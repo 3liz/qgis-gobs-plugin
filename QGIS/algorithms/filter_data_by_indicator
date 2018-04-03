@@ -1,0 +1,20 @@
+CREATE OR REPLACE FUNCTION geoobs.get_data_by_indicator (id_indicator NUMERIC)
+ RETURNS TABLE (
+ id INT,
+ id_spatial_object INT,
+ d_vector JSONB
+)
+AS $$
+BEGIN
+ RETURN QUERY SELECT
+ d.id, d.fk_id_spatial_object,
+ d.d_vector 
+ FROM
+ geoobs.data AS d
+ WHERE
+ d.fk_id_indicator = id_indicator ;
+END; $$
+ 
+LANGUAGE 'plpgsql';
+
+SELECT geoobs.get_data_by_indicator(1) FROM geoobs.data;
