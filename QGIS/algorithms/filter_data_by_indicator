@@ -1,3 +1,10 @@
+##cirad=group
+##03 Filter data=name
+##Service_PostgreSQL=string cirad_project
+##id_indicator=number 
+
+sql='''
+DROP FUNCTION geoobs.get_data_by_indicator(numeric);
 CREATE OR REPLACE FUNCTION geoobs.get_data_by_indicator (id_indicator NUMERIC)
  RETURNS TABLE (
  id INT,
@@ -17,4 +24,18 @@ END; $$
  
 LANGUAGE 'plpgsql';
 
-SELECT geoobs.get_data_by_indicator(1) FROM geoobs.data;
+SELECT geoobs.get_data_by_indicator(%i) FROM geoobs.data;
+''' % (
+    id_indicator
+)
+
+progress.setInfo('Service PostgreSQL:')
+progress.setInfo(Service_PostgreSQL)
+progress.setInfo('SQL:')
+progress.setInfo(sql)
+
+conversion = processing.runalg(
+    'script:executepostgissqlonservicedatabase',
+    Service_PostgreSQL,
+    sql
+)
