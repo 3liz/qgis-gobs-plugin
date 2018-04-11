@@ -1,0 +1,92 @@
+##cirad=group
+##03 Filter indicator by geom=name
+##Service_PostgreSQL=string cirad_project
+##Database_type=selection postgis;spatialite
+##Database_name=string cirad
+##id_indicator=number 
+
+import psycopg2
+from PyQt4.QtSql import *
+from qgis.PyQt.QtCore import *
+from qgis.core import *
+from qgis.utils import *
+from db_manager.db_plugins.plugin import DBPlugin, Schema, Table, BaseError
+from db_manager.db_plugins import createDbPlugin
+from db_manager.dlg_db_error import DlgDbError
+
+dbTypeMap = { 0: 'postgis', 1: 'spatialite' }
+
+dbpluginclass = createDbPlugin( dbTypeMap[Database_type], Database_name )
+cnx = dbpluginclass.connect()
+db = dbpluginclass.database()
+connector = db.connector
+cursor = connector._get_cursor()
+
+sql='''
+CREATE OR REPLACE FUNCTION geoobs.get_geom_by_id_indicator (id_indicator NUMERIC)
+ RETURNS TABLE (
+ so_id_given_by_source TEXT,
+ geom geometry
+)
+AS $$
+BEGIN
+ RETURN QUERY SELECT DISTINCT so.so_id_given_by_source, so.geom FROM geoobs.spatial_object so, geoobs.indicator i, geoobs.data d
+    WHERE i.id = d.fk_id_indicator 
+    AND so.fk_id_spatial_layer = d.fk_id_spatial_layer
+    AND i.id = id_indicator;
+END; $$
+ 
+LANGUAGE 'plpgsql';
+'''
+
+sqlQuery='''
+SELECT * FROM geoobs.get_geom_by_id_indicator(%i)
+''' % (
+    id_indicator )
+
+sqlLayerName='''
+SELECT sl.sl_label FROM geoobs.spatial_layer sl, geoobs.data d
+WHERE d.fk_id_spatial_layer = sl.id
+AND d.fk_id_indicator = %i
+''' % (
+    id_indicator )
+    
+layerName = processing.runalg(
+    'script:executepostgissqlonservicedatabase',
+    'cirad_project',
+    sqlLayerName
+)
+
+if cursor:
+    try: 
+        cursor.execute(sqlLayerName)
+    except:
+        progress.setText('Cursor does not exist')
+ 
+
+
+progress.setInfo('Service PostgreSQL:')
+progress.setInfo(Service_PostgreSQL)
+progress.setInfo('SQL:')
+progress.setInfo(sql)
+progress.setInfo(sqlQuery)
+
+conversion = processing.runalg(
+    'script:executepostgissqlonservicedatabase',
+    Service_PostgreSQL,
+    sql
+)
+
+load = processing.runalg(
+    'script:addvectorlayerfromsqlquery',
+    0,
+    Database_name,
+    sqlQuery,
+    cursor.fetchone()[0],
+    'geom',
+    'so_id_given_by_source',
+    'true'
+)
+
+cursor.close()
+del cursor
