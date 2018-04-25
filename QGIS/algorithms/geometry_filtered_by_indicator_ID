@@ -4,89 +4,67 @@
 ##Database_type=selection postgis;spatialite
 ##Database_name=string cirad
 ##id_indicator=number 
+##layer_name=string Choose_name
 
 import psycopg2
 from PyQt4.QtSql import *
 from qgis.PyQt.QtCore import *
 from qgis.core import *
 from qgis.utils import *
+
 from db_manager.db_plugins.plugin import DBPlugin, Schema, Table, BaseError
 from db_manager.db_plugins import createDbPlugin
 from db_manager.dlg_db_error import DlgDbError
 
 dbTypeMap = { 0: 'postgis', 1: 'spatialite' }
 
+#Connection and creation of the cursor
 dbpluginclass = createDbPlugin( dbTypeMap[Database_type], Database_name )
 cnx = dbpluginclass.connect()
 db = dbpluginclass.database()
 connector = db.connector
-cursor = connector._get_cursor()
+cursorVector = connector._get_cursor()
+
+#Request to get the key of the d_vector field and indicator type wo will be used in the function
+sqlQueryVector='''
+    SELECT jsonb_object_keys(d.d_vector), i.i_type 
+    FROM geoobs.indicator i, geoobs.data d 
+    WHERE i.id = %i AND i.id = d.fk_id_indicator
+    LIMIT 1
+    ''' % (
+    id_indicator)
+    
+cursorVector.execute(sqlQueryVector)
+field_vector_name = cursorVector.fetchone()[0]
+
+cursorVector.execute(sqlQueryVector)
+field_type = cursorVector.fetchone()[1]
+
+cursorVector.close()
+del cursorVector
 
 sql='''
-CREATE OR REPLACE FUNCTION geoobs.get_geom_by_id_indicator (id_indicator NUMERIC)
- RETURNS TABLE (
- so_id_given_by_source TEXT,
- geom geometry
-)
-AS $$
-BEGIN
- RETURN QUERY SELECT DISTINCT so.so_id_given_by_source, so.geom FROM geoobs.spatial_object so, geoobs.indicator i, geoobs.data d
-    WHERE i.id = d.fk_id_indicator 
-    AND so.fk_id_spatial_layer = d.fk_id_spatial_layer
-    AND i.id = id_indicator;
-END; $$
- 
-LANGUAGE 'plpgsql';
-'''
-
-sqlQuery='''
-SELECT * FROM geoobs.get_geom_by_id_indicator(%i)
+    SELECT so_id_given_by_source,
+        (d_vector->>'%s')::%s as "%s",
+        d_timestamp,
+        geom
+        FROM geoobs.get_geom_by_id_indicator(%i)
+        
 ''' % (
-    id_indicator )
-
-sqlLayerName='''
-SELECT sl.sl_label FROM geoobs.spatial_layer sl, geoobs.data d
-WHERE d.fk_id_spatial_layer = sl.id
-AND d.fk_id_indicator = %i
-''' % (
-    id_indicator )
-    
-layerName = processing.runalg(
-    'script:executepostgissqlonservicedatabase',
-    'cirad_project',
-    sqlLayerName
-)
-
-if cursor:
-    try: 
-        cursor.execute(sqlLayerName)
-    except:
-        progress.setText('Cursor does not exist')
- 
-
+        field_vector_name, field_type, field_vector_name, id_indicator )
 
 progress.setInfo('Service PostgreSQL:')
 progress.setInfo(Service_PostgreSQL)
 progress.setInfo('SQL:')
 progress.setInfo(sql)
-progress.setInfo(sqlQuery)
-
-conversion = processing.runalg(
-    'script:executepostgissqlonservicedatabase',
-    Service_PostgreSQL,
-    sql
-)
 
 load = processing.runalg(
     'script:addvectorlayerfromsqlquery',
     0,
     Database_name,
-    sqlQuery,
-    cursor.fetchone()[0],
+    sql,
+    layer_name,
     'geom',
     'so_id_given_by_source',
     'true'
 )
-
-cursor.close()
-del cursor
