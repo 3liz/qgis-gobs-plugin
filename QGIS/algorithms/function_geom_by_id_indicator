@@ -1,0 +1,20 @@
+CREATE OR REPLACE FUNCTION geoobs.get_geom_by_id_indicator (id_indicator NUMERIC)
+ RETURNS TABLE (
+ so_id_given_by_source text,
+ d_vector jsonb,
+ d_timestamp timestamp,
+ i_type text,
+ geom geometry
+)
+AS $$
+BEGIN
+ RETURN QUERY SELECT so.so_id_given_by_source, d.d_vector, d.d_timestamp, i.i_type, so.geom
+    FROM geoobs.spatial_object so, geoobs.data d, geoobs.spatial_layer sl, geoobs.indicator i
+    WHERE  
+     so.id = d.fk_id_spatial_object
+    AND d.fk_id_spatial_layer = sl.id
+    AND d.fk_id_indicator = i.id
+    AND d.fk_id_indicator = id_indicator;
+END; $$
+ 
+LANGUAGE 'plpgsql';
