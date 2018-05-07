@@ -12,9 +12,9 @@ Un regroupement d'entités spatiales conceptuellement ou techniquement homogène
 
 Une donnée caractérisée par un nom d'observable, une entité spatiale, une date, une ou des valeurs, une source ou le code du jeu de données qui la contient.
 
-### Valeur ?
+### Clés et valeurs
 
-Comment appeler le ou les items d'un vecteur. Je propose clé
+Comment appeler le ou les items d'un vecteur. Je propose clé (concept clé-valeur ou key-value en anglais). Par exemple, si on souhaite enregistrer dans un vecteur la population des hommes et la population des femmes, le vecteur contiendrait 2 clés "population_homme" et "population_femme" avec les valeurs respectives. Dans la plupart des cas simple, le vecteur ne contiendra qu'une seule clé (ex: "pluviometrie"). Chaque clé est caractérisée par un nom (ex: "pluviometrie", un type (ex: "integer"), une unité (ex: "mm"), un alias (ex: "Pluviométrie journalière")
 
 ### Protocole
 
