@@ -44,3 +44,6 @@ Un regroupement de données d'observation dans un but d'aide à la décision. Il
 
 Un service de présentation d'indicateurs qui répond aux besoins et aux préférences d'une catégorie d'acteur en vue d'une aide à la décision. Par exemple des graphiques, des cartes thématiques. Est candidat pour une implémentation en tant ue projet QGIS. Un projet QGIS peut être ici le sujet de la gestion des droits.
 
+## Modèle conceptuel de données
+
+![](media/modele_conceptuel.png)
