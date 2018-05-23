@@ -1,4 +1,5 @@
-## Dictionnaire des concepts
+
+# Dictionnaire des concepts
 
 ### Entité spatiale
 
@@ -24,7 +25,7 @@ Méthode de recueil d'une série d'observations en vue d'une exploitation scient
 
 ### Série d'observations
 
-Un ensemble d'observations obéissant au même protocole.
+Un ensemble d'observations obéissant au même protocole. Si le protocole évolue, on doit créer une nouvelle série d'observations, qui se rattache au nouveau protocole. On garde ainsi un historique qui est important pour la validation scientifique.
 
 ### Jeu de données
 
@@ -41,6 +42,17 @@ Regroupement d'acteurs ayant les mêmes besoins en information.
 ### Indicateur
 
 Un regroupement de données d'observation dans un but d'aide à la décision. Il est caractérisé par un nom, une définition, un type d'entité spatiale, une granularité et une fréquence temporelle. Soit une série d'observations, soit une formule de calcul portant sur une ou plusieurs séries d'observations et de couches spatiales. Une personne morale est choisie en tant que gestionnaire responsable.
+
+Il peut être utilisé par exemple pour rassembler deux séries d'observations obéissant à 2 protocoles différents mais proches du point de vue de l'exploitation en vue de décider et d'agir. Par exemple, on a remplacé un capteur de température par un nouveau système plus précis, mais on a conservé les fréquences d'acquisition, les sites de mesure, etc. L'indicateur permet aussi de rassembler des données observées sur des sites ou des terrains différents.
+
+## Chemins d'accès
+
+Pour faciliter la navigation et le choix parmi les indicateurs, on rattache à chaque indicateur un ou plusieurs chemins d'accès. Un chemin se caractérise par une suite ordonnée de mots-clés précisant progressivement la thématique puis l'indicateur.
+
+Par exemple, pour accéder à l'indicateur "Pluviométrie", deux chemins sont possibles
+
+* Environnement / Changement climatique / Pluviométrie
+* Gestion de l'eau / Pluviométrie
 
 ### Service informationnel
 
