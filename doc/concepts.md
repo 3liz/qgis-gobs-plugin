@@ -1,5 +1,6 @@
+# Documentation
 
-# Dictionnaire des concepts
+## Dictionnaire des concepts
 
 ### Entité spatiale
 
@@ -45,7 +46,7 @@ Un regroupement de données d'observation dans un but d'aide à la décision. Il
 
 Il peut être utilisé par exemple pour rassembler deux séries d'observations obéissant à 2 protocoles différents mais proches du point de vue de l'exploitation en vue de décider et d'agir. Par exemple, on a remplacé un capteur de température par un nouveau système plus précis, mais on a conservé les fréquences d'acquisition, les sites de mesure, etc. L'indicateur permet aussi de rassembler des données observées sur des sites ou des terrains différents.
 
-## Chemins d'accès
+### Chemins d'accès
 
 Pour faciliter la navigation et le choix parmi les indicateurs, on rattache à chaque indicateur un ou plusieurs chemins d'accès. Un chemin se caractérise par une suite ordonnée de mots-clés précisant progressivement la thématique puis l'indicateur.
 
