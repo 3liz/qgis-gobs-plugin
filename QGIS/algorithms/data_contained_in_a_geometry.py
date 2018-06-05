@@ -1,7 +1,7 @@
 ##cirad=group
 ##test intersect=name
 ##layer=vector
-##Name_pk_label=string QUARTMNO (id or field with the name you want)
+##Name_primaryKey_id_or_label=string QUARTMNO (id or field with the name you want)
 
 from qgis.core import *
 import processing
