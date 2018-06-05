@@ -14,10 +14,8 @@ sql = ''
 sqlData = ''
 for feature in layer.getFeatures():
     nameField=feature[Name_pk_label]
-    #geoms = geoms.combine(feature.geometry())
     xform = QgsCoordinateTransform(layer.crs(), QgsCoordinateReferenceSystem(4326))
     geoms = feature.geometry()
-    #geoms.transform(xform)
     geoms.transform(xform)
     geoms = geoms.exportToWkt()
     
