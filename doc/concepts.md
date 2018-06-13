@@ -1,5 +1,9 @@
 # Documentation
 
+## Introduction
+
+Le projet s'appelle **G-Obs**.
+
 ## Dictionnaire des concepts
 
 ### Entité spatiale
@@ -29,6 +33,7 @@ Méthode de recueil d'une série d'observations en vue d'une exploitation scient
 ### Série d'observations
 
 Un ensemble d'observations obéissant au même protocole. Si le protocole évolue, on doit créer une nouvelle série d'observations, qui se rattache au nouveau protocole. On garde ainsi un historique qui est important pour la validation scientifique.
+Chaque série est caractérisée par une source.
 
 ### Jeu de données
 
@@ -117,5 +122,159 @@ Le gestionnaire de données peut ajouter des données. Il peut réimporter un je
 ### Création d'un service informationnel
 
 Cela correspond à la création d'un projet QGIS, et à sa publication dans Lizmap.
+Toutes les sources des séries d'obsevations utilisées dans le projet QGIS sont visibles par les utilisateurs.
 
 A documenter.
+
+
+## Outils et traitements
+
+### Administration des données
+
+Il s'agit:
+
+* de créer le vocabulaire, de lister les acteurs, les protocoles, le catalogue de couches, les séries d'observations et indicateurs, pour un observatoire.
+* de gérer les droits d'accès selon les catégories d'utilisateurs
+
+On utilise les capacités de QGIS à produire des outils de saisie riches via des formulaires. Les relations entre couches permettent de lier les données entre elles.
+
+Pour la gestion des droits, on utilisera l'interface d'administration de Lizmap pour créer les utilisateurs et les groupes, et leur assigner des droits.
+
+
+### Gestion des données
+
+Il s'agit d'importer les données d'observation dans le système à partir des jeux de données fournis par les acteurs. On passe des données source aux indicateurs, via un travail de consolidation et d'homogénéisation de la donnée.
+
+Liste:
+
+* Voir la liste des couches spatiales
+* Voir les relations entre les couches et les indicateurs (comment est faite la jointure)
+* Import d'une couche spatiale
+* Import d'un jeu de données
+* Tableau de bord qui permet de chercher les observations (voir Extraction des données ci-dessous)
+
+Notes:
+
+* Ce n'est pas au gestionnaire de données de faire la jointure spatiale entre couche spatiale et indicateur, car elle a été pensée en amont et décrite par l'administrateur de données. Le gestionnaire doit simplement alimenter les indicateurs.
+* Le gestionnaire peut voir l'ensemble des données décrites par l'administrateur, sans pouvoir les modifier. Cela lui permet de connaître les listes d'acteur, d'indicateur, de couches spatiales, etc.
+
+
+### Exploration des données
+
+Il s'agit d'avoir un état de la connaissance des données du système.
+
+On permet à l'administrateur, au gestionnaire de récupérer des informations sur les données correspondant aux filtres de recherche suivants:
+
+* temporel : dans un intervalle de date (ou par exemple "le mois dernier")
+* spatial : dans un rectangle d'emprise ou dans une couche de type polygone
+* indicateur(s)
+* acteur(s) source
+
+Une fois le ou les filtres spécifié, on lance la recherche. Les résultats sont affichés sous la forme d'un tableu présentant une ligne par indicateur
+
+* le nom de l'indicateur
+* la couche spatiale
+* les acteurs source
+* le nombre total d'observations
+* les dates minimum et maximum des observations
+* la date de dernier import
+* les chemins d'accès
+* les services informationnels qui référencent l'indicateur (lien direct vers la carte)
+* un bouton pour charger la couche spatiale
+* un bouton pour charger les données
+
+### Représentation des données
+
+
+Il s'agit de récupérer les informations depuis le système dans un format exploitable par les outils bureautique et géomatiques ( Tableur, QGIS et Lizmap ), afin de créer des modèles de représentation au pilotage de l'action collective: cartes, graphiques, tableaux, etc.
+
+Le géomaticien peut récupérer les données converties au format SIG ou tableur via un outil qui présente les filtres de recherche suivants:
+    - choix de l'indicateur
+    - filtre spatial : dans un rectangle d'emprise ou dans une couche vectorielle de type polygone présente dans QGIS
+    - filtre temporel : dans un intervalle de date (ou par exemple "le mois dernier")
+
+Il lance la recherche, qui lui présente un tableau synthétique sur les données filtrée de l'indicateur (équivalent à l'explorateur décrit au chapitre précédent)
+
+* le nom de l'indicateur
+* la couche spatiale
+* les acteurs source
+* le nombre total d'observations
+* les dates minimum et maximum des observations
+* la date de dernier import
+* les chemins d'accès
+* les services informationnels qui référencent l'indicateur (lien direct vers la carte)
+* un bouton pour charger la couche spatiale
+* un bouton pour charger les données
+
+Les options suivantes sont présentées pour faciliter le chargement des données:
+
+* charger les données brutes : cela ajoute dans QGIS une couche non spatiale contenant les données de l'indicateur avec le champ de jointure. Une relation est automatiquement créée dans le projet QGIS entre la couche spatiale chargée précédemment et les données brutes.
+
+* charger les données d'indicateur aggrégées par un à plusieurs critères:
+
+  - à l'unité temporelle : minute, heure, journée, mois, année (par exemple, 36 lignes avec la somme des hauteurs d'eau par mois entre 2016 et 2018)
+  - à l'unité temporelle unique. Par exemple, la moyenne des hauteurs d'eau tombées pour chacun des 12 mois, toutes années confondues
+  - à l'objet spatial de la couche de référence. Par exemple, une ligne par pluviomètre avec la somme des hauteurs d'eau
+  - choix de la fonction de calcul : décompte, somme, moyenne, minimum, maximum, médiane
+
+Les couches résultantes sont générées par l'outil, en se basant sur des requêtes SQL. Les données sont donc affichées dynamiquement, sans avoir besoin de les rafraîchir à chaque nouvel import.
+
+Le géomaticien doit lier le projet QGIS qui porte les modes de représentations au service informationnel présent dans le système (créé en amont par l'administrateur de données).
+
+
+### Publication des SI
+
+Il s'agit de proposer un accès web aux services informationnels qui peuvent intégrer plusieurs modèles de représentation pour différents indicateurs.
+
+TODO
+
+
+## Interfaces
+
+
+###  Lizmap
+
+#### Page d'accueil
+
+Points importants:
+
+* Une interface qui s'adapte aux écrans de différentes tailes ("responsive design")
+* Chaque service informationnel est comme une petite application qui délivre de l'information (un à pluseurs indicateurs). On propose l'analogie avec la liste des applications présente sur un smartphone.
+* La page d'accueil présente une liste des services informationnels, représentés par une image. Un clic sur cette image lance l'affichage de la carte.
+* La présentation de cette liste est paramétrable, avec un choix de l'ordre des présentations des services informationnels:
+
+  - mise à jour de la donnée la plus récente en premier
+  - ordre alphabétique
+  - affichage des nouveaux services informationnels en premier
+
+L'utilisateur peut filtrer les services informationnels affichés via les chemins d'accès. Pour cela, on lui présente un outil de recherche avec une autocomplétion, qui lui permet de parcourir les mots-clé des chemins d'accès.
+
+    [ champ de recherche ] [ paramètre de tri ]
+    **1ER NOEUD SELECTIONNE**
+    **FILS DU 1ER NOEUD SELECTIONNE**
+    *Petit fils A sélectionnable*
+    *Petit fils B sélectionnable* -> idem
+    *Petit fils C sélectionnable* -> idem
+
+    Affichage filtré des services informationnels
+    [ SI 1 ] [ SI 2 ] [ SI 3 ] [ SI 4 ]
+    [ SI 5 ] [ SI 6 ] [ SI 7 ] [ SI 8 ]
+    [ SI 9 ] [ SI10 ] [ SI11 ] [ SI12 ]
+    [ SI13 ] [ SI14 ] ...
+
+
+A l'arrivée sur la page d'accueil:
+
+* l'utilisateur voit le champ de filtre vide, avec la mention "Taper votre recherche". On active l'autocomplétion.
+* Sous le champ de filtre, on présente les premiers noeuds fils (mots-clés). Par exemple:
+
+    Eau
+    Qualité
+    Gouvernance
+
+Lorsque l'utilisateur clique sur un des fils, celui-ci passe en mode "sélectionné" (par exemple en gras avec un fond de couleur). Sur sélection de ce mot-clé, on présente directement en dessous les fils directs, en mode "sélectionnable" (par exemple en italique et avec un fond clair)
+
+Le champs de filtre permet de n'afficher que les noeuds à sélectionner qui correspondent. Il présente via une autocomplétion l'ensemble des fils directs du dernier noeud sélectionné. A l'arrivée, on peut donc chercher directement un fils éloigné.
+
+On pourra adapter la disposition des noeuds sélectionnés en mode horizontal (fils d'ariane) pour les écrans larges, et en mode vertical avec les mots-clé empilés sur les petits écrans.
+
