@@ -33,7 +33,8 @@ Méthode de recueil d'une série d'observations en vue d'une exploitation scient
 ### Série d'observations
 
 Un ensemble d'observations obéissant au même protocole. Si le protocole évolue, on doit créer une nouvelle série d'observations, qui se rattache au nouveau protocole. On garde ainsi un historique qui est important pour la validation scientifique.
-Chaque série est caractérisée par une source.
+
+Chaque série est caractérisée par une source et attachée à une couche spatiale. Si la couche spatiale évolue (ex: Communes fusionnées, ou pluviomètre rajouté ou déplacé), il faut créer une nouvelle couchce spatiale et une nouvelle série liée.
 
 ### Jeu de données
 
@@ -46,6 +47,7 @@ Les jeux de données source ne seront pas enregistrés ni conservés dans le sys
 ### Acteur
 
 Un organisme ou une personne capable de produire des observations (source), d'agir dans un territoire, de signer une charte dans le cadre d'une action collective. Il fournit les jeux de données au gestionnaire de données qui pourra les transformer en observations. Il peut aussi valider les observations après avoir eu accès aux observations sous forme de services informationnels (cartes Lizmap).
+Il est caractérisé par un nom, un email, une personne contact, une catégorie
 
 ### Gestionnaire de données
 
@@ -57,7 +59,11 @@ Regroupement d'acteurs ayant les mêmes besoins en information.
 
 ### Indicateur
 
-Un regroupement de données d'observation dans un but d'aide à la décision. Il est caractérisé par un nom, une définition, un type d'entité spatiale, une granularité et une fréquence temporelle. Soit une série d'observations, soit une formule de calcul portant sur une ou plusieurs séries d'observations et de couches spatiales. Une personne morale est choisie en tant que gestionnaire responsable.
+Un regroupement de données d'observation dans un but d'aide à la décision.
+Il est caractérisé par un nom, une définition, un type d'entité spatiale, une granularité et une fréquence temporelle.
+
+L'indicateur peut regrouper une seule série d'observations. Il peut aussi être utilisé pour regrouper plusieurs séries obéissant à des protocoles différents mais suffisamment voisins pour ne pas changer la sémantique de l'indicateur( ex: températures mesurées depuis 1900 avec des outils de précision différente).
+Si on souhaite utiliser des données de plusieurs séries pour les combiner et créer une nouvelle donnée, on devra passer par la création d'un nouvelle série de données dont le nouveau protocole contiendra la formule de calcul. C'est l'acteur source qui fera ce travail de création de la nouvelle série.
 
 Il peut être utilisé par exemple pour rassembler deux séries d'observations obéissant à 2 protocoles différents mais proches du point de vue de l'exploitation en vue de décider et d'agir. Par exemple, on a remplacé un capteur de température par un nouveau système plus précis, mais on a conservé les fréquences d'acquisition, les sites de mesure, etc. L'indicateur permet aussi de rassembler des données observées sur des sites ou des terrains différents.
 
@@ -69,6 +75,10 @@ Par exemple, pour accéder à l'indicateur "Pluviométrie", deux chemins sont po
 
 * Environnement / Changement climatique / Pluviométrie
 * Gestion de l'eau / Pluviométrie
+
+On formalise le stockage des chemins d'accès via un graphe orienté en évitant les boucles.
+
+C'est le gestionnaire de données qui a la maîtrise totale sur le graphe, car il est responsable de la création des indicateurs.
 
 ### Service informationnel
 
@@ -105,6 +115,8 @@ C'est le rôle du gestionnaire de données. Cette étape consiste à:
 * rattacher ces données à la série d'observations et à un acteur (fournisseur du jeu de données).
 
 Un journal d'import est automatiquement rempli à chaqe import d'un jeu de données. Il est caractérisé par une date, un acteur, une série d'observations et un statut de validation: import en attente de validation / import validé. Chaque observation est rattachée à un code d'import.
+
+Lors de l'import, le gestionnaire (ou l'outil) doit vérifier que toutes les données du jdd ont une correspondance aux objets spatiaux de la couche spatiale définie. Si non, l'import est invalidé.
 
 Lors de la création de cet import, un message est envoyé à l'acteur, avec un lien vers un service informationnel qui lui permet de visualiser les données importées (l'outil choisit la première carte accessible). Il se connecte en tant qu'acteur dans l'application de visualisation (Lizmap). Il peut alors appliquer un filtre sur les données pour ne voir que les données de l'import à valider.
 
