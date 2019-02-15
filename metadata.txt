@@ -1,0 +1,39 @@
+# This file contains metadata for your plugin. Since 
+# version 2.0 of QGIS this is the proper way to supply 
+# information about a plugin. The old method of 
+# embedding metadata in __init__.py will 
+# is no longer supported since version 2.0.
+
+# This file should be included when you package your plugin.# Mandatory items:
+
+[general]
+name=G-Obs
+qgisMinimumVersion=3.0
+description=This plugin provides tools to store and manage spatial and time data in a standardized way
+version=0.1
+author=3liz
+email=info@3liz.com
+
+about=This plugin provides tools to store and manage spatial and time data in a standardized way
+
+tracker=http://github.com/3liz
+repository=http://github.com/3liz
+# End of mandatory metadata
+
+# Recommended items:
+
+# Uncomment the following line and add your changelog:
+# changelog=
+
+# Tags are comma separated with spaces allowed
+tags=time observation stats
+
+homepage=http://github.com/3liz
+category=Analysis
+icon=icon.png
+# experimental flag
+experimental=True
+
+# deprecated flag (applies to the whole plugin, not just a single version)
+deprecated=False
+
