@@ -1,0 +1,2729 @@
+<!DOCTYPE qgis PUBLIC 'http://mrcc.com/qgis.dtd' 'SYSTEM'>
+<qgis version="3.4.6-Madeira" projectname="">
+  <homePath path=""/>
+  <title></title>
+  <autotransaction active="0"/>
+  <evaluateDefaultValues active="0"/>
+  <trust active="0"/>
+  <projectCrs>
+    <spatialrefsys>
+      <proj4>+proj=longlat +datum=WGS84 +no_defs</proj4>
+      <srsid>3452</srsid>
+      <srid>4326</srid>
+      <authid>EPSG:4326</authid>
+      <description>WGS 84</description>
+      <projectionacronym>longlat</projectionacronym>
+      <ellipsoidacronym>WGS84</ellipsoidacronym>
+      <geographicflag>true</geographicflag>
+    </spatialrefsys>
+  </projectCrs>
+  <layer-tree-group>
+    <customproperties/>
+    <layer-tree-layer checked="Qt::Checked" expanded="1" name="observation" id="observation_bcc90162_47c8_4097_bc24_a31af92d2708" source="dbname='gobs' host=localhost port=5432 user='mdouchin' sslmode=disable key='id' estimatedmetadata=true table=&quot;gobs&quot;.&quot;observation&quot; sql=" providerKey="postgres">
+      <customproperties/>
+    </layer-tree-layer>
+    <layer-tree-layer checked="Qt::Checked" expanded="1" name="spatial_layer" id="spatial_layer_18215d6d_1f4c_40d2_ba83_f2c9a9694e84" source="dbname='gobs' host=localhost port=5432 user='mdouchin' sslmode=disable key='id' estimatedmetadata=true table=&quot;gobs&quot;.&quot;spatial_layer&quot; sql=" providerKey="postgres">
+      <customproperties/>
+    </layer-tree-layer>
+    <layer-tree-layer checked="Qt::Checked" expanded="1" name="series" id="series_04a7414a_ab6d_4611_8a60_bcd22071dc22" source="dbname='gobs' host=localhost port=5432 user='mdouchin' sslmode=disable key='id' estimatedmetadata=true table=&quot;gobs&quot;.&quot;series&quot; sql=" providerKey="postgres">
+      <customproperties/>
+    </layer-tree-layer>
+    <layer-tree-layer checked="Qt::Checked" expanded="1" name="r_indicator_node" id="r_indicator_node_2ca83116_e69f_4dcb_abcb_de5bdf44b2be" source="dbname='gobs' host=localhost port=5432 user='mdouchin' sslmode=disable key='fk_id_indicator,fk_id_node' estimatedmetadata=true table=&quot;gobs&quot;.&quot;r_indicator_node&quot; sql=" providerKey="postgres">
+      <customproperties/>
+    </layer-tree-layer>
+    <layer-tree-layer checked="Qt::Checked" expanded="1" name="r_graph_edge" id="r_graph_edge_f2eb47e9_728b_4c85_a839_3b488e132e06" source="dbname='gobs' host=localhost port=5432 user='mdouchin' sslmode=disable key='ge_parent_node,ge_child_node' estimatedmetadata=true table=&quot;gobs&quot;.&quot;r_graph_edge&quot; sql=" providerKey="postgres">
+      <customproperties/>
+    </layer-tree-layer>
+    <layer-tree-layer checked="Qt::Checked" expanded="1" name="protocol" id="protocol_5507f1c8_1802_4df0_a273_8e9b7f52c352" source="dbname='gobs' host=localhost port=5432 user='mdouchin' sslmode=disable key='id' estimatedmetadata=true table=&quot;gobs&quot;.&quot;protocol&quot; sql=" providerKey="postgres">
+      <customproperties/>
+    </layer-tree-layer>
+    <layer-tree-layer checked="Qt::Checked" expanded="1" name="indicator" id="indicator_18ba18bf_0390_45a3_8edd_1cc049e8a251" source="dbname='gobs' host=localhost port=5432 user='mdouchin' sslmode=disable key='id' estimatedmetadata=true table=&quot;gobs&quot;.&quot;indicator&quot; sql=" providerKey="postgres">
+      <customproperties/>
+    </layer-tree-layer>
+    <layer-tree-layer checked="Qt::Checked" expanded="1" name="import" id="import_0343eb12_592e_4fd0_8380_51f4d62b6a56" source="dbname='gobs' host=localhost port=5432 user='mdouchin' sslmode=disable key='id' estimatedmetadata=true table=&quot;gobs&quot;.&quot;import&quot; sql=" providerKey="postgres">
+      <customproperties/>
+    </layer-tree-layer>
+    <layer-tree-layer checked="Qt::Checked" expanded="1" name="graph_node" id="graph_node_2cd9eee8_46e2_401c_87f7_8b40d9d6260e" source="dbname='gobs' host=localhost port=5432 user='mdouchin' sslmode=disable key='id' estimatedmetadata=true table=&quot;gobs&quot;.&quot;graph_node&quot; sql=" providerKey="postgres">
+      <customproperties/>
+    </layer-tree-layer>
+    <layer-tree-layer checked="Qt::Checked" expanded="1" name="glossary" id="glossary_cee356e0_5be5_4d87_ac2b_e8e8967c4032" source="dbname='gobs' host=localhost port=5432 user='mdouchin' sslmode=disable key='id' estimatedmetadata=true table=&quot;gobs&quot;.&quot;glossary&quot; sql=" providerKey="postgres">
+      <customproperties/>
+    </layer-tree-layer>
+    <layer-tree-layer checked="Qt::Checked" expanded="1" name="actor_category" id="actor_category_8a7edcf8_cb34_4689_b22b_7a8a6a2ab610" source="dbname='gobs' host=localhost port=5432 user='mdouchin' sslmode=disable key='id' estimatedmetadata=true table=&quot;gobs&quot;.&quot;actor_category&quot; sql=" providerKey="postgres">
+      <customproperties/>
+    </layer-tree-layer>
+    <layer-tree-layer checked="Qt::Checked" expanded="1" name="actor" id="actor_5f01a6e5_8205_462f_af40_0ffd7ff0a44f" source="dbname='gobs' host=localhost port=5432 user='mdouchin' sslmode=disable key='id' estimatedmetadata=true table=&quot;gobs&quot;.&quot;actor&quot; sql=" providerKey="postgres">
+      <customproperties/>
+    </layer-tree-layer>
+    <custom-order enabled="0"/>
+  </layer-tree-group>
+  <snapping-settings enabled="0" intersection-snapping="0" tolerance="0" unit="2" mode="2" type="1">
+    <individual-layer-settings/>
+  </snapping-settings>
+  <relations>
+    <relation referencedLayer="actor_category_8a7edcf8_cb34_4689_b22b_7a8a6a2ab610" strength="Association" name="actor_id_category_fkey" id="actor_5f01a6e5_8205_462f_af40_0ffd7ff0a44f_id_category_actor_category_8a7edcf8_cb34_4689_b22b_7a8a6a2ab610_id" referencingLayer="actor_5f01a6e5_8205_462f_af40_0ffd7ff0a44f">
+      <fieldRef referencedField="id" referencingField="id_category"/>
+    </relation>
+    <relation referencedLayer="series_04a7414a_ab6d_4611_8a60_bcd22071dc22" strength="Association" name="import_fk_id_series_fkey" id="import_0343eb12_592e_4fd0_8380_51f4d62b6a56_fk_id_series_series_04a7414a_ab6d_4611_8a60_bcd22071dc22_id" referencingLayer="import_0343eb12_592e_4fd0_8380_51f4d62b6a56">
+      <fieldRef referencedField="id" referencingField="fk_id_series"/>
+    </relation>
+    <relation referencedLayer="import_0343eb12_592e_4fd0_8380_51f4d62b6a56" strength="Association" name="observation_fk_id_import_fkey" id="observation_bcc90162_47c8_4097_bc24_a31af92d2708_fk_id_import_import_0343eb12_592e_4fd0_8380_51f4d62b6a56_id" referencingLayer="observation_bcc90162_47c8_4097_bc24_a31af92d2708">
+      <fieldRef referencedField="id" referencingField="fk_id_import"/>
+    </relation>
+    <relation referencedLayer="series_04a7414a_ab6d_4611_8a60_bcd22071dc22" strength="Association" name="observation_fk_id_series_fkey" id="observation_bcc90162_47c8_4097_bc24_a31af92d2708_fk_id_series_series_04a7414a_ab6d_4611_8a60_bcd22071dc22_id" referencingLayer="observation_bcc90162_47c8_4097_bc24_a31af92d2708">
+      <fieldRef referencedField="id" referencingField="fk_id_series"/>
+    </relation>
+    <relation referencedLayer="indicator_18ba18bf_0390_45a3_8edd_1cc049e8a251" strength="Association" name="r_indicator_node_fk_id_indicator_fkey" id="r_indicator_node_2ca83116_e69f_4dcb_abcb_de5bdf44b2be_fk_id_indicator_indicator_18ba18bf_0390_45a3_8edd_1cc049e8a251_id" referencingLayer="r_indicator_node_2ca83116_e69f_4dcb_abcb_de5bdf44b2be">
+      <fieldRef referencedField="id" referencingField="fk_id_indicator"/>
+    </relation>
+    <relation referencedLayer="graph_node_2cd9eee8_46e2_401c_87f7_8b40d9d6260e" strength="Association" name="r_indicator_node_fk_id_node_fkey" id="r_indicator_node_2ca83116_e69f_4dcb_abcb_de5bdf44b2be_fk_id_node_graph_node_2cd9eee8_46e2_401c_87f7_8b40d9d6260e_id" referencingLayer="r_indicator_node_2ca83116_e69f_4dcb_abcb_de5bdf44b2be">
+      <fieldRef referencedField="id" referencingField="fk_id_node"/>
+    </relation>
+    <relation referencedLayer="actor_5f01a6e5_8205_462f_af40_0ffd7ff0a44f" strength="Association" name="series_fk_id_actor_fkey" id="series_04a7414a_ab6d_4611_8a60_bcd22071dc22_fk_id_actor_actor_5f01a6e5_8205_462f_af40_0ffd7ff0a44f_id" referencingLayer="series_04a7414a_ab6d_4611_8a60_bcd22071dc22">
+      <fieldRef referencedField="id" referencingField="fk_id_actor"/>
+    </relation>
+    <relation referencedLayer="indicator_18ba18bf_0390_45a3_8edd_1cc049e8a251" strength="Association" name="series_fk_id_indicator_fkey" id="series_04a7414a_ab6d_4611_8a60_bcd22071dc22_fk_id_indicator_indicator_18ba18bf_0390_45a3_8edd_1cc049e8a251_id" referencingLayer="series_04a7414a_ab6d_4611_8a60_bcd22071dc22">
+      <fieldRef referencedField="id" referencingField="fk_id_indicator"/>
+    </relation>
+    <relation referencedLayer="protocol_5507f1c8_1802_4df0_a273_8e9b7f52c352" strength="Association" name="series_fk_id_protocol_fkey" id="series_04a7414a_ab6d_4611_8a60_bcd22071dc22_fk_id_protocol_protocol_5507f1c8_1802_4df0_a273_8e9b7f52c352_id" referencingLayer="series_04a7414a_ab6d_4611_8a60_bcd22071dc22">
+      <fieldRef referencedField="id" referencingField="fk_id_protocol"/>
+    </relation>
+    <relation referencedLayer="spatial_layer_18215d6d_1f4c_40d2_ba83_f2c9a9694e84" strength="Association" name="series_fk_id_spatial_layer_fkey" id="series_04a7414a_ab6d_4611_8a60_bcd22071dc22_fk_id_spatial_layer_spatial_layer_18215d6d_1f4c_40d2_ba83_f2c9a9694e84_id" referencingLayer="series_04a7414a_ab6d_4611_8a60_bcd22071dc22">
+      <fieldRef referencedField="id" referencingField="fk_id_spatial_layer"/>
+    </relation>
+    <relation referencedLayer="actor_5f01a6e5_8205_462f_af40_0ffd7ff0a44f" strength="Association" name="spatial_layer_fk_id_actor_fkey" id="spatial_layer_18215d6d_1f4c_40d2_ba83_f2c9a9694e84_fk_id_actor_actor_5f01a6e5_8205_462f_af40_0ffd7ff0a44f_id" referencingLayer="spatial_layer_18215d6d_1f4c_40d2_ba83_f2c9a9694e84">
+      <fieldRef referencedField="id" referencingField="fk_id_actor"/>
+    </relation>
+  </relations>
+  <mapcanvas name="theMapCanvas" annotationsVisible="1">
+    <units>degrees</units>
+    <extent>
+      <xmin>-1</xmin>
+      <ymin>-1</ymin>
+      <xmax>1</xmax>
+      <ymax>1</ymax>
+    </extent>
+    <rotation>0</rotation>
+    <destinationsrs>
+      <spatialrefsys>
+        <proj4>+proj=longlat +datum=WGS84 +no_defs</proj4>
+        <srsid>3452</srsid>
+        <srid>4326</srid>
+        <authid>EPSG:4326</authid>
+        <description>WGS 84</description>
+        <projectionacronym>longlat</projectionacronym>
+        <ellipsoidacronym>WGS84</ellipsoidacronym>
+        <geographicflag>true</geographicflag>
+      </spatialrefsys>
+    </destinationsrs>
+    <rendermaptile>0</rendermaptile>
+  </mapcanvas>
+  <projectModels/>
+  <legend updateDrawingOrder="true">
+    <legendlayer checked="Qt::Checked" name="observation" showFeatureCount="0" open="true" drawingOrder="-1">
+      <filegroup hidden="false" open="true">
+        <legendlayerfile isInOverview="0" visible="1" layerid="observation_bcc90162_47c8_4097_bc24_a31af92d2708"/>
+      </filegroup>
+    </legendlayer>
+    <legendlayer checked="Qt::Checked" name="spatial_layer" showFeatureCount="0" open="true" drawingOrder="-1">
+      <filegroup hidden="false" open="true">
+        <legendlayerfile isInOverview="0" visible="1" layerid="spatial_layer_18215d6d_1f4c_40d2_ba83_f2c9a9694e84"/>
+      </filegroup>
+    </legendlayer>
+    <legendlayer checked="Qt::Checked" name="series" showFeatureCount="0" open="true" drawingOrder="-1">
+      <filegroup hidden="false" open="true">
+        <legendlayerfile isInOverview="0" visible="1" layerid="series_04a7414a_ab6d_4611_8a60_bcd22071dc22"/>
+      </filegroup>
+    </legendlayer>
+    <legendlayer checked="Qt::Checked" name="r_indicator_node" showFeatureCount="0" open="true" drawingOrder="-1">
+      <filegroup hidden="false" open="true">
+        <legendlayerfile isInOverview="0" visible="1" layerid="r_indicator_node_2ca83116_e69f_4dcb_abcb_de5bdf44b2be"/>
+      </filegroup>
+    </legendlayer>
+    <legendlayer checked="Qt::Checked" name="r_graph_edge" showFeatureCount="0" open="true" drawingOrder="-1">
+      <filegroup hidden="false" open="true">
+        <legendlayerfile isInOverview="0" visible="1" layerid="r_graph_edge_f2eb47e9_728b_4c85_a839_3b488e132e06"/>
+      </filegroup>
+    </legendlayer>
+    <legendlayer checked="Qt::Checked" name="protocol" showFeatureCount="0" open="true" drawingOrder="-1">
+      <filegroup hidden="false" open="true">
+        <legendlayerfile isInOverview="0" visible="1" layerid="protocol_5507f1c8_1802_4df0_a273_8e9b7f52c352"/>
+      </filegroup>
+    </legendlayer>
+    <legendlayer checked="Qt::Checked" name="indicator" showFeatureCount="0" open="true" drawingOrder="-1">
+      <filegroup hidden="false" open="true">
+        <legendlayerfile isInOverview="0" visible="1" layerid="indicator_18ba18bf_0390_45a3_8edd_1cc049e8a251"/>
+      </filegroup>
+    </legendlayer>
+    <legendlayer checked="Qt::Checked" name="import" showFeatureCount="0" open="true" drawingOrder="-1">
+      <filegroup hidden="false" open="true">
+        <legendlayerfile isInOverview="0" visible="1" layerid="import_0343eb12_592e_4fd0_8380_51f4d62b6a56"/>
+      </filegroup>
+    </legendlayer>
+    <legendlayer checked="Qt::Checked" name="graph_node" showFeatureCount="0" open="true" drawingOrder="-1">
+      <filegroup hidden="false" open="true">
+        <legendlayerfile isInOverview="0" visible="1" layerid="graph_node_2cd9eee8_46e2_401c_87f7_8b40d9d6260e"/>
+      </filegroup>
+    </legendlayer>
+    <legendlayer checked="Qt::Checked" name="glossary" showFeatureCount="0" open="true" drawingOrder="-1">
+      <filegroup hidden="false" open="true">
+        <legendlayerfile isInOverview="0" visible="1" layerid="glossary_cee356e0_5be5_4d87_ac2b_e8e8967c4032"/>
+      </filegroup>
+    </legendlayer>
+    <legendlayer checked="Qt::Checked" name="actor_category" showFeatureCount="0" open="true" drawingOrder="-1">
+      <filegroup hidden="false" open="true">
+        <legendlayerfile isInOverview="0" visible="1" layerid="actor_category_8a7edcf8_cb34_4689_b22b_7a8a6a2ab610"/>
+      </filegroup>
+    </legendlayer>
+    <legendlayer checked="Qt::Checked" name="actor" showFeatureCount="0" open="true" drawingOrder="-1">
+      <filegroup hidden="false" open="true">
+        <legendlayerfile isInOverview="0" visible="1" layerid="actor_5f01a6e5_8205_462f_af40_0ffd7ff0a44f"/>
+      </filegroup>
+    </legendlayer>
+  </legend>
+  <mapViewDocks/>
+  <mapViewDocks3D/>
+  <projectlayers>
+    <maplayer geometry="No geometry" hasScaleBasedVisibilityFlag="0" maxScale="0" autoRefreshTime="0" refreshOnNotifyMessage="" refreshOnNotifyEnabled="0" styleCategories="AllStyleCategories" minScale="1e+8" autoRefreshEnabled="0" readOnly="0" type="vector">
+      <id>actor_5f01a6e5_8205_462f_af40_0ffd7ff0a44f</id>
+      <datasource>dbname='gobs' host=localhost port=5432 user='mdouchin' password='tation' sslmode=disable key='id' estimatedmetadata=true table="gobs"."actor" sql=</datasource>
+      <keywordList>
+        <value></value>
+      </keywordList>
+      <layername>actor</layername>
+      <srs>
+        <spatialrefsys>
+          <proj4></proj4>
+          <srsid>0</srsid>
+          <srid>0</srid>
+          <authid></authid>
+          <description></description>
+          <projectionacronym></projectionacronym>
+          <ellipsoidacronym></ellipsoidacronym>
+          <geographicflag>true</geographicflag>
+        </spatialrefsys>
+      </srs>
+      <resourceMetadata>
+        <identifier></identifier>
+        <parentidentifier></parentidentifier>
+        <language></language>
+        <type>dataset</type>
+        <title></title>
+        <abstract>Actors</abstract>
+        <contact>
+          <name></name>
+          <organization></organization>
+          <position></position>
+          <voice></voice>
+          <fax></fax>
+          <email></email>
+          <role></role>
+        </contact>
+        <links/>
+        <fees></fees>
+        <encoding></encoding>
+        <crs>
+          <spatialrefsys>
+            <proj4></proj4>
+            <srsid>0</srsid>
+            <srid>0</srid>
+            <authid></authid>
+            <description></description>
+            <projectionacronym></projectionacronym>
+            <ellipsoidacronym></ellipsoidacronym>
+            <geographicflag>false</geographicflag>
+          </spatialrefsys>
+        </crs>
+        <extent>
+          <spatial dimensions="2" maxx="0" maxy="0" maxz="0" crs="" minx="0" miny="0" minz="0"/>
+          <temporal>
+            <period>
+              <start></start>
+              <end></end>
+            </period>
+          </temporal>
+        </extent>
+      </resourceMetadata>
+      <provider encoding="UTF-8">postgres</provider>
+      <vectorjoins/>
+      <layerDependencies/>
+      <dataDependencies/>
+      <legend type="default-vector"/>
+      <expressionfields/>
+      <map-layer-style-manager current="défaut">
+        <map-layer-style name="défaut"/>
+      </map-layer-style-manager>
+      <auxiliaryLayer/>
+      <flags>
+        <Identifiable>1</Identifiable>
+        <Removable>1</Removable>
+        <Searchable>1</Searchable>
+      </flags>
+      <customproperties>
+        <property key="dualview/previewExpressions">
+          <value>id</value>
+        </property>
+        <property key="embeddedWidgets/count" value="0"/>
+        <property key="variableNames"/>
+        <property key="variableValues"/>
+      </customproperties>
+      <geometryOptions removeDuplicateNodes="0" geometryPrecision="0">
+        <activeChecks/>
+        <checkConfiguration/>
+      </geometryOptions>
+      <fieldConfiguration>
+        <field name="id">
+          <editWidget type="TextEdit">
+            <config>
+              <Option type="Map">
+                <Option name="IsMultiline" value="false" type="bool"/>
+                <Option name="UseHtml" value="false" type="bool"/>
+              </Option>
+            </config>
+          </editWidget>
+        </field>
+        <field name="a_name">
+          <editWidget type="TextEdit">
+            <config>
+              <Option type="Map">
+                <Option name="IsMultiline" value="false" type="bool"/>
+                <Option name="UseHtml" value="false" type="bool"/>
+              </Option>
+            </config>
+          </editWidget>
+        </field>
+        <field name="a_description">
+          <editWidget type="TextEdit">
+            <config>
+              <Option type="Map">
+                <Option name="IsMultiline" value="true" type="bool"/>
+                <Option name="UseHtml" value="false" type="bool"/>
+              </Option>
+            </config>
+          </editWidget>
+        </field>
+        <field name="a_email">
+          <editWidget type="TextEdit">
+            <config>
+              <Option type="Map">
+                <Option name="IsMultiline" value="false" type="bool"/>
+                <Option name="UseHtml" value="false" type="bool"/>
+              </Option>
+            </config>
+          </editWidget>
+        </field>
+        <field name="id_category">
+          <editWidget type="RelationReference">
+            <config>
+              <Option type="Map">
+                <Option name="AllowAddFeatures" value="true" type="bool"/>
+                <Option name="AllowNULL" value="false" type="bool"/>
+                <Option name="MapIdentification" value="false" type="bool"/>
+                <Option name="OrderByValue" value="true" type="bool"/>
+                <Option name="ReadOnly" value="false" type="bool"/>
+                <Option name="Relation" value="actor_5f01a6e5_8205_462f_af40_0ffd7ff0a44f_id_category_actor_category_8a7edcf8_cb34_4689_b22b_7a8a6a2ab610_id" type="QString"/>
+                <Option name="ShowForm" value="false" type="bool"/>
+                <Option name="ShowOpenFormButton" value="false" type="bool"/>
+              </Option>
+            </config>
+          </editWidget>
+        </field>
+      </fieldConfiguration>
+      <aliases>
+        <alias index="0" name="Identifiant" field="id"/>
+        <alias index="1" name="Nom" field="a_name"/>
+        <alias index="2" name="Description" field="a_description"/>
+        <alias index="3" name="Email" field="a_email"/>
+        <alias index="4" name="" field="id_category"/>
+      </aliases>
+      <excludeAttributesWMS/>
+      <excludeAttributesWFS/>
+      <defaults>
+        <default expression="" field="id" applyOnUpdate="0"/>
+        <default expression="" field="a_name" applyOnUpdate="0"/>
+        <default expression="" field="a_description" applyOnUpdate="0"/>
+        <default expression="" field="a_email" applyOnUpdate="0"/>
+        <default expression="" field="id_category" applyOnUpdate="0"/>
+      </defaults>
+      <constraints>
+        <constraint constraints="3" exp_strength="0" notnull_strength="1" unique_strength="1" field="id"/>
+        <constraint constraints="1" exp_strength="0" notnull_strength="1" unique_strength="0" field="a_name"/>
+        <constraint constraints="1" exp_strength="0" notnull_strength="1" unique_strength="0" field="a_description"/>
+        <constraint constraints="1" exp_strength="0" notnull_strength="1" unique_strength="0" field="a_email"/>
+        <constraint constraints="1" exp_strength="0" notnull_strength="1" unique_strength="0" field="id_category"/>
+      </constraints>
+      <constraintExpressions>
+        <constraint exp="" desc="" field="id"/>
+        <constraint exp="" desc="" field="a_name"/>
+        <constraint exp="" desc="" field="a_description"/>
+        <constraint exp="" desc="" field="a_email"/>
+        <constraint exp="" desc="" field="id_category"/>
+      </constraintExpressions>
+      <expressionfields/>
+      <attributeactions>
+        <defaultAction key="Canvas" value="{00000000-0000-0000-0000-000000000000}"/>
+      </attributeactions>
+      <attributetableconfig sortExpression="" sortOrder="0" actionWidgetStyle="dropDown">
+        <columns>
+          <column hidden="0" width="-1" name="id" type="field"/>
+          <column hidden="0" width="-1" name="a_name" type="field"/>
+          <column hidden="0" width="-1" name="a_description" type="field"/>
+          <column hidden="0" width="-1" name="a_email" type="field"/>
+          <column hidden="0" width="-1" name="id_category" type="field"/>
+          <column hidden="1" width="-1" type="actions"/>
+        </columns>
+      </attributetableconfig>
+      <conditionalstyles>
+        <rowstyles/>
+        <fieldstyles/>
+      </conditionalstyles>
+      <editform tolerant="1"></editform>
+      <editforminit/>
+      <editforminitcodesource>0</editforminitcodesource>
+      <editforminitfilepath></editforminitfilepath>
+      <editforminitcode><![CDATA[# -*- coding: utf-8 -*-
+"""
+Les formulaires QGIS peuvent avoir une fonction Python qui sera appelée à l'ouverture du formulaire.
+
+Utilisez cette fonction pour ajouter plus de fonctionnalités à vos formulaires.
+
+Entrez le nom de la fonction dans le champ "Fonction d'initialisation Python".
+Voici un exemple à suivre:
+"""
+from qgis.PyQt.QtWidgets import QWidget
+
+def my_form_open(dialog, layer, feature):
+    geom = feature.geometry()
+    control = dialog.findChild(QWidget, "MyLineEdit")
+]]></editforminitcode>
+      <featformsuppress>0</featformsuppress>
+      <editorlayout>tablayout</editorlayout>
+      <attributeEditorForm>
+        <attributeEditorContainer visibilityExpression="" visibilityExpressionEnabled="0" name="General" showLabel="1" columnCount="1" groupBox="0">
+          <attributeEditorField index="0" name="id" showLabel="1"/>
+          <attributeEditorField index="1" name="a_name" showLabel="1"/>
+          <attributeEditorField index="3" name="a_email" showLabel="1"/>
+          <attributeEditorField index="2" name="a_description" showLabel="1"/>
+          <attributeEditorField index="4" name="id_category" showLabel="1"/>
+        </attributeEditorContainer>
+      </attributeEditorForm>
+      <editable>
+        <field editable="1" name="a_description"/>
+        <field editable="1" name="a_email"/>
+        <field editable="1" name="a_name"/>
+        <field editable="0" name="id"/>
+        <field editable="1" name="id_category"/>
+      </editable>
+      <labelOnTop>
+        <field labelOnTop="0" name="a_description"/>
+        <field labelOnTop="0" name="a_email"/>
+        <field labelOnTop="0" name="a_name"/>
+        <field labelOnTop="0" name="id"/>
+        <field labelOnTop="0" name="id_category"/>
+      </labelOnTop>
+      <widgets>
+        <widget name="series_04a7414a_ab6d_4611_8a60_bcd22071dc22_fk_id_actor_actor_5f01a6e5_8205_462f_af40_0ffd7ff0a44f_id">
+          <config type="Map">
+            <Option name="nm-rel" value="" type="QString"/>
+          </config>
+        </widget>
+        <widget name="spatial_layer_18215d6d_1f4c_40d2_ba83_f2c9a9694e84_fk_id_actor_actor_5f01a6e5_8205_462f_af40_0ffd7ff0a44f_id">
+          <config type="Map">
+            <Option name="nm-rel" value="" type="QString"/>
+          </config>
+        </widget>
+      </widgets>
+      <previewExpression>a_name</previewExpression>
+      <mapTip></mapTip>
+    </maplayer>
+    <maplayer geometry="No geometry" hasScaleBasedVisibilityFlag="0" maxScale="0" autoRefreshTime="0" refreshOnNotifyMessage="" refreshOnNotifyEnabled="0" styleCategories="AllStyleCategories" minScale="1e+8" autoRefreshEnabled="0" readOnly="0" type="vector">
+      <id>actor_category_8a7edcf8_cb34_4689_b22b_7a8a6a2ab610</id>
+      <datasource>dbname='gobs' host=localhost port=5432 user='mdouchin' password='tation' sslmode=disable key='id' estimatedmetadata=true table="gobs"."actor_category" sql=</datasource>
+      <keywordList>
+        <value></value>
+      </keywordList>
+      <layername>actor_category</layername>
+      <srs>
+        <spatialrefsys>
+          <proj4></proj4>
+          <srsid>0</srsid>
+          <srid>0</srid>
+          <authid></authid>
+          <description></description>
+          <projectionacronym></projectionacronym>
+          <ellipsoidacronym></ellipsoidacronym>
+          <geographicflag>false</geographicflag>
+        </spatialrefsys>
+      </srs>
+      <resourceMetadata>
+        <identifier></identifier>
+        <parentidentifier></parentidentifier>
+        <language></language>
+        <type>dataset</type>
+        <title></title>
+        <abstract>Actors categories</abstract>
+        <contact>
+          <name></name>
+          <organization></organization>
+          <position></position>
+          <voice></voice>
+          <fax></fax>
+          <email></email>
+          <role></role>
+        </contact>
+        <links/>
+        <fees></fees>
+        <encoding></encoding>
+        <crs>
+          <spatialrefsys>
+            <proj4></proj4>
+            <srsid>0</srsid>
+            <srid>0</srid>
+            <authid></authid>
+            <description></description>
+            <projectionacronym></projectionacronym>
+            <ellipsoidacronym></ellipsoidacronym>
+            <geographicflag>false</geographicflag>
+          </spatialrefsys>
+        </crs>
+        <extent>
+          <spatial dimensions="2" maxx="0" maxy="0" maxz="0" crs="" minx="0" miny="0" minz="0"/>
+          <temporal>
+            <period>
+              <start></start>
+              <end></end>
+            </period>
+          </temporal>
+        </extent>
+      </resourceMetadata>
+      <provider encoding="UTF-8">postgres</provider>
+      <vectorjoins/>
+      <layerDependencies/>
+      <dataDependencies/>
+      <legend type="default-vector"/>
+      <expressionfields/>
+      <map-layer-style-manager current="défaut">
+        <map-layer-style name="défaut"/>
+      </map-layer-style-manager>
+      <auxiliaryLayer/>
+      <flags>
+        <Identifiable>1</Identifiable>
+        <Removable>1</Removable>
+        <Searchable>1</Searchable>
+      </flags>
+      <customproperties>
+        <property key="embeddedWidgets/count" value="0"/>
+        <property key="variableNames"/>
+        <property key="variableValues"/>
+      </customproperties>
+      <geometryOptions removeDuplicateNodes="0" geometryPrecision="0">
+        <activeChecks/>
+        <checkConfiguration/>
+      </geometryOptions>
+      <fieldConfiguration>
+        <field name="id">
+          <editWidget type="TextEdit">
+            <config>
+              <Option type="Map">
+                <Option name="IsMultiline" value="false" type="bool"/>
+                <Option name="UseHtml" value="false" type="bool"/>
+              </Option>
+            </config>
+          </editWidget>
+        </field>
+        <field name="ac_name">
+          <editWidget type="TextEdit">
+            <config>
+              <Option type="Map">
+                <Option name="IsMultiline" value="false" type="bool"/>
+                <Option name="UseHtml" value="false" type="bool"/>
+              </Option>
+            </config>
+          </editWidget>
+        </field>
+        <field name="ac_description">
+          <editWidget type="TextEdit">
+            <config>
+              <Option type="Map">
+                <Option name="IsMultiline" value="true" type="bool"/>
+                <Option name="UseHtml" value="false" type="bool"/>
+              </Option>
+            </config>
+          </editWidget>
+        </field>
+      </fieldConfiguration>
+      <aliases>
+        <alias index="0" name="" field="id"/>
+        <alias index="1" name="Name" field="ac_name"/>
+        <alias index="2" name="Description" field="ac_description"/>
+      </aliases>
+      <excludeAttributesWMS/>
+      <excludeAttributesWFS/>
+      <defaults>
+        <default expression="" field="id" applyOnUpdate="0"/>
+        <default expression="" field="ac_name" applyOnUpdate="0"/>
+        <default expression="" field="ac_description" applyOnUpdate="0"/>
+      </defaults>
+      <constraints>
+        <constraint constraints="3" exp_strength="0" notnull_strength="1" unique_strength="1" field="id"/>
+        <constraint constraints="1" exp_strength="0" notnull_strength="1" unique_strength="0" field="ac_name"/>
+        <constraint constraints="1" exp_strength="0" notnull_strength="1" unique_strength="0" field="ac_description"/>
+      </constraints>
+      <constraintExpressions>
+        <constraint exp="" desc="" field="id"/>
+        <constraint exp="" desc="" field="ac_name"/>
+        <constraint exp="" desc="" field="ac_description"/>
+      </constraintExpressions>
+      <expressionfields/>
+      <attributeactions>
+        <defaultAction key="Canvas" value="{00000000-0000-0000-0000-000000000000}"/>
+      </attributeactions>
+      <attributetableconfig sortExpression="" sortOrder="0" actionWidgetStyle="dropDown">
+        <columns>
+          <column hidden="0" width="-1" name="id" type="field"/>
+          <column hidden="0" width="-1" name="ac_name" type="field"/>
+          <column hidden="0" width="-1" name="ac_description" type="field"/>
+          <column hidden="1" width="-1" type="actions"/>
+        </columns>
+      </attributetableconfig>
+      <conditionalstyles>
+        <rowstyles/>
+        <fieldstyles/>
+      </conditionalstyles>
+      <editform tolerant="1"></editform>
+      <editforminit/>
+      <editforminitcodesource>0</editforminitcodesource>
+      <editforminitfilepath></editforminitfilepath>
+      <editforminitcode><![CDATA[# -*- coding: utf-8 -*-
+"""
+Les formulaires QGIS peuvent avoir une fonction Python qui sera appelée à l'ouverture du formulaire.
+
+Utilisez cette fonction pour ajouter plus de fonctionnalités à vos formulaires.
+
+Entrez le nom de la fonction dans le champ "Fonction d'initialisation Python".
+Voici un exemple à suivre:
+"""
+from qgis.PyQt.QtWidgets import QWidget
+
+def my_form_open(dialog, layer, feature):
+    geom = feature.geometry()
+    control = dialog.findChild(QWidget, "MyLineEdit")
+]]></editforminitcode>
+      <featformsuppress>0</featformsuppress>
+      <editorlayout>generatedlayout</editorlayout>
+      <editable>
+        <field editable="1" name="ac_description"/>
+        <field editable="1" name="ac_name"/>
+        <field editable="1" name="id"/>
+      </editable>
+      <labelOnTop>
+        <field labelOnTop="0" name="ac_description"/>
+        <field labelOnTop="0" name="ac_name"/>
+        <field labelOnTop="0" name="id"/>
+      </labelOnTop>
+      <widgets>
+        <widget name="actor_5f01a6e5_8205_462f_af40_0ffd7ff0a44f_id_category_actor_category_8a7edcf8_cb34_4689_b22b_7a8a6a2ab610_id">
+          <config type="Map">
+            <Option name="nm-rel" value="" type="QString"/>
+          </config>
+        </widget>
+      </widgets>
+      <previewExpression>ac_name</previewExpression>
+      <mapTip></mapTip>
+    </maplayer>
+    <maplayer geometry="No geometry" hasScaleBasedVisibilityFlag="0" maxScale="0" autoRefreshTime="0" refreshOnNotifyMessage="" refreshOnNotifyEnabled="0" styleCategories="AllStyleCategories" minScale="1e+8" autoRefreshEnabled="0" readOnly="0" type="vector">
+      <id>glossary_cee356e0_5be5_4d87_ac2b_e8e8967c4032</id>
+      <datasource>dbname='gobs' host=localhost port=5432 user='mdouchin' password='tation' sslmode=disable key='id' estimatedmetadata=true table="gobs"."glossary" sql=</datasource>
+      <keywordList>
+        <value></value>
+      </keywordList>
+      <layername>glossary</layername>
+      <srs>
+        <spatialrefsys>
+          <proj4></proj4>
+          <srsid>0</srsid>
+          <srid>0</srid>
+          <authid></authid>
+          <description></description>
+          <projectionacronym></projectionacronym>
+          <ellipsoidacronym></ellipsoidacronym>
+          <geographicflag>false</geographicflag>
+        </spatialrefsys>
+      </srs>
+      <resourceMetadata>
+        <identifier></identifier>
+        <parentidentifier></parentidentifier>
+        <language></language>
+        <type>dataset</type>
+        <title></title>
+        <abstract>List of labels and words used as labels for stored data</abstract>
+        <links/>
+        <fees></fees>
+        <encoding></encoding>
+        <crs>
+          <spatialrefsys>
+            <proj4></proj4>
+            <srsid>0</srsid>
+            <srid>0</srid>
+            <authid></authid>
+            <description></description>
+            <projectionacronym></projectionacronym>
+            <ellipsoidacronym></ellipsoidacronym>
+            <geographicflag>false</geographicflag>
+          </spatialrefsys>
+        </crs>
+        <extent/>
+      </resourceMetadata>
+      <provider encoding="UTF-8">postgres</provider>
+      <vectorjoins/>
+      <layerDependencies/>
+      <dataDependencies/>
+      <legend type="default-vector"/>
+      <expressionfields/>
+      <map-layer-style-manager current="défaut">
+        <map-layer-style name="défaut"/>
+      </map-layer-style-manager>
+      <auxiliaryLayer/>
+      <flags>
+        <Identifiable>1</Identifiable>
+        <Removable>1</Removable>
+        <Searchable>1</Searchable>
+      </flags>
+      <customproperties/>
+      <geometryOptions removeDuplicateNodes="0" geometryPrecision="0">
+        <activeChecks type="StringList">
+          <Option value="" type="QString"/>
+        </activeChecks>
+        <checkConfiguration/>
+      </geometryOptions>
+      <fieldConfiguration>
+        <field name="id">
+          <editWidget type="">
+            <config>
+              <Option/>
+            </config>
+          </editWidget>
+        </field>
+        <field name="gl_field">
+          <editWidget type="">
+            <config>
+              <Option/>
+            </config>
+          </editWidget>
+        </field>
+        <field name="gl_code">
+          <editWidget type="">
+            <config>
+              <Option/>
+            </config>
+          </editWidget>
+        </field>
+        <field name="gl_value">
+          <editWidget type="">
+            <config>
+              <Option/>
+            </config>
+          </editWidget>
+        </field>
+        <field name="gl_label">
+          <editWidget type="">
+            <config>
+              <Option/>
+            </config>
+          </editWidget>
+        </field>
+        <field name="gl_order">
+          <editWidget type="">
+            <config>
+              <Option/>
+            </config>
+          </editWidget>
+        </field>
+      </fieldConfiguration>
+      <aliases>
+        <alias index="0" name="" field="id"/>
+        <alias index="1" name="" field="gl_field"/>
+        <alias index="2" name="" field="gl_code"/>
+        <alias index="3" name="" field="gl_value"/>
+        <alias index="4" name="" field="gl_label"/>
+        <alias index="5" name="" field="gl_order"/>
+      </aliases>
+      <excludeAttributesWMS/>
+      <excludeAttributesWFS/>
+      <defaults>
+        <default expression="" field="id" applyOnUpdate="0"/>
+        <default expression="" field="gl_field" applyOnUpdate="0"/>
+        <default expression="" field="gl_code" applyOnUpdate="0"/>
+        <default expression="" field="gl_value" applyOnUpdate="0"/>
+        <default expression="" field="gl_label" applyOnUpdate="0"/>
+        <default expression="" field="gl_order" applyOnUpdate="0"/>
+      </defaults>
+      <constraints>
+        <constraint constraints="3" exp_strength="0" notnull_strength="1" unique_strength="1" field="id"/>
+        <constraint constraints="1" exp_strength="0" notnull_strength="1" unique_strength="0" field="gl_field"/>
+        <constraint constraints="1" exp_strength="0" notnull_strength="1" unique_strength="0" field="gl_code"/>
+        <constraint constraints="1" exp_strength="0" notnull_strength="1" unique_strength="0" field="gl_value"/>
+        <constraint constraints="1" exp_strength="0" notnull_strength="1" unique_strength="0" field="gl_label"/>
+        <constraint constraints="0" exp_strength="0" notnull_strength="0" unique_strength="0" field="gl_order"/>
+      </constraints>
+      <constraintExpressions>
+        <constraint exp="" desc="" field="id"/>
+        <constraint exp="" desc="" field="gl_field"/>
+        <constraint exp="" desc="" field="gl_code"/>
+        <constraint exp="" desc="" field="gl_value"/>
+        <constraint exp="" desc="" field="gl_label"/>
+        <constraint exp="" desc="" field="gl_order"/>
+      </constraintExpressions>
+      <expressionfields/>
+      <attributeactions>
+        <defaultAction key="Canvas" value="{00000000-0000-0000-0000-000000000000}"/>
+      </attributeactions>
+      <attributetableconfig sortExpression="" sortOrder="0" actionWidgetStyle="dropDown">
+        <columns/>
+      </attributetableconfig>
+      <conditionalstyles>
+        <rowstyles/>
+        <fieldstyles/>
+      </conditionalstyles>
+      <editform tolerant="1"></editform>
+      <editforminit/>
+      <editforminitcodesource>0</editforminitcodesource>
+      <editforminitfilepath></editforminitfilepath>
+      <editforminitcode><![CDATA[]]></editforminitcode>
+      <featformsuppress>0</featformsuppress>
+      <editorlayout>generatedlayout</editorlayout>
+      <editable/>
+      <labelOnTop/>
+      <widgets/>
+      <previewExpression></previewExpression>
+      <mapTip></mapTip>
+    </maplayer>
+    <maplayer geometry="No geometry" hasScaleBasedVisibilityFlag="0" maxScale="0" autoRefreshTime="0" refreshOnNotifyMessage="" refreshOnNotifyEnabled="0" styleCategories="AllStyleCategories" minScale="1e+8" autoRefreshEnabled="0" readOnly="0" type="vector">
+      <id>graph_node_2cd9eee8_46e2_401c_87f7_8b40d9d6260e</id>
+      <datasource>dbname='gobs' host=localhost port=5432 user='mdouchin' password='tation' sslmode=disable key='id' estimatedmetadata=true table="gobs"."graph_node" sql=</datasource>
+      <keywordList>
+        <value></value>
+      </keywordList>
+      <layername>graph_node</layername>
+      <srs>
+        <spatialrefsys>
+          <proj4></proj4>
+          <srsid>0</srsid>
+          <srid>0</srid>
+          <authid></authid>
+          <description></description>
+          <projectionacronym></projectionacronym>
+          <ellipsoidacronym></ellipsoidacronym>
+          <geographicflag>false</geographicflag>
+        </spatialrefsys>
+      </srs>
+      <resourceMetadata>
+        <identifier></identifier>
+        <parentidentifier></parentidentifier>
+        <language></language>
+        <type>dataset</type>
+        <title></title>
+        <abstract>Graph nodes, to store key words used to find an indicator.</abstract>
+        <links/>
+        <fees></fees>
+        <encoding></encoding>
+        <crs>
+          <spatialrefsys>
+            <proj4></proj4>
+            <srsid>0</srsid>
+            <srid>0</srid>
+            <authid></authid>
+            <description></description>
+            <projectionacronym></projectionacronym>
+            <ellipsoidacronym></ellipsoidacronym>
+            <geographicflag>false</geographicflag>
+          </spatialrefsys>
+        </crs>
+        <extent/>
+      </resourceMetadata>
+      <provider encoding="UTF-8">postgres</provider>
+      <vectorjoins/>
+      <layerDependencies/>
+      <dataDependencies/>
+      <legend type="default-vector"/>
+      <expressionfields/>
+      <map-layer-style-manager current="défaut">
+        <map-layer-style name="défaut"/>
+      </map-layer-style-manager>
+      <auxiliaryLayer/>
+      <flags>
+        <Identifiable>1</Identifiable>
+        <Removable>1</Removable>
+        <Searchable>1</Searchable>
+      </flags>
+      <customproperties/>
+      <geometryOptions removeDuplicateNodes="0" geometryPrecision="0">
+        <activeChecks type="StringList">
+          <Option value="" type="QString"/>
+        </activeChecks>
+        <checkConfiguration/>
+      </geometryOptions>
+      <fieldConfiguration>
+        <field name="id">
+          <editWidget type="">
+            <config>
+              <Option/>
+            </config>
+          </editWidget>
+        </field>
+        <field name="gn_name">
+          <editWidget type="">
+            <config>
+              <Option/>
+            </config>
+          </editWidget>
+        </field>
+        <field name="gn_description">
+          <editWidget type="">
+            <config>
+              <Option/>
+            </config>
+          </editWidget>
+        </field>
+      </fieldConfiguration>
+      <aliases>
+        <alias index="0" name="" field="id"/>
+        <alias index="1" name="" field="gn_name"/>
+        <alias index="2" name="" field="gn_description"/>
+      </aliases>
+      <excludeAttributesWMS/>
+      <excludeAttributesWFS/>
+      <defaults>
+        <default expression="" field="id" applyOnUpdate="0"/>
+        <default expression="" field="gn_name" applyOnUpdate="0"/>
+        <default expression="" field="gn_description" applyOnUpdate="0"/>
+      </defaults>
+      <constraints>
+        <constraint constraints="3" exp_strength="0" notnull_strength="1" unique_strength="1" field="id"/>
+        <constraint constraints="1" exp_strength="0" notnull_strength="1" unique_strength="0" field="gn_name"/>
+        <constraint constraints="1" exp_strength="0" notnull_strength="1" unique_strength="0" field="gn_description"/>
+      </constraints>
+      <constraintExpressions>
+        <constraint exp="" desc="" field="id"/>
+        <constraint exp="" desc="" field="gn_name"/>
+        <constraint exp="" desc="" field="gn_description"/>
+      </constraintExpressions>
+      <expressionfields/>
+      <attributeactions>
+        <defaultAction key="Canvas" value="{00000000-0000-0000-0000-000000000000}"/>
+      </attributeactions>
+      <attributetableconfig sortExpression="" sortOrder="0" actionWidgetStyle="dropDown">
+        <columns/>
+      </attributetableconfig>
+      <conditionalstyles>
+        <rowstyles/>
+        <fieldstyles/>
+      </conditionalstyles>
+      <editform tolerant="1"></editform>
+      <editforminit/>
+      <editforminitcodesource>0</editforminitcodesource>
+      <editforminitfilepath></editforminitfilepath>
+      <editforminitcode><![CDATA[]]></editforminitcode>
+      <featformsuppress>0</featformsuppress>
+      <editorlayout>generatedlayout</editorlayout>
+      <editable/>
+      <labelOnTop/>
+      <widgets/>
+      <previewExpression></previewExpression>
+      <mapTip></mapTip>
+    </maplayer>
+    <maplayer geometry="No geometry" hasScaleBasedVisibilityFlag="0" maxScale="0" autoRefreshTime="0" refreshOnNotifyMessage="" refreshOnNotifyEnabled="0" styleCategories="AllStyleCategories" minScale="1e+8" autoRefreshEnabled="0" readOnly="0" type="vector">
+      <id>import_0343eb12_592e_4fd0_8380_51f4d62b6a56</id>
+      <datasource>dbname='gobs' host=localhost port=5432 user='mdouchin' password='tation' sslmode=disable key='id' estimatedmetadata=true table="gobs"."import" sql=</datasource>
+      <keywordList>
+        <value></value>
+      </keywordList>
+      <layername>import</layername>
+      <srs>
+        <spatialrefsys>
+          <proj4></proj4>
+          <srsid>0</srsid>
+          <srid>0</srid>
+          <authid></authid>
+          <description></description>
+          <projectionacronym></projectionacronym>
+          <ellipsoidacronym></ellipsoidacronym>
+          <geographicflag>false</geographicflag>
+        </spatialrefsys>
+      </srs>
+      <resourceMetadata>
+        <identifier></identifier>
+        <parentidentifier></parentidentifier>
+        <language></language>
+        <type>dataset</type>
+        <title></title>
+        <abstract>Journal des imports</abstract>
+        <links/>
+        <fees></fees>
+        <encoding></encoding>
+        <crs>
+          <spatialrefsys>
+            <proj4></proj4>
+            <srsid>0</srsid>
+            <srid>0</srid>
+            <authid></authid>
+            <description></description>
+            <projectionacronym></projectionacronym>
+            <ellipsoidacronym></ellipsoidacronym>
+            <geographicflag>false</geographicflag>
+          </spatialrefsys>
+        </crs>
+        <extent/>
+      </resourceMetadata>
+      <provider encoding="UTF-8">postgres</provider>
+      <vectorjoins/>
+      <layerDependencies/>
+      <dataDependencies/>
+      <legend type="default-vector"/>
+      <expressionfields/>
+      <map-layer-style-manager current="défaut">
+        <map-layer-style name="défaut"/>
+      </map-layer-style-manager>
+      <auxiliaryLayer/>
+      <flags>
+        <Identifiable>1</Identifiable>
+        <Removable>1</Removable>
+        <Searchable>1</Searchable>
+      </flags>
+      <customproperties>
+        <property key="dualview/previewExpressions">
+          <value>"id"</value>
+        </property>
+      </customproperties>
+      <geometryOptions removeDuplicateNodes="0" geometryPrecision="0">
+        <activeChecks type="StringList">
+          <Option value="" type="QString"/>
+        </activeChecks>
+        <checkConfiguration/>
+      </geometryOptions>
+      <fieldConfiguration>
+        <field name="id">
+          <editWidget type="">
+            <config>
+              <Option/>
+            </config>
+          </editWidget>
+        </field>
+        <field name="im_timestamp">
+          <editWidget type="">
+            <config>
+              <Option/>
+            </config>
+          </editWidget>
+        </field>
+        <field name="fk_id_series">
+          <editWidget type="">
+            <config>
+              <Option/>
+            </config>
+          </editWidget>
+        </field>
+        <field name="im_status">
+          <editWidget type="">
+            <config>
+              <Option/>
+            </config>
+          </editWidget>
+        </field>
+      </fieldConfiguration>
+      <aliases>
+        <alias index="0" name="" field="id"/>
+        <alias index="1" name="" field="im_timestamp"/>
+        <alias index="2" name="" field="fk_id_series"/>
+        <alias index="3" name="" field="im_status"/>
+      </aliases>
+      <excludeAttributesWMS/>
+      <excludeAttributesWFS/>
+      <defaults>
+        <default expression="" field="id" applyOnUpdate="0"/>
+        <default expression="" field="im_timestamp" applyOnUpdate="0"/>
+        <default expression="" field="fk_id_series" applyOnUpdate="0"/>
+        <default expression="" field="im_status" applyOnUpdate="0"/>
+      </defaults>
+      <constraints>
+        <constraint constraints="3" exp_strength="0" notnull_strength="1" unique_strength="1" field="id"/>
+        <constraint constraints="1" exp_strength="0" notnull_strength="1" unique_strength="0" field="im_timestamp"/>
+        <constraint constraints="1" exp_strength="0" notnull_strength="1" unique_strength="0" field="fk_id_series"/>
+        <constraint constraints="0" exp_strength="0" notnull_strength="0" unique_strength="0" field="im_status"/>
+      </constraints>
+      <constraintExpressions>
+        <constraint exp="" desc="" field="id"/>
+        <constraint exp="" desc="" field="im_timestamp"/>
+        <constraint exp="" desc="" field="fk_id_series"/>
+        <constraint exp="" desc="" field="im_status"/>
+      </constraintExpressions>
+      <expressionfields/>
+      <attributeactions>
+        <defaultAction key="Canvas" value="{00000000-0000-0000-0000-000000000000}"/>
+      </attributeactions>
+      <attributetableconfig sortExpression="" sortOrder="0" actionWidgetStyle="dropDown">
+        <columns/>
+      </attributetableconfig>
+      <conditionalstyles>
+        <rowstyles/>
+        <fieldstyles/>
+      </conditionalstyles>
+      <editform tolerant="1"></editform>
+      <editforminit/>
+      <editforminitcodesource>0</editforminitcodesource>
+      <editforminitfilepath></editforminitfilepath>
+      <editforminitcode><![CDATA[]]></editforminitcode>
+      <featformsuppress>0</featformsuppress>
+      <editorlayout>generatedlayout</editorlayout>
+      <editable/>
+      <labelOnTop/>
+      <widgets/>
+      <previewExpression>id</previewExpression>
+      <mapTip></mapTip>
+    </maplayer>
+    <maplayer geometry="No geometry" hasScaleBasedVisibilityFlag="0" maxScale="0" autoRefreshTime="0" refreshOnNotifyMessage="" refreshOnNotifyEnabled="0" styleCategories="AllStyleCategories" minScale="1e+8" autoRefreshEnabled="0" readOnly="0" type="vector">
+      <id>indicator_18ba18bf_0390_45a3_8edd_1cc049e8a251</id>
+      <datasource>dbname='gobs' host=localhost port=5432 user='mdouchin' password='tation' sslmode=disable key='id' estimatedmetadata=true table="gobs"."indicator" sql=</datasource>
+      <keywordList>
+        <value></value>
+      </keywordList>
+      <layername>indicator</layername>
+      <srs>
+        <spatialrefsys>
+          <proj4></proj4>
+          <srsid>0</srsid>
+          <srid>0</srid>
+          <authid></authid>
+          <description></description>
+          <projectionacronym></projectionacronym>
+          <ellipsoidacronym></ellipsoidacronym>
+          <geographicflag>false</geographicflag>
+        </spatialrefsys>
+      </srs>
+      <resourceMetadata>
+        <identifier></identifier>
+        <parentidentifier></parentidentifier>
+        <language></language>
+        <type>dataset</type>
+        <title></title>
+        <abstract>Groups of observation data for decisional purpose. </abstract>
+        <links/>
+        <fees></fees>
+        <encoding></encoding>
+        <crs>
+          <spatialrefsys>
+            <proj4></proj4>
+            <srsid>0</srsid>
+            <srid>0</srid>
+            <authid></authid>
+            <description></description>
+            <projectionacronym></projectionacronym>
+            <ellipsoidacronym></ellipsoidacronym>
+            <geographicflag>false</geographicflag>
+          </spatialrefsys>
+        </crs>
+        <extent/>
+      </resourceMetadata>
+      <provider encoding="UTF-8">postgres</provider>
+      <vectorjoins/>
+      <layerDependencies/>
+      <dataDependencies/>
+      <legend type="default-vector"/>
+      <expressionfields/>
+      <map-layer-style-manager current="défaut">
+        <map-layer-style name="défaut"/>
+      </map-layer-style-manager>
+      <auxiliaryLayer/>
+      <flags>
+        <Identifiable>1</Identifiable>
+        <Removable>1</Removable>
+        <Searchable>1</Searchable>
+      </flags>
+      <customproperties/>
+      <geometryOptions removeDuplicateNodes="0" geometryPrecision="0">
+        <activeChecks type="StringList">
+          <Option value="" type="QString"/>
+        </activeChecks>
+        <checkConfiguration/>
+      </geometryOptions>
+      <fieldConfiguration>
+        <field name="id">
+          <editWidget type="">
+            <config>
+              <Option/>
+            </config>
+          </editWidget>
+        </field>
+        <field name="id_label">
+          <editWidget type="">
+            <config>
+              <Option/>
+            </config>
+          </editWidget>
+        </field>
+        <field name="id_title">
+          <editWidget type="">
+            <config>
+              <Option/>
+            </config>
+          </editWidget>
+        </field>
+        <field name="id_description">
+          <editWidget type="">
+            <config>
+              <Option/>
+            </config>
+          </editWidget>
+        </field>
+        <field name="id_date_format">
+          <editWidget type="">
+            <config>
+              <Option/>
+            </config>
+          </editWidget>
+        </field>
+        <field name="id_value_code">
+          <editWidget type="">
+            <config>
+              <Option/>
+            </config>
+          </editWidget>
+        </field>
+        <field name="id_value_name">
+          <editWidget type="">
+            <config>
+              <Option/>
+            </config>
+          </editWidget>
+        </field>
+        <field name="id_value_type">
+          <editWidget type="">
+            <config>
+              <Option/>
+            </config>
+          </editWidget>
+        </field>
+        <field name="id_value_unit">
+          <editWidget type="">
+            <config>
+              <Option/>
+            </config>
+          </editWidget>
+        </field>
+      </fieldConfiguration>
+      <aliases>
+        <alias index="0" name="" field="id"/>
+        <alias index="1" name="" field="id_label"/>
+        <alias index="2" name="" field="id_title"/>
+        <alias index="3" name="" field="id_description"/>
+        <alias index="4" name="" field="id_date_format"/>
+        <alias index="5" name="" field="id_value_code"/>
+        <alias index="6" name="" field="id_value_name"/>
+        <alias index="7" name="" field="id_value_type"/>
+        <alias index="8" name="" field="id_value_unit"/>
+      </aliases>
+      <excludeAttributesWMS/>
+      <excludeAttributesWFS/>
+      <defaults>
+        <default expression="" field="id" applyOnUpdate="0"/>
+        <default expression="" field="id_label" applyOnUpdate="0"/>
+        <default expression="" field="id_title" applyOnUpdate="0"/>
+        <default expression="" field="id_description" applyOnUpdate="0"/>
+        <default expression="" field="id_date_format" applyOnUpdate="0"/>
+        <default expression="" field="id_value_code" applyOnUpdate="0"/>
+        <default expression="" field="id_value_name" applyOnUpdate="0"/>
+        <default expression="" field="id_value_type" applyOnUpdate="0"/>
+        <default expression="" field="id_value_unit" applyOnUpdate="0"/>
+      </defaults>
+      <constraints>
+        <constraint constraints="3" exp_strength="0" notnull_strength="1" unique_strength="1" field="id"/>
+        <constraint constraints="1" exp_strength="0" notnull_strength="1" unique_strength="0" field="id_label"/>
+        <constraint constraints="1" exp_strength="0" notnull_strength="1" unique_strength="0" field="id_title"/>
+        <constraint constraints="1" exp_strength="0" notnull_strength="1" unique_strength="0" field="id_description"/>
+        <constraint constraints="1" exp_strength="0" notnull_strength="1" unique_strength="0" field="id_date_format"/>
+        <constraint constraints="1" exp_strength="0" notnull_strength="1" unique_strength="0" field="id_value_code"/>
+        <constraint constraints="1" exp_strength="0" notnull_strength="1" unique_strength="0" field="id_value_name"/>
+        <constraint constraints="1" exp_strength="0" notnull_strength="1" unique_strength="0" field="id_value_type"/>
+        <constraint constraints="1" exp_strength="0" notnull_strength="1" unique_strength="0" field="id_value_unit"/>
+      </constraints>
+      <constraintExpressions>
+        <constraint exp="" desc="" field="id"/>
+        <constraint exp="" desc="" field="id_label"/>
+        <constraint exp="" desc="" field="id_title"/>
+        <constraint exp="" desc="" field="id_description"/>
+        <constraint exp="" desc="" field="id_date_format"/>
+        <constraint exp="" desc="" field="id_value_code"/>
+        <constraint exp="" desc="" field="id_value_name"/>
+        <constraint exp="" desc="" field="id_value_type"/>
+        <constraint exp="" desc="" field="id_value_unit"/>
+      </constraintExpressions>
+      <expressionfields/>
+      <attributeactions>
+        <defaultAction key="Canvas" value="{00000000-0000-0000-0000-000000000000}"/>
+      </attributeactions>
+      <attributetableconfig sortExpression="" sortOrder="0" actionWidgetStyle="dropDown">
+        <columns/>
+      </attributetableconfig>
+      <conditionalstyles>
+        <rowstyles/>
+        <fieldstyles/>
+      </conditionalstyles>
+      <editform tolerant="1"></editform>
+      <editforminit/>
+      <editforminitcodesource>0</editforminitcodesource>
+      <editforminitfilepath></editforminitfilepath>
+      <editforminitcode><![CDATA[]]></editforminitcode>
+      <featformsuppress>0</featformsuppress>
+      <editorlayout>generatedlayout</editorlayout>
+      <editable/>
+      <labelOnTop/>
+      <widgets/>
+      <previewExpression>id_label</previewExpression>
+      <mapTip></mapTip>
+    </maplayer>
+    <maplayer geometry="No geometry" hasScaleBasedVisibilityFlag="0" maxScale="0" autoRefreshTime="0" refreshOnNotifyMessage="" refreshOnNotifyEnabled="0" styleCategories="AllStyleCategories" minScale="1e+8" autoRefreshEnabled="0" readOnly="0" type="vector">
+      <id>observation_bcc90162_47c8_4097_bc24_a31af92d2708</id>
+      <datasource>dbname='gobs' host=localhost port=5432 user='mdouchin' password='tation' sslmode=disable key='id' estimatedmetadata=true table="gobs"."observation" sql=</datasource>
+      <keywordList>
+        <value></value>
+      </keywordList>
+      <layername>observation</layername>
+      <srs>
+        <spatialrefsys>
+          <proj4></proj4>
+          <srsid>0</srsid>
+          <srid>0</srid>
+          <authid></authid>
+          <description></description>
+          <projectionacronym></projectionacronym>
+          <ellipsoidacronym></ellipsoidacronym>
+          <geographicflag>false</geographicflag>
+        </spatialrefsys>
+      </srs>
+      <resourceMetadata>
+        <identifier></identifier>
+        <parentidentifier></parentidentifier>
+        <language></language>
+        <type>dataset</type>
+        <title></title>
+        <abstract>Les données brutes au format pivot ( indicateur, date, valeurs et entité spatiale, auteur, etc.)</abstract>
+        <contact>
+          <name></name>
+          <organization></organization>
+          <position></position>
+          <voice></voice>
+          <fax></fax>
+          <email></email>
+          <role></role>
+        </contact>
+        <links/>
+        <fees></fees>
+        <encoding></encoding>
+        <crs>
+          <spatialrefsys>
+            <proj4></proj4>
+            <srsid>0</srsid>
+            <srid>0</srid>
+            <authid></authid>
+            <description></description>
+            <projectionacronym></projectionacronym>
+            <ellipsoidacronym></ellipsoidacronym>
+            <geographicflag>false</geographicflag>
+          </spatialrefsys>
+        </crs>
+        <extent>
+          <spatial dimensions="2" maxx="0" maxy="0" maxz="0" crs="" minx="0" miny="0" minz="0"/>
+          <temporal>
+            <period>
+              <start></start>
+              <end></end>
+            </period>
+          </temporal>
+        </extent>
+      </resourceMetadata>
+      <provider encoding="UTF-8">postgres</provider>
+      <vectorjoins/>
+      <layerDependencies/>
+      <dataDependencies/>
+      <legend type="default-vector"/>
+      <expressionfields/>
+      <map-layer-style-manager current="défaut">
+        <map-layer-style name="défaut"/>
+      </map-layer-style-manager>
+      <auxiliaryLayer/>
+      <flags>
+        <Identifiable>1</Identifiable>
+        <Removable>1</Removable>
+        <Searchable>1</Searchable>
+      </flags>
+      <customproperties>
+        <property key="dualview/previewExpressions">
+          <value>"id"</value>
+        </property>
+        <property key="embeddedWidgets/count" value="0"/>
+        <property key="variableNames"/>
+        <property key="variableValues"/>
+      </customproperties>
+      <geometryOptions removeDuplicateNodes="0" geometryPrecision="0">
+        <activeChecks/>
+        <checkConfiguration/>
+      </geometryOptions>
+      <fieldConfiguration>
+        <field name="id">
+          <editWidget type="TextEdit">
+            <config>
+              <Option type="Map">
+                <Option name="IsMultiline" value="false" type="bool"/>
+                <Option name="UseHtml" value="false" type="bool"/>
+              </Option>
+            </config>
+          </editWidget>
+        </field>
+        <field name="fk_id_series">
+          <editWidget type="RelationReference">
+            <config>
+              <Option type="Map">
+                <Option name="AllowAddFeatures" value="false" type="bool"/>
+                <Option name="AllowNULL" value="false" type="bool"/>
+                <Option name="MapIdentification" value="false" type="bool"/>
+                <Option name="OrderByValue" value="false" type="bool"/>
+                <Option name="ReadOnly" value="false" type="bool"/>
+                <Option name="Relation" value="observation_bcc90162_47c8_4097_bc24_a31af92d2708_fk_id_series_series_04a7414a_ab6d_4611_8a60_bcd22071dc22_id" type="QString"/>
+                <Option name="ShowForm" value="false" type="bool"/>
+                <Option name="ShowOpenFormButton" value="true" type="bool"/>
+              </Option>
+            </config>
+          </editWidget>
+        </field>
+        <field name="fk_id_spatial_object">
+          <editWidget type="TextEdit">
+            <config>
+              <Option type="Map">
+                <Option name="IsMultiline" value="false" type="bool"/>
+                <Option name="UseHtml" value="false" type="bool"/>
+              </Option>
+            </config>
+          </editWidget>
+        </field>
+        <field name="fk_id_import">
+          <editWidget type="RelationReference">
+            <config>
+              <Option type="Map">
+                <Option name="AllowAddFeatures" value="false" type="bool"/>
+                <Option name="AllowNULL" value="false" type="bool"/>
+                <Option name="MapIdentification" value="false" type="bool"/>
+                <Option name="OrderByValue" value="false" type="bool"/>
+                <Option name="ReadOnly" value="false" type="bool"/>
+                <Option name="Relation" value="observation_bcc90162_47c8_4097_bc24_a31af92d2708_fk_id_import_import_0343eb12_592e_4fd0_8380_51f4d62b6a56_id" type="QString"/>
+                <Option name="ShowForm" value="false" type="bool"/>
+                <Option name="ShowOpenFormButton" value="true" type="bool"/>
+              </Option>
+            </config>
+          </editWidget>
+        </field>
+        <field name="ob_value">
+          <editWidget type="KeyValue">
+            <config>
+              <Option/>
+            </config>
+          </editWidget>
+        </field>
+        <field name="ob_timestamp">
+          <editWidget type="DateTime">
+            <config>
+              <Option type="Map">
+                <Option name="allow_null" value="true" type="bool"/>
+                <Option name="calendar_popup" value="true" type="bool"/>
+                <Option name="display_format" value="yyyy-MM-dd HH:mm:ss" type="QString"/>
+                <Option name="field_format" value="yyyy-MM-dd HH:mm:ss" type="QString"/>
+                <Option name="field_iso_format" value="false" type="bool"/>
+              </Option>
+            </config>
+          </editWidget>
+        </field>
+      </fieldConfiguration>
+      <aliases>
+        <alias index="0" name="" field="id"/>
+        <alias index="1" name="Serie" field="fk_id_series"/>
+        <alias index="2" name="Spatial object" field="fk_id_spatial_object"/>
+        <alias index="3" name="Import" field="fk_id_import"/>
+        <alias index="4" name="Value" field="ob_value"/>
+        <alias index="5" name="Timestamp" field="ob_timestamp"/>
+      </aliases>
+      <excludeAttributesWMS/>
+      <excludeAttributesWFS/>
+      <defaults>
+        <default expression="" field="id" applyOnUpdate="0"/>
+        <default expression="" field="fk_id_series" applyOnUpdate="0"/>
+        <default expression="" field="fk_id_spatial_object" applyOnUpdate="0"/>
+        <default expression="" field="fk_id_import" applyOnUpdate="0"/>
+        <default expression="" field="ob_value" applyOnUpdate="0"/>
+        <default expression="" field="ob_timestamp" applyOnUpdate="0"/>
+      </defaults>
+      <constraints>
+        <constraint constraints="3" exp_strength="0" notnull_strength="1" unique_strength="1" field="id"/>
+        <constraint constraints="1" exp_strength="0" notnull_strength="1" unique_strength="0" field="fk_id_series"/>
+        <constraint constraints="1" exp_strength="0" notnull_strength="1" unique_strength="0" field="fk_id_spatial_object"/>
+        <constraint constraints="1" exp_strength="0" notnull_strength="1" unique_strength="0" field="fk_id_import"/>
+        <constraint constraints="1" exp_strength="0" notnull_strength="1" unique_strength="0" field="ob_value"/>
+        <constraint constraints="1" exp_strength="0" notnull_strength="1" unique_strength="0" field="ob_timestamp"/>
+      </constraints>
+      <constraintExpressions>
+        <constraint exp="" desc="" field="id"/>
+        <constraint exp="" desc="" field="fk_id_series"/>
+        <constraint exp="" desc="" field="fk_id_spatial_object"/>
+        <constraint exp="" desc="" field="fk_id_import"/>
+        <constraint exp="" desc="" field="ob_value"/>
+        <constraint exp="" desc="" field="ob_timestamp"/>
+      </constraintExpressions>
+      <expressionfields/>
+      <attributeactions>
+        <defaultAction key="Canvas" value="{00000000-0000-0000-0000-000000000000}"/>
+      </attributeactions>
+      <attributetableconfig sortExpression="" sortOrder="0" actionWidgetStyle="dropDown">
+        <columns>
+          <column hidden="0" width="-1" name="id" type="field"/>
+          <column hidden="0" width="-1" name="fk_id_series" type="field"/>
+          <column hidden="0" width="-1" name="fk_id_spatial_object" type="field"/>
+          <column hidden="0" width="-1" name="fk_id_import" type="field"/>
+          <column hidden="0" width="-1" name="ob_value" type="field"/>
+          <column hidden="0" width="-1" name="ob_timestamp" type="field"/>
+          <column hidden="1" width="-1" type="actions"/>
+        </columns>
+      </attributetableconfig>
+      <conditionalstyles>
+        <rowstyles/>
+        <fieldstyles/>
+      </conditionalstyles>
+      <editform tolerant="1"></editform>
+      <editforminit/>
+      <editforminitcodesource>0</editforminitcodesource>
+      <editforminitfilepath></editforminitfilepath>
+      <editforminitcode><![CDATA[# -*- coding: utf-8 -*-
+"""
+Les formulaires QGIS peuvent avoir une fonction Python qui sera appelée à l'ouverture du formulaire.
+
+Utilisez cette fonction pour ajouter plus de fonctionnalités à vos formulaires.
+
+Entrez le nom de la fonction dans le champ "Fonction d'initialisation Python".
+Voici un exemple à suivre:
+"""
+from qgis.PyQt.QtWidgets import QWidget
+
+def my_form_open(dialog, layer, feature):
+    geom = feature.geometry()
+    control = dialog.findChild(QWidget, "MyLineEdit")
+]]></editforminitcode>
+      <featformsuppress>0</featformsuppress>
+      <editorlayout>generatedlayout</editorlayout>
+      <editable>
+        <field editable="1" name="fk_id_import"/>
+        <field editable="1" name="fk_id_series"/>
+        <field editable="1" name="fk_id_spatial_object"/>
+        <field editable="0" name="id"/>
+        <field editable="1" name="ob_timestamp"/>
+        <field editable="1" name="ob_value"/>
+      </editable>
+      <labelOnTop>
+        <field labelOnTop="0" name="fk_id_import"/>
+        <field labelOnTop="0" name="fk_id_series"/>
+        <field labelOnTop="0" name="fk_id_spatial_object"/>
+        <field labelOnTop="0" name="id"/>
+        <field labelOnTop="0" name="ob_timestamp"/>
+        <field labelOnTop="0" name="ob_value"/>
+      </labelOnTop>
+      <widgets/>
+      <previewExpression>id</previewExpression>
+      <mapTip></mapTip>
+    </maplayer>
+    <maplayer geometry="No geometry" hasScaleBasedVisibilityFlag="0" maxScale="0" autoRefreshTime="0" refreshOnNotifyMessage="" refreshOnNotifyEnabled="0" styleCategories="AllStyleCategories" minScale="1e+8" autoRefreshEnabled="0" readOnly="0" type="vector">
+      <id>protocol_5507f1c8_1802_4df0_a273_8e9b7f52c352</id>
+      <datasource>dbname='gobs' host=localhost port=5432 user='mdouchin' password='tation' sslmode=disable key='id' estimatedmetadata=true table="gobs"."protocol" sql=</datasource>
+      <keywordList>
+        <value></value>
+      </keywordList>
+      <layername>protocol</layername>
+      <srs>
+        <spatialrefsys>
+          <proj4></proj4>
+          <srsid>0</srsid>
+          <srid>0</srid>
+          <authid></authid>
+          <description></description>
+          <projectionacronym></projectionacronym>
+          <ellipsoidacronym></ellipsoidacronym>
+          <geographicflag>false</geographicflag>
+        </spatialrefsys>
+      </srs>
+      <resourceMetadata>
+        <identifier></identifier>
+        <parentidentifier></parentidentifier>
+        <language></language>
+        <type>dataset</type>
+        <title></title>
+        <abstract>List of protocols</abstract>
+        <contact>
+          <name></name>
+          <organization></organization>
+          <position></position>
+          <voice></voice>
+          <fax></fax>
+          <email></email>
+          <role></role>
+        </contact>
+        <links/>
+        <fees></fees>
+        <encoding></encoding>
+        <crs>
+          <spatialrefsys>
+            <proj4></proj4>
+            <srsid>0</srsid>
+            <srid>0</srid>
+            <authid></authid>
+            <description></description>
+            <projectionacronym></projectionacronym>
+            <ellipsoidacronym></ellipsoidacronym>
+            <geographicflag>false</geographicflag>
+          </spatialrefsys>
+        </crs>
+        <extent>
+          <spatial dimensions="2" maxx="0" maxy="0" maxz="0" crs="" minx="0" miny="0" minz="0"/>
+          <temporal>
+            <period>
+              <start></start>
+              <end></end>
+            </period>
+          </temporal>
+        </extent>
+      </resourceMetadata>
+      <provider encoding="UTF-8">postgres</provider>
+      <vectorjoins/>
+      <layerDependencies/>
+      <dataDependencies/>
+      <legend type="default-vector"/>
+      <expressionfields/>
+      <map-layer-style-manager current="défaut">
+        <map-layer-style name="défaut"/>
+      </map-layer-style-manager>
+      <auxiliaryLayer/>
+      <flags>
+        <Identifiable>1</Identifiable>
+        <Removable>1</Removable>
+        <Searchable>1</Searchable>
+      </flags>
+      <customproperties>
+        <property key="embeddedWidgets/count" value="0"/>
+        <property key="variableNames"/>
+        <property key="variableValues"/>
+      </customproperties>
+      <geometryOptions removeDuplicateNodes="0" geometryPrecision="0">
+        <activeChecks/>
+        <checkConfiguration/>
+      </geometryOptions>
+      <fieldConfiguration>
+        <field name="id">
+          <editWidget type="TextEdit">
+            <config>
+              <Option type="Map">
+                <Option name="IsMultiline" value="false" type="bool"/>
+                <Option name="UseHtml" value="false" type="bool"/>
+              </Option>
+            </config>
+          </editWidget>
+        </field>
+        <field name="pr_code">
+          <editWidget type="TextEdit">
+            <config>
+              <Option type="Map">
+                <Option name="IsMultiline" value="false" type="bool"/>
+                <Option name="UseHtml" value="false" type="bool"/>
+              </Option>
+            </config>
+          </editWidget>
+        </field>
+        <field name="pr_name">
+          <editWidget type="TextEdit">
+            <config>
+              <Option type="Map">
+                <Option name="IsMultiline" value="false" type="bool"/>
+                <Option name="UseHtml" value="false" type="bool"/>
+              </Option>
+            </config>
+          </editWidget>
+        </field>
+        <field name="pr_description">
+          <editWidget type="TextEdit">
+            <config>
+              <Option type="Map">
+                <Option name="IsMultiline" value="true" type="bool"/>
+                <Option name="UseHtml" value="false" type="bool"/>
+              </Option>
+            </config>
+          </editWidget>
+        </field>
+      </fieldConfiguration>
+      <aliases>
+        <alias index="0" name="" field="id"/>
+        <alias index="1" name="Code" field="pr_code"/>
+        <alias index="2" name="Name" field="pr_name"/>
+        <alias index="3" name="Description" field="pr_description"/>
+      </aliases>
+      <excludeAttributesWMS/>
+      <excludeAttributesWFS/>
+      <defaults>
+        <default expression="" field="id" applyOnUpdate="0"/>
+        <default expression="" field="pr_code" applyOnUpdate="0"/>
+        <default expression="" field="pr_name" applyOnUpdate="0"/>
+        <default expression="" field="pr_description" applyOnUpdate="0"/>
+      </defaults>
+      <constraints>
+        <constraint constraints="3" exp_strength="0" notnull_strength="1" unique_strength="1" field="id"/>
+        <constraint constraints="1" exp_strength="0" notnull_strength="1" unique_strength="0" field="pr_code"/>
+        <constraint constraints="1" exp_strength="0" notnull_strength="1" unique_strength="0" field="pr_name"/>
+        <constraint constraints="1" exp_strength="0" notnull_strength="1" unique_strength="0" field="pr_description"/>
+      </constraints>
+      <constraintExpressions>
+        <constraint exp="" desc="" field="id"/>
+        <constraint exp="" desc="" field="pr_code"/>
+        <constraint exp="" desc="" field="pr_name"/>
+        <constraint exp="" desc="" field="pr_description"/>
+      </constraintExpressions>
+      <expressionfields/>
+      <attributeactions>
+        <defaultAction key="Canvas" value="{00000000-0000-0000-0000-000000000000}"/>
+      </attributeactions>
+      <attributetableconfig sortExpression="" sortOrder="0" actionWidgetStyle="dropDown">
+        <columns>
+          <column hidden="0" width="-1" name="id" type="field"/>
+          <column hidden="0" width="-1" name="pr_code" type="field"/>
+          <column hidden="0" width="-1" name="pr_name" type="field"/>
+          <column hidden="0" width="-1" name="pr_description" type="field"/>
+          <column hidden="1" width="-1" type="actions"/>
+        </columns>
+      </attributetableconfig>
+      <conditionalstyles>
+        <rowstyles/>
+        <fieldstyles/>
+      </conditionalstyles>
+      <editform tolerant="1"></editform>
+      <editforminit/>
+      <editforminitcodesource>0</editforminitcodesource>
+      <editforminitfilepath></editforminitfilepath>
+      <editforminitcode><![CDATA[# -*- coding: utf-8 -*-
+"""
+Les formulaires QGIS peuvent avoir une fonction Python qui sera appelée à l'ouverture du formulaire.
+
+Utilisez cette fonction pour ajouter plus de fonctionnalités à vos formulaires.
+
+Entrez le nom de la fonction dans le champ "Fonction d'initialisation Python".
+Voici un exemple à suivre:
+"""
+from qgis.PyQt.QtWidgets import QWidget
+
+def my_form_open(dialog, layer, feature):
+    geom = feature.geometry()
+    control = dialog.findChild(QWidget, "MyLineEdit")
+]]></editforminitcode>
+      <featformsuppress>0</featformsuppress>
+      <editorlayout>tablayout</editorlayout>
+      <attributeEditorForm>
+        <attributeEditorContainer visibilityExpression="" visibilityExpressionEnabled="0" name="General" showLabel="1" columnCount="1" groupBox="0">
+          <attributeEditorField index="0" name="id" showLabel="1"/>
+          <attributeEditorField index="2" name="pr_name" showLabel="1"/>
+          <attributeEditorField index="1" name="pr_code" showLabel="1"/>
+          <attributeEditorField index="3" name="pr_description" showLabel="1"/>
+        </attributeEditorContainer>
+      </attributeEditorForm>
+      <editable>
+        <field editable="0" name="id"/>
+        <field editable="1" name="pr_code"/>
+        <field editable="1" name="pr_description"/>
+        <field editable="1" name="pr_name"/>
+      </editable>
+      <labelOnTop>
+        <field labelOnTop="0" name="id"/>
+        <field labelOnTop="0" name="pr_code"/>
+        <field labelOnTop="0" name="pr_description"/>
+        <field labelOnTop="0" name="pr_name"/>
+      </labelOnTop>
+      <widgets>
+        <widget name="series_04a7414a_ab6d_4611_8a60_bcd22071dc22_fk_id_protocol_protocol_5507f1c8_1802_4df0_a273_8e9b7f52c352_id">
+          <config type="Map">
+            <Option name="nm-rel" value="" type="QString"/>
+          </config>
+        </widget>
+      </widgets>
+      <previewExpression>pr_name</previewExpression>
+      <mapTip></mapTip>
+    </maplayer>
+    <maplayer geometry="No geometry" hasScaleBasedVisibilityFlag="0" maxScale="0" autoRefreshTime="0" refreshOnNotifyMessage="" refreshOnNotifyEnabled="0" styleCategories="AllStyleCategories" minScale="1e+8" autoRefreshEnabled="0" readOnly="0" type="vector">
+      <id>r_graph_edge_f2eb47e9_728b_4c85_a839_3b488e132e06</id>
+      <datasource>dbname='gobs' host=localhost port=5432 user='mdouchin' password='tation' sslmode=disable key='ge_parent_node,ge_child_node' estimatedmetadata=true table="gobs"."r_graph_edge" sql=</datasource>
+      <keywordList>
+        <value></value>
+      </keywordList>
+      <layername>r_graph_edge</layername>
+      <srs>
+        <spatialrefsys>
+          <proj4></proj4>
+          <srsid>0</srsid>
+          <srid>0</srid>
+          <authid></authid>
+          <description></description>
+          <projectionacronym></projectionacronym>
+          <ellipsoidacronym></ellipsoidacronym>
+          <geographicflag>false</geographicflag>
+        </spatialrefsys>
+      </srs>
+      <resourceMetadata>
+        <identifier></identifier>
+        <parentidentifier></parentidentifier>
+        <language></language>
+        <type>dataset</type>
+        <title></title>
+        <abstract>Graph edges: relations between nodes</abstract>
+        <links/>
+        <fees></fees>
+        <encoding></encoding>
+        <crs>
+          <spatialrefsys>
+            <proj4></proj4>
+            <srsid>0</srsid>
+            <srid>0</srid>
+            <authid></authid>
+            <description></description>
+            <projectionacronym></projectionacronym>
+            <ellipsoidacronym></ellipsoidacronym>
+            <geographicflag>false</geographicflag>
+          </spatialrefsys>
+        </crs>
+        <extent/>
+      </resourceMetadata>
+      <provider encoding="UTF-8">postgres</provider>
+      <vectorjoins/>
+      <layerDependencies/>
+      <dataDependencies/>
+      <legend type="default-vector"/>
+      <expressionfields/>
+      <map-layer-style-manager current="défaut">
+        <map-layer-style name="défaut"/>
+      </map-layer-style-manager>
+      <auxiliaryLayer/>
+      <flags>
+        <Identifiable>1</Identifiable>
+        <Removable>1</Removable>
+        <Searchable>1</Searchable>
+      </flags>
+      <customproperties/>
+      <geometryOptions removeDuplicateNodes="0" geometryPrecision="0">
+        <activeChecks type="StringList">
+          <Option value="" type="QString"/>
+        </activeChecks>
+        <checkConfiguration/>
+      </geometryOptions>
+      <fieldConfiguration>
+        <field name="ge_parent_node">
+          <editWidget type="">
+            <config>
+              <Option/>
+            </config>
+          </editWidget>
+        </field>
+        <field name="ge_child_node">
+          <editWidget type="">
+            <config>
+              <Option/>
+            </config>
+          </editWidget>
+        </field>
+      </fieldConfiguration>
+      <aliases>
+        <alias index="0" name="" field="ge_parent_node"/>
+        <alias index="1" name="" field="ge_child_node"/>
+      </aliases>
+      <excludeAttributesWMS/>
+      <excludeAttributesWFS/>
+      <defaults>
+        <default expression="" field="ge_parent_node" applyOnUpdate="0"/>
+        <default expression="" field="ge_child_node" applyOnUpdate="0"/>
+      </defaults>
+      <constraints>
+        <constraint constraints="3" exp_strength="0" notnull_strength="1" unique_strength="1" field="ge_parent_node"/>
+        <constraint constraints="3" exp_strength="0" notnull_strength="1" unique_strength="1" field="ge_child_node"/>
+      </constraints>
+      <constraintExpressions>
+        <constraint exp="" desc="" field="ge_parent_node"/>
+        <constraint exp="" desc="" field="ge_child_node"/>
+      </constraintExpressions>
+      <expressionfields/>
+      <attributeactions/>
+      <attributetableconfig sortExpression="" sortOrder="0" actionWidgetStyle="dropDown">
+        <columns/>
+      </attributetableconfig>
+      <conditionalstyles>
+        <rowstyles/>
+        <fieldstyles/>
+      </conditionalstyles>
+      <editform tolerant="1"></editform>
+      <editforminit/>
+      <editforminitcodesource>0</editforminitcodesource>
+      <editforminitfilepath></editforminitfilepath>
+      <editforminitcode><![CDATA[]]></editforminitcode>
+      <featformsuppress>0</featformsuppress>
+      <editorlayout>generatedlayout</editorlayout>
+      <editable/>
+      <labelOnTop/>
+      <widgets/>
+      <previewExpression></previewExpression>
+      <mapTip></mapTip>
+    </maplayer>
+    <maplayer geometry="No geometry" hasScaleBasedVisibilityFlag="0" maxScale="0" autoRefreshTime="0" refreshOnNotifyMessage="" refreshOnNotifyEnabled="0" styleCategories="AllStyleCategories" minScale="1e+8" autoRefreshEnabled="0" readOnly="0" type="vector">
+      <id>r_indicator_node_2ca83116_e69f_4dcb_abcb_de5bdf44b2be</id>
+      <datasource>dbname='gobs' host=localhost port=5432 user='mdouchin' password='tation' sslmode=disable key='fk_id_indicator,fk_id_node' estimatedmetadata=true table="gobs"."r_indicator_node" sql=</datasource>
+      <keywordList>
+        <value></value>
+      </keywordList>
+      <layername>r_indicator_node</layername>
+      <srs>
+        <spatialrefsys>
+          <proj4></proj4>
+          <srsid>0</srsid>
+          <srid>0</srid>
+          <authid></authid>
+          <description></description>
+          <projectionacronym></projectionacronym>
+          <ellipsoidacronym></ellipsoidacronym>
+          <geographicflag>false</geographicflag>
+        </spatialrefsys>
+      </srs>
+      <resourceMetadata>
+        <identifier></identifier>
+        <parentidentifier></parentidentifier>
+        <language></language>
+        <type>dataset</type>
+        <title></title>
+        <abstract>Pivot table between indicators and nodes</abstract>
+        <links/>
+        <fees></fees>
+        <encoding></encoding>
+        <crs>
+          <spatialrefsys>
+            <proj4></proj4>
+            <srsid>0</srsid>
+            <srid>0</srid>
+            <authid></authid>
+            <description></description>
+            <projectionacronym></projectionacronym>
+            <ellipsoidacronym></ellipsoidacronym>
+            <geographicflag>false</geographicflag>
+          </spatialrefsys>
+        </crs>
+        <extent/>
+      </resourceMetadata>
+      <provider encoding="UTF-8">postgres</provider>
+      <vectorjoins/>
+      <layerDependencies/>
+      <dataDependencies/>
+      <legend type="default-vector"/>
+      <expressionfields/>
+      <map-layer-style-manager current="défaut">
+        <map-layer-style name="défaut"/>
+      </map-layer-style-manager>
+      <auxiliaryLayer/>
+      <flags>
+        <Identifiable>1</Identifiable>
+        <Removable>1</Removable>
+        <Searchable>1</Searchable>
+      </flags>
+      <customproperties/>
+      <geometryOptions removeDuplicateNodes="0" geometryPrecision="0">
+        <activeChecks type="StringList">
+          <Option value="" type="QString"/>
+        </activeChecks>
+        <checkConfiguration/>
+      </geometryOptions>
+      <fieldConfiguration>
+        <field name="fk_id_indicator">
+          <editWidget type="">
+            <config>
+              <Option/>
+            </config>
+          </editWidget>
+        </field>
+        <field name="fk_id_node">
+          <editWidget type="">
+            <config>
+              <Option/>
+            </config>
+          </editWidget>
+        </field>
+      </fieldConfiguration>
+      <aliases>
+        <alias index="0" name="" field="fk_id_indicator"/>
+        <alias index="1" name="" field="fk_id_node"/>
+      </aliases>
+      <excludeAttributesWMS/>
+      <excludeAttributesWFS/>
+      <defaults>
+        <default expression="" field="fk_id_indicator" applyOnUpdate="0"/>
+        <default expression="" field="fk_id_node" applyOnUpdate="0"/>
+      </defaults>
+      <constraints>
+        <constraint constraints="3" exp_strength="0" notnull_strength="1" unique_strength="1" field="fk_id_indicator"/>
+        <constraint constraints="3" exp_strength="0" notnull_strength="1" unique_strength="1" field="fk_id_node"/>
+      </constraints>
+      <constraintExpressions>
+        <constraint exp="" desc="" field="fk_id_indicator"/>
+        <constraint exp="" desc="" field="fk_id_node"/>
+      </constraintExpressions>
+      <expressionfields/>
+      <attributeactions>
+        <defaultAction key="Canvas" value="{00000000-0000-0000-0000-000000000000}"/>
+      </attributeactions>
+      <attributetableconfig sortExpression="" sortOrder="0" actionWidgetStyle="dropDown">
+        <columns/>
+      </attributetableconfig>
+      <conditionalstyles>
+        <rowstyles/>
+        <fieldstyles/>
+      </conditionalstyles>
+      <editform tolerant="1"></editform>
+      <editforminit/>
+      <editforminitcodesource>0</editforminitcodesource>
+      <editforminitfilepath></editforminitfilepath>
+      <editforminitcode><![CDATA[]]></editforminitcode>
+      <featformsuppress>0</featformsuppress>
+      <editorlayout>generatedlayout</editorlayout>
+      <editable/>
+      <labelOnTop/>
+      <widgets/>
+      <previewExpression></previewExpression>
+      <mapTip></mapTip>
+    </maplayer>
+    <maplayer geometry="No geometry" hasScaleBasedVisibilityFlag="0" maxScale="0" autoRefreshTime="0" refreshOnNotifyMessage="" refreshOnNotifyEnabled="0" styleCategories="AllStyleCategories" minScale="1e+8" autoRefreshEnabled="0" readOnly="0" type="vector">
+      <id>series_04a7414a_ab6d_4611_8a60_bcd22071dc22</id>
+      <datasource>dbname='gobs' host=localhost port=5432 user='mdouchin' password='tation' sslmode=disable key='id' estimatedmetadata=true table="gobs"."series" sql=</datasource>
+      <keywordList>
+        <value></value>
+      </keywordList>
+      <layername>series</layername>
+      <srs>
+        <spatialrefsys>
+          <proj4></proj4>
+          <srsid>0</srsid>
+          <srid>0</srid>
+          <authid></authid>
+          <description></description>
+          <projectionacronym></projectionacronym>
+          <ellipsoidacronym></ellipsoidacronym>
+          <geographicflag>false</geographicflag>
+        </spatialrefsys>
+      </srs>
+      <resourceMetadata>
+        <identifier></identifier>
+        <parentidentifier></parentidentifier>
+        <language></language>
+        <type>dataset</type>
+        <title></title>
+        <abstract>Series of data</abstract>
+        <contact>
+          <name></name>
+          <organization></organization>
+          <position></position>
+          <voice></voice>
+          <fax></fax>
+          <email></email>
+          <role></role>
+        </contact>
+        <links/>
+        <fees></fees>
+        <encoding></encoding>
+        <crs>
+          <spatialrefsys>
+            <proj4></proj4>
+            <srsid>0</srsid>
+            <srid>0</srid>
+            <authid></authid>
+            <description></description>
+            <projectionacronym></projectionacronym>
+            <ellipsoidacronym></ellipsoidacronym>
+            <geographicflag>false</geographicflag>
+          </spatialrefsys>
+        </crs>
+        <extent>
+          <spatial dimensions="2" maxx="0" maxy="0" maxz="0" crs="" minx="0" miny="0" minz="0"/>
+          <temporal>
+            <period>
+              <start></start>
+              <end></end>
+            </period>
+          </temporal>
+        </extent>
+      </resourceMetadata>
+      <provider encoding="UTF-8">postgres</provider>
+      <vectorjoins/>
+      <layerDependencies/>
+      <dataDependencies/>
+      <legend type="default-vector"/>
+      <expressionfields/>
+      <map-layer-style-manager current="défaut">
+        <map-layer-style name="défaut"/>
+      </map-layer-style-manager>
+      <auxiliaryLayer/>
+      <flags>
+        <Identifiable>1</Identifiable>
+        <Removable>1</Removable>
+        <Searchable>1</Searchable>
+      </flags>
+      <customproperties>
+        <property key="dualview/previewExpressions">
+          <value>"id"</value>
+        </property>
+        <property key="embeddedWidgets/count" value="0"/>
+        <property key="variableNames"/>
+        <property key="variableValues"/>
+      </customproperties>
+      <geometryOptions removeDuplicateNodes="0" geometryPrecision="0">
+        <activeChecks/>
+        <checkConfiguration/>
+      </geometryOptions>
+      <fieldConfiguration>
+        <field name="id">
+          <editWidget type="TextEdit">
+            <config>
+              <Option type="Map">
+                <Option name="IsMultiline" value="false" type="bool"/>
+                <Option name="UseHtml" value="false" type="bool"/>
+              </Option>
+            </config>
+          </editWidget>
+        </field>
+        <field name="fk_id_protocol">
+          <editWidget type="RelationReference">
+            <config>
+              <Option type="Map">
+                <Option name="AllowAddFeatures" value="true" type="bool"/>
+                <Option name="AllowNULL" value="false" type="bool"/>
+                <Option name="MapIdentification" value="false" type="bool"/>
+                <Option name="OrderByValue" value="true" type="bool"/>
+                <Option name="ReadOnly" value="false" type="bool"/>
+                <Option name="Relation" value="series_04a7414a_ab6d_4611_8a60_bcd22071dc22_fk_id_protocol_protocol_5507f1c8_1802_4df0_a273_8e9b7f52c352_id" type="QString"/>
+                <Option name="ShowForm" value="false" type="bool"/>
+                <Option name="ShowOpenFormButton" value="true" type="bool"/>
+              </Option>
+            </config>
+          </editWidget>
+        </field>
+        <field name="fk_id_actor">
+          <editWidget type="RelationReference">
+            <config>
+              <Option type="Map">
+                <Option name="AllowAddFeatures" value="true" type="bool"/>
+                <Option name="AllowNULL" value="false" type="bool"/>
+                <Option name="MapIdentification" value="false" type="bool"/>
+                <Option name="OrderByValue" value="true" type="bool"/>
+                <Option name="ReadOnly" value="false" type="bool"/>
+                <Option name="Relation" value="series_04a7414a_ab6d_4611_8a60_bcd22071dc22_fk_id_actor_actor_5f01a6e5_8205_462f_af40_0ffd7ff0a44f_id" type="QString"/>
+                <Option name="ShowForm" value="false" type="bool"/>
+                <Option name="ShowOpenFormButton" value="true" type="bool"/>
+              </Option>
+            </config>
+          </editWidget>
+        </field>
+        <field name="fk_id_indicator">
+          <editWidget type="RelationReference">
+            <config>
+              <Option type="Map">
+                <Option name="AllowAddFeatures" value="true" type="bool"/>
+                <Option name="AllowNULL" value="false" type="bool"/>
+                <Option name="MapIdentification" value="false" type="bool"/>
+                <Option name="OrderByValue" value="true" type="bool"/>
+                <Option name="ReadOnly" value="false" type="bool"/>
+                <Option name="Relation" value="series_04a7414a_ab6d_4611_8a60_bcd22071dc22_fk_id_indicator_indicator_18ba18bf_0390_45a3_8edd_1cc049e8a251_id" type="QString"/>
+                <Option name="ShowForm" value="false" type="bool"/>
+                <Option name="ShowOpenFormButton" value="true" type="bool"/>
+              </Option>
+            </config>
+          </editWidget>
+        </field>
+        <field name="fk_id_spatial_layer">
+          <editWidget type="RelationReference">
+            <config>
+              <Option type="Map">
+                <Option name="AllowAddFeatures" value="true" type="bool"/>
+                <Option name="AllowNULL" value="false" type="bool"/>
+                <Option name="MapIdentification" value="false" type="bool"/>
+                <Option name="OrderByValue" value="true" type="bool"/>
+                <Option name="ReadOnly" value="false" type="bool"/>
+                <Option name="Relation" value="series_04a7414a_ab6d_4611_8a60_bcd22071dc22_fk_id_spatial_layer_spatial_layer_18215d6d_1f4c_40d2_ba83_f2c9a9694e84_id" type="QString"/>
+                <Option name="ShowForm" value="false" type="bool"/>
+                <Option name="ShowOpenFormButton" value="true" type="bool"/>
+              </Option>
+            </config>
+          </editWidget>
+        </field>
+      </fieldConfiguration>
+      <aliases>
+        <alias index="0" name="" field="id"/>
+        <alias index="1" name="" field="fk_id_protocol"/>
+        <alias index="2" name="" field="fk_id_actor"/>
+        <alias index="3" name="" field="fk_id_indicator"/>
+        <alias index="4" name="" field="fk_id_spatial_layer"/>
+      </aliases>
+      <excludeAttributesWMS/>
+      <excludeAttributesWFS/>
+      <defaults>
+        <default expression="" field="id" applyOnUpdate="0"/>
+        <default expression="" field="fk_id_protocol" applyOnUpdate="0"/>
+        <default expression="" field="fk_id_actor" applyOnUpdate="0"/>
+        <default expression="" field="fk_id_indicator" applyOnUpdate="0"/>
+        <default expression="" field="fk_id_spatial_layer" applyOnUpdate="0"/>
+      </defaults>
+      <constraints>
+        <constraint constraints="3" exp_strength="0" notnull_strength="1" unique_strength="1" field="id"/>
+        <constraint constraints="1" exp_strength="0" notnull_strength="1" unique_strength="0" field="fk_id_protocol"/>
+        <constraint constraints="1" exp_strength="0" notnull_strength="1" unique_strength="0" field="fk_id_actor"/>
+        <constraint constraints="1" exp_strength="0" notnull_strength="1" unique_strength="0" field="fk_id_indicator"/>
+        <constraint constraints="1" exp_strength="0" notnull_strength="1" unique_strength="0" field="fk_id_spatial_layer"/>
+      </constraints>
+      <constraintExpressions>
+        <constraint exp="" desc="" field="id"/>
+        <constraint exp="" desc="" field="fk_id_protocol"/>
+        <constraint exp="" desc="" field="fk_id_actor"/>
+        <constraint exp="" desc="" field="fk_id_indicator"/>
+        <constraint exp="" desc="" field="fk_id_spatial_layer"/>
+      </constraintExpressions>
+      <expressionfields/>
+      <attributeactions>
+        <defaultAction key="Canvas" value="{00000000-0000-0000-0000-000000000000}"/>
+      </attributeactions>
+      <attributetableconfig sortExpression="" sortOrder="0" actionWidgetStyle="dropDown">
+        <columns>
+          <column hidden="0" width="-1" name="id" type="field"/>
+          <column hidden="0" width="-1" name="fk_id_protocol" type="field"/>
+          <column hidden="0" width="-1" name="fk_id_actor" type="field"/>
+          <column hidden="0" width="-1" name="fk_id_indicator" type="field"/>
+          <column hidden="0" width="-1" name="fk_id_spatial_layer" type="field"/>
+          <column hidden="1" width="-1" type="actions"/>
+        </columns>
+      </attributetableconfig>
+      <conditionalstyles>
+        <rowstyles/>
+        <fieldstyles/>
+      </conditionalstyles>
+      <editform tolerant="1"></editform>
+      <editforminit/>
+      <editforminitcodesource>0</editforminitcodesource>
+      <editforminitfilepath></editforminitfilepath>
+      <editforminitcode><![CDATA[# -*- coding: utf-8 -*-
+"""
+Les formulaires QGIS peuvent avoir une fonction Python qui sera appelée à l'ouverture du formulaire.
+
+Utilisez cette fonction pour ajouter plus de fonctionnalités à vos formulaires.
+
+Entrez le nom de la fonction dans le champ "Fonction d'initialisation Python".
+Voici un exemple à suivre:
+"""
+from qgis.PyQt.QtWidgets import QWidget
+
+def my_form_open(dialog, layer, feature):
+    geom = feature.geometry()
+    control = dialog.findChild(QWidget, "MyLineEdit")
+]]></editforminitcode>
+      <featformsuppress>0</featformsuppress>
+      <editorlayout>tablayout</editorlayout>
+      <attributeEditorForm>
+        <attributeEditorContainer visibilityExpression="" visibilityExpressionEnabled="0" name="General" showLabel="1" columnCount="1" groupBox="0">
+          <attributeEditorField index="0" name="id" showLabel="1"/>
+          <attributeEditorField index="2" name="fk_id_actor" showLabel="1"/>
+          <attributeEditorField index="1" name="fk_id_protocol" showLabel="1"/>
+          <attributeEditorField index="3" name="fk_id_indicator" showLabel="1"/>
+          <attributeEditorField index="4" name="fk_id_spatial_layer" showLabel="1"/>
+        </attributeEditorContainer>
+      </attributeEditorForm>
+      <editable>
+        <field editable="1" name="fk_id_actor"/>
+        <field editable="1" name="fk_id_indicator"/>
+        <field editable="1" name="fk_id_protocol"/>
+        <field editable="1" name="fk_id_spatial_layer"/>
+        <field editable="0" name="id"/>
+      </editable>
+      <labelOnTop>
+        <field labelOnTop="0" name="fk_id_actor"/>
+        <field labelOnTop="0" name="fk_id_indicator"/>
+        <field labelOnTop="0" name="fk_id_protocol"/>
+        <field labelOnTop="0" name="fk_id_spatial_layer"/>
+        <field labelOnTop="0" name="id"/>
+      </labelOnTop>
+      <widgets>
+        <widget name="import_0343eb12_592e_4fd0_8380_51f4d62b6a56_fk_id_series_series_04a7414a_ab6d_4611_8a60_bcd22071dc22_id">
+          <config type="Map">
+            <Option name="nm-rel" value="" type="QString"/>
+          </config>
+        </widget>
+        <widget name="observation_bcc90162_47c8_4097_bc24_a31af92d2708_fk_id_series_series_04a7414a_ab6d_4611_8a60_bcd22071dc22_id">
+          <config type="Map">
+            <Option name="nm-rel" value="" type="QString"/>
+          </config>
+        </widget>
+      </widgets>
+      <previewExpression>id</previewExpression>
+      <mapTip></mapTip>
+    </maplayer>
+    <maplayer geometry="No geometry" hasScaleBasedVisibilityFlag="0" maxScale="0" autoRefreshTime="0" refreshOnNotifyMessage="" refreshOnNotifyEnabled="0" styleCategories="AllStyleCategories" minScale="1e+8" autoRefreshEnabled="0" readOnly="0" type="vector">
+      <id>spatial_layer_18215d6d_1f4c_40d2_ba83_f2c9a9694e84</id>
+      <datasource>dbname='gobs' host=localhost port=5432 user='mdouchin' password='tation' sslmode=disable key='id' estimatedmetadata=true table="gobs"."spatial_layer" sql=</datasource>
+      <keywordList>
+        <value></value>
+      </keywordList>
+      <layername>spatial_layer</layername>
+      <srs>
+        <spatialrefsys>
+          <proj4></proj4>
+          <srsid>0</srsid>
+          <srid>0</srid>
+          <authid></authid>
+          <description></description>
+          <projectionacronym></projectionacronym>
+          <ellipsoidacronym></ellipsoidacronym>
+          <geographicflag>false</geographicflag>
+        </spatialrefsys>
+      </srs>
+      <resourceMetadata>
+        <identifier></identifier>
+        <parentidentifier></parentidentifier>
+        <language></language>
+        <type>dataset</type>
+        <title></title>
+        <abstract>List the spatial layers, used to regroup the spatial data. Ex : cities, rivers, stations</abstract>
+        <contact>
+          <name></name>
+          <organization></organization>
+          <position></position>
+          <voice></voice>
+          <fax></fax>
+          <email></email>
+          <role></role>
+        </contact>
+        <links/>
+        <fees></fees>
+        <encoding></encoding>
+        <crs>
+          <spatialrefsys>
+            <proj4></proj4>
+            <srsid>0</srsid>
+            <srid>0</srid>
+            <authid></authid>
+            <description></description>
+            <projectionacronym></projectionacronym>
+            <ellipsoidacronym></ellipsoidacronym>
+            <geographicflag>false</geographicflag>
+          </spatialrefsys>
+        </crs>
+        <extent>
+          <spatial dimensions="2" maxx="0" maxy="0" maxz="0" crs="" minx="0" miny="0" minz="0"/>
+          <temporal>
+            <period>
+              <start></start>
+              <end></end>
+            </period>
+          </temporal>
+        </extent>
+      </resourceMetadata>
+      <provider encoding="UTF-8">postgres</provider>
+      <vectorjoins/>
+      <layerDependencies/>
+      <dataDependencies/>
+      <legend type="default-vector"/>
+      <expressionfields/>
+      <map-layer-style-manager current="défaut">
+        <map-layer-style name="défaut"/>
+      </map-layer-style-manager>
+      <auxiliaryLayer/>
+      <flags>
+        <Identifiable>1</Identifiable>
+        <Removable>1</Removable>
+        <Searchable>1</Searchable>
+      </flags>
+      <customproperties>
+        <property key="dualview/previewExpressions">
+          <value>"id"</value>
+        </property>
+        <property key="embeddedWidgets/count" value="0"/>
+        <property key="variableNames"/>
+        <property key="variableValues"/>
+      </customproperties>
+      <geometryOptions removeDuplicateNodes="0" geometryPrecision="0">
+        <activeChecks/>
+        <checkConfiguration/>
+      </geometryOptions>
+      <fieldConfiguration>
+        <field name="id">
+          <editWidget type="TextEdit">
+            <config>
+              <Option type="Map">
+                <Option name="IsMultiline" value="false" type="bool"/>
+                <Option name="UseHtml" value="false" type="bool"/>
+              </Option>
+            </config>
+          </editWidget>
+        </field>
+        <field name="sl_code">
+          <editWidget type="TextEdit">
+            <config>
+              <Option type="Map">
+                <Option name="IsMultiline" value="false" type="bool"/>
+                <Option name="UseHtml" value="false" type="bool"/>
+              </Option>
+            </config>
+          </editWidget>
+        </field>
+        <field name="sl_label">
+          <editWidget type="TextEdit">
+            <config>
+              <Option type="Map">
+                <Option name="IsMultiline" value="false" type="bool"/>
+                <Option name="UseHtml" value="false" type="bool"/>
+              </Option>
+            </config>
+          </editWidget>
+        </field>
+        <field name="sl_description">
+          <editWidget type="TextEdit">
+            <config>
+              <Option type="Map">
+                <Option name="IsMultiline" value="true" type="bool"/>
+                <Option name="UseHtml" value="false" type="bool"/>
+              </Option>
+            </config>
+          </editWidget>
+        </field>
+        <field name="sl_creation_date">
+          <editWidget type="DateTime">
+            <config>
+              <Option type="Map">
+                <Option name="allow_null" value="false" type="bool"/>
+                <Option name="calendar_popup" value="true" type="bool"/>
+                <Option name="display_format" value="yyyy-MM-dd" type="QString"/>
+                <Option name="field_format" value="yyyy-MM-dd" type="QString"/>
+                <Option name="field_iso_format" value="false" type="bool"/>
+              </Option>
+            </config>
+          </editWidget>
+        </field>
+        <field name="fk_id_actor">
+          <editWidget type="RelationReference">
+            <config>
+              <Option type="Map">
+                <Option name="AllowAddFeatures" value="true" type="bool"/>
+                <Option name="AllowNULL" value="false" type="bool"/>
+                <Option name="MapIdentification" value="false" type="bool"/>
+                <Option name="OrderByValue" value="true" type="bool"/>
+                <Option name="ReadOnly" value="false" type="bool"/>
+                <Option name="Relation" value="spatial_layer_18215d6d_1f4c_40d2_ba83_f2c9a9694e84_fk_id_actor_actor_5f01a6e5_8205_462f_af40_0ffd7ff0a44f_id" type="QString"/>
+                <Option name="ShowForm" value="false" type="bool"/>
+                <Option name="ShowOpenFormButton" value="true" type="bool"/>
+              </Option>
+            </config>
+          </editWidget>
+        </field>
+        <field name="sl_geometry_type">
+          <editWidget type="ValueMap">
+            <config>
+              <Option type="Map">
+                <Option name="map" type="List">
+                  <Option type="Map">
+                    <Option name="Point" value="Point" type="QString"/>
+                  </Option>
+                  <Option type="Map">
+                    <Option name="Linestring" value="Linestring" type="QString"/>
+                  </Option>
+                  <Option type="Map">
+                    <Option name="Polygon" value="Polygon" type="QString"/>
+                  </Option>
+                  <Option type="Map">
+                    <Option name="MultiPoint" value="MultiPoint" type="QString"/>
+                  </Option>
+                  <Option type="Map">
+                    <Option name="MultiLinestring" value="MultiLinestring" type="QString"/>
+                  </Option>
+                  <Option type="Map">
+                    <Option name="MultiPolygon" value="MultiPolygon" type="QString"/>
+                  </Option>
+                </Option>
+              </Option>
+            </config>
+          </editWidget>
+        </field>
+      </fieldConfiguration>
+      <aliases>
+        <alias index="0" name="" field="id"/>
+        <alias index="1" name="Code" field="sl_code"/>
+        <alias index="2" name="Label" field="sl_label"/>
+        <alias index="3" name="Description" field="sl_description"/>
+        <alias index="4" name="Creation date" field="sl_creation_date"/>
+        <alias index="5" name="Actor" field="fk_id_actor"/>
+        <alias index="6" name="Geometry type" field="sl_geometry_type"/>
+      </aliases>
+      <excludeAttributesWMS/>
+      <excludeAttributesWFS/>
+      <defaults>
+        <default expression="" field="id" applyOnUpdate="0"/>
+        <default expression="" field="sl_code" applyOnUpdate="0"/>
+        <default expression="" field="sl_label" applyOnUpdate="0"/>
+        <default expression="" field="sl_description" applyOnUpdate="0"/>
+        <default expression="" field="sl_creation_date" applyOnUpdate="0"/>
+        <default expression="" field="fk_id_actor" applyOnUpdate="0"/>
+        <default expression="" field="sl_geometry_type" applyOnUpdate="0"/>
+      </defaults>
+      <constraints>
+        <constraint constraints="3" exp_strength="0" notnull_strength="1" unique_strength="1" field="id"/>
+        <constraint constraints="1" exp_strength="0" notnull_strength="1" unique_strength="0" field="sl_code"/>
+        <constraint constraints="1" exp_strength="0" notnull_strength="1" unique_strength="0" field="sl_label"/>
+        <constraint constraints="1" exp_strength="0" notnull_strength="1" unique_strength="0" field="sl_description"/>
+        <constraint constraints="1" exp_strength="0" notnull_strength="1" unique_strength="0" field="sl_creation_date"/>
+        <constraint constraints="1" exp_strength="0" notnull_strength="1" unique_strength="0" field="fk_id_actor"/>
+        <constraint constraints="1" exp_strength="0" notnull_strength="1" unique_strength="0" field="sl_geometry_type"/>
+      </constraints>
+      <constraintExpressions>
+        <constraint exp="" desc="" field="id"/>
+        <constraint exp="" desc="" field="sl_code"/>
+        <constraint exp="" desc="" field="sl_label"/>
+        <constraint exp="" desc="" field="sl_description"/>
+        <constraint exp="" desc="" field="sl_creation_date"/>
+        <constraint exp="" desc="" field="fk_id_actor"/>
+        <constraint exp="" desc="" field="sl_geometry_type"/>
+      </constraintExpressions>
+      <expressionfields/>
+      <attributeactions>
+        <defaultAction key="Canvas" value="{00000000-0000-0000-0000-000000000000}"/>
+      </attributeactions>
+      <attributetableconfig sortExpression="" sortOrder="0" actionWidgetStyle="dropDown">
+        <columns>
+          <column hidden="0" width="-1" name="id" type="field"/>
+          <column hidden="0" width="-1" name="sl_code" type="field"/>
+          <column hidden="0" width="-1" name="sl_label" type="field"/>
+          <column hidden="0" width="-1" name="sl_description" type="field"/>
+          <column hidden="0" width="-1" name="sl_creation_date" type="field"/>
+          <column hidden="0" width="-1" name="fk_id_actor" type="field"/>
+          <column hidden="0" width="-1" name="sl_geometry_type" type="field"/>
+          <column hidden="1" width="-1" type="actions"/>
+        </columns>
+      </attributetableconfig>
+      <conditionalstyles>
+        <rowstyles/>
+        <fieldstyles/>
+      </conditionalstyles>
+      <editform tolerant="1"></editform>
+      <editforminit/>
+      <editforminitcodesource>0</editforminitcodesource>
+      <editforminitfilepath></editforminitfilepath>
+      <editforminitcode><![CDATA[# -*- coding: utf-8 -*-
+"""
+Les formulaires QGIS peuvent avoir une fonction Python qui sera appelée à l'ouverture du formulaire.
+
+Utilisez cette fonction pour ajouter plus de fonctionnalités à vos formulaires.
+
+Entrez le nom de la fonction dans le champ "Fonction d'initialisation Python".
+Voici un exemple à suivre:
+"""
+from qgis.PyQt.QtWidgets import QWidget
+
+def my_form_open(dialog, layer, feature):
+    geom = feature.geometry()
+    control = dialog.findChild(QWidget, "MyLineEdit")
+]]></editforminitcode>
+      <featformsuppress>0</featformsuppress>
+      <editorlayout>tablayout</editorlayout>
+      <attributeEditorForm>
+        <attributeEditorContainer visibilityExpression="" visibilityExpressionEnabled="0" name="General" showLabel="1" columnCount="1" groupBox="0">
+          <attributeEditorField index="0" name="id" showLabel="1"/>
+          <attributeEditorField index="2" name="sl_label" showLabel="1"/>
+          <attributeEditorField index="1" name="sl_code" showLabel="1"/>
+          <attributeEditorField index="3" name="sl_description" showLabel="1"/>
+          <attributeEditorField index="6" name="sl_geometry_type" showLabel="1"/>
+          <attributeEditorField index="5" name="fk_id_actor" showLabel="1"/>
+          <attributeEditorField index="4" name="sl_creation_date" showLabel="1"/>
+          <attributeEditorRelation relation="series_04a7414a_ab6d_4611_8a60_bcd22071dc22_fk_id_spatial_layer_spatial_layer_18215d6d_1f4c_40d2_ba83_f2c9a9694e84_id" name="series_04a7414a_ab6d_4611_8a60_bcd22071dc22_fk_id_spatial_layer_spatial_layer_18215d6d_1f4c_40d2_ba83_f2c9a9694e84_id" showLabel="1" showLinkButton="1" showUnlinkButton="1"/>
+        </attributeEditorContainer>
+      </attributeEditorForm>
+      <editable>
+        <field editable="1" name="fk_id_actor"/>
+        <field editable="0" name="id"/>
+        <field editable="1" name="sl_code"/>
+        <field editable="1" name="sl_creation_date"/>
+        <field editable="1" name="sl_description"/>
+        <field editable="1" name="sl_geometry_type"/>
+        <field editable="1" name="sl_label"/>
+      </editable>
+      <labelOnTop>
+        <field labelOnTop="0" name="fk_id_actor"/>
+        <field labelOnTop="0" name="id"/>
+        <field labelOnTop="0" name="sl_code"/>
+        <field labelOnTop="0" name="sl_creation_date"/>
+        <field labelOnTop="0" name="sl_description"/>
+        <field labelOnTop="0" name="sl_geometry_type"/>
+        <field labelOnTop="0" name="sl_label"/>
+      </labelOnTop>
+      <widgets>
+        <widget name="series_04a7414a_ab6d_4611_8a60_bcd22071dc22_fk_id_spatial_layer_spatial_layer_18215d6d_1f4c_40d2_ba83_f2c9a9694e84_id">
+          <config type="Map">
+            <Option name="nm-rel" value="" type="QString"/>
+          </config>
+        </widget>
+      </widgets>
+      <previewExpression>sl_label</previewExpression>
+      <mapTip></mapTip>
+    </maplayer>
+  </projectlayers>
+  <layerorder/>
+  <properties>
+    <WMSPrecision type="QString">8</WMSPrecision>
+    <WMTSJpegLayers>
+      <Group type="QStringList"/>
+      <Project type="bool">false</Project>
+      <Layer type="QStringList"/>
+    </WMTSJpegLayers>
+    <WMSAccessConstraints type="QString">None</WMSAccessConstraints>
+    <WFSTLayers>
+      <Insert type="QStringList"/>
+      <Update type="QStringList"/>
+      <Delete type="QStringList"/>
+    </WFSTLayers>
+    <Macros>
+      <pythonCode type="QString"></pythonCode>
+    </Macros>
+    <WMSContactOrganization type="QString"></WMSContactOrganization>
+    <PositionPrecision>
+      <Automatic type="bool">true</Automatic>
+      <DegreeFormat type="QString">MU</DegreeFormat>
+      <DecimalPlaces type="int">2</DecimalPlaces>
+    </PositionPrecision>
+    <WMTSUrl type="QString"></WMTSUrl>
+    <Paths>
+      <Absolute type="bool">false</Absolute>
+    </Paths>
+    <WMTSMinScale type="int">5000</WMTSMinScale>
+    <Measurement>
+      <AreaUnits type="QString">m2</AreaUnits>
+      <DistanceUnits type="QString">meters</DistanceUnits>
+    </Measurement>
+    <Measure>
+      <Ellipsoid type="QString">WGS84</Ellipsoid>
+    </Measure>
+    <DefaultStyles>
+      <Opacity type="double">1</Opacity>
+      <Marker type="QString"></Marker>
+      <Fill type="QString"></Fill>
+      <Line type="QString"></Line>
+      <RandomColors type="bool">true</RandomColors>
+      <ColorRamp type="QString"></ColorRamp>
+    </DefaultStyles>
+    <WFSUrl type="QString"></WFSUrl>
+    <WMSContactPosition type="QString"></WMSContactPosition>
+    <WMSUseLayerIDs type="bool">false</WMSUseLayerIDs>
+    <WCSUrl type="QString"></WCSUrl>
+    <WMSServiceCapabilities type="bool">false</WMSServiceCapabilities>
+    <WMSAddWktGeometry type="bool">false</WMSAddWktGeometry>
+    <PAL>
+      <CandidatesPolygon type="int">30</CandidatesPolygon>
+      <SearchMethod type="int">0</SearchMethod>
+      <ShowingAllLabels type="bool">false</ShowingAllLabels>
+      <TextFormat type="int">0</TextFormat>
+      <ShowingPartialsLabels type="bool">true</ShowingPartialsLabels>
+      <CandidatesPoint type="int">16</CandidatesPoint>
+      <CandidatesLine type="int">50</CandidatesLine>
+      <ShowingCandidates type="bool">false</ShowingCandidates>
+      <DrawRectOnly type="bool">false</DrawRectOnly>
+    </PAL>
+    <WFSLayers type="QStringList"/>
+    <WMSUrl type="QString"></WMSUrl>
+    <WMSServiceTitle type="QString"></WMSServiceTitle>
+    <Gui>
+      <CanvasColorRedPart type="int">255</CanvasColorRedPart>
+      <SelectionColorRedPart type="int">255</SelectionColorRedPart>
+      <SelectionColorGreenPart type="int">255</SelectionColorGreenPart>
+      <CanvasColorGreenPart type="int">255</CanvasColorGreenPart>
+      <SelectionColorBluePart type="int">0</SelectionColorBluePart>
+      <SelectionColorAlphaPart type="int">255</SelectionColorAlphaPart>
+      <CanvasColorBluePart type="int">255</CanvasColorBluePart>
+    </Gui>
+    <WMTSLayers>
+      <Group type="QStringList"/>
+      <Project type="bool">false</Project>
+      <Layer type="QStringList"/>
+    </WMTSLayers>
+    <WMSOnlineResource type="QString"></WMSOnlineResource>
+    <WMSRootName type="QString"></WMSRootName>
+    <WMSImageQuality type="int">90</WMSImageQuality>
+    <WMSContactMail type="QString"></WMSContactMail>
+    <SpatialRefSys>
+      <ProjectionsEnabled type="int">1</ProjectionsEnabled>
+    </SpatialRefSys>
+    <WCSLayers type="QStringList"/>
+    <WMSSegmentizeFeatureInfoGeometry type="bool">false</WMSSegmentizeFeatureInfoGeometry>
+    <WMTSPngLayers>
+      <Group type="QStringList"/>
+      <Project type="bool">false</Project>
+      <Layer type="QStringList"/>
+    </WMTSPngLayers>
+    <Legend>
+      <filterByMap type="bool">false</filterByMap>
+    </Legend>
+    <WMSRequestDefinedDataSources type="bool">false</WMSRequestDefinedDataSources>
+    <WMSContactPerson type="QString"></WMSContactPerson>
+    <WMSFees type="QString">conditions unknown</WMSFees>
+    <WMSKeywordList type="QStringList">
+      <value></value>
+    </WMSKeywordList>
+    <qgis2web>
+      <Highlightonhover type="bool">false</Highlightonhover>
+      <WidgetBackground type="QString">#f8f8f8</WidgetBackground>
+      <MatchprojectCRS type="bool">false</MatchprojectCRS>
+      <Exporter type="QString">folder</Exporter>
+      <mapFormat type="QString">openlayers</mapFormat>
+      <Showpopupsonhover type="bool">false</Showpopupsonhover>
+      <Addlayerslist type="QString">None</Addlayerslist>
+      <WidgetIcon type="QString">#000000</WidgetIcon>
+      <Searchlayer type="QString"></Searchlayer>
+      <Template type="QString">full-screen</Template>
+      <Extent type="QString">Canvas extent</Extent>
+      <MinifyGeoJSONfiles type="bool">false</MinifyGeoJSONfiles>
+      <Layersearch type="QString">None</Layersearch>
+      <Measuretool type="QString">None</Measuretool>
+      <Precision type="QString">maintain</Precision>
+      <Exportfolder type="QString">/tmp/qgis2web</Exportfolder>
+      <Restricttoextent type="bool">false</Restricttoextent>
+      <Minzoomlevel type="QString">1</Minzoomlevel>
+      <Maxzoomlevel type="QString">28</Maxzoomlevel>
+      <Geolocateuser type="bool">false</Geolocateuser>
+      <Addaddresssearch type="bool">false</Addaddresssearch>
+    </qgis2web>
+    <WMSContactPhone type="QString"></WMSContactPhone>
+    <WMSServiceAbstract type="QString"></WMSServiceAbstract>
+  </properties>
+  <visibility-presets/>
+  <transformContext/>
+  <projectMetadata>
+    <identifier></identifier>
+    <parentidentifier></parentidentifier>
+    <language></language>
+    <type></type>
+    <title></title>
+    <abstract></abstract>
+    <contact>
+      <name></name>
+      <organization></organization>
+      <position></position>
+      <voice></voice>
+      <fax></fax>
+      <email></email>
+      <role></role>
+    </contact>
+    <links/>
+    <author>mdouchin</author>
+    <creation>2019-04-12T09:32:17</creation>
+  </projectMetadata>
+  <Annotations/>
+  <Layouts/>
+</qgis>
