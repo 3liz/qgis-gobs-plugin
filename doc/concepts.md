@@ -218,9 +218,10 @@ Une fois le ou les filtres spécifié, on lance la recherche. Les résultats son
 Il s'agit de récupérer les informations depuis le système dans un format exploitable par les outils bureautique et géomatiques ( Tableur, QGIS et Lizmap ), afin de créer des modèles de représentation au pilotage de l'action collective: cartes, graphiques, tableaux, etc.
 
 Le géomaticien peut récupérer les données converties au format SIG ou tableur via un outil qui présente les filtres de recherche suivants:
-    - choix de l'indicateur
-    - filtre spatial : dans un rectangle d'emprise ou dans une couche vectorielle de type polygone présente dans QGIS
-    - filtre temporel : dans un intervalle de date (ou par exemple "le mois dernier")
+
+* choix de l'indicateur
+* filtre spatial : dans un rectangle d'emprise ou dans une couche vectorielle de type polygone présente dans QGIS
+* filtre temporel : dans un intervalle de date (ou par exemple "le mois dernier")
 
 Il lance la recherche, qui lui présente un tableau synthétique sur les données filtrée de l'indicateur (équivalent à l'explorateur décrit au chapitre précédent)
 
