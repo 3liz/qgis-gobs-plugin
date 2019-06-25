@@ -31,7 +31,11 @@ __copyright__ = '(C) 2019 by 3liz'
 __revision__ = '$Format:%H$'
 
 from qgis.core import QgsProcessingProvider
-from .gobs_execute_sql_on_service_algorithm import GobsExecuteSqlOnServiceAlgorithm
+from .algorithms.execute_sql_on_service import ExecuteSqlOnService
+from .algorithms.create_database_structure import CreateDatabaseStructure
+from .algorithms.import_spatial_layer import ImportSpatialLayer
+from .algorithms.import_observation_data import ImportObservationData
+from .algorithms.get_spatial_layer import GetSpatialLayer
 
 
 class GobsProvider(QgsProcessingProvider):
@@ -41,7 +45,11 @@ class GobsProvider(QgsProcessingProvider):
 
         # Load algorithms
         self.alglist = [
-            GobsExecuteSqlOnServiceAlgorithm()
+            CreateDatabaseStructure(),
+            ExecuteSqlOnService(),
+            ImportSpatialLayer(),
+            ImportObservationData(),
+            GetSpatialLayer()
         ]
 
     def unload(self):
