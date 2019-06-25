@@ -26,8 +26,13 @@ from qgis.core import (
     QgsProcessingUtils,
     QgsProcessingException,
     QgsProcessingParameterString,
+    QgsProcessingParameterBoolean,
+    QgsProcessingOutputNumber,
     QgsProcessingOutputString
 )
+
+import processing
+import os
 
 class CreateDatabaseStructure(QgsProcessingAlgorithm):
     """
@@ -39,6 +44,8 @@ class CreateDatabaseStructure(QgsProcessingAlgorithm):
     # calling from the QGIS console.
 
     PGSERVICE = 'PGSERVICE'
+    OVERRIDE = 'OVERRIDE'
+    OUTPUT_STATUS = 'OUTPUT_STATUS'
     OUTPUT_STRING = 'OUTPUT_STRING'
 
     def name(self):
@@ -72,25 +79,116 @@ class CreateDatabaseStructure(QgsProcessingAlgorithm):
                 optional=False
             )
         )
-
+        self.addParameter(
+            QgsProcessingParameterBoolean(
+                self.OVERRIDE, 'Overwrite schema gobs and all data ? ** CAUTION **',
+                defaultValue=False,
+                optional=False
+            )
+        )
         # OUTPUTS
-        # Add output for message
+        # Add output for status (integer) and message (string)
+        self.addOutput(
+            QgsProcessingOutputNumber(
+                self.OUTPUT_STATUS, self.tr('Output status')
+            )
+        )
         self.addOutput(
             QgsProcessingOutputString(
                 self.OUTPUT_STRING, self.tr('Output message')
             )
         )
 
+
+    def run_sql(self, sql, parameters, context, feedback):
+        service = parameters[self.PGSERVICE]
+        exec_result = processing.run("gobs:execute_sql_on_service", {
+            'PGSERVICE': service,
+            'INPUT_SQL': sql
+        }, context=context, feedback=feedback)
+        return exec_result
+
+
+    def checkParameterValues(self, parameters, context):
+
+        # Check database content
+        ok, msg = self.checkSchema(parameters, context)
+        if not ok:
+            return False, msg
+        return super(self.__class__, self).checkParameterValues(parameters, context)
+
+    def checkSchema(self, parameters, context):
+        sql = '''
+            SELECT schema_name
+            FROM information_schema.schemata
+            WHERE schema_name = 'gobs';
+        '''
+        override = parameters[self.OVERRIDE]
+        get_sql = self.run_sql(sql, parameters, context, None)
+        ok = bool(get_sql['OUTPUT_STATUS'])
+        msg = get_sql['OUTPUT_STRING']
+        if not ok:
+            return ok, msg
+        msg = self.tr('Schema gobs does not exists. Continue...')
+        if 'OUTPUT_LAYER' in get_sql:
+            for feature in get_sql['OUTPUT_LAYER'].getFeatures():
+                schema = feature['schema_name']
+                if schema == 'gobs' and not override:
+                    ok = False
+                    msg = self.tr("Schema gobs already exists in database ! If you REALLY want to drop and recreate it (and loose all data), check the Override checkbox")
+        return ok, msg
+
     def processAlgorithm(self, parameters, context, feedback):
         """
         Here is where the processing itself takes place.
         """
         service = parameters[self.PGSERVICE]
-        sql = parameters[self.INPUT_SQL]
 
+        # Drop schema if needed
+        override = self.parameterAsBool(parameters, self.OVERRIDE, context)
+        if override:
+            sql = 'DROP SCHEMA gobs CASCADE;'
+            get_sql = self.run_sql(sql, parameters, context, None)
+            ok = bool(get_sql['OUTPUT_STATUS'])
+            msg = get_sql['OUTPUT_STRING']
+            if ok:
+                feedback.pushInfo(self.tr("Schema gobs has been droped."))
+            else:
+                feedback.pushInfo(msg)
+                status = 0
+                # raise Exception(msg)
+                return {
+                    self.OUTPUT_STATUS: status,
+                    self.OUTPUT_STRING: msg
+                }
+
+        # Create full structure
+        sql_files = [
+            '01-create_structure.sql'
+        ]
         msg = ''
-        # raise QgsProcessingException(msg)
+        alg_dir = os.path.dirname(__file__)
+        plugin_dir = os.path.join(alg_dir, '../../')
+
+        for sf in sql_files:
+            sql_file = os.path.join(plugin_dir, 'install/sql/%s' % sf)
+            with open(sql_file, 'r') as f:
+                sql = f.read()
+                get_sql = self.run_sql(sql, parameters, context, None)
+                ok = bool(get_sql['OUTPUT_STATUS'])
+                msg = get_sql['OUTPUT_STRING']
+                if ok:
+                    feedback.pushInfo('* ' + sf)
+                else:
+                    feedback.pushInfo(msg)
+                    status = 0
+                    raise Exception(msg)
+                    return {
+                        self.OUTPUT_STATUS: status,
+                        self.OUTPUT_STRING: msg
+                    }
 
         return {
-            self.OUTPUT_STRING: msg
+            self.OUTPUT_STATUS: 1,
+            self.OUTPUT_STRING: self.tr('*** GOBS STRUCTURE HAS BEEN SUCCESSFULLY CREATED ***')
         }

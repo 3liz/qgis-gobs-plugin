@@ -45,8 +45,8 @@ class GobsProvider(QgsProcessingProvider):
 
         # Load algorithms
         self.alglist = [
-            CreateDatabaseStructure(),
             ExecuteSqlOnService(),
+            CreateDatabaseStructure(),
             ImportSpatialLayer(),
             ImportObservationData(),
             GetSpatialLayer()
@@ -64,7 +64,7 @@ class GobsProvider(QgsProcessingProvider):
             self.addAlgorithm( alg )
 
     def id(self):
-        return 'Gobs'
+        return 'gobs'
 
     def name(self):
         return self.tr('G-Obs')
