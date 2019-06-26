@@ -22,7 +22,8 @@ done
 echo "<h3>G-Obs - List of database schemas</h3>" > $OUTPUTDIR/index.html
 
 # On boucle sur les schemas
-for SCHEMANAME in public gobs; do
+#for SCHEMANAME in public gobs; do
+for SCHEMANAME in gobs; do
 
     # Remove existing directory
     rm -rf $OUTPUTDIR/$SCHEMANAME

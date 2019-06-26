@@ -31,13 +31,13 @@
             <column ascending="true" name="id"/>
          </index>
       </table>
-      <table name="glossary" numRows="0" remarks="List of labels and words used as labels for stored data" schema="gobs" type="TABLE">
+      <table name="glossary" numRows="12" remarks="List of labels and words used as labels for stored data" schema="gobs" type="TABLE">
          <column autoUpdated="true" defaultValue="nextval('gobs.glossary_id_seq'::regclass)" digits="0" id="0" name="id" nullable="false" remarks="ID" size="10" type="serial"/>
-         <column autoUpdated="false" digits="0" id="1" name="gl_field" nullable="false" remarks="Field" size="2147483647" type="text"/>
-         <column autoUpdated="false" digits="0" id="2" name="gl_code" nullable="false" remarks="Code" size="2147483647" type="text"/>
-         <column autoUpdated="false" digits="0" id="3" name="gl_value" nullable="false" remarks="Value" size="2147483647" type="text"/>
-         <column autoUpdated="false" digits="0" id="4" name="gl_label" nullable="false" remarks="Label" size="2147483647" type="text"/>
-         <column autoUpdated="false" digits="0" id="5" name="gl_order" nullable="true" remarks="Order" size="5" type="int2"/>
+         <column autoUpdated="false" digits="0" id="1" name="gl_field" nullable="false" remarks="Target field for this glossary item" size="2147483647" type="text"/>
+         <column autoUpdated="false" digits="0" id="2" name="gl_code" nullable="false" remarks="Item code to store in tables" size="2147483647" type="text"/>
+         <column autoUpdated="false" digits="0" id="3" name="gl_label" nullable="false" remarks="Item label to show for users" size="2147483647" type="text"/>
+         <column autoUpdated="false" digits="0" id="4" name="gl_description" nullable="false" remarks="Description of the item" size="2147483647" type="text"/>
+         <column autoUpdated="false" digits="0" id="5" name="gl_order" nullable="true" remarks="Display order among the field items" size="5" type="int2"/>
          <primaryKey column="id" sequenceNumberInPK="1"/>
          <index name="glossary_pkey" unique="true">
             <column ascending="true" name="id"/>
@@ -86,8 +86,8 @@
          <column autoUpdated="false" digits="0" id="2" name="id_title" nullable="false" remarks="Title" size="2147483647" type="text"/>
          <column autoUpdated="false" digits="0" id="3" name="id_description" nullable="false" remarks="Describes the indicator regarding its rôle inside the project." size="2147483647" type="text"/>
          <column autoUpdated="false" defaultValue="'day'::text" digits="0" id="4" name="id_date_format" nullable="false" remarks="Help to know what is the format for the date. Example : ‘year’" size="2147483647" type="text"/>
-         <column autoUpdated="false" digits="0" id="5" name="id_value_code" nullable="false" remarks="List of the codes of the vector dimensions. Ex : [‘pop_h’, ‘pop_f’]" size="2147483647" type="jsonb"/>
-         <column autoUpdated="false" digits="0" id="6" name="id_value_name" nullable="false" remarks="List of the names of the vector dimensions. Ex : [‘population homme’, ‘population femme’]" size="2147483647" type="jsonb"/>
+         <column autoUpdated="false" digits="0" id="5" name="id_value_code" nullable="false" remarks="List of the codes of the vector dimensions. Ex : [‘pop_h’, ‘pop_f’]" size="2147483647" type="_text"/>
+         <column autoUpdated="false" digits="0" id="6" name="id_value_name" nullable="false" remarks="List of the names of the vector dimensions. Ex : [‘population homme’, ‘population femme’]" size="2147483647" type="_text"/>
          <column autoUpdated="false" defaultValue="'integer'::text" digits="0" id="7" name="id_value_type" nullable="false" remarks="Type of the stored values. Ex : ‘integer’ or ‘real’" size="2147483647" type="text"/>
          <column autoUpdated="false" digits="0" id="8" name="id_value_unit" nullable="false" remarks="Unit ot the store values. Ex : ‘inhabitants’ or ‘°C’" size="2147483647" type="text"/>
          <primaryKey column="id" sequenceNumberInPK="1"/>

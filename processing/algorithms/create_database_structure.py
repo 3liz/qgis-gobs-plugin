@@ -45,6 +45,7 @@ class CreateDatabaseStructure(QgsProcessingAlgorithm):
 
     PGSERVICE = 'PGSERVICE'
     OVERRIDE = 'OVERRIDE'
+    ADDTESTDATA = 'ADDTESTDATA'
     OUTPUT_STATUS = 'OUTPUT_STATUS'
     OUTPUT_STRING = 'OUTPUT_STRING'
 
@@ -83,6 +84,13 @@ class CreateDatabaseStructure(QgsProcessingAlgorithm):
             QgsProcessingParameterBoolean(
                 self.OVERRIDE, 'Overwrite schema gobs and all data ? ** CAUTION **',
                 defaultValue=False,
+                optional=False
+            )
+        )
+        self.addParameter(
+            QgsProcessingParameterBoolean(
+                self.ADDTESTDATA, 'Add test data ?',
+                defaultValue=True,
                 optional=False
             )
         )
@@ -147,7 +155,8 @@ class CreateDatabaseStructure(QgsProcessingAlgorithm):
         # Drop schema if needed
         override = self.parameterAsBool(parameters, self.OVERRIDE, context)
         if override:
-            sql = 'DROP SCHEMA gobs CASCADE;'
+            feedback.pushInfo(self.tr("Trying to drop schema gobs..."))
+            sql = 'DROP SCHEMA IF EXISTS gobs CASCADE;'
             get_sql = self.run_sql(sql, parameters, context, None)
             ok = bool(get_sql['OUTPUT_STATUS'])
             msg = get_sql['OUTPUT_STRING']
@@ -164,21 +173,32 @@ class CreateDatabaseStructure(QgsProcessingAlgorithm):
 
         # Create full structure
         sql_files = [
-            '01-create_structure.sql'
+            '10_create_structure.sql',
+            '90_glossary.sql'
         ]
+        # Add test data
+        addtestdata = self.parameterAsBool(parameters, self.ADDTESTDATA, context)
+        if addtestdata:
+            sql_files.append('99_test_data.sql')
+
         msg = ''
         alg_dir = os.path.dirname(__file__)
         plugin_dir = os.path.join(alg_dir, '../../')
+
+
 
         for sf in sql_files:
             sql_file = os.path.join(plugin_dir, 'install/sql/%s' % sf)
             with open(sql_file, 'r') as f:
                 sql = f.read()
+                if len(sql.strip()) == 0:
+                    feedback.pushInfo('* ' + sf + ' -> SKIPPED (EMPTY FILE)')
+                    continue
                 get_sql = self.run_sql(sql, parameters, context, None)
                 ok = bool(get_sql['OUTPUT_STATUS'])
                 msg = get_sql['OUTPUT_STRING']
                 if ok:
-                    feedback.pushInfo('* ' + sf)
+                    feedback.pushInfo('* ' + sf + ' -> SUCCESS !')
                 else:
                     feedback.pushInfo(msg)
                     status = 0

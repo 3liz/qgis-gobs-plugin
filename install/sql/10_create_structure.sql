@@ -50,18 +50,18 @@ CREATE TABLE gobs.glossary (
     id integer NOT NULL,
     gl_field text NOT NULL,
     gl_code text NOT NULL,
-    gl_value text NOT NULL,
     gl_label text NOT NULL,
+    gl_description text NOT NULL,
     gl_order smallint
 );
 
 COMMENT ON TABLE gobs.glossary IS 'List of labels and words used as labels for stored data';
 COMMENT ON COLUMN gobs.glossary.id IS 'ID';
-COMMENT ON COLUMN gobs.glossary.gl_field IS 'Field';
-COMMENT ON COLUMN gobs.glossary.gl_code IS 'Code';
-COMMENT ON COLUMN gobs.glossary.gl_value IS 'Value';
-COMMENT ON COLUMN gobs.glossary.gl_label IS 'Label';
-COMMENT ON COLUMN gobs.glossary.gl_order IS 'Order';
+COMMENT ON COLUMN gobs.glossary.gl_field IS 'Target field for this glossary item';
+COMMENT ON COLUMN gobs.glossary.gl_code IS 'Item code to store in tables';
+COMMENT ON COLUMN gobs.glossary.gl_label IS 'Item label to show for users';
+COMMENT ON COLUMN gobs.glossary.gl_description IS 'Description of the item';
+COMMENT ON COLUMN gobs.glossary.gl_order IS 'Display order among the field items';
 
 CREATE SEQUENCE gobs.glossary_id_seq
     START WITH 1
@@ -120,8 +120,8 @@ CREATE TABLE gobs.indicator (
     id_title text NOT NULL,
     id_description text NOT NULL,
     id_date_format text DEFAULT 'day'::text NOT NULL,
-    id_value_code jsonb NOT NULL,
-    id_value_name jsonb NOT NULL,
+    id_value_code text[] NOT NULL,
+    id_value_name text[] NOT NULL,
     id_value_type text DEFAULT 'integer'::text NOT NULL,
     id_value_unit text NOT NULL
 );
