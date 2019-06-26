@@ -7,61 +7,82 @@
   <trust active="0"/>
   <projectCrs>
     <spatialrefsys>
-      <proj4>+proj=merc +a=6378137 +b=6378137 +lat_ts=0.0 +lon_0=0.0 +x_0=0.0 +y_0=0 +k=1.0 +units=m +nadgrids=@null +wktext +no_defs</proj4>
-      <srsid>3857</srsid>
-      <srid>3857</srid>
-      <authid>EPSG:3857</authid>
-      <description>WGS 84 / Pseudo-Mercator</description>
-      <projectionacronym>merc</projectionacronym>
-      <ellipsoidacronym>WGS84</ellipsoidacronym>
+      <proj4>+proj=lcc +lat_1=49 +lat_2=44 +lat_0=46.5 +lon_0=3 +x_0=700000 +y_0=6600000 +ellps=GRS80 +towgs84=0,0,0,0,0,0,0 +units=m +no_defs</proj4>
+      <srsid>145</srsid>
+      <srid>2154</srid>
+      <authid>EPSG:2154</authid>
+      <description>RGF93 / Lambert-93</description>
+      <projectionacronym>lcc</projectionacronym>
+      <ellipsoidacronym>GRS80</ellipsoidacronym>
       <geographicflag>false</geographicflag>
     </spatialrefsys>
   </projectCrs>
   <layer-tree-group>
     <customproperties/>
-    <layer-tree-layer source="service='gobs' sslmode=disable key='id' estimatedmetadata=true checkPrimaryKeyUnicity='0' table=&quot;gobs&quot;.&quot;actor_category&quot; sql=" checked="Qt::Checked" id="actor_category_8a7edcf8_cb34_4689_b22b_7a8a6a2ab610" expanded="1" name="actor_category" providerKey="postgres">
+    <layer-tree-group checked="Qt::Checked" expanded="1" name="Imports">
       <customproperties/>
-    </layer-tree-layer>
-    <layer-tree-layer source="service='gobs' sslmode=disable key='id' estimatedmetadata=true checkPrimaryKeyUnicity='0' table=&quot;gobs&quot;.&quot;actor&quot; sql=" checked="Qt::Checked" id="actor_5f01a6e5_8205_462f_af40_0ffd7ff0a44f" expanded="1" name="actor" providerKey="postgres">
+      <layer-tree-layer source="../install/test_data/daily_rainfall_montpellier.csv|layername=daily_rainfall_montpellier" checked="Qt::Checked" id="daily_rainfall_montpellier_b9e39d79_d2cb_4390_b7d9_042934a3dd1f" expanded="1" name="daily_rainfall_montpellier" providerKey="ogr">
+        <customproperties/>
+      </layer-tree-layer>
+      <layer-tree-layer source="../install/test_data/pluviometers.geojson|layername=pluviometers" checked="Qt::Checked" id="pluviometers_2ec6280d_621b_4e0b_a24d_ddfa5e6130c2" expanded="1" name="pluviometers" providerKey="ogr">
+        <customproperties/>
+      </layer-tree-layer>
+      <layer-tree-layer source="../install/test_data/montpellier_districts.geojson|layername=montpellier_districts" checked="Qt::Checked" id="montpellier_districts_09be70ff_8fd9_40de_b711_743f276f640e" expanded="1" name="montpellier_districts" providerKey="ogr">
+        <customproperties/>
+      </layer-tree-layer>
+    </layer-tree-group>
+    <layer-tree-group checked="Qt::Checked" expanded="1" name="Structure">
       <customproperties/>
-    </layer-tree-layer>
-    <layer-tree-layer source="service='gobs' sslmode=disable key='id' estimatedmetadata=true checkPrimaryKeyUnicity='0' table=&quot;gobs&quot;.&quot;indicator&quot; sql=" checked="Qt::Checked" id="indicator_18ba18bf_0390_45a3_8edd_1cc049e8a251" expanded="1" name="indicator" providerKey="postgres">
-      <customproperties/>
-    </layer-tree-layer>
-    <layer-tree-layer source="service='gobs' sslmode=disable key='id' estimatedmetadata=true checkPrimaryKeyUnicity='0' table=&quot;gobs&quot;.&quot;observation&quot; sql=" checked="Qt::Checked" id="observation_bcc90162_47c8_4097_bc24_a31af92d2708" expanded="1" name="observation" providerKey="postgres">
-      <customproperties/>
-    </layer-tree-layer>
-    <layer-tree-layer source="service='gobs' sslmode=disable key='id' estimatedmetadata=true checkPrimaryKeyUnicity='0' table=&quot;gobs&quot;.&quot;spatial_layer&quot; sql=" checked="Qt::Checked" id="spatial_layer_18215d6d_1f4c_40d2_ba83_f2c9a9694e84" expanded="1" name="spatial_layer" providerKey="postgres">
-      <customproperties/>
-    </layer-tree-layer>
-    <layer-tree-layer source="service='gobs' sslmode=disable key='id' estimatedmetadata=true checkPrimaryKeyUnicity='0' table=&quot;gobs&quot;.&quot;series&quot; sql=" checked="Qt::Checked" id="series_04a7414a_ab6d_4611_8a60_bcd22071dc22" expanded="1" name="series" providerKey="postgres">
-      <customproperties/>
-    </layer-tree-layer>
-    <layer-tree-layer source="service='gobs' sslmode=disable key='fk_id_indicator,fk_id_node' estimatedmetadata=true checkPrimaryKeyUnicity='0' table=&quot;gobs&quot;.&quot;r_indicator_node&quot; sql=" checked="Qt::Checked" id="r_indicator_node_2ca83116_e69f_4dcb_abcb_de5bdf44b2be" expanded="1" name="r_indicator_node" providerKey="postgres">
-      <customproperties/>
-    </layer-tree-layer>
-    <layer-tree-layer source="service='gobs' sslmode=disable key='ge_parent_node,ge_child_node' estimatedmetadata=true checkPrimaryKeyUnicity='0' table=&quot;gobs&quot;.&quot;r_graph_edge&quot; sql=" checked="Qt::Checked" id="r_graph_edge_f2eb47e9_728b_4c85_a839_3b488e132e06" expanded="1" name="r_graph_edge" providerKey="postgres">
-      <customproperties/>
-    </layer-tree-layer>
-    <layer-tree-layer source="memory?geometry=NoGeometry&amp;field=setval:(0,0)&amp;uid={6294e16a-9ce2-4500-af4b-10d20caaacc4}" checked="Qt::Checked" id="temp_layer_2363ef3f_2c0e_41ed_a895_e4a785b46cb2" expanded="1" name="SQL layer" providerKey="memory">
-      <customproperties/>
-    </layer-tree-layer>
-    <layer-tree-layer source="service='gobs' sslmode=disable key='id' estimatedmetadata=true checkPrimaryKeyUnicity='0' table=&quot;gobs&quot;.&quot;protocol&quot; sql=" checked="Qt::Checked" id="protocol_5507f1c8_1802_4df0_a273_8e9b7f52c352" expanded="1" name="protocol" providerKey="postgres">
-      <customproperties/>
-    </layer-tree-layer>
-    <layer-tree-layer source="service='gobs' sslmode=disable key='id' estimatedmetadata=true checkPrimaryKeyUnicity='0' table=&quot;gobs&quot;.&quot;import&quot; sql=" checked="Qt::Checked" id="import_0343eb12_592e_4fd0_8380_51f4d62b6a56" expanded="1" name="import" providerKey="postgres">
-      <customproperties/>
-    </layer-tree-layer>
-    <layer-tree-layer source="service='gobs' sslmode=disable key='id' estimatedmetadata=true checkPrimaryKeyUnicity='0' table=&quot;gobs&quot;.&quot;graph_node&quot; sql=" checked="Qt::Checked" id="graph_node_2cd9eee8_46e2_401c_87f7_8b40d9d6260e" expanded="1" name="graph_node" providerKey="postgres">
-      <customproperties/>
-    </layer-tree-layer>
-    <layer-tree-layer source="service='gobs' sslmode=disable key='id' estimatedmetadata=true checkPrimaryKeyUnicity='0' table=&quot;gobs&quot;.&quot;glossary&quot; sql=" checked="Qt::Checked" id="glossary_cee356e0_5be5_4d87_ac2b_e8e8967c4032" expanded="1" name="glossary" providerKey="postgres">
-      <customproperties/>
-    </layer-tree-layer>
-    <custom-order enabled="0"/>
+      <layer-tree-layer source="service='gobs' sslmode=disable key='id' estimatedmetadata=true checkPrimaryKeyUnicity='0' table=&quot;gobs&quot;.&quot;actor_category&quot; sql=" checked="Qt::Checked" id="actor_category_8a7edcf8_cb34_4689_b22b_7a8a6a2ab610" expanded="1" name="actor_category" providerKey="postgres">
+        <customproperties/>
+      </layer-tree-layer>
+      <layer-tree-layer source="service='gobs' sslmode=disable key='id' estimatedmetadata=true checkPrimaryKeyUnicity='0' table=&quot;gobs&quot;.&quot;actor&quot; sql=" checked="Qt::Checked" id="actor_5f01a6e5_8205_462f_af40_0ffd7ff0a44f" expanded="1" name="actor" providerKey="postgres">
+        <customproperties/>
+      </layer-tree-layer>
+      <layer-tree-layer source="service='gobs' sslmode=disable key='id' estimatedmetadata=true checkPrimaryKeyUnicity='0' table=&quot;gobs&quot;.&quot;spatial_layer&quot; sql=" checked="Qt::Checked" id="spatial_layer_18215d6d_1f4c_40d2_ba83_f2c9a9694e84" expanded="1" name="spatial_layer" providerKey="postgres">
+        <customproperties/>
+      </layer-tree-layer>
+      <layer-tree-layer source="service='gobs' sslmode=disable key='id' estimatedmetadata=true checkPrimaryKeyUnicity='0' table=&quot;gobs&quot;.&quot;indicator&quot; sql=" checked="Qt::Checked" id="indicator_18ba18bf_0390_45a3_8edd_1cc049e8a251" expanded="1" name="indicator" providerKey="postgres">
+        <customproperties/>
+      </layer-tree-layer>
+      <layer-tree-layer source="service='gobs' sslmode=disable key='id' estimatedmetadata=true checkPrimaryKeyUnicity='0' table=&quot;gobs&quot;.&quot;series&quot; sql=" checked="Qt::Checked" id="series_04a7414a_ab6d_4611_8a60_bcd22071dc22" expanded="1" name="series" providerKey="postgres">
+        <customproperties/>
+      </layer-tree-layer>
+      <layer-tree-layer source="service='gobs' sslmode=disable key='id' estimatedmetadata=true checkPrimaryKeyUnicity='0' table=&quot;gobs&quot;.&quot;observation&quot; sql=" checked="Qt::Checked" id="observation_bcc90162_47c8_4097_bc24_a31af92d2708" expanded="1" name="observation" providerKey="postgres">
+        <customproperties/>
+      </layer-tree-layer>
+      <layer-tree-layer source="service='gobs' sslmode=disable key='fk_id_indicator,fk_id_node' estimatedmetadata=true checkPrimaryKeyUnicity='0' table=&quot;gobs&quot;.&quot;r_indicator_node&quot; sql=" checked="Qt::Checked" id="r_indicator_node_2ca83116_e69f_4dcb_abcb_de5bdf44b2be" expanded="1" name="r_indicator_node" providerKey="postgres">
+        <customproperties/>
+      </layer-tree-layer>
+      <layer-tree-layer source="service='gobs' sslmode=disable key='ge_parent_node,ge_child_node' estimatedmetadata=true checkPrimaryKeyUnicity='0' table=&quot;gobs&quot;.&quot;r_graph_edge&quot; sql=" checked="Qt::Checked" id="r_graph_edge_f2eb47e9_728b_4c85_a839_3b488e132e06" expanded="1" name="r_graph_edge" providerKey="postgres">
+        <customproperties/>
+      </layer-tree-layer>
+      <layer-tree-layer source="memory?geometry=NoGeometry&amp;field=setval:(0,0):string(255,0)&amp;uid={13240aba-70fa-4712-bab9-e67b8780d9c9}" checked="Qt::Checked" id="temp_layer_2363ef3f_2c0e_41ed_a895_e4a785b46cb2" expanded="1" name="SQL layer" providerKey="memory">
+        <customproperties/>
+      </layer-tree-layer>
+      <layer-tree-layer source="service='gobs' sslmode=disable key='id' estimatedmetadata=true checkPrimaryKeyUnicity='0' table=&quot;gobs&quot;.&quot;protocol&quot; sql=" checked="Qt::Checked" id="protocol_5507f1c8_1802_4df0_a273_8e9b7f52c352" expanded="1" name="protocol" providerKey="postgres">
+        <customproperties/>
+      </layer-tree-layer>
+      <layer-tree-layer source="service='gobs' sslmode=disable key='id' estimatedmetadata=true checkPrimaryKeyUnicity='0' table=&quot;gobs&quot;.&quot;import&quot; sql=" checked="Qt::Checked" id="import_0343eb12_592e_4fd0_8380_51f4d62b6a56" expanded="1" name="import" providerKey="postgres">
+        <customproperties/>
+      </layer-tree-layer>
+      <layer-tree-layer source="service='gobs' sslmode=disable key='id' estimatedmetadata=true checkPrimaryKeyUnicity='0' table=&quot;gobs&quot;.&quot;graph_node&quot; sql=" checked="Qt::Checked" id="graph_node_2cd9eee8_46e2_401c_87f7_8b40d9d6260e" expanded="1" name="graph_node" providerKey="postgres">
+        <customproperties/>
+      </layer-tree-layer>
+      <layer-tree-layer source="service='gobs' sslmode=disable key='id' estimatedmetadata=true checkPrimaryKeyUnicity='0' table=&quot;gobs&quot;.&quot;glossary&quot; sql=" checked="Qt::Checked" id="glossary_cee356e0_5be5_4d87_ac2b_e8e8967c4032" expanded="0" name="glossary" providerKey="postgres">
+        <customproperties/>
+      </layer-tree-layer>
+    </layer-tree-group>
+    <custom-order enabled="0">
+      <item>pluviometers_2ec6280d_621b_4e0b_a24d_ddfa5e6130c2</item>
+      <item>montpellier_districts_09be70ff_8fd9_40de_b711_743f276f640e</item>
+    </custom-order>
   </layer-tree-group>
   <snapping-settings tolerance="0" intersection-snapping="0" enabled="0" type="1" unit="2" mode="2">
-    <individual-layer-settings/>
+    <individual-layer-settings>
+      <layer-setting id="montpellier_districts_09be70ff_8fd9_40de_b711_743f276f640e" tolerance="0" enabled="0" type="1" units="2"/>
+      <layer-setting id="pluviometers_2ec6280d_621b_4e0b_a24d_ddfa5e6130c2" tolerance="0" enabled="0" type="1" units="2"/>
+    </individual-layer-settings>
   </snapping-settings>
   <relations>
     <relation referencedLayer="actor_category_8a7edcf8_cb34_4689_b22b_7a8a6a2ab610" referencingLayer="actor_5f01a6e5_8205_462f_af40_0ffd7ff0a44f" id="actor_5f01a6e5_8205_462f_af40_0ffd7ff0a44f_id_category_actor_category_8a7edcf8_cb34_4689_b22b_7a8a6a2ab610_id" strength="Association" name="actor_id_category_fkey">
@@ -101,21 +122,21 @@
   <mapcanvas annotationsVisible="1" name="theMapCanvas">
     <units>meters</units>
     <extent>
-      <xmin>-141912.32927027280675247</xmin>
-      <ymin>-111325.1428663859696826</ymin>
-      <xmax>141912.32927027280675247</xmax>
-      <ymax>111325.14286638486373704</ymax>
+      <xmin>765803.04501968750264496</xmin>
+      <ymin>6275314.42897447105497122</ymin>
+      <xmax>776592.60820177977439016</xmax>
+      <ymax>6283794.2189707001671195</ymax>
     </extent>
     <rotation>0</rotation>
     <destinationsrs>
       <spatialrefsys>
-        <proj4>+proj=merc +a=6378137 +b=6378137 +lat_ts=0.0 +lon_0=0.0 +x_0=0.0 +y_0=0 +k=1.0 +units=m +nadgrids=@null +wktext +no_defs</proj4>
-        <srsid>3857</srsid>
-        <srid>3857</srid>
-        <authid>EPSG:3857</authid>
-        <description>WGS 84 / Pseudo-Mercator</description>
-        <projectionacronym>merc</projectionacronym>
-        <ellipsoidacronym>WGS84</ellipsoidacronym>
+        <proj4>+proj=lcc +lat_1=49 +lat_2=44 +lat_0=46.5 +lon_0=3 +x_0=700000 +y_0=6600000 +ellps=GRS80 +towgs84=0,0,0,0,0,0,0 +units=m +no_defs</proj4>
+        <srsid>145</srsid>
+        <srid>2154</srid>
+        <authid>EPSG:2154</authid>
+        <description>RGF93 / Lambert-93</description>
+        <projectionacronym>lcc</projectionacronym>
+        <ellipsoidacronym>GRS80</ellipsoidacronym>
         <geographicflag>false</geographicflag>
       </spatialrefsys>
     </destinationsrs>
@@ -123,74 +144,162 @@
   </mapcanvas>
   <projectModels/>
   <legend updateDrawingOrder="true">
-    <legendlayer showFeatureCount="0" checked="Qt::Checked" open="true" name="actor_category" drawingOrder="-1">
-      <filegroup hidden="false" open="true">
-        <legendlayerfile layerid="actor_category_8a7edcf8_cb34_4689_b22b_7a8a6a2ab610" isInOverview="0" visible="1"/>
-      </filegroup>
-    </legendlayer>
-    <legendlayer showFeatureCount="0" checked="Qt::Checked" open="true" name="actor" drawingOrder="-1">
-      <filegroup hidden="false" open="true">
-        <legendlayerfile layerid="actor_5f01a6e5_8205_462f_af40_0ffd7ff0a44f" isInOverview="0" visible="1"/>
-      </filegroup>
-    </legendlayer>
-    <legendlayer showFeatureCount="0" checked="Qt::Checked" open="true" name="indicator" drawingOrder="-1">
-      <filegroup hidden="false" open="true">
-        <legendlayerfile layerid="indicator_18ba18bf_0390_45a3_8edd_1cc049e8a251" isInOverview="0" visible="1"/>
-      </filegroup>
-    </legendlayer>
-    <legendlayer showFeatureCount="0" checked="Qt::Checked" open="true" name="observation" drawingOrder="-1">
-      <filegroup hidden="false" open="true">
-        <legendlayerfile layerid="observation_bcc90162_47c8_4097_bc24_a31af92d2708" isInOverview="0" visible="1"/>
-      </filegroup>
-    </legendlayer>
-    <legendlayer showFeatureCount="0" checked="Qt::Checked" open="true" name="spatial_layer" drawingOrder="-1">
-      <filegroup hidden="false" open="true">
-        <legendlayerfile layerid="spatial_layer_18215d6d_1f4c_40d2_ba83_f2c9a9694e84" isInOverview="0" visible="1"/>
-      </filegroup>
-    </legendlayer>
-    <legendlayer showFeatureCount="0" checked="Qt::Checked" open="true" name="series" drawingOrder="-1">
-      <filegroup hidden="false" open="true">
-        <legendlayerfile layerid="series_04a7414a_ab6d_4611_8a60_bcd22071dc22" isInOverview="0" visible="1"/>
-      </filegroup>
-    </legendlayer>
-    <legendlayer showFeatureCount="0" checked="Qt::Checked" open="true" name="r_indicator_node" drawingOrder="-1">
-      <filegroup hidden="false" open="true">
-        <legendlayerfile layerid="r_indicator_node_2ca83116_e69f_4dcb_abcb_de5bdf44b2be" isInOverview="0" visible="1"/>
-      </filegroup>
-    </legendlayer>
-    <legendlayer showFeatureCount="0" checked="Qt::Checked" open="true" name="r_graph_edge" drawingOrder="-1">
-      <filegroup hidden="false" open="true">
-        <legendlayerfile layerid="r_graph_edge_f2eb47e9_728b_4c85_a839_3b488e132e06" isInOverview="0" visible="1"/>
-      </filegroup>
-    </legendlayer>
-    <legendlayer showFeatureCount="0" checked="Qt::Checked" open="true" name="SQL layer" drawingOrder="-1">
-      <filegroup hidden="false" open="true">
-        <legendlayerfile layerid="temp_layer_2363ef3f_2c0e_41ed_a895_e4a785b46cb2" isInOverview="0" visible="1"/>
-      </filegroup>
-    </legendlayer>
-    <legendlayer showFeatureCount="0" checked="Qt::Checked" open="true" name="protocol" drawingOrder="-1">
-      <filegroup hidden="false" open="true">
-        <legendlayerfile layerid="protocol_5507f1c8_1802_4df0_a273_8e9b7f52c352" isInOverview="0" visible="1"/>
-      </filegroup>
-    </legendlayer>
-    <legendlayer showFeatureCount="0" checked="Qt::Checked" open="true" name="import" drawingOrder="-1">
-      <filegroup hidden="false" open="true">
-        <legendlayerfile layerid="import_0343eb12_592e_4fd0_8380_51f4d62b6a56" isInOverview="0" visible="1"/>
-      </filegroup>
-    </legendlayer>
-    <legendlayer showFeatureCount="0" checked="Qt::Checked" open="true" name="graph_node" drawingOrder="-1">
-      <filegroup hidden="false" open="true">
-        <legendlayerfile layerid="graph_node_2cd9eee8_46e2_401c_87f7_8b40d9d6260e" isInOverview="0" visible="1"/>
-      </filegroup>
-    </legendlayer>
-    <legendlayer showFeatureCount="0" checked="Qt::Checked" open="true" name="glossary" drawingOrder="-1">
-      <filegroup hidden="false" open="true">
-        <legendlayerfile layerid="glossary_cee356e0_5be5_4d87_ac2b_e8e8967c4032" isInOverview="0" visible="1"/>
-      </filegroup>
-    </legendlayer>
+    <legendgroup checked="Qt::Checked" open="true" name="Imports">
+      <legendlayer showFeatureCount="0" checked="Qt::Checked" open="true" name="daily_rainfall_montpellier" drawingOrder="-1">
+        <filegroup hidden="false" open="true">
+          <legendlayerfile layerid="daily_rainfall_montpellier_b9e39d79_d2cb_4390_b7d9_042934a3dd1f" isInOverview="0" visible="1"/>
+        </filegroup>
+      </legendlayer>
+      <legendlayer showFeatureCount="0" checked="Qt::Checked" open="true" name="pluviometers" drawingOrder="-1">
+        <filegroup hidden="false" open="true">
+          <legendlayerfile layerid="pluviometers_2ec6280d_621b_4e0b_a24d_ddfa5e6130c2" isInOverview="0" visible="1"/>
+        </filegroup>
+      </legendlayer>
+      <legendlayer showFeatureCount="0" checked="Qt::Checked" open="true" name="montpellier_districts" drawingOrder="-1">
+        <filegroup hidden="false" open="true">
+          <legendlayerfile layerid="montpellier_districts_09be70ff_8fd9_40de_b711_743f276f640e" isInOverview="0" visible="1"/>
+        </filegroup>
+      </legendlayer>
+    </legendgroup>
+    <legendgroup checked="Qt::Checked" open="true" name="Structure">
+      <legendlayer showFeatureCount="0" checked="Qt::Checked" open="true" name="actor_category" drawingOrder="-1">
+        <filegroup hidden="false" open="true">
+          <legendlayerfile layerid="actor_category_8a7edcf8_cb34_4689_b22b_7a8a6a2ab610" isInOverview="0" visible="1"/>
+        </filegroup>
+      </legendlayer>
+      <legendlayer showFeatureCount="0" checked="Qt::Checked" open="true" name="actor" drawingOrder="-1">
+        <filegroup hidden="false" open="true">
+          <legendlayerfile layerid="actor_5f01a6e5_8205_462f_af40_0ffd7ff0a44f" isInOverview="0" visible="1"/>
+        </filegroup>
+      </legendlayer>
+      <legendlayer showFeatureCount="0" checked="Qt::Checked" open="true" name="spatial_layer" drawingOrder="-1">
+        <filegroup hidden="false" open="true">
+          <legendlayerfile layerid="spatial_layer_18215d6d_1f4c_40d2_ba83_f2c9a9694e84" isInOverview="0" visible="1"/>
+        </filegroup>
+      </legendlayer>
+      <legendlayer showFeatureCount="0" checked="Qt::Checked" open="true" name="indicator" drawingOrder="-1">
+        <filegroup hidden="false" open="true">
+          <legendlayerfile layerid="indicator_18ba18bf_0390_45a3_8edd_1cc049e8a251" isInOverview="0" visible="1"/>
+        </filegroup>
+      </legendlayer>
+      <legendlayer showFeatureCount="0" checked="Qt::Checked" open="true" name="series" drawingOrder="-1">
+        <filegroup hidden="false" open="true">
+          <legendlayerfile layerid="series_04a7414a_ab6d_4611_8a60_bcd22071dc22" isInOverview="0" visible="1"/>
+        </filegroup>
+      </legendlayer>
+      <legendlayer showFeatureCount="0" checked="Qt::Checked" open="true" name="observation" drawingOrder="-1">
+        <filegroup hidden="false" open="true">
+          <legendlayerfile layerid="observation_bcc90162_47c8_4097_bc24_a31af92d2708" isInOverview="0" visible="1"/>
+        </filegroup>
+      </legendlayer>
+      <legendlayer showFeatureCount="0" checked="Qt::Checked" open="true" name="r_indicator_node" drawingOrder="-1">
+        <filegroup hidden="false" open="true">
+          <legendlayerfile layerid="r_indicator_node_2ca83116_e69f_4dcb_abcb_de5bdf44b2be" isInOverview="0" visible="1"/>
+        </filegroup>
+      </legendlayer>
+      <legendlayer showFeatureCount="0" checked="Qt::Checked" open="true" name="r_graph_edge" drawingOrder="-1">
+        <filegroup hidden="false" open="true">
+          <legendlayerfile layerid="r_graph_edge_f2eb47e9_728b_4c85_a839_3b488e132e06" isInOverview="0" visible="1"/>
+        </filegroup>
+      </legendlayer>
+      <legendlayer showFeatureCount="0" checked="Qt::Checked" open="true" name="SQL layer" drawingOrder="-1">
+        <filegroup hidden="false" open="true">
+          <legendlayerfile layerid="temp_layer_2363ef3f_2c0e_41ed_a895_e4a785b46cb2" isInOverview="0" visible="1"/>
+        </filegroup>
+      </legendlayer>
+      <legendlayer showFeatureCount="0" checked="Qt::Checked" open="true" name="protocol" drawingOrder="-1">
+        <filegroup hidden="false" open="true">
+          <legendlayerfile layerid="protocol_5507f1c8_1802_4df0_a273_8e9b7f52c352" isInOverview="0" visible="1"/>
+        </filegroup>
+      </legendlayer>
+      <legendlayer showFeatureCount="0" checked="Qt::Checked" open="true" name="import" drawingOrder="-1">
+        <filegroup hidden="false" open="true">
+          <legendlayerfile layerid="import_0343eb12_592e_4fd0_8380_51f4d62b6a56" isInOverview="0" visible="1"/>
+        </filegroup>
+      </legendlayer>
+      <legendlayer showFeatureCount="0" checked="Qt::Checked" open="true" name="graph_node" drawingOrder="-1">
+        <filegroup hidden="false" open="true">
+          <legendlayerfile layerid="graph_node_2cd9eee8_46e2_401c_87f7_8b40d9d6260e" isInOverview="0" visible="1"/>
+        </filegroup>
+      </legendlayer>
+      <legendlayer showFeatureCount="0" checked="Qt::Checked" open="false" name="glossary" drawingOrder="-1">
+        <filegroup hidden="false" open="false">
+          <legendlayerfile layerid="glossary_cee356e0_5be5_4d87_ac2b_e8e8967c4032" isInOverview="0" visible="1"/>
+        </filegroup>
+      </legendlayer>
+    </legendgroup>
   </legend>
   <mapViewDocks/>
   <mapViewDocks3D/>
+  <mapcanvas annotationsVisible="1" name="mAreaCanvas">
+    <units>degrees</units>
+    <extent>
+      <xmin>0</xmin>
+      <ymin>0</ymin>
+      <xmax>0</xmax>
+      <ymax>0</ymax>
+    </extent>
+    <rotation>0</rotation>
+    <destinationsrs>
+      <spatialrefsys>
+        <proj4>+proj=longlat +datum=WGS84 +no_defs</proj4>
+        <srsid>3452</srsid>
+        <srid>4326</srid>
+        <authid>EPSG:4326</authid>
+        <description>WGS 84</description>
+        <projectionacronym>longlat</projectionacronym>
+        <ellipsoidacronym>WGS84</ellipsoidacronym>
+        <geographicflag>true</geographicflag>
+      </spatialrefsys>
+    </destinationsrs>
+    <rendermaptile>0</rendermaptile>
+  </mapcanvas>
+  <mapcanvas annotationsVisible="1" name="mAreaCanvas">
+    <units>degrees</units>
+    <extent>
+      <xmin>0</xmin>
+      <ymin>0</ymin>
+      <xmax>0</xmax>
+      <ymax>0</ymax>
+    </extent>
+    <rotation>0</rotation>
+    <destinationsrs>
+      <spatialrefsys>
+        <proj4>+proj=longlat +datum=WGS84 +no_defs</proj4>
+        <srsid>3452</srsid>
+        <srid>4326</srid>
+        <authid>EPSG:4326</authid>
+        <description>WGS 84</description>
+        <projectionacronym>longlat</projectionacronym>
+        <ellipsoidacronym>WGS84</ellipsoidacronym>
+        <geographicflag>true</geographicflag>
+      </spatialrefsys>
+    </destinationsrs>
+    <rendermaptile>0</rendermaptile>
+  </mapcanvas>
+  <mapcanvas annotationsVisible="1" name="mAreaCanvas">
+    <units>degrees</units>
+    <extent>
+      <xmin>0</xmin>
+      <ymin>0</ymin>
+      <xmax>0</xmax>
+      <ymax>0</ymax>
+    </extent>
+    <rotation>0</rotation>
+    <destinationsrs>
+      <spatialrefsys>
+        <proj4>+proj=longlat +datum=WGS84 +no_defs</proj4>
+        <srsid>3452</srsid>
+        <srid>4326</srid>
+        <authid>EPSG:4326</authid>
+        <description>WGS 84</description>
+        <projectionacronym>longlat</projectionacronym>
+        <ellipsoidacronym>WGS84</ellipsoidacronym>
+        <geographicflag>true</geographicflag>
+      </spatialrefsys>
+    </destinationsrs>
+    <rendermaptile>0</rendermaptile>
+  </mapcanvas>
   <projectlayers>
     <maplayer refreshOnNotifyEnabled="0" hasScaleBasedVisibilityFlag="0" styleCategories="AllStyleCategories" type="vector" minScale="1e+8" autoRefreshTime="0" maxScale="0" readOnly="0" autoRefreshEnabled="0" refreshOnNotifyMessage="" geometry="No geometry">
       <id>actor_5f01a6e5_8205_462f_af40_0ffd7ff0a44f</id>
@@ -268,9 +377,7 @@
         <Searchable>1</Searchable>
       </flags>
       <customproperties>
-        <property key="dualview/previewExpressions">
-          <value>a_name</value>
-        </property>
+        <property key="dualview/previewExpressions" value="a_name"/>
         <property key="embeddedWidgets/count" value="0"/>
         <property key="variableNames"/>
         <property key="variableValues"/>
@@ -638,6 +745,161 @@ def my_form_open(dialog, layer, feature):
         </widget>
       </widgets>
       <previewExpression>ac_name</previewExpression>
+      <mapTip></mapTip>
+    </maplayer>
+    <maplayer refreshOnNotifyEnabled="0" hasScaleBasedVisibilityFlag="0" styleCategories="AllStyleCategories" type="vector" minScale="1e+8" autoRefreshTime="0" maxScale="0" readOnly="0" autoRefreshEnabled="0" refreshOnNotifyMessage="" geometry="No geometry">
+      <id>daily_rainfall_montpellier_b9e39d79_d2cb_4390_b7d9_042934a3dd1f</id>
+      <datasource>../install/test_data/daily_rainfall_montpellier.csv|layername=daily_rainfall_montpellier</datasource>
+      <keywordList>
+        <value></value>
+      </keywordList>
+      <layername>daily_rainfall_montpellier</layername>
+      <srs>
+        <spatialrefsys>
+          <proj4></proj4>
+          <srsid>0</srsid>
+          <srid>0</srid>
+          <authid></authid>
+          <description></description>
+          <projectionacronym></projectionacronym>
+          <ellipsoidacronym></ellipsoidacronym>
+          <geographicflag>false</geographicflag>
+        </spatialrefsys>
+      </srs>
+      <resourceMetadata>
+        <identifier></identifier>
+        <parentidentifier></parentidentifier>
+        <language></language>
+        <type></type>
+        <title></title>
+        <abstract></abstract>
+        <links/>
+        <fees></fees>
+        <encoding></encoding>
+        <crs>
+          <spatialrefsys>
+            <proj4></proj4>
+            <srsid>0</srsid>
+            <srid>0</srid>
+            <authid></authid>
+            <description></description>
+            <projectionacronym></projectionacronym>
+            <ellipsoidacronym></ellipsoidacronym>
+            <geographicflag>false</geographicflag>
+          </spatialrefsys>
+        </crs>
+        <extent/>
+      </resourceMetadata>
+      <provider encoding="UTF-8">ogr</provider>
+      <vectorjoins/>
+      <layerDependencies/>
+      <dataDependencies/>
+      <legend type="default-vector"/>
+      <expressionfields/>
+      <map-layer-style-manager current="default">
+        <map-layer-style name="default"/>
+      </map-layer-style-manager>
+      <auxiliaryLayer/>
+      <flags>
+        <Identifiable>1</Identifiable>
+        <Removable>1</Removable>
+        <Searchable>1</Searchable>
+      </flags>
+      <customproperties>
+        <property key="dualview/previewExpressions">
+          <value>"id"</value>
+        </property>
+      </customproperties>
+      <geometryOptions geometryPrecision="0" removeDuplicateNodes="0">
+        <activeChecks type="StringList">
+          <Option type="QString" value=""/>
+        </activeChecks>
+        <checkConfiguration/>
+      </geometryOptions>
+      <fieldConfiguration>
+        <field name="id">
+          <editWidget type="">
+            <config>
+              <Option/>
+            </config>
+          </editWidget>
+        </field>
+        <field name="id_pluviometre">
+          <editWidget type="">
+            <config>
+              <Option/>
+            </config>
+          </editWidget>
+        </field>
+        <field name="hauteur_eau_mm">
+          <editWidget type="">
+            <config>
+              <Option/>
+            </config>
+          </editWidget>
+        </field>
+        <field name="Date">
+          <editWidget type="">
+            <config>
+              <Option/>
+            </config>
+          </editWidget>
+        </field>
+      </fieldConfiguration>
+      <aliases>
+        <alias name="" index="0" field="id"/>
+        <alias name="" index="1" field="id_pluviometre"/>
+        <alias name="" index="2" field="hauteur_eau_mm"/>
+        <alias name="" index="3" field="Date"/>
+      </aliases>
+      <excludeAttributesWMS/>
+      <excludeAttributesWFS/>
+      <defaults>
+        <default applyOnUpdate="0" expression="" field="id"/>
+        <default applyOnUpdate="0" expression="" field="id_pluviometre"/>
+        <default applyOnUpdate="0" expression="" field="hauteur_eau_mm"/>
+        <default applyOnUpdate="0" expression="" field="Date"/>
+      </defaults>
+      <constraints>
+        <constraint constraints="0" notnull_strength="0" exp_strength="0" unique_strength="0" field="id"/>
+        <constraint constraints="0" notnull_strength="0" exp_strength="0" unique_strength="0" field="id_pluviometre"/>
+        <constraint constraints="0" notnull_strength="0" exp_strength="0" unique_strength="0" field="hauteur_eau_mm"/>
+        <constraint constraints="0" notnull_strength="0" exp_strength="0" unique_strength="0" field="Date"/>
+      </constraints>
+      <constraintExpressions>
+        <constraint desc="" field="id" exp=""/>
+        <constraint desc="" field="id_pluviometre" exp=""/>
+        <constraint desc="" field="hauteur_eau_mm" exp=""/>
+        <constraint desc="" field="Date" exp=""/>
+      </constraintExpressions>
+      <expressionfields/>
+      <attributeactions>
+        <defaultAction key="Canvas" value="{00000000-0000-0000-0000-000000000000}"/>
+      </attributeactions>
+      <attributetableconfig sortExpression="&quot;id_pluviometre&quot;" sortOrder="0" actionWidgetStyle="dropDown">
+        <columns>
+          <column width="-1" type="field" hidden="0" name="id"/>
+          <column width="-1" type="field" hidden="0" name="id_pluviometre"/>
+          <column width="-1" type="field" hidden="0" name="hauteur_eau_mm"/>
+          <column width="-1" type="field" hidden="0" name="Date"/>
+          <column width="-1" type="actions" hidden="1"/>
+        </columns>
+      </attributetableconfig>
+      <conditionalstyles>
+        <rowstyles/>
+        <fieldstyles/>
+      </conditionalstyles>
+      <editform tolerant="1"></editform>
+      <editforminit/>
+      <editforminitcodesource>0</editforminitcodesource>
+      <editforminitfilepath></editforminitfilepath>
+      <editforminitcode><![CDATA[]]></editforminitcode>
+      <featformsuppress>0</featformsuppress>
+      <editorlayout>generatedlayout</editorlayout>
+      <editable/>
+      <labelOnTop/>
+      <widgets/>
+      <previewExpression>"id"</previewExpression>
       <mapTip></mapTip>
     </maplayer>
     <maplayer refreshOnNotifyEnabled="0" hasScaleBasedVisibilityFlag="0" styleCategories="AllStyleCategories" type="vector" minScale="1e+8" autoRefreshTime="0" maxScale="0" readOnly="0" autoRefreshEnabled="0" refreshOnNotifyMessage="" geometry="No geometry">
@@ -1174,9 +1436,7 @@ def my_form_open(dialog, layer, feature):
         <Searchable>1</Searchable>
       </flags>
       <customproperties>
-        <property key="dualview/previewExpressions">
-          <value>id_label</value>
-        </property>
+        <property key="dualview/previewExpressions" value="id_label"/>
         <property key="embeddedWidgets/count" value="0"/>
         <property key="variableNames"/>
         <property key="variableValues"/>
@@ -1422,6 +1682,257 @@ def my_form_open(dialog, layer, feature):
         </widget>
       </widgets>
       <previewExpression>id_label</previewExpression>
+      <mapTip></mapTip>
+    </maplayer>
+    <maplayer refreshOnNotifyEnabled="0" simplifyDrawingHints="1" simplifyMaxScale="1" hasScaleBasedVisibilityFlag="0" simplifyAlgorithm="0" styleCategories="AllStyleCategories" type="vector" minScale="1e+8" autoRefreshTime="0" maxScale="0" readOnly="0" autoRefreshEnabled="0" simplifyLocal="1" refreshOnNotifyMessage="" labelsEnabled="0" geometry="Polygon" simplifyDrawingTol="1">
+      <extent>
+        <xmin>765145.88000000000465661</xmin>
+        <ymin>6274561.21999999973922968</ymin>
+        <xmax>776031.67000000004190952</xmax>
+        <ymax>6284189.51999999955296516</ymax>
+      </extent>
+      <id>montpellier_districts_09be70ff_8fd9_40de_b711_743f276f640e</id>
+      <datasource>../install/test_data/montpellier_districts.geojson|layername=montpellier_districts</datasource>
+      <keywordList>
+        <value></value>
+      </keywordList>
+      <layername>montpellier_districts</layername>
+      <srs>
+        <spatialrefsys>
+          <proj4>+proj=lcc +lat_1=49 +lat_2=44 +lat_0=46.5 +lon_0=3 +x_0=700000 +y_0=6600000 +ellps=GRS80 +towgs84=0,0,0,0,0,0,0 +units=m +no_defs</proj4>
+          <srsid>145</srsid>
+          <srid>2154</srid>
+          <authid>EPSG:2154</authid>
+          <description>RGF93 / Lambert-93</description>
+          <projectionacronym>lcc</projectionacronym>
+          <ellipsoidacronym>GRS80</ellipsoidacronym>
+          <geographicflag>false</geographicflag>
+        </spatialrefsys>
+      </srs>
+      <resourceMetadata>
+        <identifier></identifier>
+        <parentidentifier></parentidentifier>
+        <language></language>
+        <type></type>
+        <title></title>
+        <abstract></abstract>
+        <contact>
+          <name></name>
+          <organization></organization>
+          <position></position>
+          <voice></voice>
+          <fax></fax>
+          <email></email>
+          <role></role>
+        </contact>
+        <links/>
+        <fees></fees>
+        <encoding></encoding>
+        <crs>
+          <spatialrefsys>
+            <proj4></proj4>
+            <srsid>0</srsid>
+            <srid>0</srid>
+            <authid></authid>
+            <description></description>
+            <projectionacronym></projectionacronym>
+            <ellipsoidacronym></ellipsoidacronym>
+            <geographicflag>false</geographicflag>
+          </spatialrefsys>
+        </crs>
+        <extent>
+          <spatial minz="0" crs="" maxy="0" maxz="0" dimensions="2" maxx="0" minx="0" miny="0"/>
+          <temporal>
+            <period>
+              <start></start>
+              <end></end>
+            </period>
+          </temporal>
+        </extent>
+      </resourceMetadata>
+      <provider encoding="UTF-8">ogr</provider>
+      <vectorjoins/>
+      <layerDependencies/>
+      <dataDependencies/>
+      <legend type="default-vector"/>
+      <expressionfields/>
+      <map-layer-style-manager current="default">
+        <map-layer-style name="default"/>
+      </map-layer-style-manager>
+      <auxiliaryLayer/>
+      <flags>
+        <Identifiable>1</Identifiable>
+        <Removable>1</Removable>
+        <Searchable>1</Searchable>
+      </flags>
+      <renderer-v2 enableorderby="0" symbollevels="0" type="singleSymbol" forceraster="0">
+        <symbols>
+          <symbol clip_to_extent="1" force_rhr="0" type="fill" name="0" alpha="1">
+            <layer class="SimpleFill" pass="0" enabled="1" locked="0">
+              <prop k="border_width_map_unit_scale" v="3x:0,0,0,0,0,0"/>
+              <prop k="color" v="164,113,88,255"/>
+              <prop k="joinstyle" v="bevel"/>
+              <prop k="offset" v="0,0"/>
+              <prop k="offset_map_unit_scale" v="3x:0,0,0,0,0,0"/>
+              <prop k="offset_unit" v="MM"/>
+              <prop k="outline_color" v="35,35,35,255"/>
+              <prop k="outline_style" v="solid"/>
+              <prop k="outline_width" v="0.26"/>
+              <prop k="outline_width_unit" v="MM"/>
+              <prop k="style" v="no"/>
+              <data_defined_properties>
+                <Option type="Map">
+                  <Option type="QString" value="" name="name"/>
+                  <Option name="properties"/>
+                  <Option type="QString" value="collection" name="type"/>
+                </Option>
+              </data_defined_properties>
+            </layer>
+          </symbol>
+        </symbols>
+        <rotation/>
+        <sizescale/>
+      </renderer-v2>
+      <customproperties>
+        <property key="dualview/previewExpressions">
+          <value>fid</value>
+        </property>
+        <property key="embeddedWidgets/count" value="0"/>
+        <property key="variableNames"/>
+        <property key="variableValues"/>
+      </customproperties>
+      <blendMode>0</blendMode>
+      <featureBlendMode>0</featureBlendMode>
+      <layerOpacity>1</layerOpacity>
+      <SingleCategoryDiagramRenderer attributeLegend="1" diagramType="Histogram">
+        <DiagramCategory scaleBasedVisibility="0" penColor="#000000" labelPlacementMethod="XHeight" barWidth="5" backgroundColor="#ffffff" height="15" maxScaleDenominator="1e+8" backgroundAlpha="255" scaleDependency="Area" minimumSize="0" sizeType="MM" diagramOrientation="Up" sizeScale="3x:0,0,0,0,0,0" enabled="0" lineSizeType="MM" penWidth="0" minScaleDenominator="0" rotationOffset="270" width="15" penAlpha="255" opacity="1" lineSizeScale="3x:0,0,0,0,0,0">
+          <fontProperties description="Ubuntu,11,-1,5,50,0,0,0,0,0" style=""/>
+          <attribute label="" color="#000000" field=""/>
+        </DiagramCategory>
+      </SingleCategoryDiagramRenderer>
+      <DiagramLayerSettings priority="0" zIndex="0" linePlacementFlags="18" dist="0" obstacle="0" showAll="1" placement="1">
+        <properties>
+          <Option type="Map">
+            <Option type="QString" value="" name="name"/>
+            <Option name="properties"/>
+            <Option type="QString" value="collection" name="type"/>
+          </Option>
+        </properties>
+      </DiagramLayerSettings>
+      <geometryOptions geometryPrecision="0" removeDuplicateNodes="0">
+        <activeChecks/>
+        <checkConfiguration/>
+      </geometryOptions>
+      <fieldConfiguration>
+        <field name="fid">
+          <editWidget type="Range">
+            <config>
+              <Option/>
+            </config>
+          </editWidget>
+        </field>
+        <field name="QUARTMNO">
+          <editWidget type="TextEdit">
+            <config>
+              <Option/>
+            </config>
+          </editWidget>
+        </field>
+        <field name="LIBQUART">
+          <editWidget type="TextEdit">
+            <config>
+              <Option/>
+            </config>
+          </editWidget>
+        </field>
+        <field name="url">
+          <editWidget type="TextEdit">
+            <config>
+              <Option/>
+            </config>
+          </editWidget>
+        </field>
+      </fieldConfiguration>
+      <aliases>
+        <alias name="" index="0" field="fid"/>
+        <alias name="" index="1" field="QUARTMNO"/>
+        <alias name="" index="2" field="LIBQUART"/>
+        <alias name="" index="3" field="url"/>
+      </aliases>
+      <excludeAttributesWMS/>
+      <excludeAttributesWFS/>
+      <defaults>
+        <default applyOnUpdate="0" expression="" field="fid"/>
+        <default applyOnUpdate="0" expression="" field="QUARTMNO"/>
+        <default applyOnUpdate="0" expression="" field="LIBQUART"/>
+        <default applyOnUpdate="0" expression="" field="url"/>
+      </defaults>
+      <constraints>
+        <constraint constraints="0" notnull_strength="0" exp_strength="0" unique_strength="0" field="fid"/>
+        <constraint constraints="0" notnull_strength="0" exp_strength="0" unique_strength="0" field="QUARTMNO"/>
+        <constraint constraints="0" notnull_strength="0" exp_strength="0" unique_strength="0" field="LIBQUART"/>
+        <constraint constraints="0" notnull_strength="0" exp_strength="0" unique_strength="0" field="url"/>
+      </constraints>
+      <constraintExpressions>
+        <constraint desc="" field="fid" exp=""/>
+        <constraint desc="" field="QUARTMNO" exp=""/>
+        <constraint desc="" field="LIBQUART" exp=""/>
+        <constraint desc="" field="url" exp=""/>
+      </constraintExpressions>
+      <expressionfields/>
+      <attributeactions>
+        <defaultAction key="Canvas" value="{00000000-0000-0000-0000-000000000000}"/>
+      </attributeactions>
+      <attributetableconfig sortExpression="" sortOrder="0" actionWidgetStyle="dropDown">
+        <columns>
+          <column width="-1" type="field" hidden="0" name="fid"/>
+          <column width="-1" type="field" hidden="0" name="QUARTMNO"/>
+          <column width="-1" type="field" hidden="0" name="LIBQUART"/>
+          <column width="-1" type="field" hidden="0" name="url"/>
+          <column width="-1" type="actions" hidden="1"/>
+        </columns>
+      </attributetableconfig>
+      <conditionalstyles>
+        <rowstyles/>
+        <fieldstyles/>
+      </conditionalstyles>
+      <editform tolerant="1"></editform>
+      <editforminit/>
+      <editforminitcodesource>0</editforminitcodesource>
+      <editforminitfilepath></editforminitfilepath>
+      <editforminitcode><![CDATA[# -*- coding: utf-8 -*-
+"""
+QGIS forms can have a Python function that is called when the form is
+opened.
+
+Use this function to add extra logic to your forms.
+
+Enter the name of the function in the "Python Init function"
+field.
+An example follows:
+"""
+from qgis.PyQt.QtWidgets import QWidget
+
+def my_form_open(dialog, layer, feature):
+	geom = feature.geometry()
+	control = dialog.findChild(QWidget, "MyLineEdit")
+]]></editforminitcode>
+      <featformsuppress>0</featformsuppress>
+      <editorlayout>generatedlayout</editorlayout>
+      <editable>
+        <field editable="1" name="LIBQUART"/>
+        <field editable="1" name="QUARTMNO"/>
+        <field editable="1" name="fid"/>
+        <field editable="1" name="url"/>
+      </editable>
+      <labelOnTop>
+        <field labelOnTop="0" name="LIBQUART"/>
+        <field labelOnTop="0" name="QUARTMNO"/>
+        <field labelOnTop="0" name="fid"/>
+        <field labelOnTop="0" name="url"/>
+      </labelOnTop>
+      <widgets/>
+      <previewExpression>fid</previewExpression>
       <mapTip></mapTip>
     </maplayer>
     <maplayer refreshOnNotifyEnabled="0" hasScaleBasedVisibilityFlag="0" styleCategories="AllStyleCategories" type="vector" minScale="1e+8" autoRefreshTime="0" maxScale="0" readOnly="0" autoRefreshEnabled="0" refreshOnNotifyMessage="" geometry="No geometry">
@@ -1675,6 +2186,181 @@ def my_form_open(dialog, layer, feature):
       </labelOnTop>
       <widgets/>
       <previewExpression>id</previewExpression>
+      <mapTip></mapTip>
+    </maplayer>
+    <maplayer refreshOnNotifyEnabled="0" simplifyDrawingHints="1" simplifyMaxScale="1" hasScaleBasedVisibilityFlag="0" simplifyAlgorithm="0" styleCategories="AllStyleCategories" type="vector" minScale="1e+8" autoRefreshTime="0" maxScale="0" readOnly="0" autoRefreshEnabled="0" simplifyLocal="0" refreshOnNotifyMessage="" labelsEnabled="0" geometry="Point" simplifyDrawingTol="1">
+      <extent>
+        <xmin>765578.82999999995809048</xmin>
+        <ymin>6275998.04999999981373549</ymin>
+        <xmax>775350.7900000000372529</xmax>
+        <ymax>6283553.33000000007450581</ymax>
+      </extent>
+      <id>pluviometers_2ec6280d_621b_4e0b_a24d_ddfa5e6130c2</id>
+      <datasource>../install/test_data/pluviometers.geojson|layername=pluviometers</datasource>
+      <keywordList>
+        <value></value>
+      </keywordList>
+      <layername>pluviometers</layername>
+      <srs>
+        <spatialrefsys>
+          <proj4>+proj=lcc +lat_1=49 +lat_2=44 +lat_0=46.5 +lon_0=3 +x_0=700000 +y_0=6600000 +ellps=GRS80 +towgs84=0,0,0,0,0,0,0 +units=m +no_defs</proj4>
+          <srsid>145</srsid>
+          <srid>2154</srid>
+          <authid>EPSG:2154</authid>
+          <description>RGF93 / Lambert-93</description>
+          <projectionacronym>lcc</projectionacronym>
+          <ellipsoidacronym>GRS80</ellipsoidacronym>
+          <geographicflag>false</geographicflag>
+        </spatialrefsys>
+      </srs>
+      <resourceMetadata>
+        <identifier></identifier>
+        <parentidentifier></parentidentifier>
+        <language></language>
+        <type></type>
+        <title></title>
+        <abstract></abstract>
+        <links/>
+        <fees></fees>
+        <encoding></encoding>
+        <crs>
+          <spatialrefsys>
+            <proj4></proj4>
+            <srsid>0</srsid>
+            <srid>0</srid>
+            <authid></authid>
+            <description></description>
+            <projectionacronym></projectionacronym>
+            <ellipsoidacronym></ellipsoidacronym>
+            <geographicflag>false</geographicflag>
+          </spatialrefsys>
+        </crs>
+        <extent/>
+      </resourceMetadata>
+      <provider encoding="UTF-8">ogr</provider>
+      <vectorjoins/>
+      <layerDependencies/>
+      <dataDependencies/>
+      <legend type="default-vector"/>
+      <expressionfields/>
+      <map-layer-style-manager current="default">
+        <map-layer-style name="default"/>
+      </map-layer-style-manager>
+      <auxiliaryLayer/>
+      <flags>
+        <Identifiable>1</Identifiable>
+        <Removable>1</Removable>
+        <Searchable>1</Searchable>
+      </flags>
+      <renderer-v2 enableorderby="0" symbollevels="0" type="singleSymbol" forceraster="0">
+        <symbols>
+          <symbol clip_to_extent="1" force_rhr="0" type="marker" name="0" alpha="1">
+            <layer class="SimpleMarker" pass="0" enabled="1" locked="0">
+              <prop k="angle" v="0"/>
+              <prop k="color" v="57,125,251,255"/>
+              <prop k="horizontal_anchor_point" v="1"/>
+              <prop k="joinstyle" v="bevel"/>
+              <prop k="name" v="square"/>
+              <prop k="offset" v="0,0"/>
+              <prop k="offset_map_unit_scale" v="3x:0,0,0,0,0,0"/>
+              <prop k="offset_unit" v="MM"/>
+              <prop k="outline_color" v="255,255,255,255"/>
+              <prop k="outline_style" v="solid"/>
+              <prop k="outline_width" v="0.4"/>
+              <prop k="outline_width_map_unit_scale" v="3x:0,0,0,0,0,0"/>
+              <prop k="outline_width_unit" v="MM"/>
+              <prop k="scale_method" v="diameter"/>
+              <prop k="size" v="2"/>
+              <prop k="size_map_unit_scale" v="3x:0,0,0,0,0,0"/>
+              <prop k="size_unit" v="MM"/>
+              <prop k="vertical_anchor_point" v="1"/>
+              <data_defined_properties>
+                <Option type="Map">
+                  <Option type="QString" value="" name="name"/>
+                  <Option name="properties"/>
+                  <Option type="QString" value="collection" name="type"/>
+                </Option>
+              </data_defined_properties>
+            </layer>
+          </symbol>
+        </symbols>
+        <rotation/>
+        <sizescale/>
+      </renderer-v2>
+      <customproperties>
+        <property key="dualview/previewExpressions">
+          <value>"id"</value>
+        </property>
+      </customproperties>
+      <blendMode>0</blendMode>
+      <featureBlendMode>0</featureBlendMode>
+      <layerOpacity>1</layerOpacity>
+      <geometryOptions geometryPrecision="0" removeDuplicateNodes="0">
+        <activeChecks type="StringList">
+          <Option type="QString" value=""/>
+        </activeChecks>
+        <checkConfiguration/>
+      </geometryOptions>
+      <fieldConfiguration>
+        <field name="id">
+          <editWidget type="">
+            <config>
+              <Option/>
+            </config>
+          </editWidget>
+        </field>
+        <field name="nom">
+          <editWidget type="">
+            <config>
+              <Option/>
+            </config>
+          </editWidget>
+        </field>
+      </fieldConfiguration>
+      <aliases>
+        <alias name="" index="0" field="id"/>
+        <alias name="" index="1" field="nom"/>
+      </aliases>
+      <excludeAttributesWMS/>
+      <excludeAttributesWFS/>
+      <defaults>
+        <default applyOnUpdate="0" expression="" field="id"/>
+        <default applyOnUpdate="0" expression="" field="nom"/>
+      </defaults>
+      <constraints>
+        <constraint constraints="0" notnull_strength="0" exp_strength="0" unique_strength="0" field="id"/>
+        <constraint constraints="0" notnull_strength="0" exp_strength="0" unique_strength="0" field="nom"/>
+      </constraints>
+      <constraintExpressions>
+        <constraint desc="" field="id" exp=""/>
+        <constraint desc="" field="nom" exp=""/>
+      </constraintExpressions>
+      <expressionfields/>
+      <attributeactions>
+        <defaultAction key="Canvas" value="{00000000-0000-0000-0000-000000000000}"/>
+      </attributeactions>
+      <attributetableconfig sortExpression="&quot;id&quot;" sortOrder="0" actionWidgetStyle="dropDown">
+        <columns>
+          <column width="-1" type="field" hidden="0" name="id"/>
+          <column width="-1" type="field" hidden="0" name="nom"/>
+          <column width="-1" type="actions" hidden="1"/>
+        </columns>
+      </attributetableconfig>
+      <conditionalstyles>
+        <rowstyles/>
+        <fieldstyles/>
+      </conditionalstyles>
+      <editform tolerant="1"></editform>
+      <editforminit/>
+      <editforminitcodesource>0</editforminitcodesource>
+      <editforminitfilepath></editforminitfilepath>
+      <editforminitcode><![CDATA[]]></editforminitcode>
+      <featformsuppress>0</featformsuppress>
+      <editorlayout>generatedlayout</editorlayout>
+      <editable/>
+      <labelOnTop/>
+      <widgets/>
+      <previewExpression>"id"</previewExpression>
       <mapTip></mapTip>
     </maplayer>
     <maplayer refreshOnNotifyEnabled="0" hasScaleBasedVisibilityFlag="0" styleCategories="AllStyleCategories" type="vector" minScale="1e+8" autoRefreshTime="0" maxScale="0" readOnly="0" autoRefreshEnabled="0" refreshOnNotifyMessage="" geometry="No geometry">
@@ -1997,7 +2683,9 @@ def my_form_open(dialog, layer, feature):
         <constraint desc="" field="ge_child_node" exp=""/>
       </constraintExpressions>
       <expressionfields/>
-      <attributeactions/>
+      <attributeactions>
+        <defaultAction key="Canvas" value="{00000000-0000-0000-0000-000000000000}"/>
+      </attributeactions>
       <attributetableconfig sortExpression="" sortOrder="0" actionWidgetStyle="dropDown">
         <columns/>
       </attributetableconfig>
@@ -2219,11 +2907,7 @@ def my_form_open(dialog, layer, feature):
         <Searchable>1</Searchable>
       </flags>
       <customproperties>
-        <property key="dualview/previewExpressions">
-          <value>id</value>
-          <value>"id"</value>
-          <value>id</value>
-        </property>
+        <property key="dualview/previewExpressions" value="id"/>
         <property key="embeddedWidgets/count" value="0"/>
         <property key="variableNames"/>
         <property key="variableValues"/>
@@ -2491,7 +3175,7 @@ def my_form_open(dialog, layer, feature):
         <Searchable>1</Searchable>
       </flags>
       <customproperties>
-        <property key="dualview/previewExpressions" value="&quot;id&quot;"/>
+        <property key="dualview/previewExpressions" value="sl_label"/>
         <property key="embeddedWidgets/count" value="0"/>
         <property key="variableNames"/>
         <property key="variableValues"/>
@@ -2571,29 +3255,18 @@ def my_form_open(dialog, layer, feature):
           </editWidget>
         </field>
         <field name="sl_geometry_type">
-          <editWidget type="ValueMap">
+          <editWidget type="ValueRelation">
             <config>
               <Option type="Map">
-                <Option type="List" name="map">
-                  <Option type="Map">
-                    <Option type="QString" value="Point" name="Point"/>
-                  </Option>
-                  <Option type="Map">
-                    <Option type="QString" value="Linestring" name="Linestring"/>
-                  </Option>
-                  <Option type="Map">
-                    <Option type="QString" value="Polygon" name="Polygon"/>
-                  </Option>
-                  <Option type="Map">
-                    <Option type="QString" value="MultiPoint" name="MultiPoint"/>
-                  </Option>
-                  <Option type="Map">
-                    <Option type="QString" value="MultiLinestring" name="MultiLinestring"/>
-                  </Option>
-                  <Option type="Map">
-                    <Option type="QString" value="MultiPolygon" name="MultiPolygon"/>
-                  </Option>
-                </Option>
+                <Option type="bool" value="false" name="AllowMulti"/>
+                <Option type="bool" value="false" name="AllowNull"/>
+                <Option type="QString" value="&quot;gl_field&quot; = 'sl_geometry_type'" name="FilterExpression"/>
+                <Option type="QString" value="gl_code" name="Key"/>
+                <Option type="QString" value="glossary_cee356e0_5be5_4d87_ac2b_e8e8967c4032" name="Layer"/>
+                <Option type="int" value="1" name="NofColumns"/>
+                <Option type="bool" value="false" name="OrderByValue"/>
+                <Option type="bool" value="false" name="UseCompleter"/>
+                <Option type="QString" value="gl_label" name="Value"/>
               </Option>
             </config>
           </editWidget>
@@ -2831,7 +3504,10 @@ def my_form_open(dialog, layer, feature):
       <mapTip></mapTip>
     </maplayer>
   </projectlayers>
-  <layerorder/>
+  <layerorder>
+    <layer id="pluviometers_2ec6280d_621b_4e0b_a24d_ddfa5e6130c2"/>
+    <layer id="montpellier_districts_09be70ff_8fd9_40de_b711_743f276f640e"/>
+  </layerorder>
   <properties>
     <SpatialRefSys>
       <ProjectionsEnabled type="int">1</ProjectionsEnabled>
