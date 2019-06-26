@@ -138,13 +138,27 @@ class ImportSpatialLayer(QgsProcessingAlgorithm):
         """
         Here is where the processing itself takes place.
         """
+        # parameters
         service = parameters[self.PGSERVICE]
+        layer = self.parameterAsVectorLayer(parameters, self.LAYER, context)
+        uniqueid = self.parameterAsString(parameters, self.UNIQUEID, context)
+        uniquelabel = self.parameterAsString(parameters, self.UNIQUELABEL, context)
 
         msg = ''
-        # raise QgsProcessingException(msg)
+        status = 1
 
+        # Loop throug features
+        for feat in layer.getFeatures():
+            feedback.pushInfo(
+                'ID = %s - LABEL = %s' % (
+                    feat[uniqueid],
+                    feat[uniquelabel]
+                )
+            )
 
+        msg = self.tr('Spatial data objects have been imported')
 
         return {
+            self.OUTPUT_STATUS: status,
             self.OUTPUT_STRING: msg
         }
