@@ -27,6 +27,8 @@ from qgis.core import (
     QgsProcessingException,
     QgsProcessingParameterString,
     QgsProcessingParameterVectorLayer,
+    QgsProcessingParameterField,
+    QgsProcessingParameterEnum,
     QgsProcessingOutputString
 )
 
@@ -40,6 +42,12 @@ class ImportSpatialLayer(QgsProcessingAlgorithm):
 
     PGSERVICE = 'PGSERVICE'
     LAYER = 'LAYER'
+    UNIQUEID = 'UNIQUEID'
+    UNIQUELABEL = 'UNIQUELABEL'
+    ACTOR = 'ACTOR'
+    GEOMETRYTYPE = 'GEOMETRYTYPE'
+
+    OUTPUT_STATUS = 'OUTPUT_STATUS'
     OUTPUT_STRING = 'OUTPUT_STRING'
 
     def name(self):
@@ -68,14 +76,52 @@ class ImportSpatialLayer(QgsProcessingAlgorithm):
         # INPUTS
         self.addParameter(
             QgsProcessingParameterString(
-                self.PGSERVICE, 'PostgreSQL Service',
+                self.PGSERVICE,
+                'PostgreSQL Service',
                 defaultValue='gobs',
                 optional=False
             )
         )
         self.addParameter(
             QgsProcessingParameterVectorLayer(
-                self.LAYER, self.tr('Spatial layer'),
+                self.LAYER,
+                self.tr('Source data layer'),
+                optional=False
+            )
+        )
+        self.addParameter(
+            QgsProcessingParameterField(
+                self.UNIQUEID,
+                self.tr('Unique identifier'),
+                parentLayerParameterName=self.LAYER
+            )
+        )
+        self.addParameter(
+            QgsProcessingParameterField(
+                self.UNIQUELABEL,
+                self.tr('Unique label'),
+                parentLayerParameterName=self.LAYER,
+                type=QgsProcessingParameterField.String
+            )
+        )
+        actors = ['NONE', 'IGN', 'CIRAD']
+        self.addParameter(
+            QgsProcessingParameterEnum(
+                self.ACTOR, self.tr('Source actor'),
+                options=actors,
+                optional=False
+            )
+        )
+
+        geometrytypes = [
+            'Point', 'MultiPoint',
+            'Linestring', 'MultiLinestring',
+            'Polygon', 'MultiPolygon'
+        ]
+        self.addParameter(
+            QgsProcessingParameterEnum(
+                self.GEOMETRYTYPE, self.tr('Geometry type'),
+                options=geometrytypes,
                 optional=False
             )
         )
@@ -93,10 +139,11 @@ class ImportSpatialLayer(QgsProcessingAlgorithm):
         Here is where the processing itself takes place.
         """
         service = parameters[self.PGSERVICE]
-        sql = parameters[self.INPUT_SQL]
 
         msg = ''
         # raise QgsProcessingException(msg)
+
+
 
         return {
             self.OUTPUT_STRING: msg
