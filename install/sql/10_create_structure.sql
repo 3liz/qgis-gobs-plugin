@@ -1197,7 +1197,7 @@ CREATE INDEX spatial_object_fk_id_spatial_layer_idx ON gobs.spatial_object USING
 -- Name: spatial_object_geom_idx; Type: INDEX; Schema: gobs; Owner: -
 --
 
-CREATE INDEX spatial_object_geom_idx ON gobs.spatial_object USING btree (geom);
+CREATE INDEX spatial_object_geom_idx ON gobs.spatial_object USING gist (geom);
 
 
 --

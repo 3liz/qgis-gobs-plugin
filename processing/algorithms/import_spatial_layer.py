@@ -162,6 +162,9 @@ class ImportSpatialLayer(QgsProcessingAlgorithm):
 
 
         # Import data to temporary table
+        feedback.pushInfo(
+            self.tr('IMPORT SOURCE LAYER INTO TEMPORARY TABLE')
+        )
         temp_schema = 'public'
         temp_table = 'temp_' + str(time.time()).replace('.', '')
         ouvrages_conversion = processing.run("qgis:importintopostgis", {
@@ -173,16 +176,19 @@ class ImportSpatialLayer(QgsProcessingAlgorithm):
             'GEOMETRY_COLUMN': 'geom',
             'ENCODING': 'UTF-8',
             'OVERWRITE': True,
-            'CREATEINDEX': True,
+            'CREATEINDEX': False,
             'LOWERCASE_NAMES': False,
             'DROP_STRING_LENGTH': True,
             'FORCE_SINGLEPART': False
         }, context=context, feedback=feedback)
         feedback.pushInfo(
-            tr('* Source layer has been imported into temporary table')
+            self.tr('* Source layer has been imported into temporary table')
         )
 
         # Copy data to spatial_object
+        feedback.pushInfo(
+            self.tr('COPY IMPORTED DATA TO spatial_object')
+        )
         sql = '''
             INSERT INTO gobs.spatial_object
             (so_unique_id, so_unique_label, geom, fk_id_spatial_layer)
@@ -210,11 +216,18 @@ class ImportSpatialLayer(QgsProcessingAlgorithm):
             else:
                 status = 1
                 msg = self.tr('* Source data has been successfully imported !')
+                feedback.pushInfo(
+                    msg
+                )
         except:
             status = False
             msg = self.tr('* An unknown error occured while adding features to spatial_object table')
         finally:
+
             # Remove temporary table
+            feedback.pushInfo(
+                self.tr('DROP TEMPORARY DATA')
+            )
             sql = '''
                 DROP TABLE IF EXISTS "%s"."%s"
             ;
@@ -226,10 +239,17 @@ class ImportSpatialLayer(QgsProcessingAlgorithm):
                 'gobs',
                 sql
             )
+            if ok:
+                feedback.pushInfo(
+                    self.tr('* Temporary data has been deleted.')
+                )
+            else:
+                feedback.pushInfo(
+                    self.tr('* An error occured while droping temporary table') + ' "%s"."%s"' % (temp_schema, temp_table)
+                )
 
 
-
-        msg = self.tr('Spatial data objects have been imported')
+        msg = self.tr('SPATIAL LAYER HAS BEEN SUCCESSFULLY IMPORTED !')
 
         return {
             self.OUTPUT_STATUS: status,
