@@ -1,4 +1,4 @@
-// dot 2.40 on Linux 4.15.0-52-generic
+// dot 2.40 on Linux 4.15.0-54-generic
 // SchemaSpy rev Unknown
 digraph "glossary" {
   graph [
@@ -28,7 +28,7 @@ digraph "glossary" {
       <TR><TD PORT="gl_label" COLSPAN="2" ALIGN="LEFT"><TABLE BORDER="0" CELLSPACING="0" ALIGN="LEFT"><TR ALIGN="LEFT"><TD ALIGN="LEFT" FIXEDSIZE="TRUE" WIDTH="15" HEIGHT="16"></TD><TD ALIGN="LEFT" FIXEDSIZE="TRUE" WIDTH="94" HEIGHT="16">gl_label</TD></TR></TABLE></TD><TD PORT="gl_label.type" ALIGN="LEFT">text[2147483647]</TD></TR>
       <TR><TD PORT="gl_description" COLSPAN="2" ALIGN="LEFT"><TABLE BORDER="0" CELLSPACING="0" ALIGN="LEFT"><TR ALIGN="LEFT"><TD ALIGN="LEFT" FIXEDSIZE="TRUE" WIDTH="15" HEIGHT="16"></TD><TD ALIGN="LEFT" FIXEDSIZE="TRUE" WIDTH="94" HEIGHT="16">gl_description</TD></TR></TABLE></TD><TD PORT="gl_description.type" ALIGN="LEFT">text[2147483647]</TD></TR>
       <TR><TD PORT="gl_order" COLSPAN="2" ALIGN="LEFT"><TABLE BORDER="0" CELLSPACING="0" ALIGN="LEFT"><TR ALIGN="LEFT"><TD ALIGN="LEFT" FIXEDSIZE="TRUE" WIDTH="15" HEIGHT="16"></TD><TD ALIGN="LEFT" FIXEDSIZE="TRUE" WIDTH="94" HEIGHT="16">gl_order</TD></TR></TABLE></TD><TD PORT="gl_order.type" ALIGN="LEFT">int2[5]</TD></TR>
-      <TR><TD ALIGN="LEFT" BGCOLOR="#ffffff">&lt; 0</TD><TD ALIGN="RIGHT" BGCOLOR="#ffffff">12 rows</TD><TD ALIGN="RIGHT" BGCOLOR="#ffffff">0 &gt;</TD></TR>
+      <TR><TD ALIGN="LEFT" BGCOLOR="#ffffff">&lt; 0</TD><TD ALIGN="RIGHT" BGCOLOR="#ffffff">18 rows</TD><TD ALIGN="RIGHT" BGCOLOR="#ffffff">0 &gt;</TD></TR>
     </TABLE>>
     URL="tables/glossary.html"
     tooltip="glossary"

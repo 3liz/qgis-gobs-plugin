@@ -31,7 +31,7 @@
             <column ascending="true" name="id"/>
          </index>
       </table>
-      <table name="glossary" numRows="12" remarks="List of labels and words used as labels for stored data" schema="gobs" type="TABLE">
+      <table name="glossary" numRows="18" remarks="List of labels and words used as labels for stored data" schema="gobs" type="TABLE">
          <column autoUpdated="true" defaultValue="nextval('gobs.glossary_id_seq'::regclass)" digits="0" id="0" name="id" nullable="false" remarks="ID" size="10" type="serial"/>
          <column autoUpdated="false" digits="0" id="1" name="gl_field" nullable="false" remarks="Target field for this glossary item" size="2147483647" type="text"/>
          <column autoUpdated="false" digits="0" id="2" name="gl_code" nullable="false" remarks="Item code to store in tables" size="2147483647" type="text"/>
@@ -241,6 +241,10 @@
          </index>
          <index name="spatial_object_geom_idx" unique="false">
             <column ascending="true" name="geom"/>
+         </index>
+         <index name="spatial_object_so_unique_id_fk_id_spatial_layer_key" unique="true">
+            <column ascending="true" name="so_unique_id"/>
+            <column ascending="true" name="fk_id_spatial_layer"/>
          </index>
       </table>
    </tables>

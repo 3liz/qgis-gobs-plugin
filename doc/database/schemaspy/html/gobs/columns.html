@@ -174,13 +174,13 @@
 					<tr>
 					 <td>spatial_object</td>
 					 <td>Table</td>
-					 <td>so_unique_id</td>
-					 <td>text</td>
+					 <td class='indexedColumn' title='Indexed'><i class='fa fa-sitemap fa-rotate-120' style='padding-right: 5px;'></i>geom</td>
+					 <td>geometry</td>
 					 <td>2147483647</td>
 					 <td title=''></td>
 					 <td title=''></td>
 					 <td>null</td>
-					 <td><p>Unique code of each object in the spatial layer ( INSEE, tag, etc.)</p></td>
+					 <td><p>Geometry of the spatial object. Alway in EPSG:4326</p></td>
 					</tr>
 					<tr>
 					 <td>import</td>
@@ -326,15 +326,15 @@
 					 <td><p>ID</p></td>
 					</tr>
 					<tr>
-					 <td>r_indicator_node</td>
+					 <td>spatial_object</td>
 					 <td>Table</td>
-					 <td class='primaryKey' title='Primary Key'><i class='icon ion-key iconkey' style='padding-left: 5px;'></i>fk_id_indicator</td>
-					 <td>int4</td>
-					 <td>10</td>
+					 <td class='primaryKey' title='Primary Key'><i class='icon ion-key iconkey' style='padding-left: 5px;'></i>id</td>
+					 <td>bigserial</td>
+					 <td>19</td>
 					 <td title=''></td>
-					 <td title=''></td>
-					 <td>null</td>
-					 <td><p>Parent indicator</p></td>
+					 <td title='Automatically updated by the database'>√</td>
+					 <td>nextval(&#39;gobs.spatial_object_id_seq&#39;::regclass)</td>
+					 <td><p>ID</p></td>
 					</tr>
 					<tr>
 					 <td>glossary</td>
@@ -403,37 +403,37 @@
 					 <td><p>Id</p></td>
 					</tr>
 					<tr>
-					 <td>spatial_object</td>
+					 <td>r_indicator_node</td>
 					 <td>Table</td>
-					 <td class='indexedColumn' title='Indexed'><i class='fa fa-sitemap fa-rotate-120' style='padding-right: 5px;'></i>geom</td>
-					 <td>geometry</td>
-					 <td>2147483647</td>
-					 <td title=''></td>
-					 <td title=''></td>
-					 <td>null</td>
-					 <td><p>Geometry of the spatial object. Alway in EPSG:4326</p></td>
-					</tr>
-					<tr>
-					 <td>spatial_object</td>
-					 <td>Table</td>
-					 <td class='foreignKey' title='Foreign Key'><i class='icon ion-key iconkey' style='padding-left: 5px;'></i>fk_id_spatial_layer</td>
+					 <td class='primaryKey' title='Primary Key'><i class='icon ion-key iconkey' style='padding-left: 5px;'></i>fk_id_indicator</td>
 					 <td>int4</td>
 					 <td>10</td>
 					 <td title=''></td>
 					 <td title=''></td>
 					 <td>null</td>
-					 <td><p>Spatial layer</p></td>
+					 <td><p>Parent indicator</p></td>
+					</tr>
+					<tr>
+					 <td>r_indicator_node</td>
+					 <td>Table</td>
+					 <td class='primaryKey' title='Primary Key'><i class='icon ion-key iconkey' style='padding-left: 5px;'></i>fk_id_node</td>
+					 <td>int4</td>
+					 <td>10</td>
+					 <td title=''></td>
+					 <td title=''></td>
+					 <td>null</td>
+					 <td><p>Parent node</p></td>
 					</tr>
 					<tr>
 					 <td>spatial_object</td>
 					 <td>Table</td>
-					 <td class='primaryKey' title='Primary Key'><i class='icon ion-key iconkey' style='padding-left: 5px;'></i>id</td>
-					 <td>bigserial</td>
-					 <td>19</td>
+					 <td>so_unique_label</td>
+					 <td>text</td>
+					 <td>2147483647</td>
 					 <td title=''></td>
-					 <td title='Automatically updated by the database'>√</td>
-					 <td>nextval(&#39;gobs.spatial_object_id_seq&#39;::regclass)</td>
-					 <td><p>ID</p></td>
+					 <td title=''></td>
+					 <td>null</td>
+					 <td><p>Label of each spatial object. Ex : name of the city.</p></td>
 					</tr>
 					<tr>
 					 <td>series</td>
@@ -656,26 +656,26 @@
 					 <td><p>ID</p></td>
 					</tr>
 					<tr>
-					 <td>r_indicator_node</td>
-					 <td>Table</td>
-					 <td class='primaryKey' title='Primary Key'><i class='icon ion-key iconkey' style='padding-left: 5px;'></i>fk_id_node</td>
-					 <td>int4</td>
-					 <td>10</td>
-					 <td title=''></td>
-					 <td title=''></td>
-					 <td>null</td>
-					 <td><p>Parent node</p></td>
-					</tr>
-					<tr>
 					 <td>spatial_object</td>
 					 <td>Table</td>
-					 <td>so_unique_label</td>
+					 <td class='indexedColumn' title='Indexed'><i class='fa fa-sitemap fa-rotate-120' style='padding-right: 5px;'></i>so_unique_id</td>
 					 <td>text</td>
 					 <td>2147483647</td>
 					 <td title=''></td>
 					 <td title=''></td>
 					 <td>null</td>
-					 <td><p>Label of each spatial object. Ex : name of the city.</p></td>
+					 <td><p>Unique code of each object in the spatial layer ( INSEE, tag, etc.)</p></td>
+					</tr>
+					<tr>
+					 <td>spatial_object</td>
+					 <td>Table</td>
+					 <td class='foreignKey' title='Foreign Key'><i class='icon ion-key iconkey' style='padding-left: 5px;'></i>fk_id_spatial_layer</td>
+					 <td>int4</td>
+					 <td>10</td>
+					 <td title=''></td>
+					 <td title=''></td>
+					 <td>null</td>
+					 <td><p>Spatial layer</p></td>
 					</tr>
 					<tr>
 					 <td>indicator</td>
