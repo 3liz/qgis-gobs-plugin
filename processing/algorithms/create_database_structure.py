@@ -90,7 +90,7 @@ class CreateDatabaseStructure(QgsProcessingAlgorithm):
         self.addParameter(
             QgsProcessingParameterBoolean(
                 self.ADDTESTDATA, 'Add test data ?',
-                defaultValue=True,
+                defaultValue=False,
                 optional=False
             )
         )

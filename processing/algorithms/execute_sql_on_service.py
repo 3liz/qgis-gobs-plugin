@@ -39,6 +39,8 @@ from qgis.core import (
 from db_manager.db_plugins.plugin import BaseError
 from db_manager.db_plugins.postgis.connector import PostGisDBConnector
 
+from .tools import *
+
 class ExecuteSqlOnService(QgsProcessingAlgorithm):
     """
     Execute SQL into a PostgreSQL database given a service name
@@ -61,10 +63,10 @@ class ExecuteSqlOnService(QgsProcessingAlgorithm):
         return self.tr('Execute SQL on service database')
 
     def group(self):
-        return self.tr('Structure')
+        return self.tr('Tools')
 
     def groupId(self):
-        return 'gobs_structure'
+        return 'gobs_tools'
 
     def tr(self, string):
         return QCoreApplication.translate('Processing', string)
@@ -106,43 +108,6 @@ class ExecuteSqlOnService(QgsProcessingAlgorithm):
             )
         )
 
-    def fetchDataFromSqlQuery(self, connector, sql):
-        data = []
-        header = []
-        rowCount = 0
-        error_message = None
-        c = None
-        ok = True
-        #print "run query"
-        try:
-            c = connector._execute(None,str(sql))
-            data = []
-            header = connector._get_cursor_columns(c)
-            if header == None:
-                header = []
-            if len(header) > 0:
-                data = connector._fetchall(c)
-            rowCount = c.rowcount
-            if rowCount == -1:
-                rowCount = len(data)
-
-        except BaseError as e:
-            ok = False
-            error_message = e.msg
-
-        finally:
-            if c:
-                #print "close connection"
-                c.close()
-                del c
-
-        # Log errors
-        if not ok:
-            print(error_message)
-            print(sql)
-
-        return [header, data, rowCount, ok, error_message]
-
     def processAlgorithm(self, parameters, context, feedback):
         """
         Here is where the processing itself takes place.
@@ -151,26 +116,13 @@ class ExecuteSqlOnService(QgsProcessingAlgorithm):
             self.OUTPUT_STATUS: 1,
             self.OUTPUT_STRING: 'ok'
         }
-
+        # parameters
         service = parameters[self.PGSERVICE]
         sql = parameters[self.INPUT_SQL]
-
-        uri = QgsDataSourceUri()
-        uri.setConnection(service, '', '', '')
-        try:
-            connector = PostGisDBConnector(uri)
-        except:
-            msg = self.tr("""Cannot connect to database""")
-            feedback.pushInfo(msg)
-            status = 0
-            # raise Exception(msg)
-            return {
-                self.OUTPUT_STATUS: status,
-                self.OUTPUT_STRING: msg
-            }
-
         vlayer = None
-        [header, data, rowCount, ok, error_message] = self.fetchDataFromSqlQuery(connector, sql)
+
+        # Run SQL query
+        [header, data, rowCount, ok, error_message] = fetchDataFromSqlQuery(service, sql)
         if not ok:
             msg = error_message
             feedback.pushInfo(msg)

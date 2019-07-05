@@ -31,6 +31,10 @@ from qgis.core import (
     QgsProcessingParameterEnum,
     QgsProcessingOutputString
 )
+import processing
+import os
+from .tools import *
+import time
 
 class ImportSpatialLayer(QgsProcessingAlgorithm):
     """
@@ -40,15 +44,16 @@ class ImportSpatialLayer(QgsProcessingAlgorithm):
     # used when calling the algorithm from another algorithm, or when
     # calling from the QGIS console.
 
-    PGSERVICE = 'PGSERVICE'
-    LAYER = 'LAYER'
+    CONNECTION_NAME = 'CONNECTION_NAME'
+    SPATIALLAYER = 'SPATIALLAYER'
+    SOURCELAYER = 'SOURCELAYER'
     UNIQUEID = 'UNIQUEID'
     UNIQUELABEL = 'UNIQUELABEL'
-    ACTOR = 'ACTOR'
-    GEOMETRYTYPE = 'GEOMETRYTYPE'
 
     OUTPUT_STATUS = 'OUTPUT_STATUS'
     OUTPUT_STRING = 'OUTPUT_STRING'
+
+    SPATIALLAYERS = []
 
     def name(self):
         return 'gobs_import_spatial_layer'
@@ -74,17 +79,41 @@ class ImportSpatialLayer(QgsProcessingAlgorithm):
         with some other properties.
         """
         # INPUTS
+
+        # Database connection parameters
+        db_param = QgsProcessingParameterString(
+            self.CONNECTION_NAME, 'PostgreSQL connection name in QGIS',
+            defaultValue='gobs',
+            optional=False
+        )
+        db_param.setMetadata({
+            'widget_wrapper': {
+                'class': 'processing.gui.wrappers_postgis.ConnectionWidgetWrapper'
+            }
+        })
+        self.addParameter(db_param)
+
+        # List of spatial_layer
+        sql = '''
+            SELECT id, sl_label
+            FROM gobs.spatial_layer
+            ORDER BY sl_label
+        '''
+        service = 'gobs'
+        [header, data, rowCount, ok, error_message] = fetchDataFromSqlQuery(
+            service, sql
+        )
+        self.SPATIALLAYERS = ['%s - %s' % (a[1], a[0]) for a in data]
         self.addParameter(
-            QgsProcessingParameterString(
-                self.PGSERVICE,
-                'PostgreSQL Service',
-                defaultValue='gobs',
+            QgsProcessingParameterEnum(
+                self.SPATIALLAYER, self.tr('Target spatial layer'),
+                options=self.SPATIALLAYERS,
                 optional=False
             )
         )
         self.addParameter(
             QgsProcessingParameterVectorLayer(
-                self.LAYER,
+                self.SOURCELAYER,
                 self.tr('Source data layer'),
                 optional=False
             )
@@ -93,36 +122,15 @@ class ImportSpatialLayer(QgsProcessingAlgorithm):
             QgsProcessingParameterField(
                 self.UNIQUEID,
                 self.tr('Unique identifier'),
-                parentLayerParameterName=self.LAYER
+                parentLayerParameterName=self.SOURCELAYER
             )
         )
         self.addParameter(
             QgsProcessingParameterField(
                 self.UNIQUELABEL,
                 self.tr('Unique label'),
-                parentLayerParameterName=self.LAYER,
+                parentLayerParameterName=self.SOURCELAYER,
                 type=QgsProcessingParameterField.String
-            )
-        )
-        actors = ['NONE', 'IGN', 'CIRAD']
-        self.addParameter(
-            QgsProcessingParameterEnum(
-                self.ACTOR, self.tr('Source actor'),
-                options=actors,
-                optional=False
-            )
-        )
-
-        geometrytypes = [
-            'Point', 'MultiPoint',
-            'Linestring', 'MultiLinestring',
-            'Polygon', 'MultiPolygon'
-        ]
-        self.addParameter(
-            QgsProcessingParameterEnum(
-                self.GEOMETRYTYPE, self.tr('Geometry type'),
-                options=geometrytypes,
-                optional=False
             )
         )
 
@@ -139,21 +147,76 @@ class ImportSpatialLayer(QgsProcessingAlgorithm):
         Here is where the processing itself takes place.
         """
         # parameters
-        service = parameters[self.PGSERVICE]
-        layer = self.parameterAsVectorLayer(parameters, self.LAYER, context)
+        connexion_name = parameters[self.CONNECTION_NAME]
+        feedback.pushInfo('Connection name = %s' % connexion_name)
+        spatiallayer = self.SPATIALLAYERS[parameters[self.SPATIALLAYER]]
+        sourcelayer = self.parameterAsVectorLayer(parameters, self.SOURCELAYER, context)
         uniqueid = self.parameterAsString(parameters, self.UNIQUEID, context)
         uniquelabel = self.parameterAsString(parameters, self.UNIQUELABEL, context)
 
         msg = ''
         status = 1
 
-        # Loop throug features
-        for feat in layer.getFeatures():
-            feedback.pushInfo(
-                'ID = %s - LABEL = %s' % (
-                    feat[uniqueid],
-                    feat[uniquelabel]
-                )
+        # Get chosen spatial layer id
+        id_spatial_layer = spatiallayer.split('-')[-1].strip()
+
+
+        # Import data to temporary table
+        temp_schema = 'public'
+        temp_table = 'temp_' + str(time.time()).replace('.', '')
+        ouvrages_conversion = processing.run("qgis:importintopostgis", {
+            'INPUT': parameters[self.SOURCELAYER],
+            'DATABASE': parameters[self.CONNECTION_NAME],
+            'SCHEMA': temp_schema,
+            'TABLENAME': temp_table,
+            'PRIMARY_KEY': 'gobs_id',
+            'GEOMETRY_COLUMN': 'geom',
+            'ENCODING': 'UTF-8',
+            'OVERWRITE': True,
+            'CREATEINDEX': True,
+            'LOWERCASE_NAMES': False,
+            'DROP_STRING_LENGTH': True,
+            'FORCE_SINGLEPART': False
+        }, context=context, feedback=feedback)
+        feedback.pushInfo(tr('Layer has been imported into temporary table'))
+
+        # Copy data to spatial_object
+        sql = '''
+            INSERT INTO gobs.spatial_object
+            (so_unique_id, so_unique_label, geom, fk_id_spatial_layer)
+            SELECT "%s", "%s", ST_Transform(geom, 4326) AS geom, %s
+            FROM "%s"."%s"
+            ;
+        ''' % (
+            uniqueid,
+            uniquelabel,
+            id_spatial_layer,
+            temp_schema,
+            temp_table
+        )
+        feedback.pushInfo('SQL = %s' % sql)
+        try:
+            [header, data, rowCount, ok, error_message] = fetchDataFromSqlQuery(
+                'gobs',
+                sql
+            )
+            status = True
+            msg = self.tr('Source data has been successfully imported !')
+        except:
+            status = False
+            msg = self.tr('An error occured while adding features to spatial_object table')
+        finally:
+            # Remove temporary table
+            sql = '''
+                DROP TABLE IF EXISTS "%s"."%s"
+            ;
+            ''' % (
+                temp_schema,
+                temp_table
+            )
+            [header, data, rowCount, ok, error_message] = fetchDataFromSqlQuery(
+                'gobs',
+                sql
             )
 
         msg = self.tr('Spatial data objects have been imported')
