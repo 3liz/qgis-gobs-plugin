@@ -178,7 +178,9 @@ class ImportSpatialLayer(QgsProcessingAlgorithm):
             'DROP_STRING_LENGTH': True,
             'FORCE_SINGLEPART': False
         }, context=context, feedback=feedback)
-        feedback.pushInfo(tr('Layer has been imported into temporary table'))
+        feedback.pushInfo(
+            tr('* Source layer has been imported into temporary table')
+        )
 
         # Copy data to spatial_object
         sql = '''
@@ -194,17 +196,23 @@ class ImportSpatialLayer(QgsProcessingAlgorithm):
             temp_schema,
             temp_table
         )
-        feedback.pushInfo('SQL = %s' % sql)
         try:
             [header, data, rowCount, ok, error_message] = fetchDataFromSqlQuery(
                 'gobs',
                 sql
             )
-            status = True
-            msg = self.tr('Source data has been successfully imported !')
+            if not ok:
+                status = 0
+                msg = self.tr('* The following error has been raised') + '  %s' % error_message
+                feedback.pushInfo(
+                    msg
+                )
+            else:
+                status = 1
+                msg = self.tr('* Source data has been successfully imported !')
         except:
             status = False
-            msg = self.tr('An error occured while adding features to spatial_object table')
+            msg = self.tr('* An unknown error occured while adding features to spatial_object table')
         finally:
             # Remove temporary table
             sql = '''
@@ -218,6 +226,8 @@ class ImportSpatialLayer(QgsProcessingAlgorithm):
                 'gobs',
                 sql
             )
+
+
 
         msg = self.tr('Spatial data objects have been imported')
 
