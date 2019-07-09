@@ -10,4 +10,5 @@ spatial_object
 r_indicator_node
 observation
 glossary
+metadata
 r_graph_edge

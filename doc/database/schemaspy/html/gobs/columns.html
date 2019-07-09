@@ -106,281 +106,6 @@
 				</thead>
 				<tbody>
 					<tr>
-					 <td>observation</td>
-					 <td>Table</td>
-					 <td class='indexedColumn' title='Indexed'><i class='fa fa-sitemap fa-rotate-120' style='padding-right: 5px;'></i>ob_timestamp</td>
-					 <td>timestamp</td>
-					 <td>29</td>
-					 <td title=''></td>
-					 <td title=''></td>
-					 <td>null</td>
-					 <td><p>Timestamp of the data</p></td>
-					</tr>
-					<tr>
-					 <td>observation</td>
-					 <td>Table</td>
-					 <td class='foreignKey' title='Foreign Key'><i class='icon ion-key iconkey' style='padding-left: 5px;'></i>fk_id_import</td>
-					 <td>int4</td>
-					 <td>10</td>
-					 <td title=''></td>
-					 <td title=''></td>
-					 <td>null</td>
-					 <td><p>Import id</p></td>
-					</tr>
-					<tr>
-					 <td>series</td>
-					 <td>Table</td>
-					 <td class='foreignKey' title='Foreign Key'><i class='icon ion-key iconkey' style='padding-left: 5px;'></i>fk_id_protocol</td>
-					 <td>int4</td>
-					 <td>10</td>
-					 <td title=''></td>
-					 <td title=''></td>
-					 <td>null</td>
-					 <td><p>Protocol</p></td>
-					</tr>
-					<tr>
-					 <td>actor</td>
-					 <td>Table</td>
-					 <td class='primaryKey' title='Primary Key'><i class='icon ion-key iconkey' style='padding-left: 5px;'></i>id</td>
-					 <td>serial</td>
-					 <td>10</td>
-					 <td title=''></td>
-					 <td title='Automatically updated by the database'>√</td>
-					 <td>nextval(&#39;gobs.actor_id_seq&#39;::regclass)</td>
-					 <td><p>ID</p></td>
-					</tr>
-					<tr>
-					 <td>graph_node</td>
-					 <td>Table</td>
-					 <td class='indexedColumn' title='Indexed'><i class='fa fa-sitemap fa-rotate-120' style='padding-right: 5px;'></i>gn_name</td>
-					 <td>text</td>
-					 <td>2147483647</td>
-					 <td title=''></td>
-					 <td title=''></td>
-					 <td>null</td>
-					 <td><p>Name of the node</p></td>
-					</tr>
-					<tr>
-					 <td>spatial_object</td>
-					 <td>Table</td>
-					 <td>so_unique_label</td>
-					 <td>text</td>
-					 <td>2147483647</td>
-					 <td title=''></td>
-					 <td title=''></td>
-					 <td>null</td>
-					 <td><p>Label of each spatial object. Ex : name of the city.</p></td>
-					</tr>
-					<tr>
-					 <td>observation</td>
-					 <td>Table</td>
-					 <td class='primaryKey' title='Primary Key'><i class='icon ion-key iconkey' style='padding-left: 5px;'></i>id</td>
-					 <td>bigserial</td>
-					 <td>19</td>
-					 <td title=''></td>
-					 <td title='Automatically updated by the database'>√</td>
-					 <td>nextval(&#39;gobs.observation_id_seq&#39;::regclass)</td>
-					 <td><p>ID</p></td>
-					</tr>
-					<tr>
-					 <td>protocol</td>
-					 <td>Table</td>
-					 <td class='indexedColumn' title='Indexed'><i class='fa fa-sitemap fa-rotate-120' style='padding-right: 5px;'></i>pr_code</td>
-					 <td>text</td>
-					 <td>2147483647</td>
-					 <td title=''></td>
-					 <td title=''></td>
-					 <td>null</td>
-					 <td><p>Code</p></td>
-					</tr>
-					<tr>
-					 <td>glossary</td>
-					 <td>Table</td>
-					 <td>gl_code</td>
-					 <td>text</td>
-					 <td>2147483647</td>
-					 <td title=''></td>
-					 <td title=''></td>
-					 <td>null</td>
-					 <td><p>Item code to store in tables</p></td>
-					</tr>
-					<tr>
-					 <td>import</td>
-					 <td>Table</td>
-					 <td class='primaryKey' title='Primary Key'><i class='icon ion-key iconkey' style='padding-left: 5px;'></i>id</td>
-					 <td>serial</td>
-					 <td>10</td>
-					 <td title=''></td>
-					 <td title='Automatically updated by the database'>√</td>
-					 <td>nextval(&#39;gobs.import_id_seq&#39;::regclass)</td>
-					 <td><p>Id</p></td>
-					</tr>
-					<tr>
-					 <td>observation</td>
-					 <td>Table</td>
-					 <td>ob_value</td>
-					 <td>jsonb</td>
-					 <td>2147483647</td>
-					 <td title=''></td>
-					 <td title=''></td>
-					 <td>null</td>
-					 <td><p>Vector containing the measured or computed data values. Ex : <a href="./null">1543, 1637</a></p></td>
-					</tr>
-					<tr>
-					 <td>spatial_layer</td>
-					 <td>Table</td>
-					 <td class='primaryKey' title='Primary Key'><i class='icon ion-key iconkey' style='padding-left: 5px;'></i>id</td>
-					 <td>serial</td>
-					 <td>10</td>
-					 <td title=''></td>
-					 <td title='Automatically updated by the database'>√</td>
-					 <td>nextval(&#39;gobs.spatial_layer_id_seq&#39;::regclass)</td>
-					 <td></td>
-					</tr>
-					<tr>
-					 <td>actor</td>
-					 <td>Table</td>
-					 <td class='foreignKey' title='Foreign Key'><i class='icon ion-key iconkey' style='padding-left: 5px;'></i>id_category</td>
-					 <td>int4</td>
-					 <td>10</td>
-					 <td title=''></td>
-					 <td title=''></td>
-					 <td>null</td>
-					 <td><p>Category of actor</p></td>
-					</tr>
-					<tr>
-					 <td>r_indicator_node</td>
-					 <td>Table</td>
-					 <td class='primaryKey' title='Primary Key'><i class='icon ion-key iconkey' style='padding-left: 5px;'></i>fk_id_indicator</td>
-					 <td>int4</td>
-					 <td>10</td>
-					 <td title=''></td>
-					 <td title=''></td>
-					 <td>null</td>
-					 <td><p>Parent indicator</p></td>
-					</tr>
-					<tr>
-					 <td>spatial_layer</td>
-					 <td>Table</td>
-					 <td class='foreignKey' title='Foreign Key'><i class='icon ion-key iconkey' style='padding-left: 5px;'></i>fk_id_actor</td>
-					 <td>int4</td>
-					 <td>10</td>
-					 <td title=''></td>
-					 <td title=''></td>
-					 <td>null</td>
-					 <td><p>Source actor.</p></td>
-					</tr>
-					<tr>
-					 <td>indicator</td>
-					 <td>Table</td>
-					 <td>id_date_format</td>
-					 <td>text</td>
-					 <td>2147483647</td>
-					 <td title=''></td>
-					 <td title=''></td>
-					 <td>&#39;day&#39;::text</td>
-					 <td><p>Help to know what is the format for the date. Example : ‘year’</p></td>
-					</tr>
-					<tr>
-					 <td>actor_category</td>
-					 <td>Table</td>
-					 <td class='primaryKey' title='Primary Key'><i class='icon ion-key iconkey' style='padding-left: 5px;'></i>id</td>
-					 <td>serial</td>
-					 <td>10</td>
-					 <td title=''></td>
-					 <td title='Automatically updated by the database'>√</td>
-					 <td>nextval(&#39;gobs.actor_category_id_seq&#39;::regclass)</td>
-					 <td><p>ID</p></td>
-					</tr>
-					<tr>
-					 <td>import</td>
-					 <td>Table</td>
-					 <td>im_status</td>
-					 <td>text</td>
-					 <td>2147483647</td>
-					 <td title='nullable'>√</td>
-					 <td title=''></td>
-					 <td>&#39;p&#39;::text</td>
-					 <td><p>Status of import : pending, validated</p></td>
-					</tr>
-					<tr>
-					 <td>glossary</td>
-					 <td>Table</td>
-					 <td class='indexedColumn' title='Indexed'><i class='fa fa-sitemap fa-rotate-120' style='padding-right: 5px;'></i>gl_field</td>
-					 <td>text</td>
-					 <td>2147483647</td>
-					 <td title=''></td>
-					 <td title=''></td>
-					 <td>null</td>
-					 <td><p>Target field for this glossary item</p></td>
-					</tr>
-					<tr>
-					 <td>r_indicator_node</td>
-					 <td>Table</td>
-					 <td class='primaryKey' title='Primary Key'><i class='icon ion-key iconkey' style='padding-left: 5px;'></i>fk_id_node</td>
-					 <td>int4</td>
-					 <td>10</td>
-					 <td title=''></td>
-					 <td title=''></td>
-					 <td>null</td>
-					 <td><p>Parent node</p></td>
-					</tr>
-					<tr>
-					 <td>glossary</td>
-					 <td>Table</td>
-					 <td>gl_description</td>
-					 <td>text</td>
-					 <td>2147483647</td>
-					 <td title=''></td>
-					 <td title=''></td>
-					 <td>null</td>
-					 <td><p>Description of the item</p></td>
-					</tr>
-					<tr>
-					 <td>actor</td>
-					 <td>Table</td>
-					 <td>a_email</td>
-					 <td>text</td>
-					 <td>2147483647</td>
-					 <td title=''></td>
-					 <td title=''></td>
-					 <td>null</td>
-					 <td><p>Email of the actor</p></td>
-					</tr>
-					<tr>
-					 <td>actor_category</td>
-					 <td>Table</td>
-					 <td>ac_description</td>
-					 <td>text</td>
-					 <td>2147483647</td>
-					 <td title=''></td>
-					 <td title=''></td>
-					 <td>null</td>
-					 <td><p>Description of the actor category</p></td>
-					</tr>
-					<tr>
-					 <td>glossary</td>
-					 <td>Table</td>
-					 <td class='primaryKey' title='Primary Key'><i class='icon ion-key iconkey' style='padding-left: 5px;'></i>id</td>
-					 <td>serial</td>
-					 <td>10</td>
-					 <td title=''></td>
-					 <td title='Automatically updated by the database'>√</td>
-					 <td>nextval(&#39;gobs.glossary_id_seq&#39;::regclass)</td>
-					 <td><p>ID</p></td>
-					</tr>
-					<tr>
-					 <td>series</td>
-					 <td>Table</td>
-					 <td class='foreignKey' title='Foreign Key'><i class='icon ion-key iconkey' style='padding-left: 5px;'></i>fk_id_spatial_layer</td>
-					 <td>int4</td>
-					 <td>10</td>
-					 <td title=''></td>
-					 <td title=''></td>
-					 <td>null</td>
-					 <td><p>Spatial layer, mandatory. If needed, use a global spatial layer with only 1 object representing the global area.</p></td>
-					</tr>
-					<tr>
 					 <td>import</td>
 					 <td>Table</td>
 					 <td>im_timestamp</td>
@@ -390,116 +115,6 @@
 					 <td title=''></td>
 					 <td>&#39;2018-06-28 12:15:46.635568&#39;::timestamp without time zone</td>
 					 <td><p>Import date</p></td>
-					</tr>
-					<tr>
-					 <td>spatial_object</td>
-					 <td>Table</td>
-					 <td class='foreignKey' title='Foreign Key'><i class='icon ion-key iconkey' style='padding-left: 5px;'></i>fk_id_spatial_layer</td>
-					 <td>int4</td>
-					 <td>10</td>
-					 <td title=''></td>
-					 <td title=''></td>
-					 <td>null</td>
-					 <td><p>Spatial layer</p></td>
-					</tr>
-					<tr>
-					 <td>graph_node</td>
-					 <td>Table</td>
-					 <td class='primaryKey' title='Primary Key'><i class='icon ion-key iconkey' style='padding-left: 5px;'></i>id</td>
-					 <td>serial</td>
-					 <td>10</td>
-					 <td title=''></td>
-					 <td title='Automatically updated by the database'>√</td>
-					 <td>nextval(&#39;gobs.graph_node_id_seq&#39;::regclass)</td>
-					 <td><p>ID</p></td>
-					</tr>
-					<tr>
-					 <td>spatial_object</td>
-					 <td>Table</td>
-					 <td class='indexedColumn' title='Indexed'><i class='fa fa-sitemap fa-rotate-120' style='padding-right: 5px;'></i>so_unique_id</td>
-					 <td>text</td>
-					 <td>2147483647</td>
-					 <td title=''></td>
-					 <td title=''></td>
-					 <td>null</td>
-					 <td><p>Unique code of each object in the spatial layer ( INSEE, tag, etc.)</p></td>
-					</tr>
-					<tr>
-					 <td>series</td>
-					 <td>Table</td>
-					 <td class='foreignKey' title='Foreign Key'><i class='icon ion-key iconkey' style='padding-left: 5px;'></i>fk_id_indicator</td>
-					 <td>int4</td>
-					 <td>10</td>
-					 <td title=''></td>
-					 <td title=''></td>
-					 <td>null</td>
-					 <td><p>Indicator. The series is named after the indicator.</p></td>
-					</tr>
-					<tr>
-					 <td>spatial_layer</td>
-					 <td>Table</td>
-					 <td>sl_label</td>
-					 <td>text</td>
-					 <td>2147483647</td>
-					 <td title=''></td>
-					 <td title=''></td>
-					 <td>null</td>
-					 <td><p>Label of the spatial layer</p></td>
-					</tr>
-					<tr>
-					 <td>actor</td>
-					 <td>Table</td>
-					 <td>a_description</td>
-					 <td>text</td>
-					 <td>2147483647</td>
-					 <td title=''></td>
-					 <td title=''></td>
-					 <td>null</td>
-					 <td><p>Description of the actor</p></td>
-					</tr>
-					<tr>
-					 <td>protocol</td>
-					 <td>Table</td>
-					 <td>pr_name</td>
-					 <td>text</td>
-					 <td>2147483647</td>
-					 <td title=''></td>
-					 <td title=''></td>
-					 <td>null</td>
-					 <td><p>Name of the indicator</p></td>
-					</tr>
-					<tr>
-					 <td>indicator</td>
-					 <td>Table</td>
-					 <td>id_value_name</td>
-					 <td>_text</td>
-					 <td>2147483647</td>
-					 <td title=''></td>
-					 <td title=''></td>
-					 <td>null</td>
-					 <td><p>List of the names of the vector dimensions. Ex : <a href="./null">‘population homme’, ‘population femme’</a></p></td>
-					</tr>
-					<tr>
-					 <td>r_graph_edge</td>
-					 <td>Table</td>
-					 <td class='primaryKey' title='Primary Key'><i class='icon ion-key iconkey' style='padding-left: 5px;'></i>ge_parent_node</td>
-					 <td>int4</td>
-					 <td>10</td>
-					 <td title=''></td>
-					 <td title=''></td>
-					 <td>null</td>
-					 <td><p>Parent node</p></td>
-					</tr>
-					<tr>
-					 <td>graph_node</td>
-					 <td>Table</td>
-					 <td>gn_description</td>
-					 <td>text</td>
-					 <td>2147483647</td>
-					 <td title=''></td>
-					 <td title=''></td>
-					 <td>null</td>
-					 <td><p>Description of the node</p></td>
 					</tr>
 					<tr>
 					 <td>spatial_layer</td>
@@ -513,136 +128,26 @@
 					 <td><p>Type of geometry (POINT, POLYGON, MULTIPOLYGON, etc.)</p></td>
 					</tr>
 					<tr>
-					 <td>indicator</td>
+					 <td>spatial_object</td>
 					 <td>Table</td>
-					 <td>id_value_code</td>
-					 <td>_text</td>
-					 <td>2147483647</td>
-					 <td title=''></td>
-					 <td title=''></td>
-					 <td>null</td>
-					 <td><p>List of the codes of the vector dimensions. Ex : <a href="./null">‘pop_h’, ‘pop_f’</a></p></td>
-					</tr>
-					<tr>
-					 <td>spatial_layer</td>
-					 <td>Table</td>
-					 <td class='indexedColumn' title='Indexed'><i class='fa fa-sitemap fa-rotate-120' style='padding-right: 5px;'></i>sl_code</td>
-					 <td>text</td>
-					 <td>2147483647</td>
-					 <td title=''></td>
-					 <td title=''></td>
-					 <td>null</td>
-					 <td><p>Unique short code for the spatial layer</p></td>
-					</tr>
-					<tr>
-					 <td>protocol</td>
-					 <td>Table</td>
-					 <td class='primaryKey' title='Primary Key'><i class='icon ion-key iconkey' style='padding-left: 5px;'></i>id</td>
-					 <td>serial</td>
-					 <td>10</td>
-					 <td title=''></td>
-					 <td title='Automatically updated by the database'>√</td>
-					 <td>nextval(&#39;gobs.protocol_id_seq&#39;::regclass)</td>
-					 <td><p>ID</p></td>
-					</tr>
-					<tr>
-					 <td>glossary</td>
-					 <td>Table</td>
-					 <td>gl_label</td>
-					 <td>text</td>
-					 <td>2147483647</td>
-					 <td title=''></td>
-					 <td title=''></td>
-					 <td>null</td>
-					 <td><p>Item label to show for users</p></td>
-					</tr>
-					<tr>
-					 <td>indicator</td>
-					 <td>Table</td>
-					 <td>id_value_unit</td>
-					 <td>text</td>
-					 <td>2147483647</td>
-					 <td title=''></td>
-					 <td title=''></td>
-					 <td>null</td>
-					 <td><p>Unit ot the store values. Ex : ‘inhabitants’ or ‘°C’</p></td>
-					</tr>
-					<tr>
-					 <td>spatial_layer</td>
-					 <td>Table</td>
-					 <td>sl_creation_date</td>
-					 <td>date</td>
-					 <td>13</td>
-					 <td title=''></td>
-					 <td title=''></td>
-					 <td>&#39;2018-06-28&#39;::date</td>
-					 <td><p>Creation date</p></td>
-					</tr>
-					<tr>
-					 <td>indicator</td>
-					 <td>Table</td>
-					 <td>id_title</td>
-					 <td>text</td>
-					 <td>2147483647</td>
-					 <td title=''></td>
-					 <td title=''></td>
-					 <td>null</td>
-					 <td><p>Title</p></td>
-					</tr>
-					<tr>
-					 <td>glossary</td>
-					 <td>Table</td>
-					 <td>gl_order</td>
-					 <td>int2</td>
-					 <td>5</td>
-					 <td title='nullable'>√</td>
-					 <td title=''></td>
-					 <td>null</td>
-					 <td><p>Display order among the field items</p></td>
-					</tr>
-					<tr>
-					 <td>protocol</td>
-					 <td>Table</td>
-					 <td>pr_description</td>
-					 <td>text</td>
-					 <td>2147483647</td>
-					 <td title=''></td>
-					 <td title=''></td>
-					 <td>null</td>
-					 <td><p>Description, including URLs to references and authors.</p></td>
-					</tr>
-					<tr>
-					 <td>indicator</td>
-					 <td>Table</td>
-					 <td>id_value_type</td>
-					 <td>text</td>
-					 <td>2147483647</td>
-					 <td title=''></td>
-					 <td title=''></td>
-					 <td>&#39;integer&#39;::text</td>
-					 <td><p>Type of the stored values. Ex : ‘integer’ or ‘real’</p></td>
-					</tr>
-					<tr>
-					 <td>import</td>
-					 <td>Table</td>
-					 <td class='foreignKey' title='Foreign Key'><i class='icon ion-key iconkey' style='padding-left: 5px;'></i>fk_id_series</td>
+					 <td class='foreignKey' title='Foreign Key'><i class='icon ion-key iconkey' style='padding-left: 5px;'></i>fk_id_spatial_layer</td>
 					 <td>int4</td>
 					 <td>10</td>
 					 <td title=''></td>
 					 <td title=''></td>
 					 <td>null</td>
-					 <td><p>Series ID</p></td>
+					 <td><p>Spatial layer</p></td>
 					</tr>
 					<tr>
-					 <td>actor_category</td>
+					 <td>series</td>
 					 <td>Table</td>
-					 <td>ac_name</td>
-					 <td>text</td>
-					 <td>2147483647</td>
+					 <td class='foreignKey' title='Foreign Key'><i class='icon ion-key iconkey' style='padding-left: 5px;'></i>fk_id_protocol</td>
+					 <td>int4</td>
+					 <td>10</td>
 					 <td title=''></td>
 					 <td title=''></td>
 					 <td>null</td>
-					 <td><p>Name of the actor category</p></td>
+					 <td><p>Protocol</p></td>
 					</tr>
 					<tr>
 					 <td>spatial_object</td>
@@ -656,92 +161,15 @@
 					 <td><p>ID</p></td>
 					</tr>
 					<tr>
-					 <td>spatial_object</td>
-					 <td>Table</td>
-					 <td class='indexedColumn' title='Indexed'><i class='fa fa-sitemap fa-rotate-120' style='padding-right: 5px;'></i>geom</td>
-					 <td>geometry</td>
-					 <td>2147483647</td>
-					 <td title=''></td>
-					 <td title=''></td>
-					 <td>null</td>
-					 <td><p>Geometry of the spatial object. Alway in EPSG:4326</p></td>
-					</tr>
-					<tr>
-					 <td>indicator</td>
-					 <td>Table</td>
-					 <td class='indexedColumn' title='Indexed'><i class='fa fa-sitemap fa-rotate-120' style='padding-right: 5px;'></i>id_label</td>
-					 <td>text</td>
-					 <td>2147483647</td>
-					 <td title=''></td>
-					 <td title=''></td>
-					 <td>null</td>
-					 <td><p>Short name</p></td>
-					</tr>
-					<tr>
-					 <td>indicator</td>
-					 <td>Table</td>
-					 <td>id_description</td>
-					 <td>text</td>
-					 <td>2147483647</td>
-					 <td title=''></td>
-					 <td title=''></td>
-					 <td>null</td>
-					 <td><p>Describes the indicator regarding its rôle inside the project.</p></td>
-					</tr>
-					<tr>
 					 <td>r_graph_edge</td>
 					 <td>Table</td>
-					 <td class='primaryKey' title='Primary Key'><i class='icon ion-key iconkey' style='padding-left: 5px;'></i>ge_child_node</td>
+					 <td class='primaryKey' title='Primary Key'><i class='icon ion-key iconkey' style='padding-left: 5px;'></i>ge_parent_node</td>
 					 <td>int4</td>
 					 <td>10</td>
 					 <td title=''></td>
 					 <td title=''></td>
 					 <td>null</td>
-					 <td><p>Child node</p></td>
-					</tr>
-					<tr>
-					 <td>series</td>
-					 <td>Table</td>
-					 <td class='primaryKey' title='Primary Key'><i class='icon ion-key iconkey' style='padding-left: 5px;'></i>id</td>
-					 <td>serial</td>
-					 <td>10</td>
-					 <td title=''></td>
-					 <td title='Automatically updated by the database'>√</td>
-					 <td>nextval(&#39;gobs.series_id_seq&#39;::regclass)</td>
-					 <td><p>Id</p></td>
-					</tr>
-					<tr>
-					 <td>indicator</td>
-					 <td>Table</td>
-					 <td class='primaryKey' title='Primary Key'><i class='icon ion-key iconkey' style='padding-left: 5px;'></i>id</td>
-					 <td>serial</td>
-					 <td>10</td>
-					 <td title=''></td>
-					 <td title='Automatically updated by the database'>√</td>
-					 <td>nextval(&#39;gobs.indicator_id_seq&#39;::regclass)</td>
-					 <td><p>ID</p></td>
-					</tr>
-					<tr>
-					 <td>actor</td>
-					 <td>Table</td>
-					 <td class='indexedColumn' title='Indexed'><i class='fa fa-sitemap fa-rotate-120' style='padding-right: 5px;'></i>a_name</td>
-					 <td>text</td>
-					 <td>2147483647</td>
-					 <td title=''></td>
-					 <td title=''></td>
-					 <td>null</td>
-					 <td><p>Name of the actor (can be a person or an entity)</p></td>
-					</tr>
-					<tr>
-					 <td>observation</td>
-					 <td>Table</td>
-					 <td class='foreignKey' title='Foreign Key'><i class='icon ion-key iconkey' style='padding-left: 5px;'></i>fk_id_series</td>
-					 <td>int4</td>
-					 <td>10</td>
-					 <td title=''></td>
-					 <td title=''></td>
-					 <td>null</td>
-					 <td><p>Series ID</p></td>
+					 <td><p>Parent node</p></td>
 					</tr>
 					<tr>
 					 <td>observation</td>
@@ -766,6 +194,600 @@
 					 <td><p>Description</p></td>
 					</tr>
 					<tr>
+					 <td>actor_category</td>
+					 <td>Table</td>
+					 <td>ac_description</td>
+					 <td>text</td>
+					 <td>2147483647</td>
+					 <td title=''></td>
+					 <td title=''></td>
+					 <td>null</td>
+					 <td><p>Description of the actor category</p></td>
+					</tr>
+					<tr>
+					 <td>indicator</td>
+					 <td>Table</td>
+					 <td>id_date_format</td>
+					 <td>text</td>
+					 <td>2147483647</td>
+					 <td title=''></td>
+					 <td title=''></td>
+					 <td>&#39;day&#39;::text</td>
+					 <td><p>Help to know what is the format for the date. Example : ‘year’</p></td>
+					</tr>
+					<tr>
+					 <td>glossary</td>
+					 <td>Table</td>
+					 <td>gl_order</td>
+					 <td>int2</td>
+					 <td>5</td>
+					 <td title='nullable'>√</td>
+					 <td title=''></td>
+					 <td>null</td>
+					 <td><p>Display order among the field items</p></td>
+					</tr>
+					<tr>
+					 <td>import</td>
+					 <td>Table</td>
+					 <td class='primaryKey' title='Primary Key'><i class='icon ion-key iconkey' style='padding-left: 5px;'></i>id</td>
+					 <td>serial</td>
+					 <td>10</td>
+					 <td title=''></td>
+					 <td title='Automatically updated by the database'>√</td>
+					 <td>nextval(&#39;gobs.import_id_seq&#39;::regclass)</td>
+					 <td><p>Id</p></td>
+					</tr>
+					<tr>
+					 <td>indicator</td>
+					 <td>Table</td>
+					 <td>id_value_unit</td>
+					 <td>text</td>
+					 <td>2147483647</td>
+					 <td title=''></td>
+					 <td title=''></td>
+					 <td>null</td>
+					 <td><p>Unit ot the store values. Ex : ‘inhabitants’ or ‘°C’</p></td>
+					</tr>
+					<tr>
+					 <td>actor_category</td>
+					 <td>Table</td>
+					 <td class='primaryKey' title='Primary Key'><i class='icon ion-key iconkey' style='padding-left: 5px;'></i>id</td>
+					 <td>serial</td>
+					 <td>10</td>
+					 <td title=''></td>
+					 <td title='Automatically updated by the database'>√</td>
+					 <td>nextval(&#39;gobs.actor_category_id_seq&#39;::regclass)</td>
+					 <td><p>ID</p></td>
+					</tr>
+					<tr>
+					 <td>import</td>
+					 <td>Table</td>
+					 <td class='foreignKey' title='Foreign Key'><i class='icon ion-key iconkey' style='padding-left: 5px;'></i>fk_id_series</td>
+					 <td>int4</td>
+					 <td>10</td>
+					 <td title=''></td>
+					 <td title=''></td>
+					 <td>null</td>
+					 <td><p>Series ID</p></td>
+					</tr>
+					<tr>
+					 <td>glossary</td>
+					 <td>Table</td>
+					 <td>gl_label</td>
+					 <td>text</td>
+					 <td>2147483647</td>
+					 <td title=''></td>
+					 <td title=''></td>
+					 <td>null</td>
+					 <td><p>Item label to show for users</p></td>
+					</tr>
+					<tr>
+					 <td>protocol</td>
+					 <td>Table</td>
+					 <td class='indexedColumn' title='Indexed'><i class='fa fa-sitemap fa-rotate-120' style='padding-right: 5px;'></i>pr_code</td>
+					 <td>text</td>
+					 <td>2147483647</td>
+					 <td title=''></td>
+					 <td title=''></td>
+					 <td>null</td>
+					 <td><p>Code</p></td>
+					</tr>
+					<tr>
+					 <td>spatial_layer</td>
+					 <td>Table</td>
+					 <td>sl_label</td>
+					 <td>text</td>
+					 <td>2147483647</td>
+					 <td title=''></td>
+					 <td title=''></td>
+					 <td>null</td>
+					 <td><p>Label of the spatial layer</p></td>
+					</tr>
+					<tr>
+					 <td>graph_node</td>
+					 <td>Table</td>
+					 <td class='indexedColumn' title='Indexed'><i class='fa fa-sitemap fa-rotate-120' style='padding-right: 5px;'></i>gn_name</td>
+					 <td>text</td>
+					 <td>2147483647</td>
+					 <td title=''></td>
+					 <td title=''></td>
+					 <td>null</td>
+					 <td><p>Name of the node</p></td>
+					</tr>
+					<tr>
+					 <td>indicator</td>
+					 <td>Table</td>
+					 <td>id_description</td>
+					 <td>text</td>
+					 <td>2147483647</td>
+					 <td title=''></td>
+					 <td title=''></td>
+					 <td>null</td>
+					 <td><p>Describes the indicator regarding its rôle inside the project.</p></td>
+					</tr>
+					<tr>
+					 <td>import</td>
+					 <td>Table</td>
+					 <td>im_status</td>
+					 <td>text</td>
+					 <td>2147483647</td>
+					 <td title='nullable'>√</td>
+					 <td title=''></td>
+					 <td>&#39;p&#39;::text</td>
+					 <td><p>Status of import : pending, validated</p></td>
+					</tr>
+					<tr>
+					 <td>indicator</td>
+					 <td>Table</td>
+					 <td>id_value_name</td>
+					 <td>_text</td>
+					 <td>2147483647</td>
+					 <td title=''></td>
+					 <td title=''></td>
+					 <td>null</td>
+					 <td><p>List of the names of the vector dimensions. Ex : <a href="./null">‘population homme’, ‘population femme’</a></p></td>
+					</tr>
+					<tr>
+					 <td>r_indicator_node</td>
+					 <td>Table</td>
+					 <td class='primaryKey' title='Primary Key'><i class='icon ion-key iconkey' style='padding-left: 5px;'></i>fk_id_indicator</td>
+					 <td>int4</td>
+					 <td>10</td>
+					 <td title=''></td>
+					 <td title=''></td>
+					 <td>null</td>
+					 <td><p>Parent indicator</p></td>
+					</tr>
+					<tr>
+					 <td>series</td>
+					 <td>Table</td>
+					 <td class='foreignKey' title='Foreign Key'><i class='icon ion-key iconkey' style='padding-left: 5px;'></i>fk_id_spatial_layer</td>
+					 <td>int4</td>
+					 <td>10</td>
+					 <td title=''></td>
+					 <td title=''></td>
+					 <td>null</td>
+					 <td><p>Spatial layer, mandatory. If needed, use a global spatial layer with only 1 object representing the global area.</p></td>
+					</tr>
+					<tr>
+					 <td>series</td>
+					 <td>Table</td>
+					 <td class='primaryKey' title='Primary Key'><i class='icon ion-key iconkey' style='padding-left: 5px;'></i>id</td>
+					 <td>serial</td>
+					 <td>10</td>
+					 <td title=''></td>
+					 <td title='Automatically updated by the database'>√</td>
+					 <td>nextval(&#39;gobs.series_id_seq&#39;::regclass)</td>
+					 <td><p>Id</p></td>
+					</tr>
+					<tr>
+					 <td>indicator</td>
+					 <td>Table</td>
+					 <td>id_title</td>
+					 <td>text</td>
+					 <td>2147483647</td>
+					 <td title=''></td>
+					 <td title=''></td>
+					 <td>null</td>
+					 <td><p>Title</p></td>
+					</tr>
+					<tr>
+					 <td>metadata</td>
+					 <td>Table</td>
+					 <td>me_version_date</td>
+					 <td>date</td>
+					 <td>13</td>
+					 <td title=''></td>
+					 <td title=''></td>
+					 <td>null</td>
+					 <td><p>Date of the version. Ex: 2019-06-01</p></td>
+					</tr>
+					<tr>
+					 <td>spatial_layer</td>
+					 <td>Table</td>
+					 <td class='primaryKey' title='Primary Key'><i class='icon ion-key iconkey' style='padding-left: 5px;'></i>id</td>
+					 <td>serial</td>
+					 <td>10</td>
+					 <td title=''></td>
+					 <td title='Automatically updated by the database'>√</td>
+					 <td>nextval(&#39;gobs.spatial_layer_id_seq&#39;::regclass)</td>
+					 <td></td>
+					</tr>
+					<tr>
+					 <td>observation</td>
+					 <td>Table</td>
+					 <td>ob_value</td>
+					 <td>jsonb</td>
+					 <td>2147483647</td>
+					 <td title=''></td>
+					 <td title=''></td>
+					 <td>null</td>
+					 <td><p>Vector containing the measured or computed data values. Ex : <a href="./null">1543, 1637</a></p></td>
+					</tr>
+					<tr>
+					 <td>observation</td>
+					 <td>Table</td>
+					 <td class='indexedColumn' title='Indexed'><i class='fa fa-sitemap fa-rotate-120' style='padding-right: 5px;'></i>ob_timestamp</td>
+					 <td>timestamp</td>
+					 <td>29</td>
+					 <td title=''></td>
+					 <td title=''></td>
+					 <td>null</td>
+					 <td><p>Timestamp of the data</p></td>
+					</tr>
+					<tr>
+					 <td>observation</td>
+					 <td>Table</td>
+					 <td class='foreignKey' title='Foreign Key'><i class='icon ion-key iconkey' style='padding-left: 5px;'></i>fk_id_series</td>
+					 <td>int4</td>
+					 <td>10</td>
+					 <td title=''></td>
+					 <td title=''></td>
+					 <td>null</td>
+					 <td><p>Series ID</p></td>
+					</tr>
+					<tr>
+					 <td>r_indicator_node</td>
+					 <td>Table</td>
+					 <td class='primaryKey' title='Primary Key'><i class='icon ion-key iconkey' style='padding-left: 5px;'></i>fk_id_node</td>
+					 <td>int4</td>
+					 <td>10</td>
+					 <td title=''></td>
+					 <td title=''></td>
+					 <td>null</td>
+					 <td><p>Parent node</p></td>
+					</tr>
+					<tr>
+					 <td>glossary</td>
+					 <td>Table</td>
+					 <td class='primaryKey' title='Primary Key'><i class='icon ion-key iconkey' style='padding-left: 5px;'></i>id</td>
+					 <td>serial</td>
+					 <td>10</td>
+					 <td title=''></td>
+					 <td title='Automatically updated by the database'>√</td>
+					 <td>nextval(&#39;gobs.glossary_id_seq&#39;::regclass)</td>
+					 <td><p>ID</p></td>
+					</tr>
+					<tr>
+					 <td>series</td>
+					 <td>Table</td>
+					 <td class='foreignKey' title='Foreign Key'><i class='icon ion-key iconkey' style='padding-left: 5px;'></i>fk_id_indicator</td>
+					 <td>int4</td>
+					 <td>10</td>
+					 <td title=''></td>
+					 <td title=''></td>
+					 <td>null</td>
+					 <td><p>Indicator. The series is named after the indicator.</p></td>
+					</tr>
+					<tr>
+					 <td>actor</td>
+					 <td>Table</td>
+					 <td class='primaryKey' title='Primary Key'><i class='icon ion-key iconkey' style='padding-left: 5px;'></i>id</td>
+					 <td>serial</td>
+					 <td>10</td>
+					 <td title=''></td>
+					 <td title='Automatically updated by the database'>√</td>
+					 <td>nextval(&#39;gobs.actor_id_seq&#39;::regclass)</td>
+					 <td><p>ID</p></td>
+					</tr>
+					<tr>
+					 <td>protocol</td>
+					 <td>Table</td>
+					 <td>pr_description</td>
+					 <td>text</td>
+					 <td>2147483647</td>
+					 <td title=''></td>
+					 <td title=''></td>
+					 <td>null</td>
+					 <td><p>Description, including URLs to references and authors.</p></td>
+					</tr>
+					<tr>
+					 <td>spatial_object</td>
+					 <td>Table</td>
+					 <td>so_unique_label</td>
+					 <td>text</td>
+					 <td>2147483647</td>
+					 <td title=''></td>
+					 <td title=''></td>
+					 <td>null</td>
+					 <td><p>Label of each spatial object. Ex : name of the city.</p></td>
+					</tr>
+					<tr>
+					 <td>spatial_object</td>
+					 <td>Table</td>
+					 <td class='indexedColumn' title='Indexed'><i class='fa fa-sitemap fa-rotate-120' style='padding-right: 5px;'></i>so_unique_id</td>
+					 <td>text</td>
+					 <td>2147483647</td>
+					 <td title=''></td>
+					 <td title=''></td>
+					 <td>null</td>
+					 <td><p>Unique code of each object in the spatial layer ( INSEE, tag, etc.)</p></td>
+					</tr>
+					<tr>
+					 <td>glossary</td>
+					 <td>Table</td>
+					 <td>gl_description</td>
+					 <td>text</td>
+					 <td>2147483647</td>
+					 <td title=''></td>
+					 <td title=''></td>
+					 <td>null</td>
+					 <td><p>Description of the item</p></td>
+					</tr>
+					<tr>
+					 <td>protocol</td>
+					 <td>Table</td>
+					 <td>pr_name</td>
+					 <td>text</td>
+					 <td>2147483647</td>
+					 <td title=''></td>
+					 <td title=''></td>
+					 <td>null</td>
+					 <td><p>Name of the indicator</p></td>
+					</tr>
+					<tr>
+					 <td>indicator</td>
+					 <td>Table</td>
+					 <td>id_paths</td>
+					 <td>text</td>
+					 <td>2147483647</td>
+					 <td title='nullable'>√</td>
+					 <td title=''></td>
+					 <td>null</td>
+					 <td><p>Paths given to help finding an indicator. They will be split up to fill the graph_node and r_indicator_node tables. If you need multiple paths, use | as a separator. Ex: Environment / Water resources | Measure / Physics / Water</p></td>
+					</tr>
+					<tr>
+					 <td>graph_node</td>
+					 <td>Table</td>
+					 <td class='primaryKey' title='Primary Key'><i class='icon ion-key iconkey' style='padding-left: 5px;'></i>id</td>
+					 <td>serial</td>
+					 <td>10</td>
+					 <td title=''></td>
+					 <td title='Automatically updated by the database'>√</td>
+					 <td>nextval(&#39;gobs.graph_node_id_seq&#39;::regclass)</td>
+					 <td><p>ID</p></td>
+					</tr>
+					<tr>
+					 <td>actor_category</td>
+					 <td>Table</td>
+					 <td>ac_name</td>
+					 <td>text</td>
+					 <td>2147483647</td>
+					 <td title=''></td>
+					 <td title=''></td>
+					 <td>null</td>
+					 <td><p>Name of the actor category</p></td>
+					</tr>
+					<tr>
+					 <td>r_graph_edge</td>
+					 <td>Table</td>
+					 <td class='primaryKey' title='Primary Key'><i class='icon ion-key iconkey' style='padding-left: 5px;'></i>ge_child_node</td>
+					 <td>int4</td>
+					 <td>10</td>
+					 <td title=''></td>
+					 <td title=''></td>
+					 <td>null</td>
+					 <td><p>Child node</p></td>
+					</tr>
+					<tr>
+					 <td>indicator</td>
+					 <td>Table</td>
+					 <td>id_value_code</td>
+					 <td>_text</td>
+					 <td>2147483647</td>
+					 <td title=''></td>
+					 <td title=''></td>
+					 <td>null</td>
+					 <td><p>List of the codes of the vector dimensions. Ex : <a href="./null">‘pop_h’, ‘pop_f’</a></p></td>
+					</tr>
+					<tr>
+					 <td>indicator</td>
+					 <td>Table</td>
+					 <td class='indexedColumn' title='Indexed'><i class='fa fa-sitemap fa-rotate-120' style='padding-right: 5px;'></i>id_label</td>
+					 <td>text</td>
+					 <td>2147483647</td>
+					 <td title=''></td>
+					 <td title=''></td>
+					 <td>null</td>
+					 <td><p>Short name</p></td>
+					</tr>
+					<tr>
+					 <td>glossary</td>
+					 <td>Table</td>
+					 <td>gl_code</td>
+					 <td>text</td>
+					 <td>2147483647</td>
+					 <td title=''></td>
+					 <td title=''></td>
+					 <td>null</td>
+					 <td><p>Item code to store in tables</p></td>
+					</tr>
+					<tr>
+					 <td>actor</td>
+					 <td>Table</td>
+					 <td class='foreignKey' title='Foreign Key'><i class='icon ion-key iconkey' style='padding-left: 5px;'></i>id_category</td>
+					 <td>int4</td>
+					 <td>10</td>
+					 <td title=''></td>
+					 <td title=''></td>
+					 <td>null</td>
+					 <td><p>Category of actor</p></td>
+					</tr>
+					<tr>
+					 <td>indicator</td>
+					 <td>Table</td>
+					 <td>id_value_type</td>
+					 <td>text</td>
+					 <td>2147483647</td>
+					 <td title=''></td>
+					 <td title=''></td>
+					 <td>&#39;integer&#39;::text</td>
+					 <td><p>Type of the stored values. Ex : ‘integer’ or ‘real’</p></td>
+					</tr>
+					<tr>
+					 <td>actor</td>
+					 <td>Table</td>
+					 <td class='indexedColumn' title='Indexed'><i class='fa fa-sitemap fa-rotate-120' style='padding-right: 5px;'></i>a_name</td>
+					 <td>text</td>
+					 <td>2147483647</td>
+					 <td title=''></td>
+					 <td title=''></td>
+					 <td>null</td>
+					 <td><p>Name of the actor (can be a person or an entity)</p></td>
+					</tr>
+					<tr>
+					 <td>indicator</td>
+					 <td>Table</td>
+					 <td class='primaryKey' title='Primary Key'><i class='icon ion-key iconkey' style='padding-left: 5px;'></i>id</td>
+					 <td>serial</td>
+					 <td>10</td>
+					 <td title=''></td>
+					 <td title='Automatically updated by the database'>√</td>
+					 <td>nextval(&#39;gobs.indicator_id_seq&#39;::regclass)</td>
+					 <td><p>ID</p></td>
+					</tr>
+					<tr>
+					 <td>spatial_layer</td>
+					 <td>Table</td>
+					 <td class='indexedColumn' title='Indexed'><i class='fa fa-sitemap fa-rotate-120' style='padding-right: 5px;'></i>sl_code</td>
+					 <td>text</td>
+					 <td>2147483647</td>
+					 <td title=''></td>
+					 <td title=''></td>
+					 <td>null</td>
+					 <td><p>Unique short code for the spatial layer</p></td>
+					</tr>
+					<tr>
+					 <td>metadata</td>
+					 <td>Table</td>
+					 <td class='primaryKey' title='Primary Key'><i class='icon ion-key iconkey' style='padding-left: 5px;'></i>id</td>
+					 <td>serial</td>
+					 <td>10</td>
+					 <td title=''></td>
+					 <td title='Automatically updated by the database'>√</td>
+					 <td>nextval(&#39;gobs.metadata_id_seq&#39;::regclass)</td>
+					 <td><p>Id of the version</p></td>
+					</tr>
+					<tr>
+					 <td>observation</td>
+					 <td>Table</td>
+					 <td class='primaryKey' title='Primary Key'><i class='icon ion-key iconkey' style='padding-left: 5px;'></i>id</td>
+					 <td>bigserial</td>
+					 <td>19</td>
+					 <td title=''></td>
+					 <td title='Automatically updated by the database'>√</td>
+					 <td>nextval(&#39;gobs.observation_id_seq&#39;::regclass)</td>
+					 <td><p>ID</p></td>
+					</tr>
+					<tr>
+					 <td>observation</td>
+					 <td>Table</td>
+					 <td class='foreignKey' title='Foreign Key'><i class='icon ion-key iconkey' style='padding-left: 5px;'></i>fk_id_import</td>
+					 <td>int4</td>
+					 <td>10</td>
+					 <td title=''></td>
+					 <td title=''></td>
+					 <td>null</td>
+					 <td><p>Import id</p></td>
+					</tr>
+					<tr>
+					 <td>graph_node</td>
+					 <td>Table</td>
+					 <td>gn_description</td>
+					 <td>text</td>
+					 <td>2147483647</td>
+					 <td title=''></td>
+					 <td title=''></td>
+					 <td>null</td>
+					 <td><p>Description of the node</p></td>
+					</tr>
+					<tr>
+					 <td>metadata</td>
+					 <td>Table</td>
+					 <td>me_status</td>
+					 <td>int2</td>
+					 <td>5</td>
+					 <td title=''></td>
+					 <td title=''></td>
+					 <td>null</td>
+					 <td><p>Status of the version. 1 means active version, 0 means older version</p></td>
+					</tr>
+					<tr>
+					 <td>actor</td>
+					 <td>Table</td>
+					 <td>a_email</td>
+					 <td>text</td>
+					 <td>2147483647</td>
+					 <td title=''></td>
+					 <td title=''></td>
+					 <td>null</td>
+					 <td><p>Email of the actor</p></td>
+					</tr>
+					<tr>
+					 <td>protocol</td>
+					 <td>Table</td>
+					 <td class='primaryKey' title='Primary Key'><i class='icon ion-key iconkey' style='padding-left: 5px;'></i>id</td>
+					 <td>serial</td>
+					 <td>10</td>
+					 <td title=''></td>
+					 <td title='Automatically updated by the database'>√</td>
+					 <td>nextval(&#39;gobs.protocol_id_seq&#39;::regclass)</td>
+					 <td><p>ID</p></td>
+					</tr>
+					<tr>
+					 <td>spatial_object</td>
+					 <td>Table</td>
+					 <td class='indexedColumn' title='Indexed'><i class='fa fa-sitemap fa-rotate-120' style='padding-right: 5px;'></i>geom</td>
+					 <td>geometry</td>
+					 <td>2147483647</td>
+					 <td title=''></td>
+					 <td title=''></td>
+					 <td>null</td>
+					 <td><p>Geometry of the spatial object. Alway in EPSG:4326</p></td>
+					</tr>
+					<tr>
+					 <td>actor</td>
+					 <td>Table</td>
+					 <td>a_description</td>
+					 <td>text</td>
+					 <td>2147483647</td>
+					 <td title=''></td>
+					 <td title=''></td>
+					 <td>null</td>
+					 <td><p>Description of the actor</p></td>
+					</tr>
+					<tr>
+					 <td>metadata</td>
+					 <td>Table</td>
+					 <td class='indexedColumn' title='Indexed'><i class='fa fa-sitemap fa-rotate-120' style='padding-right: 5px;'></i>me_version</td>
+					 <td>text</td>
+					 <td>2147483647</td>
+					 <td title=''></td>
+					 <td title=''></td>
+					 <td>null</td>
+					 <td><p>Version. Ex: 1.0.2</p></td>
+					</tr>
+					<tr>
 					 <td>series</td>
 					 <td>Table</td>
 					 <td class='foreignKey' title='Foreign Key'><i class='icon ion-key iconkey' style='padding-left: 5px;'></i>fk_id_actor</td>
@@ -775,6 +797,39 @@
 					 <td title=''></td>
 					 <td>null</td>
 					 <td><p>Actor, source of the observation data.</p></td>
+					</tr>
+					<tr>
+					 <td>spatial_layer</td>
+					 <td>Table</td>
+					 <td>sl_creation_date</td>
+					 <td>date</td>
+					 <td>13</td>
+					 <td title=''></td>
+					 <td title=''></td>
+					 <td>&#39;2018-06-28&#39;::date</td>
+					 <td><p>Creation date</p></td>
+					</tr>
+					<tr>
+					 <td>spatial_layer</td>
+					 <td>Table</td>
+					 <td class='foreignKey' title='Foreign Key'><i class='icon ion-key iconkey' style='padding-left: 5px;'></i>fk_id_actor</td>
+					 <td>int4</td>
+					 <td>10</td>
+					 <td title=''></td>
+					 <td title=''></td>
+					 <td>null</td>
+					 <td><p>Source actor.</p></td>
+					</tr>
+					<tr>
+					 <td>glossary</td>
+					 <td>Table</td>
+					 <td class='indexedColumn' title='Indexed'><i class='fa fa-sitemap fa-rotate-120' style='padding-right: 5px;'></i>gl_field</td>
+					 <td>text</td>
+					 <td>2147483647</td>
+					 <td title=''></td>
+					 <td title=''></td>
+					 <td>null</td>
+					 <td><p>Target field for this glossary item</p></td>
 					</tr>
 								</tbody>
 				</table>				

@@ -31,7 +31,7 @@
             <column ascending="true" name="id"/>
          </index>
       </table>
-      <table name="glossary" numRows="18" remarks="List of labels and words used as labels for stored data" schema="gobs" type="TABLE">
+      <table name="glossary" numRows="20" remarks="List of labels and words used as labels for stored data" schema="gobs" type="TABLE">
          <column autoUpdated="true" defaultValue="nextval('gobs.glossary_id_seq'::regclass)" digits="0" id="0" name="id" nullable="false" remarks="ID" size="10" type="serial"/>
          <column autoUpdated="false" digits="0" id="1" name="gl_field" nullable="false" remarks="Target field for this glossary item" size="2147483647" type="text"/>
          <column autoUpdated="false" digits="0" id="2" name="gl_code" nullable="false" remarks="Item code to store in tables" size="2147483647" type="text"/>
@@ -90,12 +90,26 @@
          <column autoUpdated="false" digits="0" id="6" name="id_value_name" nullable="false" remarks="List of the names of the vector dimensions. Ex : [‘population homme’, ‘population femme’]" size="2147483647" type="_text"/>
          <column autoUpdated="false" defaultValue="'integer'::text" digits="0" id="7" name="id_value_type" nullable="false" remarks="Type of the stored values. Ex : ‘integer’ or ‘real’" size="2147483647" type="text"/>
          <column autoUpdated="false" digits="0" id="8" name="id_value_unit" nullable="false" remarks="Unit ot the store values. Ex : ‘inhabitants’ or ‘°C’" size="2147483647" type="text"/>
+         <column autoUpdated="false" digits="0" id="9" name="id_paths" nullable="true" remarks="Paths given to help finding an indicator. They will be split up to fill the graph_node and r_indicator_node tables. If you need multiple paths, use | as a separator. Ex: Environment / Water resources | Measure / Physics / Water" size="2147483647" type="text"/>
          <primaryKey column="id" sequenceNumberInPK="1"/>
          <index name="indicator_pkey" unique="true">
             <column ascending="true" name="id"/>
          </index>
          <index name="indicator_id_label_idx" unique="false">
             <column ascending="true" name="id_label"/>
+         </index>
+      </table>
+      <table name="metadata" numRows="1" remarks="Metadata of the structure : version and date. Usefull for database structure and glossary data migrations between versions" schema="gobs" type="TABLE">
+         <column autoUpdated="true" defaultValue="nextval('gobs.metadata_id_seq'::regclass)" digits="0" id="0" name="id" nullable="false" remarks="Id of the version" size="10" type="serial"/>
+         <column autoUpdated="false" digits="0" id="1" name="me_version" nullable="false" remarks="Version. Ex: 1.0.2" size="2147483647" type="text"/>
+         <column autoUpdated="false" digits="0" id="2" name="me_version_date" nullable="false" remarks="Date of the version. Ex: 2019-06-01" size="13" type="date"/>
+         <column autoUpdated="false" digits="0" id="3" name="me_status" nullable="false" remarks="Status of the version. 1 means active version, 0 means older version" size="5" type="int2"/>
+         <primaryKey column="id" sequenceNumberInPK="1"/>
+         <index name="metadata_pkey" unique="true">
+            <column ascending="true" name="id"/>
+         </index>
+         <index name="metadata_me_version_key" unique="true">
+            <column ascending="true" name="me_version"/>
          </index>
       </table>
       <table name="observation" numRows="0" remarks="Les données brutes au format pivot ( indicateur, date, valeurs et entité spatiale, auteur, etc.)" schema="gobs" type="TABLE">

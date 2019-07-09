@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <title>indicator - gobs Database</title>
+  <title>metadata - gobs Database</title>
   <!-- Tell the browser to be responsive to screen width -->
   <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
   <link rel="icon" type="image/png" sizes="16x16" href="../favicon.png">
@@ -76,7 +76,7 @@
   <div class="content-wrapper">
           <!-- Content Header (Page header) -->
       <section class="content-header">
-        <h1>indicator</h1></br>
+        <h1>metadata</h1></br>
 		<div class="box box-primary">
             <div class="box-header with-border">
               <i class="fa fa-file-text-o"></i>
@@ -89,7 +89,7 @@
             </div>
             <!-- /.box-header -->
             <div class="box-body clearfix">
-				<p><p>Groups of observation data for decisional purpose.</p></p>              
+				<p><p>Metadata of the structure : version and date. Usefull for database structure and glossary data migrations between versions</p></p>              
             </div>
             <!-- /.box-body -->
 		</div>
@@ -132,35 +132,19 @@
 				 <td>10</td>
 				 <td title=''></td>
 				 <td title='Automatically updated by the database'>√</td>
-				 <td>nextval(&#39;gobs.indicator_id_seq&#39;::regclass)</td>
+				 <td>nextval(&#39;gobs.metadata_id_seq&#39;::regclass)</td>
 				 <td>
 				  <table border='0' cellspacing='0' cellpadding='0'>
-				   <tr>
-					<td title="r_indicator_node.fk_id_indicator references indicator.id via r_indicator_node_fk_id_indicator_fkey">
-						<a href='r_indicator_node.html'>r_indicator_node</a><span class='relatedKey'>.fk_id_indicator</span>
-					</td>
-					<td class="constraint detail">
-						r_indicator_node_fk_id_indicator_fkey <span title='Cascade on delete:&#10;Deletion of parent deletes child'>C</span>
-					</td>
-				   </tr>
-				   <tr>
-					<td title="series.fk_id_indicator references indicator.id via series_fk_id_indicator_fkey">
-						<a href='series.html'>series</a><span class='relatedKey'>.fk_id_indicator</span>
-					</td>
-					<td class="constraint detail">
-						series_fk_id_indicator_fkey <span title='Restrict delete:&#10;Parent cannot be deleted if children exist'>R</span>
-					</td>
-				   </tr>
 				  </table>				 
 				 </td>
 				 <td>
 				  <table border='0' cellspacing='0' cellpadding='0'>
 				  </table>					 
 				 </td>
-				 <td><p>ID</p></td>
+				 <td><p>Id of the version</p></td>
 				</tr>
 				<tr>
-				 <td class='indexedColumn' title='Indexed'><i class='fa fa-sitemap fa-rotate-120' style='padding-right: 5px;'></i><span id="id_label">id_label</span></td>
+				 <td class='indexedColumn' title='Indexed'><i class='fa fa-sitemap fa-rotate-120' style='padding-right: 5px;'></i><span id="me_version">me_version</span></td>
 				 <td>text</td>
 				 <td>2147483647</td>
 				 <td title=''></td>
@@ -174,12 +158,12 @@
 				  <table border='0' cellspacing='0' cellpadding='0'>
 				  </table>					 
 				 </td>
-				 <td><p>Short name</p></td>
+				 <td><p>Version. Ex: 1.0.2</p></td>
 				</tr>
 				<tr>
-				 <td><span id="id_title">id_title</span></td>
-				 <td>text</td>
-				 <td>2147483647</td>
+				 <td><span id="me_version_date">me_version_date</span></td>
+				 <td>date</td>
+				 <td>13</td>
 				 <td title=''></td>
 				 <td title=''></td>
 				 <td>null</td>
@@ -191,12 +175,12 @@
 				  <table border='0' cellspacing='0' cellpadding='0'>
 				  </table>					 
 				 </td>
-				 <td><p>Title</p></td>
+				 <td><p>Date of the version. Ex: 2019-06-01</p></td>
 				</tr>
 				<tr>
-				 <td><span id="id_description">id_description</span></td>
-				 <td>text</td>
-				 <td>2147483647</td>
+				 <td><span id="me_status">me_status</span></td>
+				 <td>int2</td>
+				 <td>5</td>
 				 <td title=''></td>
 				 <td title=''></td>
 				 <td>null</td>
@@ -208,113 +192,11 @@
 				  <table border='0' cellspacing='0' cellpadding='0'>
 				  </table>					 
 				 </td>
-				 <td><p>Describes the indicator regarding its rôle inside the project.</p></td>
-				</tr>
-				<tr>
-				 <td><span id="id_date_format">id_date_format</span></td>
-				 <td>text</td>
-				 <td>2147483647</td>
-				 <td title=''></td>
-				 <td title=''></td>
-				 <td>&#39;day&#39;::text</td>
-				 <td>
-				  <table border='0' cellspacing='0' cellpadding='0'>
-				  </table>				 
-				 </td>
-				 <td>
-				  <table border='0' cellspacing='0' cellpadding='0'>
-				  </table>					 
-				 </td>
-				 <td><p>Help to know what is the format for the date. Example : ‘year’</p></td>
-				</tr>
-				<tr>
-				 <td><span id="id_value_code">id_value_code</span></td>
-				 <td>_text</td>
-				 <td>2147483647</td>
-				 <td title=''></td>
-				 <td title=''></td>
-				 <td>null</td>
-				 <td>
-				  <table border='0' cellspacing='0' cellpadding='0'>
-				  </table>				 
-				 </td>
-				 <td>
-				  <table border='0' cellspacing='0' cellpadding='0'>
-				  </table>					 
-				 </td>
-				 <td><p>List of the codes of the vector dimensions. Ex : <a href="./../null">‘pop_h’, ‘pop_f’</a></p></td>
-				</tr>
-				<tr>
-				 <td><span id="id_value_name">id_value_name</span></td>
-				 <td>_text</td>
-				 <td>2147483647</td>
-				 <td title=''></td>
-				 <td title=''></td>
-				 <td>null</td>
-				 <td>
-				  <table border='0' cellspacing='0' cellpadding='0'>
-				  </table>				 
-				 </td>
-				 <td>
-				  <table border='0' cellspacing='0' cellpadding='0'>
-				  </table>					 
-				 </td>
-				 <td><p>List of the names of the vector dimensions. Ex : <a href="./../null">‘population homme’, ‘population femme’</a></p></td>
-				</tr>
-				<tr>
-				 <td><span id="id_value_type">id_value_type</span></td>
-				 <td>text</td>
-				 <td>2147483647</td>
-				 <td title=''></td>
-				 <td title=''></td>
-				 <td>&#39;integer&#39;::text</td>
-				 <td>
-				  <table border='0' cellspacing='0' cellpadding='0'>
-				  </table>				 
-				 </td>
-				 <td>
-				  <table border='0' cellspacing='0' cellpadding='0'>
-				  </table>					 
-				 </td>
-				 <td><p>Type of the stored values. Ex : ‘integer’ or ‘real’</p></td>
-				</tr>
-				<tr>
-				 <td><span id="id_value_unit">id_value_unit</span></td>
-				 <td>text</td>
-				 <td>2147483647</td>
-				 <td title=''></td>
-				 <td title=''></td>
-				 <td>null</td>
-				 <td>
-				  <table border='0' cellspacing='0' cellpadding='0'>
-				  </table>				 
-				 </td>
-				 <td>
-				  <table border='0' cellspacing='0' cellpadding='0'>
-				  </table>					 
-				 </td>
-				 <td><p>Unit ot the store values. Ex : ‘inhabitants’ or ‘°C’</p></td>
-				</tr>
-				<tr>
-				 <td><span id="id_paths">id_paths</span></td>
-				 <td>text</td>
-				 <td>2147483647</td>
-				 <td title='nullable'>√</td>
-				 <td title=''></td>
-				 <td>null</td>
-				 <td>
-				  <table border='0' cellspacing='0' cellpadding='0'>
-				  </table>				 
-				 </td>
-				 <td>
-				  <table border='0' cellspacing='0' cellpadding='0'>
-				  </table>					 
-				 </td>
-				 <td><p>Paths given to help finding an indicator. They will be split up to fill the graph_node and r_indicator_node tables. If you need multiple paths, use | as a separator. Ex: Environment / Water resources | Measure / Physics / Water</p></td>
+				 <td><p>Status of the version. 1 means active version, 0 means older version</p></td>
 				</tr>
 								</tbody>
 				</table>
-				<p title='10 columns'>Table contained <span id="recordNumber">0</span> rows<p/>
+				<p title='4 columns'>Table contained <span id="recordNumber">1</span> rows<p/>
 			</div>
 		</div>
 		<div class="box box-primary">		
@@ -341,69 +223,20 @@
 				</thead>
 				<tbody>
 				 <tr>
-				  <td class='primaryKey' title='Primary Key'><i class='icon ion-key iconkey'></i> indicator_pkey</td>
+				  <td class='primaryKey' title='Primary Key'><i class='icon ion-key iconkey'></i> metadata_pkey</td>
 				  <td>Primary key</td>
 				  <td><span title='Ascending'>Asc</span></td>
 				  <td>id</td>
 				 </tr>				 
 				 <tr>
-				  <td title='Indexed'>indicator_id_label_idx</td>
-				  <td>Performance</td>
+				  <td class='uniqueKey' title='Unique Key'><i class='icon ion-key iconkey'></i> metadata_me_version_key</td>
+				  <td>Must be unique</td>
 				  <td><span title='Ascending'>Asc</span></td>
-				  <td>id_label</td>
+				  <td>me_version</td>
 				 </tr>				 
 				</tbody>
 				</table>   			  
 			</div><!-- /.box-body -->
-		</div>
-				<div class="box box-primary">		
-			<div class="box-header with-border">
-              <i class="fa fa-code-fork"></i>
-
-              <h3 id="Relationships" class="box-title">Relationships</h3>
-
-              <div class="box-tools pull-right">
-                <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
-                </button>
-                <button type="button" class="btn btn-box-tool" data-widget="remove"><i class="fa fa-times"></i></button>
-              </div>
-            </div>	
-			<div class="box-body">	
-			<div class="nav-tabs-custom" style="cursor: move;">
-            <!-- Tabs within a box -->
-			<h5>Close relationships within degrees of separation</h5>
-            <ul class="nav nav-tabs pull-left ui-sortable-handle">
-			  			              <li class="active"><a href="#oneDegreeImg-chart" data-toggle="tab" aria-expanded="true">One</a></li>			  			 
-			  			              <li class=""><a href="#twodegreesDegreeImg-chart" data-toggle="tab" aria-expanded="true">Two degrees</a></li>			  			 
-            </ul>
-            <div class="tab-content no-padding">            
-				<div class="chart tab-pane active" id="oneDegreeImg-chart" style="position: relative; overflow-x:auto;">					
-					<map id="oneDegreeRelationshipsDiagram" name="oneDegreeRelationshipsDiagram">
-<area shape="rect" id="node1" href="r_indicator_node.html" title="r_indicator_node" alt="" coords="372,5,572,128">
-<area shape="rect" id="node2" href="indicator.html" title="indicator" alt="" coords="5,116,321,479">
-<area shape="rect" id="node3" href="series.html" title="series" alt="" coords="365,145,579,356">
-</map>
-
-					<a name='diagram'><img id='oneDegreeImg' src='../diagrams/indicator.1degree.png' usemap='#oneDegreeRelationshipsDiagram' class='diagram' border='0' alt='' align='left'></a>							
-				</div>
-				<div class="chart tab-pane " id="twodegreesDegreeImg-chart" style="position: relative; overflow-x:auto;">					
-					<map id="twoDegreesRelationshipsDiagram" name="twoDegreesRelationshipsDiagram">
-<area shape="rect" id="node1" href="import.html" title="import" alt="" coords="799,141,931,229">
-<area shape="rect" id="node2" href="series.html" title="series" alt="" coords="541,172,755,383">
-<area shape="rect" id="node5" href="indicator.html" title="indicator" alt="" coords="181,271,497,633">
-<area shape="rect" id="node7" href="actor.html" title="actor" alt="" coords="5,424,137,512">
-<area shape="rect" id="node8" href="protocol.html" title="protocol" alt="" coords="269,129,409,217">
-<area shape="rect" id="node9" href="spatial_layer.html" title="spatial_layer" alt="" coords="255,651,424,739">
-<area shape="rect" id="node3" href="observation.html" title="observation" alt="" coords="975,176,1139,264">
-<area shape="rect" id="node4" href="r_indicator_node.html" title="r_indicator_node" alt="" coords="548,5,748,128">
-<area shape="rect" id="node6" href="graph_node.html" title="graph_node" alt="" coords="257,24,422,112">
-</map>
-
-					<a name='diagram'><img id='twodegreesDegreeImg' src='../diagrams/indicator.2degrees.png' usemap='#twoDegreesRelationshipsDiagram' class='diagram' border='0' alt='' align='left'></a>							
-				</div>
-			  			</div>
-			</div>
-		  </div><!-- /.box-body -->
 		</div>
 	      </section>
     
