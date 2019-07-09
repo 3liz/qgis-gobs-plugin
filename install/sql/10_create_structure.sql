@@ -2,7 +2,6 @@ CREATE EXTENSION IF NOT EXISTS postgis;
 
 CREATE SCHEMA gobs;
 
-
 --
 -- Name: actor; Type: TABLE; Schema: gobs; Owner: -
 --

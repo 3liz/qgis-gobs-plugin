@@ -33,6 +33,8 @@ from qgis.core import (
 
 import processing
 import os
+from .tools import *
+import configparser
 
 class CreateDatabaseStructure(QgsProcessingAlgorithm):
     """
@@ -207,6 +209,22 @@ class CreateDatabaseStructure(QgsProcessingAlgorithm):
                         self.OUTPUT_STATUS: status,
                         self.OUTPUT_STRING: msg
                     }
+
+        # Add version
+        config = configparser.ConfigParser()
+        config.read(os.path.join(plugin_dir, 'metadata.txt'))
+        version = config['general']['version']
+        sql = '''
+            INSERT INTO gobs.metadata
+            (me_version, me_version_date, me_status)
+            VALUES (
+                '%s', now()::timestamp(0), 1
+            )
+        ''' % version
+        [header, data, rowCount, ok, error_message] = fetchDataFromSqlQuery(
+            'gobs',
+            sql
+        )
 
         return {
             self.OUTPUT_STATUS: 1,
