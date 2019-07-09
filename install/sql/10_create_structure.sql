@@ -2,6 +2,7 @@ CREATE EXTENSION IF NOT EXISTS postgis;
 
 CREATE SCHEMA gobs;
 
+
 --
 -- Name: actor; Type: TABLE; Schema: gobs; Owner: -
 --
@@ -452,6 +453,72 @@ CREATE SEQUENCE gobs.indicator_id_seq
 --
 
 ALTER SEQUENCE gobs.indicator_id_seq OWNED BY gobs.indicator.id;
+
+
+--
+-- Name: metadata; Type: TABLE; Schema: gobs; Owner: -
+--
+
+CREATE TABLE gobs.metadata (
+    id integer NOT NULL,
+    me_version text NOT NULL,
+    me_version_date date NOT NULL,
+    me_status smallint NOT NULL
+);
+
+
+--
+-- Name: TABLE metadata; Type: COMMENT; Schema: gobs; Owner: -
+--
+
+COMMENT ON TABLE gobs.metadata IS 'Metadata of the structure : version and date. Usefull for database structure and glossary data migrations between versions';
+
+
+--
+-- Name: COLUMN metadata.id; Type: COMMENT; Schema: gobs; Owner: -
+--
+
+COMMENT ON COLUMN gobs.metadata.id IS 'Id of the version';
+
+
+--
+-- Name: COLUMN metadata.me_version; Type: COMMENT; Schema: gobs; Owner: -
+--
+
+COMMENT ON COLUMN gobs.metadata.me_version IS 'Version. Ex: 1.0.2';
+
+
+--
+-- Name: COLUMN metadata.me_version_date; Type: COMMENT; Schema: gobs; Owner: -
+--
+
+COMMENT ON COLUMN gobs.metadata.me_version_date IS 'Date of the version. Ex: 2019-06-01';
+
+
+--
+-- Name: COLUMN metadata.me_status; Type: COMMENT; Schema: gobs; Owner: -
+--
+
+COMMENT ON COLUMN gobs.metadata.me_status IS 'Status of the version. 1 means active version, 0 means older version';
+
+
+--
+-- Name: metadata_id_seq; Type: SEQUENCE; Schema: gobs; Owner: -
+--
+
+CREATE SEQUENCE gobs.metadata_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+--
+-- Name: metadata_id_seq; Type: SEQUENCE OWNED BY; Schema: gobs; Owner: -
+--
+
+ALTER SEQUENCE gobs.metadata_id_seq OWNED BY gobs.metadata.id;
 
 
 --
@@ -938,6 +1005,13 @@ ALTER TABLE ONLY gobs.indicator ALTER COLUMN id SET DEFAULT nextval('gobs.indica
 
 
 --
+-- Name: metadata id; Type: DEFAULT; Schema: gobs; Owner: -
+--
+
+ALTER TABLE ONLY gobs.metadata ALTER COLUMN id SET DEFAULT nextval('gobs.metadata_id_seq'::regclass);
+
+
+--
 -- Name: observation id; Type: DEFAULT; Schema: gobs; Owner: -
 --
 
@@ -1018,6 +1092,22 @@ ALTER TABLE ONLY gobs.import
 
 ALTER TABLE ONLY gobs.indicator
     ADD CONSTRAINT indicator_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: metadata metadata_me_version_key; Type: CONSTRAINT; Schema: gobs; Owner: -
+--
+
+ALTER TABLE ONLY gobs.metadata
+    ADD CONSTRAINT metadata_me_version_key UNIQUE (me_version);
+
+
+--
+-- Name: metadata metadata_pkey; Type: CONSTRAINT; Schema: gobs; Owner: -
+--
+
+ALTER TABLE ONLY gobs.metadata
+    ADD CONSTRAINT metadata_pkey PRIMARY KEY (id);
 
 
 --
