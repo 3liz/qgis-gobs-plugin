@@ -23,3 +23,7 @@ INSERT INTO glossary (gl_field, gl_code, gl_label, gl_description, gl_order) VAL
 INSERT INTO glossary (gl_field, gl_code, gl_label, gl_description, gl_order) VALUES ('sl_geometry_type', 'multilinestring', 'MultiLinestring', 'Multi linestring geometry', 4);
 INSERT INTO glossary (gl_field, gl_code, gl_label, gl_description, gl_order) VALUES ('sl_geometry_type', 'polygon', 'Polygon', 'Simple polygon', 5);
 INSERT INTO glossary (gl_field, gl_code, gl_label, gl_description, gl_order) VALUES ('sl_geometry_type', 'multipolygon', 'MultiPolygon', 'Multi Polygon geometry', 6);
+
+-- im_status
+INSERT INTO glossary (gl_field, gl_code, gl_label, gl_description, gl_order) VALUES ('im_status', 'P', 'Pending validation', 'Data has been imported but not yet validated by its owner', 1);
+INSERT INTO glossary (gl_field, gl_code, gl_label, gl_description, gl_order) VALUES ('im_status', 'V', 'Validated data', 'Data has been validated and is visible to more users depending on their granted access', 2);

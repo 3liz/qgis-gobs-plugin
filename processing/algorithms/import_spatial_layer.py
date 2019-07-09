@@ -82,7 +82,7 @@ class ImportSpatialLayer(QgsProcessingAlgorithm):
 
         # Database connection parameters
         db_param = QgsProcessingParameterString(
-            self.CONNECTION_NAME, 'PostgreSQL connection name in QGIS',
+            self.CONNECTION_NAME, 'PostgreSQL connection',
             defaultValue='gobs',
             optional=False
         )
@@ -160,7 +160,6 @@ class ImportSpatialLayer(QgsProcessingAlgorithm):
         # Get chosen spatial layer id
         id_spatial_layer = spatiallayer.split('-')[-1].strip()
 
-
         # Import data to temporary table
         feedback.pushInfo(
             self.tr('IMPORT SOURCE LAYER INTO TEMPORARY TABLE')
@@ -220,7 +219,7 @@ class ImportSpatialLayer(QgsProcessingAlgorithm):
                     msg
                 )
         except:
-            status = False
+            status = 0
             msg = self.tr('* An unknown error occured while adding features to spatial_object table')
         finally:
 

@@ -2,11 +2,6 @@ CREATE EXTENSION IF NOT EXISTS postgis;
 
 CREATE SCHEMA gobs;
 
-
-SET default_tablespace = '';
-
-SET default_with_oids = false;
-
 --
 -- Name: actor; Type: TABLE; Schema: gobs; Owner: -
 --
@@ -358,7 +353,8 @@ CREATE TABLE gobs.indicator (
     id_value_code text[] NOT NULL,
     id_value_name text[] NOT NULL,
     id_value_type text DEFAULT 'integer'::text NOT NULL,
-    id_value_unit text NOT NULL
+    id_value_unit text NOT NULL,
+    id_paths text
 );
 
 
@@ -430,6 +426,13 @@ COMMENT ON COLUMN gobs.indicator.id_value_type IS 'Type of the stored values. Ex
 --
 
 COMMENT ON COLUMN gobs.indicator.id_value_unit IS 'Unit ot the store values. Ex : ‘inhabitants’ or ‘°C’';
+
+
+--
+-- Name: COLUMN indicator.id_paths; Type: COMMENT; Schema: gobs; Owner: -
+--
+
+COMMENT ON COLUMN gobs.indicator.id_paths IS 'Paths given to help finding an indicator. They will be split up to fill the graph_node and r_indicator_node tables. If you need multiple paths, use | as a separator. Ex: Environment / Water resources | Measure / Physics / Water';
 
 
 --
