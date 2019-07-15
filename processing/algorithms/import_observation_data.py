@@ -288,8 +288,8 @@ class ImportObservationData(QgsProcessingAlgorithm):
             else:
                 status = 1
                 id_date_format = data[0][0]
-                msg = self.tr('* Indicator date format is %s')
-                msg+= "'%s'" % id_date_format
+                msg = self.tr('* Indicator date format is')
+                msg+= " '%s'" % id_date_format
                 feedback.pushInfo(
                     msg
                 )
@@ -311,6 +311,22 @@ class ImportObservationData(QgsProcessingAlgorithm):
             if field2 and field2 != field1:
                 jsonb_array+= ', s."%s"' % field2
             jsonb_array+= ')'
+
+            # Use the correct expression for casting date and/or time
+            casted_timestamp = ''
+            if id_date_format == 'year':
+                casted_timestamp = '''
+                    concat( trim(s."{0}"::text), '-01-01')::date
+                '''.format(
+                    field_timestamp
+                )
+            else:
+                casted_timestamp = '''
+                    date_trunc('{0}', s."{1}")
+                '''.format(
+                    id_date_format,
+                    field_timestamp
+                )
             sql = '''
                 INSERT INTO gobs.observation
                 (fk_id_series, fk_id_spatial_object, fk_id_import, ob_value, ob_timestamp)
@@ -324,7 +340,7 @@ class ImportObservationData(QgsProcessingAlgorithm):
                 -- jsonb array value computed
                 %s,
                 -- timestamp from the source
-                date_trunc('%s', s."%s")
+                %s
                 FROM "%s"."%s" AS s
                 JOIN gobs.spatial_object AS so ON so.so_unique_id = s."%s"::text
                 ;
@@ -332,8 +348,7 @@ class ImportObservationData(QgsProcessingAlgorithm):
                 id_serie,
                 id_import,
                 jsonb_array,
-                id_date_format,
-                field_timestamp,
+                casted_timestamp,
                 temp_schema,
                 temp_table,
                 field_spatial_object
