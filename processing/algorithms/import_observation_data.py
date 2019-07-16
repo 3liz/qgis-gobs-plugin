@@ -46,6 +46,7 @@ class ImportObservationData(QgsProcessingAlgorithm):
     CONNECTION_NAME = 'CONNECTION_NAME'
     SERIE = 'SERIE'
     SOURCELAYER = 'SOURCELAYER'
+    MANUALDATE = 'MANUALDATE'
     FIELD_TIMESTAMP = 'FIELD_TIMESTAMP'
     FIELD_SPATIAL_OBJECT = 'FIELD_SPATIAL_OBJECT'
     FIELD1 = 'FIELD1'
@@ -127,13 +128,21 @@ class ImportObservationData(QgsProcessingAlgorithm):
                 types=[QgsProcessing.TypeVector]
             )
         )
-        # First field
+        # Date field
         self.addParameter(
             QgsProcessingParameterField(
                 self.FIELD_TIMESTAMP,
-                self.tr('Date and time field'),
-                optional=False,
+                self.tr('Date and time field. ISO Format'),
+                optional=True,
                 parentLayerParameterName=self.SOURCELAYER
+            )
+        )
+        # Manual date field
+        self.addParameter(
+            QgsProcessingParameterString(
+                self.MANUALDATE,
+                self.tr('Manual date or timestamp, (2019-01-06 or 2019-01-06 22:59:50) Use when the data refers to only one date or time'),
+                optional=True
             )
         )
         # Spatial object id field
@@ -172,6 +181,26 @@ class ImportObservationData(QgsProcessingAlgorithm):
             )
         )
 
+
+    def checkParameterValues(self, parameters, context):
+
+        # Check date has been given
+        field_timestamp = self.parameterAsString(parameters, self.FIELD_TIMESTAMP, context)
+        manualdate = (self.parameterAsString(parameters, self.MANUALDATE, context)).strip()
+        if not field_timestamp and not manualdate:
+            ok = False
+            msg = self.tr('You need to enter either a date/time field or a manual date/time')
+
+        # check validity of given manual date
+        # TODO
+        if manualdate:
+            ok = True
+
+        if not ok:
+            return False, msg
+        return super(self.__class__, self).checkParameterValues(parameters, context)
+
+
     def processAlgorithm(self, parameters, context, feedback):
         """
         Here is where the processing itself takes place.
@@ -182,6 +211,7 @@ class ImportObservationData(QgsProcessingAlgorithm):
         serie = self.SERIES[parameters[self.SERIE]]
         sourcelayer = self.parameterAsVectorLayer(parameters, self.SOURCELAYER, context)
         field_timestamp = self.parameterAsString(parameters, self.FIELD_TIMESTAMP, context)
+        manualdate = self.parameterAsString(parameters, self.MANUALDATE, context)
         field_spatial_object = self.parameterAsString(parameters, self.FIELD_SPATIAL_OBJECT, context)
         field1 = self.parameterAsString(parameters, self.FIELD1, context)
         field2 = self.parameterAsString(parameters, self.FIELD2, context)
@@ -313,20 +343,43 @@ class ImportObservationData(QgsProcessingAlgorithm):
             jsonb_array+= ')'
 
             # Use the correct expression for casting date and/or time
-            casted_timestamp = ''
-            if id_date_format == 'year':
+            caster = 'timestamp'
+            if id_date_format in ('year', 'month', 'day'):
+                caster = 'date'
+
+            if manualdate.strip():
+                manualdate = manualdate.strip().replace('/', '-')
+                if id_date_format == 'year':
+                    manualdate = manualdate[0:4] + '-01-01'
+                elif id_date_format == 'month':
+                    manualdate = manualdate[0:7] + '-01'
+                elif id_date_format == 'day':
+                    manualdate = manualdate[0:10]
+                else:
+                    manualdate = manualdate.strip()
                 casted_timestamp = '''
-                    concat( trim(s."{0}"::text), '-01-01')::date
+                    '{0}'::{1}
                 '''.format(
-                    field_timestamp
+                    manualdate,
+                    caster
                 )
             else:
-                casted_timestamp = '''
-                    date_trunc('{0}', s."{1}")
-                '''.format(
-                    id_date_format,
-                    field_timestamp
-                )
+                casted_timestamp = ''
+                if id_date_format == 'year':
+                    casted_timestamp = '''
+                        concat( trim(s."{0}"::text), '-01-01')::{1}
+                    '''.format(
+                        field_timestamp,
+                        caster
+                    )
+                else:
+                    casted_timestamp = '''
+                        date_trunc('{0}', s."{1}"::{2})
+                    '''.format(
+                        id_date_format,
+                        field_timestamp,
+                        caster
+                    )
             sql = '''
                 INSERT INTO gobs.observation
                 (fk_id_series, fk_id_spatial_object, fk_id_import, ob_value, ob_timestamp)
