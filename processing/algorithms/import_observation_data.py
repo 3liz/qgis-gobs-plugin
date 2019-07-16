@@ -185,6 +185,7 @@ class ImportObservationData(QgsProcessingAlgorithm):
     def checkParameterValues(self, parameters, context):
 
         # Check date has been given
+        ok = True
         field_timestamp = self.parameterAsString(parameters, self.FIELD_TIMESTAMP, context)
         manualdate = (self.parameterAsString(parameters, self.MANUALDATE, context)).strip()
         if not field_timestamp and not manualdate:

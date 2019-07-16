@@ -23,31 +23,6 @@ from qgis.core import (
 def tr(string):
     return QCoreApplication.translate('Processing', string)
 
-def getTableData(service, table, fields, orderColumn='id'):
-
-    sql = 'SELECT "%s" FROM gobs."%s" ORDER BY "%s"' % (
-        table,
-        '", "'.join(fields),
-        orderColumn
-    )
-    get_sql = self.run_sql(sql, service, None, None)
-    ok = bool(get_sql['OUTPUT_STATUS'])
-    msg = get_sql['OUTPUT_STRING']
-    if not ok:
-        return ok, msg
-    msg = tr('Schema gobs does not exists. Continue...')
-    data = []
-    if 'OUTPUT_LAYER' in get_sql:
-        for feature in get_sql['OUTPUT_LAYER'].getFeatures():
-            line = {}
-            for f in fields:
-                line[f] = feature[f]
-            data.append(
-                line
-            )
-    return data
-
-
 def fetchDataFromSqlQuery(service, sql):
 
     from db_manager.db_plugins.plugin import BaseError
