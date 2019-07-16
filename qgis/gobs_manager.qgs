@@ -19,19 +19,22 @@
   </projectCrs>
   <layer-tree-group>
     <customproperties/>
+    <layer-tree-group name="Exports" expanded="1" checked="Qt::Checked">
+      <customproperties/>
+    </layer-tree-group>
     <layer-tree-group name="Imports" expanded="1" checked="Qt::Checked">
       <customproperties/>
-      <layer-tree-layer name="pluviometrie_stations_technique" expanded="1" id="pluviometrie_stations_technique_66eb0c8c_1668_4009_a8fb_6437ffca93d3" source="../install/test_data/bretagne/pluviometrie_stations_technique.geojson" checked="Qt::Checked" providerKey="ogr">
+      <layer-tree-layer providerKey="ogr" id="pluviometrie_stations_technique_66eb0c8c_1668_4009_a8fb_6437ffca93d3" name="pluviometrie_stations_technique" expanded="1" source="../install/test_data/bretagne/pluviometrie_stations_technique.geojson" checked="Qt::Checked">
         <customproperties>
           <property key="showFeatureCount" value="1"/>
         </customproperties>
       </layer-tree-layer>
-      <layer-tree-layer name="pluviometrie_horaire_historique" expanded="1" id="pluviometrie_horaire_historique_16e3e428_23be_4eae_a3e0_8eeddea0d3b9" source="../install/test_data/bretagne/pluviometrie_horaire_historique.csv" checked="Qt::Checked" providerKey="ogr">
+      <layer-tree-layer providerKey="ogr" id="pluviometrie_horaire_historique_16e3e428_23be_4eae_a3e0_8eeddea0d3b9" name="pluviometrie_horaire_historique" expanded="1" source="../install/test_data/bretagne/pluviometrie_horaire_historique.csv" checked="Qt::Checked">
         <customproperties>
           <property key="showFeatureCount" value="1"/>
         </customproperties>
       </layer-tree-layer>
-      <layer-tree-layer name="rp_struct_pop_evolution_geom rb:rp_struct_pop_evolution_geom" expanded="1" id="rp_struct_pop_evolution_geom_9e098769_c0a3_48ea_af36_583a5b78040f" source="../install/test_data/bretagne/rp_struct_pop_evolution_geom.geojson" checked="Qt::Checked" providerKey="ogr">
+      <layer-tree-layer providerKey="ogr" id="rp_struct_pop_evolution_geom_9e098769_c0a3_48ea_af36_583a5b78040f" name="rp_struct_pop_evolution_geom rb:rp_struct_pop_evolution_geom" expanded="1" source="../install/test_data/bretagne/rp_struct_pop_evolution_geom.geojson" checked="Qt::Checked">
         <customproperties>
           <property key="showFeatureCount" value="1"/>
         </customproperties>
@@ -39,44 +42,44 @@
     </layer-tree-group>
     <layer-tree-group name="Structure" expanded="1" checked="Qt::Checked">
       <customproperties/>
-      <layer-tree-layer name="actor_category" expanded="1" id="actor_category_8a7edcf8_cb34_4689_b22b_7a8a6a2ab610" source="service='gobs' sslmode=disable key='id' estimatedmetadata=true checkPrimaryKeyUnicity='0' table=&quot;gobs&quot;.&quot;actor_category&quot; sql=" checked="Qt::Checked" providerKey="postgres">
+      <layer-tree-layer providerKey="postgres" id="actor_category_8a7edcf8_cb34_4689_b22b_7a8a6a2ab610" name="actor_category" expanded="1" source="service='gobs' sslmode=disable key='id' estimatedmetadata=true checkPrimaryKeyUnicity='0' table=&quot;gobs&quot;.&quot;actor_category&quot; sql=" checked="Qt::Checked">
         <customproperties/>
       </layer-tree-layer>
-      <layer-tree-layer name="actor" expanded="1" id="actor_5f01a6e5_8205_462f_af40_0ffd7ff0a44f" source="service='gobs' sslmode=disable key='id' estimatedmetadata=true checkPrimaryKeyUnicity='0' table=&quot;gobs&quot;.&quot;actor&quot; sql=" checked="Qt::Checked" providerKey="postgres">
+      <layer-tree-layer providerKey="postgres" id="actor_5f01a6e5_8205_462f_af40_0ffd7ff0a44f" name="actor" expanded="1" source="service='gobs' sslmode=disable key='id' estimatedmetadata=true checkPrimaryKeyUnicity='0' table=&quot;gobs&quot;.&quot;actor&quot; sql=" checked="Qt::Checked">
         <customproperties/>
       </layer-tree-layer>
-      <layer-tree-layer name="spatial_layer" expanded="1" id="spatial_layer_18215d6d_1f4c_40d2_ba83_f2c9a9694e84" source="service='gobs' sslmode=disable key='id' estimatedmetadata=true checkPrimaryKeyUnicity='0' table=&quot;gobs&quot;.&quot;spatial_layer&quot; sql=" checked="Qt::Checked" providerKey="postgres">
+      <layer-tree-layer providerKey="postgres" id="spatial_layer_18215d6d_1f4c_40d2_ba83_f2c9a9694e84" name="spatial_layer" expanded="1" source="service='gobs' sslmode=disable key='id' estimatedmetadata=true checkPrimaryKeyUnicity='0' table=&quot;gobs&quot;.&quot;spatial_layer&quot; sql=" checked="Qt::Checked">
         <customproperties/>
       </layer-tree-layer>
-      <layer-tree-layer name="indicator" expanded="1" id="indicator_18ba18bf_0390_45a3_8edd_1cc049e8a251" source="service='gobs' sslmode=disable key='id' estimatedmetadata=true checkPrimaryKeyUnicity='0' table=&quot;gobs&quot;.&quot;indicator&quot; sql=" checked="Qt::Checked" providerKey="postgres">
+      <layer-tree-layer providerKey="postgres" id="indicator_18ba18bf_0390_45a3_8edd_1cc049e8a251" name="indicator" expanded="1" source="service='gobs' sslmode=disable key='id' estimatedmetadata=true checkPrimaryKeyUnicity='0' table=&quot;gobs&quot;.&quot;indicator&quot; sql=" checked="Qt::Checked">
         <customproperties/>
       </layer-tree-layer>
-      <layer-tree-layer name="series" expanded="1" id="series_04a7414a_ab6d_4611_8a60_bcd22071dc22" source="service='gobs' sslmode=disable key='id' estimatedmetadata=true checkPrimaryKeyUnicity='0' table=&quot;gobs&quot;.&quot;series&quot; sql=" checked="Qt::Checked" providerKey="postgres">
+      <layer-tree-layer providerKey="postgres" id="series_04a7414a_ab6d_4611_8a60_bcd22071dc22" name="series" expanded="1" source="service='gobs' sslmode=disable key='id' estimatedmetadata=true checkPrimaryKeyUnicity='0' table=&quot;gobs&quot;.&quot;series&quot; sql=" checked="Qt::Checked">
         <customproperties/>
       </layer-tree-layer>
-      <layer-tree-layer name="observation" expanded="1" id="observation_bcc90162_47c8_4097_bc24_a31af92d2708" source="service='gobs' sslmode=disable key='id' estimatedmetadata=true checkPrimaryKeyUnicity='0' table=&quot;gobs&quot;.&quot;observation&quot; sql=" checked="Qt::Checked" providerKey="postgres">
+      <layer-tree-layer providerKey="postgres" id="observation_bcc90162_47c8_4097_bc24_a31af92d2708" name="observation" expanded="1" source="service='gobs' sslmode=disable key='id' estimatedmetadata=true checkPrimaryKeyUnicity='0' table=&quot;gobs&quot;.&quot;observation&quot; sql=" checked="Qt::Checked">
         <customproperties/>
       </layer-tree-layer>
-      <layer-tree-layer name="r_indicator_node" expanded="1" id="r_indicator_node_2ca83116_e69f_4dcb_abcb_de5bdf44b2be" source="service='gobs' sslmode=disable key='fk_id_indicator,fk_id_node' estimatedmetadata=true checkPrimaryKeyUnicity='0' table=&quot;gobs&quot;.&quot;r_indicator_node&quot; sql=" checked="Qt::Checked" providerKey="postgres">
+      <layer-tree-layer providerKey="postgres" id="r_indicator_node_2ca83116_e69f_4dcb_abcb_de5bdf44b2be" name="r_indicator_node" expanded="1" source="service='gobs' sslmode=disable key='fk_id_indicator,fk_id_node' estimatedmetadata=true checkPrimaryKeyUnicity='0' table=&quot;gobs&quot;.&quot;r_indicator_node&quot; sql=" checked="Qt::Checked">
         <customproperties/>
       </layer-tree-layer>
-      <layer-tree-layer name="r_graph_edge" expanded="1" id="r_graph_edge_f2eb47e9_728b_4c85_a839_3b488e132e06" source="service='gobs' sslmode=disable key='ge_parent_node,ge_child_node' estimatedmetadata=true checkPrimaryKeyUnicity='0' table=&quot;gobs&quot;.&quot;r_graph_edge&quot; sql=" checked="Qt::Checked" providerKey="postgres">
+      <layer-tree-layer providerKey="postgres" id="r_graph_edge_f2eb47e9_728b_4c85_a839_3b488e132e06" name="r_graph_edge" expanded="1" source="service='gobs' sslmode=disable key='ge_parent_node,ge_child_node' estimatedmetadata=true checkPrimaryKeyUnicity='0' table=&quot;gobs&quot;.&quot;r_graph_edge&quot; sql=" checked="Qt::Checked">
         <customproperties/>
       </layer-tree-layer>
-      <layer-tree-layer name="protocol" expanded="1" id="protocol_5507f1c8_1802_4df0_a273_8e9b7f52c352" source="service='gobs' sslmode=disable key='id' estimatedmetadata=true checkPrimaryKeyUnicity='0' table=&quot;gobs&quot;.&quot;protocol&quot; sql=" checked="Qt::Checked" providerKey="postgres">
+      <layer-tree-layer providerKey="postgres" id="protocol_5507f1c8_1802_4df0_a273_8e9b7f52c352" name="protocol" expanded="1" source="service='gobs' sslmode=disable key='id' estimatedmetadata=true checkPrimaryKeyUnicity='0' table=&quot;gobs&quot;.&quot;protocol&quot; sql=" checked="Qt::Checked">
         <customproperties/>
       </layer-tree-layer>
-      <layer-tree-layer name="import" expanded="1" id="import_0343eb12_592e_4fd0_8380_51f4d62b6a56" source="service='gobs' sslmode=disable key='id' estimatedmetadata=true checkPrimaryKeyUnicity='0' table=&quot;gobs&quot;.&quot;import&quot; sql=" checked="Qt::Checked" providerKey="postgres">
+      <layer-tree-layer providerKey="postgres" id="import_0343eb12_592e_4fd0_8380_51f4d62b6a56" name="import" expanded="1" source="service='gobs' sslmode=disable key='id' estimatedmetadata=true checkPrimaryKeyUnicity='0' table=&quot;gobs&quot;.&quot;import&quot; sql=" checked="Qt::Checked">
         <customproperties/>
       </layer-tree-layer>
-      <layer-tree-layer name="graph_node" expanded="1" id="graph_node_2cd9eee8_46e2_401c_87f7_8b40d9d6260e" source="service='gobs' sslmode=disable key='id' estimatedmetadata=true checkPrimaryKeyUnicity='0' table=&quot;gobs&quot;.&quot;graph_node&quot; sql=" checked="Qt::Checked" providerKey="postgres">
+      <layer-tree-layer providerKey="postgres" id="graph_node_2cd9eee8_46e2_401c_87f7_8b40d9d6260e" name="graph_node" expanded="1" source="service='gobs' sslmode=disable key='id' estimatedmetadata=true checkPrimaryKeyUnicity='0' table=&quot;gobs&quot;.&quot;graph_node&quot; sql=" checked="Qt::Checked">
         <customproperties/>
       </layer-tree-layer>
-      <layer-tree-layer name="glossary" expanded="0" id="glossary_cee356e0_5be5_4d87_ac2b_e8e8967c4032" source="service='gobs' sslmode=disable key='id' estimatedmetadata=true checkPrimaryKeyUnicity='0' table=&quot;gobs&quot;.&quot;glossary&quot; sql=" checked="Qt::Checked" providerKey="postgres">
+      <layer-tree-layer providerKey="postgres" id="glossary_cee356e0_5be5_4d87_ac2b_e8e8967c4032" name="glossary" expanded="0" source="service='gobs' sslmode=disable key='id' estimatedmetadata=true checkPrimaryKeyUnicity='0' table=&quot;gobs&quot;.&quot;glossary&quot; sql=" checked="Qt::Checked">
         <customproperties/>
       </layer-tree-layer>
     </layer-tree-group>
-    <layer-tree-layer name="osm-mapnik" expanded="1" id="osm_mapnik_73cc9876_fa44_4742_bc09_afe572b57bbe" source="crs=EPSG:3857&amp;format&amp;type=xyz&amp;url=http://tile.openstreetmap.org/%7Bz%7D/%7Bx%7D/%7By%7D.png" checked="Qt::Unchecked" providerKey="wms">
+    <layer-tree-layer providerKey="wms" id="osm_mapnik_73cc9876_fa44_4742_bc09_afe572b57bbe" name="osm-mapnik" expanded="1" source="crs=EPSG:3857&amp;format&amp;type=xyz&amp;url=http://tile.openstreetmap.org/%7Bz%7D/%7Bx%7D/%7By%7D.png" checked="Qt::Unchecked">
       <customproperties/>
     </layer-tree-layer>
     <custom-order enabled="0">
@@ -85,45 +88,45 @@
       <item>rp_struct_pop_evolution_geom_9e098769_c0a3_48ea_af36_583a5b78040f</item>
     </custom-order>
   </layer-tree-group>
-  <snapping-settings mode="2" tolerance="0" intersection-snapping="0" enabled="0" type="1" unit="2">
+  <snapping-settings enabled="0" intersection-snapping="0" type="1" mode="2" tolerance="0" unit="2">
     <individual-layer-settings>
-      <layer-setting tolerance="0" id="rp_struct_pop_evolution_geom_9e098769_c0a3_48ea_af36_583a5b78040f" units="2" enabled="0" type="1"/>
-      <layer-setting tolerance="0" id="spatial_object_c4852341_be7f_490c_b115_26d47b3e38f8" units="2" enabled="0" type="1"/>
-      <layer-setting tolerance="0" id="pluviometrie_stations_technique_66eb0c8c_1668_4009_a8fb_6437ffca93d3" units="2" enabled="0" type="1"/>
+      <layer-setting enabled="0" units="2" id="rp_struct_pop_evolution_geom_9e098769_c0a3_48ea_af36_583a5b78040f" type="1" tolerance="0"/>
+      <layer-setting enabled="0" units="2" id="spatial_object_c4852341_be7f_490c_b115_26d47b3e38f8" type="1" tolerance="0"/>
+      <layer-setting enabled="0" units="2" id="pluviometrie_stations_technique_66eb0c8c_1668_4009_a8fb_6437ffca93d3" type="1" tolerance="0"/>
     </individual-layer-settings>
   </snapping-settings>
   <relations>
-    <relation name="actor_id_category_fkey" id="actor_5f01a6e5_8205_462f_af40_0ffd7ff0a44f_id_category_actor_category_8a7edcf8_cb34_4689_b22b_7a8a6a2ab610_id" strength="Association" referencedLayer="actor_category_8a7edcf8_cb34_4689_b22b_7a8a6a2ab610" referencingLayer="actor_5f01a6e5_8205_462f_af40_0ffd7ff0a44f">
+    <relation referencingLayer="actor_5f01a6e5_8205_462f_af40_0ffd7ff0a44f" id="actor_5f01a6e5_8205_462f_af40_0ffd7ff0a44f_id_category_actor_category_8a7edcf8_cb34_4689_b22b_7a8a6a2ab610_id" name="actor_id_category_fkey" referencedLayer="actor_category_8a7edcf8_cb34_4689_b22b_7a8a6a2ab610" strength="Association">
       <fieldRef referencingField="id_category" referencedField="id"/>
     </relation>
-    <relation name="import_fk_id_series_fkey" id="import_0343eb12_592e_4fd0_8380_51f4d62b6a56_fk_id_series_series_04a7414a_ab6d_4611_8a60_bcd22071dc22_id" strength="Association" referencedLayer="series_04a7414a_ab6d_4611_8a60_bcd22071dc22" referencingLayer="import_0343eb12_592e_4fd0_8380_51f4d62b6a56">
+    <relation referencingLayer="import_0343eb12_592e_4fd0_8380_51f4d62b6a56" id="import_0343eb12_592e_4fd0_8380_51f4d62b6a56_fk_id_series_series_04a7414a_ab6d_4611_8a60_bcd22071dc22_id" name="import_fk_id_series_fkey" referencedLayer="series_04a7414a_ab6d_4611_8a60_bcd22071dc22" strength="Association">
       <fieldRef referencingField="fk_id_series" referencedField="id"/>
     </relation>
-    <relation name="observation_fk_id_import_fkey" id="observation_bcc90162_47c8_4097_bc24_a31af92d2708_fk_id_import_import_0343eb12_592e_4fd0_8380_51f4d62b6a56_id" strength="Association" referencedLayer="import_0343eb12_592e_4fd0_8380_51f4d62b6a56" referencingLayer="observation_bcc90162_47c8_4097_bc24_a31af92d2708">
+    <relation referencingLayer="observation_bcc90162_47c8_4097_bc24_a31af92d2708" id="observation_bcc90162_47c8_4097_bc24_a31af92d2708_fk_id_import_import_0343eb12_592e_4fd0_8380_51f4d62b6a56_id" name="observation_fk_id_import_fkey" referencedLayer="import_0343eb12_592e_4fd0_8380_51f4d62b6a56" strength="Association">
       <fieldRef referencingField="fk_id_import" referencedField="id"/>
     </relation>
-    <relation name="observation_fk_id_series_fkey" id="observation_bcc90162_47c8_4097_bc24_a31af92d2708_fk_id_series_series_04a7414a_ab6d_4611_8a60_bcd22071dc22_id" strength="Association" referencedLayer="series_04a7414a_ab6d_4611_8a60_bcd22071dc22" referencingLayer="observation_bcc90162_47c8_4097_bc24_a31af92d2708">
+    <relation referencingLayer="observation_bcc90162_47c8_4097_bc24_a31af92d2708" id="observation_bcc90162_47c8_4097_bc24_a31af92d2708_fk_id_series_series_04a7414a_ab6d_4611_8a60_bcd22071dc22_id" name="observation_fk_id_series_fkey" referencedLayer="series_04a7414a_ab6d_4611_8a60_bcd22071dc22" strength="Association">
       <fieldRef referencingField="fk_id_series" referencedField="id"/>
     </relation>
-    <relation name="r_indicator_node_fk_id_indicator_fkey" id="r_indicator_node_2ca83116_e69f_4dcb_abcb_de5bdf44b2be_fk_id_indicator_indicator_18ba18bf_0390_45a3_8edd_1cc049e8a251_id" strength="Association" referencedLayer="indicator_18ba18bf_0390_45a3_8edd_1cc049e8a251" referencingLayer="r_indicator_node_2ca83116_e69f_4dcb_abcb_de5bdf44b2be">
+    <relation referencingLayer="r_indicator_node_2ca83116_e69f_4dcb_abcb_de5bdf44b2be" id="r_indicator_node_2ca83116_e69f_4dcb_abcb_de5bdf44b2be_fk_id_indicator_indicator_18ba18bf_0390_45a3_8edd_1cc049e8a251_id" name="r_indicator_node_fk_id_indicator_fkey" referencedLayer="indicator_18ba18bf_0390_45a3_8edd_1cc049e8a251" strength="Association">
       <fieldRef referencingField="fk_id_indicator" referencedField="id"/>
     </relation>
-    <relation name="r_indicator_node_fk_id_node_fkey" id="r_indicator_node_2ca83116_e69f_4dcb_abcb_de5bdf44b2be_fk_id_node_graph_node_2cd9eee8_46e2_401c_87f7_8b40d9d6260e_id" strength="Association" referencedLayer="graph_node_2cd9eee8_46e2_401c_87f7_8b40d9d6260e" referencingLayer="r_indicator_node_2ca83116_e69f_4dcb_abcb_de5bdf44b2be">
+    <relation referencingLayer="r_indicator_node_2ca83116_e69f_4dcb_abcb_de5bdf44b2be" id="r_indicator_node_2ca83116_e69f_4dcb_abcb_de5bdf44b2be_fk_id_node_graph_node_2cd9eee8_46e2_401c_87f7_8b40d9d6260e_id" name="r_indicator_node_fk_id_node_fkey" referencedLayer="graph_node_2cd9eee8_46e2_401c_87f7_8b40d9d6260e" strength="Association">
       <fieldRef referencingField="fk_id_node" referencedField="id"/>
     </relation>
-    <relation name="series_fk_id_actor_fkey" id="series_04a7414a_ab6d_4611_8a60_bcd22071dc22_fk_id_actor_actor_5f01a6e5_8205_462f_af40_0ffd7ff0a44f_id" strength="Association" referencedLayer="actor_5f01a6e5_8205_462f_af40_0ffd7ff0a44f" referencingLayer="series_04a7414a_ab6d_4611_8a60_bcd22071dc22">
+    <relation referencingLayer="series_04a7414a_ab6d_4611_8a60_bcd22071dc22" id="series_04a7414a_ab6d_4611_8a60_bcd22071dc22_fk_id_actor_actor_5f01a6e5_8205_462f_af40_0ffd7ff0a44f_id" name="series_fk_id_actor_fkey" referencedLayer="actor_5f01a6e5_8205_462f_af40_0ffd7ff0a44f" strength="Association">
       <fieldRef referencingField="fk_id_actor" referencedField="id"/>
     </relation>
-    <relation name="series_fk_id_indicator_fkey" id="series_04a7414a_ab6d_4611_8a60_bcd22071dc22_fk_id_indicator_indicator_18ba18bf_0390_45a3_8edd_1cc049e8a251_id" strength="Association" referencedLayer="indicator_18ba18bf_0390_45a3_8edd_1cc049e8a251" referencingLayer="series_04a7414a_ab6d_4611_8a60_bcd22071dc22">
+    <relation referencingLayer="series_04a7414a_ab6d_4611_8a60_bcd22071dc22" id="series_04a7414a_ab6d_4611_8a60_bcd22071dc22_fk_id_indicator_indicator_18ba18bf_0390_45a3_8edd_1cc049e8a251_id" name="series_fk_id_indicator_fkey" referencedLayer="indicator_18ba18bf_0390_45a3_8edd_1cc049e8a251" strength="Association">
       <fieldRef referencingField="fk_id_indicator" referencedField="id"/>
     </relation>
-    <relation name="series_fk_id_protocol_fkey" id="series_04a7414a_ab6d_4611_8a60_bcd22071dc22_fk_id_protocol_protocol_5507f1c8_1802_4df0_a273_8e9b7f52c352_id" strength="Association" referencedLayer="protocol_5507f1c8_1802_4df0_a273_8e9b7f52c352" referencingLayer="series_04a7414a_ab6d_4611_8a60_bcd22071dc22">
+    <relation referencingLayer="series_04a7414a_ab6d_4611_8a60_bcd22071dc22" id="series_04a7414a_ab6d_4611_8a60_bcd22071dc22_fk_id_protocol_protocol_5507f1c8_1802_4df0_a273_8e9b7f52c352_id" name="series_fk_id_protocol_fkey" referencedLayer="protocol_5507f1c8_1802_4df0_a273_8e9b7f52c352" strength="Association">
       <fieldRef referencingField="fk_id_protocol" referencedField="id"/>
     </relation>
-    <relation name="series_fk_id_spatial_layer_fkey" id="series_04a7414a_ab6d_4611_8a60_bcd22071dc22_fk_id_spatial_layer_spatial_layer_18215d6d_1f4c_40d2_ba83_f2c9a9694e84_id" strength="Association" referencedLayer="spatial_layer_18215d6d_1f4c_40d2_ba83_f2c9a9694e84" referencingLayer="series_04a7414a_ab6d_4611_8a60_bcd22071dc22">
+    <relation referencingLayer="series_04a7414a_ab6d_4611_8a60_bcd22071dc22" id="series_04a7414a_ab6d_4611_8a60_bcd22071dc22_fk_id_spatial_layer_spatial_layer_18215d6d_1f4c_40d2_ba83_f2c9a9694e84_id" name="series_fk_id_spatial_layer_fkey" referencedLayer="spatial_layer_18215d6d_1f4c_40d2_ba83_f2c9a9694e84" strength="Association">
       <fieldRef referencingField="fk_id_spatial_layer" referencedField="id"/>
     </relation>
-    <relation name="spatial_layer_fk_id_actor_fkey" id="spatial_layer_18215d6d_1f4c_40d2_ba83_f2c9a9694e84_fk_id_actor_actor_5f01a6e5_8205_462f_af40_0ffd7ff0a44f_id" strength="Association" referencedLayer="actor_5f01a6e5_8205_462f_af40_0ffd7ff0a44f" referencingLayer="spatial_layer_18215d6d_1f4c_40d2_ba83_f2c9a9694e84">
+    <relation referencingLayer="spatial_layer_18215d6d_1f4c_40d2_ba83_f2c9a9694e84" id="spatial_layer_18215d6d_1f4c_40d2_ba83_f2c9a9694e84_fk_id_actor_actor_5f01a6e5_8205_462f_af40_0ffd7ff0a44f_id" name="spatial_layer_fk_id_actor_fkey" referencedLayer="actor_5f01a6e5_8205_462f_af40_0ffd7ff0a44f" strength="Association">
       <fieldRef referencingField="fk_id_actor" referencedField="id"/>
     </relation>
   </relations>
@@ -152,106 +155,96 @@
   </mapcanvas>
   <projectModels/>
   <legend updateDrawingOrder="true">
-    <legendgroup name="Imports" checked="Qt::Checked" open="true">
-      <legendlayer name="pluviometrie_stations_technique" checked="Qt::Checked" drawingOrder="-1" showFeatureCount="1" open="true">
-        <filegroup hidden="false" open="true">
+    <legendgroup open="true" name="Exports" checked="Qt::Checked"/>
+    <legendgroup open="true" name="Imports" checked="Qt::Checked">
+      <legendlayer open="true" name="pluviometrie_stations_technique" showFeatureCount="1" drawingOrder="-1" checked="Qt::Checked">
+        <filegroup open="true" hidden="false">
           <legendlayerfile layerid="pluviometrie_stations_technique_66eb0c8c_1668_4009_a8fb_6437ffca93d3" isInOverview="0" visible="1"/>
         </filegroup>
       </legendlayer>
-      <legendlayer name="pluviometrie_horaire_historique" checked="Qt::Checked" drawingOrder="-1" showFeatureCount="1" open="true">
-        <filegroup hidden="false" open="true">
+      <legendlayer open="true" name="pluviometrie_horaire_historique" showFeatureCount="1" drawingOrder="-1" checked="Qt::Checked">
+        <filegroup open="true" hidden="false">
           <legendlayerfile layerid="pluviometrie_horaire_historique_16e3e428_23be_4eae_a3e0_8eeddea0d3b9" isInOverview="0" visible="1"/>
         </filegroup>
       </legendlayer>
-      <legendlayer name="rp_struct_pop_evolution_geom rb:rp_struct_pop_evolution_geom" checked="Qt::Checked" drawingOrder="-1" showFeatureCount="1" open="true">
-        <filegroup hidden="false" open="true">
+      <legendlayer open="true" name="rp_struct_pop_evolution_geom rb:rp_struct_pop_evolution_geom" showFeatureCount="1" drawingOrder="-1" checked="Qt::Checked">
+        <filegroup open="true" hidden="false">
           <legendlayerfile layerid="rp_struct_pop_evolution_geom_9e098769_c0a3_48ea_af36_583a5b78040f" isInOverview="0" visible="1"/>
         </filegroup>
       </legendlayer>
     </legendgroup>
-    <legendgroup name="Structure" checked="Qt::Checked" open="true">
-      <legendlayer name="actor_category" checked="Qt::Checked" drawingOrder="-1" showFeatureCount="0" open="true">
-        <filegroup hidden="false" open="true">
+    <legendgroup open="true" name="Structure" checked="Qt::Checked">
+      <legendlayer open="true" name="actor_category" showFeatureCount="0" drawingOrder="-1" checked="Qt::Checked">
+        <filegroup open="true" hidden="false">
           <legendlayerfile layerid="actor_category_8a7edcf8_cb34_4689_b22b_7a8a6a2ab610" isInOverview="0" visible="1"/>
         </filegroup>
       </legendlayer>
-      <legendlayer name="actor" checked="Qt::Checked" drawingOrder="-1" showFeatureCount="0" open="true">
-        <filegroup hidden="false" open="true">
+      <legendlayer open="true" name="actor" showFeatureCount="0" drawingOrder="-1" checked="Qt::Checked">
+        <filegroup open="true" hidden="false">
           <legendlayerfile layerid="actor_5f01a6e5_8205_462f_af40_0ffd7ff0a44f" isInOverview="0" visible="1"/>
         </filegroup>
       </legendlayer>
-      <legendlayer name="spatial_layer" checked="Qt::Checked" drawingOrder="-1" showFeatureCount="0" open="true">
-        <filegroup hidden="false" open="true">
+      <legendlayer open="true" name="spatial_layer" showFeatureCount="0" drawingOrder="-1" checked="Qt::Checked">
+        <filegroup open="true" hidden="false">
           <legendlayerfile layerid="spatial_layer_18215d6d_1f4c_40d2_ba83_f2c9a9694e84" isInOverview="0" visible="1"/>
         </filegroup>
       </legendlayer>
-      <legendlayer name="indicator" checked="Qt::Checked" drawingOrder="-1" showFeatureCount="0" open="true">
-        <filegroup hidden="false" open="true">
+      <legendlayer open="true" name="indicator" showFeatureCount="0" drawingOrder="-1" checked="Qt::Checked">
+        <filegroup open="true" hidden="false">
           <legendlayerfile layerid="indicator_18ba18bf_0390_45a3_8edd_1cc049e8a251" isInOverview="0" visible="1"/>
         </filegroup>
       </legendlayer>
-      <legendlayer name="series" checked="Qt::Checked" drawingOrder="-1" showFeatureCount="0" open="true">
-        <filegroup hidden="false" open="true">
+      <legendlayer open="true" name="series" showFeatureCount="0" drawingOrder="-1" checked="Qt::Checked">
+        <filegroup open="true" hidden="false">
           <legendlayerfile layerid="series_04a7414a_ab6d_4611_8a60_bcd22071dc22" isInOverview="0" visible="1"/>
         </filegroup>
       </legendlayer>
-      <legendlayer name="observation" checked="Qt::Checked" drawingOrder="-1" showFeatureCount="0" open="true">
-        <filegroup hidden="false" open="true">
+      <legendlayer open="true" name="observation" showFeatureCount="0" drawingOrder="-1" checked="Qt::Checked">
+        <filegroup open="true" hidden="false">
           <legendlayerfile layerid="observation_bcc90162_47c8_4097_bc24_a31af92d2708" isInOverview="0" visible="1"/>
         </filegroup>
       </legendlayer>
-      <legendlayer name="r_indicator_node" checked="Qt::Checked" drawingOrder="-1" showFeatureCount="0" open="true">
-        <filegroup hidden="false" open="true">
+      <legendlayer open="true" name="r_indicator_node" showFeatureCount="0" drawingOrder="-1" checked="Qt::Checked">
+        <filegroup open="true" hidden="false">
           <legendlayerfile layerid="r_indicator_node_2ca83116_e69f_4dcb_abcb_de5bdf44b2be" isInOverview="0" visible="1"/>
         </filegroup>
       </legendlayer>
-      <legendlayer name="r_graph_edge" checked="Qt::Checked" drawingOrder="-1" showFeatureCount="0" open="true">
-        <filegroup hidden="false" open="true">
+      <legendlayer open="true" name="r_graph_edge" showFeatureCount="0" drawingOrder="-1" checked="Qt::Checked">
+        <filegroup open="true" hidden="false">
           <legendlayerfile layerid="r_graph_edge_f2eb47e9_728b_4c85_a839_3b488e132e06" isInOverview="0" visible="1"/>
         </filegroup>
       </legendlayer>
-      <legendlayer name="protocol" checked="Qt::Checked" drawingOrder="-1" showFeatureCount="0" open="true">
-        <filegroup hidden="false" open="true">
+      <legendlayer open="true" name="protocol" showFeatureCount="0" drawingOrder="-1" checked="Qt::Checked">
+        <filegroup open="true" hidden="false">
           <legendlayerfile layerid="protocol_5507f1c8_1802_4df0_a273_8e9b7f52c352" isInOverview="0" visible="1"/>
         </filegroup>
       </legendlayer>
-      <legendlayer name="import" checked="Qt::Checked" drawingOrder="-1" showFeatureCount="0" open="true">
-        <filegroup hidden="false" open="true">
+      <legendlayer open="true" name="import" showFeatureCount="0" drawingOrder="-1" checked="Qt::Checked">
+        <filegroup open="true" hidden="false">
           <legendlayerfile layerid="import_0343eb12_592e_4fd0_8380_51f4d62b6a56" isInOverview="0" visible="1"/>
         </filegroup>
       </legendlayer>
-      <legendlayer name="graph_node" checked="Qt::Checked" drawingOrder="-1" showFeatureCount="0" open="true">
-        <filegroup hidden="false" open="true">
+      <legendlayer open="true" name="graph_node" showFeatureCount="0" drawingOrder="-1" checked="Qt::Checked">
+        <filegroup open="true" hidden="false">
           <legendlayerfile layerid="graph_node_2cd9eee8_46e2_401c_87f7_8b40d9d6260e" isInOverview="0" visible="1"/>
         </filegroup>
       </legendlayer>
-      <legendlayer name="glossary" checked="Qt::Checked" drawingOrder="-1" showFeatureCount="0" open="false">
-        <filegroup hidden="false" open="false">
+      <legendlayer open="false" name="glossary" showFeatureCount="0" drawingOrder="-1" checked="Qt::Checked">
+        <filegroup open="false" hidden="false">
           <legendlayerfile layerid="glossary_cee356e0_5be5_4d87_ac2b_e8e8967c4032" isInOverview="0" visible="1"/>
         </filegroup>
       </legendlayer>
     </legendgroup>
-    <legendlayer name="osm-mapnik" checked="Qt::Unchecked" drawingOrder="-1" showFeatureCount="0" open="true">
-      <filegroup hidden="false" open="true">
+    <legendlayer open="true" name="osm-mapnik" showFeatureCount="0" drawingOrder="-1" checked="Qt::Unchecked">
+      <filegroup open="true" hidden="false">
         <legendlayerfile layerid="osm_mapnik_73cc9876_fa44_4742_bc09_afe572b57bbe" isInOverview="0" visible="0"/>
       </filegroup>
     </legendlayer>
   </legend>
   <mapViewDocks/>
   <mapViewDocks3D/>
-  <mapcanvas name="" annotationsVisible="1">
-    <units>unknown</units>
-    <extent>
-      <xmin>-5.26706671714782892</xmin>
-      <ymin>47.22918996810909675</ymin>
-      <xmax>-0.89086174964904785</xmax>
-      <ymax>48.93313684463501545</ymax>
-    </extent>
-    <rotation>0</rotation>
-    <rendermaptile>0</rendermaptile>
-  </mapcanvas>
   <projectlayers>
-    <maplayer minScale="1e+8" refreshOnNotifyMessage="" hasScaleBasedVisibilityFlag="0" refreshOnNotifyEnabled="0" geometry="No geometry" styleCategories="AllStyleCategories" autoRefreshTime="0" maxScale="0" type="vector" autoRefreshEnabled="0" readOnly="0">
+    <maplayer refreshOnNotifyMessage="" refreshOnNotifyEnabled="0" geometry="No geometry" styleCategories="AllStyleCategories" minScale="1e+8" type="vector" autoRefreshEnabled="0" hasScaleBasedVisibilityFlag="0" autoRefreshTime="0" maxScale="0" readOnly="0">
       <id>actor_5f01a6e5_8205_462f_af40_0ffd7ff0a44f</id>
       <datasource>service='gobs' sslmode=disable key='id' estimatedmetadata=true checkPrimaryKeyUnicity='0' table="gobs"."actor" sql=</datasource>
       <keywordList>
@@ -302,7 +295,7 @@
           </spatialrefsys>
         </crs>
         <extent>
-          <spatial minz="0" maxz="0" minx="0" maxy="0" dimensions="2" miny="0" crs="" maxx="0"/>
+          <spatial minx="0" maxx="0" miny="0" crs="" minz="0" dimensions="2" maxy="0" maxz="0"/>
           <temporal>
             <period>
               <start></start>
@@ -341,8 +334,8 @@
           <editWidget type="TextEdit">
             <config>
               <Option type="Map">
-                <Option name="IsMultiline" type="bool" value="false"/>
-                <Option name="UseHtml" type="bool" value="false"/>
+                <Option type="bool" name="IsMultiline" value="false"/>
+                <Option type="bool" name="UseHtml" value="false"/>
               </Option>
             </config>
           </editWidget>
@@ -351,8 +344,8 @@
           <editWidget type="TextEdit">
             <config>
               <Option type="Map">
-                <Option name="IsMultiline" type="bool" value="false"/>
-                <Option name="UseHtml" type="bool" value="false"/>
+                <Option type="bool" name="IsMultiline" value="false"/>
+                <Option type="bool" name="UseHtml" value="false"/>
               </Option>
             </config>
           </editWidget>
@@ -361,8 +354,8 @@
           <editWidget type="TextEdit">
             <config>
               <Option type="Map">
-                <Option name="IsMultiline" type="bool" value="true"/>
-                <Option name="UseHtml" type="bool" value="false"/>
+                <Option type="bool" name="IsMultiline" value="true"/>
+                <Option type="bool" name="UseHtml" value="false"/>
               </Option>
             </config>
           </editWidget>
@@ -371,8 +364,8 @@
           <editWidget type="TextEdit">
             <config>
               <Option type="Map">
-                <Option name="IsMultiline" type="bool" value="false"/>
-                <Option name="UseHtml" type="bool" value="false"/>
+                <Option type="bool" name="IsMultiline" value="false"/>
+                <Option type="bool" name="UseHtml" value="false"/>
               </Option>
             </config>
           </editWidget>
@@ -381,34 +374,34 @@
           <editWidget type="RelationReference">
             <config>
               <Option type="Map">
-                <Option name="AllowAddFeatures" type="bool" value="true"/>
-                <Option name="AllowNULL" type="bool" value="false"/>
-                <Option name="MapIdentification" type="bool" value="false"/>
-                <Option name="OrderByValue" type="bool" value="true"/>
-                <Option name="ReadOnly" type="bool" value="false"/>
-                <Option name="Relation" type="QString" value="actor_5f01a6e5_8205_462f_af40_0ffd7ff0a44f_id_category_actor_category_8a7edcf8_cb34_4689_b22b_7a8a6a2ab610_id"/>
-                <Option name="ShowForm" type="bool" value="false"/>
-                <Option name="ShowOpenFormButton" type="bool" value="false"/>
+                <Option type="bool" name="AllowAddFeatures" value="true"/>
+                <Option type="bool" name="AllowNULL" value="false"/>
+                <Option type="bool" name="MapIdentification" value="false"/>
+                <Option type="bool" name="OrderByValue" value="true"/>
+                <Option type="bool" name="ReadOnly" value="false"/>
+                <Option type="QString" name="Relation" value="actor_5f01a6e5_8205_462f_af40_0ffd7ff0a44f_id_category_actor_category_8a7edcf8_cb34_4689_b22b_7a8a6a2ab610_id"/>
+                <Option type="bool" name="ShowForm" value="false"/>
+                <Option type="bool" name="ShowOpenFormButton" value="false"/>
               </Option>
             </config>
           </editWidget>
         </field>
       </fieldConfiguration>
       <aliases>
-        <alias index="0" name="Identifiant" field="id"/>
-        <alias index="1" name="Nom" field="a_name"/>
-        <alias index="2" name="Description" field="a_description"/>
-        <alias index="3" name="Email" field="a_email"/>
-        <alias index="4" name="" field="id_category"/>
+        <alias name="Identifiant" index="0" field="id"/>
+        <alias name="Nom" index="1" field="a_name"/>
+        <alias name="Description" index="2" field="a_description"/>
+        <alias name="Email" index="3" field="a_email"/>
+        <alias name="" index="4" field="id_category"/>
       </aliases>
       <excludeAttributesWMS/>
       <excludeAttributesWFS/>
       <defaults>
-        <default applyOnUpdate="0" field="id" expression=""/>
-        <default applyOnUpdate="0" field="a_name" expression=""/>
-        <default applyOnUpdate="0" field="a_description" expression=""/>
-        <default applyOnUpdate="0" field="a_email" expression=""/>
-        <default applyOnUpdate="0" field="id_category" expression=""/>
+        <default expression="" field="id" applyOnUpdate="0"/>
+        <default expression="" field="a_name" applyOnUpdate="0"/>
+        <default expression="" field="a_description" applyOnUpdate="0"/>
+        <default expression="" field="a_email" applyOnUpdate="0"/>
+        <default expression="" field="id_category" applyOnUpdate="0"/>
       </defaults>
       <constraints>
         <constraint notnull_strength="1" constraints="3" exp_strength="0" field="id" unique_strength="1"/>
@@ -428,14 +421,14 @@
       <attributeactions>
         <defaultAction key="Canvas" value="{00000000-0000-0000-0000-000000000000}"/>
       </attributeactions>
-      <attributetableconfig actionWidgetStyle="dropDown" sortExpression="" sortOrder="0">
+      <attributetableconfig sortExpression="" sortOrder="0" actionWidgetStyle="dropDown">
         <columns>
-          <column name="id" hidden="0" type="field" width="-1"/>
-          <column name="a_name" hidden="0" type="field" width="-1"/>
-          <column name="a_description" hidden="0" type="field" width="-1"/>
-          <column name="a_email" hidden="0" type="field" width="-1"/>
-          <column name="id_category" hidden="0" type="field" width="180"/>
-          <column hidden="1" type="actions" width="-1"/>
+          <column type="field" name="id" hidden="0" width="-1"/>
+          <column type="field" name="a_name" hidden="0" width="-1"/>
+          <column type="field" name="a_description" hidden="0" width="-1"/>
+          <column type="field" name="a_email" hidden="0" width="-1"/>
+          <column type="field" name="id_category" hidden="0" width="180"/>
+          <column type="actions" hidden="1" width="-1"/>
         </columns>
       </attributetableconfig>
       <conditionalstyles>
@@ -464,12 +457,12 @@ def my_form_open(dialog, layer, feature):
       <featformsuppress>0</featformsuppress>
       <editorlayout>tablayout</editorlayout>
       <attributeEditorForm>
-        <attributeEditorContainer name="General" visibilityExpression="" showLabel="1" columnCount="1" groupBox="0" visibilityExpressionEnabled="0">
-          <attributeEditorField index="0" name="id" showLabel="1"/>
-          <attributeEditorField index="1" name="a_name" showLabel="1"/>
-          <attributeEditorField index="3" name="a_email" showLabel="1"/>
-          <attributeEditorField index="2" name="a_description" showLabel="1"/>
-          <attributeEditorField index="4" name="id_category" showLabel="1"/>
+        <attributeEditorContainer showLabel="1" visibilityExpression="" name="General" groupBox="0" columnCount="1" visibilityExpressionEnabled="0">
+          <attributeEditorField showLabel="1" name="id" index="0"/>
+          <attributeEditorField showLabel="1" name="a_name" index="1"/>
+          <attributeEditorField showLabel="1" name="a_email" index="3"/>
+          <attributeEditorField showLabel="1" name="a_description" index="2"/>
+          <attributeEditorField showLabel="1" name="id_category" index="4"/>
         </attributeEditorContainer>
       </attributeEditorForm>
       <editable>
@@ -489,19 +482,19 @@ def my_form_open(dialog, layer, feature):
       <widgets>
         <widget name="series_04a7414a_ab6d_4611_8a60_bcd22071dc22_fk_id_actor_actor_5f01a6e5_8205_462f_af40_0ffd7ff0a44f_id">
           <config type="Map">
-            <Option name="nm-rel" type="QString" value=""/>
+            <Option type="QString" name="nm-rel" value=""/>
           </config>
         </widget>
         <widget name="spatial_layer_18215d6d_1f4c_40d2_ba83_f2c9a9694e84_fk_id_actor_actor_5f01a6e5_8205_462f_af40_0ffd7ff0a44f_id">
           <config type="Map">
-            <Option name="nm-rel" type="QString" value=""/>
+            <Option type="QString" name="nm-rel" value=""/>
           </config>
         </widget>
       </widgets>
       <previewExpression>a_name</previewExpression>
       <mapTip></mapTip>
     </maplayer>
-    <maplayer minScale="1e+8" refreshOnNotifyMessage="" hasScaleBasedVisibilityFlag="0" refreshOnNotifyEnabled="0" geometry="No geometry" styleCategories="AllStyleCategories" autoRefreshTime="0" maxScale="0" type="vector" autoRefreshEnabled="0" readOnly="0">
+    <maplayer refreshOnNotifyMessage="" refreshOnNotifyEnabled="0" geometry="No geometry" styleCategories="AllStyleCategories" minScale="1e+8" type="vector" autoRefreshEnabled="0" hasScaleBasedVisibilityFlag="0" autoRefreshTime="0" maxScale="0" readOnly="0">
       <id>actor_category_8a7edcf8_cb34_4689_b22b_7a8a6a2ab610</id>
       <datasource>service='gobs' sslmode=disable key='id' estimatedmetadata=true checkPrimaryKeyUnicity='0' table="gobs"."actor_category" sql=</datasource>
       <keywordList>
@@ -552,7 +545,7 @@ def my_form_open(dialog, layer, feature):
           </spatialrefsys>
         </crs>
         <extent>
-          <spatial minz="0" maxz="0" minx="0" maxy="0" dimensions="2" miny="0" crs="" maxx="0"/>
+          <spatial minx="0" maxx="0" miny="0" crs="" minz="0" dimensions="2" maxy="0" maxz="0"/>
           <temporal>
             <period>
               <start></start>
@@ -591,8 +584,8 @@ def my_form_open(dialog, layer, feature):
           <editWidget type="TextEdit">
             <config>
               <Option type="Map">
-                <Option name="IsMultiline" type="bool" value="false"/>
-                <Option name="UseHtml" type="bool" value="false"/>
+                <Option type="bool" name="IsMultiline" value="false"/>
+                <Option type="bool" name="UseHtml" value="false"/>
               </Option>
             </config>
           </editWidget>
@@ -601,8 +594,8 @@ def my_form_open(dialog, layer, feature):
           <editWidget type="TextEdit">
             <config>
               <Option type="Map">
-                <Option name="IsMultiline" type="bool" value="false"/>
-                <Option name="UseHtml" type="bool" value="false"/>
+                <Option type="bool" name="IsMultiline" value="false"/>
+                <Option type="bool" name="UseHtml" value="false"/>
               </Option>
             </config>
           </editWidget>
@@ -611,24 +604,24 @@ def my_form_open(dialog, layer, feature):
           <editWidget type="TextEdit">
             <config>
               <Option type="Map">
-                <Option name="IsMultiline" type="bool" value="true"/>
-                <Option name="UseHtml" type="bool" value="false"/>
+                <Option type="bool" name="IsMultiline" value="true"/>
+                <Option type="bool" name="UseHtml" value="false"/>
               </Option>
             </config>
           </editWidget>
         </field>
       </fieldConfiguration>
       <aliases>
-        <alias index="0" name="" field="id"/>
-        <alias index="1" name="Name" field="ac_name"/>
-        <alias index="2" name="Description" field="ac_description"/>
+        <alias name="" index="0" field="id"/>
+        <alias name="Name" index="1" field="ac_name"/>
+        <alias name="Description" index="2" field="ac_description"/>
       </aliases>
       <excludeAttributesWMS/>
       <excludeAttributesWFS/>
       <defaults>
-        <default applyOnUpdate="0" field="id" expression=""/>
-        <default applyOnUpdate="0" field="ac_name" expression=""/>
-        <default applyOnUpdate="0" field="ac_description" expression=""/>
+        <default expression="" field="id" applyOnUpdate="0"/>
+        <default expression="" field="ac_name" applyOnUpdate="0"/>
+        <default expression="" field="ac_description" applyOnUpdate="0"/>
       </defaults>
       <constraints>
         <constraint notnull_strength="1" constraints="3" exp_strength="0" field="id" unique_strength="1"/>
@@ -644,12 +637,12 @@ def my_form_open(dialog, layer, feature):
       <attributeactions>
         <defaultAction key="Canvas" value="{00000000-0000-0000-0000-000000000000}"/>
       </attributeactions>
-      <attributetableconfig actionWidgetStyle="dropDown" sortExpression="" sortOrder="0">
+      <attributetableconfig sortExpression="" sortOrder="0" actionWidgetStyle="dropDown">
         <columns>
-          <column name="id" hidden="0" type="field" width="-1"/>
-          <column name="ac_name" hidden="0" type="field" width="267"/>
-          <column name="ac_description" hidden="0" type="field" width="-1"/>
-          <column hidden="1" type="actions" width="-1"/>
+          <column type="field" name="id" hidden="0" width="-1"/>
+          <column type="field" name="ac_name" hidden="0" width="267"/>
+          <column type="field" name="ac_description" hidden="0" width="-1"/>
+          <column type="actions" hidden="1" width="-1"/>
         </columns>
       </attributetableconfig>
       <conditionalstyles>
@@ -690,14 +683,14 @@ def my_form_open(dialog, layer, feature):
       <widgets>
         <widget name="actor_5f01a6e5_8205_462f_af40_0ffd7ff0a44f_id_category_actor_category_8a7edcf8_cb34_4689_b22b_7a8a6a2ab610_id">
           <config type="Map">
-            <Option name="nm-rel" type="QString" value=""/>
+            <Option type="QString" name="nm-rel" value=""/>
           </config>
         </widget>
       </widgets>
       <previewExpression>ac_name</previewExpression>
       <mapTip></mapTip>
     </maplayer>
-    <maplayer minScale="1e+8" refreshOnNotifyMessage="" hasScaleBasedVisibilityFlag="0" refreshOnNotifyEnabled="0" geometry="No geometry" styleCategories="AllStyleCategories" autoRefreshTime="0" maxScale="0" type="vector" autoRefreshEnabled="0" readOnly="0">
+    <maplayer refreshOnNotifyMessage="" refreshOnNotifyEnabled="0" geometry="No geometry" styleCategories="AllStyleCategories" minScale="1e+8" type="vector" autoRefreshEnabled="0" hasScaleBasedVisibilityFlag="0" autoRefreshTime="0" maxScale="0" readOnly="0">
       <id>glossary_cee356e0_5be5_4d87_ac2b_e8e8967c4032</id>
       <datasource>service='gobs' sslmode=disable key='id' estimatedmetadata=true checkPrimaryKeyUnicity='0' table="gobs"."glossary" sql=</datasource>
       <keywordList>
@@ -809,22 +802,22 @@ def my_form_open(dialog, layer, feature):
         </field>
       </fieldConfiguration>
       <aliases>
-        <alias index="0" name="" field="id"/>
-        <alias index="1" name="" field="gl_field"/>
-        <alias index="2" name="" field="gl_code"/>
-        <alias index="3" name="" field="gl_label"/>
-        <alias index="4" name="" field="gl_description"/>
-        <alias index="5" name="" field="gl_order"/>
+        <alias name="" index="0" field="id"/>
+        <alias name="" index="1" field="gl_field"/>
+        <alias name="" index="2" field="gl_code"/>
+        <alias name="" index="3" field="gl_label"/>
+        <alias name="" index="4" field="gl_description"/>
+        <alias name="" index="5" field="gl_order"/>
       </aliases>
       <excludeAttributesWMS/>
       <excludeAttributesWFS/>
       <defaults>
-        <default applyOnUpdate="0" field="id" expression=""/>
-        <default applyOnUpdate="0" field="gl_field" expression=""/>
-        <default applyOnUpdate="0" field="gl_code" expression=""/>
-        <default applyOnUpdate="0" field="gl_label" expression=""/>
-        <default applyOnUpdate="0" field="gl_description" expression=""/>
-        <default applyOnUpdate="0" field="gl_order" expression=""/>
+        <default expression="" field="id" applyOnUpdate="0"/>
+        <default expression="" field="gl_field" applyOnUpdate="0"/>
+        <default expression="" field="gl_code" applyOnUpdate="0"/>
+        <default expression="" field="gl_label" applyOnUpdate="0"/>
+        <default expression="" field="gl_description" applyOnUpdate="0"/>
+        <default expression="" field="gl_order" applyOnUpdate="0"/>
       </defaults>
       <constraints>
         <constraint notnull_strength="1" constraints="3" exp_strength="0" field="id" unique_strength="1"/>
@@ -846,15 +839,15 @@ def my_form_open(dialog, layer, feature):
       <attributeactions>
         <defaultAction key="Canvas" value="{00000000-0000-0000-0000-000000000000}"/>
       </attributeactions>
-      <attributetableconfig actionWidgetStyle="dropDown" sortExpression="" sortOrder="0">
+      <attributetableconfig sortExpression="" sortOrder="0" actionWidgetStyle="dropDown">
         <columns>
-          <column name="id" hidden="0" type="field" width="-1"/>
-          <column name="gl_field" hidden="0" type="field" width="-1"/>
-          <column name="gl_code" hidden="0" type="field" width="-1"/>
-          <column name="gl_value" hidden="0" type="field" width="-1"/>
-          <column name="gl_label" hidden="0" type="field" width="-1"/>
-          <column name="gl_order" hidden="0" type="field" width="-1"/>
-          <column hidden="1" type="actions" width="-1"/>
+          <column type="field" name="id" hidden="0" width="-1"/>
+          <column type="field" name="gl_field" hidden="0" width="-1"/>
+          <column type="field" name="gl_code" hidden="0" width="-1"/>
+          <column type="field" name="gl_label" hidden="0" width="-1"/>
+          <column type="field" name="gl_order" hidden="0" width="-1"/>
+          <column type="actions" hidden="1" width="-1"/>
+          <column type="field" name="gl_description" hidden="0" width="-1"/>
         </columns>
       </attributetableconfig>
       <conditionalstyles>
@@ -874,7 +867,7 @@ def my_form_open(dialog, layer, feature):
       <previewExpression>"id"</previewExpression>
       <mapTip></mapTip>
     </maplayer>
-    <maplayer minScale="1e+8" refreshOnNotifyMessage="" hasScaleBasedVisibilityFlag="0" refreshOnNotifyEnabled="0" geometry="No geometry" styleCategories="AllStyleCategories" autoRefreshTime="0" maxScale="0" type="vector" autoRefreshEnabled="0" readOnly="0">
+    <maplayer refreshOnNotifyMessage="" refreshOnNotifyEnabled="0" geometry="No geometry" styleCategories="AllStyleCategories" minScale="1e+8" type="vector" autoRefreshEnabled="0" hasScaleBasedVisibilityFlag="0" autoRefreshTime="0" maxScale="0" readOnly="0">
       <id>graph_node_2cd9eee8_46e2_401c_87f7_8b40d9d6260e</id>
       <datasource>service='gobs' sslmode=disable key='id' estimatedmetadata=true checkPrimaryKeyUnicity='0' table="gobs"."graph_node" sql=</datasource>
       <keywordList>
@@ -963,16 +956,16 @@ def my_form_open(dialog, layer, feature):
         </field>
       </fieldConfiguration>
       <aliases>
-        <alias index="0" name="" field="id"/>
-        <alias index="1" name="" field="gn_name"/>
-        <alias index="2" name="" field="gn_description"/>
+        <alias name="" index="0" field="id"/>
+        <alias name="" index="1" field="gn_name"/>
+        <alias name="" index="2" field="gn_description"/>
       </aliases>
       <excludeAttributesWMS/>
       <excludeAttributesWFS/>
       <defaults>
-        <default applyOnUpdate="0" field="id" expression=""/>
-        <default applyOnUpdate="0" field="gn_name" expression=""/>
-        <default applyOnUpdate="0" field="gn_description" expression=""/>
+        <default expression="" field="id" applyOnUpdate="0"/>
+        <default expression="" field="gn_name" applyOnUpdate="0"/>
+        <default expression="" field="gn_description" applyOnUpdate="0"/>
       </defaults>
       <constraints>
         <constraint notnull_strength="1" constraints="3" exp_strength="0" field="id" unique_strength="1"/>
@@ -988,7 +981,7 @@ def my_form_open(dialog, layer, feature):
       <attributeactions>
         <defaultAction key="Canvas" value="{00000000-0000-0000-0000-000000000000}"/>
       </attributeactions>
-      <attributetableconfig actionWidgetStyle="dropDown" sortExpression="" sortOrder="0">
+      <attributetableconfig sortExpression="" sortOrder="0" actionWidgetStyle="dropDown">
         <columns/>
       </attributetableconfig>
       <conditionalstyles>
@@ -1008,7 +1001,7 @@ def my_form_open(dialog, layer, feature):
       <previewExpression></previewExpression>
       <mapTip></mapTip>
     </maplayer>
-    <maplayer minScale="1e+8" refreshOnNotifyMessage="" hasScaleBasedVisibilityFlag="0" refreshOnNotifyEnabled="0" geometry="No geometry" styleCategories="AllStyleCategories" autoRefreshTime="0" maxScale="0" type="vector" autoRefreshEnabled="0" readOnly="0">
+    <maplayer refreshOnNotifyMessage="" refreshOnNotifyEnabled="0" geometry="No geometry" styleCategories="AllStyleCategories" minScale="1e+8" type="vector" autoRefreshEnabled="0" hasScaleBasedVisibilityFlag="0" autoRefreshTime="0" maxScale="0" readOnly="0">
       <id>import_0343eb12_592e_4fd0_8380_51f4d62b6a56</id>
       <datasource>service='gobs' sslmode=disable key='id' estimatedmetadata=true checkPrimaryKeyUnicity='0' table="gobs"."import" sql=</datasource>
       <keywordList>
@@ -1106,18 +1099,18 @@ def my_form_open(dialog, layer, feature):
         </field>
       </fieldConfiguration>
       <aliases>
-        <alias index="0" name="" field="id"/>
-        <alias index="1" name="" field="im_timestamp"/>
-        <alias index="2" name="" field="fk_id_series"/>
-        <alias index="3" name="" field="im_status"/>
+        <alias name="" index="0" field="id"/>
+        <alias name="" index="1" field="im_timestamp"/>
+        <alias name="" index="2" field="fk_id_series"/>
+        <alias name="" index="3" field="im_status"/>
       </aliases>
       <excludeAttributesWMS/>
       <excludeAttributesWFS/>
       <defaults>
-        <default applyOnUpdate="0" field="id" expression=""/>
-        <default applyOnUpdate="0" field="im_timestamp" expression=""/>
-        <default applyOnUpdate="0" field="fk_id_series" expression=""/>
-        <default applyOnUpdate="0" field="im_status" expression=""/>
+        <default expression="" field="id" applyOnUpdate="0"/>
+        <default expression="" field="im_timestamp" applyOnUpdate="0"/>
+        <default expression="" field="fk_id_series" applyOnUpdate="0"/>
+        <default expression="" field="im_status" applyOnUpdate="0"/>
       </defaults>
       <constraints>
         <constraint notnull_strength="1" constraints="3" exp_strength="0" field="id" unique_strength="1"/>
@@ -1135,7 +1128,7 @@ def my_form_open(dialog, layer, feature):
       <attributeactions>
         <defaultAction key="Canvas" value="{00000000-0000-0000-0000-000000000000}"/>
       </attributeactions>
-      <attributetableconfig actionWidgetStyle="dropDown" sortExpression="" sortOrder="0">
+      <attributetableconfig sortExpression="" sortOrder="0" actionWidgetStyle="dropDown">
         <columns/>
       </attributetableconfig>
       <conditionalstyles>
@@ -1155,7 +1148,7 @@ def my_form_open(dialog, layer, feature):
       <previewExpression>id</previewExpression>
       <mapTip></mapTip>
     </maplayer>
-    <maplayer minScale="1e+8" refreshOnNotifyMessage="" hasScaleBasedVisibilityFlag="0" refreshOnNotifyEnabled="0" geometry="No geometry" styleCategories="AllStyleCategories" autoRefreshTime="0" maxScale="0" type="vector" autoRefreshEnabled="0" readOnly="0">
+    <maplayer refreshOnNotifyMessage="" refreshOnNotifyEnabled="0" geometry="No geometry" styleCategories="AllStyleCategories" minScale="1e+8" type="vector" autoRefreshEnabled="0" hasScaleBasedVisibilityFlag="0" autoRefreshTime="0" maxScale="0" readOnly="0">
       <id>indicator_18ba18bf_0390_45a3_8edd_1cc049e8a251</id>
       <datasource>service='gobs' sslmode=disable key='id' estimatedmetadata=true checkPrimaryKeyUnicity='0' table="gobs"."indicator" sql=</datasource>
       <keywordList>
@@ -1206,7 +1199,7 @@ def my_form_open(dialog, layer, feature):
           </spatialrefsys>
         </crs>
         <extent>
-          <spatial minz="0" maxz="0" minx="0" maxy="0" dimensions="2" miny="0" crs="" maxx="0"/>
+          <spatial minx="0" maxx="0" miny="0" crs="" minz="0" dimensions="2" maxy="0" maxz="0"/>
           <temporal>
             <period>
               <start></start>
@@ -1245,8 +1238,8 @@ def my_form_open(dialog, layer, feature):
           <editWidget type="TextEdit">
             <config>
               <Option type="Map">
-                <Option name="IsMultiline" type="bool" value="false"/>
-                <Option name="UseHtml" type="bool" value="false"/>
+                <Option type="bool" name="IsMultiline" value="false"/>
+                <Option type="bool" name="UseHtml" value="false"/>
               </Option>
             </config>
           </editWidget>
@@ -1255,8 +1248,8 @@ def my_form_open(dialog, layer, feature):
           <editWidget type="TextEdit">
             <config>
               <Option type="Map">
-                <Option name="IsMultiline" type="bool" value="false"/>
-                <Option name="UseHtml" type="bool" value="false"/>
+                <Option type="bool" name="IsMultiline" value="false"/>
+                <Option type="bool" name="UseHtml" value="false"/>
               </Option>
             </config>
           </editWidget>
@@ -1265,8 +1258,8 @@ def my_form_open(dialog, layer, feature):
           <editWidget type="TextEdit">
             <config>
               <Option type="Map">
-                <Option name="IsMultiline" type="bool" value="false"/>
-                <Option name="UseHtml" type="bool" value="false"/>
+                <Option type="bool" name="IsMultiline" value="false"/>
+                <Option type="bool" name="UseHtml" value="false"/>
               </Option>
             </config>
           </editWidget>
@@ -1275,8 +1268,8 @@ def my_form_open(dialog, layer, feature):
           <editWidget type="TextEdit">
             <config>
               <Option type="Map">
-                <Option name="IsMultiline" type="bool" value="false"/>
-                <Option name="UseHtml" type="bool" value="false"/>
+                <Option type="bool" name="IsMultiline" value="false"/>
+                <Option type="bool" name="UseHtml" value="false"/>
               </Option>
             </config>
           </editWidget>
@@ -1285,15 +1278,15 @@ def my_form_open(dialog, layer, feature):
           <editWidget type="ValueRelation">
             <config>
               <Option type="Map">
-                <Option name="AllowMulti" type="bool" value="false"/>
-                <Option name="AllowNull" type="bool" value="false"/>
-                <Option name="FilterExpression" type="QString" value="&quot;gl_field&quot; = 'id_date_format'"/>
-                <Option name="Key" type="QString" value="gl_code"/>
-                <Option name="Layer" type="QString" value="glossary_cee356e0_5be5_4d87_ac2b_e8e8967c4032"/>
-                <Option name="NofColumns" type="int" value="1"/>
-                <Option name="OrderByValue" type="bool" value="false"/>
-                <Option name="UseCompleter" type="bool" value="false"/>
-                <Option name="Value" type="QString" value="gl_label"/>
+                <Option type="bool" name="AllowMulti" value="false"/>
+                <Option type="bool" name="AllowNull" value="false"/>
+                <Option type="QString" name="FilterExpression" value="&quot;gl_field&quot; = 'id_date_format'"/>
+                <Option type="QString" name="Key" value="gl_code"/>
+                <Option type="QString" name="Layer" value="glossary_cee356e0_5be5_4d87_ac2b_e8e8967c4032"/>
+                <Option type="int" name="NofColumns" value="1"/>
+                <Option type="bool" name="OrderByValue" value="false"/>
+                <Option type="bool" name="UseCompleter" value="false"/>
+                <Option type="QString" name="Value" value="gl_label"/>
               </Option>
             </config>
           </editWidget>
@@ -1316,15 +1309,15 @@ def my_form_open(dialog, layer, feature):
           <editWidget type="ValueRelation">
             <config>
               <Option type="Map">
-                <Option name="AllowMulti" type="bool" value="false"/>
-                <Option name="AllowNull" type="bool" value="false"/>
-                <Option name="FilterExpression" type="QString" value="&quot;gl_field&quot; = 'id_value_type'"/>
-                <Option name="Key" type="QString" value="gl_code"/>
-                <Option name="Layer" type="QString" value="glossary_cee356e0_5be5_4d87_ac2b_e8e8967c4032"/>
-                <Option name="NofColumns" type="int" value="1"/>
-                <Option name="OrderByValue" type="bool" value="true"/>
-                <Option name="UseCompleter" type="bool" value="false"/>
-                <Option name="Value" type="QString" value="gl_label"/>
+                <Option type="bool" name="AllowMulti" value="false"/>
+                <Option type="bool" name="AllowNull" value="false"/>
+                <Option type="QString" name="FilterExpression" value="&quot;gl_field&quot; = 'id_value_type'"/>
+                <Option type="QString" name="Key" value="gl_code"/>
+                <Option type="QString" name="Layer" value="glossary_cee356e0_5be5_4d87_ac2b_e8e8967c4032"/>
+                <Option type="int" name="NofColumns" value="1"/>
+                <Option type="bool" name="OrderByValue" value="true"/>
+                <Option type="bool" name="UseCompleter" value="false"/>
+                <Option type="QString" name="Value" value="gl_label"/>
               </Option>
             </config>
           </editWidget>
@@ -1333,8 +1326,8 @@ def my_form_open(dialog, layer, feature):
           <editWidget type="TextEdit">
             <config>
               <Option type="Map">
-                <Option name="IsMultiline" type="bool" value="false"/>
-                <Option name="UseHtml" type="bool" value="false"/>
+                <Option type="bool" name="IsMultiline" value="false"/>
+                <Option type="bool" name="UseHtml" value="false"/>
               </Option>
             </config>
           </editWidget>
@@ -1343,38 +1336,38 @@ def my_form_open(dialog, layer, feature):
           <editWidget type="TextEdit">
             <config>
               <Option type="Map">
-                <Option name="IsMultiline" type="bool" value="true"/>
-                <Option name="UseHtml" type="bool" value="false"/>
+                <Option type="bool" name="IsMultiline" value="true"/>
+                <Option type="bool" name="UseHtml" value="false"/>
               </Option>
             </config>
           </editWidget>
         </field>
       </fieldConfiguration>
       <aliases>
-        <alias index="0" name="ID" field="id"/>
-        <alias index="1" name="Short name" field="id_label"/>
-        <alias index="2" name="Title" field="id_title"/>
-        <alias index="3" name="Description" field="id_description"/>
-        <alias index="4" name="Date format" field="id_date_format"/>
-        <alias index="5" name="Codes of the vector dimensions" field="id_value_code"/>
-        <alias index="6" name="Names of the vector dimensions" field="id_value_name"/>
-        <alias index="7" name="Type of the stored values" field="id_value_type"/>
-        <alias index="8" name="Unit of the stored values" field="id_value_unit"/>
-        <alias index="9" name="Paths given to help finding a indicator" field="id_paths"/>
+        <alias name="ID" index="0" field="id"/>
+        <alias name="Short name" index="1" field="id_label"/>
+        <alias name="Title" index="2" field="id_title"/>
+        <alias name="Description" index="3" field="id_description"/>
+        <alias name="Date format" index="4" field="id_date_format"/>
+        <alias name="Codes of the vector dimensions" index="5" field="id_value_code"/>
+        <alias name="Names of the vector dimensions" index="6" field="id_value_name"/>
+        <alias name="Type of the stored values" index="7" field="id_value_type"/>
+        <alias name="Unit of the stored values" index="8" field="id_value_unit"/>
+        <alias name="Paths given to help finding a indicator" index="9" field="id_paths"/>
       </aliases>
       <excludeAttributesWMS/>
       <excludeAttributesWFS/>
       <defaults>
-        <default applyOnUpdate="0" field="id" expression=""/>
-        <default applyOnUpdate="0" field="id_label" expression=""/>
-        <default applyOnUpdate="0" field="id_title" expression=""/>
-        <default applyOnUpdate="0" field="id_description" expression=""/>
-        <default applyOnUpdate="0" field="id_date_format" expression="'year'"/>
-        <default applyOnUpdate="0" field="id_value_code" expression=""/>
-        <default applyOnUpdate="0" field="id_value_name" expression=""/>
-        <default applyOnUpdate="0" field="id_value_type" expression="'integer'"/>
-        <default applyOnUpdate="0" field="id_value_unit" expression=""/>
-        <default applyOnUpdate="0" field="id_paths" expression=""/>
+        <default expression="" field="id" applyOnUpdate="0"/>
+        <default expression="" field="id_label" applyOnUpdate="0"/>
+        <default expression="" field="id_title" applyOnUpdate="0"/>
+        <default expression="" field="id_description" applyOnUpdate="0"/>
+        <default expression="'year'" field="id_date_format" applyOnUpdate="0"/>
+        <default expression="" field="id_value_code" applyOnUpdate="0"/>
+        <default expression="" field="id_value_name" applyOnUpdate="0"/>
+        <default expression="'integer'" field="id_value_type" applyOnUpdate="0"/>
+        <default expression="" field="id_value_unit" applyOnUpdate="0"/>
+        <default expression="" field="id_paths" applyOnUpdate="0"/>
       </defaults>
       <constraints>
         <constraint notnull_strength="1" constraints="3" exp_strength="0" field="id" unique_strength="1"/>
@@ -1404,19 +1397,19 @@ def my_form_open(dialog, layer, feature):
       <attributeactions>
         <defaultAction key="Canvas" value="{00000000-0000-0000-0000-000000000000}"/>
       </attributeactions>
-      <attributetableconfig actionWidgetStyle="dropDown" sortExpression="" sortOrder="0">
+      <attributetableconfig sortExpression="" sortOrder="0" actionWidgetStyle="dropDown">
         <columns>
-          <column name="id" hidden="0" type="field" width="-1"/>
-          <column name="id_label" hidden="0" type="field" width="-1"/>
-          <column name="id_title" hidden="0" type="field" width="-1"/>
-          <column name="id_description" hidden="0" type="field" width="-1"/>
-          <column name="id_date_format" hidden="0" type="field" width="-1"/>
-          <column name="id_value_code" hidden="0" type="field" width="-1"/>
-          <column name="id_value_name" hidden="0" type="field" width="-1"/>
-          <column name="id_value_type" hidden="0" type="field" width="-1"/>
-          <column name="id_value_unit" hidden="0" type="field" width="-1"/>
-          <column hidden="1" type="actions" width="-1"/>
-          <column name="id_paths" hidden="0" type="field" width="-1"/>
+          <column type="field" name="id" hidden="0" width="-1"/>
+          <column type="field" name="id_label" hidden="0" width="-1"/>
+          <column type="field" name="id_title" hidden="0" width="-1"/>
+          <column type="field" name="id_description" hidden="0" width="-1"/>
+          <column type="field" name="id_date_format" hidden="0" width="-1"/>
+          <column type="field" name="id_value_code" hidden="0" width="-1"/>
+          <column type="field" name="id_value_name" hidden="0" width="-1"/>
+          <column type="field" name="id_value_type" hidden="0" width="-1"/>
+          <column type="field" name="id_value_unit" hidden="0" width="-1"/>
+          <column type="actions" hidden="1" width="-1"/>
+          <column type="field" name="id_paths" hidden="0" width="-1"/>
         </columns>
       </attributetableconfig>
       <conditionalstyles>
@@ -1447,16 +1440,16 @@ def my_form_open(dialog, layer, feature):
       <featformsuppress>0</featformsuppress>
       <editorlayout>tablayout</editorlayout>
       <attributeEditorForm>
-        <attributeEditorField index="0" name="id" showLabel="1"/>
-        <attributeEditorField index="1" name="id_label" showLabel="1"/>
-        <attributeEditorField index="2" name="id_title" showLabel="1"/>
-        <attributeEditorField index="3" name="id_description" showLabel="1"/>
-        <attributeEditorField index="4" name="id_date_format" showLabel="1"/>
-        <attributeEditorField index="5" name="id_value_code" showLabel="1"/>
-        <attributeEditorField index="6" name="id_value_name" showLabel="1"/>
-        <attributeEditorField index="7" name="id_value_type" showLabel="1"/>
-        <attributeEditorField index="8" name="id_value_unit" showLabel="1"/>
-        <attributeEditorField index="9" name="id_paths" showLabel="1"/>
+        <attributeEditorField showLabel="1" name="id" index="0"/>
+        <attributeEditorField showLabel="1" name="id_label" index="1"/>
+        <attributeEditorField showLabel="1" name="id_title" index="2"/>
+        <attributeEditorField showLabel="1" name="id_description" index="3"/>
+        <attributeEditorField showLabel="1" name="id_date_format" index="4"/>
+        <attributeEditorField showLabel="1" name="id_value_code" index="5"/>
+        <attributeEditorField showLabel="1" name="id_value_name" index="6"/>
+        <attributeEditorField showLabel="1" name="id_value_type" index="7"/>
+        <attributeEditorField showLabel="1" name="id_value_unit" index="8"/>
+        <attributeEditorField showLabel="1" name="id_paths" index="9"/>
       </attributeEditorForm>
       <editable>
         <field name="id" editable="1"/>
@@ -1485,19 +1478,19 @@ def my_form_open(dialog, layer, feature):
       <widgets>
         <widget name="r_indicator_node_2ca83116_e69f_4dcb_abcb_de5bdf44b2be_fk_id_indicator_indicator_18ba18bf_0390_45a3_8edd_1cc049e8a251_id">
           <config type="Map">
-            <Option name="nm-rel" type="QString" value=""/>
+            <Option type="QString" name="nm-rel" value=""/>
           </config>
         </widget>
         <widget name="series_04a7414a_ab6d_4611_8a60_bcd22071dc22_fk_id_indicator_indicator_18ba18bf_0390_45a3_8edd_1cc049e8a251_id">
           <config type="Map">
-            <Option name="nm-rel" type="QString" value=""/>
+            <Option type="QString" name="nm-rel" value=""/>
           </config>
         </widget>
       </widgets>
       <previewExpression>id_label</previewExpression>
       <mapTip></mapTip>
     </maplayer>
-    <maplayer minScale="1e+8" refreshOnNotifyMessage="" hasScaleBasedVisibilityFlag="0" refreshOnNotifyEnabled="0" geometry="No geometry" styleCategories="AllStyleCategories" autoRefreshTime="0" maxScale="0" type="vector" autoRefreshEnabled="0" readOnly="0">
+    <maplayer refreshOnNotifyMessage="" refreshOnNotifyEnabled="0" geometry="No geometry" styleCategories="AllStyleCategories" minScale="1e+8" type="vector" autoRefreshEnabled="0" hasScaleBasedVisibilityFlag="0" autoRefreshTime="0" maxScale="0" readOnly="0">
       <id>observation_bcc90162_47c8_4097_bc24_a31af92d2708</id>
       <datasource>service='gobs' sslmode=disable key='id' estimatedmetadata=true checkPrimaryKeyUnicity='0' table="gobs"."observation" sql=</datasource>
       <keywordList>
@@ -1548,7 +1541,7 @@ def my_form_open(dialog, layer, feature):
           </spatialrefsys>
         </crs>
         <extent>
-          <spatial minz="0" maxz="0" minx="0" maxy="0" dimensions="2" miny="0" crs="" maxx="0"/>
+          <spatial minx="0" maxx="0" miny="0" crs="" minz="0" dimensions="2" maxy="0" maxz="0"/>
           <temporal>
             <period>
               <start></start>
@@ -1573,9 +1566,7 @@ def my_form_open(dialog, layer, feature):
         <Searchable>1</Searchable>
       </flags>
       <customproperties>
-        <property key="dualview/previewExpressions">
-          <value>id</value>
-        </property>
+        <property key="dualview/previewExpressions" value="id"/>
         <property key="embeddedWidgets/count" value="0"/>
         <property key="variableNames"/>
         <property key="variableValues"/>
@@ -1589,8 +1580,8 @@ def my_form_open(dialog, layer, feature):
           <editWidget type="TextEdit">
             <config>
               <Option type="Map">
-                <Option name="IsMultiline" type="bool" value="false"/>
-                <Option name="UseHtml" type="bool" value="false"/>
+                <Option type="bool" name="IsMultiline" value="false"/>
+                <Option type="bool" name="UseHtml" value="false"/>
               </Option>
             </config>
           </editWidget>
@@ -1599,14 +1590,14 @@ def my_form_open(dialog, layer, feature):
           <editWidget type="RelationReference">
             <config>
               <Option type="Map">
-                <Option name="AllowAddFeatures" type="bool" value="false"/>
-                <Option name="AllowNULL" type="bool" value="false"/>
-                <Option name="MapIdentification" type="bool" value="false"/>
-                <Option name="OrderByValue" type="bool" value="false"/>
-                <Option name="ReadOnly" type="bool" value="false"/>
-                <Option name="Relation" type="QString" value="observation_bcc90162_47c8_4097_bc24_a31af92d2708_fk_id_series_series_04a7414a_ab6d_4611_8a60_bcd22071dc22_id"/>
-                <Option name="ShowForm" type="bool" value="false"/>
-                <Option name="ShowOpenFormButton" type="bool" value="true"/>
+                <Option type="bool" name="AllowAddFeatures" value="false"/>
+                <Option type="bool" name="AllowNULL" value="false"/>
+                <Option type="bool" name="MapIdentification" value="false"/>
+                <Option type="bool" name="OrderByValue" value="false"/>
+                <Option type="bool" name="ReadOnly" value="false"/>
+                <Option type="QString" name="Relation" value="observation_bcc90162_47c8_4097_bc24_a31af92d2708_fk_id_series_series_04a7414a_ab6d_4611_8a60_bcd22071dc22_id"/>
+                <Option type="bool" name="ShowForm" value="false"/>
+                <Option type="bool" name="ShowOpenFormButton" value="true"/>
               </Option>
             </config>
           </editWidget>
@@ -1615,8 +1606,8 @@ def my_form_open(dialog, layer, feature):
           <editWidget type="TextEdit">
             <config>
               <Option type="Map">
-                <Option name="IsMultiline" type="bool" value="false"/>
-                <Option name="UseHtml" type="bool" value="false"/>
+                <Option type="bool" name="IsMultiline" value="false"/>
+                <Option type="bool" name="UseHtml" value="false"/>
               </Option>
             </config>
           </editWidget>
@@ -1625,14 +1616,14 @@ def my_form_open(dialog, layer, feature):
           <editWidget type="RelationReference">
             <config>
               <Option type="Map">
-                <Option name="AllowAddFeatures" type="bool" value="false"/>
-                <Option name="AllowNULL" type="bool" value="false"/>
-                <Option name="MapIdentification" type="bool" value="false"/>
-                <Option name="OrderByValue" type="bool" value="false"/>
-                <Option name="ReadOnly" type="bool" value="false"/>
-                <Option name="Relation" type="QString" value="observation_bcc90162_47c8_4097_bc24_a31af92d2708_fk_id_import_import_0343eb12_592e_4fd0_8380_51f4d62b6a56_id"/>
-                <Option name="ShowForm" type="bool" value="false"/>
-                <Option name="ShowOpenFormButton" type="bool" value="true"/>
+                <Option type="bool" name="AllowAddFeatures" value="false"/>
+                <Option type="bool" name="AllowNULL" value="false"/>
+                <Option type="bool" name="MapIdentification" value="false"/>
+                <Option type="bool" name="OrderByValue" value="false"/>
+                <Option type="bool" name="ReadOnly" value="false"/>
+                <Option type="QString" name="Relation" value="observation_bcc90162_47c8_4097_bc24_a31af92d2708_fk_id_import_import_0343eb12_592e_4fd0_8380_51f4d62b6a56_id"/>
+                <Option type="bool" name="ShowForm" value="false"/>
+                <Option type="bool" name="ShowOpenFormButton" value="true"/>
               </Option>
             </config>
           </editWidget>
@@ -1648,33 +1639,33 @@ def my_form_open(dialog, layer, feature):
           <editWidget type="DateTime">
             <config>
               <Option type="Map">
-                <Option name="allow_null" type="bool" value="true"/>
-                <Option name="calendar_popup" type="bool" value="true"/>
-                <Option name="display_format" type="QString" value="yyyy-MM-dd HH:mm:ss"/>
-                <Option name="field_format" type="QString" value="yyyy-MM-dd HH:mm:ss"/>
-                <Option name="field_iso_format" type="bool" value="false"/>
+                <Option type="bool" name="allow_null" value="true"/>
+                <Option type="bool" name="calendar_popup" value="true"/>
+                <Option type="QString" name="display_format" value="yyyy-MM-dd HH:mm:ss"/>
+                <Option type="QString" name="field_format" value="yyyy-MM-dd HH:mm:ss"/>
+                <Option type="bool" name="field_iso_format" value="false"/>
               </Option>
             </config>
           </editWidget>
         </field>
       </fieldConfiguration>
       <aliases>
-        <alias index="0" name="" field="id"/>
-        <alias index="1" name="Serie" field="fk_id_series"/>
-        <alias index="2" name="Spatial object" field="fk_id_spatial_object"/>
-        <alias index="3" name="Import" field="fk_id_import"/>
-        <alias index="4" name="Value" field="ob_value"/>
-        <alias index="5" name="Timestamp" field="ob_timestamp"/>
+        <alias name="" index="0" field="id"/>
+        <alias name="Serie" index="1" field="fk_id_series"/>
+        <alias name="Spatial object" index="2" field="fk_id_spatial_object"/>
+        <alias name="Import" index="3" field="fk_id_import"/>
+        <alias name="Value" index="4" field="ob_value"/>
+        <alias name="Timestamp" index="5" field="ob_timestamp"/>
       </aliases>
       <excludeAttributesWMS/>
       <excludeAttributesWFS/>
       <defaults>
-        <default applyOnUpdate="0" field="id" expression=""/>
-        <default applyOnUpdate="0" field="fk_id_series" expression=""/>
-        <default applyOnUpdate="0" field="fk_id_spatial_object" expression=""/>
-        <default applyOnUpdate="0" field="fk_id_import" expression=""/>
-        <default applyOnUpdate="0" field="ob_value" expression=""/>
-        <default applyOnUpdate="0" field="ob_timestamp" expression=""/>
+        <default expression="" field="id" applyOnUpdate="0"/>
+        <default expression="" field="fk_id_series" applyOnUpdate="0"/>
+        <default expression="" field="fk_id_spatial_object" applyOnUpdate="0"/>
+        <default expression="" field="fk_id_import" applyOnUpdate="0"/>
+        <default expression="" field="ob_value" applyOnUpdate="0"/>
+        <default expression="" field="ob_timestamp" applyOnUpdate="0"/>
       </defaults>
       <constraints>
         <constraint notnull_strength="1" constraints="3" exp_strength="0" field="id" unique_strength="1"/>
@@ -1696,15 +1687,15 @@ def my_form_open(dialog, layer, feature):
       <attributeactions>
         <defaultAction key="Canvas" value="{00000000-0000-0000-0000-000000000000}"/>
       </attributeactions>
-      <attributetableconfig actionWidgetStyle="dropDown" sortExpression="&quot;fk_id_series&quot;" sortOrder="0">
+      <attributetableconfig sortExpression="&quot;fk_id_series&quot;" sortOrder="0" actionWidgetStyle="dropDown">
         <columns>
-          <column name="id" hidden="0" type="field" width="-1"/>
-          <column name="fk_id_series" hidden="0" type="field" width="-1"/>
-          <column name="fk_id_spatial_object" hidden="0" type="field" width="-1"/>
-          <column name="fk_id_import" hidden="0" type="field" width="-1"/>
-          <column name="ob_value" hidden="0" type="field" width="-1"/>
-          <column name="ob_timestamp" hidden="0" type="field" width="302"/>
-          <column hidden="1" type="actions" width="-1"/>
+          <column type="field" name="id" hidden="0" width="-1"/>
+          <column type="field" name="fk_id_series" hidden="0" width="-1"/>
+          <column type="field" name="fk_id_spatial_object" hidden="0" width="-1"/>
+          <column type="field" name="fk_id_import" hidden="0" width="-1"/>
+          <column type="field" name="ob_value" hidden="0" width="-1"/>
+          <column type="field" name="ob_timestamp" hidden="0" width="302"/>
+          <column type="actions" hidden="1" width="-1"/>
         </columns>
       </attributetableconfig>
       <conditionalstyles>
@@ -1752,7 +1743,7 @@ def my_form_open(dialog, layer, feature):
       <previewExpression>id</previewExpression>
       <mapTip></mapTip>
     </maplayer>
-    <maplayer minScale="1e+8" refreshOnNotifyMessage="" hasScaleBasedVisibilityFlag="0" refreshOnNotifyEnabled="0" styleCategories="AllStyleCategories" autoRefreshTime="0" maxScale="0" type="raster" autoRefreshEnabled="0">
+    <maplayer refreshOnNotifyMessage="" refreshOnNotifyEnabled="0" styleCategories="AllStyleCategories" minScale="1e+8" type="raster" autoRefreshEnabled="0" hasScaleBasedVisibilityFlag="0" autoRefreshTime="0" maxScale="0">
       <extent>
         <xmin>-20037508.34278924390673637</xmin>
         <ymin>-20037508.34278925508260727</ymin>
@@ -1817,7 +1808,7 @@ def my_form_open(dialog, layer, feature):
         <property key="identify/format" value="Undefined"/>
       </customproperties>
       <pipe>
-        <rasterrenderer band="1" type="singlebandcolordata" opacity="1" alphaBand="-1">
+        <rasterrenderer type="singlebandcolordata" alphaBand="-1" opacity="1" band="1">
           <rasterTransparency/>
           <minMaxOrigin>
             <limits>None</limits>
@@ -1828,13 +1819,13 @@ def my_form_open(dialog, layer, feature):
             <stdDevFactor>2</stdDevFactor>
           </minMaxOrigin>
         </rasterrenderer>
-        <brightnesscontrast brightness="0" contrast="0"/>
-        <huesaturation colorizeRed="255" colorizeBlue="128" colorizeGreen="128" colorizeOn="0" colorizeStrength="100" grayscaleMode="0" saturation="0"/>
+        <brightnesscontrast contrast="0" brightness="0"/>
+        <huesaturation grayscaleMode="0" colorizeGreen="128" colorizeStrength="100" colorizeBlue="128" colorizeOn="0" saturation="0" colorizeRed="255"/>
         <rasterresampler maxOversampling="2"/>
       </pipe>
       <blendMode>0</blendMode>
     </maplayer>
-    <maplayer minScale="1e+8" refreshOnNotifyMessage="" hasScaleBasedVisibilityFlag="0" refreshOnNotifyEnabled="0" geometry="No geometry" styleCategories="AllStyleCategories" autoRefreshTime="0" maxScale="0" type="vector" autoRefreshEnabled="0" readOnly="0">
+    <maplayer refreshOnNotifyMessage="" refreshOnNotifyEnabled="0" geometry="No geometry" styleCategories="AllStyleCategories" minScale="1e+8" type="vector" autoRefreshEnabled="0" hasScaleBasedVisibilityFlag="0" autoRefreshTime="0" maxScale="0" readOnly="0">
       <id>pluviometrie_horaire_historique_16e3e428_23be_4eae_a3e0_8eeddea0d3b9</id>
       <datasource>../install/test_data/bretagne/pluviometrie_horaire_historique.csv</datasource>
       <keywordList>
@@ -1893,9 +1884,7 @@ def my_form_open(dialog, layer, feature):
         <Searchable>1</Searchable>
       </flags>
       <customproperties>
-        <property key="dualview/previewExpressions">
-          <value>"FID"</value>
-        </property>
+        <property key="dualview/previewExpressions" value="&quot;FID&quot;"/>
       </customproperties>
       <geometryOptions geometryPrecision="0" removeDuplicateNodes="0">
         <activeChecks type="StringList">
@@ -1962,26 +1951,26 @@ def my_form_open(dialog, layer, feature):
         </field>
       </fieldConfiguration>
       <aliases>
-        <alias index="0" name="" field="FID"/>
-        <alias index="1" name="" field="code_pluvio"/>
-        <alias index="2" name="" field="lieu_dit_station"/>
-        <alias index="3" name="" field="pluviometrie_horaire"/>
-        <alias index="4" name="" field="pluviometrie_journaliere"/>
-        <alias index="5" name="" field="date"/>
-        <alias index="6" name="" field="the_geom"/>
-        <alias index="7" name="" field="recordid"/>
+        <alias name="" index="0" field="FID"/>
+        <alias name="" index="1" field="code_pluvio"/>
+        <alias name="" index="2" field="lieu_dit_station"/>
+        <alias name="" index="3" field="pluviometrie_horaire"/>
+        <alias name="" index="4" field="pluviometrie_journaliere"/>
+        <alias name="" index="5" field="date"/>
+        <alias name="" index="6" field="the_geom"/>
+        <alias name="" index="7" field="recordid"/>
       </aliases>
       <excludeAttributesWMS/>
       <excludeAttributesWFS/>
       <defaults>
-        <default applyOnUpdate="0" field="FID" expression=""/>
-        <default applyOnUpdate="0" field="code_pluvio" expression=""/>
-        <default applyOnUpdate="0" field="lieu_dit_station" expression=""/>
-        <default applyOnUpdate="0" field="pluviometrie_horaire" expression=""/>
-        <default applyOnUpdate="0" field="pluviometrie_journaliere" expression=""/>
-        <default applyOnUpdate="0" field="date" expression=""/>
-        <default applyOnUpdate="0" field="the_geom" expression=""/>
-        <default applyOnUpdate="0" field="recordid" expression=""/>
+        <default expression="" field="FID" applyOnUpdate="0"/>
+        <default expression="" field="code_pluvio" applyOnUpdate="0"/>
+        <default expression="" field="lieu_dit_station" applyOnUpdate="0"/>
+        <default expression="" field="pluviometrie_horaire" applyOnUpdate="0"/>
+        <default expression="" field="pluviometrie_journaliere" applyOnUpdate="0"/>
+        <default expression="" field="date" applyOnUpdate="0"/>
+        <default expression="" field="the_geom" applyOnUpdate="0"/>
+        <default expression="" field="recordid" applyOnUpdate="0"/>
       </defaults>
       <constraints>
         <constraint notnull_strength="0" constraints="0" exp_strength="0" field="FID" unique_strength="0"/>
@@ -2007,17 +1996,17 @@ def my_form_open(dialog, layer, feature):
       <attributeactions>
         <defaultAction key="Canvas" value="{00000000-0000-0000-0000-000000000000}"/>
       </attributeactions>
-      <attributetableconfig actionWidgetStyle="dropDown" sortExpression="&quot;lieu_dit_station&quot;" sortOrder="0">
+      <attributetableconfig sortExpression="&quot;lieu_dit_station&quot;" sortOrder="0" actionWidgetStyle="dropDown">
         <columns>
-          <column name="FID" hidden="0" type="field" width="-1"/>
-          <column name="code_pluvio" hidden="0" type="field" width="-1"/>
-          <column name="lieu_dit_station" hidden="0" type="field" width="179"/>
-          <column name="pluviometrie_horaire" hidden="0" type="field" width="191"/>
-          <column name="pluviometrie_journaliere" hidden="0" type="field" width="211"/>
-          <column name="date" hidden="0" type="field" width="300"/>
-          <column name="the_geom" hidden="0" type="field" width="-1"/>
-          <column name="recordid" hidden="0" type="field" width="-1"/>
-          <column hidden="1" type="actions" width="-1"/>
+          <column type="field" name="FID" hidden="0" width="-1"/>
+          <column type="field" name="code_pluvio" hidden="0" width="-1"/>
+          <column type="field" name="lieu_dit_station" hidden="0" width="179"/>
+          <column type="field" name="pluviometrie_horaire" hidden="0" width="191"/>
+          <column type="field" name="pluviometrie_journaliere" hidden="0" width="211"/>
+          <column type="field" name="date" hidden="0" width="300"/>
+          <column type="field" name="the_geom" hidden="0" width="-1"/>
+          <column type="field" name="recordid" hidden="0" width="-1"/>
+          <column type="actions" hidden="1" width="-1"/>
         </columns>
       </attributetableconfig>
       <conditionalstyles>
@@ -2037,7 +2026,7 @@ def my_form_open(dialog, layer, feature):
       <previewExpression>"FID"</previewExpression>
       <mapTip></mapTip>
     </maplayer>
-    <maplayer minScale="1e+8" simplifyLocal="1" refreshOnNotifyMessage="" hasScaleBasedVisibilityFlag="0" refreshOnNotifyEnabled="0" geometry="Point" styleCategories="AllStyleCategories" autoRefreshTime="0" simplifyAlgorithm="0" maxScale="0" simplifyDrawingHints="0" type="vector" autoRefreshEnabled="0" simplifyMaxScale="1" simplifyDrawingTol="1" readOnly="0" labelsEnabled="0">
+    <maplayer refreshOnNotifyMessage="" refreshOnNotifyEnabled="0" geometry="Point" styleCategories="AllStyleCategories" minScale="1e+8" type="vector" simplifyDrawingHints="0" autoRefreshEnabled="0" simplifyDrawingTol="1" hasScaleBasedVisibilityFlag="0" autoRefreshTime="0" simplifyMaxScale="1" maxScale="0" labelsEnabled="0" simplifyAlgorithm="0" simplifyLocal="1" readOnly="0">
       <extent>
         <xmin>132977.98000000001047738</xmin>
         <ymin>6734681.83000000007450581</ymin>
@@ -2094,7 +2083,7 @@ def my_form_open(dialog, layer, feature):
           </spatialrefsys>
         </crs>
         <extent>
-          <spatial minz="0" maxz="0" minx="0" maxy="0" dimensions="2" miny="0" crs="" maxx="0"/>
+          <spatial minx="0" maxx="0" miny="0" crs="" minz="0" dimensions="2" maxy="0" maxz="0"/>
           <temporal>
             <period>
               <start></start>
@@ -2118,33 +2107,33 @@ def my_form_open(dialog, layer, feature):
         <Removable>1</Removable>
         <Searchable>1</Searchable>
       </flags>
-      <renderer-v2 forceraster="0" symbollevels="0" enableorderby="0" type="singleSymbol">
+      <renderer-v2 type="singleSymbol" symbollevels="0" forceraster="0" enableorderby="0">
         <symbols>
-          <symbol name="0" type="marker" clip_to_extent="1" alpha="1" force_rhr="0">
-            <layer locked="0" class="SimpleMarker" enabled="1" pass="0">
-              <prop k="angle" v="0"/>
-              <prop k="color" v="58,99,146,255"/>
-              <prop k="horizontal_anchor_point" v="1"/>
-              <prop k="joinstyle" v="bevel"/>
-              <prop k="name" v="square"/>
-              <prop k="offset" v="0,0"/>
-              <prop k="offset_map_unit_scale" v="3x:0,0,0,0,0,0"/>
-              <prop k="offset_unit" v="MM"/>
-              <prop k="outline_color" v="255,255,255,255"/>
-              <prop k="outline_style" v="solid"/>
-              <prop k="outline_width" v="0.4"/>
-              <prop k="outline_width_map_unit_scale" v="3x:0,0,0,0,0,0"/>
-              <prop k="outline_width_unit" v="MM"/>
-              <prop k="scale_method" v="diameter"/>
-              <prop k="size" v="2.6"/>
-              <prop k="size_map_unit_scale" v="3x:0,0,0,0,0,0"/>
-              <prop k="size_unit" v="MM"/>
-              <prop k="vertical_anchor_point" v="1"/>
+          <symbol force_rhr="0" type="marker" name="0" alpha="1" clip_to_extent="1">
+            <layer class="SimpleMarker" enabled="1" locked="0" pass="0">
+              <prop v="0" k="angle"/>
+              <prop v="58,99,146,255" k="color"/>
+              <prop v="1" k="horizontal_anchor_point"/>
+              <prop v="bevel" k="joinstyle"/>
+              <prop v="square" k="name"/>
+              <prop v="0,0" k="offset"/>
+              <prop v="3x:0,0,0,0,0,0" k="offset_map_unit_scale"/>
+              <prop v="MM" k="offset_unit"/>
+              <prop v="255,255,255,255" k="outline_color"/>
+              <prop v="solid" k="outline_style"/>
+              <prop v="0.4" k="outline_width"/>
+              <prop v="3x:0,0,0,0,0,0" k="outline_width_map_unit_scale"/>
+              <prop v="MM" k="outline_width_unit"/>
+              <prop v="diameter" k="scale_method"/>
+              <prop v="2.6" k="size"/>
+              <prop v="3x:0,0,0,0,0,0" k="size_map_unit_scale"/>
+              <prop v="MM" k="size_unit"/>
+              <prop v="1" k="vertical_anchor_point"/>
               <data_defined_properties>
                 <Option type="Map">
-                  <Option name="name" type="QString" value=""/>
+                  <Option type="QString" name="name" value=""/>
                   <Option name="properties"/>
-                  <Option name="type" type="QString" value="collection"/>
+                  <Option type="QString" name="type" value="collection"/>
                 </Option>
               </data_defined_properties>
             </layer>
@@ -2162,18 +2151,18 @@ def my_form_open(dialog, layer, feature):
       <blendMode>0</blendMode>
       <featureBlendMode>0</featureBlendMode>
       <layerOpacity>1</layerOpacity>
-      <SingleCategoryDiagramRenderer attributeLegend="1" diagramType="Histogram">
-        <DiagramCategory barWidth="5" penColor="#000000" lineSizeType="MM" sizeScale="3x:0,0,0,0,0,0" backgroundAlpha="255" width="15" lineSizeScale="3x:0,0,0,0,0,0" enabled="0" minimumSize="0" maxScaleDenominator="1e+8" minScaleDenominator="0" rotationOffset="270" scaleBasedVisibility="0" scaleDependency="Area" height="15" backgroundColor="#ffffff" penAlpha="255" opacity="1" penWidth="0" labelPlacementMethod="XHeight" sizeType="MM" diagramOrientation="Up">
-          <fontProperties description="Ubuntu,11,-1,5,50,0,0,0,0,0" style=""/>
-          <attribute color="#000000" field="" label=""/>
+      <SingleCategoryDiagramRenderer diagramType="Histogram" attributeLegend="1">
+        <DiagramCategory penAlpha="255" barWidth="5" opacity="1" enabled="0" height="15" sizeType="MM" lineSizeScale="3x:0,0,0,0,0,0" width="15" penWidth="0" minScaleDenominator="0" labelPlacementMethod="XHeight" backgroundAlpha="255" lineSizeType="MM" scaleDependency="Area" penColor="#000000" scaleBasedVisibility="0" backgroundColor="#ffffff" diagramOrientation="Up" maxScaleDenominator="1e+8" sizeScale="3x:0,0,0,0,0,0" minimumSize="0" rotationOffset="270">
+          <fontProperties style="" description="Ubuntu,11,-1,5,50,0,0,0,0,0"/>
+          <attribute field="" color="#000000" label=""/>
         </DiagramCategory>
       </SingleCategoryDiagramRenderer>
-      <DiagramLayerSettings dist="0" obstacle="0" zIndex="0" showAll="1" priority="0" placement="0" linePlacementFlags="18">
+      <DiagramLayerSettings obstacle="0" placement="0" showAll="1" priority="0" dist="0" zIndex="0" linePlacementFlags="18">
         <properties>
           <Option type="Map">
-            <Option name="name" type="QString" value=""/>
+            <Option type="QString" name="name" value=""/>
             <Option name="properties"/>
-            <Option name="type" type="QString" value="collection"/>
+            <Option type="QString" name="type" value="collection"/>
           </Option>
         </properties>
       </DiagramLayerSettings>
@@ -2240,26 +2229,26 @@ def my_form_open(dialog, layer, feature):
         </field>
       </fieldConfiguration>
       <aliases>
-        <alias index="0" name="" field="id"/>
-        <alias index="1" name="" field="code_pluvio"/>
-        <alias index="2" name="" field="lieu_dit_station"/>
-        <alias index="3" name="" field="pluviometrie_journaliere"/>
-        <alias index="4" name="" field="sup_seuil"/>
-        <alias index="5" name="" field="batterie"/>
-        <alias index="6" name="" field="date"/>
-        <alias index="7" name="" field="age"/>
+        <alias name="" index="0" field="id"/>
+        <alias name="" index="1" field="code_pluvio"/>
+        <alias name="" index="2" field="lieu_dit_station"/>
+        <alias name="" index="3" field="pluviometrie_journaliere"/>
+        <alias name="" index="4" field="sup_seuil"/>
+        <alias name="" index="5" field="batterie"/>
+        <alias name="" index="6" field="date"/>
+        <alias name="" index="7" field="age"/>
       </aliases>
       <excludeAttributesWMS/>
       <excludeAttributesWFS/>
       <defaults>
-        <default applyOnUpdate="0" field="id" expression=""/>
-        <default applyOnUpdate="0" field="code_pluvio" expression=""/>
-        <default applyOnUpdate="0" field="lieu_dit_station" expression=""/>
-        <default applyOnUpdate="0" field="pluviometrie_journaliere" expression=""/>
-        <default applyOnUpdate="0" field="sup_seuil" expression=""/>
-        <default applyOnUpdate="0" field="batterie" expression=""/>
-        <default applyOnUpdate="0" field="date" expression=""/>
-        <default applyOnUpdate="0" field="age" expression=""/>
+        <default expression="" field="id" applyOnUpdate="0"/>
+        <default expression="" field="code_pluvio" applyOnUpdate="0"/>
+        <default expression="" field="lieu_dit_station" applyOnUpdate="0"/>
+        <default expression="" field="pluviometrie_journaliere" applyOnUpdate="0"/>
+        <default expression="" field="sup_seuil" applyOnUpdate="0"/>
+        <default expression="" field="batterie" applyOnUpdate="0"/>
+        <default expression="" field="date" applyOnUpdate="0"/>
+        <default expression="" field="age" applyOnUpdate="0"/>
       </defaults>
       <constraints>
         <constraint notnull_strength="0" constraints="0" exp_strength="0" field="id" unique_strength="0"/>
@@ -2285,17 +2274,17 @@ def my_form_open(dialog, layer, feature):
       <attributeactions>
         <defaultAction key="Canvas" value="{00000000-0000-0000-0000-000000000000}"/>
       </attributeactions>
-      <attributetableconfig actionWidgetStyle="dropDown" sortExpression="&quot;code_pluvio&quot;" sortOrder="0">
+      <attributetableconfig sortExpression="&quot;code_pluvio&quot;" sortOrder="0" actionWidgetStyle="dropDown">
         <columns>
-          <column name="id" hidden="0" type="field" width="-1"/>
-          <column name="code_pluvio" hidden="0" type="field" width="-1"/>
-          <column name="lieu_dit_station" hidden="0" type="field" width="324"/>
-          <column name="pluviometrie_journaliere" hidden="0" type="field" width="-1"/>
-          <column name="sup_seuil" hidden="0" type="field" width="-1"/>
-          <column name="batterie" hidden="0" type="field" width="-1"/>
-          <column name="date" hidden="0" type="field" width="-1"/>
-          <column name="age" hidden="0" type="field" width="-1"/>
-          <column hidden="1" type="actions" width="-1"/>
+          <column type="field" name="id" hidden="0" width="-1"/>
+          <column type="field" name="code_pluvio" hidden="0" width="-1"/>
+          <column type="field" name="lieu_dit_station" hidden="0" width="324"/>
+          <column type="field" name="pluviometrie_journaliere" hidden="0" width="-1"/>
+          <column type="field" name="sup_seuil" hidden="0" width="-1"/>
+          <column type="field" name="batterie" hidden="0" width="-1"/>
+          <column type="field" name="date" hidden="0" width="-1"/>
+          <column type="field" name="age" hidden="0" width="-1"/>
+          <column type="actions" hidden="1" width="-1"/>
         </columns>
       </attributetableconfig>
       <conditionalstyles>
@@ -2347,7 +2336,7 @@ def my_form_open(dialog, layer, feature):
       <previewExpression>id</previewExpression>
       <mapTip></mapTip>
     </maplayer>
-    <maplayer minScale="1e+8" refreshOnNotifyMessage="" hasScaleBasedVisibilityFlag="0" refreshOnNotifyEnabled="0" geometry="No geometry" styleCategories="AllStyleCategories" autoRefreshTime="0" maxScale="0" type="vector" autoRefreshEnabled="0" readOnly="0">
+    <maplayer refreshOnNotifyMessage="" refreshOnNotifyEnabled="0" geometry="No geometry" styleCategories="AllStyleCategories" minScale="1e+8" type="vector" autoRefreshEnabled="0" hasScaleBasedVisibilityFlag="0" autoRefreshTime="0" maxScale="0" readOnly="0">
       <id>protocol_5507f1c8_1802_4df0_a273_8e9b7f52c352</id>
       <datasource>service='gobs' sslmode=disable key='id' estimatedmetadata=true checkPrimaryKeyUnicity='0' table="gobs"."protocol" sql=</datasource>
       <keywordList>
@@ -2398,7 +2387,7 @@ def my_form_open(dialog, layer, feature):
           </spatialrefsys>
         </crs>
         <extent>
-          <spatial minz="0" maxz="0" minx="0" maxy="0" dimensions="2" miny="0" crs="" maxx="0"/>
+          <spatial minx="0" maxx="0" miny="0" crs="" minz="0" dimensions="2" maxy="0" maxz="0"/>
           <temporal>
             <period>
               <start></start>
@@ -2436,8 +2425,8 @@ def my_form_open(dialog, layer, feature):
           <editWidget type="TextEdit">
             <config>
               <Option type="Map">
-                <Option name="IsMultiline" type="bool" value="false"/>
-                <Option name="UseHtml" type="bool" value="false"/>
+                <Option type="bool" name="IsMultiline" value="false"/>
+                <Option type="bool" name="UseHtml" value="false"/>
               </Option>
             </config>
           </editWidget>
@@ -2446,8 +2435,8 @@ def my_form_open(dialog, layer, feature):
           <editWidget type="TextEdit">
             <config>
               <Option type="Map">
-                <Option name="IsMultiline" type="bool" value="false"/>
-                <Option name="UseHtml" type="bool" value="false"/>
+                <Option type="bool" name="IsMultiline" value="false"/>
+                <Option type="bool" name="UseHtml" value="false"/>
               </Option>
             </config>
           </editWidget>
@@ -2456,8 +2445,8 @@ def my_form_open(dialog, layer, feature):
           <editWidget type="TextEdit">
             <config>
               <Option type="Map">
-                <Option name="IsMultiline" type="bool" value="false"/>
-                <Option name="UseHtml" type="bool" value="false"/>
+                <Option type="bool" name="IsMultiline" value="false"/>
+                <Option type="bool" name="UseHtml" value="false"/>
               </Option>
             </config>
           </editWidget>
@@ -2466,26 +2455,26 @@ def my_form_open(dialog, layer, feature):
           <editWidget type="TextEdit">
             <config>
               <Option type="Map">
-                <Option name="IsMultiline" type="bool" value="true"/>
-                <Option name="UseHtml" type="bool" value="false"/>
+                <Option type="bool" name="IsMultiline" value="true"/>
+                <Option type="bool" name="UseHtml" value="false"/>
               </Option>
             </config>
           </editWidget>
         </field>
       </fieldConfiguration>
       <aliases>
-        <alias index="0" name="Id" field="id"/>
-        <alias index="1" name="Code" field="pr_code"/>
-        <alias index="2" name="Name" field="pr_name"/>
-        <alias index="3" name="Description" field="pr_description"/>
+        <alias name="Id" index="0" field="id"/>
+        <alias name="Code" index="1" field="pr_code"/>
+        <alias name="Name" index="2" field="pr_name"/>
+        <alias name="Description" index="3" field="pr_description"/>
       </aliases>
       <excludeAttributesWMS/>
       <excludeAttributesWFS/>
       <defaults>
-        <default applyOnUpdate="0" field="id" expression=""/>
-        <default applyOnUpdate="0" field="pr_code" expression=""/>
-        <default applyOnUpdate="0" field="pr_name" expression=""/>
-        <default applyOnUpdate="0" field="pr_description" expression=""/>
+        <default expression="" field="id" applyOnUpdate="0"/>
+        <default expression="" field="pr_code" applyOnUpdate="0"/>
+        <default expression="" field="pr_name" applyOnUpdate="0"/>
+        <default expression="" field="pr_description" applyOnUpdate="0"/>
       </defaults>
       <constraints>
         <constraint notnull_strength="1" constraints="3" exp_strength="0" field="id" unique_strength="1"/>
@@ -2503,13 +2492,13 @@ def my_form_open(dialog, layer, feature):
       <attributeactions>
         <defaultAction key="Canvas" value="{00000000-0000-0000-0000-000000000000}"/>
       </attributeactions>
-      <attributetableconfig actionWidgetStyle="dropDown" sortExpression="" sortOrder="0">
+      <attributetableconfig sortExpression="" sortOrder="0" actionWidgetStyle="dropDown">
         <columns>
-          <column name="id" hidden="0" type="field" width="-1"/>
-          <column name="pr_code" hidden="0" type="field" width="-1"/>
-          <column name="pr_name" hidden="0" type="field" width="-1"/>
-          <column name="pr_description" hidden="0" type="field" width="-1"/>
-          <column hidden="1" type="actions" width="-1"/>
+          <column type="field" name="id" hidden="0" width="-1"/>
+          <column type="field" name="pr_code" hidden="0" width="-1"/>
+          <column type="field" name="pr_name" hidden="0" width="-1"/>
+          <column type="field" name="pr_description" hidden="0" width="-1"/>
+          <column type="actions" hidden="1" width="-1"/>
         </columns>
       </attributetableconfig>
       <conditionalstyles>
@@ -2538,11 +2527,11 @@ def my_form_open(dialog, layer, feature):
       <featformsuppress>0</featformsuppress>
       <editorlayout>tablayout</editorlayout>
       <attributeEditorForm>
-        <attributeEditorContainer name="General" visibilityExpression="" showLabel="1" columnCount="1" groupBox="0" visibilityExpressionEnabled="0">
-          <attributeEditorField index="0" name="id" showLabel="1"/>
-          <attributeEditorField index="2" name="pr_name" showLabel="1"/>
-          <attributeEditorField index="1" name="pr_code" showLabel="1"/>
-          <attributeEditorField index="3" name="pr_description" showLabel="1"/>
+        <attributeEditorContainer showLabel="1" visibilityExpression="" name="General" groupBox="0" columnCount="1" visibilityExpressionEnabled="0">
+          <attributeEditorField showLabel="1" name="id" index="0"/>
+          <attributeEditorField showLabel="1" name="pr_name" index="2"/>
+          <attributeEditorField showLabel="1" name="pr_code" index="1"/>
+          <attributeEditorField showLabel="1" name="pr_description" index="3"/>
         </attributeEditorContainer>
       </attributeEditorForm>
       <editable>
@@ -2560,14 +2549,14 @@ def my_form_open(dialog, layer, feature):
       <widgets>
         <widget name="series_04a7414a_ab6d_4611_8a60_bcd22071dc22_fk_id_protocol_protocol_5507f1c8_1802_4df0_a273_8e9b7f52c352_id">
           <config type="Map">
-            <Option name="nm-rel" type="QString" value=""/>
+            <Option type="QString" name="nm-rel" value=""/>
           </config>
         </widget>
       </widgets>
       <previewExpression>pr_name</previewExpression>
       <mapTip></mapTip>
     </maplayer>
-    <maplayer minScale="1e+8" refreshOnNotifyMessage="" hasScaleBasedVisibilityFlag="0" refreshOnNotifyEnabled="0" geometry="No geometry" styleCategories="AllStyleCategories" autoRefreshTime="0" maxScale="0" type="vector" autoRefreshEnabled="0" readOnly="0">
+    <maplayer refreshOnNotifyMessage="" refreshOnNotifyEnabled="0" geometry="No geometry" styleCategories="AllStyleCategories" minScale="1e+8" type="vector" autoRefreshEnabled="0" hasScaleBasedVisibilityFlag="0" autoRefreshTime="0" maxScale="0" readOnly="0">
       <id>r_graph_edge_f2eb47e9_728b_4c85_a839_3b488e132e06</id>
       <datasource>service='gobs' sslmode=disable key='ge_parent_node,ge_child_node' estimatedmetadata=true checkPrimaryKeyUnicity='0' table="gobs"."r_graph_edge" sql=</datasource>
       <keywordList>
@@ -2649,14 +2638,14 @@ def my_form_open(dialog, layer, feature):
         </field>
       </fieldConfiguration>
       <aliases>
-        <alias index="0" name="" field="ge_parent_node"/>
-        <alias index="1" name="" field="ge_child_node"/>
+        <alias name="" index="0" field="ge_parent_node"/>
+        <alias name="" index="1" field="ge_child_node"/>
       </aliases>
       <excludeAttributesWMS/>
       <excludeAttributesWFS/>
       <defaults>
-        <default applyOnUpdate="0" field="ge_parent_node" expression=""/>
-        <default applyOnUpdate="0" field="ge_child_node" expression=""/>
+        <default expression="" field="ge_parent_node" applyOnUpdate="0"/>
+        <default expression="" field="ge_child_node" applyOnUpdate="0"/>
       </defaults>
       <constraints>
         <constraint notnull_strength="1" constraints="3" exp_strength="0" field="ge_parent_node" unique_strength="1"/>
@@ -2670,7 +2659,7 @@ def my_form_open(dialog, layer, feature):
       <attributeactions>
         <defaultAction key="Canvas" value="{00000000-0000-0000-0000-000000000000}"/>
       </attributeactions>
-      <attributetableconfig actionWidgetStyle="dropDown" sortExpression="" sortOrder="0">
+      <attributetableconfig sortExpression="" sortOrder="0" actionWidgetStyle="dropDown">
         <columns/>
       </attributetableconfig>
       <conditionalstyles>
@@ -2690,7 +2679,7 @@ def my_form_open(dialog, layer, feature):
       <previewExpression></previewExpression>
       <mapTip></mapTip>
     </maplayer>
-    <maplayer minScale="1e+8" refreshOnNotifyMessage="" hasScaleBasedVisibilityFlag="0" refreshOnNotifyEnabled="0" geometry="No geometry" styleCategories="AllStyleCategories" autoRefreshTime="0" maxScale="0" type="vector" autoRefreshEnabled="0" readOnly="0">
+    <maplayer refreshOnNotifyMessage="" refreshOnNotifyEnabled="0" geometry="No geometry" styleCategories="AllStyleCategories" minScale="1e+8" type="vector" autoRefreshEnabled="0" hasScaleBasedVisibilityFlag="0" autoRefreshTime="0" maxScale="0" readOnly="0">
       <id>r_indicator_node_2ca83116_e69f_4dcb_abcb_de5bdf44b2be</id>
       <datasource>service='gobs' sslmode=disable key='fk_id_indicator,fk_id_node' estimatedmetadata=true checkPrimaryKeyUnicity='0' table="gobs"."r_indicator_node" sql=</datasource>
       <keywordList>
@@ -2774,14 +2763,14 @@ def my_form_open(dialog, layer, feature):
         </field>
       </fieldConfiguration>
       <aliases>
-        <alias index="0" name="" field="fk_id_indicator"/>
-        <alias index="1" name="" field="fk_id_node"/>
+        <alias name="" index="0" field="fk_id_indicator"/>
+        <alias name="" index="1" field="fk_id_node"/>
       </aliases>
       <excludeAttributesWMS/>
       <excludeAttributesWFS/>
       <defaults>
-        <default applyOnUpdate="0" field="fk_id_indicator" expression=""/>
-        <default applyOnUpdate="0" field="fk_id_node" expression=""/>
+        <default expression="" field="fk_id_indicator" applyOnUpdate="0"/>
+        <default expression="" field="fk_id_node" applyOnUpdate="0"/>
       </defaults>
       <constraints>
         <constraint notnull_strength="1" constraints="3" exp_strength="0" field="fk_id_indicator" unique_strength="1"/>
@@ -2795,7 +2784,7 @@ def my_form_open(dialog, layer, feature):
       <attributeactions>
         <defaultAction key="Canvas" value="{00000000-0000-0000-0000-000000000000}"/>
       </attributeactions>
-      <attributetableconfig actionWidgetStyle="dropDown" sortExpression="" sortOrder="0">
+      <attributetableconfig sortExpression="" sortOrder="0" actionWidgetStyle="dropDown">
         <columns/>
       </attributetableconfig>
       <conditionalstyles>
@@ -2815,7 +2804,7 @@ def my_form_open(dialog, layer, feature):
       <previewExpression>"fk_id_indicator"</previewExpression>
       <mapTip></mapTip>
     </maplayer>
-    <maplayer minScale="1e+8" simplifyLocal="1" refreshOnNotifyMessage="" hasScaleBasedVisibilityFlag="0" refreshOnNotifyEnabled="0" geometry="Polygon" styleCategories="AllStyleCategories" autoRefreshTime="0" simplifyAlgorithm="0" maxScale="0" simplifyDrawingHints="1" type="vector" autoRefreshEnabled="0" simplifyMaxScale="1" simplifyDrawingTol="1" readOnly="0" labelsEnabled="0">
+    <maplayer refreshOnNotifyMessage="" refreshOnNotifyEnabled="0" geometry="Polygon" styleCategories="AllStyleCategories" minScale="1e+8" type="vector" simplifyDrawingHints="1" autoRefreshEnabled="0" simplifyDrawingTol="1" hasScaleBasedVisibilityFlag="0" autoRefreshTime="0" simplifyMaxScale="1" maxScale="0" labelsEnabled="0" simplifyAlgorithm="0" simplifyLocal="1" readOnly="0">
       <extent>
         <xmin>-5.14223839732082411</xmin>
         <ymin>47.27779589694952023</ymin>
@@ -2872,7 +2861,7 @@ def my_form_open(dialog, layer, feature):
           </spatialrefsys>
         </crs>
         <extent>
-          <spatial minz="0" maxz="0" minx="0" maxy="0" dimensions="2" miny="0" crs="" maxx="0"/>
+          <spatial minx="0" maxx="0" miny="0" crs="" minz="0" dimensions="2" maxy="0" maxz="0"/>
           <temporal>
             <period>
               <start></start>
@@ -2896,26 +2885,26 @@ def my_form_open(dialog, layer, feature):
         <Removable>1</Removable>
         <Searchable>1</Searchable>
       </flags>
-      <renderer-v2 forceraster="0" symbollevels="0" enableorderby="0" type="singleSymbol">
+      <renderer-v2 type="singleSymbol" symbollevels="0" forceraster="0" enableorderby="0">
         <symbols>
-          <symbol name="0" type="fill" clip_to_extent="1" alpha="1" force_rhr="0">
-            <layer locked="0" class="SimpleFill" enabled="1" pass="0">
-              <prop k="border_width_map_unit_scale" v="3x:0,0,0,0,0,0"/>
-              <prop k="color" v="255,255,255,255"/>
-              <prop k="joinstyle" v="bevel"/>
-              <prop k="offset" v="0,0"/>
-              <prop k="offset_map_unit_scale" v="3x:0,0,0,0,0,0"/>
-              <prop k="offset_unit" v="MM"/>
-              <prop k="outline_color" v="35,35,35,255"/>
-              <prop k="outline_style" v="solid"/>
-              <prop k="outline_width" v="0.26"/>
-              <prop k="outline_width_unit" v="MM"/>
-              <prop k="style" v="no"/>
+          <symbol force_rhr="0" type="fill" name="0" alpha="1" clip_to_extent="1">
+            <layer class="SimpleFill" enabled="1" locked="0" pass="0">
+              <prop v="3x:0,0,0,0,0,0" k="border_width_map_unit_scale"/>
+              <prop v="255,255,255,255" k="color"/>
+              <prop v="bevel" k="joinstyle"/>
+              <prop v="0,0" k="offset"/>
+              <prop v="3x:0,0,0,0,0,0" k="offset_map_unit_scale"/>
+              <prop v="MM" k="offset_unit"/>
+              <prop v="35,35,35,255" k="outline_color"/>
+              <prop v="solid" k="outline_style"/>
+              <prop v="0.26" k="outline_width"/>
+              <prop v="MM" k="outline_width_unit"/>
+              <prop v="no" k="style"/>
               <data_defined_properties>
                 <Option type="Map">
-                  <Option name="name" type="QString" value=""/>
+                  <Option type="QString" name="name" value=""/>
                   <Option name="properties"/>
-                  <Option name="type" type="QString" value="collection"/>
+                  <Option type="QString" name="type" value="collection"/>
                 </Option>
               </data_defined_properties>
             </layer>
@@ -2925,9 +2914,7 @@ def my_form_open(dialog, layer, feature):
         <sizescale/>
       </renderer-v2>
       <customproperties>
-        <property key="dualview/previewExpressions">
-          <value>gml_id</value>
-        </property>
+        <property key="dualview/previewExpressions" value="gml_id"/>
         <property key="embeddedWidgets/count" value="0"/>
         <property key="variableNames"/>
         <property key="variableValues"/>
@@ -2935,18 +2922,18 @@ def my_form_open(dialog, layer, feature):
       <blendMode>0</blendMode>
       <featureBlendMode>0</featureBlendMode>
       <layerOpacity>1</layerOpacity>
-      <SingleCategoryDiagramRenderer attributeLegend="1" diagramType="Histogram">
-        <DiagramCategory barWidth="5" penColor="#000000" lineSizeType="MM" sizeScale="3x:0,0,0,0,0,0" backgroundAlpha="255" width="15" lineSizeScale="3x:0,0,0,0,0,0" enabled="0" minimumSize="0" maxScaleDenominator="1e+8" minScaleDenominator="0" rotationOffset="270" scaleBasedVisibility="0" scaleDependency="Area" height="15" backgroundColor="#ffffff" penAlpha="255" opacity="1" penWidth="0" labelPlacementMethod="XHeight" sizeType="MM" diagramOrientation="Up">
-          <fontProperties description="Ubuntu,11,-1,5,50,0,0,0,0,0" style=""/>
-          <attribute color="#000000" field="" label=""/>
+      <SingleCategoryDiagramRenderer diagramType="Histogram" attributeLegend="1">
+        <DiagramCategory penAlpha="255" barWidth="5" opacity="1" enabled="0" height="15" sizeType="MM" lineSizeScale="3x:0,0,0,0,0,0" width="15" penWidth="0" minScaleDenominator="0" labelPlacementMethod="XHeight" backgroundAlpha="255" lineSizeType="MM" scaleDependency="Area" penColor="#000000" scaleBasedVisibility="0" backgroundColor="#ffffff" diagramOrientation="Up" maxScaleDenominator="1e+8" sizeScale="3x:0,0,0,0,0,0" minimumSize="0" rotationOffset="270">
+          <fontProperties style="" description="Ubuntu,11,-1,5,50,0,0,0,0,0"/>
+          <attribute field="" color="#000000" label=""/>
         </DiagramCategory>
       </SingleCategoryDiagramRenderer>
-      <DiagramLayerSettings dist="0" obstacle="0" zIndex="0" showAll="1" priority="0" placement="1" linePlacementFlags="18">
+      <DiagramLayerSettings obstacle="0" placement="1" showAll="1" priority="0" dist="0" zIndex="0" linePlacementFlags="18">
         <properties>
           <Option type="Map">
-            <Option name="name" type="QString" value=""/>
+            <Option type="QString" name="name" value=""/>
             <Option name="properties"/>
-            <Option name="type" type="QString" value="collection"/>
+            <Option type="QString" name="type" value="collection"/>
           </Option>
         </properties>
       </DiagramLayerSettings>
@@ -3055,38 +3042,38 @@ def my_form_open(dialog, layer, feature):
         </field>
       </fieldConfiguration>
       <aliases>
-        <alias index="0" name="" field="gml_id"/>
-        <alias index="1" name="" field="code_geo"/>
-        <alias index="2" name="" field="nom_geo"/>
-        <alias index="3" name="" field="level"/>
-        <alias index="4" name="" field="p_pop1999"/>
-        <alias index="5" name="" field="p_pop2008"/>
-        <alias index="6" name="" field="p_pop2009"/>
-        <alias index="7" name="" field="p_pop2010"/>
-        <alias index="8" name="" field="p_pop2013"/>
-        <alias index="9" name="" field="p_pop2014"/>
-        <alias index="10" name="" field="p_pop2015"/>
-        <alias index="11" name="" field="ev_08_13"/>
-        <alias index="12" name="" field="ev_09_14"/>
-        <alias index="13" name="" field="ev_10_15"/>
+        <alias name="" index="0" field="gml_id"/>
+        <alias name="" index="1" field="code_geo"/>
+        <alias name="" index="2" field="nom_geo"/>
+        <alias name="" index="3" field="level"/>
+        <alias name="" index="4" field="p_pop1999"/>
+        <alias name="" index="5" field="p_pop2008"/>
+        <alias name="" index="6" field="p_pop2009"/>
+        <alias name="" index="7" field="p_pop2010"/>
+        <alias name="" index="8" field="p_pop2013"/>
+        <alias name="" index="9" field="p_pop2014"/>
+        <alias name="" index="10" field="p_pop2015"/>
+        <alias name="" index="11" field="ev_08_13"/>
+        <alias name="" index="12" field="ev_09_14"/>
+        <alias name="" index="13" field="ev_10_15"/>
       </aliases>
       <excludeAttributesWMS/>
       <excludeAttributesWFS/>
       <defaults>
-        <default applyOnUpdate="0" field="gml_id" expression=""/>
-        <default applyOnUpdate="0" field="code_geo" expression=""/>
-        <default applyOnUpdate="0" field="nom_geo" expression=""/>
-        <default applyOnUpdate="0" field="level" expression=""/>
-        <default applyOnUpdate="0" field="p_pop1999" expression=""/>
-        <default applyOnUpdate="0" field="p_pop2008" expression=""/>
-        <default applyOnUpdate="0" field="p_pop2009" expression=""/>
-        <default applyOnUpdate="0" field="p_pop2010" expression=""/>
-        <default applyOnUpdate="0" field="p_pop2013" expression=""/>
-        <default applyOnUpdate="0" field="p_pop2014" expression=""/>
-        <default applyOnUpdate="0" field="p_pop2015" expression=""/>
-        <default applyOnUpdate="0" field="ev_08_13" expression=""/>
-        <default applyOnUpdate="0" field="ev_09_14" expression=""/>
-        <default applyOnUpdate="0" field="ev_10_15" expression=""/>
+        <default expression="" field="gml_id" applyOnUpdate="0"/>
+        <default expression="" field="code_geo" applyOnUpdate="0"/>
+        <default expression="" field="nom_geo" applyOnUpdate="0"/>
+        <default expression="" field="level" applyOnUpdate="0"/>
+        <default expression="" field="p_pop1999" applyOnUpdate="0"/>
+        <default expression="" field="p_pop2008" applyOnUpdate="0"/>
+        <default expression="" field="p_pop2009" applyOnUpdate="0"/>
+        <default expression="" field="p_pop2010" applyOnUpdate="0"/>
+        <default expression="" field="p_pop2013" applyOnUpdate="0"/>
+        <default expression="" field="p_pop2014" applyOnUpdate="0"/>
+        <default expression="" field="p_pop2015" applyOnUpdate="0"/>
+        <default expression="" field="ev_08_13" applyOnUpdate="0"/>
+        <default expression="" field="ev_09_14" applyOnUpdate="0"/>
+        <default expression="" field="ev_10_15" applyOnUpdate="0"/>
       </defaults>
       <constraints>
         <constraint notnull_strength="0" constraints="0" exp_strength="0" field="gml_id" unique_strength="0"/>
@@ -3124,23 +3111,23 @@ def my_form_open(dialog, layer, feature):
       <attributeactions>
         <defaultAction key="Canvas" value="{00000000-0000-0000-0000-000000000000}"/>
       </attributeactions>
-      <attributetableconfig actionWidgetStyle="dropDown" sortExpression="" sortOrder="0">
+      <attributetableconfig sortExpression="" sortOrder="0" actionWidgetStyle="dropDown">
         <columns>
-          <column name="gml_id" hidden="0" type="field" width="-1"/>
-          <column name="code_geo" hidden="0" type="field" width="-1"/>
-          <column name="nom_geo" hidden="0" type="field" width="234"/>
-          <column name="level" hidden="0" type="field" width="-1"/>
-          <column name="p_pop1999" hidden="0" type="field" width="-1"/>
-          <column name="p_pop2008" hidden="0" type="field" width="-1"/>
-          <column name="p_pop2009" hidden="0" type="field" width="-1"/>
-          <column name="p_pop2010" hidden="0" type="field" width="-1"/>
-          <column name="p_pop2013" hidden="0" type="field" width="-1"/>
-          <column name="p_pop2014" hidden="0" type="field" width="-1"/>
-          <column name="p_pop2015" hidden="0" type="field" width="-1"/>
-          <column name="ev_08_13" hidden="0" type="field" width="-1"/>
-          <column name="ev_09_14" hidden="0" type="field" width="-1"/>
-          <column name="ev_10_15" hidden="0" type="field" width="-1"/>
-          <column hidden="1" type="actions" width="-1"/>
+          <column type="field" name="gml_id" hidden="0" width="-1"/>
+          <column type="field" name="code_geo" hidden="0" width="-1"/>
+          <column type="field" name="nom_geo" hidden="0" width="234"/>
+          <column type="field" name="level" hidden="0" width="-1"/>
+          <column type="field" name="p_pop1999" hidden="0" width="-1"/>
+          <column type="field" name="p_pop2008" hidden="0" width="-1"/>
+          <column type="field" name="p_pop2009" hidden="0" width="-1"/>
+          <column type="field" name="p_pop2010" hidden="0" width="-1"/>
+          <column type="field" name="p_pop2013" hidden="0" width="-1"/>
+          <column type="field" name="p_pop2014" hidden="0" width="-1"/>
+          <column type="field" name="p_pop2015" hidden="0" width="-1"/>
+          <column type="field" name="ev_08_13" hidden="0" width="-1"/>
+          <column type="field" name="ev_09_14" hidden="0" width="-1"/>
+          <column type="field" name="ev_10_15" hidden="0" width="-1"/>
+          <column type="actions" hidden="1" width="-1"/>
         </columns>
       </attributetableconfig>
       <conditionalstyles>
@@ -3204,7 +3191,7 @@ def my_form_open(dialog, layer, feature):
       <previewExpression>gml_id</previewExpression>
       <mapTip></mapTip>
     </maplayer>
-    <maplayer minScale="1e+8" refreshOnNotifyMessage="" hasScaleBasedVisibilityFlag="0" refreshOnNotifyEnabled="0" geometry="No geometry" styleCategories="AllStyleCategories" autoRefreshTime="0" maxScale="0" type="vector" autoRefreshEnabled="0" readOnly="0">
+    <maplayer refreshOnNotifyMessage="" refreshOnNotifyEnabled="0" geometry="No geometry" styleCategories="AllStyleCategories" minScale="1e+8" type="vector" autoRefreshEnabled="0" hasScaleBasedVisibilityFlag="0" autoRefreshTime="0" maxScale="0" readOnly="0">
       <id>series_04a7414a_ab6d_4611_8a60_bcd22071dc22</id>
       <datasource>service='gobs' sslmode=disable key='id' estimatedmetadata=true checkPrimaryKeyUnicity='0' table="gobs"."series" sql=</datasource>
       <keywordList>
@@ -3255,7 +3242,7 @@ def my_form_open(dialog, layer, feature):
           </spatialrefsys>
         </crs>
         <extent>
-          <spatial minz="0" maxz="0" minx="0" maxy="0" dimensions="2" miny="0" crs="" maxx="0"/>
+          <spatial minx="0" maxx="0" miny="0" crs="" minz="0" dimensions="2" maxy="0" maxz="0"/>
           <temporal>
             <period>
               <start></start>
@@ -3294,8 +3281,8 @@ def my_form_open(dialog, layer, feature):
           <editWidget type="TextEdit">
             <config>
               <Option type="Map">
-                <Option name="IsMultiline" type="bool" value="false"/>
-                <Option name="UseHtml" type="bool" value="false"/>
+                <Option type="bool" name="IsMultiline" value="false"/>
+                <Option type="bool" name="UseHtml" value="false"/>
               </Option>
             </config>
           </editWidget>
@@ -3304,14 +3291,14 @@ def my_form_open(dialog, layer, feature):
           <editWidget type="RelationReference">
             <config>
               <Option type="Map">
-                <Option name="AllowAddFeatures" type="bool" value="true"/>
-                <Option name="AllowNULL" type="bool" value="false"/>
-                <Option name="MapIdentification" type="bool" value="false"/>
-                <Option name="OrderByValue" type="bool" value="true"/>
-                <Option name="ReadOnly" type="bool" value="false"/>
-                <Option name="Relation" type="QString" value="series_04a7414a_ab6d_4611_8a60_bcd22071dc22_fk_id_protocol_protocol_5507f1c8_1802_4df0_a273_8e9b7f52c352_id"/>
-                <Option name="ShowForm" type="bool" value="false"/>
-                <Option name="ShowOpenFormButton" type="bool" value="true"/>
+                <Option type="bool" name="AllowAddFeatures" value="true"/>
+                <Option type="bool" name="AllowNULL" value="false"/>
+                <Option type="bool" name="MapIdentification" value="false"/>
+                <Option type="bool" name="OrderByValue" value="true"/>
+                <Option type="bool" name="ReadOnly" value="false"/>
+                <Option type="QString" name="Relation" value="series_04a7414a_ab6d_4611_8a60_bcd22071dc22_fk_id_protocol_protocol_5507f1c8_1802_4df0_a273_8e9b7f52c352_id"/>
+                <Option type="bool" name="ShowForm" value="false"/>
+                <Option type="bool" name="ShowOpenFormButton" value="true"/>
               </Option>
             </config>
           </editWidget>
@@ -3320,14 +3307,14 @@ def my_form_open(dialog, layer, feature):
           <editWidget type="RelationReference">
             <config>
               <Option type="Map">
-                <Option name="AllowAddFeatures" type="bool" value="true"/>
-                <Option name="AllowNULL" type="bool" value="false"/>
-                <Option name="MapIdentification" type="bool" value="false"/>
-                <Option name="OrderByValue" type="bool" value="true"/>
-                <Option name="ReadOnly" type="bool" value="false"/>
-                <Option name="Relation" type="QString" value="series_04a7414a_ab6d_4611_8a60_bcd22071dc22_fk_id_actor_actor_5f01a6e5_8205_462f_af40_0ffd7ff0a44f_id"/>
-                <Option name="ShowForm" type="bool" value="false"/>
-                <Option name="ShowOpenFormButton" type="bool" value="true"/>
+                <Option type="bool" name="AllowAddFeatures" value="true"/>
+                <Option type="bool" name="AllowNULL" value="false"/>
+                <Option type="bool" name="MapIdentification" value="false"/>
+                <Option type="bool" name="OrderByValue" value="true"/>
+                <Option type="bool" name="ReadOnly" value="false"/>
+                <Option type="QString" name="Relation" value="series_04a7414a_ab6d_4611_8a60_bcd22071dc22_fk_id_actor_actor_5f01a6e5_8205_462f_af40_0ffd7ff0a44f_id"/>
+                <Option type="bool" name="ShowForm" value="false"/>
+                <Option type="bool" name="ShowOpenFormButton" value="true"/>
               </Option>
             </config>
           </editWidget>
@@ -3336,14 +3323,14 @@ def my_form_open(dialog, layer, feature):
           <editWidget type="RelationReference">
             <config>
               <Option type="Map">
-                <Option name="AllowAddFeatures" type="bool" value="true"/>
-                <Option name="AllowNULL" type="bool" value="false"/>
-                <Option name="MapIdentification" type="bool" value="false"/>
-                <Option name="OrderByValue" type="bool" value="true"/>
-                <Option name="ReadOnly" type="bool" value="false"/>
-                <Option name="Relation" type="QString" value="series_04a7414a_ab6d_4611_8a60_bcd22071dc22_fk_id_indicator_indicator_18ba18bf_0390_45a3_8edd_1cc049e8a251_id"/>
-                <Option name="ShowForm" type="bool" value="false"/>
-                <Option name="ShowOpenFormButton" type="bool" value="true"/>
+                <Option type="bool" name="AllowAddFeatures" value="true"/>
+                <Option type="bool" name="AllowNULL" value="false"/>
+                <Option type="bool" name="MapIdentification" value="false"/>
+                <Option type="bool" name="OrderByValue" value="true"/>
+                <Option type="bool" name="ReadOnly" value="false"/>
+                <Option type="QString" name="Relation" value="series_04a7414a_ab6d_4611_8a60_bcd22071dc22_fk_id_indicator_indicator_18ba18bf_0390_45a3_8edd_1cc049e8a251_id"/>
+                <Option type="bool" name="ShowForm" value="false"/>
+                <Option type="bool" name="ShowOpenFormButton" value="true"/>
               </Option>
             </config>
           </editWidget>
@@ -3352,34 +3339,34 @@ def my_form_open(dialog, layer, feature):
           <editWidget type="RelationReference">
             <config>
               <Option type="Map">
-                <Option name="AllowAddFeatures" type="bool" value="true"/>
-                <Option name="AllowNULL" type="bool" value="false"/>
-                <Option name="MapIdentification" type="bool" value="false"/>
-                <Option name="OrderByValue" type="bool" value="true"/>
-                <Option name="ReadOnly" type="bool" value="false"/>
-                <Option name="Relation" type="QString" value="series_04a7414a_ab6d_4611_8a60_bcd22071dc22_fk_id_spatial_layer_spatial_layer_18215d6d_1f4c_40d2_ba83_f2c9a9694e84_id"/>
-                <Option name="ShowForm" type="bool" value="false"/>
-                <Option name="ShowOpenFormButton" type="bool" value="true"/>
+                <Option type="bool" name="AllowAddFeatures" value="true"/>
+                <Option type="bool" name="AllowNULL" value="false"/>
+                <Option type="bool" name="MapIdentification" value="false"/>
+                <Option type="bool" name="OrderByValue" value="true"/>
+                <Option type="bool" name="ReadOnly" value="false"/>
+                <Option type="QString" name="Relation" value="series_04a7414a_ab6d_4611_8a60_bcd22071dc22_fk_id_spatial_layer_spatial_layer_18215d6d_1f4c_40d2_ba83_f2c9a9694e84_id"/>
+                <Option type="bool" name="ShowForm" value="false"/>
+                <Option type="bool" name="ShowOpenFormButton" value="true"/>
               </Option>
             </config>
           </editWidget>
         </field>
       </fieldConfiguration>
       <aliases>
-        <alias index="0" name="Id" field="id"/>
-        <alias index="1" name="Protocol" field="fk_id_protocol"/>
-        <alias index="2" name="Actor" field="fk_id_actor"/>
-        <alias index="3" name="Indicator" field="fk_id_indicator"/>
-        <alias index="4" name="Spatial layer" field="fk_id_spatial_layer"/>
+        <alias name="Id" index="0" field="id"/>
+        <alias name="Protocol" index="1" field="fk_id_protocol"/>
+        <alias name="Actor" index="2" field="fk_id_actor"/>
+        <alias name="Indicator" index="3" field="fk_id_indicator"/>
+        <alias name="Spatial layer" index="4" field="fk_id_spatial_layer"/>
       </aliases>
       <excludeAttributesWMS/>
       <excludeAttributesWFS/>
       <defaults>
-        <default applyOnUpdate="0" field="id" expression=""/>
-        <default applyOnUpdate="0" field="fk_id_protocol" expression=""/>
-        <default applyOnUpdate="0" field="fk_id_actor" expression=""/>
-        <default applyOnUpdate="0" field="fk_id_indicator" expression=""/>
-        <default applyOnUpdate="0" field="fk_id_spatial_layer" expression=""/>
+        <default expression="" field="id" applyOnUpdate="0"/>
+        <default expression="" field="fk_id_protocol" applyOnUpdate="0"/>
+        <default expression="" field="fk_id_actor" applyOnUpdate="0"/>
+        <default expression="" field="fk_id_indicator" applyOnUpdate="0"/>
+        <default expression="" field="fk_id_spatial_layer" applyOnUpdate="0"/>
       </defaults>
       <constraints>
         <constraint notnull_strength="1" constraints="3" exp_strength="0" field="id" unique_strength="1"/>
@@ -3399,14 +3386,14 @@ def my_form_open(dialog, layer, feature):
       <attributeactions>
         <defaultAction key="Canvas" value="{00000000-0000-0000-0000-000000000000}"/>
       </attributeactions>
-      <attributetableconfig actionWidgetStyle="dropDown" sortExpression="" sortOrder="0">
+      <attributetableconfig sortExpression="" sortOrder="0" actionWidgetStyle="dropDown">
         <columns>
-          <column name="id" hidden="0" type="field" width="-1"/>
-          <column name="fk_id_protocol" hidden="0" type="field" width="-1"/>
-          <column name="fk_id_actor" hidden="0" type="field" width="-1"/>
-          <column name="fk_id_indicator" hidden="0" type="field" width="-1"/>
-          <column name="fk_id_spatial_layer" hidden="0" type="field" width="-1"/>
-          <column hidden="1" type="actions" width="-1"/>
+          <column type="field" name="id" hidden="0" width="-1"/>
+          <column type="field" name="fk_id_protocol" hidden="0" width="-1"/>
+          <column type="field" name="fk_id_actor" hidden="0" width="-1"/>
+          <column type="field" name="fk_id_indicator" hidden="0" width="-1"/>
+          <column type="field" name="fk_id_spatial_layer" hidden="0" width="-1"/>
+          <column type="actions" hidden="1" width="-1"/>
         </columns>
       </attributetableconfig>
       <conditionalstyles>
@@ -3435,12 +3422,12 @@ def my_form_open(dialog, layer, feature):
       <featformsuppress>0</featformsuppress>
       <editorlayout>tablayout</editorlayout>
       <attributeEditorForm>
-        <attributeEditorContainer name="General" visibilityExpression="" showLabel="1" columnCount="1" groupBox="0" visibilityExpressionEnabled="0">
-          <attributeEditorField index="0" name="id" showLabel="1"/>
-          <attributeEditorField index="2" name="fk_id_actor" showLabel="1"/>
-          <attributeEditorField index="1" name="fk_id_protocol" showLabel="1"/>
-          <attributeEditorField index="3" name="fk_id_indicator" showLabel="1"/>
-          <attributeEditorField index="4" name="fk_id_spatial_layer" showLabel="1"/>
+        <attributeEditorContainer showLabel="1" visibilityExpression="" name="General" groupBox="0" columnCount="1" visibilityExpressionEnabled="0">
+          <attributeEditorField showLabel="1" name="id" index="0"/>
+          <attributeEditorField showLabel="1" name="fk_id_actor" index="2"/>
+          <attributeEditorField showLabel="1" name="fk_id_protocol" index="1"/>
+          <attributeEditorField showLabel="1" name="fk_id_indicator" index="3"/>
+          <attributeEditorField showLabel="1" name="fk_id_spatial_layer" index="4"/>
         </attributeEditorContainer>
       </attributeEditorForm>
       <editable>
@@ -3460,19 +3447,19 @@ def my_form_open(dialog, layer, feature):
       <widgets>
         <widget name="import_0343eb12_592e_4fd0_8380_51f4d62b6a56_fk_id_series_series_04a7414a_ab6d_4611_8a60_bcd22071dc22_id">
           <config type="Map">
-            <Option name="nm-rel" type="QString" value=""/>
+            <Option type="QString" name="nm-rel" value=""/>
           </config>
         </widget>
         <widget name="observation_bcc90162_47c8_4097_bc24_a31af92d2708_fk_id_series_series_04a7414a_ab6d_4611_8a60_bcd22071dc22_id">
           <config type="Map">
-            <Option name="nm-rel" type="QString" value=""/>
+            <Option type="QString" name="nm-rel" value=""/>
           </config>
         </widget>
       </widgets>
       <previewExpression>id</previewExpression>
       <mapTip></mapTip>
     </maplayer>
-    <maplayer minScale="1e+8" refreshOnNotifyMessage="" hasScaleBasedVisibilityFlag="0" refreshOnNotifyEnabled="0" geometry="No geometry" styleCategories="AllStyleCategories" autoRefreshTime="0" maxScale="0" type="vector" autoRefreshEnabled="0" readOnly="0">
+    <maplayer refreshOnNotifyMessage="" refreshOnNotifyEnabled="0" geometry="No geometry" styleCategories="AllStyleCategories" minScale="1e+8" type="vector" autoRefreshEnabled="0" hasScaleBasedVisibilityFlag="0" autoRefreshTime="0" maxScale="0" readOnly="0">
       <id>spatial_layer_18215d6d_1f4c_40d2_ba83_f2c9a9694e84</id>
       <datasource>service='gobs' sslmode=disable key='id' estimatedmetadata=true checkPrimaryKeyUnicity='0' table="gobs"."spatial_layer" sql=</datasource>
       <keywordList>
@@ -3523,7 +3510,7 @@ def my_form_open(dialog, layer, feature):
           </spatialrefsys>
         </crs>
         <extent>
-          <spatial minz="0" maxz="0" minx="0" maxy="0" dimensions="2" miny="0" crs="" maxx="0"/>
+          <spatial minx="0" maxx="0" miny="0" crs="" minz="0" dimensions="2" maxy="0" maxz="0"/>
           <temporal>
             <period>
               <start></start>
@@ -3548,9 +3535,7 @@ def my_form_open(dialog, layer, feature):
         <Searchable>1</Searchable>
       </flags>
       <customproperties>
-        <property key="dualview/previewExpressions">
-          <value>sl_label</value>
-        </property>
+        <property key="dualview/previewExpressions" value="sl_label"/>
         <property key="embeddedWidgets/count" value="0"/>
         <property key="variableNames"/>
         <property key="variableValues"/>
@@ -3564,8 +3549,8 @@ def my_form_open(dialog, layer, feature):
           <editWidget type="TextEdit">
             <config>
               <Option type="Map">
-                <Option name="IsMultiline" type="bool" value="false"/>
-                <Option name="UseHtml" type="bool" value="false"/>
+                <Option type="bool" name="IsMultiline" value="false"/>
+                <Option type="bool" name="UseHtml" value="false"/>
               </Option>
             </config>
           </editWidget>
@@ -3574,8 +3559,8 @@ def my_form_open(dialog, layer, feature):
           <editWidget type="TextEdit">
             <config>
               <Option type="Map">
-                <Option name="IsMultiline" type="bool" value="false"/>
-                <Option name="UseHtml" type="bool" value="false"/>
+                <Option type="bool" name="IsMultiline" value="false"/>
+                <Option type="bool" name="UseHtml" value="false"/>
               </Option>
             </config>
           </editWidget>
@@ -3584,8 +3569,8 @@ def my_form_open(dialog, layer, feature):
           <editWidget type="TextEdit">
             <config>
               <Option type="Map">
-                <Option name="IsMultiline" type="bool" value="false"/>
-                <Option name="UseHtml" type="bool" value="false"/>
+                <Option type="bool" name="IsMultiline" value="false"/>
+                <Option type="bool" name="UseHtml" value="false"/>
               </Option>
             </config>
           </editWidget>
@@ -3594,8 +3579,8 @@ def my_form_open(dialog, layer, feature):
           <editWidget type="TextEdit">
             <config>
               <Option type="Map">
-                <Option name="IsMultiline" type="bool" value="true"/>
-                <Option name="UseHtml" type="bool" value="false"/>
+                <Option type="bool" name="IsMultiline" value="true"/>
+                <Option type="bool" name="UseHtml" value="false"/>
               </Option>
             </config>
           </editWidget>
@@ -3604,11 +3589,11 @@ def my_form_open(dialog, layer, feature):
           <editWidget type="DateTime">
             <config>
               <Option type="Map">
-                <Option name="allow_null" type="bool" value="false"/>
-                <Option name="calendar_popup" type="bool" value="true"/>
-                <Option name="display_format" type="QString" value="yyyy-MM-dd"/>
-                <Option name="field_format" type="QString" value="yyyy-MM-dd"/>
-                <Option name="field_iso_format" type="bool" value="false"/>
+                <Option type="bool" name="allow_null" value="false"/>
+                <Option type="bool" name="calendar_popup" value="true"/>
+                <Option type="QString" name="display_format" value="yyyy-MM-dd"/>
+                <Option type="QString" name="field_format" value="yyyy-MM-dd"/>
+                <Option type="bool" name="field_iso_format" value="false"/>
               </Option>
             </config>
           </editWidget>
@@ -3617,14 +3602,14 @@ def my_form_open(dialog, layer, feature):
           <editWidget type="RelationReference">
             <config>
               <Option type="Map">
-                <Option name="AllowAddFeatures" type="bool" value="true"/>
-                <Option name="AllowNULL" type="bool" value="false"/>
-                <Option name="MapIdentification" type="bool" value="false"/>
-                <Option name="OrderByValue" type="bool" value="true"/>
-                <Option name="ReadOnly" type="bool" value="false"/>
-                <Option name="Relation" type="QString" value="spatial_layer_18215d6d_1f4c_40d2_ba83_f2c9a9694e84_fk_id_actor_actor_5f01a6e5_8205_462f_af40_0ffd7ff0a44f_id"/>
-                <Option name="ShowForm" type="bool" value="false"/>
-                <Option name="ShowOpenFormButton" type="bool" value="true"/>
+                <Option type="bool" name="AllowAddFeatures" value="true"/>
+                <Option type="bool" name="AllowNULL" value="false"/>
+                <Option type="bool" name="MapIdentification" value="false"/>
+                <Option type="bool" name="OrderByValue" value="true"/>
+                <Option type="bool" name="ReadOnly" value="false"/>
+                <Option type="QString" name="Relation" value="spatial_layer_18215d6d_1f4c_40d2_ba83_f2c9a9694e84_fk_id_actor_actor_5f01a6e5_8205_462f_af40_0ffd7ff0a44f_id"/>
+                <Option type="bool" name="ShowForm" value="false"/>
+                <Option type="bool" name="ShowOpenFormButton" value="true"/>
               </Option>
             </config>
           </editWidget>
@@ -3633,39 +3618,39 @@ def my_form_open(dialog, layer, feature):
           <editWidget type="ValueRelation">
             <config>
               <Option type="Map">
-                <Option name="AllowMulti" type="bool" value="false"/>
-                <Option name="AllowNull" type="bool" value="false"/>
-                <Option name="FilterExpression" type="QString" value="&quot;gl_field&quot; = 'sl_geometry_type'"/>
-                <Option name="Key" type="QString" value="gl_code"/>
-                <Option name="Layer" type="QString" value="glossary_cee356e0_5be5_4d87_ac2b_e8e8967c4032"/>
-                <Option name="NofColumns" type="int" value="1"/>
-                <Option name="OrderByValue" type="bool" value="false"/>
-                <Option name="UseCompleter" type="bool" value="false"/>
-                <Option name="Value" type="QString" value="gl_label"/>
+                <Option type="bool" name="AllowMulti" value="false"/>
+                <Option type="bool" name="AllowNull" value="false"/>
+                <Option type="QString" name="FilterExpression" value="&quot;gl_field&quot; = 'sl_geometry_type'"/>
+                <Option type="QString" name="Key" value="gl_code"/>
+                <Option type="QString" name="Layer" value="glossary_cee356e0_5be5_4d87_ac2b_e8e8967c4032"/>
+                <Option type="int" name="NofColumns" value="1"/>
+                <Option type="bool" name="OrderByValue" value="false"/>
+                <Option type="bool" name="UseCompleter" value="false"/>
+                <Option type="QString" name="Value" value="gl_label"/>
               </Option>
             </config>
           </editWidget>
         </field>
       </fieldConfiguration>
       <aliases>
-        <alias index="0" name="" field="id"/>
-        <alias index="1" name="Code" field="sl_code"/>
-        <alias index="2" name="Label" field="sl_label"/>
-        <alias index="3" name="Description" field="sl_description"/>
-        <alias index="4" name="Creation date" field="sl_creation_date"/>
-        <alias index="5" name="Actor" field="fk_id_actor"/>
-        <alias index="6" name="Geometry type" field="sl_geometry_type"/>
+        <alias name="" index="0" field="id"/>
+        <alias name="Code" index="1" field="sl_code"/>
+        <alias name="Label" index="2" field="sl_label"/>
+        <alias name="Description" index="3" field="sl_description"/>
+        <alias name="Creation date" index="4" field="sl_creation_date"/>
+        <alias name="Actor" index="5" field="fk_id_actor"/>
+        <alias name="Geometry type" index="6" field="sl_geometry_type"/>
       </aliases>
       <excludeAttributesWMS/>
       <excludeAttributesWFS/>
       <defaults>
-        <default applyOnUpdate="0" field="id" expression=""/>
-        <default applyOnUpdate="0" field="sl_code" expression=""/>
-        <default applyOnUpdate="0" field="sl_label" expression=""/>
-        <default applyOnUpdate="0" field="sl_description" expression=""/>
-        <default applyOnUpdate="0" field="sl_creation_date" expression=""/>
-        <default applyOnUpdate="0" field="fk_id_actor" expression=""/>
-        <default applyOnUpdate="0" field="sl_geometry_type" expression=""/>
+        <default expression="" field="id" applyOnUpdate="0"/>
+        <default expression="" field="sl_code" applyOnUpdate="0"/>
+        <default expression="" field="sl_label" applyOnUpdate="0"/>
+        <default expression="" field="sl_description" applyOnUpdate="0"/>
+        <default expression="" field="sl_creation_date" applyOnUpdate="0"/>
+        <default expression="" field="fk_id_actor" applyOnUpdate="0"/>
+        <default expression="" field="sl_geometry_type" applyOnUpdate="0"/>
       </defaults>
       <constraints>
         <constraint notnull_strength="1" constraints="3" exp_strength="0" field="id" unique_strength="1"/>
@@ -3689,16 +3674,16 @@ def my_form_open(dialog, layer, feature):
       <attributeactions>
         <defaultAction key="Canvas" value="{00000000-0000-0000-0000-000000000000}"/>
       </attributeactions>
-      <attributetableconfig actionWidgetStyle="dropDown" sortExpression="" sortOrder="0">
+      <attributetableconfig sortExpression="" sortOrder="0" actionWidgetStyle="dropDown">
         <columns>
-          <column name="id" hidden="0" type="field" width="59"/>
-          <column name="sl_code" hidden="0" type="field" width="114"/>
-          <column name="sl_label" hidden="0" type="field" width="184"/>
-          <column name="sl_description" hidden="0" type="field" width="380"/>
-          <column name="sl_creation_date" hidden="0" type="field" width="-1"/>
-          <column name="fk_id_actor" hidden="0" type="field" width="-1"/>
-          <column name="sl_geometry_type" hidden="0" type="field" width="145"/>
-          <column hidden="0" type="actions" width="-1"/>
+          <column type="field" name="id" hidden="0" width="59"/>
+          <column type="field" name="sl_code" hidden="0" width="114"/>
+          <column type="field" name="sl_label" hidden="0" width="184"/>
+          <column type="field" name="sl_description" hidden="0" width="380"/>
+          <column type="field" name="sl_creation_date" hidden="0" width="-1"/>
+          <column type="field" name="fk_id_actor" hidden="0" width="-1"/>
+          <column type="field" name="sl_geometry_type" hidden="0" width="145"/>
+          <column type="actions" hidden="0" width="-1"/>
         </columns>
       </attributetableconfig>
       <conditionalstyles>
@@ -3727,15 +3712,15 @@ def my_form_open(dialog, layer, feature):
       <featformsuppress>0</featformsuppress>
       <editorlayout>tablayout</editorlayout>
       <attributeEditorForm>
-        <attributeEditorContainer name="General" visibilityExpression="" showLabel="1" columnCount="1" groupBox="0" visibilityExpressionEnabled="0">
-          <attributeEditorField index="0" name="id" showLabel="1"/>
-          <attributeEditorField index="2" name="sl_label" showLabel="1"/>
-          <attributeEditorField index="1" name="sl_code" showLabel="1"/>
-          <attributeEditorField index="3" name="sl_description" showLabel="1"/>
-          <attributeEditorField index="6" name="sl_geometry_type" showLabel="1"/>
-          <attributeEditorField index="5" name="fk_id_actor" showLabel="1"/>
-          <attributeEditorField index="4" name="sl_creation_date" showLabel="1"/>
-          <attributeEditorRelation showUnlinkButton="1" name="series_04a7414a_ab6d_4611_8a60_bcd22071dc22_fk_id_spatial_layer_spatial_layer_18215d6d_1f4c_40d2_ba83_f2c9a9694e84_id" showLinkButton="1" showLabel="1" relation="series_04a7414a_ab6d_4611_8a60_bcd22071dc22_fk_id_spatial_layer_spatial_layer_18215d6d_1f4c_40d2_ba83_f2c9a9694e84_id"/>
+        <attributeEditorContainer showLabel="1" visibilityExpression="" name="General" groupBox="0" columnCount="1" visibilityExpressionEnabled="0">
+          <attributeEditorField showLabel="1" name="id" index="0"/>
+          <attributeEditorField showLabel="1" name="sl_label" index="2"/>
+          <attributeEditorField showLabel="1" name="sl_code" index="1"/>
+          <attributeEditorField showLabel="1" name="sl_description" index="3"/>
+          <attributeEditorField showLabel="1" name="sl_geometry_type" index="6"/>
+          <attributeEditorField showLabel="1" name="fk_id_actor" index="5"/>
+          <attributeEditorField showLabel="1" name="sl_creation_date" index="4"/>
+          <attributeEditorRelation showLabel="1" showLinkButton="1" showUnlinkButton="1" name="series_04a7414a_ab6d_4611_8a60_bcd22071dc22_fk_id_spatial_layer_spatial_layer_18215d6d_1f4c_40d2_ba83_f2c9a9694e84_id" relation="series_04a7414a_ab6d_4611_8a60_bcd22071dc22_fk_id_spatial_layer_spatial_layer_18215d6d_1f4c_40d2_ba83_f2c9a9694e84_id"/>
         </attributeEditorContainer>
       </attributeEditorForm>
       <editable>
@@ -3759,14 +3744,14 @@ def my_form_open(dialog, layer, feature):
       <widgets>
         <widget name="series_04a7414a_ab6d_4611_8a60_bcd22071dc22_fk_id_spatial_layer_spatial_layer_18215d6d_1f4c_40d2_ba83_f2c9a9694e84_id">
           <config type="Map">
-            <Option name="nm-rel" type="QString" value=""/>
+            <Option type="QString" name="nm-rel" value=""/>
           </config>
         </widget>
       </widgets>
       <previewExpression>sl_label</previewExpression>
       <mapTip></mapTip>
     </maplayer>
-    <maplayer minScale="1e+8" simplifyLocal="0" refreshOnNotifyMessage="" hasScaleBasedVisibilityFlag="0" refreshOnNotifyEnabled="0" geometry="Point" styleCategories="AllStyleCategories" autoRefreshTime="0" simplifyAlgorithm="0" maxScale="0" simplifyDrawingHints="1" type="vector" autoRefreshEnabled="0" simplifyMaxScale="1" simplifyDrawingTol="1" readOnly="0" labelsEnabled="0">
+    <maplayer refreshOnNotifyMessage="" refreshOnNotifyEnabled="0" geometry="Point" styleCategories="AllStyleCategories" minScale="1e+8" type="vector" simplifyDrawingHints="1" autoRefreshEnabled="0" simplifyDrawingTol="1" hasScaleBasedVisibilityFlag="0" autoRefreshTime="0" simplifyMaxScale="1" maxScale="0" labelsEnabled="0" simplifyAlgorithm="0" simplifyLocal="0" readOnly="0">
       <extent>
         <xmin>-5.16287136077881037</xmin>
         <ymin>47.26976013183590197</ymin>
@@ -3830,33 +3815,33 @@ def my_form_open(dialog, layer, feature):
         <Removable>1</Removable>
         <Searchable>1</Searchable>
       </flags>
-      <renderer-v2 forceraster="0" symbollevels="0" enableorderby="0" type="singleSymbol">
+      <renderer-v2 type="singleSymbol" symbollevels="0" forceraster="0" enableorderby="0">
         <symbols>
-          <symbol name="0" type="marker" clip_to_extent="1" alpha="1" force_rhr="0">
-            <layer locked="0" class="SimpleMarker" enabled="1" pass="0">
-              <prop k="angle" v="0"/>
-              <prop k="color" v="164,113,88,255"/>
-              <prop k="horizontal_anchor_point" v="1"/>
-              <prop k="joinstyle" v="bevel"/>
-              <prop k="name" v="circle"/>
-              <prop k="offset" v="0,0"/>
-              <prop k="offset_map_unit_scale" v="3x:0,0,0,0,0,0"/>
-              <prop k="offset_unit" v="MM"/>
-              <prop k="outline_color" v="35,35,35,255"/>
-              <prop k="outline_style" v="solid"/>
-              <prop k="outline_width" v="0"/>
-              <prop k="outline_width_map_unit_scale" v="3x:0,0,0,0,0,0"/>
-              <prop k="outline_width_unit" v="MM"/>
-              <prop k="scale_method" v="diameter"/>
-              <prop k="size" v="2"/>
-              <prop k="size_map_unit_scale" v="3x:0,0,0,0,0,0"/>
-              <prop k="size_unit" v="MM"/>
-              <prop k="vertical_anchor_point" v="1"/>
+          <symbol force_rhr="0" type="marker" name="0" alpha="1" clip_to_extent="1">
+            <layer class="SimpleMarker" enabled="1" locked="0" pass="0">
+              <prop v="0" k="angle"/>
+              <prop v="164,113,88,255" k="color"/>
+              <prop v="1" k="horizontal_anchor_point"/>
+              <prop v="bevel" k="joinstyle"/>
+              <prop v="circle" k="name"/>
+              <prop v="0,0" k="offset"/>
+              <prop v="3x:0,0,0,0,0,0" k="offset_map_unit_scale"/>
+              <prop v="MM" k="offset_unit"/>
+              <prop v="35,35,35,255" k="outline_color"/>
+              <prop v="solid" k="outline_style"/>
+              <prop v="0" k="outline_width"/>
+              <prop v="3x:0,0,0,0,0,0" k="outline_width_map_unit_scale"/>
+              <prop v="MM" k="outline_width_unit"/>
+              <prop v="diameter" k="scale_method"/>
+              <prop v="2" k="size"/>
+              <prop v="3x:0,0,0,0,0,0" k="size_map_unit_scale"/>
+              <prop v="MM" k="size_unit"/>
+              <prop v="1" k="vertical_anchor_point"/>
               <data_defined_properties>
                 <Option type="Map">
-                  <Option name="name" type="QString" value=""/>
+                  <Option type="QString" name="name" value=""/>
                   <Option name="properties"/>
-                  <Option name="type" type="QString" value="collection"/>
+                  <Option type="QString" name="type" value="collection"/>
                 </Option>
               </data_defined_properties>
             </layer>
@@ -3906,18 +3891,18 @@ def my_form_open(dialog, layer, feature):
         </field>
       </fieldConfiguration>
       <aliases>
-        <alias index="0" name="" field="id"/>
-        <alias index="1" name="" field="so_unique_id"/>
-        <alias index="2" name="" field="so_unique_label"/>
-        <alias index="3" name="" field="fk_id_spatial_layer"/>
+        <alias name="" index="0" field="id"/>
+        <alias name="" index="1" field="so_unique_id"/>
+        <alias name="" index="2" field="so_unique_label"/>
+        <alias name="" index="3" field="fk_id_spatial_layer"/>
       </aliases>
       <excludeAttributesWMS/>
       <excludeAttributesWFS/>
       <defaults>
-        <default applyOnUpdate="0" field="id" expression=""/>
-        <default applyOnUpdate="0" field="so_unique_id" expression=""/>
-        <default applyOnUpdate="0" field="so_unique_label" expression=""/>
-        <default applyOnUpdate="0" field="fk_id_spatial_layer" expression=""/>
+        <default expression="" field="id" applyOnUpdate="0"/>
+        <default expression="" field="so_unique_id" applyOnUpdate="0"/>
+        <default expression="" field="so_unique_label" applyOnUpdate="0"/>
+        <default expression="" field="fk_id_spatial_layer" applyOnUpdate="0"/>
       </defaults>
       <constraints>
         <constraint notnull_strength="1" constraints="3" exp_strength="0" field="id" unique_strength="1"/>
@@ -3933,7 +3918,7 @@ def my_form_open(dialog, layer, feature):
       </constraintExpressions>
       <expressionfields/>
       <attributeactions/>
-      <attributetableconfig actionWidgetStyle="dropDown" sortExpression="" sortOrder="0">
+      <attributetableconfig sortExpression="" sortOrder="0" actionWidgetStyle="dropDown">
         <columns/>
       </attributetableconfig>
       <conditionalstyles>
@@ -3960,135 +3945,135 @@ def my_form_open(dialog, layer, feature):
     <layer id="rp_struct_pop_evolution_geom_9e098769_c0a3_48ea_af36_583a5b78040f"/>
   </layerorder>
   <properties>
-    <WMSFees type="QString">conditions unknown</WMSFees>
-    <WFSTLayers>
-      <Delete type="QStringList"/>
-      <Insert type="QStringList"/>
-      <Update type="QStringList"/>
-    </WFSTLayers>
-    <WFSUrl type="QString"></WFSUrl>
-    <WMSUseLayerIDs type="bool">false</WMSUseLayerIDs>
+    <WMSRequestDefinedDataSources type="bool">false</WMSRequestDefinedDataSources>
+    <WMSServiceTitle type="QString">gobs_manager</WMSServiceTitle>
+    <WMTSUrl type="QString"></WMTSUrl>
+    <WMSAddWktGeometry type="bool">false</WMSAddWktGeometry>
+    <WMSServiceCapabilities type="bool">false</WMSServiceCapabilities>
+    <Paths>
+      <Absolute type="bool">false</Absolute>
+    </Paths>
+    <WMTSLayers>
+      <Layer type="QStringList"/>
+      <Project type="bool">false</Project>
+      <Group type="QStringList"/>
+    </WMTSLayers>
+    <WMTSMinScale type="int">5000</WMTSMinScale>
+    <WMSImageQuality type="int">90</WMSImageQuality>
     <Legend>
       <filterByMap type="bool">false</filterByMap>
     </Legend>
-    <qgis2web>
-      <Addaddresssearch type="bool">false</Addaddresssearch>
-      <Layersearch type="QString">None</Layersearch>
-      <Minzoomlevel type="QString">1</Minzoomlevel>
-      <Precision type="QString">maintain</Precision>
-      <Showpopupsonhover type="bool">false</Showpopupsonhover>
-      <Measuretool type="QString">None</Measuretool>
-      <WidgetBackground type="QString">#f8f8f8</WidgetBackground>
-      <Exporter type="QString">folder</Exporter>
-      <Exportfolder type="QString">/tmp/qgis2web</Exportfolder>
-      <Searchlayer type="QString"></Searchlayer>
-      <Addlayerslist type="QString">None</Addlayerslist>
-      <WidgetIcon type="QString">#000000</WidgetIcon>
-      <MinifyGeoJSONfiles type="bool">false</MinifyGeoJSONfiles>
-      <Geolocateuser type="bool">false</Geolocateuser>
-      <Maxzoomlevel type="QString">28</Maxzoomlevel>
-      <Extent type="QString">Canvas extent</Extent>
-      <Restricttoextent type="bool">false</Restricttoextent>
-      <Highlightonhover type="bool">false</Highlightonhover>
-      <MatchprojectCRS type="bool">false</MatchprojectCRS>
-      <Template type="QString">full-screen</Template>
-      <mapFormat type="QString">openlayers</mapFormat>
-    </qgis2web>
-    <WMSServiceAbstract type="QString"></WMSServiceAbstract>
-    <WMSRequestDefinedDataSources type="bool">false</WMSRequestDefinedDataSources>
-    <WMSKeywordList type="QStringList">
-      <value></value>
-    </WMSKeywordList>
     <WMSAccessConstraints type="QString">None</WMSAccessConstraints>
+    <PositionPrecision>
+      <DegreeFormat type="QString">MU</DegreeFormat>
+      <Automatic type="bool">true</Automatic>
+      <DecimalPlaces type="int">2</DecimalPlaces>
+    </PositionPrecision>
+    <WMSContactMail type="QString"></WMSContactMail>
+    <Macros>
+      <pythonCode type="QString"></pythonCode>
+    </Macros>
     <WMSExtent type="QStringList">
       <value>763699.3042286554</value>
       <value>6275302.4538766</value>
       <value>778265.2454694429</value>
       <value>6283782.243872829</value>
     </WMSExtent>
-    <WMSPrecision type="QString">8</WMSPrecision>
-    <WMSContactPhone type="QString"></WMSContactPhone>
     <WCSUrl type="QString"></WCSUrl>
-    <WMTSJpegLayers>
-      <Layer type="QStringList"/>
-      <Group type="QStringList"/>
-      <Project type="bool">false</Project>
-    </WMTSJpegLayers>
-    <PositionPrecision>
-      <DegreeFormat type="QString">MU</DegreeFormat>
-      <Automatic type="bool">true</Automatic>
-      <DecimalPlaces type="int">2</DecimalPlaces>
-    </PositionPrecision>
-    <WMSRootName type="QString"></WMSRootName>
-    <Measurement>
-      <DistanceUnits type="QString">meters</DistanceUnits>
-      <AreaUnits type="QString">m2</AreaUnits>
-    </Measurement>
-    <WMSOnlineResource type="QString"></WMSOnlineResource>
-    <WMSSegmentizeFeatureInfoGeometry type="bool">false</WMSSegmentizeFeatureInfoGeometry>
-    <WMTSPngLayers>
-      <Layer type="QStringList"/>
-      <Group type="QStringList"/>
-      <Project type="bool">false</Project>
-    </WMTSPngLayers>
-    <DefaultStyles>
-      <Line type="QString"></Line>
-      <Opacity type="double">1</Opacity>
-      <ColorRamp type="QString"></ColorRamp>
-      <RandomColors type="bool">true</RandomColors>
-      <Marker type="QString"></Marker>
-      <Fill type="QString"></Fill>
-    </DefaultStyles>
-    <WFSLayers type="QStringList"/>
-    <WMTSUrl type="QString"></WMTSUrl>
-    <WMTSLayers>
-      <Layer type="QStringList"/>
-      <Group type="QStringList"/>
-      <Project type="bool">false</Project>
-    </WMTSLayers>
-    <WMSContactOrganization type="QString"></WMSContactOrganization>
-    <WMSContactPerson type="QString"></WMSContactPerson>
-    <WMSContactPosition type="QString"></WMSContactPosition>
-    <WMSAddWktGeometry type="bool">false</WMSAddWktGeometry>
-    <WMSContactMail type="QString"></WMSContactMail>
-    <WMSUrl type="QString"></WMSUrl>
-    <WMSServiceCapabilities type="bool">false</WMSServiceCapabilities>
     <Gui>
-      <SelectionColorAlphaPart type="int">255</SelectionColorAlphaPart>
-      <CanvasColorGreenPart type="int">255</CanvasColorGreenPart>
-      <SelectionColorRedPart type="int">255</SelectionColorRedPart>
       <SelectionColorGreenPart type="int">255</SelectionColorGreenPart>
-      <CanvasColorBluePart type="int">255</CanvasColorBluePart>
+      <SelectionColorAlphaPart type="int">255</SelectionColorAlphaPart>
       <CanvasColorRedPart type="int">255</CanvasColorRedPart>
+      <SelectionColorRedPart type="int">255</SelectionColorRedPart>
+      <CanvasColorGreenPart type="int">255</CanvasColorGreenPart>
+      <CanvasColorBluePart type="int">255</CanvasColorBluePart>
       <SelectionColorBluePart type="int">0</SelectionColorBluePart>
     </Gui>
+    <WMSPrecision type="QString">8</WMSPrecision>
+    <DefaultStyles>
+      <Line type="QString"></Line>
+      <ColorRamp type="QString"></ColorRamp>
+      <Fill type="QString"></Fill>
+      <Marker type="QString"></Marker>
+      <RandomColors type="bool">true</RandomColors>
+      <Opacity type="double">1</Opacity>
+    </DefaultStyles>
+    <WMTSPngLayers>
+      <Layer type="QStringList"/>
+      <Project type="bool">false</Project>
+      <Group type="QStringList"/>
+    </WMTSPngLayers>
+    <WMSKeywordList type="QStringList">
+      <value></value>
+    </WMSKeywordList>
+    <PAL>
+      <ShowingPartialsLabels type="bool">true</ShowingPartialsLabels>
+      <ShowingAllLabels type="bool">false</ShowingAllLabels>
+      <CandidatesLine type="int">50</CandidatesLine>
+      <ShowingCandidates type="bool">false</ShowingCandidates>
+      <TextFormat type="int">0</TextFormat>
+      <CandidatesPolygon type="int">30</CandidatesPolygon>
+      <CandidatesPoint type="int">16</CandidatesPoint>
+      <SearchMethod type="int">0</SearchMethod>
+      <DrawRectOnly type="bool">false</DrawRectOnly>
+    </PAL>
+    <WMTSJpegLayers>
+      <Layer type="QStringList"/>
+      <Project type="bool">false</Project>
+      <Group type="QStringList"/>
+    </WMTSJpegLayers>
     <SpatialRefSys>
       <ProjectionsEnabled type="int">1</ProjectionsEnabled>
     </SpatialRefSys>
-    <Macros>
-      <pythonCode type="QString"></pythonCode>
-    </Macros>
+    <WCSLayers type="QStringList"/>
+    <WMSSegmentizeFeatureInfoGeometry type="bool">false</WMSSegmentizeFeatureInfoGeometry>
+    <WMSServiceAbstract type="QString"></WMSServiceAbstract>
+    <WMSUseLayerIDs type="bool">false</WMSUseLayerIDs>
+    <WMSContactOrganization type="QString"></WMSContactOrganization>
+    <qgis2web>
+      <WidgetIcon type="QString">#000000</WidgetIcon>
+      <Maxzoomlevel type="QString">28</Maxzoomlevel>
+      <Searchlayer type="QString"></Searchlayer>
+      <mapFormat type="QString">openlayers</mapFormat>
+      <Precision type="QString">maintain</Precision>
+      <Layersearch type="QString">None</Layersearch>
+      <Geolocateuser type="bool">false</Geolocateuser>
+      <Addlayerslist type="QString">None</Addlayerslist>
+      <MatchprojectCRS type="bool">false</MatchprojectCRS>
+      <Measuretool type="QString">None</Measuretool>
+      <Addaddresssearch type="bool">false</Addaddresssearch>
+      <WidgetBackground type="QString">#f8f8f8</WidgetBackground>
+      <Showpopupsonhover type="bool">false</Showpopupsonhover>
+      <Restricttoextent type="bool">false</Restricttoextent>
+      <Exportfolder type="QString">/tmp/qgis2web</Exportfolder>
+      <Minzoomlevel type="QString">1</Minzoomlevel>
+      <Highlightonhover type="bool">false</Highlightonhover>
+      <Extent type="QString">Canvas extent</Extent>
+      <MinifyGeoJSONfiles type="bool">false</MinifyGeoJSONfiles>
+      <Template type="QString">full-screen</Template>
+      <Exporter type="QString">folder</Exporter>
+    </qgis2web>
+    <WFSLayers type="QStringList"/>
+    <WMSFees type="QString">conditions unknown</WMSFees>
+    <WMSOnlineResource type="QString"></WMSOnlineResource>
+    <WFSTLayers>
+      <Insert type="QStringList"/>
+      <Update type="QStringList"/>
+      <Delete type="QStringList"/>
+    </WFSTLayers>
+    <WFSUrl type="QString"></WFSUrl>
+    <WMSContactPosition type="QString"></WMSContactPosition>
     <Measure>
       <Ellipsoid type="QString">WGS84</Ellipsoid>
     </Measure>
-    <WMSServiceTitle type="QString">gobs_manager</WMSServiceTitle>
-    <PAL>
-      <CandidatesLine type="int">50</CandidatesLine>
-      <SearchMethod type="int">0</SearchMethod>
-      <ShowingPartialsLabels type="bool">true</ShowingPartialsLabels>
-      <DrawRectOnly type="bool">false</DrawRectOnly>
-      <ShowingCandidates type="bool">false</ShowingCandidates>
-      <CandidatesPolygon type="int">30</CandidatesPolygon>
-      <ShowingAllLabels type="bool">false</ShowingAllLabels>
-      <TextFormat type="int">0</TextFormat>
-      <CandidatesPoint type="int">16</CandidatesPoint>
-    </PAL>
-    <Paths>
-      <Absolute type="bool">false</Absolute>
-    </Paths>
-    <WCSLayers type="QStringList"/>
-    <WMSImageQuality type="int">90</WMSImageQuality>
-    <WMTSMinScale type="int">5000</WMTSMinScale>
+    <WMSContactPerson type="QString"></WMSContactPerson>
+    <WMSUrl type="QString"></WMSUrl>
+    <WMSRootName type="QString"></WMSRootName>
+    <Measurement>
+      <AreaUnits type="QString">m2</AreaUnits>
+      <DistanceUnits type="QString">meters</DistanceUnits>
+    </Measurement>
+    <WMSContactPhone type="QString"></WMSContactPhone>
   </properties>
   <visibility-presets/>
   <transformContext/>

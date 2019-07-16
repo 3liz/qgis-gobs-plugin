@@ -35,7 +35,7 @@ from .algorithms.execute_sql_on_service import ExecuteSqlOnService
 from .algorithms.create_database_structure import CreateDatabaseStructure
 from .algorithms.import_spatial_layer import ImportSpatialLayer
 from .algorithms.import_observation_data import ImportObservationData
-from .algorithms.get_spatial_layer import GetSpatialLayer
+from .algorithms.get_spatial_layer_vector_data import GetSpatialLayerVectorData
 
 
 class GobsProvider(QgsProcessingProvider):
@@ -49,7 +49,7 @@ class GobsProvider(QgsProcessingProvider):
             CreateDatabaseStructure(),
             ImportSpatialLayer(),
             ImportObservationData(),
-            GetSpatialLayer()
+            GetSpatialLayerVectorData()
         ]
 
     def unload(self):
