@@ -21,6 +21,7 @@ __revision__ = '$Format:%H$'
 
 from PyQt5.QtCore import QCoreApplication
 from qgis.core import (
+    QgsVectorLayer,
     QgsProcessing,
     QgsProcessingAlgorithm,
     QgsProcessingContext,
@@ -33,26 +34,15 @@ from qgis.core import (
     QgsProcessingOutputVectorLayer
 )
 from .tools import *
-import processing
+from .get_data_as_layer import *
+from processing.tools import postgis
 
-class GetSpatialLayerVectorData(QgsProcessingAlgorithm):
+class GetSpatialLayerVectorData(GetDataAsLayer):
     """
 
     """
-
-    # Constants used to refer to parameters and outputs. They will be
-    # used when calling the algorithm from another algorithm, or when
-    # calling from the QGIS console.
-
-    CONNECTION_NAME = 'CONNECTION_NAME'
-    SPATIALLAYER = 'SPATIALLAYER'
-
-    OUTPUT_STATUS = 'OUTPUT_STATUS'
-    OUTPUT_STRING = 'OUTPUT_STRING'
-    OUTPUT_LAYER = 'OUTPUT_LAYER'
-    OUTPUT_LAYER_NAME = 'OUTPUT_LAYER_NAME'
-
-    SQL = ''
+    # override geom field
+    GEOM_FIELD = 'geom'
 
     def name(self):
         return 'get_spatial_layer_vector_data'
@@ -60,38 +50,10 @@ class GetSpatialLayerVectorData(QgsProcessingAlgorithm):
     def displayName(self):
         return self.tr('Get spatial layer vector data')
 
-    def group(self):
-        return self.tr('Tools')
-
-    def groupId(self):
-        return 'gobs_tools'
-
-    def tr(self, string):
-        return QCoreApplication.translate('Processing', string)
-
-    def createInstance(self):
-        return self.__class__()
-
     def initAlgorithm(self, config):
         """
-        Here we define the inputs and output of the algorithm, along
-        with some other properties.
         """
-        # INPUTS
-
-        # Database connection parameters
-        db_param = QgsProcessingParameterString(
-            self.CONNECTION_NAME, 'PostgreSQL connection',
-            defaultValue='gobs',
-            optional=False
-        )
-        db_param.setMetadata({
-            'widget_wrapper': {
-                'class': 'processing.gui.wrappers_postgis.ConnectionWidgetWrapper'
-            }
-        })
-        self.addParameter(db_param)
-
+        # Add spatial layer choice
         # List of spatial_layer
         sql = '''
             SELECT id, sl_label
@@ -111,56 +73,9 @@ class GetSpatialLayerVectorData(QgsProcessingAlgorithm):
             )
         )
 
-        # Name of the layer
-        self.addParameter(
-            QgsProcessingParameterString(
-                self.OUTPUT_LAYER_NAME, self.tr('Name of the output layer'),
-                optional=True
-            )
-        )
+        # use parent class to get other parameters
+        return super(self.__class__, self).initAlgorithm(config)
 
-        # OUTPUTS
-        # Add output for status (integer)
-        self.addOutput(
-            QgsProcessingOutputNumber(
-                self.OUTPUT_STATUS, self.tr('Output status')
-            )
-        )
-        # Add output for message
-        self.addOutput(
-            QgsProcessingOutputString(
-                self.OUTPUT_STRING, self.tr('Output message')
-            )
-        )
-
-        # Output vector layer
-        self.addOutput(
-            QgsProcessingOutputVectorLayer(
-                self.OUTPUT_LAYER, self.tr('Output layer')
-            )
-        )
-
-
-    def getSqlData(self, sql, parameters, context, feedback):
-        msg = ''
-        try:
-            [header, data, rowCount, ok, error_message] = fetchDataFromSqlQuery(
-                'gobs',
-                sql
-            )
-            if not ok:
-                status = 0
-                msg = self.tr('* The following error has been raised') + '  %s' % error_message
-                feedback.pushInfo(
-                    msg
-                )
-            else:
-                status = 1
-        except:
-            status = 0
-            msg = self.tr('* An unknown error occured while getting data from spatial layer')
-
-        return status, msg, data
 
     def getSpatialLayerData(self, parameters, context, feedback):
 
@@ -171,8 +86,11 @@ class GetSpatialLayerVectorData(QgsProcessingAlgorithm):
             self.tr('GET DATA FROM CHOSEN SPATIAL LAYER')
         )
         sql = "SELECT id, sl_label, sl_geometry_type FROM gobs.spatial_layer WHERE id = " + id_spatial_layer
-        status, message, data = self.getSqlData(sql, parameters, context, feedback)
-        if status:
+        [header, data, rowCount, ok, message] = fetchDataFromSqlQuery(
+            'gobs',
+            sql
+        )
+        if ok:
             label = data[0][1]
             message = self.tr('* Data has been fetched for spatial layer')
             message+= ' %s !' % label
@@ -180,7 +98,7 @@ class GetSpatialLayerVectorData(QgsProcessingAlgorithm):
                 message
             )
 
-        return status, message, data
+        return ok, message, data
 
     def setSql(self, parameters, context, feedback):
 
@@ -190,7 +108,7 @@ class GetSpatialLayerVectorData(QgsProcessingAlgorithm):
         geometry_type = data[0][2]
 
         # Build SQL
-        self.SQL = '''
+        sql = '''
             SELECT
                 id,
                 so_unique_id AS code,
@@ -202,44 +120,11 @@ class GetSpatialLayerVectorData(QgsProcessingAlgorithm):
             id_spatial_layer,
             geometry_type
         )
+        self.SQL = sql.replace('\n', ' ').rstrip(';')
 
-    def processAlgorithm(self, parameters, context, feedback):
-        """
-        Here is where the processing itself takes place.
-        """
-        connexion_name = parameters[self.CONNECTION_NAME]
+    def setLayerName(self, parameters, context, feedback):
         output_layer_name = parameters[self.OUTPUT_LAYER_NAME]
-        feedback.pushInfo('Connection name = %s' % connexion_name)
         spatiallayer = self.SPATIALLAYERS[parameters[self.SPATIALLAYER]]
         if not output_layer_name.strip():
             output_layer_name = spatiallayer.split('-')[0].strip()
-
-        msg = ''
-        status = 1
-
-        self.setSql(parameters, context, feedback)
-
-        # Import data via QGIS alg
-        vector_layer = processing.run("qgis:postgisexecuteandloadsql", {
-            'DATABASE': parameters[self.CONNECTION_NAME],
-            'SQL': self.SQL,
-            'ID_FIELD': 'id',
-            'GEOMETRY_FIELD': 'geom'
-        }, context=context, feedback=feedback)
-
-        vlayer = vector_layer['OUTPUT']
-        context.temporaryLayerStore().addMapLayer(vlayer)
-        context.addLayerToLoadOnCompletion(
-            vlayer.id(),
-            QgsProcessingContext.LayerDetails(
-                output_layer_name,
-                context.project(),
-                self.OUTPUT_LAYER
-            )
-        )
-
-        return {
-            self.OUTPUT_STATUS: status,
-            self.OUTPUT_STRING: msg,
-            self.OUTPUT_LAYER: vlayer.id()
-        }
+        self.LAYER_NAME = output_layer_name
