@@ -98,7 +98,11 @@ class ImportObservationData(QgsProcessingAlgorithm):
         # List of series
         sql = '''
             SELECT s.id,
-            concat(pr_name, ' / ', a_name, ' / ', id_label, ' / ', sl_label) AS label
+            concat(
+                ' Indicator: ', id_label,
+                ' / Source: ', a_name,
+                ' / Layer: ', sl_label
+            ) AS label
             FROM gobs.series s
             INNER JOIN gobs.protocol p ON p.id = s.fk_id_protocol
             INNER JOIN gobs.actor a ON a.id = s.fk_id_actor
