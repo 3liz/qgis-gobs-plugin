@@ -41,7 +41,8 @@ class GetSpatialLayerVectorData(GetDataAsLayer):
     """
 
     """
-    # override geom field
+
+    SPATIALLAYER = 'SPATIALLAYER'
     GEOM_FIELD = 'geom'
 
     def name(self):
@@ -53,6 +54,10 @@ class GetSpatialLayerVectorData(GetDataAsLayer):
     def initAlgorithm(self, config):
         """
         """
+
+        # use parent class to get other parameters
+        super(self.__class__, self).initAlgorithm(config)
+
         # Add spatial layer choice
         # List of spatial_layer
         sql = '''
@@ -73,13 +78,10 @@ class GetSpatialLayerVectorData(GetDataAsLayer):
             )
         )
 
-        # use parent class to get other parameters
-        return super(self.__class__, self).initAlgorithm(config)
 
+    def setSql(self, parameters, context, feedback):
 
-    def getSpatialLayerData(self, parameters, context, feedback):
-
-        # Get chosen spatial layer id
+        # Get id, label and geometry type from chosen spatial layer
         spatiallayer = self.SPATIALLAYERS[parameters[self.SPATIALLAYER]]
         id_spatial_layer = spatiallayer.split('-')[-1].strip()
         feedback.pushInfo(
@@ -97,13 +99,10 @@ class GetSpatialLayerVectorData(GetDataAsLayer):
             feedback.pushInfo(
                 message
             )
+        else:
+            raise QgsProcessingException(message)
 
-        return ok, message, data
-
-    def setSql(self, parameters, context, feedback):
-
-        # Get data from spatial_layer table for this id
-        status, message, data = self.getSpatialLayerData(parameters, context, feedback)
+        # Retrieve needed data
         id_spatial_layer = data[0][0]
         geometry_type = data[0][2]
 
