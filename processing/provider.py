@@ -38,6 +38,7 @@ from .algorithms.import_observation_data import ImportObservationData
 from .algorithms.get_data_as_layer import GetDataAsLayer
 from .algorithms.get_spatial_layer_vector_data import GetSpatialLayerVectorData
 from .algorithms.get_series_data import GetSeriesData
+from .algorithms.get_series_list import GetSeriesList
 
 
 class GobsProvider(QgsProcessingProvider):
@@ -53,7 +54,8 @@ class GobsProvider(QgsProcessingProvider):
             ImportObservationData(),
             GetDataAsLayer(),
             GetSpatialLayerVectorData(),
-            GetSeriesData()
+            GetSeriesData(),
+            GetSeriesList()
         ]
 
     def unload(self):
