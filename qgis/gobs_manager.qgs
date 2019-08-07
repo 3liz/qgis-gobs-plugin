@@ -19,7 +19,10 @@
   </projectCrs>
   <layer-tree-group>
     <customproperties/>
-    <layer-tree-group name="Imports" checked="Qt::Checked" expanded="1">
+    <layer-tree-group name="Tests" checked="Qt::Checked" expanded="1">
+      <customproperties/>
+    </layer-tree-group>
+    <layer-tree-group name="Source data" checked="Qt::Checked" expanded="1">
       <customproperties/>
       <layer-tree-layer name="pluviometrie_stations_technique" providerKey="ogr" checked="Qt::Checked" source="../install/test_data/bretagne/pluviometrie_stations_technique.geojson" expanded="1" id="pluviometrie_stations_technique_66eb0c8c_1668_4009_a8fb_6437ffca93d3">
         <customproperties>
@@ -137,10 +140,10 @@
   <mapcanvas name="theMapCanvas" annotationsVisible="1">
     <units>meters</units>
     <extent>
-      <xmin>152886.11462960578501225</xmin>
-      <ymin>6625436.7186347171664238</ymin>
-      <xmax>389223.20289890072308481</xmax>
-      <ymax>6938087.15546098724007607</ymax>
+      <xmin>175710.04184435290517285</xmin>
+      <ymin>6727953.95294612366706133</ymin>
+      <xmax>327104.16934559389483184</xmax>
+      <ymax>6928233.31004052516072989</ymax>
     </extent>
     <rotation>0</rotation>
     <destinationsrs>
@@ -159,7 +162,8 @@
   </mapcanvas>
   <projectModels/>
   <legend updateDrawingOrder="true">
-    <legendgroup name="Imports" checked="Qt::Checked" open="true">
+    <legendgroup name="Tests" checked="Qt::Checked" open="true"/>
+    <legendgroup name="Source data" checked="Qt::Checked" open="true">
       <legendlayer checked="Qt::Checked" name="pluviometrie_stations_technique" open="true" showFeatureCount="1" drawingOrder="-1">
         <filegroup open="true" hidden="false">
           <legendlayerfile layerid="pluviometrie_stations_technique_66eb0c8c_1668_4009_a8fb_6437ffca93d3" visible="1" isInOverview="0"/>
@@ -1723,17 +1727,17 @@ def my_form_open(dialog, layer, feature):
       <expressionfields/>
       <attributeactions>
         <defaultAction value="{00000000-0000-0000-0000-000000000000}" key="Canvas"/>
-        <actionsetting name="Get series raw data (no geometry)" action="project = QgsProject.instance()&#xa;layer = QgsProject.instance().mapLayer('[% @layer_id %]')&#xa;print(layer.name())&#xa;feat = layer.getFeature( [% $id %] )&#xa;print(feat['id'])&#xa;if feat:&#xa;    import processing&#xa;    res = processing.run(&#xa;        &quot;gobs:get_series_data&quot;, &#xa;        {&#xa;            'CONNECTION_NAME':'gobs',&#xa;            'OUTPUT_LAYER_NAME':'',&#xa;            'SERIE': 0, &#xa;            'SERIE_ID': feat['id']&#xa;        }&#xa;    )&#xa;    layer = res['OUTPUT_LAYER']&#xa;    layer.setName(res['OUTPUT_LAYER_RESULT_NAME'])&#xa;    QgsProject.instance().addMapLayer(layer)&#xa;    qgis.utils.iface.messageBar().pushMessage(&#xa;        'Series &quot;{series}&quot; has been added !'.format(&#xa;            series=res['OUTPUT_LAYER_RESULT_NAME']&#xa;        ) &#xa;    )" isEnabledOnlyWhenEditable="0" shortTitle="Get series raw data" notificationMessage="" type="1" icon="" id="{aa0de9a1-ee42-45b0-8051-c1f7e0c455ea}" capture="0">
+        <actionsetting name="Get series raw data (no geometry)" action="project = QgsProject.instance()&#xa;layer = QgsProject.instance().mapLayer('[% @layer_id %]')&#xa;feat = layer.getFeature( [% $id %] )&#xa;if feat:&#xa;    import processing&#xa;    res = processing.run(&#xa;        &quot;gobs:get_series_data&quot;, &#xa;        {&#xa;            'CONNECTION_NAME':'gobs',&#xa;            'OUTPUT_LAYER_NAME':'',&#xa;            'SERIE': 0, &#xa;            'SERIE_ID': feat['id']&#xa;        }&#xa;    )&#xa;    layer = res['OUTPUT_LAYER']&#xa;    layer.setName(res['OUTPUT_LAYER_RESULT_NAME'])&#xa;    QgsProject.instance().addMapLayer(layer)&#xa;    qgis.utils.iface.messageBar().pushMessage(&#xa;        'Series &quot;{series}&quot; has been added !'.format(&#xa;            series=res['OUTPUT_LAYER_RESULT_NAME']&#xa;        ) &#xa;    )" isEnabledOnlyWhenEditable="0" shortTitle="Get series raw data" notificationMessage="" type="1" icon="" id="{5f5bed16-e9c6-4fdb-9c1c-39da9bb0d3cd}" capture="0">
           <actionScope id="Feature"/>
         </actionsetting>
       </attributeactions>
       <attributetableconfig actionWidgetStyle="dropDown" sortExpression="" sortOrder="0">
         <columns>
-          <column name="id" width="-1" type="field" hidden="0"/>
+          <column name="id" width="100" type="field" hidden="0"/>
           <column name="indicator" width="-1" type="field" hidden="0"/>
           <column name="indicator_paths" width="-1" type="field" hidden="0"/>
           <column name="actor_source" width="-1" type="field" hidden="0"/>
-          <column name="spatial_layer" width="-1" type="field" hidden="0"/>
+          <column name="spatial_layer" width="181" type="field" hidden="0"/>
           <column name="protocol" width="-1" type="field" hidden="0"/>
           <column name="map_url" width="-1" type="field" hidden="0"/>
           <column name="nb_observation" width="-1" type="field" hidden="0"/>
@@ -3848,7 +3852,9 @@ def my_form_open(dialog, layer, feature):
         <Searchable>1</Searchable>
       </flags>
       <customproperties>
-        <property value="sl_label" key="dualview/previewExpressions"/>
+        <property key="dualview/previewExpressions">
+          <value>sl_label</value>
+        </property>
         <property value="0" key="embeddedWidgets/count"/>
         <property key="variableNames"/>
         <property key="variableValues"/>
@@ -3986,6 +3992,9 @@ def my_form_open(dialog, layer, feature):
       <expressionfields/>
       <attributeactions>
         <defaultAction value="{00000000-0000-0000-0000-000000000000}" key="Canvas"/>
+        <actionsetting name="Load spatial layer into QGIS" action="project = QgsProject.instance()&#xa;layer = QgsProject.instance().mapLayer('[% @layer_id %]')&#xa;feat = layer.getFeature( [% $id %] )&#xa;if feat:&#xa;    import processing&#xa;    res = processing.run(&#xa;        &quot;gobs:get_spatial_layer_vector_data&quot;, &#xa;        {&#xa;            'CONNECTION_NAME':'gobs',&#xa;            'OUTPUT_LAYER_NAME':'',&#xa;            'SPATIALLAYER': 0, &#xa;            'SPATIALLAYER_ID': feat['id']&#xa;        }&#xa;    )&#xa;    layer = res['OUTPUT_LAYER']&#xa;    layer.setName(res['OUTPUT_LAYER_RESULT_NAME'])&#xa;    QgsProject.instance().addMapLayer(layer)&#xa;    qgis.utils.iface.messageBar().pushMessage(&#xa;        'Layer &quot;{layer}&quot; has been added !'.format(&#xa;            layer=res['OUTPUT_LAYER_RESULT_NAME']&#xa;        ) &#xa;    )" isEnabledOnlyWhenEditable="0" shortTitle="Load spatial layer into QGIS" notificationMessage="" type="1" icon="" id="{1060e7c7-3132-478a-9ac1-5f482b7c0070}" capture="0">
+          <actionScope id="Feature"/>
+        </actionsetting>
       </attributeactions>
       <attributetableconfig actionWidgetStyle="dropDown" sortExpression="" sortOrder="0">
         <columns>

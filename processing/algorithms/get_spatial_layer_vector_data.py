@@ -29,6 +29,7 @@ from qgis.core import (
     QgsProcessingException,
     QgsProcessingParameterEnum,
     QgsProcessingParameterString,
+    QgsProcessingParameterNumber,
     QgsProcessingOutputString,
     QgsProcessingOutputNumber,
     QgsProcessingOutputVectorLayer
@@ -43,6 +44,7 @@ class GetSpatialLayerVectorData(GetDataAsLayer):
     """
 
     SPATIALLAYER = 'SPATIALLAYER'
+    SPATIALLAYER_ID = 'SPATIALLAYER_ID'
     GEOM_FIELD = 'geom'
 
     def name(self):
@@ -70,6 +72,7 @@ class GetSpatialLayerVectorData(GetDataAsLayer):
             service, sql
         )
         self.SPATIALLAYERS = ['%s - %s' % (a[1], a[0]) for a in data]
+        self.SPATIALLAYERS_DICT = {a[0]: a[1] for a in data}
         self.addParameter(
             QgsProcessingParameterEnum(
                 self.SPATIALLAYER, self.tr('Spatial layer'),
@@ -78,16 +81,41 @@ class GetSpatialLayerVectorData(GetDataAsLayer):
             )
         )
 
+        # Id of series, to get the serie directly
+        # mainly used from other processing algs
+        self.addParameter(
+            QgsProcessingParameterNumber(
+                self.SPATIALLAYER_ID, 'Spatial layer ID. If given, it overrides previous choice',
+                optional=True
+            )
+        )
+
+    def checkParameterValues(self, parameters, context):
+
+        spatial_layer_id = self.parameterAsInt(parameters, self.SPATIALLAYER_ID, context)
+
+        # Check serie id is in the list of existing spatial layers
+        if spatial_layer_id > 0:
+            if not spatial_layer_id in self.SPATIALLAYERS_DICT:
+                return False, self.tr('Spatial layer ID does not exists in the database')
+
+        return super(self.__class__, self).checkParameterValues(parameters, context)
 
     def setSql(self, parameters, context, feedback):
 
         # Get id, label and geometry type from chosen spatial layer
         spatiallayer = self.SPATIALLAYERS[parameters[self.SPATIALLAYER]]
-        id_spatial_layer = spatiallayer.split('-')[-1].strip()
+        id_spatial_layer = int(spatiallayer.split('-')[-1].strip())
+
+        # Override spatial layer id from second number input
+        spatial_layer_id = self.parameterAsInt(parameters, self.SPATIALLAYER_ID, context)
+        if spatial_layer_id in self.SPATIALLAYERS_DICT:
+            id_spatial_layer = spatial_layer_id
+
         feedback.pushInfo(
             self.tr('GET DATA FROM CHOSEN SPATIAL LAYER')
         )
-        sql = "SELECT id, sl_label, sl_geometry_type FROM gobs.spatial_layer WHERE id = " + id_spatial_layer
+        sql = "SELECT id, sl_label, sl_geometry_type FROM gobs.spatial_layer WHERE id = %s" % id_spatial_layer
         [header, data, rowCount, ok, message] = fetchDataFromSqlQuery(
             'gobs',
             sql
@@ -121,9 +149,24 @@ class GetSpatialLayerVectorData(GetDataAsLayer):
         )
         self.SQL = sql.replace('\n', ' ').rstrip(';')
 
+
     def setLayerName(self, parameters, context, feedback):
+
+        # Name given by the user
         output_layer_name = parameters[self.OUTPUT_LAYER_NAME]
-        spatiallayer = self.SPATIALLAYERS[parameters[self.SPATIALLAYER]]
+
+        # Default name if nothing given
         if not output_layer_name.strip():
-            output_layer_name = spatiallayer.split('-')[0].strip()
+            # Get spatial layer id from first combo box
+            spatiallayer = self.SPATIALLAYERS[parameters[self.SPATIALLAYER]]
+            id_spatial_layer = int(spatiallayer.split('-')[-1].strip())
+
+            # Override spatial layer id from second number input
+            spatial_layer_id = self.parameterAsInt(parameters, self.SPATIALLAYER_ID, context)
+            if spatial_layer_id in self.SPATIALLAYERS_DICT:
+                id_spatial_layer = spatial_layer_id
+
+            output_layer_name = self.SPATIALLAYERS_DICT[id_spatial_layer]
+
+        # Set layer name
         self.LAYER_NAME = output_layer_name

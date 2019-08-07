@@ -137,8 +137,9 @@ class GetDataAsLayer(QgsProcessingAlgorithm):
         self.SQL = self.SQL.replace('\n', ' ').rstrip(';')
 
     def setLayerName(self, parameters, context, feedback):
-        output_layer_name = parameters[self.OUTPUT_LAYER_NAME]
 
+        # Name given by the user
+        output_layer_name = parameters[self.OUTPUT_LAYER_NAME]
         self.LAYER_NAME = output_layer_name
 
 

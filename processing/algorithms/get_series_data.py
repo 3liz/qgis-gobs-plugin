@@ -81,9 +81,7 @@ class GetSeriesData(GetDataAsLayer):
             service, sql
         )
         self.SERIES = ['%s - %s' % (a[1], a[0]) for a in data]
-        print(self.SERIES)
         self.SERIES_DICT = {a[0]: a[1] for a in data}
-        print(self.SERIES_DICT)
         self.addParameter(
             QgsProcessingParameterEnum(
                 self.SERIE, self.tr('Target serie'),
@@ -104,10 +102,6 @@ class GetSeriesData(GetDataAsLayer):
     def checkParameterValues(self, parameters, context):
 
         serie_id = self.parameterAsInt(parameters, self.SERIE_ID, context)
-
-        # Check serie_id is a valid integer
-        if not isinstance(serie_id, int):
-            return False, self.tr('Series ID must be a valid integer > 0')
 
         # Check serie id is in the list of existing series
         if serie_id > 0:
@@ -187,6 +181,7 @@ class GetSeriesData(GetDataAsLayer):
         self.SQL = sql.replace('\n', ' ').rstrip(';')
 
     def setLayerName(self, parameters, context, feedback):
+
         # Name given by the user
         output_layer_name = parameters[self.OUTPUT_LAYER_NAME]
 
