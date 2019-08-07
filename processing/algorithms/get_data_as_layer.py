@@ -51,6 +51,7 @@ class GetDataAsLayer(QgsProcessingAlgorithm):
     OUTPUT_STRING = 'OUTPUT_STRING'
     OUTPUT_LAYER = 'OUTPUT_LAYER'
     OUTPUT_LAYER_NAME = 'OUTPUT_LAYER_NAME'
+    OUTPUT_LAYER_RESULT_NAME = 'OUTPUT_LAYER_RESULT_NAME'
 
     SQL = 'SELECT * FROM gobs.indicator'
     LAYER_NAME = ''
@@ -123,6 +124,13 @@ class GetDataAsLayer(QgsProcessingAlgorithm):
             )
         )
 
+        # Output vector layer name (set by the user or the alg)
+        self.addOutput(
+            QgsProcessingOutputString(
+                self.OUTPUT_LAYER_RESULT_NAME, self.tr('Output layer name')
+            )
+        )
+
 
     def setSql(self, parameters, context, feedback):
 
@@ -174,5 +182,6 @@ class GetDataAsLayer(QgsProcessingAlgorithm):
         return {
             self.OUTPUT_STATUS: status,
             self.OUTPUT_STRING: msg,
-            self.OUTPUT_LAYER: vlayer.id()
+            self.OUTPUT_LAYER: vlayer.id(),
+            self.OUTPUT_LAYER_RESULT_NAME: self.LAYER_NAME
         }
