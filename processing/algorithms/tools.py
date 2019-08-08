@@ -76,3 +76,13 @@ def fetchDataFromSqlQuery(service, sql):
     return [header, data, rowCount, ok, error_message]
 
 
+def validateTimestamp(timestamp_text):
+    from dateutil.parser import parse
+    valid = True
+    msg = ''
+    try:
+        parse(timestamp_text)
+    except ValueError as e:
+        valid = False
+        msg = str(e)
+    return valid, msg

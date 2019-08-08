@@ -84,7 +84,8 @@ class GetSeriesData(GetDataAsLayer):
         self.SERIES_DICT = {a[0]: a[1] for a in data}
         self.addParameter(
             QgsProcessingParameterEnum(
-                self.SERIE, self.tr('Target serie'),
+                self.SERIE,
+                self.tr('Target serie'),
                 options=self.SERIES,
                 optional=False
             )
@@ -94,7 +95,8 @@ class GetSeriesData(GetDataAsLayer):
         # mainly used from other processing algs
         self.addParameter(
             QgsProcessingParameterNumber(
-                self.SERIE_ID, 'Series ID. If given, it overrides previous choice',
+                self.SERIE_ID,
+                self.tr('Series ID. If given, it overrides previous choice'),
                 optional=True
             )
         )

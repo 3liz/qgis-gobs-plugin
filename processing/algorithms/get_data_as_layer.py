@@ -27,7 +27,6 @@ from qgis.core import (
     QgsProcessingContext,
     QgsProcessingUtils,
     QgsProcessingException,
-    QgsProcessingParameterEnum,
     QgsProcessingParameterString,
     QgsProcessingOutputString,
     QgsProcessingOutputNumber,
@@ -84,7 +83,8 @@ class GetDataAsLayer(QgsProcessingAlgorithm):
 
         # Database connection parameters
         db_param = QgsProcessingParameterString(
-            self.CONNECTION_NAME, 'PostgreSQL connection',
+            self.CONNECTION_NAME,
+            self.tr('PostgreSQL connection'),
             defaultValue='gobs',
             optional=False
         )
@@ -98,7 +98,8 @@ class GetDataAsLayer(QgsProcessingAlgorithm):
         # Name of the layer
         self.addParameter(
             QgsProcessingParameterString(
-                self.OUTPUT_LAYER_NAME, self.tr('Name of the output layer'),
+                self.OUTPUT_LAYER_NAME,
+                self.tr('Name of the output layer'),
                 optional=True
             )
         )
@@ -107,27 +108,31 @@ class GetDataAsLayer(QgsProcessingAlgorithm):
         # Add output for status (integer)
         self.addOutput(
             QgsProcessingOutputNumber(
-                self.OUTPUT_STATUS, self.tr('Output status')
+                self.OUTPUT_STATUS,
+                self.tr('Output status')
             )
         )
         # Add output for message
         self.addOutput(
             QgsProcessingOutputString(
-                self.OUTPUT_STRING, self.tr('Output message')
+                self.OUTPUT_STRING,
+                self.tr('Output message')
             )
         )
 
         # Output vector layer
         self.addOutput(
             QgsProcessingOutputVectorLayer(
-                self.OUTPUT_LAYER, self.tr('Output layer')
+                self.OUTPUT_LAYER,
+                self.tr('Output layer')
             )
         )
 
         # Output vector layer name (set by the user or the alg)
         self.addOutput(
             QgsProcessingOutputString(
-                self.OUTPUT_LAYER_RESULT_NAME, self.tr('Output layer name')
+                self.OUTPUT_LAYER_RESULT_NAME,
+                self.tr('Output layer name')
             )
         )
 

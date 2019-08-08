@@ -106,7 +106,8 @@ class ImportSpatialLayer(QgsProcessingAlgorithm):
         self.SPATIALLAYERS = ['%s - %s' % (a[1], a[0]) for a in data]
         self.addParameter(
             QgsProcessingParameterEnum(
-                self.SPATIALLAYER, self.tr('Target spatial layer'),
+                self.SPATIALLAYER,
+                self.tr('Target spatial layer'),
                 options=self.SPATIALLAYERS,
                 optional=False
             )
@@ -138,7 +139,8 @@ class ImportSpatialLayer(QgsProcessingAlgorithm):
         # Add output for message
         self.addOutput(
             QgsProcessingOutputString(
-                self.OUTPUT_STRING, self.tr('Output message')
+                self.OUTPUT_STRING,
+                self.tr('Output message')
             )
         )
 

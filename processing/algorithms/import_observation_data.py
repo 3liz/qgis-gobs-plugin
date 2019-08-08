@@ -117,7 +117,8 @@ class ImportObservationData(QgsProcessingAlgorithm):
         self.SERIES = ['%s - %s' % (a[1], a[0]) for a in data]
         self.addParameter(
             QgsProcessingParameterEnum(
-                self.SERIE, self.tr('Target serie'),
+                self.SERIE,
+                self.tr('Target serie'),
                 options=self.SERIES,
                 optional=False
             )
@@ -181,7 +182,8 @@ class ImportObservationData(QgsProcessingAlgorithm):
         # Add output for message
         self.addOutput(
             QgsProcessingOutputString(
-                self.OUTPUT_STRING, self.tr('Output message')
+                self.OUTPUT_STRING,
+                self.tr('Output message')
             )
         )
 
@@ -191,14 +193,16 @@ class ImportObservationData(QgsProcessingAlgorithm):
         # Check date has been given
         ok = True
         field_timestamp = self.parameterAsString(parameters, self.FIELD_TIMESTAMP, context)
-        manualdate = (self.parameterAsString(parameters, self.MANUALDATE, context)).strip()
+        manualdate = (self.parameterAsString(parameters, self.MANUALDATE, context)).strip().replace('/', '-')
         if not field_timestamp and not manualdate:
             ok = False
             msg = self.tr('You need to enter either a date/time field or a manual date/time')
 
         # check validity of given manual date
-        # TODO
         if manualdate:
+            ok, msg = validateTimestamp(manualdate)
+            if not ok:
+                return ok, self.tr('Manual date or timestamp: ') + msg
             ok = True
 
         if not ok:

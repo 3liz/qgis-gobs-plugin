@@ -75,7 +75,8 @@ class GetSpatialLayerVectorData(GetDataAsLayer):
         self.SPATIALLAYERS_DICT = {a[0]: a[1] for a in data}
         self.addParameter(
             QgsProcessingParameterEnum(
-                self.SPATIALLAYER, self.tr('Spatial layer'),
+                self.SPATIALLAYER,
+                self.tr('Spatial layer'),
                 options=self.SPATIALLAYERS,
                 optional=False
             )
@@ -85,7 +86,8 @@ class GetSpatialLayerVectorData(GetDataAsLayer):
         # mainly used from other processing algs
         self.addParameter(
             QgsProcessingParameterNumber(
-                self.SPATIALLAYER_ID, 'Spatial layer ID. If given, it overrides previous choice',
+                self.SPATIALLAYER_ID,
+                self.tr('Spatial layer ID. If given, it overrides previous choice'),
                 optional=True
             )
         )

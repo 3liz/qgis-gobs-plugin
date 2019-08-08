@@ -27,7 +27,6 @@ from qgis.core import (
     QgsProcessingContext,
     QgsProcessingUtils,
     QgsProcessingException,
-    QgsProcessingParameterEnum,
     QgsProcessingParameterString,
     QgsProcessingOutputString,
     QgsProcessingOutputNumber,
