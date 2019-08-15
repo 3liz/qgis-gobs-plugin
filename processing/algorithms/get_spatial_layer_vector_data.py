@@ -37,6 +37,7 @@ from qgis.core import (
 from .tools import *
 from .get_data_as_layer import *
 from processing.tools import postgis
+from db_manager.db_plugins import createDbPlugin
 
 class GetSpatialLayerVectorData(GetDataAsLayer):
     """
@@ -67,10 +68,15 @@ class GetSpatialLayerVectorData(GetDataAsLayer):
             FROM gobs.spatial_layer
             ORDER BY sl_label
         '''
-        service = 'gobs'
-        [header, data, rowCount, ok, error_message] = fetchDataFromSqlQuery(
-            service, sql
-        )
+        connection_name = 'gobs'
+        dbpluginclass = createDbPlugin( 'postgis' )
+        connections = [c.connectionName() for c in dbpluginclass.connections()]
+        data = []
+        if connection_name in connections:
+            [header, data, rowCount, ok, error_message] = fetchDataFromSqlQuery(
+                connection_name,
+                sql
+            )
         self.SPATIALLAYERS = ['%s - %s' % (a[1], a[0]) for a in data]
         self.SPATIALLAYERS_DICT = {a[0]: a[1] for a in data}
         self.addParameter(
@@ -105,6 +111,7 @@ class GetSpatialLayerVectorData(GetDataAsLayer):
 
     def setSql(self, parameters, context, feedback):
 
+        connection_name = parameters[self.CONNECTION_NAME]
         # Get id, label and geometry type from chosen spatial layer
         spatiallayer = self.SPATIALLAYERS[parameters[self.SPATIALLAYER]]
         id_spatial_layer = int(spatiallayer.split('-')[-1].strip())
@@ -119,7 +126,7 @@ class GetSpatialLayerVectorData(GetDataAsLayer):
         )
         sql = "SELECT id, sl_label, sl_geometry_type FROM gobs.spatial_layer WHERE id = %s" % id_spatial_layer
         [header, data, rowCount, ok, message] = fetchDataFromSqlQuery(
-            'gobs',
+            connection_name,
             sql
         )
         if ok:

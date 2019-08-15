@@ -38,6 +38,7 @@ from qgis.core import (
 from .tools import *
 from .get_data_as_layer import *
 from processing.tools import postgis
+from db_manager.db_plugins import createDbPlugin
 
 class GetAggregatedData(GetDataAsLayer):
     """
@@ -83,10 +84,16 @@ class GetAggregatedData(GetDataAsLayer):
             INNER JOIN gobs.spatial_layer sl ON sl.id = s.fk_id_spatial_layer
             ORDER BY label
         '''
-        service = 'gobs'
-        [header, data, rowCount, ok, error_message] = fetchDataFromSqlQuery(
-            service, sql
-        )
+        connection_name = 'gobs'
+        dbpluginclass = createDbPlugin( 'postgis' )
+        connections = [c.connectionName() for c in dbpluginclass.connections()]
+        data = []
+        if connection_name in connections:
+            [header, data, rowCount, ok, error_message] = fetchDataFromSqlQuery(
+                connection_name,
+                sql
+            )
+
         self.SERIES = ['%s - %s' % (a[1], a[0]) for a in data]
         self.SERIES_DICT = {a[0]: a[1] for a in data}
         self.addParameter(
@@ -190,6 +197,7 @@ class GetAggregatedData(GetDataAsLayer):
     def setSql(self, parameters, context, feedback):
 
         # Get parameters
+        connection_name = parameters[self.CONNECTION_NAME]
         add_spatial_object_data = self.parameterAsBool(parameters, self.ADD_SPATIAL_OBJECT_DATA, context)
         add_spatial_object_geom = self.parameterAsBool(parameters, self.ADD_SPATIAL_OBJECT_GEOM, context)
         timestamp_step = None
@@ -227,7 +235,7 @@ class GetAggregatedData(GetDataAsLayer):
             id_serie=id_serie
         )
         [header, data, rowCount, ok, message] = fetchDataFromSqlQuery(
-            'gobs',
+            connection_name,
             sql
         )
         if ok:

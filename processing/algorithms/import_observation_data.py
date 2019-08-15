@@ -35,6 +35,7 @@ import processing
 import os
 from .tools import *
 import time
+from db_manager.db_plugins import createDbPlugin
 
 class ImportObservationData(QgsProcessingAlgorithm):
     """
@@ -110,10 +111,15 @@ class ImportObservationData(QgsProcessingAlgorithm):
             INNER JOIN gobs.spatial_layer sl ON sl.id = s.fk_id_spatial_layer
             ORDER BY label
         '''
-        service = 'gobs'
-        [header, data, rowCount, ok, error_message] = fetchDataFromSqlQuery(
-            service, sql
-        )
+        connection_name = 'gobs'
+        dbpluginclass = createDbPlugin( 'postgis' )
+        connections = [c.connectionName() for c in dbpluginclass.connections()]
+        data = []
+        if connection_name in connections:
+            [header, data, rowCount, ok, error_message] = fetchDataFromSqlQuery(
+                connection_name,
+                sql
+            )
         self.SERIES = ['%s - %s' % (a[1], a[0]) for a in data]
         self.addParameter(
             QgsProcessingParameterEnum(
@@ -273,9 +279,10 @@ class ImportObservationData(QgsProcessingAlgorithm):
             ;
         ''' % id_serie
         id_import = None
+
         try:
             [header, data, rowCount, ok, error_message] = fetchDataFromSqlQuery(
-                'gobs',
+                connection_name,
                 sql
             )
             if not ok:
@@ -315,7 +322,7 @@ class ImportObservationData(QgsProcessingAlgorithm):
         id_date_format = None
         try:
             [header, data, rowCount, ok, error_message] = fetchDataFromSqlQuery(
-                'gobs',
+                connection_name,
                 sql
             )
             if not ok:
@@ -417,7 +424,7 @@ class ImportObservationData(QgsProcessingAlgorithm):
             )
             try:
                 [header, data, rowCount, ok, error_message] = fetchDataFromSqlQuery(
-                    'gobs',
+                    connection_name,
                     sql
                 )
                 if not ok:
@@ -449,7 +456,7 @@ class ImportObservationData(QgsProcessingAlgorithm):
                     temp_table
                 )
                 [header, data, rowCount, ok, error_message] = fetchDataFromSqlQuery(
-                    'gobs',
+                    connection_name,
                     sql
                 )
                 if ok:
@@ -463,7 +470,7 @@ class ImportObservationData(QgsProcessingAlgorithm):
 
             if not status and id_import:
                 [header, data, rowCount, ok, error_message] = fetchDataFromSqlQuery(
-                    'gobs',
+                    connection_name,
                     'DELETE FROM gobs.import WHERE id = %s ' % id_import
                 )
 

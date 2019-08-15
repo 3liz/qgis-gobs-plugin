@@ -37,6 +37,7 @@ from qgis.core import (
 from .tools import *
 from .get_data_as_layer import *
 from processing.tools import postgis
+from db_manager.db_plugins import createDbPlugin
 
 class GetSeriesData(GetDataAsLayer):
     """
@@ -76,10 +77,16 @@ class GetSeriesData(GetDataAsLayer):
             INNER JOIN gobs.spatial_layer sl ON sl.id = s.fk_id_spatial_layer
             ORDER BY label
         '''
-        service = 'gobs'
-        [header, data, rowCount, ok, error_message] = fetchDataFromSqlQuery(
-            service, sql
-        )
+        connection_name = 'gobs'
+        dbpluginclass = createDbPlugin( 'postgis' )
+        connections = [c.connectionName() for c in dbpluginclass.connections()]
+        data = []
+        if connection_name in connections:
+            [header, data, rowCount, ok, error_message] = fetchDataFromSqlQuery(
+                connection_name,
+                sql
+            )
+
         self.SERIES = ['%s - %s' % (a[1], a[0]) for a in data]
         self.SERIES_DICT = {a[0]: a[1] for a in data}
         self.addParameter(
@@ -115,6 +122,8 @@ class GetSeriesData(GetDataAsLayer):
 
     def setSql(self, parameters, context, feedback):
 
+        connection_name = parameters[self.CONNECTION_NAME]
+
         # Get series id from first combo box
         serie = self.SERIES[parameters[self.SERIE]]
         id_serie = int(serie.split('-')[-1].strip())
@@ -143,7 +152,7 @@ class GetSeriesData(GetDataAsLayer):
             id_serie
         )
         [header, data, rowCount, ok, message] = fetchDataFromSqlQuery(
-            'gobs',
+            connection_name,
             sql
         )
         if ok:

@@ -23,18 +23,43 @@ from qgis.core import (
 def tr(string):
     return QCoreApplication.translate('Processing', string)
 
-def fetchDataFromSqlQuery(service, sql):
+def fetchDataFromSqlQuery(connection_name, sql):
 
     from db_manager.db_plugins.plugin import BaseError
+    from db_manager.db_plugins import createDbPlugin
     from db_manager.db_plugins.postgis.connector import PostGisDBConnector
+
     header = None
     data = []
     header = []
     rowCount = 0
     error_message = None
+    connection = None
 
-    uri = QgsDataSourceUri()
-    uri.setConnection(service, '', '', '')
+    # Create plugin class and try to connect
+    ok = True
+    try:
+        dbpluginclass = createDbPlugin( 'postgis', connection_name )
+        connection = dbpluginclass.connect()
+    except BaseError as e:
+        #DlgDbError.showError(e, self.dialog)
+        ok = False
+        error_message = e.msg
+    except:
+        ok = False
+        error_message = 'Cannot connect to database'
+
+    if not connection:
+        return [header, data, rowCount, ok, error_message]
+
+    db = dbpluginclass.database()
+    if not db:
+        ok = False
+        error_message = 'Unable to get database from connection'
+        return [header, data, rowCount, ok, error_message]
+
+    # Get URI
+    uri = db.uri()
     try:
         connector = PostGisDBConnector(uri)
     except:

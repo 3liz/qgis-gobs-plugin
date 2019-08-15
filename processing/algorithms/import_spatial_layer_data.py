@@ -35,8 +35,9 @@ import processing
 import os
 from .tools import *
 import time
+from db_manager.db_plugins import createDbPlugin
 
-class ImportSpatialLayer(QgsProcessingAlgorithm):
+class ImportSpatialLayerData(QgsProcessingAlgorithm):
     """
     """
 
@@ -56,10 +57,10 @@ class ImportSpatialLayer(QgsProcessingAlgorithm):
     SPATIALLAYERS = []
 
     def name(self):
-        return 'gobs_import_spatial_layer'
+        return 'gobs_import_spatial_layer_data'
 
     def displayName(self):
-        return self.tr('Import spatial layer')
+        return self.tr('Import spatial layer data')
 
     def group(self):
         return self.tr('Manage')
@@ -99,10 +100,15 @@ class ImportSpatialLayer(QgsProcessingAlgorithm):
             FROM gobs.spatial_layer
             ORDER BY sl_label
         '''
-        service = 'gobs'
-        [header, data, rowCount, ok, error_message] = fetchDataFromSqlQuery(
-            service, sql
-        )
+        connection_name = 'gobs'
+        dbpluginclass = createDbPlugin( 'postgis' )
+        connections = [c.connectionName() for c in dbpluginclass.connections()]
+        data = []
+        if connection_name in connections:
+            [header, data, rowCount, ok, error_message] = fetchDataFromSqlQuery(
+                connection_name,
+                sql
+            )
         self.SPATIALLAYERS = ['%s - %s' % (a[1], a[0]) for a in data]
         self.addParameter(
             QgsProcessingParameterEnum(
@@ -205,7 +211,7 @@ class ImportSpatialLayer(QgsProcessingAlgorithm):
         )
         try:
             [header, data, rowCount, ok, error_message] = fetchDataFromSqlQuery(
-                'gobs',
+                connection_name,
                 sql
             )
             if not ok:
@@ -237,7 +243,7 @@ class ImportSpatialLayer(QgsProcessingAlgorithm):
                 temp_table
             )
             [header, data, rowCount, ok, error_message] = fetchDataFromSqlQuery(
-                'gobs',
+                connection_name,
                 sql
             )
             if ok:
