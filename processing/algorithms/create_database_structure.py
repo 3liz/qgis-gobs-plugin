@@ -28,13 +28,15 @@ from qgis.core import (
     QgsProcessingParameterString,
     QgsProcessingParameterBoolean,
     QgsProcessingOutputNumber,
-    QgsProcessingOutputString
+    QgsProcessingOutputString,
+    QgsExpressionContextUtils
 )
 
 import processing
 import os
 from .tools import *
 import configparser
+from db_manager.db_plugins import createDbPlugin
 
 class CreateDatabaseStructure(QgsProcessingAlgorithm):
     """
@@ -44,8 +46,6 @@ class CreateDatabaseStructure(QgsProcessingAlgorithm):
     # Constants used to refer to parameters and outputs. They will be
     # used when calling the algorithm from another algorithm, or when
     # calling from the QGIS console.
-
-    CONNECTION_NAME = 'CONNECTION_NAME'
     OVERRIDE = 'OVERRIDE'
     ADDTESTDATA = 'ADDTESTDATA'
     OUTPUT_STATUS = 'OUTPUT_STATUS'
@@ -75,22 +75,11 @@ class CreateDatabaseStructure(QgsProcessingAlgorithm):
         with some other properties.
         """
         # INPUTS
-        db_param = QgsProcessingParameterString(
-            self.CONNECTION_NAME,
-            self.tr('PostgreSQL connection'),
-            defaultValue='gobs',
-            optional=False
-        )
-        db_param.setMetadata({
-            'widget_wrapper': {
-                'class': 'processing.gui.wrappers_postgis.ConnectionWidgetWrapper'
-            }
-        })
-        self.addParameter(db_param)
+
         self.addParameter(
             QgsProcessingParameterBoolean(
                 self.OVERRIDE,
-                self.tr('Overwrite schema gobs and all data ? ** CAUTION **'),
+                self.tr('Overwrite schema gobs and all data ? ** CAUTION ** It will remove all existing data !'),
                 defaultValue=False,
                 optional=False
             )
@@ -120,12 +109,22 @@ class CreateDatabaseStructure(QgsProcessingAlgorithm):
 
 
     def checkParameterValues(self, parameters, context):
+        # Check that the connection name has been configured
+        connection_name = QgsExpressionContextUtils.globalScope().variable('gobs_connection_name')
+        if not connection_name:
+            return False, self.tr('You must use the "Configure G-obs plugin" alg to set the database connection name')
+
+        # Check that it corresponds to an existing connection
+        dbpluginclass = createDbPlugin( 'postgis' )
+        connections = [c.connectionName() for c in dbpluginclass.connections()]
+        if connection_name not in connections:
+            return False, self.tr('The configured connection name does not exists in QGIS')
 
         # Check database content
         ok, msg = self.checkSchema(parameters, context)
         if not ok:
             return False, msg
-        return super(self.__class__, self).checkParameterValues(parameters, context)
+        return super(CreateDatabaseStructure, self).checkParameterValues(parameters, context)
 
     def checkSchema(self, parameters, context):
         sql = '''
@@ -133,7 +132,7 @@ class CreateDatabaseStructure(QgsProcessingAlgorithm):
             FROM information_schema.schemata
             WHERE schema_name = 'gobs';
         '''
-        connection_name = parameters[self.CONNECTION_NAME]
+        connection_name = QgsExpressionContextUtils.globalScope().variable('gobs_connection_name')
         [header, data, rowCount, ok, error_message] = fetchDataFromSqlQuery(
             connection_name,
             sql
@@ -146,7 +145,7 @@ class CreateDatabaseStructure(QgsProcessingAlgorithm):
             schema = a[0]
             if schema == 'gobs' and not override:
                 ok = False
-                msg = self.tr("Schema gobs already exists in database ! If you REALLY want to drop and recreate it (and loose all data), check the Override checkbox")
+                msg = self.tr("Schema gobs already exists in database ! If you REALLY want to drop and recreate it (and loose all data), check the *Overwrite* checkbox")
         return ok, msg
 
     def processAlgorithm(self, parameters, context, feedback):
@@ -154,7 +153,7 @@ class CreateDatabaseStructure(QgsProcessingAlgorithm):
         Here is where the processing itself takes place.
         """
 
-        connection_name = parameters[self.CONNECTION_NAME]
+        connection_name = QgsExpressionContextUtils.globalScope().variable('gobs_connection_name')
 
         # Drop schema if needed
         override = self.parameterAsBool(parameters, self.OVERRIDE, context)

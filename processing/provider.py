@@ -31,6 +31,7 @@ __copyright__ = '(C) 2019 by 3liz'
 __revision__ = '$Format:%H$'
 
 from qgis.core import QgsProcessingProvider
+from .algorithms.configure_plugin import ConfigurePlugin
 from .algorithms.execute_sql_on_service import ExecuteSqlOnService
 from .algorithms.create_database_structure import CreateDatabaseStructure
 from .algorithms.import_spatial_layer_data import ImportSpatialLayerData
@@ -49,6 +50,7 @@ class GobsProvider(QgsProcessingProvider):
 
         # Load algorithms
         self.alglist = [
+            ConfigurePlugin(),
             ExecuteSqlOnService(),
             CreateDatabaseStructure(),
             ImportSpatialLayerData(),

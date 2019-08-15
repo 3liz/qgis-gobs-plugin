@@ -30,10 +30,12 @@ from qgis.core import (
     QgsProcessingParameterString,
     QgsProcessingOutputString,
     QgsProcessingOutputNumber,
-    QgsProcessingOutputVectorLayer
+    QgsProcessingOutputVectorLayer,
+    QgsExpressionContextUtils
 )
 from .tools import *
 from processing.tools import postgis
+from db_manager.db_plugins import createDbPlugin
 
 class GetDataAsLayer(QgsProcessingAlgorithm):
     """
@@ -43,8 +45,6 @@ class GetDataAsLayer(QgsProcessingAlgorithm):
     # Constants used to refer to parameters and outputs. They will be
     # used when calling the algorithm from another algorithm, or when
     # calling from the QGIS console.
-
-    CONNECTION_NAME = 'CONNECTION_NAME'
 
     OUTPUT_STATUS = 'OUTPUT_STATUS'
     OUTPUT_STRING = 'OUTPUT_STRING'
@@ -80,20 +80,6 @@ class GetDataAsLayer(QgsProcessingAlgorithm):
         with some other properties.
         """
         # INPUTS
-
-        # Database connection parameters
-        db_param = QgsProcessingParameterString(
-            self.CONNECTION_NAME,
-            self.tr('PostgreSQL connection'),
-            defaultValue='gobs',
-            optional=False
-        )
-        db_param.setMetadata({
-            'widget_wrapper': {
-                'class': 'processing.gui.wrappers_postgis.ConnectionWidgetWrapper'
-            }
-        })
-        self.addParameter(db_param)
 
         # Name of the layer
         self.addParameter(
@@ -136,6 +122,20 @@ class GetDataAsLayer(QgsProcessingAlgorithm):
             )
         )
 
+    def checkParameterValues(self, parameters, context):
+
+        # Check that the connection name has been configured
+        connection_name = QgsExpressionContextUtils.globalScope().variable('gobs_connection_name')
+        if not connection_name:
+            return False, self.tr('You must use the "Configure G-obs plugin" alg to set the database connection name')
+
+        # Check that it corresponds to an existing connection
+        dbpluginclass = createDbPlugin( 'postgis' )
+        connections = [c.connectionName() for c in dbpluginclass.connections()]
+        if connection_name not in connections:
+            return False, self.tr('The configured connection name does not exists in QGIS')
+
+        return super(GetDataAsLayer, self).checkParameterValues(parameters, context)
 
     def setSql(self, parameters, context, feedback):
 
@@ -152,7 +152,8 @@ class GetDataAsLayer(QgsProcessingAlgorithm):
         """
         Here is where the processing itself takes place.
         """
-        connexion_name = parameters[self.CONNECTION_NAME]
+        # Database connection parameters
+        connection_name = QgsExpressionContextUtils.globalScope().variable('gobs_connection_name')
 
         msg = ''
         status = 1
@@ -164,7 +165,7 @@ class GetDataAsLayer(QgsProcessingAlgorithm):
 
         # Buid QGIS uri to load layer
         id_field = 'id'
-        uri = postgis.uri_from_name(connexion_name)
+        uri = postgis.uri_from_name(connection_name)
         uri.setDataSource("", "(" + self.SQL + ")", self.GEOM_FIELD, "", id_field)
         vlayer = QgsVectorLayer(uri.uri(), "layername", "postgres")
         if not vlayer.isValid():

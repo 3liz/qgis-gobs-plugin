@@ -29,7 +29,8 @@ from qgis.core import (
     QgsProcessingParameterVectorLayer,
     QgsProcessingParameterField,
     QgsProcessingParameterEnum,
-    QgsProcessingOutputString
+    QgsProcessingOutputString,
+    QgsExpressionContextUtils
 )
 import processing
 import os
@@ -44,7 +45,6 @@ class ImportObservationData(QgsProcessingAlgorithm):
     # Constants used to refer to parameters and outputs. They will be
     # used when calling the algorithm from another algorithm, or when
     # calling from the QGIS console.
-    CONNECTION_NAME = 'CONNECTION_NAME'
     SERIE = 'SERIE'
     SOURCELAYER = 'SOURCELAYER'
     MANUALDATE = 'MANUALDATE'
@@ -83,18 +83,7 @@ class ImportObservationData(QgsProcessingAlgorithm):
         """
         # INPUTS
 
-        # Database connection parameters
-        db_param = QgsProcessingParameterString(
-            self.CONNECTION_NAME, 'PostgreSQL connection',
-            defaultValue='gobs',
-            optional=False
-        )
-        db_param.setMetadata({
-            'widget_wrapper': {
-                'class': 'processing.gui.wrappers_postgis.ConnectionWidgetWrapper'
-            }
-        })
-        self.addParameter(db_param)
+        connection_name = QgsExpressionContextUtils.globalScope().variable('gobs_connection_name')
 
         # List of series
         sql = '''
@@ -111,7 +100,6 @@ class ImportObservationData(QgsProcessingAlgorithm):
             INNER JOIN gobs.spatial_layer sl ON sl.id = s.fk_id_spatial_layer
             ORDER BY label
         '''
-        connection_name = 'gobs'
         dbpluginclass = createDbPlugin( 'postgis' )
         connections = [c.connectionName() for c in dbpluginclass.connections()]
         data = []
@@ -213,7 +201,7 @@ class ImportObservationData(QgsProcessingAlgorithm):
 
         if not ok:
             return False, msg
-        return super(self.__class__, self).checkParameterValues(parameters, context)
+        return super(ImportObservationData, self).checkParameterValues(parameters, context)
 
 
     def processAlgorithm(self, parameters, context, feedback):
@@ -221,8 +209,9 @@ class ImportObservationData(QgsProcessingAlgorithm):
         Here is where the processing itself takes place.
         """
         # parameters
-        connexion_name = parameters[self.CONNECTION_NAME]
-        feedback.pushInfo('Connection name = %s' % connexion_name)
+        # Database connection parameters
+        connection_name = QgsExpressionContextUtils.globalScope().variable('gobs_connection_name')
+
         serie = self.SERIES[parameters[self.SERIE]]
         sourcelayer = self.parameterAsVectorLayer(parameters, self.SOURCELAYER, context)
         field_timestamp = self.parameterAsString(parameters, self.FIELD_TIMESTAMP, context)
@@ -245,7 +234,7 @@ class ImportObservationData(QgsProcessingAlgorithm):
         temp_table = 'temp_' + str(time.time()).replace('.', '')
         ouvrages_conversion = processing.run("qgis:importintopostgis", {
             'INPUT': parameters[self.SOURCELAYER],
-            'DATABASE': parameters[self.CONNECTION_NAME],
+            'DATABASE': connection_name,
             'SCHEMA': temp_schema,
             'TABLENAME': temp_table,
             'PRIMARY_KEY': 'gobs_id',

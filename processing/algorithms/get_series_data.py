@@ -32,7 +32,8 @@ from qgis.core import (
     QgsProcessingParameterString,
     QgsProcessingOutputString,
     QgsProcessingOutputNumber,
-    QgsProcessingOutputVectorLayer
+    QgsProcessingOutputVectorLayer,
+    QgsExpressionContextUtils
 )
 from .tools import *
 from .get_data_as_layer import *
@@ -62,6 +63,8 @@ class GetSeriesData(GetDataAsLayer):
         # use parent class to get other parameters
         super(self.__class__, self).initAlgorithm(config)
 
+        connection_name = QgsExpressionContextUtils.globalScope().variable('gobs_connection_name')
+
         # List of series
         sql = '''
             SELECT s.id,
@@ -77,7 +80,6 @@ class GetSeriesData(GetDataAsLayer):
             INNER JOIN gobs.spatial_layer sl ON sl.id = s.fk_id_spatial_layer
             ORDER BY label
         '''
-        connection_name = 'gobs'
         dbpluginclass = createDbPlugin( 'postgis' )
         connections = [c.connectionName() for c in dbpluginclass.connections()]
         data = []
@@ -117,12 +119,13 @@ class GetSeriesData(GetDataAsLayer):
             if not serie_id in self.SERIES_DICT:
                 return False, self.tr('Series ID does not exists in the database')
 
-        return super(self.__class__, self).checkParameterValues(parameters, context)
+        return super(GetSeriesData, self).checkParameterValues(parameters, context)
 
 
     def setSql(self, parameters, context, feedback):
 
-        connection_name = parameters[self.CONNECTION_NAME]
+        # Database connection parameters
+        connection_name = QgsExpressionContextUtils.globalScope().variable('gobs_connection_name')
 
         # Get series id from first combo box
         serie = self.SERIES[parameters[self.SERIE]]

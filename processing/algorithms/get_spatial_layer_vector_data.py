@@ -32,7 +32,8 @@ from qgis.core import (
     QgsProcessingParameterNumber,
     QgsProcessingOutputString,
     QgsProcessingOutputNumber,
-    QgsProcessingOutputVectorLayer
+    QgsProcessingOutputVectorLayer,
+    QgsExpressionContextUtils
 )
 from .tools import *
 from .get_data_as_layer import *
@@ -61,6 +62,8 @@ class GetSpatialLayerVectorData(GetDataAsLayer):
         # use parent class to get other parameters
         super(self.__class__, self).initAlgorithm(config)
 
+        connection_name = QgsExpressionContextUtils.globalScope().variable('gobs_connection_name')
+
         # Add spatial layer choice
         # List of spatial_layer
         sql = '''
@@ -68,7 +71,6 @@ class GetSpatialLayerVectorData(GetDataAsLayer):
             FROM gobs.spatial_layer
             ORDER BY sl_label
         '''
-        connection_name = 'gobs'
         dbpluginclass = createDbPlugin( 'postgis' )
         connections = [c.connectionName() for c in dbpluginclass.connections()]
         data = []
@@ -107,11 +109,13 @@ class GetSpatialLayerVectorData(GetDataAsLayer):
             if not spatial_layer_id in self.SPATIALLAYERS_DICT:
                 return False, self.tr('Spatial layer ID does not exists in the database')
 
-        return super(self.__class__, self).checkParameterValues(parameters, context)
+        return super(GetSpatialLayerVectorData, self).checkParameterValues(parameters, context)
 
     def setSql(self, parameters, context, feedback):
 
-        connection_name = parameters[self.CONNECTION_NAME]
+        # Database connection parameters
+        connection_name = QgsExpressionContextUtils.globalScope().variable('gobs_connection_name')
+
         # Get id, label and geometry type from chosen spatial layer
         spatiallayer = self.SPATIALLAYERS[parameters[self.SPATIALLAYER]]
         id_spatial_layer = int(spatiallayer.split('-')[-1].strip())

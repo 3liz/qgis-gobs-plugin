@@ -29,7 +29,8 @@ from qgis.core import (
     QgsProcessingParameterVectorLayer,
     QgsProcessingParameterField,
     QgsProcessingParameterEnum,
-    QgsProcessingOutputString
+    QgsProcessingOutputString,
+    QgsExpressionContextUtils
 )
 import processing
 import os
@@ -45,7 +46,6 @@ class ImportSpatialLayerData(QgsProcessingAlgorithm):
     # used when calling the algorithm from another algorithm, or when
     # calling from the QGIS console.
 
-    CONNECTION_NAME = 'CONNECTION_NAME'
     SPATIALLAYER = 'SPATIALLAYER'
     SOURCELAYER = 'SOURCELAYER'
     UNIQUEID = 'UNIQUEID'
@@ -80,19 +80,7 @@ class ImportSpatialLayerData(QgsProcessingAlgorithm):
         with some other properties.
         """
         # INPUTS
-
-        # Database connection parameters
-        db_param = QgsProcessingParameterString(
-            self.CONNECTION_NAME, 'PostgreSQL connection',
-            defaultValue='gobs',
-            optional=False
-        )
-        db_param.setMetadata({
-            'widget_wrapper': {
-                'class': 'processing.gui.wrappers_postgis.ConnectionWidgetWrapper'
-            }
-        })
-        self.addParameter(db_param)
+        connection_name = QgsExpressionContextUtils.globalScope().variable('gobs_connection_name')
 
         # List of spatial_layer
         sql = '''
@@ -100,7 +88,6 @@ class ImportSpatialLayerData(QgsProcessingAlgorithm):
             FROM gobs.spatial_layer
             ORDER BY sl_label
         '''
-        connection_name = 'gobs'
         dbpluginclass = createDbPlugin( 'postgis' )
         connections = [c.connectionName() for c in dbpluginclass.connections()]
         data = []
@@ -155,8 +142,9 @@ class ImportSpatialLayerData(QgsProcessingAlgorithm):
         Here is where the processing itself takes place.
         """
         # parameters
-        connexion_name = parameters[self.CONNECTION_NAME]
-        feedback.pushInfo('Connection name = %s' % connexion_name)
+        # Database connection parameters
+        connection_name = QgsExpressionContextUtils.globalScope().variable('gobs_connection_name')
+
         spatiallayer = self.SPATIALLAYERS[parameters[self.SPATIALLAYER]]
         sourcelayer = self.parameterAsVectorLayer(parameters, self.SOURCELAYER, context)
         uniqueid = self.parameterAsString(parameters, self.UNIQUEID, context)
@@ -176,7 +164,7 @@ class ImportSpatialLayerData(QgsProcessingAlgorithm):
         temp_table = 'temp_' + str(time.time()).replace('.', '')
         ouvrages_conversion = processing.run("qgis:importintopostgis", {
             'INPUT': parameters[self.SOURCELAYER],
-            'DATABASE': parameters[self.CONNECTION_NAME],
+            'DATABASE': connection_name,
             'SCHEMA': temp_schema,
             'TABLENAME': temp_table,
             'PRIMARY_KEY': 'gobs_id',
