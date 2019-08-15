@@ -52,7 +52,7 @@ class CreateDatabaseStructure(QgsProcessingAlgorithm):
     OUTPUT_STRING = 'OUTPUT_STRING'
 
     def name(self):
-        return 'gobs_create_database_structure'
+        return 'create_database_structure'
 
     def displayName(self):
         return self.tr('Create database structure')

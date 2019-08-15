@@ -57,7 +57,7 @@ class ImportSpatialLayerData(QgsProcessingAlgorithm):
     SPATIALLAYERS = []
 
     def name(self):
-        return 'gobs_import_spatial_layer_data'
+        return 'import_spatial_layer_data'
 
     def displayName(self):
         return self.tr('Import spatial layer data')

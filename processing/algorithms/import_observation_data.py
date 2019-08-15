@@ -59,7 +59,7 @@ class ImportObservationData(QgsProcessingAlgorithm):
     SERIES = []
 
     def name(self):
-        return 'gobs_import_observation_data'
+        return 'import_observation_data'
 
     def displayName(self):
         return self.tr('Import observation data')
