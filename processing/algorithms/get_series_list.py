@@ -70,21 +70,18 @@ class GetSeriesList(GetDataAsLayer):
                 a_name AS actor_source,
                 sl_label AS spatial_layer,
                 pr_name AS protocol,
-                NULL AS map_url,
                 count(o.id) AS nb_observation,
                 min(o.ob_timestamp) AS min_date,
-                max(o.ob_timestamp) AS max_date,
-                max(im_timestamp) AS last_import_date
+                max(o.ob_timestamp) AS max_date
 
             FROM gobs.series s
             INNER JOIN gobs.observation o ON o.fk_id_series = s.id
-            INNER JOIN gobs.import im ON im.fk_id_series = s.id
             INNER JOIN gobs.actor a ON a.id = s.fk_id_actor
             INNER JOIN gobs.indicator i ON i.id = s.fk_id_indicator
             INNER JOIN gobs.spatial_layer sl ON sl.id = s.fk_id_spatial_layer
             INNER JOIN gobs.protocol p ON p.id = s.fk_id_protocol
 
-            GROUP BY s.id, id_label, id_paths, a_name, sl_label, pr_name, map_url
+            GROUP BY s.id, id_label, id_paths, a_name, sl_label, pr_name
 
         '''
         self.SQL = sql.replace('\n', ' ').rstrip(';')
