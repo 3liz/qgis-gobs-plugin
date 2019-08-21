@@ -45,23 +45,6 @@ from .algorithms.get_aggregated_data import GetAggregatedData
 
 class GobsProvider(QgsProcessingProvider):
 
-    def __init__(self):
-        QgsProcessingProvider.__init__(self)
-
-        # Load algorithms
-        self.alglist = [
-            ConfigurePlugin(),
-            ExecuteSqlOnService(),
-            CreateDatabaseStructure(),
-            ImportSpatialLayerData(),
-            ImportObservationData(),
-            GetDataAsLayer(),
-            GetSpatialLayerVectorData(),
-            GetSeriesData(),
-            GetSeriesList(),
-            GetAggregatedData()
-        ]
-
     def unload(self):
         """
         Unloads the provider. Any tear-down steps required by the provider
@@ -70,8 +53,17 @@ class GobsProvider(QgsProcessingProvider):
         pass
 
     def loadAlgorithms(self):
-        for alg in self.alglist:
-            self.addAlgorithm( alg )
+
+        self.addAlgorithm( ConfigurePlugin() )
+        self.addAlgorithm( ExecuteSqlOnService() )
+        self.addAlgorithm( CreateDatabaseStructure() )
+        self.addAlgorithm( ImportSpatialLayerData() )
+        self.addAlgorithm( ImportObservationData() )
+        self.addAlgorithm( GetDataAsLayer() )
+        self.addAlgorithm( GetSpatialLayerVectorData() )
+        self.addAlgorithm( GetSeriesData() )
+        self.addAlgorithm( GetSeriesList() )
+        self.addAlgorithm( GetAggregatedData() )
 
     def id(self):
         return 'gobs'

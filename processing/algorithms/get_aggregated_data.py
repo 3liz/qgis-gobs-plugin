@@ -199,7 +199,8 @@ class GetAggregatedData(GetDataAsLayer):
     def setSql(self, parameters, context, feedback):
 
         # Get parameters
-        connection_name = parameters[self.CONNECTION_NAME]
+        connection_name = QgsExpressionContextUtils.globalScope().variable('gobs_connection_name')
+
         add_spatial_object_data = self.parameterAsBool(parameters, self.ADD_SPATIAL_OBJECT_DATA, context)
         add_spatial_object_geom = self.parameterAsBool(parameters, self.ADD_SPATIAL_OBJECT_GEOM, context)
         timestamp_step = None
