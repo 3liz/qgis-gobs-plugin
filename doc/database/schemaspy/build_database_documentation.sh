@@ -1,11 +1,11 @@
 #!/bin/sh
 #
 # Create documentation based on the SchemaSpy tool
-# Ex: ./build_database_documentation.sh -h localhost -p 5432 -d gobs -u postgres -w ***** -o html
+# Ex: ./build_database_documentation.sh -h localhost -p 5432 -d gobs -u postgres -o html
 # LICENCE: GPL 2
 # AUTHOR: 3LIZ
 
-while getopts h:p:d:u:w:o: option
+while getopts h:p:d:u:o: option
 do
 case "${option}"
 in
@@ -13,16 +13,14 @@ h) DBHOST=${OPTARG};;
 p) DBPORT=${OPTARG};;
 d) DBNAME=${OPTARG};;
 u) DBUSER=${OPTARG};;
-w) DBPASS=${OPTARG};;
 o) OUTPUTDIR=${OPTARG};;
 esac
 done
 
 # Create HTML landing page with list of exported schemas
-echo "<h3>G-Obs - List of database schemas</h3>" > $OUTPUTDIR/index.html
+echo "<h3>List of database schemas</h3>" > $OUTPUTDIR/index.html
 
 # On boucle sur les schemas
-#for SCHEMANAME in public gobs; do
 for SCHEMANAME in gobs; do
 
     # Remove existing directory
@@ -32,7 +30,7 @@ for SCHEMANAME in gobs; do
     mkdir -p $OUTPUTDIR/$SCHEMANAME
 
     # Run SchemaSpy for current schema
-    java -jar schemaspy-6.0.0.jar -t pgsql-mat -dp postgresql-42.2.4.jar -host $DBHOST -port $DBPORT -db $DBNAME -u $DBUSER -p $DBPASS -s $SCHEMANAME -o $OUTPUTDIR/$SCHEMANAME
+    java -jar schemaspy-6.0.0.jar -t pgsql-mat -dp postgresql-42.2.4.jar -host $DBHOST -port $DBPORT -db $DBNAME -u $DBUSER -pfp -s $SCHEMANAME -norows -o $OUTPUTDIR/$SCHEMANAME
 
     # Add schema documentation file to index.html
     echo "<li><a href=$SCHEMANAME/index.html>$SCHEMANAME</a></li>" >> $OUTPUTDIR/index.html
