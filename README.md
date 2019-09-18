@@ -8,4 +8,8 @@ To generate automatically the SQL files in the `install/sql` folder, see [README
 
 You can generate the database schema documentation. See [README](doc/database/README.md)
 
+## Contributors
 
+## Licence
+
+GPL V2
