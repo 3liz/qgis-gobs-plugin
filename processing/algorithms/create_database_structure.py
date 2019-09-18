@@ -40,7 +40,7 @@ from db_manager.db_plugins import createDbPlugin
 
 class CreateDatabaseStructure(QgsProcessingAlgorithm):
     """
-
+    Create gobs structure in Database
     """
 
     # Constants used to refer to parameters and outputs. They will be
@@ -197,11 +197,12 @@ class CreateDatabaseStructure(QgsProcessingAlgorithm):
 
         # Loop sql files and run SQL code
         for sf in sql_files:
+            feedback.pushInfo(sf)
             sql_file = os.path.join(plugin_dir, 'install/sql/%s' % sf)
             with open(sql_file, 'r') as f:
                 sql = f.read()
                 if len(sql.strip()) == 0:
-                    feedback.pushInfo('* ' + sf + ' -> SKIPPED (EMPTY FILE)')
+                    feedback.pushInfo('  Skipped (empty file)')
                     continue
 
                 [header, data, rowCount, ok, error_message] = fetchDataFromSqlQuery(
@@ -209,9 +210,9 @@ class CreateDatabaseStructure(QgsProcessingAlgorithm):
                     sql
                 )
                 if ok:
-                    feedback.pushInfo('* ' + sf + ' -> SUCCESS !')
+                    feedback.pushInfo('  Success !')
                 else:
-                    feedback.pushInfo(error_message)
+                    feedback.pushInfo('* ' + error_message)
                     status = 0
                     raise Exception(error_message)
                     # return {
@@ -221,7 +222,7 @@ class CreateDatabaseStructure(QgsProcessingAlgorithm):
 
         # Add version
         config = configparser.ConfigParser()
-        config.read(os.path.join(plugin_dir, 'metadata.txt'))
+        config.read(str(os.path.join(plugin_dir, 'metadata.txt')))
         version = config['general']['version']
         sql = '''
             INSERT INTO gobs.metadata
