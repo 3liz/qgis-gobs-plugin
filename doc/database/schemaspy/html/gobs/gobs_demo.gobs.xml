@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<database name="gobs" schema="gobs" type="PostgreSQL - 9.6.14">
+<database name="gobs_demo" schema="gobs" type="PostgreSQL - 9.6.15">
    <tables>
-      <table name="actor" numRows="0" remarks="Actors" schema="gobs" type="TABLE">
+      <table name="actor" remarks="Actors" schema="gobs" type="TABLE">
          <column autoUpdated="true" defaultValue="nextval('gobs.actor_id_seq'::regclass)" digits="0" id="0" name="id" nullable="false" remarks="ID" size="10" type="serial">
             <child column="fk_id_actor" foreignKey="series_fk_id_actor_fkey" implied="false" onDeleteCascade="false" schema="gobs" table="series"/>
             <child column="fk_id_actor" foreignKey="spatial_layer_fk_id_actor_fkey" implied="false" onDeleteCascade="false" schema="gobs" table="spatial_layer"/>
@@ -20,7 +20,7 @@
             <column ascending="true" name="a_name"/>
          </index>
       </table>
-      <table name="actor_category" numRows="0" remarks="Actors categories" schema="gobs" type="TABLE">
+      <table name="actor_category" remarks="Actors categories" schema="gobs" type="TABLE">
          <column autoUpdated="true" defaultValue="nextval('gobs.actor_category_id_seq'::regclass)" digits="0" id="0" name="id" nullable="false" remarks="ID" size="10" type="serial">
             <child column="id_category" foreignKey="actor_id_category_fkey" implied="false" onDeleteCascade="false" schema="gobs" table="actor"/>
          </column>
@@ -31,7 +31,7 @@
             <column ascending="true" name="id"/>
          </index>
       </table>
-      <table name="glossary" numRows="20" remarks="List of labels and words used as labels for stored data" schema="gobs" type="TABLE">
+      <table name="glossary" remarks="List of labels and words used as labels for stored data" schema="gobs" type="TABLE">
          <column autoUpdated="true" defaultValue="nextval('gobs.glossary_id_seq'::regclass)" digits="0" id="0" name="id" nullable="false" remarks="ID" size="10" type="serial"/>
          <column autoUpdated="false" digits="0" id="1" name="gl_field" nullable="false" remarks="Target field for this glossary item" size="2147483647" type="text"/>
          <column autoUpdated="false" digits="0" id="2" name="gl_code" nullable="false" remarks="Item code to store in tables" size="2147483647" type="text"/>
@@ -46,9 +46,10 @@
             <column ascending="true" name="gl_field"/>
          </index>
       </table>
-      <table name="graph_node" numRows="0" remarks="Graph nodes, to store key words used to find an indicator." schema="gobs" type="TABLE">
+      <table name="graph_node" remarks="Graph nodes, to store key words used to find an indicator." schema="gobs" type="TABLE">
          <column autoUpdated="true" defaultValue="nextval('gobs.graph_node_id_seq'::regclass)" digits="0" id="0" name="id" nullable="false" remarks="ID" size="10" type="serial">
             <child column="fk_id_node" foreignKey="r_indicator_node_fk_id_node_fkey" implied="false" onDeleteCascade="true" schema="gobs" table="r_indicator_node"/>
+            <child column="fk_id_node" foreignKey="r_qgisproject_node_fk_id_node_fkey" implied="false" onDeleteCascade="true" schema="gobs" table="r_qgisproject_node"/>
          </column>
          <column autoUpdated="false" digits="0" id="1" name="gn_name" nullable="false" remarks="Name of the node" size="2147483647" type="text"/>
          <column autoUpdated="false" digits="0" id="2" name="gn_description" nullable="false" remarks="Description of the node" size="2147483647" type="text"/>
@@ -60,7 +61,7 @@
             <column ascending="true" name="gn_name"/>
          </index>
       </table>
-      <table name="import" numRows="0" remarks="Journal des imports" schema="gobs" type="TABLE">
+      <table name="import" remarks="Journal des imports" schema="gobs" type="TABLE">
          <column autoUpdated="true" defaultValue="nextval('gobs.import_id_seq'::regclass)" digits="0" id="0" name="id" nullable="false" remarks="Id" size="10" type="serial">
             <child column="fk_id_import" foreignKey="observation_fk_id_import_fkey" implied="false" onDeleteCascade="false" schema="gobs" table="observation"/>
          </column>
@@ -77,7 +78,7 @@
             <column ascending="true" name="fk_id_series"/>
          </index>
       </table>
-      <table name="indicator" numRows="0" remarks="Groups of observation data for decisional purpose." schema="gobs" type="TABLE">
+      <table name="indicator" remarks="Groups of observation data for decisional purpose." schema="gobs" type="TABLE">
          <column autoUpdated="true" defaultValue="nextval('gobs.indicator_id_seq'::regclass)" digits="0" id="0" name="id" nullable="false" remarks="ID" size="10" type="serial">
             <child column="fk_id_indicator" foreignKey="r_indicator_node_fk_id_indicator_fkey" implied="false" onDeleteCascade="true" schema="gobs" table="r_indicator_node"/>
             <child column="fk_id_indicator" foreignKey="series_fk_id_indicator_fkey" implied="false" onDeleteCascade="false" schema="gobs" table="series"/>
@@ -99,7 +100,7 @@
             <column ascending="true" name="id_label"/>
          </index>
       </table>
-      <table name="metadata" numRows="1" remarks="Metadata of the structure : version and date. Usefull for database structure and glossary data migrations between versions" schema="gobs" type="TABLE">
+      <table name="metadata" remarks="Metadata of the structure : version and date. Usefull for database structure and glossary data migrations between versions" schema="gobs" type="TABLE">
          <column autoUpdated="true" defaultValue="nextval('gobs.metadata_id_seq'::regclass)" digits="0" id="0" name="id" nullable="false" remarks="Id of the version" size="10" type="serial"/>
          <column autoUpdated="false" digits="0" id="1" name="me_version" nullable="false" remarks="Version. Ex: 1.0.2" size="2147483647" type="text"/>
          <column autoUpdated="false" digits="0" id="2" name="me_version_date" nullable="false" remarks="Date of the version. Ex: 2019-06-01" size="13" type="date"/>
@@ -112,7 +113,7 @@
             <column ascending="true" name="me_version"/>
          </index>
       </table>
-      <table name="observation" numRows="0" remarks="Les données brutes au format pivot ( indicateur, date, valeurs et entité spatiale, auteur, etc.)" schema="gobs" type="TABLE">
+      <table name="observation" remarks="Les données brutes au format pivot ( indicateur, date, valeurs et entité spatiale, auteur, etc.)" schema="gobs" type="TABLE">
          <column autoUpdated="true" defaultValue="nextval('gobs.observation_id_seq'::regclass)" digits="0" id="0" name="id" nullable="false" remarks="ID" size="19" type="bigserial"/>
          <column autoUpdated="false" digits="0" id="1" name="fk_id_series" nullable="false" remarks="Series ID" size="10" type="int4">
             <parent column="id" foreignKey="observation_fk_id_series_fkey" implied="false" onDeleteCascade="false" schema="gobs" table="series"/>
@@ -142,7 +143,7 @@
             <column ascending="true" name="ob_timestamp"/>
          </index>
       </table>
-      <table name="protocol" numRows="0" remarks="List of protocols" schema="gobs" type="TABLE">
+      <table name="protocol" remarks="List of protocols" schema="gobs" type="TABLE">
          <column autoUpdated="true" defaultValue="nextval('gobs.protocol_id_seq'::regclass)" digits="0" id="0" name="id" nullable="false" remarks="ID" size="10" type="serial">
             <child column="fk_id_protocol" foreignKey="series_fk_id_protocol_fkey" implied="false" onDeleteCascade="false" schema="gobs" table="series"/>
          </column>
@@ -157,7 +158,23 @@
             <column ascending="true" name="pr_code"/>
          </index>
       </table>
-      <table name="r_graph_edge" numRows="0" remarks="Graph edges: relations between nodes" schema="gobs" type="TABLE">
+      <table name="qgisproject" remarks="Store references of QGIS projects. Each project has one or many nodes" schema="gobs" type="TABLE">
+         <column autoUpdated="true" defaultValue="nextval('gobs.qgisproject_id_seq'::regclass)" digits="0" id="0" name="id" nullable="false" remarks="Unique automatic id (serial)" size="10" type="serial">
+            <child column="fk_id_qgisproject" foreignKey="r_qgisproject_node_fk_id_qgisproject_fkey" implied="false" onDeleteCascade="true" schema="gobs" table="r_qgisproject_node"/>
+         </column>
+         <column autoUpdated="false" digits="0" id="1" name="qp_project" nullable="false" remarks="QGIS Project name, which is the name of the *.qgs file without the extension" size="2147483647" type="text"/>
+         <column autoUpdated="false" digits="0" id="2" name="qp_repository" nullable="false" remarks="Lizmap repository name, which is the ID of Lizmap repository configured in the Lizmap admin panel" size="2147483647" type="text"/>
+         <column autoUpdated="false" digits="0" id="3" name="qp_paths" nullable="true" remarks="Paths given to help finding a QGIS project. They will be split up to fill the graph_node and r_qgisproject_node tables. If you need multiple paths, use | as a separator. Ex: Environment / Water resources | Measure / Physics / Water" size="2147483647" type="text"/>
+         <primaryKey column="id" sequenceNumberInPK="1"/>
+         <index name="qgisproject_pkey" unique="true">
+            <column ascending="true" name="id"/>
+         </index>
+         <index name="qgisproject_qp_project_qp_repository_key" unique="true">
+            <column ascending="true" name="qp_project"/>
+            <column ascending="true" name="qp_repository"/>
+         </index>
+      </table>
+      <table name="r_graph_edge" remarks="Graph edges: relations between nodes" schema="gobs" type="TABLE">
          <column autoUpdated="false" digits="0" id="0" name="ge_parent_node" nullable="false" remarks="Parent node" size="10" type="int4"/>
          <column autoUpdated="false" digits="0" id="1" name="ge_child_node" nullable="false" remarks="Child node" size="10" type="int4"/>
          <primaryKey column="ge_parent_node" sequenceNumberInPK="1"/>
@@ -167,7 +184,7 @@
             <column ascending="true" name="ge_child_node"/>
          </index>
       </table>
-      <table name="r_indicator_node" numRows="0" remarks="Pivot table between indicators and nodes" schema="gobs" type="TABLE">
+      <table name="r_indicator_node" remarks="Pivot table between indicators and nodes" schema="gobs" type="TABLE">
          <column autoUpdated="false" digits="0" id="0" name="fk_id_indicator" nullable="false" remarks="Parent indicator" size="10" type="int4">
             <parent column="id" foreignKey="r_indicator_node_fk_id_indicator_fkey" implied="false" onDeleteCascade="true" schema="gobs" table="indicator"/>
          </column>
@@ -181,7 +198,21 @@
             <column ascending="true" name="fk_id_node"/>
          </index>
       </table>
-      <table name="series" numRows="0" remarks="Series of data" schema="gobs" type="TABLE">
+      <table name="r_qgisproject_node" remarks="Pivot table between the QGIS projects and the thematic nodes." schema="gobs" type="TABLE">
+         <column autoUpdated="false" digits="0" id="0" name="fk_id_qgisproject" nullable="false" remarks="Id of the QGIS project" size="10" type="int4">
+            <parent column="id" foreignKey="r_qgisproject_node_fk_id_qgisproject_fkey" implied="false" onDeleteCascade="true" schema="gobs" table="qgisproject"/>
+         </column>
+         <column autoUpdated="false" digits="0" id="1" name="fk_id_node" nullable="false" remarks="Id of the node" size="10" type="int4">
+            <parent column="id" foreignKey="r_qgisproject_node_fk_id_node_fkey" implied="false" onDeleteCascade="true" schema="gobs" table="graph_node"/>
+         </column>
+         <primaryKey column="fk_id_qgisproject" sequenceNumberInPK="1"/>
+         <primaryKey column="fk_id_node" sequenceNumberInPK="2"/>
+         <index name="r_qgisproject_node_pkey" unique="true">
+            <column ascending="true" name="fk_id_qgisproject"/>
+            <column ascending="true" name="fk_id_node"/>
+         </index>
+      </table>
+      <table name="series" remarks="Series of data" schema="gobs" type="TABLE">
          <column autoUpdated="true" defaultValue="nextval('gobs.series_id_seq'::regclass)" digits="0" id="0" name="id" nullable="false" remarks="Id" size="10" type="serial">
             <child column="fk_id_series" foreignKey="import_fk_id_series_fkey" implied="false" onDeleteCascade="false" schema="gobs" table="import"/>
             <child column="fk_id_series" foreignKey="observation_fk_id_series_fkey" implied="false" onDeleteCascade="false" schema="gobs" table="observation"/>
@@ -215,7 +246,7 @@
             <column ascending="true" name="fk_id_spatial_layer"/>
          </index>
       </table>
-      <table name="spatial_layer" numRows="0" remarks="List the spatial layers, used to regroup the spatial data. Ex : cities, rivers, stations" schema="gobs" type="TABLE">
+      <table name="spatial_layer" remarks="List the spatial layers, used to regroup the spatial data. Ex : cities, rivers, stations" schema="gobs" type="TABLE">
          <column autoUpdated="true" defaultValue="nextval('gobs.spatial_layer_id_seq'::regclass)" digits="0" id="0" name="id" nullable="false" remarks="" size="10" type="serial">
             <child column="fk_id_spatial_layer" foreignKey="series_fk_id_spatial_layer_fkey" implied="false" onDeleteCascade="false" schema="gobs" table="series"/>
             <child column="fk_id_spatial_layer" foreignKey="spatial_object_fk_id_spatial_layer_fkey" implied="false" onDeleteCascade="false" schema="gobs" table="spatial_object"/>
@@ -236,7 +267,7 @@
             <column ascending="true" name="sl_code"/>
          </index>
       </table>
-      <table name="spatial_object" numRows="0" remarks="Contains all the spatial objects, caracterized by a geometry type and an entity" schema="gobs" type="TABLE">
+      <table name="spatial_object" remarks="Contains all the spatial objects, caracterized by a geometry type and an entity" schema="gobs" type="TABLE">
          <column autoUpdated="true" defaultValue="nextval('gobs.spatial_object_id_seq'::regclass)" digits="0" id="0" name="id" nullable="false" remarks="ID" size="19" type="bigserial">
             <child column="fk_id_spatial_object" foreignKey="observation_fk_id_spatial_object_fkey" implied="false" onDeleteCascade="false" schema="gobs" table="observation"/>
          </column>

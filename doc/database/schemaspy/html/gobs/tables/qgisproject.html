@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <title>import - gobs_demo Database</title>
+  <title>qgisproject - gobs_demo Database</title>
   <!-- Tell the browser to be responsive to screen width -->
   <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
   <link rel="icon" type="image/png" sizes="16x16" href="../favicon.png">
@@ -76,7 +76,7 @@
   <div class="content-wrapper">
           <!-- Content Header (Page header) -->
       <section class="content-header">
-        <h1>import</h1></br>
+        <h1>qgisproject</h1></br>
 		<div class="box box-primary">
             <div class="box-header with-border">
               <i class="fa fa-file-text-o"></i>
@@ -89,7 +89,7 @@
             </div>
             <!-- /.box-header -->
             <div class="box-body clearfix">
-				<p><p>Journal des imports</p></p>              
+				<p><p>Store references of QGIS projects. Each project has one or many nodes</p></p>              
             </div>
             <!-- /.box-body -->
 		</div>
@@ -132,15 +132,15 @@
 				 <td>10</td>
 				 <td title=''></td>
 				 <td title='Automatically updated by the database'>√</td>
-				 <td>nextval(&#39;gobs.import_id_seq&#39;::regclass)</td>
+				 <td>nextval(&#39;gobs.qgisproject_id_seq&#39;::regclass)</td>
 				 <td>
 				  <table border='0' cellspacing='0' cellpadding='0'>
 				   <tr>
-					<td title="observation.fk_id_import references import.id via observation_fk_id_import_fkey">
-						<a href='observation.html'>observation</a><span class='relatedKey'>.fk_id_import</span>
+					<td title="r_qgisproject_node.fk_id_qgisproject references qgisproject.id via r_qgisproject_node_fk_id_qgisproject_fkey">
+						<a href='r_qgisproject_node.html'>r_qgisproject_node</a><span class='relatedKey'>.fk_id_qgisproject</span>
 					</td>
 					<td class="constraint detail">
-						observation_fk_id_import_fkey <span title='Restrict delete:&#10;Parent cannot be deleted if children exist'>R</span>
+						r_qgisproject_node_fk_id_qgisproject_fkey <span title='Cascade on delete:&#10;Deletion of parent deletes child'>C</span>
 					</td>
 				   </tr>
 				  </table>				 
@@ -149,29 +149,12 @@
 				  <table border='0' cellspacing='0' cellpadding='0'>
 				  </table>					 
 				 </td>
-				 <td><p>Id</p></td>
+				 <td><p>Unique automatic id (serial)</p></td>
 				</tr>
 				<tr>
-				 <td><span id="im_timestamp">im_timestamp</span></td>
-				 <td>timestamp</td>
-				 <td>29,6</td>
-				 <td title=''></td>
-				 <td title=''></td>
-				 <td>&#39;2018-06-28 12:15:46.635568&#39;::timestamp without time zone</td>
-				 <td>
-				  <table border='0' cellspacing='0' cellpadding='0'>
-				  </table>				 
-				 </td>
-				 <td>
-				  <table border='0' cellspacing='0' cellpadding='0'>
-				  </table>					 
-				 </td>
-				 <td><p>Import date</p></td>
-				</tr>
-				<tr>
-				 <td class='foreignKey' title='Foreign Key'><i class='icon ion-key iconkey' style='padding-left: 5px;'></i><span id="fk_id_series">fk_id_series</span></td>
-				 <td>int4</td>
-				 <td>10</td>
+				 <td class='indexedColumn' title='Indexed'><i class='fa fa-sitemap fa-rotate-120' style='padding-right: 5px;'></i><span id="qp_project">qp_project</span></td>
+				 <td>text</td>
+				 <td>2147483647</td>
 				 <td title=''></td>
 				 <td title=''></td>
 				 <td>null</td>
@@ -181,25 +164,17 @@
 				 </td>
 				 <td>
 				  <table border='0' cellspacing='0' cellpadding='0'>
-				   <tr>
-					<td title="import.fk_id_series references series.id via import_fk_id_series_fkey">
-						<a href='series.html'>series</a><span class='relatedKey'>.id</span>
-					</td>
-					<td class="constraint detail">
-						import_fk_id_series_fkey <span title='Restrict delete:&#10;Parent cannot be deleted if children exist'>R</span>
-					</td>
-				   </tr>
 				  </table>					 
 				 </td>
-				 <td><p>Series ID</p></td>
+				 <td><p>QGIS Project name, which is the name of the *.qgs file without the extension</p></td>
 				</tr>
 				<tr>
-				 <td><span id="im_status">im_status</span></td>
+				 <td class='indexedColumn' title='Indexed'><i class='fa fa-sitemap fa-rotate-120' style='padding-right: 5px;'></i><span id="qp_repository">qp_repository</span></td>
 				 <td>text</td>
 				 <td>2147483647</td>
-				 <td title='nullable'>√</td>
 				 <td title=''></td>
-				 <td>&#39;p&#39;::text</td>
+				 <td title=''></td>
+				 <td>null</td>
 				 <td>
 				  <table border='0' cellspacing='0' cellpadding='0'>
 				  </table>				 
@@ -208,7 +183,24 @@
 				  <table border='0' cellspacing='0' cellpadding='0'>
 				  </table>					 
 				 </td>
-				 <td><p>Status of import : pending, validated</p></td>
+				 <td><p>Lizmap repository name, which is the ID of Lizmap repository configured in the Lizmap admin panel</p></td>
+				</tr>
+				<tr>
+				 <td><span id="qp_paths">qp_paths</span></td>
+				 <td>text</td>
+				 <td>2147483647</td>
+				 <td title='nullable'>√</td>
+				 <td title=''></td>
+				 <td>null</td>
+				 <td>
+				  <table border='0' cellspacing='0' cellpadding='0'>
+				  </table>				 
+				 </td>
+				 <td>
+				  <table border='0' cellspacing='0' cellpadding='0'>
+				  </table>					 
+				 </td>
+				 <td><p>Paths given to help finding a QGIS project. They will be split up to fill the graph_node and r_qgisproject_node tables. If you need multiple paths, use | as a separator. Ex: Environment / Water resources | Measure / Physics / Water</p></td>
 				</tr>
 								</tbody>
 				</table>
@@ -239,16 +231,16 @@
 				</thead>
 				<tbody>
 				 <tr>
-				  <td class='primaryKey' title='Primary Key'><i class='icon ion-key iconkey'></i> import_pkey</td>
+				  <td class='primaryKey' title='Primary Key'><i class='icon ion-key iconkey'></i> qgisproject_pkey</td>
 				  <td>Primary key</td>
 				  <td><span title='Ascending'>Asc</span></td>
 				  <td>id</td>
 				 </tr>				 
 				 <tr>
-				  <td title='Indexed'>import_fk_id_series_idx</td>
-				  <td>Performance</td>
-				  <td><span title='Ascending'>Asc</span></td>
-				  <td>fk_id_series</td>
+				  <td class='uniqueKey' title='Unique Key'><i class='icon ion-key iconkey'></i> qgisproject_qp_project_qp_repository_key</td>
+				  <td>Must be unique</td>
+				  <td><span title='Ascending'>Asc</span>/<span title='Ascending'>Asc</span></td>
+				  <td>qp_project + qp_repository</td>
 				 </tr>				 
 				</tbody>
 				</table>   			  
@@ -277,26 +269,20 @@
             <div class="tab-content no-padding">            
 				<div class="chart tab-pane active" id="oneDegreeImg-chart" style="position: relative; overflow-x:auto;">					
 					<map id="oneDegreeRelationshipsDiagram" name="oneDegreeRelationshipsDiagram">
-<area shape="rect" id="node1" href="import.html" title="import" alt="" coords="263,100,564,287">
-<area shape="rect" id="node2" href="series.html" title="series" alt="" coords="5,92,219,303">
-<area shape="rect" id="node3" href="observation.html" title="observation" alt="" coords="608,5,832,240">
+<area shape="rect" id="node1" href="r_qgisproject_node.html" title="r_qgisproject_node" alt="" coords="348,8,567,131">
+<area shape="rect" id="node2" href="qgisproject.html" title="qgisproject" alt="" coords="5,5,304,192">
 </map>
 
-					<a name='diagram'><img id='oneDegreeImg' src='../diagrams/import.1degree.png' usemap='#oneDegreeRelationshipsDiagram' class='diagram' border='0' alt='' align='left'></a>							
+					<a name='diagram'><img id='oneDegreeImg' src='../diagrams/qgisproject.1degree.png' usemap='#oneDegreeRelationshipsDiagram' class='diagram' border='0' alt='' align='left'></a>							
 				</div>
 				<div class="chart tab-pane " id="twodegreesDegreeImg-chart" style="position: relative; overflow-x:auto;">					
 					<map id="twoDegreesRelationshipsDiagram" name="twoDegreesRelationshipsDiagram">
-<area shape="rect" id="node1" href="import.html" title="import" alt="" coords="637,140,939,327">
-<area shape="rect" id="node2" href="series.html" title="series" alt="" coords="380,28,593,239">
-<area shape="rect" id="node5" href="actor.html" title="actor" alt="" coords="5,167,123,255">
-<area shape="rect" id="node6" href="indicator.html" title="indicator" alt="" coords="180,151,323,239">
-<area shape="rect" id="node7" href="protocol.html" title="protocol" alt="" coords="181,9,321,97">
-<area shape="rect" id="node8" href="spatial_layer.html" title="spatial_layer" alt="" coords="167,256,336,344">
-<area shape="rect" id="node3" href="observation.html" title="observation" alt="" coords="983,5,1207,240">
-<area shape="rect" id="node4" href="spatial_object.html" title="spatial_object" alt="" coords="398,256,575,344">
+<area shape="rect" id="node1" href="r_qgisproject_node.html" title="r_qgisproject_node" alt="" coords="348,93,567,216">
+<area shape="rect" id="node2" href="graph_node.html" title="graph_node" alt="" coords="72,209,237,297">
+<area shape="rect" id="node3" href="qgisproject.html" title="qgisproject" alt="" coords="5,5,304,192">
 </map>
 
-					<a name='diagram'><img id='twodegreesDegreeImg' src='../diagrams/import.2degrees.png' usemap='#twoDegreesRelationshipsDiagram' class='diagram' border='0' alt='' align='left'></a>							
+					<a name='diagram'><img id='twodegreesDegreeImg' src='../diagrams/qgisproject.2degrees.png' usemap='#twoDegreesRelationshipsDiagram' class='diagram' border='0' alt='' align='left'></a>							
 				</div>
 			  			</div>
 			</div>

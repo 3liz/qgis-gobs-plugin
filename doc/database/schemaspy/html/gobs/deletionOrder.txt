@@ -2,13 +2,15 @@ r_graph_edge
 metadata
 glossary
 observation
+r_qgisproject_node
 r_indicator_node
 spatial_object
 import
 series
 spatial_layer
 actor
+qgisproject
 protocol
-graph_node
 actor_category
 indicator
+graph_node

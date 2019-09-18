@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <title>gobs Database</title>
+  <title>gobs_demo Database</title>
   <!-- Tell the browser to be responsive to screen width -->
   <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
   <link rel="icon" type="image/png" sizes="16x16" href="favicon.png">
@@ -46,7 +46,7 @@
     <nav class="navbar navbar-static-top">
       <div class="container">
         <div class="navbar-header">
-          <a href="index.html" class="navbar-brand"><b>gobs</b> Database</a>
+          <a href="index.html" class="navbar-brand"><b>gobs_demo</b> Database</a>
           <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar-collapse">
             <i class="fa fa-bars"></i>
           </button>
@@ -80,14 +80,14 @@
 		<div class="row">
 			<div class="col-md-12">
 				<div class="callout callout-info">
-					<h4>SchemaSpy Analysis of gobs</h4>
-					<p>Generated on mar. juil. 09 18:42 CEST 2019</p>
+					<h4>SchemaSpy Analysis of gobs_demo</h4>
+					<p>Generated on mar. sept. 17 17:39 CEST 2019</p>
 				</div>
 			</div>
 		</div>
 
 
-        <a href="gobs.gobs.xml" title="XML Representation">XML Representation</a></br>
+        <a href="gobs_demo.gobs.xml" title="XML Representation">XML Representation</a></br>
 		<a href="insertionOrder.txt" title="Useful for loading data into a database">Insertion Order</a>
         <a href="deletionOrder.txt" title="Useful for purging data from a database">Deletion Order</a>	
       </section>
@@ -99,7 +99,7 @@
 				  <span class="info-box-icon bg-aqua"><i class="fa fa-table"></i></span>
 				  <div class="info-box-content">
 					  <span class="info-box-text">TABLES</span>
-					  <span class="info-box-number">14</span>
+					  <span class="info-box-number">16</span>
 				  </div>
 				  <!-- /.info-box-content -->
 			  </div>
@@ -125,7 +125,7 @@
 
 				  <div class="info-box-content">
 					  <span class="info-box-text">COLUMNS</span>
-					  <span class="info-box-number">66</span>
+					  <span class="info-box-number">72</span>
 				  </div>
 				  <!-- /.info-box-content -->
 			  </div>
@@ -138,7 +138,7 @@
 
 				  <div class="info-box-content">
 					  <span class="info-box-text">Constraints</span>
-					  <span class="info-box-number">13</span>
+					  <span class="info-box-number">15</span>
 				  </div>
 				  <!-- /.info-box-content -->
 			  </div>
@@ -178,7 +178,7 @@
 			  <span class="label label-primary pull-right"><i class="fa fa-cog fa-2x"></i></span>			  
 			</div><!-- /.box-header -->
 			<div class="box-body">
-			  <p>Database Type: PostgreSQL - 9.6.14</p>			  
+			  <p>Database Type: PostgreSQL - 9.6.15</p>			  
 			</div><!-- /.box-body -->
 		</div>
 		<div class="box box-primary">
@@ -204,11 +204,19 @@
 					</tr>
 				</thead>
 				<tbody>
+				 <tr class="tbl even" valign="top">  <td class="detail"><a href="tables/qgisproject.html">qgisproject</a></td>
+				  <td class="detail" align="right">1</td>
+				  <td class="detail" align="right">0</td>
+				  <td class="detail" align="right">4</td>
+				  <td class="detail" align="right">-1</td>
+				  <td class="detail" align="right">Table</td>
+				  <td class="comment detail" style="display: table-cell;"><p>Store references of QGIS projects. Each project has one or many nodes</p></td>
+				  </tr>
 				 <tr class="tbl even" valign="top">  <td class="detail"><a href="tables/series.html">series</a></td>
 				  <td class="detail" align="right">2</td>
 				  <td class="detail" align="right">4</td>
 				  <td class="detail" align="right">5</td>
-				  <td class="detail" align="right">0</td>
+				  <td class="detail" align="right">-1</td>
 				  <td class="detail" align="right">Table</td>
 				  <td class="comment detail" style="display: table-cell;"><p>Series of data</p></td>
 				  </tr>
@@ -216,7 +224,7 @@
 				  <td class="detail" align="right">1</td>
 				  <td class="detail" align="right">0</td>
 				  <td class="detail" align="right">3</td>
-				  <td class="detail" align="right">0</td>
+				  <td class="detail" align="right">-1</td>
 				  <td class="detail" align="right">Table</td>
 				  <td class="comment detail" style="display: table-cell;"><p>Actors categories</p></td>
 				  </tr>
@@ -224,7 +232,7 @@
 				  <td class="detail" align="right">2</td>
 				  <td class="detail" align="right">1</td>
 				  <td class="detail" align="right">5</td>
-				  <td class="detail" align="right">0</td>
+				  <td class="detail" align="right">-1</td>
 				  <td class="detail" align="right">Table</td>
 				  <td class="comment detail" style="display: table-cell;"><p>Actors</p></td>
 				  </tr>
@@ -232,7 +240,7 @@
 				  <td class="detail" align="right">1</td>
 				  <td class="detail" align="right">0</td>
 				  <td class="detail" align="right">4</td>
-				  <td class="detail" align="right">0</td>
+				  <td class="detail" align="right">-1</td>
 				  <td class="detail" align="right">Table</td>
 				  <td class="comment detail" style="display: table-cell;"><p>List of protocols</p></td>
 				  </tr>
@@ -240,7 +248,7 @@
 				  <td class="detail" align="right">2</td>
 				  <td class="detail" align="right">0</td>
 				  <td class="detail" align="right">10</td>
-				  <td class="detail" align="right">0</td>
+				  <td class="detail" align="right">-1</td>
 				  <td class="detail" align="right">Table</td>
 				  <td class="comment detail" style="display: table-cell;"><p>Groups of observation data for decisional purpose.</p></td>
 				  </tr>
@@ -248,15 +256,23 @@
 				  <td class="detail" align="right">0</td>
 				  <td class="detail" align="right">0</td>
 				  <td class="detail" align="right">6</td>
-				  <td class="detail" align="right">20</td>
+				  <td class="detail" align="right">-1</td>
 				  <td class="detail" align="right">Table</td>
 				  <td class="comment detail" style="display: table-cell;"><p>List of labels and words used as labels for stored data</p></td>
+				  </tr>
+				 <tr class="tbl even" valign="top">  <td class="detail"><a href="tables/r_qgisproject_node.html">r_qgisproject_node</a></td>
+				  <td class="detail" align="right">0</td>
+				  <td class="detail" align="right">2</td>
+				  <td class="detail" align="right">2</td>
+				  <td class="detail" align="right">-1</td>
+				  <td class="detail" align="right">Table</td>
+				  <td class="comment detail" style="display: table-cell;"><p>Pivot table between the QGIS projects and the thematic nodes.</p></td>
 				  </tr>
 				 <tr class="tbl even" valign="top">  <td class="detail"><a href="tables/spatial_layer.html">spatial_layer</a></td>
 				  <td class="detail" align="right">2</td>
 				  <td class="detail" align="right">1</td>
 				  <td class="detail" align="right">7</td>
-				  <td class="detail" align="right">0</td>
+				  <td class="detail" align="right">-1</td>
 				  <td class="detail" align="right">Table</td>
 				  <td class="comment detail" style="display: table-cell;"><p>List the spatial layers, used to regroup the spatial data. Ex : cities, rivers, stations</p></td>
 				  </tr>
@@ -264,7 +280,7 @@
 				  <td class="detail" align="right">1</td>
 				  <td class="detail" align="right">1</td>
 				  <td class="detail" align="right">4</td>
-				  <td class="detail" align="right">0</td>
+				  <td class="detail" align="right">-1</td>
 				  <td class="detail" align="right">Table</td>
 				  <td class="comment detail" style="display: table-cell;"><p>Journal des imports</p></td>
 				  </tr>
@@ -272,7 +288,7 @@
 				  <td class="detail" align="right">0</td>
 				  <td class="detail" align="right">3</td>
 				  <td class="detail" align="right">6</td>
-				  <td class="detail" align="right">0</td>
+				  <td class="detail" align="right">-1</td>
 				  <td class="detail" align="right">Table</td>
 				  <td class="comment detail" style="display: table-cell;"><p>Les données brutes au format pivot ( indicateur, date, valeurs et entité spatiale, auteur, etc.)</p></td>
 				  </tr>
@@ -280,7 +296,7 @@
 				  <td class="detail" align="right">1</td>
 				  <td class="detail" align="right">1</td>
 				  <td class="detail" align="right">5</td>
-				  <td class="detail" align="right">0</td>
+				  <td class="detail" align="right">-1</td>
 				  <td class="detail" align="right">Table</td>
 				  <td class="comment detail" style="display: table-cell;"><p>Contains all the spatial objects, caracterized by a geometry type and an entity</p></td>
 				  </tr>
@@ -288,15 +304,15 @@
 				  <td class="detail" align="right">0</td>
 				  <td class="detail" align="right">2</td>
 				  <td class="detail" align="right">2</td>
-				  <td class="detail" align="right">0</td>
+				  <td class="detail" align="right">-1</td>
 				  <td class="detail" align="right">Table</td>
 				  <td class="comment detail" style="display: table-cell;"><p>Pivot table between indicators and nodes</p></td>
 				  </tr>
 				 <tr class="tbl even" valign="top">  <td class="detail"><a href="tables/graph_node.html">graph_node</a></td>
-				  <td class="detail" align="right">1</td>
+				  <td class="detail" align="right">2</td>
 				  <td class="detail" align="right">0</td>
 				  <td class="detail" align="right">3</td>
-				  <td class="detail" align="right">0</td>
+				  <td class="detail" align="right">-1</td>
 				  <td class="detail" align="right">Table</td>
 				  <td class="comment detail" style="display: table-cell;"><p>Graph nodes, to store key words used to find an indicator.</p></td>
 				  </tr>
@@ -304,7 +320,7 @@
 				  <td class="detail" align="right">0</td>
 				  <td class="detail" align="right">0</td>
 				  <td class="detail" align="right">4</td>
-				  <td class="detail" align="right">1</td>
+				  <td class="detail" align="right">-1</td>
 				  <td class="detail" align="right">Table</td>
 				  <td class="comment detail" style="display: table-cell;"><p>Metadata of the structure : version and date. Usefull for database structure and glossary data migrations between versions</p></td>
 				  </tr>
@@ -312,7 +328,7 @@
 				  <td class="detail" align="right">0</td>
 				  <td class="detail" align="right">0</td>
 				  <td class="detail" align="right">2</td>
-				  <td class="detail" align="right">0</td>
+				  <td class="detail" align="right">-1</td>
 				  <td class="detail" align="right">Table</td>
 				  <td class="comment detail" style="display: table-cell;"><p>Graph edges: relations between nodes</p></td>
 				  </tr>
