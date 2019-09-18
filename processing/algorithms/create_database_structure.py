@@ -178,13 +178,15 @@ class CreateDatabaseStructure(QgsProcessingAlgorithm):
 
         # Create full structure
         sql_files = [
-            'raepa/10_FUNCTION.sql',
-            'raepa/20_TABLE_COMMENT_SEQUENCE_DEFAULT.sql',
-            'raepa/30_VIEW.sql',
-            'raepa/40_INDEX.sql',
-            'raepa/50_TRIGGER.sql',
-            'raepa/60_CONSTRAINT.sql',
-            'raepa/90_GLOSSARY.sql'
+            '00_initialize_database.sql',
+            'gobs/10_FUNCTION.sql',
+            'gobs/20_TABLE_COMMENT_SEQUENCE_DEFAULT.sql',
+            'gobs/30_VIEW.sql',
+            'gobs/40_INDEX.sql',
+            'gobs/50_TRIGGER.sql',
+            'gobs/60_CONSTRAINT.sql',
+            'gobs/90_GLOSSARY.sql',
+            '99_finalize_database.sql',
         ]
         # Add test data
         addtestdata = self.parameterAsBool(parameters, self.ADDTESTDATA, context)
