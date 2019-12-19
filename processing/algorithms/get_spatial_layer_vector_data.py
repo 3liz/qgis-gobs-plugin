@@ -33,7 +33,8 @@ from qgis.core import (
     QgsProcessingOutputString,
     QgsProcessingOutputNumber,
     QgsProcessingOutputVectorLayer,
-    QgsExpressionContextUtils
+    QgsExpressionContextUtils,
+    QgsProcessingParameterDefinition
 )
 from .tools import *
 from .get_data_as_layer import *
@@ -90,15 +91,15 @@ class GetSpatialLayerVectorData(GetDataAsLayer):
             )
         )
 
-        # Id of series, to get the serie directly
+        # Id of spatial layer, to get the layer directly
         # mainly used from other processing algs
-        self.addParameter(
-            QgsProcessingParameterNumber(
-                self.SPATIALLAYER_ID,
-                self.tr('Spatial layer ID. If given, it overrides previous choice'),
-                optional=True
-            )
+        p = QgsProcessingParameterNumber(
+            self.SPATIALLAYER_ID,
+            self.tr('Spatial layer ID. If given, it overrides previous choice'),
+            optional=True
         )
+        p.setFlags(QgsProcessingParameterDefinition.FlagHidden)
+        self.addParameter(p)
 
     def checkParameterValues(self, parameters, context):
 

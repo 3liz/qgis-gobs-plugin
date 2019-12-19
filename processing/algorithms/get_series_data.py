@@ -33,7 +33,8 @@ from qgis.core import (
     QgsProcessingOutputString,
     QgsProcessingOutputNumber,
     QgsProcessingOutputVectorLayer,
-    QgsExpressionContextUtils
+    QgsExpressionContextUtils,
+    QgsProcessingParameterDefinition
 )
 from .tools import *
 from .get_data_as_layer import *
@@ -102,13 +103,13 @@ class GetSeriesData(GetDataAsLayer):
 
         # Id of series, to get the serie directly
         # mainly used from other processing algs
-        self.addParameter(
-            QgsProcessingParameterNumber(
-                self.SERIE_ID,
-                self.tr('Series ID. If given, it overrides previous choice'),
-                optional=True
-            )
+        p = QgsProcessingParameterNumber(
+            self.SERIE_ID,
+            self.tr('Series ID. If given, it overrides previous choice'),
+            optional=True
         )
+        p.setFlags(QgsProcessingParameterDefinition.FlagHidden)
+        self.addParameter(p)
 
     def checkParameterValues(self, parameters, context):
 

@@ -34,7 +34,8 @@ from qgis.core import (
     QgsProcessingOutputString,
     QgsProcessingOutputNumber,
     QgsProcessingOutputVectorLayer,
-    QgsExpressionContextUtils
+    QgsExpressionContextUtils,
+    QgsProcessingParameterDefinition
 )
 from .tools import *
 from .get_data_as_layer import *
@@ -54,6 +55,7 @@ class GetAggregatedData(GetDataAsLayer):
     ADD_SPATIAL_OBJECT_DATA = 'ADD_SPATIAL_OBJECT_DATA'
     ADD_SPATIAL_OBJECT_GEOM = 'ADD_SPATIAL_OBJECT_GEOM'
     TIMESTAMP_STEP = 'TIMESTAMP_STEP'
+    GROUP_BY_DISTINCT_VALUES = 'GROUP_BY_DISTINCT_VALUES'
     MIN_TIMESTAMP = 'MIN_TIMESTAMP'
     MAX_TIMESTAMP = 'MAX_TIMESTAMP'
 
@@ -109,13 +111,13 @@ class GetAggregatedData(GetDataAsLayer):
 
         # Id of series, to get the serie directly
         # mainly used from other processing algs
-        self.addParameter(
-            QgsProcessingParameterNumber(
-                self.SERIE_ID,
-                self.tr('Series ID. If given, it overrides previous choice'),
-                optional=True
-            )
+        p = QgsProcessingParameterNumber(
+            self.SERIE_ID,
+            self.tr('Series ID. If given, it overrides previous choice'),
+            optional=True
         )
+        p.setFlags(QgsProcessingParameterDefinition.FlagHidden)
+        self.addParameter(p)
 
         # Add spatial object data ?
         self.addParameter(
@@ -148,6 +150,16 @@ class GetAggregatedData(GetDataAsLayer):
                 self.TIMESTAMP_STEP,
                 self.tr('Group by timestamp step ?'),
                 options=self.TIMESTAMP_STEPS,
+                optional=False
+            )
+        )
+
+        # Aggregate with a value
+        self.addParameter(
+            QgsProcessingParameterBoolean(
+                self.GROUP_BY_DISTINCT_VALUES,
+                self.tr('Group by the distinct values'),
+                defaultValue=False,
                 optional=False
             )
         )
@@ -275,7 +287,7 @@ class GetAggregatedData(GetDataAsLayer):
             '''
         if timestamp_step:
             unique_id = '''
-            timestamp_step AS id,
+            extract(epoch FROM timestamp_val) AS id,
             '''
         if add_spatial_object_data and timestamp_step:
             unique_id = '''
@@ -306,8 +318,9 @@ class GetAggregatedData(GetDataAsLayer):
 
         # Add timestamp step if asked: second, minute, hour, day, week, month, year
         if timestamp_step:
+            # (EXTRACT({timestamp_step} FROM o.ob_timestamp))::integer AS timestamp_step,
             sql+= '''
-            (EXTRACT({timestamp_step} FROM o.ob_timestamp))::integer AS timestamp_step,
+            date_trunc('{timestamp_step}', o.ob_timestamp) AS timestamp_val,
             '''.format(
                 timestamp_step=timestamp_step
             )
@@ -393,8 +406,9 @@ class GetAggregatedData(GetDataAsLayer):
             , so.geom
             '''
         if timestamp_step:
+            # , EXTRACT({timestamp_step} FROM o.ob_timestamp)
             sql+= '''
-            , EXTRACT({timestamp_step} FROM o.ob_timestamp)
+            , date_trunc('{timestamp_step}', o.ob_timestamp)
             '''.format(
                 timestamp_step=timestamp_step
             )
