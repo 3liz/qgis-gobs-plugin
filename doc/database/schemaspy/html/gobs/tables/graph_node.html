@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <title>graph_node - gobs_demo Database</title>
+  <title>graph_node - gobs Database</title>
   <!-- Tell the browser to be responsive to screen width -->
   <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
   <link rel="icon" type="image/png" sizes="16x16" href="../favicon.png">
@@ -46,7 +46,7 @@
     <nav class="navbar navbar-static-top">
       <div class="container">
         <div class="navbar-header">
-          <a href="../index.html" class="navbar-brand"><b>gobs_demo</b> Database</a>
+          <a href="../index.html" class="navbar-brand"><b>gobs</b> Database</a>
           <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar-collapse">
             <i class="fa fa-bars"></i>
           </button>
@@ -141,14 +141,6 @@
 					</td>
 					<td class="constraint detail">
 						r_indicator_node_fk_id_node_fkey <span title='Cascade on delete:&#10;Deletion of parent deletes child'>C</span>
-					</td>
-				   </tr>
-				   <tr>
-					<td title="r_qgisproject_node.fk_id_node references graph_node.id via r_qgisproject_node_fk_id_node_fkey">
-						<a href='r_qgisproject_node.html'>r_qgisproject_node</a><span class='relatedKey'>.fk_id_node</span>
-					</td>
-					<td class="constraint detail">
-						r_qgisproject_node_fk_id_node_fkey <span title='Cascade on delete:&#10;Deletion of parent deletes child'>C</span>
 					</td>
 				   </tr>
 				  </table>				 
@@ -260,20 +252,17 @@
             <div class="tab-content no-padding">            
 				<div class="chart tab-pane active" id="oneDegreeImg-chart" style="position: relative; overflow-x:auto;">					
 					<map id="oneDegreeRelationshipsDiagram" name="oneDegreeRelationshipsDiagram">
-<area shape="rect" id="node1" href="r_indicator_node.html" title="r_indicator_node" alt="" coords="365,5,565,128">
-<area shape="rect" id="node2" href="graph_node.html" title="graph_node" alt="" coords="5,103,312,260">
-<area shape="rect" id="node3" href="r_qgisproject_node.html" title="r_qgisproject_node" alt="" coords="356,145,575,268">
+<area shape="rect" id="node1" href="r_indicator_node.html" title="r_indicator_node" alt="" coords="356,5,556,128">
+<area shape="rect" id="node2" href="graph_node.html" title="graph_node" alt="" coords="5,32,312,189">
 </map>
 
 					<a name='diagram'><img id='oneDegreeImg' src='../diagrams/graph_node.1degree.png' usemap='#oneDegreeRelationshipsDiagram' class='diagram' border='0' alt='' align='left'></a>							
 				</div>
 				<div class="chart tab-pane " id="twodegreesDegreeImg-chart" style="position: relative; overflow-x:auto;">					
 					<map id="twoDegreesRelationshipsDiagram" name="twoDegreesRelationshipsDiagram">
-<area shape="rect" id="node1" href="r_indicator_node.html" title="r_indicator_node" alt="" coords="365,44,565,167">
+<area shape="rect" id="node1" href="r_indicator_node.html" title="r_indicator_node" alt="" coords="356,44,556,167">
 <area shape="rect" id="node2" href="indicator.html" title="indicator" alt="" coords="87,5,230,93">
 <area shape="rect" id="node3" href="graph_node.html" title="graph_node" alt="" coords="5,111,312,268">
-<area shape="rect" id="node4" href="r_qgisproject_node.html" title="r_qgisproject_node" alt="" coords="356,233,575,356">
-<area shape="rect" id="node5" href="qgisproject.html" title="qgisproject" alt="" coords="79,285,239,373">
 </map>
 
 					<a name='diagram'><img id='twodegreesDegreeImg' src='../diagrams/graph_node.2degrees.png' usemap='#twoDegreesRelationshipsDiagram' class='diagram' border='0' alt='' align='left'></a>							

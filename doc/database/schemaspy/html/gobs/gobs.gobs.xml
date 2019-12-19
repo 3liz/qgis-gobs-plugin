@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<database name="gobs_demo" schema="gobs" type="PostgreSQL - 9.6.15">
+<database name="gobs" schema="gobs" type="PostgreSQL - 9.6.16">
    <tables>
       <table name="actor" remarks="Actors" schema="gobs" type="TABLE">
          <column autoUpdated="true" defaultValue="nextval('gobs.actor_id_seq'::regclass)" digits="0" id="0" name="id" nullable="false" remarks="ID" size="10" type="serial">
@@ -49,7 +49,6 @@
       <table name="graph_node" remarks="Graph nodes, to store key words used to find an indicator." schema="gobs" type="TABLE">
          <column autoUpdated="true" defaultValue="nextval('gobs.graph_node_id_seq'::regclass)" digits="0" id="0" name="id" nullable="false" remarks="ID" size="10" type="serial">
             <child column="fk_id_node" foreignKey="r_indicator_node_fk_id_node_fkey" implied="false" onDeleteCascade="true" schema="gobs" table="r_indicator_node"/>
-            <child column="fk_id_node" foreignKey="r_qgisproject_node_fk_id_node_fkey" implied="false" onDeleteCascade="true" schema="gobs" table="r_qgisproject_node"/>
          </column>
          <column autoUpdated="false" digits="0" id="1" name="gn_name" nullable="false" remarks="Name of the node" size="2147483647" type="text"/>
          <column autoUpdated="false" digits="0" id="2" name="gn_description" nullable="false" remarks="Description of the node" size="2147483647" type="text"/>
@@ -158,22 +157,6 @@
             <column ascending="true" name="pr_code"/>
          </index>
       </table>
-      <table name="qgisproject" remarks="Store references of QGIS projects. Each project has one or many nodes" schema="gobs" type="TABLE">
-         <column autoUpdated="true" defaultValue="nextval('gobs.qgisproject_id_seq'::regclass)" digits="0" id="0" name="id" nullable="false" remarks="Unique automatic id (serial)" size="10" type="serial">
-            <child column="fk_id_qgisproject" foreignKey="r_qgisproject_node_fk_id_qgisproject_fkey" implied="false" onDeleteCascade="true" schema="gobs" table="r_qgisproject_node"/>
-         </column>
-         <column autoUpdated="false" digits="0" id="1" name="qp_project" nullable="false" remarks="QGIS Project name, which is the name of the *.qgs file without the extension" size="2147483647" type="text"/>
-         <column autoUpdated="false" digits="0" id="2" name="qp_repository" nullable="false" remarks="Lizmap repository name, which is the ID of Lizmap repository configured in the Lizmap admin panel" size="2147483647" type="text"/>
-         <column autoUpdated="false" digits="0" id="3" name="qp_paths" nullable="true" remarks="Paths given to help finding a QGIS project. They will be split up to fill the graph_node and r_qgisproject_node tables. If you need multiple paths, use | as a separator. Ex: Environment / Water resources | Measure / Physics / Water" size="2147483647" type="text"/>
-         <primaryKey column="id" sequenceNumberInPK="1"/>
-         <index name="qgisproject_pkey" unique="true">
-            <column ascending="true" name="id"/>
-         </index>
-         <index name="qgisproject_qp_project_qp_repository_key" unique="true">
-            <column ascending="true" name="qp_project"/>
-            <column ascending="true" name="qp_repository"/>
-         </index>
-      </table>
       <table name="r_graph_edge" remarks="Graph edges: relations between nodes" schema="gobs" type="TABLE">
          <column autoUpdated="false" digits="0" id="0" name="ge_parent_node" nullable="false" remarks="Parent node" size="10" type="int4"/>
          <column autoUpdated="false" digits="0" id="1" name="ge_child_node" nullable="false" remarks="Child node" size="10" type="int4"/>
@@ -195,20 +178,6 @@
          <primaryKey column="fk_id_node" sequenceNumberInPK="2"/>
          <index name="r_indicator_node_pkey" unique="true">
             <column ascending="true" name="fk_id_indicator"/>
-            <column ascending="true" name="fk_id_node"/>
-         </index>
-      </table>
-      <table name="r_qgisproject_node" remarks="Pivot table between the QGIS projects and the thematic nodes." schema="gobs" type="TABLE">
-         <column autoUpdated="false" digits="0" id="0" name="fk_id_qgisproject" nullable="false" remarks="Id of the QGIS project" size="10" type="int4">
-            <parent column="id" foreignKey="r_qgisproject_node_fk_id_qgisproject_fkey" implied="false" onDeleteCascade="true" schema="gobs" table="qgisproject"/>
-         </column>
-         <column autoUpdated="false" digits="0" id="1" name="fk_id_node" nullable="false" remarks="Id of the node" size="10" type="int4">
-            <parent column="id" foreignKey="r_qgisproject_node_fk_id_node_fkey" implied="false" onDeleteCascade="true" schema="gobs" table="graph_node"/>
-         </column>
-         <primaryKey column="fk_id_qgisproject" sequenceNumberInPK="1"/>
-         <primaryKey column="fk_id_node" sequenceNumberInPK="2"/>
-         <index name="r_qgisproject_node_pkey" unique="true">
-            <column ascending="true" name="fk_id_qgisproject"/>
             <column ascending="true" name="fk_id_node"/>
          </index>
       </table>

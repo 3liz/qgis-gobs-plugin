@@ -2,12 +2,12 @@
 -- PostgreSQL database dump
 --
 
--- Dumped from database version 9.6.15
--- Dumped by pg_dump version 9.6.15
+-- Dumped from database version 9.6.16
+-- Dumped by pg_dump version 9.6.16
 
 SET statement_timeout = 0;
 SET lock_timeout = 0;
--- SET idle_in_transaction_session_timeout = 0;
+SET idle_in_transaction_session_timeout = 0;
 SET client_encoding = 'UTF8';
 SET standard_conforming_strings = on;
 SELECT pg_catalog.set_config('search_path', '', false);
@@ -68,16 +68,6 @@ ALTER TABLE ONLY gobs.protocol
     ADD CONSTRAINT protocol_pkey PRIMARY KEY (id);
 
 
--- qgisproject qgisproject_pkey
-ALTER TABLE ONLY gobs.qgisproject
-    ADD CONSTRAINT qgisproject_pkey PRIMARY KEY (id);
-
-
--- qgisproject qgisproject_qp_project_qp_repository_key
-ALTER TABLE ONLY gobs.qgisproject
-    ADD CONSTRAINT qgisproject_qp_project_qp_repository_key UNIQUE (qp_project, qp_repository);
-
-
 -- r_graph_edge r_graph_edge_pkey
 ALTER TABLE ONLY gobs.r_graph_edge
     ADD CONSTRAINT r_graph_edge_pkey PRIMARY KEY (ge_parent_node, ge_child_node);
@@ -86,11 +76,6 @@ ALTER TABLE ONLY gobs.r_graph_edge
 -- r_indicator_node r_indicator_node_pkey
 ALTER TABLE ONLY gobs.r_indicator_node
     ADD CONSTRAINT r_indicator_node_pkey PRIMARY KEY (fk_id_indicator, fk_id_node);
-
-
--- r_qgisproject_node r_qgisproject_node_pkey
-ALTER TABLE ONLY gobs.r_qgisproject_node
-    ADD CONSTRAINT r_qgisproject_node_pkey PRIMARY KEY (fk_id_qgisproject, fk_id_node);
 
 
 -- series series_pkey
@@ -146,16 +131,6 @@ ALTER TABLE ONLY gobs.r_indicator_node
 -- r_indicator_node r_indicator_node_fk_id_node_fkey
 ALTER TABLE ONLY gobs.r_indicator_node
     ADD CONSTRAINT r_indicator_node_fk_id_node_fkey FOREIGN KEY (fk_id_node) REFERENCES gobs.graph_node(id) ON DELETE CASCADE;
-
-
--- r_qgisproject_node r_qgisproject_node_fk_id_node_fkey
-ALTER TABLE ONLY gobs.r_qgisproject_node
-    ADD CONSTRAINT r_qgisproject_node_fk_id_node_fkey FOREIGN KEY (fk_id_node) REFERENCES gobs.graph_node(id) ON DELETE CASCADE;
-
-
--- r_qgisproject_node r_qgisproject_node_fk_id_qgisproject_fkey
-ALTER TABLE ONLY gobs.r_qgisproject_node
-    ADD CONSTRAINT r_qgisproject_node_fk_id_qgisproject_fkey FOREIGN KEY (fk_id_qgisproject) REFERENCES gobs.qgisproject(id) ON DELETE CASCADE;
 
 
 -- series series_fk_id_actor_fkey

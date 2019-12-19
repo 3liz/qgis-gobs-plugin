@@ -2,12 +2,12 @@
 -- PostgreSQL database dump
 --
 
--- Dumped from database version 9.6.15
--- Dumped by pg_dump version 9.6.15
+-- Dumped from database version 9.6.16
+-- Dumped by pg_dump version 9.6.16
 
 SET statement_timeout = 0;
 SET lock_timeout = 0;
--- SET idle_in_transaction_session_timeout = 0;
+SET idle_in_transaction_session_timeout = 0;
 SET client_encoding = 'UTF8';
 SET standard_conforming_strings = on;
 SELECT pg_catalog.set_config('search_path', '', false);
@@ -443,48 +443,6 @@ CREATE SEQUENCE gobs.protocol_id_seq
 ALTER SEQUENCE gobs.protocol_id_seq OWNED BY gobs.protocol.id;
 
 
--- qgisproject
-CREATE TABLE gobs.qgisproject (
-    id integer NOT NULL,
-    qp_project text NOT NULL,
-    qp_repository text NOT NULL,
-    qp_paths text
-);
-
-
--- qgisproject
-COMMENT ON TABLE gobs.qgisproject IS 'Store references of QGIS projects. Each project has one or many nodes';
-
-
--- qgisproject.id
-COMMENT ON COLUMN gobs.qgisproject.id IS 'Unique automatic id (serial)';
-
-
--- qgisproject.qp_project
-COMMENT ON COLUMN gobs.qgisproject.qp_project IS 'QGIS Project name, which is the name of the *.qgs file without the extension';
-
-
--- qgisproject.qp_repository
-COMMENT ON COLUMN gobs.qgisproject.qp_repository IS 'Lizmap repository name, which is the ID of Lizmap repository configured in the Lizmap admin panel';
-
-
--- qgisproject.qp_paths
-COMMENT ON COLUMN gobs.qgisproject.qp_paths IS 'Paths given to help finding a QGIS project. They will be split up to fill the graph_node and r_qgisproject_node tables. If you need multiple paths, use | as a separator. Ex: Environment / Water resources | Measure / Physics / Water';
-
-
--- qgisproject_id_seq
-CREATE SEQUENCE gobs.qgisproject_id_seq
-    START WITH 1
-    INCREMENT BY 1
-    NO MINVALUE
-    NO MAXVALUE
-    CACHE 1;
-
-
--- qgisproject_id_seq
-ALTER SEQUENCE gobs.qgisproject_id_seq OWNED BY gobs.qgisproject.id;
-
-
 -- r_graph_edge
 CREATE TABLE gobs.r_graph_edge (
     ge_parent_node integer NOT NULL,
@@ -521,25 +479,6 @@ COMMENT ON COLUMN gobs.r_indicator_node.fk_id_indicator IS 'Parent indicator';
 
 -- r_indicator_node.fk_id_node
 COMMENT ON COLUMN gobs.r_indicator_node.fk_id_node IS 'Parent node';
-
-
--- r_qgisproject_node
-CREATE TABLE gobs.r_qgisproject_node (
-    fk_id_qgisproject integer NOT NULL,
-    fk_id_node integer NOT NULL
-);
-
-
--- r_qgisproject_node
-COMMENT ON TABLE gobs.r_qgisproject_node IS 'Pivot table between the QGIS projects and the thematic nodes.';
-
-
--- r_qgisproject_node.fk_id_qgisproject
-COMMENT ON COLUMN gobs.r_qgisproject_node.fk_id_qgisproject IS 'Id of the QGIS project';
-
-
--- r_qgisproject_node.fk_id_node
-COMMENT ON COLUMN gobs.r_qgisproject_node.fk_id_node IS 'Id of the node';
 
 
 -- series
@@ -723,10 +662,6 @@ ALTER TABLE ONLY gobs.observation ALTER COLUMN id SET DEFAULT nextval('gobs.obse
 
 -- protocol id
 ALTER TABLE ONLY gobs.protocol ALTER COLUMN id SET DEFAULT nextval('gobs.protocol_id_seq'::regclass);
-
-
--- qgisproject id
-ALTER TABLE ONLY gobs.qgisproject ALTER COLUMN id SET DEFAULT nextval('gobs.qgisproject_id_seq'::regclass);
 
 
 -- series id
