@@ -66,7 +66,7 @@ class ExecuteSqlOnService(QgsProcessingAlgorithm):
         return 'gobs_tools'
 
     def shortHelpString(self):
-        return getShortHelpString(self.id())
+        return getShortHelpString(os.path.basename(__file__))
 
     def tr(self, string):
         return QCoreApplication.translate('Processing', string)

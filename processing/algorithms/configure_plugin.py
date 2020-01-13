@@ -61,7 +61,7 @@ class ConfigurePlugin(QgsProcessingAlgorithm):
         return 'gobs_configuration'
 
     def shortHelpString(self):
-        return getShortHelpString(self.id())
+        return getShortHelpString(os.path.basename(__file__))
 
     def tr(self, string):
         return QCoreApplication.translate('Processing', string)

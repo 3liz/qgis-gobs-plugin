@@ -71,7 +71,7 @@ class ImportObservationData(QgsProcessingAlgorithm):
         return 'gobs_manage'
 
     def shortHelpString(self):
-        return getShortHelpString(self.id())
+        return getShortHelpString(os.path.basename(__file__))
 
     def tr(self, string):
         return QCoreApplication.translate('Processing', string)

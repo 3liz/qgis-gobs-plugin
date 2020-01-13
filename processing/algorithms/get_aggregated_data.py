@@ -72,7 +72,7 @@ class GetAggregatedData(GetDataAsLayer):
         return 'gobs_tools'
 
     def shortHelpString(self):
-        return getShortHelpString(self.id())
+        return getShortHelpString(os.path.basename(__file__))
 
     def initAlgorithm(self, config):
         """
