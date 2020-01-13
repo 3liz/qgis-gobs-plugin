@@ -120,3 +120,11 @@ def getVersionInteger(f):
     and sorting the upgrade files
     '''
     return ''.join([a.zfill(2) for a in f.strip().split('.')])
+
+
+def getShortHelpString(id):
+    '''
+    Read help file for given alg id
+    And return short help string
+    '''
+    return id

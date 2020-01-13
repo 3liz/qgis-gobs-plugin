@@ -57,6 +57,15 @@ class GetSeriesData(GetDataAsLayer):
     def displayName(self):
         return self.tr('Get series data')
 
+    def group(self):
+        return self.tr('Tools')
+
+    def groupId(self):
+        return 'gobs_tools'
+
+    def shortHelpString(self):
+        return getShortHelpString(self.id())
+
     def initAlgorithm(self, config):
         """
         """

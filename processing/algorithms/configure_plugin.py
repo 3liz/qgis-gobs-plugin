@@ -60,11 +60,14 @@ class ConfigurePlugin(QgsProcessingAlgorithm):
     def groupId(self):
         return 'gobs_configuration'
 
+    def shortHelpString(self):
+        return getShortHelpString(self.id())
+
     def tr(self, string):
         return QCoreApplication.translate('Processing', string)
 
     def createInstance(self):
-        return self.__class__()
+        return ConfigurePlugin()
 
     def initAlgorithm(self, config):
         """

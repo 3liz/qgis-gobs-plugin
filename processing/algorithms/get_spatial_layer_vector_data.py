@@ -56,6 +56,15 @@ class GetSpatialLayerVectorData(GetDataAsLayer):
     def displayName(self):
         return self.tr('Get spatial layer vector data')
 
+    def group(self):
+        return self.tr('Tools')
+
+    def groupId(self):
+        return 'gobs_tools'
+
+    def shortHelpString(self):
+        return getShortHelpString(self.id())
+
     def initAlgorithm(self, config):
         """
         """

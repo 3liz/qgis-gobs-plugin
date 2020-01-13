@@ -63,6 +63,9 @@ class CreateDatabaseStructure(QgsProcessingAlgorithm):
     def groupId(self):
         return 'gobs_structure'
 
+    def shortHelpString(self):
+        return getShortHelpString(self.id())
+
     def tr(self, string):
         return QCoreApplication.translate('Processing', string)
 

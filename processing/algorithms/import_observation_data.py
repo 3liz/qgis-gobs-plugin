@@ -70,6 +70,9 @@ class ImportObservationData(QgsProcessingAlgorithm):
     def groupId(self):
         return 'gobs_manage'
 
+    def shortHelpString(self):
+        return getShortHelpString(self.id())
+
     def tr(self, string):
         return QCoreApplication.translate('Processing', string)
 

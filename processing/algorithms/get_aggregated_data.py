@@ -65,6 +65,15 @@ class GetAggregatedData(GetDataAsLayer):
     def displayName(self):
         return self.tr('Get aggregated data')
 
+    def group(self):
+        return self.tr('Tools')
+
+    def groupId(self):
+        return 'gobs_tools'
+
+    def shortHelpString(self):
+        return getShortHelpString(self.id())
+
     def initAlgorithm(self, config):
         """
         """
