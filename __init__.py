@@ -36,4 +36,4 @@ def classFactory(iface):  # pylint: disable=invalid-name
     """
     #
     from .gobs import GobsPlugin
-    return GobsPlugin()
+    return GobsPlugin(iface)

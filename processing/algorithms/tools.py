@@ -20,9 +20,37 @@ from qgis.core import (
     QgsDataSourceUri
 )
 import os
+from os.path import dirname, abspath, join, pardir
 
 def tr(string):
     return QCoreApplication.translate('Processing', string)
+
+def plugin_path(*args):
+    """Get the path to plugin root folder.
+    :param args List of path elements e.g. ['img', 'logos', 'image.png']
+    :type args: str
+    :return: Absolute path to the resoure.
+    :rtype: str
+    """
+    path = dirname(dirname(__file__))
+    path = abspath(abspath(join(path, pardir)))
+    for item in args:
+        path = abspath(join(path, item))
+
+    return path
+
+def resources_path(*args):
+    """Get the path to our resources folder.
+    :param args List of path elements e.g. ['img', 'logos', 'image.png']
+    :type args: str
+    :return: Absolute path to the resources folder.
+    :rtype: str
+    """
+    path = abspath(abspath(join(plugin_path(), 'resources')))
+    for item in args:
+        path = abspath(join(path, item))
+
+    return path
 
 def fetchDataFromSqlQuery(connection_name, sql):
 

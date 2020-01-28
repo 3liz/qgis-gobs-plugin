@@ -67,7 +67,7 @@ class ConfigurePlugin(QgsProcessingAlgorithm):
         return QCoreApplication.translate('Processing', string)
 
     def createInstance(self):
-        return ConfigurePlugin()
+        return self.__class__()
 
     def initAlgorithm(self, config):
         """

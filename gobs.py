@@ -34,8 +34,19 @@ import os
 import sys
 import inspect
 
-from qgis.core import QgsProcessingAlgorithm, QgsApplication
+from qgis.core import (
+    QgsProcessingAlgorithm,
+    QgsApplication,
+    QgsSettings
+)
+from qgis.PyQt.QtCore import (
+    Qt,
+    QTranslator,
+    QCoreApplication
+)
 from .processing.provider import GobsProvider
+from .gobs_dockwidget import GobsDockWidget
+from .processing.algorithms.tools import resources_path
 
 cmd_folder = os.path.split(inspect.getfile(inspect.currentframe()))[0]
 
@@ -45,11 +56,36 @@ if cmd_folder not in sys.path:
 
 class GobsPlugin(object):
 
-    def __init__(self):
-        self.provider = GobsProvider()
+    def __init__(self, iface):
+        self.provider = None
+        self.dock = None
+        self.iface = iface
 
-    def initGui(self):
+        try:
+            locale = QgsSettings().value('locale/userLocale', 'en')[0:2]
+        except AttributeError:
+            locale = 'en'
+        locale_path = resources_path('i18n', '{}.qm'.format(locale))
+
+        if os.path.exists(locale_path):
+            self.translator = QTranslator()
+            self.translator.load(locale_path)
+            QCoreApplication.installTranslator(self.translator)
+
+    def initProcessing(self):
+        """Load the Processing provider. QGIS 3.8."""
+        self.provider = GobsProvider()
         QgsApplication.processingRegistry().addProvider(self.provider)
 
+
+    def initGui(self):
+        self.initProcessing()
+        self.dock = GobsDockWidget(self.iface)
+        self.iface.addDockWidget(Qt.RightDockWidgetArea, self.dock)
+
+
     def unload(self):
+        self.iface.removeDockWidget(self.dock)
+        self.dock.deleteLater()
+
         QgsApplication.processingRegistry().removeProvider(self.provider)
