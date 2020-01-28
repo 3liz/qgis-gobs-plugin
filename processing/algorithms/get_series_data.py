@@ -79,7 +79,8 @@ class GetSeriesData(GetDataAsLayer):
         sql = '''
             SELECT s.id,
             concat(
-                'Indicator: ', id_label,
+                id_title,
+                ' (', p.pr_code, ')',
                 ' / Source: ', a_name,
                 ' / Layer: ', sl_label
             ) AS label
