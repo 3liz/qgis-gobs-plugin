@@ -1,4 +1,4 @@
-<qgis projectname="" version="3.4.13-Madeira">
+<qgis projectname="" version="3.4.14-Madeira">
   <homePath path=""></homePath>
   <title></title>
   <autotransaction active="0"></autotransaction>
@@ -26,18 +26,18 @@
     </layer-tree-group>
     <layer-tree-group checked="Qt::Checked" expanded="1" name="Management">
       <customproperties></customproperties>
+      <layer-tree-layer checked="Qt::Checked" expanded="1" id="layername_6adb0d3d_940b_495c_8a3c_fb7f85e36ddb" name="Temperature &amp; humidity (temperature_humidity) / Source: Météo France / Layer: Weather stations" providerKey="postgres" source="service='gobs' key='id' estimatedmetadata=true checkPrimaryKeyUnicity='1' table=&quot;(             SELECT                 o.id,                 so_unique_id AS spatial_object_code,                 ob_timestamp AS observation_timestamp,                 (ob_value->>0)::real AS \&quot;humidity\&quot;, (ob_value->>1)::real AS \&quot;temperature\&quot;             FROM gobs.observation AS o             INNER JOIN gobs.spatial_object AS so                 ON so.id = o.fk_id_spatial_object             WHERE fk_id_series = 4         )&quot; sql=">
+        <customproperties></customproperties>
+      </layer-tree-layer>
+      <layer-tree-layer checked="Qt::Checked" expanded="1" id="layername_f995c716_2ba0_4ed9_a0c6_68075a05b9bd" name="Hourly pluviometry  (cirad-pluviometry) / Source: CIRAD / Layer: Pluviometers" providerKey="postgres" source="service='gobs' key='id' estimatedmetadata=true checkPrimaryKeyUnicity='1' table=&quot;(             SELECT                 o.id,                 so_unique_id AS spatial_object_code,                 ob_timestamp AS observation_timestamp,                 (ob_value->>0)::real AS \&quot;pluviometry\&quot;             FROM gobs.observation AS o             INNER JOIN gobs.spatial_object AS so                 ON so.id = o.fk_id_spatial_object             WHERE fk_id_series = 1         )&quot; sql=">
+        <customproperties></customproperties>
+      </layer-tree-layer>
       <layer-tree-layer checked="Qt::Checked" expanded="1" id="layername_92aa619b_5987_4160_8e22_c72475d3a9b4" name="List of series" providerKey="postgres" source="service='gobs' key='id' estimatedmetadata=true checkPrimaryKeyUnicity='1' table=&quot;(             SELECT                 s.id,                 id_label AS indicator,                 id_paths AS indicator_paths,                 a_name AS actor_source,                 sl_label AS spatial_layer,                 pr_name AS protocol,                 count(o.id) AS nb_observation,                 min(o.ob_timestamp) AS min_date,                 max(o.ob_timestamp) AS max_date              FROM gobs.series s             INNER JOIN gobs.observation o ON o.fk_id_series = s.id             INNER JOIN gobs.actor a ON a.id = s.fk_id_actor             INNER JOIN gobs.indicator i ON i.id = s.fk_id_indicator             INNER JOIN gobs.spatial_layer sl ON sl.id = s.fk_id_spatial_layer             INNER JOIN gobs.protocol p ON p.id = s.fk_id_protocol              GROUP BY s.id, id_label, id_paths, a_name, sl_label, pr_name          )&quot; sql=">
         <customproperties></customproperties>
       </layer-tree-layer>
     </layer-tree-group>
     <layer-tree-group checked="Qt::Checked" expanded="1" name="Structure">
       <customproperties></customproperties>
-      <layer-tree-layer checked="Qt::Checked" expanded="1" id="qgisproject_c137d6c4_f1fa_4a70_bfe3_9c67c7628f63" name="qgisproject" providerKey="postgres" source="service='gobs' sslmode=disable key='id' checkPrimaryKeyUnicity='1' table=&quot;gobs&quot;.&quot;qgisproject&quot; sql=">
-        <customproperties></customproperties>
-      </layer-tree-layer>
-      <layer-tree-layer checked="Qt::Checked" expanded="1" id="r_qgisproject_node_638ea86b_2e09_45d2_a4d3_3080ed8854fe" name="r_qgisproject_node" providerKey="postgres" source="service='gobs' sslmode=disable key='fk_id_qgisproject,fk_id_node' checkPrimaryKeyUnicity='1' table=&quot;gobs&quot;.&quot;r_qgisproject_node&quot; sql=">
-        <customproperties></customproperties>
-      </layer-tree-layer>
       <layer-tree-layer checked="Qt::Checked" expanded="1" id="actor_category_8a7edcf8_cb34_4689_b22b_7a8a6a2ab610" name="actor_category" providerKey="postgres" source="service='gobs' sslmode=disable key='id' estimatedmetadata=true checkPrimaryKeyUnicity='0' table=&quot;gobs&quot;.&quot;actor_category&quot; sql=">
         <customproperties></customproperties>
       </layer-tree-layer>
@@ -80,6 +80,8 @@
     </layer-tree-layer>
     <custom-order enabled="0">
       <item>osm_mapnik_73cc9876_fa44_4742_bc09_afe572b57bbe</item>
+      <item>layername_f995c716_2ba0_4ed9_a0c6_68075a05b9bd</item>
+      <item>layername_6adb0d3d_940b_495c_8a3c_fb7f85e36ddb</item>
     </custom-order>
   </layer-tree-group>
   <snapping-settings enabled="0" intersection-snapping="0" mode="2" tolerance="0" type="1" unit="2">
@@ -105,12 +107,6 @@
     </relation>
     <relation id="r_indicator_node_2ca83116_e69f_4dcb_abcb_de5bdf44b2be_fk_id_node_graph_node_2cd9eee8_46e2_401c_87f7_8b40d9d6260e_id" name="r_indicator_node_fk_id_node_fkey" referencedLayer="graph_node_2cd9eee8_46e2_401c_87f7_8b40d9d6260e" referencingLayer="r_indicator_node_2ca83116_e69f_4dcb_abcb_de5bdf44b2be" strength="Association">
       <fieldRef referencedField="id" referencingField="fk_id_node"></fieldRef>
-    </relation>
-    <relation id="r_qgisproject_node_638ea86b_2e09_45d2_a4d3_3080ed8854fe_fk_id_node_graph_node_2cd9eee8_46e2_401c_87f7_8b40d9d6260e_id" name="r_qgisproject_node_fk_id_node_fkey" referencedLayer="graph_node_2cd9eee8_46e2_401c_87f7_8b40d9d6260e" referencingLayer="r_qgisproject_node_638ea86b_2e09_45d2_a4d3_3080ed8854fe" strength="Association">
-      <fieldRef referencedField="id" referencingField="fk_id_node"></fieldRef>
-    </relation>
-    <relation id="r_qgisproject_node_638ea86b_2e09_45d2_a4d3_3080ed8854fe_fk_id_qgisproject_qgisproject_c137d6c4_f1fa_4a70_bfe3_9c67c7628f63_id" name="r_qgisproject_node_fk_id_qgisproject_fkey" referencedLayer="qgisproject_c137d6c4_f1fa_4a70_bfe3_9c67c7628f63" referencingLayer="r_qgisproject_node_638ea86b_2e09_45d2_a4d3_3080ed8854fe" strength="Association">
-      <fieldRef referencedField="id" referencingField="fk_id_qgisproject"></fieldRef>
     </relation>
     <relation id="series_04a7414a_ab6d_4611_8a60_bcd22071dc22_fk_id_actor_actor_5f01a6e5_8205_462f_af40_0ffd7ff0a44f_id" name="series_fk_id_actor_fkey" referencedLayer="actor_5f01a6e5_8205_462f_af40_0ffd7ff0a44f" referencingLayer="series_04a7414a_ab6d_4611_8a60_bcd22071dc22" strength="Association">
       <fieldRef referencedField="id" referencingField="fk_id_actor"></fieldRef>
@@ -151,11 +147,101 @@
     </destinationsrs>
     <rendermaptile>0</rendermaptile>
   </mapcanvas>
+  <DataPlotly>
+    <Option type="Map">
+      <Option name="dynamic_properties" type="Map">
+        <Option name="name" type="QString" value=""></Option>
+        <Option name="properties"></Option>
+        <Option name="type" type="QString" value="collection"></Option>
+      </Option>
+      <Option name="plot_layout" type="Map">
+        <Option name="additional_info_expression" type="QString" value=""></Option>
+        <Option name="bar_mode" type="QString" value="group"></Option>
+        <Option name="bargaps" type="double" value="0"></Option>
+        <Option name="bins_check" type="bool" value="false"></Option>
+        <Option name="legend" type="bool" value="true"></Option>
+        <Option name="legend_orientation" type="QString" value="v"></Option>
+        <Option name="legend_title" type="invalid"></Option>
+        <Option name="polar" type="Map">
+          <Option name="angularaxis" type="Map">
+            <Option name="direction" type="QString" value="clockwise"></Option>
+          </Option>
+        </Option>
+        <Option name="range_slider" type="Map">
+          <Option name="borderwidth" type="int" value="1"></Option>
+          <Option name="visible" type="bool" value="false"></Option>
+        </Option>
+        <Option name="title" type="QString" value=""></Option>
+        <Option name="x_inv" type="invalid"></Option>
+        <Option name="x_title" type="QString" value=""></Option>
+        <Option name="x_type" type="QString" value="linear"></Option>
+        <Option name="xaxis" type="invalid"></Option>
+        <Option name="y_inv" type="invalid"></Option>
+        <Option name="y_title" type="QString" value=""></Option>
+        <Option name="y_type" type="QString" value="linear"></Option>
+        <Option name="z_title" type="QString" value=""></Option>
+      </Option>
+      <Option name="plot_properties" type="Map">
+        <Option name="additional_hover_text" type="invalid"></Option>
+        <Option name="bins" type="int" value="10"></Option>
+        <Option name="box_orientation" type="QString" value="v"></Option>
+        <Option name="box_outliers" type="bool" value="false"></Option>
+        <Option name="box_stat" type="bool" value="false"></Option>
+        <Option name="color_scale" type="invalid"></Option>
+        <Option name="color_scale_data_defined_in_check" type="bool" value="false"></Option>
+        <Option name="color_scale_data_defined_in_invert_check" type="bool" value="false"></Option>
+        <Option name="cont_type" type="QString" value="fill"></Option>
+        <Option name="contour_type_combo" type="QString" value="Fill"></Option>
+        <Option name="cumulative" type="bool" value="false"></Option>
+        <Option name="custom" type="List">
+          <Option type="QString" value=""></Option>
+        </Option>
+        <Option name="hover_text" type="QString" value="all"></Option>
+        <Option name="in_color" type="QString" value="#8ebad9"></Option>
+        <Option name="invert_color_scale" type="bool" value="false"></Option>
+        <Option name="invert_hist" type="QString" value="increasing"></Option>
+        <Option name="line_combo" type="QString" value="Solid Line"></Option>
+        <Option name="line_dash" type="QString" value="solid"></Option>
+        <Option name="marker" type="QString" value="markers"></Option>
+        <Option name="marker_size" type="double" value="10"></Option>
+        <Option name="marker_symbol" type="int" value="0"></Option>
+        <Option name="marker_type_combo" type="QString" value="Points"></Option>
+        <Option name="marker_width" type="double" value="1"></Option>
+        <Option name="name" type="QString" value=""></Option>
+        <Option name="normalization" type="QString" value=""></Option>
+        <Option name="opacity" type="double" value="1"></Option>
+        <Option name="out_color" type="QString" value="#1f77b4"></Option>
+        <Option name="point_combo" type="QString" value=""></Option>
+        <Option name="selected_features_only" type="bool" value="false"></Option>
+        <Option name="show_colorscale_legend" type="bool" value="false"></Option>
+        <Option name="show_lines" type="bool" value="true"></Option>
+        <Option name="show_lines_check" type="bool" value="true"></Option>
+        <Option name="show_mean_line" type="bool" value="true"></Option>
+        <Option name="violin_side" type="QString" value="both"></Option>
+        <Option name="visible_features_only" type="bool" value="false"></Option>
+        <Option name="x_name" type="QString" value=""></Option>
+        <Option name="y_name" type="QString" value=""></Option>
+        <Option name="z_name" type="QString" value=""></Option>
+      </Option>
+      <Option name="plot_type" type="QString" value="scatter"></Option>
+      <Option name="source_layer_id" type="QString" value="actor_5f01a6e5_8205_462f_af40_0ffd7ff0a44f"></Option>
+    </Option>
+  </DataPlotly>
   <projectModels></projectModels>
   <legend updateDrawingOrder="true">
     <legendgroup checked="Qt::Checked" name="Tests" open="true"></legendgroup>
     <legendgroup checked="Qt::Checked" name="Source data" open="true"></legendgroup>
     <legendgroup checked="Qt::Checked" name="Management" open="true">
+      <legendlayer checked="Qt::Checked" drawingOrder="-1" name="Temperature &amp; humidity (temperature_humidity) / Source: Météo France / Layer: Weather stations" open="true" showFeatureCount="0">
+        <filegroup hidden="false" open="true">
+          <legendlayerfile isInOverview="0" layerid="layername_6adb0d3d_940b_495c_8a3c_fb7f85e36ddb" visible="1"></legendlayerfile>
+        </filegroup>
+      </legendlayer>
+      <legendlayer checked="Qt::Checked" drawingOrder="-1" name="Hourly pluviometry  (cirad-pluviometry) / Source: CIRAD / Layer: Pluviometers" open="true" showFeatureCount="0">
+        <filegroup hidden="false" open="true">
+          <legendlayerfile isInOverview="0" layerid="layername_f995c716_2ba0_4ed9_a0c6_68075a05b9bd" visible="1"></legendlayerfile>
+        </filegroup>
+      </legendlayer>
       <legendlayer checked="Qt::Checked" drawingOrder="-1" name="List of series" open="true" showFeatureCount="0">
         <filegroup hidden="false" open="true">
           <legendlayerfile isInOverview="0" layerid="layername_92aa619b_5987_4160_8e22_c72475d3a9b4" visible="1"></legendlayerfile>
@@ -163,16 +249,6 @@
       </legendlayer>
     </legendgroup>
     <legendgroup checked="Qt::Checked" name="Structure" open="true">
-      <legendlayer checked="Qt::Checked" drawingOrder="-1" name="qgisproject" open="true" showFeatureCount="0">
-        <filegroup hidden="false" open="true">
-          <legendlayerfile isInOverview="0" layerid="qgisproject_c137d6c4_f1fa_4a70_bfe3_9c67c7628f63" visible="1"></legendlayerfile>
-        </filegroup>
-      </legendlayer>
-      <legendlayer checked="Qt::Checked" drawingOrder="-1" name="r_qgisproject_node" open="true" showFeatureCount="0">
-        <filegroup hidden="false" open="true">
-          <legendlayerfile isInOverview="0" layerid="r_qgisproject_node_638ea86b_2e09_45d2_a4d3_3080ed8854fe" visible="1"></legendlayerfile>
-        </filegroup>
-      </legendlayer>
       <legendlayer checked="Qt::Checked" drawingOrder="-1" name="actor_category" open="true" showFeatureCount="0">
         <filegroup hidden="false" open="true">
           <legendlayerfile isInOverview="0" layerid="actor_category_8a7edcf8_cb34_4689_b22b_7a8a6a2ab610" visible="1"></legendlayerfile>
@@ -319,9 +395,7 @@
         <Searchable>1</Searchable>
       </flags>
       <customproperties>
-        <property key="dualview/previewExpressions">
-          <value>a_name</value>
-        </property>
+        <property key="dualview/previewExpressions" value="a_name"></property>
         <property key="embeddedWidgets/count" value="0"></property>
         <property key="variableNames"></property>
         <property key="variableValues"></property>
@@ -1309,29 +1383,16 @@ def my_form_open(dialog, layer, feature):
           </editWidget>
         </field>
         <field name="id_value_type">
-          <editWidget type="ValueRelation">
+          <editWidget type="List">
             <config>
-              <Option type="Map">
-                <Option name="AllowMulti" type="bool" value="false"></Option>
-                <Option name="AllowNull" type="bool" value="false"></Option>
-                <Option name="FilterExpression" type="QString" value="&quot;gl_field&quot; = 'id_value_type'"></Option>
-                <Option name="Key" type="QString" value="gl_code"></Option>
-                <Option name="Layer" type="QString" value="glossary_cee356e0_5be5_4d87_ac2b_e8e8967c4032"></Option>
-                <Option name="NofColumns" type="int" value="1"></Option>
-                <Option name="OrderByValue" type="bool" value="true"></Option>
-                <Option name="UseCompleter" type="bool" value="false"></Option>
-                <Option name="Value" type="QString" value="gl_label"></Option>
-              </Option>
+              <Option></Option>
             </config>
           </editWidget>
         </field>
         <field name="id_value_unit">
-          <editWidget type="TextEdit">
+          <editWidget type="List">
             <config>
-              <Option type="Map">
-                <Option name="IsMultiline" type="bool" value="false"></Option>
-                <Option name="UseHtml" type="bool" value="false"></Option>
-              </Option>
+              <Option></Option>
             </config>
           </editWidget>
         </field>
@@ -1410,7 +1471,7 @@ def my_form_open(dialog, layer, feature):
           <column hidden="0" name="id_value_code" type="field" width="-1"></column>
           <column hidden="0" name="id_value_name" type="field" width="-1"></column>
           <column hidden="0" name="id_value_type" type="field" width="-1"></column>
-          <column hidden="0" name="id_value_unit" type="field" width="-1"></column>
+          <column hidden="0" name="id_value_unit" type="field" width="163"></column>
           <column hidden="1" type="actions" width="-1"></column>
           <column hidden="0" name="id_paths" type="field" width="-1"></column>
         </columns>
@@ -1491,6 +1552,173 @@ def my_form_open(dialog, layer, feature):
         </widget>
       </widgets>
       <previewExpression>id_label</previewExpression>
+      <mapTip></mapTip>
+    </maplayer>
+    <maplayer autoRefreshEnabled="0" autoRefreshTime="0" geometry="No geometry" hasScaleBasedVisibilityFlag="0" maxScale="0" minScale="1e+8" readOnly="0" refreshOnNotifyEnabled="0" refreshOnNotifyMessage="" styleCategories="AllStyleCategories" type="vector">
+      <id>layername_6adb0d3d_940b_495c_8a3c_fb7f85e36ddb</id>
+      <datasource>service='gobs' key='id' estimatedmetadata=true checkPrimaryKeyUnicity='1' table="(             SELECT                 o.id,                 so_unique_id AS spatial_object_code,                 ob_timestamp AS observation_timestamp,                 (ob_value-&gt;&gt;0)::real AS \"humidity\", (ob_value-&gt;&gt;1)::real AS \"temperature\"             FROM gobs.observation AS o             INNER JOIN gobs.spatial_object AS so                 ON so.id = o.fk_id_spatial_object             WHERE fk_id_series = 4         )" sql=</datasource>
+      <keywordList>
+        <value></value>
+      </keywordList>
+      <layername>Temperature &amp; humidity (temperature_humidity) / Source: Météo France / Layer: Weather stations</layername>
+      <srs>
+        <spatialrefsys>
+          <proj4></proj4>
+          <srsid>0</srsid>
+          <srid>0</srid>
+          <authid></authid>
+          <description></description>
+          <projectionacronym></projectionacronym>
+          <ellipsoidacronym></ellipsoidacronym>
+          <geographicflag>false</geographicflag>
+        </spatialrefsys>
+      </srs>
+      <resourceMetadata>
+        <identifier></identifier>
+        <parentidentifier></parentidentifier>
+        <language></language>
+        <type>dataset</type>
+        <title></title>
+        <abstract></abstract>
+        <links></links>
+        <fees></fees>
+        <encoding></encoding>
+        <crs>
+          <spatialrefsys>
+            <proj4></proj4>
+            <srsid>0</srsid>
+            <srid>0</srid>
+            <authid></authid>
+            <description></description>
+            <projectionacronym></projectionacronym>
+            <ellipsoidacronym></ellipsoidacronym>
+            <geographicflag>false</geographicflag>
+          </spatialrefsys>
+        </crs>
+        <extent></extent>
+      </resourceMetadata>
+      <provider encoding="UTF-8">postgres</provider>
+      <vectorjoins></vectorjoins>
+      <layerDependencies></layerDependencies>
+      <dataDependencies></dataDependencies>
+      <legend type="default-vector"></legend>
+      <expressionfields></expressionfields>
+      <map-layer-style-manager current="défaut">
+        <map-layer-style name="défaut"></map-layer-style>
+      </map-layer-style-manager>
+      <auxiliaryLayer></auxiliaryLayer>
+      <flags>
+        <Identifiable>1</Identifiable>
+        <Removable>1</Removable>
+        <Searchable>1</Searchable>
+      </flags>
+      <customproperties>
+        <property key="dualview/previewExpressions">
+          <value>"id"</value>
+        </property>
+      </customproperties>
+      <geometryOptions geometryPrecision="0" removeDuplicateNodes="0">
+        <activeChecks type="StringList">
+          <Option type="QString" value=""></Option>
+        </activeChecks>
+        <checkConfiguration></checkConfiguration>
+      </geometryOptions>
+      <fieldConfiguration>
+        <field name="id">
+          <editWidget type="">
+            <config>
+              <Option></Option>
+            </config>
+          </editWidget>
+        </field>
+        <field name="spatial_object_code">
+          <editWidget type="">
+            <config>
+              <Option></Option>
+            </config>
+          </editWidget>
+        </field>
+        <field name="observation_timestamp">
+          <editWidget type="">
+            <config>
+              <Option></Option>
+            </config>
+          </editWidget>
+        </field>
+        <field name="humidity">
+          <editWidget type="">
+            <config>
+              <Option></Option>
+            </config>
+          </editWidget>
+        </field>
+        <field name="temperature">
+          <editWidget type="">
+            <config>
+              <Option></Option>
+            </config>
+          </editWidget>
+        </field>
+      </fieldConfiguration>
+      <aliases>
+        <alias field="id" index="0" name=""></alias>
+        <alias field="spatial_object_code" index="1" name=""></alias>
+        <alias field="observation_timestamp" index="2" name=""></alias>
+        <alias field="humidity" index="3" name=""></alias>
+        <alias field="temperature" index="4" name=""></alias>
+      </aliases>
+      <excludeAttributesWMS></excludeAttributesWMS>
+      <excludeAttributesWFS></excludeAttributesWFS>
+      <defaults>
+        <default applyOnUpdate="0" expression="" field="id"></default>
+        <default applyOnUpdate="0" expression="" field="spatial_object_code"></default>
+        <default applyOnUpdate="0" expression="" field="observation_timestamp"></default>
+        <default applyOnUpdate="0" expression="" field="humidity"></default>
+        <default applyOnUpdate="0" expression="" field="temperature"></default>
+      </defaults>
+      <constraints>
+        <constraint constraints="3" exp_strength="0" field="id" notnull_strength="1" unique_strength="1"></constraint>
+        <constraint constraints="1" exp_strength="0" field="spatial_object_code" notnull_strength="1" unique_strength="0"></constraint>
+        <constraint constraints="1" exp_strength="0" field="observation_timestamp" notnull_strength="1" unique_strength="0"></constraint>
+        <constraint constraints="0" exp_strength="0" field="humidity" notnull_strength="0" unique_strength="0"></constraint>
+        <constraint constraints="0" exp_strength="0" field="temperature" notnull_strength="0" unique_strength="0"></constraint>
+      </constraints>
+      <constraintExpressions>
+        <constraint desc="" exp="" field="id"></constraint>
+        <constraint desc="" exp="" field="spatial_object_code"></constraint>
+        <constraint desc="" exp="" field="observation_timestamp"></constraint>
+        <constraint desc="" exp="" field="humidity"></constraint>
+        <constraint desc="" exp="" field="temperature"></constraint>
+      </constraintExpressions>
+      <expressionfields></expressionfields>
+      <attributeactions>
+        <defaultAction key="Canvas" value="{00000000-0000-0000-0000-000000000000}"></defaultAction>
+      </attributeactions>
+      <attributetableconfig actionWidgetStyle="dropDown" sortExpression="" sortOrder="0">
+        <columns>
+          <column hidden="0" name="id" type="field" width="-1"></column>
+          <column hidden="0" name="spatial_object_code" type="field" width="-1"></column>
+          <column hidden="0" name="observation_timestamp" type="field" width="-1"></column>
+          <column hidden="0" name="humidity" type="field" width="-1"></column>
+          <column hidden="0" name="temperature" type="field" width="152"></column>
+          <column hidden="1" type="actions" width="-1"></column>
+        </columns>
+      </attributetableconfig>
+      <conditionalstyles>
+        <rowstyles></rowstyles>
+        <fieldstyles></fieldstyles>
+      </conditionalstyles>
+      <editform tolerant="1"></editform>
+      <editforminit></editforminit>
+      <editforminitcodesource>0</editforminitcodesource>
+      <editforminitfilepath></editforminitfilepath>
+      <editforminitcode></editforminitcode>
+      <featformsuppress>0</featformsuppress>
+      <editorlayout>generatedlayout</editorlayout>
+      <editable></editable>
+      <labelOnTop></labelOnTop>
+      <widgets></widgets>
+      <previewExpression>"id"</previewExpression>
       <mapTip></mapTip>
     </maplayer>
     <maplayer autoRefreshEnabled="0" autoRefreshTime="0" geometry="No geometry" hasScaleBasedVisibilityFlag="0" maxScale="0" minScale="1e+8" readOnly="0" refreshOnNotifyEnabled="0" refreshOnNotifyMessage="" styleCategories="AllStyleCategories" type="vector">
@@ -1777,6 +2005,161 @@ def my_form_open(dialog, layer, feature):
       </labelOnTop>
       <widgets></widgets>
       <previewExpression>id</previewExpression>
+      <mapTip></mapTip>
+    </maplayer>
+    <maplayer autoRefreshEnabled="0" autoRefreshTime="0" geometry="No geometry" hasScaleBasedVisibilityFlag="0" maxScale="0" minScale="1e+8" readOnly="0" refreshOnNotifyEnabled="0" refreshOnNotifyMessage="" styleCategories="AllStyleCategories" type="vector">
+      <id>layername_f995c716_2ba0_4ed9_a0c6_68075a05b9bd</id>
+      <datasource>service='gobs' key='id' estimatedmetadata=true checkPrimaryKeyUnicity='1' table="(             SELECT                 o.id,                 so_unique_id AS spatial_object_code,                 ob_timestamp AS observation_timestamp,                 (ob_value-&gt;&gt;0)::real AS \"pluviometry\"             FROM gobs.observation AS o             INNER JOIN gobs.spatial_object AS so                 ON so.id = o.fk_id_spatial_object             WHERE fk_id_series = 1         )" sql=</datasource>
+      <keywordList>
+        <value></value>
+      </keywordList>
+      <layername>Hourly pluviometry  (cirad-pluviometry) / Source: CIRAD / Layer: Pluviometers</layername>
+      <srs>
+        <spatialrefsys>
+          <proj4></proj4>
+          <srsid>0</srsid>
+          <srid>0</srid>
+          <authid></authid>
+          <description></description>
+          <projectionacronym></projectionacronym>
+          <ellipsoidacronym></ellipsoidacronym>
+          <geographicflag>false</geographicflag>
+        </spatialrefsys>
+      </srs>
+      <resourceMetadata>
+        <identifier></identifier>
+        <parentidentifier></parentidentifier>
+        <language></language>
+        <type>dataset</type>
+        <title></title>
+        <abstract></abstract>
+        <links></links>
+        <fees></fees>
+        <encoding></encoding>
+        <crs>
+          <spatialrefsys>
+            <proj4></proj4>
+            <srsid>0</srsid>
+            <srid>0</srid>
+            <authid></authid>
+            <description></description>
+            <projectionacronym></projectionacronym>
+            <ellipsoidacronym></ellipsoidacronym>
+            <geographicflag>false</geographicflag>
+          </spatialrefsys>
+        </crs>
+        <extent></extent>
+      </resourceMetadata>
+      <provider encoding="UTF-8">postgres</provider>
+      <vectorjoins></vectorjoins>
+      <layerDependencies></layerDependencies>
+      <dataDependencies></dataDependencies>
+      <legend type="default-vector"></legend>
+      <expressionfields></expressionfields>
+      <map-layer-style-manager current="défaut">
+        <map-layer-style name="défaut"></map-layer-style>
+      </map-layer-style-manager>
+      <auxiliaryLayer></auxiliaryLayer>
+      <flags>
+        <Identifiable>1</Identifiable>
+        <Removable>1</Removable>
+        <Searchable>1</Searchable>
+      </flags>
+      <customproperties>
+        <property key="dualview/previewExpressions">
+          <value>"id"</value>
+        </property>
+      </customproperties>
+      <geometryOptions geometryPrecision="0" removeDuplicateNodes="0">
+        <activeChecks type="StringList">
+          <Option type="QString" value=""></Option>
+        </activeChecks>
+        <checkConfiguration></checkConfiguration>
+      </geometryOptions>
+      <fieldConfiguration>
+        <field name="id">
+          <editWidget type="">
+            <config>
+              <Option></Option>
+            </config>
+          </editWidget>
+        </field>
+        <field name="spatial_object_code">
+          <editWidget type="">
+            <config>
+              <Option></Option>
+            </config>
+          </editWidget>
+        </field>
+        <field name="observation_timestamp">
+          <editWidget type="">
+            <config>
+              <Option></Option>
+            </config>
+          </editWidget>
+        </field>
+        <field name="pluviometry">
+          <editWidget type="">
+            <config>
+              <Option></Option>
+            </config>
+          </editWidget>
+        </field>
+      </fieldConfiguration>
+      <aliases>
+        <alias field="id" index="0" name=""></alias>
+        <alias field="spatial_object_code" index="1" name=""></alias>
+        <alias field="observation_timestamp" index="2" name=""></alias>
+        <alias field="pluviometry" index="3" name=""></alias>
+      </aliases>
+      <excludeAttributesWMS></excludeAttributesWMS>
+      <excludeAttributesWFS></excludeAttributesWFS>
+      <defaults>
+        <default applyOnUpdate="0" expression="" field="id"></default>
+        <default applyOnUpdate="0" expression="" field="spatial_object_code"></default>
+        <default applyOnUpdate="0" expression="" field="observation_timestamp"></default>
+        <default applyOnUpdate="0" expression="" field="pluviometry"></default>
+      </defaults>
+      <constraints>
+        <constraint constraints="3" exp_strength="0" field="id" notnull_strength="1" unique_strength="1"></constraint>
+        <constraint constraints="1" exp_strength="0" field="spatial_object_code" notnull_strength="1" unique_strength="0"></constraint>
+        <constraint constraints="1" exp_strength="0" field="observation_timestamp" notnull_strength="1" unique_strength="0"></constraint>
+        <constraint constraints="0" exp_strength="0" field="pluviometry" notnull_strength="0" unique_strength="0"></constraint>
+      </constraints>
+      <constraintExpressions>
+        <constraint desc="" exp="" field="id"></constraint>
+        <constraint desc="" exp="" field="spatial_object_code"></constraint>
+        <constraint desc="" exp="" field="observation_timestamp"></constraint>
+        <constraint desc="" exp="" field="pluviometry"></constraint>
+      </constraintExpressions>
+      <expressionfields></expressionfields>
+      <attributeactions>
+        <defaultAction key="Canvas" value="{00000000-0000-0000-0000-000000000000}"></defaultAction>
+      </attributeactions>
+      <attributetableconfig actionWidgetStyle="dropDown" sortExpression="" sortOrder="0">
+        <columns>
+          <column hidden="0" name="id" type="field" width="-1"></column>
+          <column hidden="0" name="spatial_object_code" type="field" width="-1"></column>
+          <column hidden="0" name="observation_timestamp" type="field" width="262"></column>
+          <column hidden="0" name="pluviometry" type="field" width="-1"></column>
+          <column hidden="1" type="actions" width="-1"></column>
+        </columns>
+      </attributetableconfig>
+      <conditionalstyles>
+        <rowstyles></rowstyles>
+        <fieldstyles></fieldstyles>
+      </conditionalstyles>
+      <editform tolerant="1"></editform>
+      <editforminit></editforminit>
+      <editforminitcodesource>0</editforminitcodesource>
+      <editforminitfilepath></editforminitfilepath>
+      <editforminitcode></editforminitcode>
+      <featformsuppress>0</featformsuppress>
+      <editorlayout>generatedlayout</editorlayout>
+      <editable></editable>
+      <labelOnTop></labelOnTop>
+      <widgets></widgets>
+      <previewExpression>"id"</previewExpression>
       <mapTip></mapTip>
     </maplayer>
     <maplayer autoRefreshEnabled="0" autoRefreshTime="0" geometry="No geometry" hasScaleBasedVisibilityFlag="0" maxScale="0" minScale="1e+8" readOnly="0" refreshOnNotifyEnabled="0" refreshOnNotifyMessage="" styleCategories="AllStyleCategories" type="vector">
@@ -2190,9 +2573,7 @@ def my_form_open(dialog, layer, feature):
         <Searchable>1</Searchable>
       </flags>
       <customproperties>
-        <property key="dualview/previewExpressions">
-          <value>pr_name</value>
-        </property>
+        <property key="dualview/previewExpressions" value="pr_name"></property>
         <property key="embeddedWidgets/count" value="0"></property>
         <property key="variableNames"></property>
         <property key="variableValues"></property>
@@ -2335,213 +2716,6 @@ def my_form_open(dialog, layer, feature):
         </widget>
       </widgets>
       <previewExpression>pr_name</previewExpression>
-      <mapTip></mapTip>
-    </maplayer>
-    <maplayer autoRefreshEnabled="0" autoRefreshTime="0" geometry="No geometry" hasScaleBasedVisibilityFlag="0" maxScale="0" minScale="1e+8" readOnly="0" refreshOnNotifyEnabled="0" refreshOnNotifyMessage="" styleCategories="AllStyleCategories" type="vector">
-      <id>qgisproject_c137d6c4_f1fa_4a70_bfe3_9c67c7628f63</id>
-      <datasource>service='gobs' sslmode=disable key='id' checkPrimaryKeyUnicity='1' table="gobs"."qgisproject" sql=</datasource>
-      <keywordList>
-        <value></value>
-      </keywordList>
-      <layername>qgisproject</layername>
-      <srs>
-        <spatialrefsys>
-          <proj4></proj4>
-          <srsid>0</srsid>
-          <srid>0</srid>
-          <authid></authid>
-          <description></description>
-          <projectionacronym></projectionacronym>
-          <ellipsoidacronym></ellipsoidacronym>
-          <geographicflag>false</geographicflag>
-        </spatialrefsys>
-      </srs>
-      <resourceMetadata>
-        <identifier></identifier>
-        <parentidentifier></parentidentifier>
-        <language></language>
-        <type>dataset</type>
-        <title></title>
-        <abstract>Store references of QGIS projects. Each project has one or many nodes</abstract>
-        <contact>
-          <name></name>
-          <organization></organization>
-          <position></position>
-          <voice></voice>
-          <fax></fax>
-          <email></email>
-          <role></role>
-        </contact>
-        <links></links>
-        <fees></fees>
-        <encoding></encoding>
-        <crs>
-          <spatialrefsys>
-            <proj4></proj4>
-            <srsid>0</srsid>
-            <srid>0</srid>
-            <authid></authid>
-            <description></description>
-            <projectionacronym></projectionacronym>
-            <ellipsoidacronym></ellipsoidacronym>
-            <geographicflag>false</geographicflag>
-          </spatialrefsys>
-        </crs>
-        <extent>
-          <spatial crs="" dimensions="2" maxx="0" maxy="0" maxz="0" minx="0" miny="0" minz="0"></spatial>
-          <temporal>
-            <period>
-              <start></start>
-              <end></end>
-            </period>
-          </temporal>
-        </extent>
-      </resourceMetadata>
-      <provider encoding="UTF-8">postgres</provider>
-      <vectorjoins></vectorjoins>
-      <layerDependencies></layerDependencies>
-      <dataDependencies></dataDependencies>
-      <legend type="default-vector"></legend>
-      <expressionfields></expressionfields>
-      <map-layer-style-manager current="défaut">
-        <map-layer-style name="défaut"></map-layer-style>
-      </map-layer-style-manager>
-      <auxiliaryLayer></auxiliaryLayer>
-      <flags>
-        <Identifiable>1</Identifiable>
-        <Removable>1</Removable>
-        <Searchable>1</Searchable>
-      </flags>
-      <customproperties>
-        <property key="embeddedWidgets/count" value="0"></property>
-        <property key="variableNames"></property>
-        <property key="variableValues"></property>
-      </customproperties>
-      <geometryOptions geometryPrecision="0" removeDuplicateNodes="0">
-        <activeChecks></activeChecks>
-        <checkConfiguration></checkConfiguration>
-      </geometryOptions>
-      <fieldConfiguration>
-        <field name="id">
-          <editWidget type="TextEdit">
-            <config>
-              <Option type="Map">
-                <Option name="IsMultiline" type="bool" value="false"></Option>
-                <Option name="UseHtml" type="bool" value="false"></Option>
-              </Option>
-            </config>
-          </editWidget>
-        </field>
-        <field name="qp_project">
-          <editWidget type="TextEdit">
-            <config>
-              <Option type="Map">
-                <Option name="IsMultiline" type="bool" value="false"></Option>
-                <Option name="UseHtml" type="bool" value="false"></Option>
-              </Option>
-            </config>
-          </editWidget>
-        </field>
-        <field name="qp_repository">
-          <editWidget type="TextEdit">
-            <config>
-              <Option type="Map">
-                <Option name="IsMultiline" type="bool" value="false"></Option>
-                <Option name="UseHtml" type="bool" value="false"></Option>
-              </Option>
-            </config>
-          </editWidget>
-        </field>
-        <field name="qp_paths">
-          <editWidget type="TextEdit">
-            <config>
-              <Option type="Map">
-                <Option name="IsMultiline" type="bool" value="false"></Option>
-                <Option name="UseHtml" type="bool" value="false"></Option>
-              </Option>
-            </config>
-          </editWidget>
-        </field>
-      </fieldConfiguration>
-      <aliases>
-        <alias field="id" index="0" name="Unique automatic id"></alias>
-        <alias field="qp_project" index="1" name="Project name without extension"></alias>
-        <alias field="qp_repository" index="2" name="Lizmap repository short name"></alias>
-        <alias field="qp_paths" index="3" name="Thematic paths. Ex; Environment / Water | Measure / Physics"></alias>
-      </aliases>
-      <excludeAttributesWMS></excludeAttributesWMS>
-      <excludeAttributesWFS></excludeAttributesWFS>
-      <defaults>
-        <default applyOnUpdate="0" expression="" field="id"></default>
-        <default applyOnUpdate="0" expression="" field="qp_project"></default>
-        <default applyOnUpdate="0" expression="" field="qp_repository"></default>
-        <default applyOnUpdate="0" expression="" field="qp_paths"></default>
-      </defaults>
-      <constraints>
-        <constraint constraints="3" exp_strength="0" field="id" notnull_strength="1" unique_strength="1"></constraint>
-        <constraint constraints="1" exp_strength="0" field="qp_project" notnull_strength="1" unique_strength="0"></constraint>
-        <constraint constraints="1" exp_strength="0" field="qp_repository" notnull_strength="1" unique_strength="0"></constraint>
-        <constraint constraints="0" exp_strength="0" field="qp_paths" notnull_strength="0" unique_strength="0"></constraint>
-      </constraints>
-      <constraintExpressions>
-        <constraint desc="" exp="" field="id"></constraint>
-        <constraint desc="" exp="" field="qp_project"></constraint>
-        <constraint desc="" exp="" field="qp_repository"></constraint>
-        <constraint desc="" exp="" field="qp_paths"></constraint>
-      </constraintExpressions>
-      <expressionfields></expressionfields>
-      <attributeactions>
-        <defaultAction key="Canvas" value="{00000000-0000-0000-0000-000000000000}"></defaultAction>
-      </attributeactions>
-      <attributetableconfig actionWidgetStyle="dropDown" sortExpression="" sortOrder="0">
-        <columns>
-          <column hidden="0" name="id" type="field" width="-1"></column>
-          <column hidden="0" name="qp_project" type="field" width="-1"></column>
-          <column hidden="0" name="qp_repository" type="field" width="-1"></column>
-          <column hidden="0" name="qp_paths" type="field" width="-1"></column>
-          <column hidden="1" type="actions" width="-1"></column>
-        </columns>
-      </attributetableconfig>
-      <conditionalstyles>
-        <rowstyles></rowstyles>
-        <fieldstyles></fieldstyles>
-      </conditionalstyles>
-      <editform tolerant="1"></editform>
-      <editforminit></editforminit>
-      <editforminitcodesource>0</editforminitcodesource>
-      <editforminitfilepath></editforminitfilepath>
-      <editforminitcode># -*- coding: utf-8 -*-
-"""
-Les formulaires QGIS peuvent avoir une fonction Python qui sera appelée à l'ouverture du formulaire.
-
-Utilisez cette fonction pour ajouter plus de fonctionnalités à vos formulaires.
-
-Entrez le nom de la fonction dans le champ "Fonction d'initialisation Python".
-Voici un exemple à suivre:
-"""
-from qgis.PyQt.QtWidgets import QWidget
-
-def my_form_open(dialog, layer, feature):
-    geom = feature.geometry()
-    control = dialog.findChild(QWidget, "MyLineEdit")
-
-</editforminitcode>
-      <featformsuppress>0</featformsuppress>
-      <editorlayout>generatedlayout</editorlayout>
-      <editable>
-        <field editable="0" name="id"></field>
-        <field editable="1" name="qp_paths"></field>
-        <field editable="1" name="qp_project"></field>
-        <field editable="1" name="qp_repository"></field>
-      </editable>
-      <labelOnTop>
-        <field labelOnTop="0" name="id"></field>
-        <field labelOnTop="0" name="qp_paths"></field>
-        <field labelOnTop="0" name="qp_project"></field>
-        <field labelOnTop="0" name="qp_repository"></field>
-      </labelOnTop>
-      <widgets></widgets>
-      <previewExpression>concat(qp_repository, '@', qp_project)</previewExpression>
       <mapTip></mapTip>
     </maplayer>
     <maplayer autoRefreshEnabled="0" autoRefreshTime="0" geometry="No geometry" hasScaleBasedVisibilityFlag="0" maxScale="0" minScale="1e+8" readOnly="0" refreshOnNotifyEnabled="0" refreshOnNotifyMessage="" styleCategories="AllStyleCategories" type="vector">
@@ -2793,191 +2967,6 @@ def my_form_open(dialog, layer, feature):
       <mapTip></mapTip>
     </maplayer>
     <maplayer autoRefreshEnabled="0" autoRefreshTime="0" geometry="No geometry" hasScaleBasedVisibilityFlag="0" maxScale="0" minScale="1e+8" readOnly="0" refreshOnNotifyEnabled="0" refreshOnNotifyMessage="" styleCategories="AllStyleCategories" type="vector">
-      <id>r_qgisproject_node_638ea86b_2e09_45d2_a4d3_3080ed8854fe</id>
-      <datasource>service='gobs' sslmode=disable key='fk_id_qgisproject,fk_id_node' checkPrimaryKeyUnicity='1' table="gobs"."r_qgisproject_node" sql=</datasource>
-      <keywordList>
-        <value></value>
-      </keywordList>
-      <layername>r_qgisproject_node</layername>
-      <srs>
-        <spatialrefsys>
-          <proj4></proj4>
-          <srsid>0</srsid>
-          <srid>0</srid>
-          <authid></authid>
-          <description></description>
-          <projectionacronym></projectionacronym>
-          <ellipsoidacronym></ellipsoidacronym>
-          <geographicflag>false</geographicflag>
-        </spatialrefsys>
-      </srs>
-      <resourceMetadata>
-        <identifier></identifier>
-        <parentidentifier></parentidentifier>
-        <language></language>
-        <type>dataset</type>
-        <title></title>
-        <abstract>Pivot table between the QGIS projects and the thematic nodes.</abstract>
-        <contact>
-          <name></name>
-          <organization></organization>
-          <position></position>
-          <voice></voice>
-          <fax></fax>
-          <email></email>
-          <role></role>
-        </contact>
-        <links></links>
-        <fees></fees>
-        <encoding></encoding>
-        <crs>
-          <spatialrefsys>
-            <proj4></proj4>
-            <srsid>0</srsid>
-            <srid>0</srid>
-            <authid></authid>
-            <description></description>
-            <projectionacronym></projectionacronym>
-            <ellipsoidacronym></ellipsoidacronym>
-            <geographicflag>false</geographicflag>
-          </spatialrefsys>
-        </crs>
-        <extent>
-          <spatial crs="" dimensions="2" maxx="0" maxy="0" maxz="0" minx="0" miny="0" minz="0"></spatial>
-          <temporal>
-            <period>
-              <start></start>
-              <end></end>
-            </period>
-          </temporal>
-        </extent>
-      </resourceMetadata>
-      <provider encoding="UTF-8">postgres</provider>
-      <vectorjoins></vectorjoins>
-      <layerDependencies></layerDependencies>
-      <dataDependencies></dataDependencies>
-      <legend type="default-vector"></legend>
-      <expressionfields></expressionfields>
-      <map-layer-style-manager current="défaut">
-        <map-layer-style name="défaut"></map-layer-style>
-      </map-layer-style-manager>
-      <auxiliaryLayer></auxiliaryLayer>
-      <flags>
-        <Identifiable>1</Identifiable>
-        <Removable>1</Removable>
-        <Searchable>1</Searchable>
-      </flags>
-      <customproperties>
-        <property key="embeddedWidgets/count" value="0"></property>
-        <property key="variableNames"></property>
-        <property key="variableValues"></property>
-      </customproperties>
-      <geometryOptions geometryPrecision="0" removeDuplicateNodes="0">
-        <activeChecks></activeChecks>
-        <checkConfiguration></checkConfiguration>
-      </geometryOptions>
-      <fieldConfiguration>
-        <field name="fk_id_qgisproject">
-          <editWidget type="RelationReference">
-            <config>
-              <Option type="Map">
-                <Option name="AllowAddFeatures" type="bool" value="false"></Option>
-                <Option name="AllowNULL" type="bool" value="false"></Option>
-                <Option name="MapIdentification" type="bool" value="false"></Option>
-                <Option name="OrderByValue" type="bool" value="false"></Option>
-                <Option name="ReadOnly" type="bool" value="false"></Option>
-                <Option name="Relation" type="QString" value="r_qgisproject_node_638ea86b_2e09_45d2_a4d3_3080ed8854fe_fk_id_qgisproject_qgisproject_c137d6c4_f1fa_4a70_bfe3_9c67c7628f63_id"></Option>
-                <Option name="ShowForm" type="bool" value="false"></Option>
-                <Option name="ShowOpenFormButton" type="bool" value="true"></Option>
-              </Option>
-            </config>
-          </editWidget>
-        </field>
-        <field name="fk_id_node">
-          <editWidget type="RelationReference">
-            <config>
-              <Option type="Map">
-                <Option name="AllowAddFeatures" type="bool" value="false"></Option>
-                <Option name="AllowNULL" type="bool" value="false"></Option>
-                <Option name="MapIdentification" type="bool" value="false"></Option>
-                <Option name="OrderByValue" type="bool" value="false"></Option>
-                <Option name="ReadOnly" type="bool" value="false"></Option>
-                <Option name="Relation" type="QString" value="r_qgisproject_node_638ea86b_2e09_45d2_a4d3_3080ed8854fe_fk_id_node_graph_node_2cd9eee8_46e2_401c_87f7_8b40d9d6260e_id"></Option>
-                <Option name="ShowForm" type="bool" value="false"></Option>
-                <Option name="ShowOpenFormButton" type="bool" value="true"></Option>
-              </Option>
-            </config>
-          </editWidget>
-        </field>
-      </fieldConfiguration>
-      <aliases>
-        <alias field="fk_id_qgisproject" index="0" name="QGIS project"></alias>
-        <alias field="fk_id_node" index="1" name="Thematic node"></alias>
-      </aliases>
-      <excludeAttributesWMS></excludeAttributesWMS>
-      <excludeAttributesWFS></excludeAttributesWFS>
-      <defaults>
-        <default applyOnUpdate="0" expression="" field="fk_id_qgisproject"></default>
-        <default applyOnUpdate="0" expression="" field="fk_id_node"></default>
-      </defaults>
-      <constraints>
-        <constraint constraints="1" exp_strength="0" field="fk_id_qgisproject" notnull_strength="1" unique_strength="0"></constraint>
-        <constraint constraints="1" exp_strength="0" field="fk_id_node" notnull_strength="1" unique_strength="0"></constraint>
-      </constraints>
-      <constraintExpressions>
-        <constraint desc="" exp="" field="fk_id_qgisproject"></constraint>
-        <constraint desc="" exp="" field="fk_id_node"></constraint>
-      </constraintExpressions>
-      <expressionfields></expressionfields>
-      <attributeactions>
-        <defaultAction key="Canvas" value="{00000000-0000-0000-0000-000000000000}"></defaultAction>
-      </attributeactions>
-      <attributetableconfig actionWidgetStyle="dropDown" sortExpression="" sortOrder="0">
-        <columns>
-          <column hidden="0" name="fk_id_qgisproject" type="field" width="-1"></column>
-          <column hidden="0" name="fk_id_node" type="field" width="-1"></column>
-          <column hidden="1" type="actions" width="-1"></column>
-        </columns>
-      </attributetableconfig>
-      <conditionalstyles>
-        <rowstyles></rowstyles>
-        <fieldstyles></fieldstyles>
-      </conditionalstyles>
-      <editform tolerant="1"></editform>
-      <editforminit></editforminit>
-      <editforminitcodesource>0</editforminitcodesource>
-      <editforminitfilepath></editforminitfilepath>
-      <editforminitcode># -*- coding: utf-8 -*-
-"""
-Les formulaires QGIS peuvent avoir une fonction Python qui sera appelée à l'ouverture du formulaire.
-
-Utilisez cette fonction pour ajouter plus de fonctionnalités à vos formulaires.
-
-Entrez le nom de la fonction dans le champ "Fonction d'initialisation Python".
-Voici un exemple à suivre:
-"""
-from qgis.PyQt.QtWidgets import QWidget
-
-def my_form_open(dialog, layer, feature):
-    geom = feature.geometry()
-    control = dialog.findChild(QWidget, "MyLineEdit")
-
-</editforminitcode>
-      <featformsuppress>0</featformsuppress>
-      <editorlayout>generatedlayout</editorlayout>
-      <editable>
-        <field editable="1" name="fk_id_node"></field>
-        <field editable="1" name="fk_id_qgisproject"></field>
-      </editable>
-      <labelOnTop>
-        <field labelOnTop="0" name="fk_id_node"></field>
-        <field labelOnTop="0" name="fk_id_qgisproject"></field>
-      </labelOnTop>
-      <widgets></widgets>
-      <previewExpression>fk_id_qgisproject</previewExpression>
-      <mapTip></mapTip>
-    </maplayer>
-    <maplayer autoRefreshEnabled="0" autoRefreshTime="0" geometry="No geometry" hasScaleBasedVisibilityFlag="0" maxScale="0" minScale="1e+8" readOnly="0" refreshOnNotifyEnabled="0" refreshOnNotifyMessage="" styleCategories="AllStyleCategories" type="vector">
       <id>series_04a7414a_ab6d_4611_8a60_bcd22071dc22</id>
       <datasource>service='gobs' sslmode=disable key='id' estimatedmetadata=true checkPrimaryKeyUnicity='0' table="gobs"."series" sql=</datasource>
       <keywordList>
@@ -3053,9 +3042,7 @@ def my_form_open(dialog, layer, feature):
         <Searchable>1</Searchable>
       </flags>
       <customproperties>
-        <property key="dualview/previewExpressions">
-          <value>id</value>
-        </property>
+        <property key="dualview/previewExpressions" value="id"></property>
         <property key="embeddedWidgets/count" value="0"></property>
         <property key="variableNames"></property>
         <property key="variableValues"></property>
@@ -3732,99 +3719,18 @@ def my_form_open(dialog, layer, feature):
   </projectlayers>
   <layerorder>
     <layer id="osm_mapnik_73cc9876_fa44_4742_bc09_afe572b57bbe"></layer>
+    <layer id="layername_f995c716_2ba0_4ed9_a0c6_68075a05b9bd"></layer>
+    <layer id="layername_6adb0d3d_940b_495c_8a3c_fb7f85e36ddb"></layer>
   </layerorder>
   <properties>
-    <WMTSPngLayers>
+    <WMTSLayers>
+      <Project type="bool">false</Project>
       <Group type="QStringList"></Group>
       <Layer type="QStringList"></Layer>
-      <Project type="bool">false</Project>
-    </WMTSPngLayers>
-    <Measure>
-      <Ellipsoid type="QString">WGS84</Ellipsoid>
-    </Measure>
-    <WMSPrecision type="QString">8</WMSPrecision>
-    <WMSImageQuality type="int">90</WMSImageQuality>
-    <WCSLayers type="QStringList"></WCSLayers>
-    <WMSUrl type="QString"></WMSUrl>
+    </WMTSLayers>
     <WMSOnlineResource type="QString"></WMSOnlineResource>
-    <WMSRequestDefinedDataSources type="bool">false</WMSRequestDefinedDataSources>
-    <WMSDefaultMapUnitsPerMm type="double">1</WMSDefaultMapUnitsPerMm>
-    <WMSAccessConstraints type="QString">None</WMSAccessConstraints>
-    <WMTSMinScale type="int">5000</WMTSMinScale>
-    <WMSSegmentizeFeatureInfoGeometry type="bool">false</WMSSegmentizeFeatureInfoGeometry>
-    <WMSKeywordList type="QStringList">
-      <value></value>
-    </WMSKeywordList>
-    <WFSLayersPrecision>
-      <r_indicator_node_2ca83116_e69f_4dcb_abcb_de5bdf44b2be type="int">8</r_indicator_node_2ca83116_e69f_4dcb_abcb_de5bdf44b2be>
-      <r_graph_edge_f2eb47e9_728b_4c85_a839_3b488e132e06 type="int">8</r_graph_edge_f2eb47e9_728b_4c85_a839_3b488e132e06>
-      <r_qgisproject_node_638ea86b_2e09_45d2_a4d3_3080ed8854fe type="int">8</r_qgisproject_node_638ea86b_2e09_45d2_a4d3_3080ed8854fe>
-      <glossary_cee356e0_5be5_4d87_ac2b_e8e8967c4032 type="int">8</glossary_cee356e0_5be5_4d87_ac2b_e8e8967c4032>
-      <indicator_18ba18bf_0390_45a3_8edd_1cc049e8a251 type="int">8</indicator_18ba18bf_0390_45a3_8edd_1cc049e8a251>
-      <actor_5f01a6e5_8205_462f_af40_0ffd7ff0a44f type="int">8</actor_5f01a6e5_8205_462f_af40_0ffd7ff0a44f>
-      <import_0343eb12_592e_4fd0_8380_51f4d62b6a56 type="int">8</import_0343eb12_592e_4fd0_8380_51f4d62b6a56>
-      <rp_struct_pop_evolution_geom_9e098769_c0a3_48ea_af36_583a5b78040f type="int">8</rp_struct_pop_evolution_geom_9e098769_c0a3_48ea_af36_583a5b78040f>
-      <spatial_layer_18215d6d_1f4c_40d2_ba83_f2c9a9694e84 type="int">8</spatial_layer_18215d6d_1f4c_40d2_ba83_f2c9a9694e84>
-      <observation_bcc90162_47c8_4097_bc24_a31af92d2708 type="int">8</observation_bcc90162_47c8_4097_bc24_a31af92d2708>
-      <layername_92aa619b_5987_4160_8e22_c72475d3a9b4 type="int">8</layername_92aa619b_5987_4160_8e22_c72475d3a9b4>
-      <pluviometrie_horaire_historique_16e3e428_23be_4eae_a3e0_8eeddea0d3b9 type="int">8</pluviometrie_horaire_historique_16e3e428_23be_4eae_a3e0_8eeddea0d3b9>
-      <graph_node_2cd9eee8_46e2_401c_87f7_8b40d9d6260e type="int">8</graph_node_2cd9eee8_46e2_401c_87f7_8b40d9d6260e>
-      <series_04a7414a_ab6d_4611_8a60_bcd22071dc22 type="int">8</series_04a7414a_ab6d_4611_8a60_bcd22071dc22>
-      <protocol_5507f1c8_1802_4df0_a273_8e9b7f52c352 type="int">8</protocol_5507f1c8_1802_4df0_a273_8e9b7f52c352>
-      <spatial_object_c4852341_be7f_490c_b115_26d47b3e38f8 type="int">8</spatial_object_c4852341_be7f_490c_b115_26d47b3e38f8>
-      <pluviometrie_stations_technique_66eb0c8c_1668_4009_a8fb_6437ffca93d3 type="int">8</pluviometrie_stations_technique_66eb0c8c_1668_4009_a8fb_6437ffca93d3>
-      <actor_category_8a7edcf8_cb34_4689_b22b_7a8a6a2ab610 type="int">8</actor_category_8a7edcf8_cb34_4689_b22b_7a8a6a2ab610>
-      <qgisproject_c137d6c4_f1fa_4a70_bfe3_9c67c7628f63 type="int">8</qgisproject_c137d6c4_f1fa_4a70_bfe3_9c67c7628f63>
-    </WFSLayersPrecision>
-    <DefaultStyles>
-      <RandomColors type="bool">true</RandomColors>
-      <Fill type="QString"></Fill>
-      <Line type="QString"></Line>
-      <Opacity type="double">1</Opacity>
-      <ColorRamp type="QString"></ColorRamp>
-      <Marker type="QString"></Marker>
-    </DefaultStyles>
-    <WMSRestrictedLayers type="QStringList"></WMSRestrictedLayers>
-    <WMSContactMail type="QString"></WMSContactMail>
-    <WMSExtent type="QStringList">
-      <value>763699.3042286554</value>
-      <value>6275302.4538766</value>
-      <value>778265.2454694429</value>
-      <value>6283782.243872829</value>
-    </WMSExtent>
-    <WMSUseLayerIDs type="bool">false</WMSUseLayerIDs>
-    <WMTSJpegLayers>
-      <Group type="QStringList"></Group>
-      <Layer type="QStringList"></Layer>
-      <Project type="bool">false</Project>
-    </WMTSJpegLayers>
-    <Legend>
-      <filterByMap type="bool">false</filterByMap>
-    </Legend>
-    <Measurement>
-      <AreaUnits type="QString">m2</AreaUnits>
-      <DistanceUnits type="QString">meters</DistanceUnits>
-    </Measurement>
-    <WFSUrl type="QString"></WFSUrl>
-    <WMSRootName type="QString"></WMSRootName>
-    <WMSContactOrganization type="QString"></WMSContactOrganization>
-    <PositionPrecision>
-      <Automatic type="bool">true</Automatic>
-      <DecimalPlaces type="int">2</DecimalPlaces>
-      <DegreeFormat type="QString">MU</DegreeFormat>
-    </PositionPrecision>
-    <WMSServiceAbstract type="QString"></WMSServiceAbstract>
-    <WMSContactPerson type="QString"></WMSContactPerson>
-    <Gui>
-      <SelectionColorAlphaPart type="int">255</SelectionColorAlphaPart>
-      <SelectionColorRedPart type="int">255</SelectionColorRedPart>
-      <CanvasColorGreenPart type="int">255</CanvasColorGreenPart>
-      <SelectionColorGreenPart type="int">255</SelectionColorGreenPart>
-      <SelectionColorBluePart type="int">0</SelectionColorBluePart>
-      <CanvasColorRedPart type="int">255</CanvasColorRedPart>
-      <CanvasColorBluePart type="int">255</CanvasColorBluePart>
-    </Gui>
-    <WMSFees type="QString">conditions unknown</WMSFees>
+    <WMSAddWktGeometry type="bool">false</WMSAddWktGeometry>
+    <WMSContactPosition type="QString"></WMSContactPosition>
     <WFSLayers type="QStringList">
       <value>actor_5f01a6e5_8205_462f_af40_0ffd7ff0a44f</value>
       <value>actor_category_8a7edcf8_cb34_4689_b22b_7a8a6a2ab610</value>
@@ -3846,67 +3752,150 @@ def my_form_open(dialog, layer, feature):
       <value>spatial_layer_18215d6d_1f4c_40d2_ba83_f2c9a9694e84</value>
       <value>spatial_object_c4852341_be7f_490c_b115_26d47b3e38f8</value>
     </WFSLayers>
-    <WMSRestrictedComposers type="QStringList"></WMSRestrictedComposers>
+    <WMSSegmentizeFeatureInfoGeometry type="bool">false</WMSSegmentizeFeatureInfoGeometry>
+    <Legend>
+      <filterByMap type="bool">false</filterByMap>
+    </Legend>
+    <WMSContactMail type="QString"></WMSContactMail>
+    <WFSTLayers>
+      <Update type="QStringList"></Update>
+      <Delete type="QStringList"></Delete>
+      <Insert type="QStringList"></Insert>
+    </WFSTLayers>
+    <PositionPrecision>
+      <DecimalPlaces type="int">2</DecimalPlaces>
+      <Automatic type="bool">true</Automatic>
+      <DegreeFormat type="QString">MU</DegreeFormat>
+    </PositionPrecision>
+    <WMSDefaultMapUnitsPerMm type="double">1</WMSDefaultMapUnitsPerMm>
+    <WMSUrl type="QString"></WMSUrl>
+    <WMSContactPerson type="QString"></WMSContactPerson>
+    <Measurement>
+      <DistanceUnits type="QString">meters</DistanceUnits>
+      <AreaUnits type="QString">m2</AreaUnits>
+    </Measurement>
+    <WMSRestrictedLayers type="QStringList"></WMSRestrictedLayers>
+    <WMSServiceTitle type="QString">gobs_manager</WMSServiceTitle>
+    <qgis2web>
+      <Measuretool type="QString">None</Measuretool>
+      <Exporter type="QString">folder</Exporter>
+      <Template type="QString">full-screen</Template>
+      <Restricttoextent type="bool">false</Restricttoextent>
+      <Exportfolder type="QString">/tmp/qgis2web</Exportfolder>
+      <Addlayerslist type="QString">None</Addlayerslist>
+      <Minzoomlevel type="QString">1</Minzoomlevel>
+      <Addaddresssearch type="bool">false</Addaddresssearch>
+      <WidgetBackground type="QString">#f8f8f8</WidgetBackground>
+      <Highlightonhover type="bool">false</Highlightonhover>
+      <Geolocateuser type="bool">false</Geolocateuser>
+      <MatchprojectCRS type="bool">false</MatchprojectCRS>
+      <Searchlayer type="QString"></Searchlayer>
+      <Layersearch type="QString">None</Layersearch>
+      <Precision type="QString">maintain</Precision>
+      <Extent type="QString">Canvas extent</Extent>
+      <Maxzoomlevel type="QString">28</Maxzoomlevel>
+      <MinifyGeoJSONfiles type="bool">false</MinifyGeoJSONfiles>
+      <mapFormat type="QString">openlayers</mapFormat>
+      <WidgetIcon type="QString">#000000</WidgetIcon>
+      <Showpopupsonhover type="bool">false</Showpopupsonhover>
+    </qgis2web>
+    <WMSServiceAbstract type="QString"></WMSServiceAbstract>
+    <WMSAccessConstraints type="QString">None</WMSAccessConstraints>
+    <PAL>
+      <ShowingCandidates type="bool">false</ShowingCandidates>
+      <CandidatesPoint type="int">16</CandidatesPoint>
+      <DrawRectOnly type="bool">false</DrawRectOnly>
+      <SearchMethod type="int">0</SearchMethod>
+      <CandidatesPolygon type="int">30</CandidatesPolygon>
+      <ShowingPartialsLabels type="bool">true</ShowingPartialsLabels>
+      <TextFormat type="int">0</TextFormat>
+      <ShowingAllLabels type="bool">false</ShowingAllLabels>
+      <CandidatesLine type="int">50</CandidatesLine>
+    </PAL>
+    <WCSUrl type="QString"></WCSUrl>
+    <WMSRootName type="QString"></WMSRootName>
+    <WMTSUrl type="QString"></WMTSUrl>
+    <WMSPrecision type="QString">8</WMSPrecision>
     <Macros>
       <pythonCode type="QString"></pythonCode>
     </Macros>
-    <Paths>
-      <Absolute type="bool">false</Absolute>
-    </Paths>
-    <WMTSUrl type="QString"></WMTSUrl>
-    <WFSTLayers>
-      <Insert type="QStringList"></Insert>
-      <Update type="QStringList"></Update>
-      <Delete type="QStringList"></Delete>
-    </WFSTLayers>
-    <WCSUrl type="QString"></WCSUrl>
-    <WMSContactPosition type="QString"></WMSContactPosition>
+    <WMSKeywordList type="QStringList">
+      <value></value>
+    </WMSKeywordList>
+    <WFSUrl type="QString"></WFSUrl>
+    <WMSServiceCapabilities type="bool">false</WMSServiceCapabilities>
+    <WMSContactOrganization type="QString"></WMSContactOrganization>
+    <WFSLayersPrecision>
+      <r_indicator_node_2ca83116_e69f_4dcb_abcb_de5bdf44b2be type="int">8</r_indicator_node_2ca83116_e69f_4dcb_abcb_de5bdf44b2be>
+      <import_0343eb12_592e_4fd0_8380_51f4d62b6a56 type="int">8</import_0343eb12_592e_4fd0_8380_51f4d62b6a56>
+      <layername_92aa619b_5987_4160_8e22_c72475d3a9b4 type="int">8</layername_92aa619b_5987_4160_8e22_c72475d3a9b4>
+      <pluviometrie_stations_technique_66eb0c8c_1668_4009_a8fb_6437ffca93d3 type="int">8</pluviometrie_stations_technique_66eb0c8c_1668_4009_a8fb_6437ffca93d3>
+      <r_graph_edge_f2eb47e9_728b_4c85_a839_3b488e132e06 type="int">8</r_graph_edge_f2eb47e9_728b_4c85_a839_3b488e132e06>
+      <qgisproject_c137d6c4_f1fa_4a70_bfe3_9c67c7628f63 type="int">8</qgisproject_c137d6c4_f1fa_4a70_bfe3_9c67c7628f63>
+      <series_04a7414a_ab6d_4611_8a60_bcd22071dc22 type="int">8</series_04a7414a_ab6d_4611_8a60_bcd22071dc22>
+      <spatial_layer_18215d6d_1f4c_40d2_ba83_f2c9a9694e84 type="int">8</spatial_layer_18215d6d_1f4c_40d2_ba83_f2c9a9694e84>
+      <pluviometrie_horaire_historique_16e3e428_23be_4eae_a3e0_8eeddea0d3b9 type="int">8</pluviometrie_horaire_historique_16e3e428_23be_4eae_a3e0_8eeddea0d3b9>
+      <spatial_object_c4852341_be7f_490c_b115_26d47b3e38f8 type="int">8</spatial_object_c4852341_be7f_490c_b115_26d47b3e38f8>
+      <r_qgisproject_node_638ea86b_2e09_45d2_a4d3_3080ed8854fe type="int">8</r_qgisproject_node_638ea86b_2e09_45d2_a4d3_3080ed8854fe>
+      <actor_5f01a6e5_8205_462f_af40_0ffd7ff0a44f type="int">8</actor_5f01a6e5_8205_462f_af40_0ffd7ff0a44f>
+      <protocol_5507f1c8_1802_4df0_a273_8e9b7f52c352 type="int">8</protocol_5507f1c8_1802_4df0_a273_8e9b7f52c352>
+      <glossary_cee356e0_5be5_4d87_ac2b_e8e8967c4032 type="int">8</glossary_cee356e0_5be5_4d87_ac2b_e8e8967c4032>
+      <indicator_18ba18bf_0390_45a3_8edd_1cc049e8a251 type="int">8</indicator_18ba18bf_0390_45a3_8edd_1cc049e8a251>
+      <graph_node_2cd9eee8_46e2_401c_87f7_8b40d9d6260e type="int">8</graph_node_2cd9eee8_46e2_401c_87f7_8b40d9d6260e>
+      <observation_bcc90162_47c8_4097_bc24_a31af92d2708 type="int">8</observation_bcc90162_47c8_4097_bc24_a31af92d2708>
+      <actor_category_8a7edcf8_cb34_4689_b22b_7a8a6a2ab610 type="int">8</actor_category_8a7edcf8_cb34_4689_b22b_7a8a6a2ab610>
+      <rp_struct_pop_evolution_geom_9e098769_c0a3_48ea_af36_583a5b78040f type="int">8</rp_struct_pop_evolution_geom_9e098769_c0a3_48ea_af36_583a5b78040f>
+    </WFSLayersPrecision>
+    <WMSContactPhone type="QString"></WMSContactPhone>
+    <WMTSJpegLayers>
+      <Project type="bool">false</Project>
+      <Group type="QStringList"></Group>
+      <Layer type="QStringList"></Layer>
+    </WMTSJpegLayers>
+    <Gui>
+      <SelectionColorGreenPart type="int">255</SelectionColorGreenPart>
+      <CanvasColorRedPart type="int">255</CanvasColorRedPart>
+      <CanvasColorBluePart type="int">255</CanvasColorBluePart>
+      <CanvasColorGreenPart type="int">255</CanvasColorGreenPart>
+      <SelectionColorBluePart type="int">0</SelectionColorBluePart>
+      <SelectionColorAlphaPart type="int">255</SelectionColorAlphaPart>
+      <SelectionColorRedPart type="int">255</SelectionColorRedPart>
+    </Gui>
+    <WMSImageQuality type="int">90</WMSImageQuality>
+    <WMTSPngLayers>
+      <Project type="bool">false</Project>
+      <Group type="QStringList"></Group>
+      <Layer type="QStringList"></Layer>
+    </WMTSPngLayers>
+    <WMSRequestDefinedDataSources type="bool">false</WMSRequestDefinedDataSources>
+    <DefaultStyles>
+      <Marker type="QString"></Marker>
+      <ColorRamp type="QString"></ColorRamp>
+      <RandomColors type="bool">true</RandomColors>
+      <Line type="QString"></Line>
+      <Fill type="QString"></Fill>
+      <Opacity type="double">1</Opacity>
+    </DefaultStyles>
+    <WCSLayers type="QStringList"></WCSLayers>
+    <WMSExtent type="QStringList">
+      <value>763699.3042286554</value>
+      <value>6275302.4538766</value>
+      <value>778265.2454694429</value>
+      <value>6283782.243872829</value>
+    </WMSExtent>
+    <Measure>
+      <Ellipsoid type="QString">WGS84</Ellipsoid>
+    </Measure>
+    <WMTSMinScale type="int">5000</WMTSMinScale>
     <SpatialRefSys>
       <ProjectionsEnabled type="int">1</ProjectionsEnabled>
     </SpatialRefSys>
-    <PAL>
-      <CandidatesPoint type="int">16</CandidatesPoint>
-      <SearchMethod type="int">0</SearchMethod>
-      <ShowingPartialsLabels type="bool">true</ShowingPartialsLabels>
-      <ShowingCandidates type="bool">false</ShowingCandidates>
-      <DrawRectOnly type="bool">false</DrawRectOnly>
-      <CandidatesLine type="int">50</CandidatesLine>
-      <ShowingAllLabels type="bool">false</ShowingAllLabels>
-      <CandidatesPolygon type="int">30</CandidatesPolygon>
-      <TextFormat type="int">0</TextFormat>
-    </PAL>
-    <WMSServiceCapabilities type="bool">false</WMSServiceCapabilities>
-    <WMSServiceTitle type="QString">gobs_manager</WMSServiceTitle>
-    <WMSContactPhone type="QString"></WMSContactPhone>
-    <qgis2web>
-      <Exporter type="QString">folder</Exporter>
-      <Addaddresssearch type="bool">false</Addaddresssearch>
-      <WidgetBackground type="QString">#f8f8f8</WidgetBackground>
-      <Searchlayer type="QString"></Searchlayer>
-      <Showpopupsonhover type="bool">false</Showpopupsonhover>
-      <Precision type="QString">maintain</Precision>
-      <Addlayerslist type="QString">None</Addlayerslist>
-      <MinifyGeoJSONfiles type="bool">false</MinifyGeoJSONfiles>
-      <Minzoomlevel type="QString">1</Minzoomlevel>
-      <Highlightonhover type="bool">false</Highlightonhover>
-      <Template type="QString">full-screen</Template>
-      <mapFormat type="QString">openlayers</mapFormat>
-      <Exportfolder type="QString">/tmp/qgis2web</Exportfolder>
-      <MatchprojectCRS type="bool">false</MatchprojectCRS>
-      <Layersearch type="QString">None</Layersearch>
-      <Geolocateuser type="bool">false</Geolocateuser>
-      <Measuretool type="QString">None</Measuretool>
-      <Restricttoextent type="bool">false</Restricttoextent>
-      <WidgetIcon type="QString">#000000</WidgetIcon>
-      <Maxzoomlevel type="QString">28</Maxzoomlevel>
-      <Extent type="QString">Canvas extent</Extent>
-    </qgis2web>
-    <WMTSLayers>
-      <Group type="QStringList"></Group>
-      <Layer type="QStringList"></Layer>
-      <Project type="bool">false</Project>
-    </WMTSLayers>
-    <WMSAddWktGeometry type="bool">false</WMSAddWktGeometry>
+    <WMSFees type="QString">conditions unknown</WMSFees>
+    <Paths>
+      <Absolute type="bool">false</Absolute>
+    </Paths>
+    <WMSUseLayerIDs type="bool">false</WMSUseLayerIDs>
+    <WMSRestrictedComposers type="QStringList"></WMSRestrictedComposers>
   </properties>
   <visibility-presets></visibility-presets>
   <transformContext></transformContext>

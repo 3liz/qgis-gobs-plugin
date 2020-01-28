@@ -250,8 +250,8 @@ class GetAggregatedData(GetDataAsLayer):
                 id_label,
                 id_date_format,
                 array_to_string(id_value_code, '|') AS id_value_code,
-                id_value_type,
-                id_value_unit
+                array_to_string(id_value_type, '|') AS id_value_type,
+                array_to_string(id_value_unit, '|') AS id_value_unit
             FROM gobs.indicator AS i
             INNER JOIN gobs.series AS s
                 ON s.fk_id_protocol = i.id
@@ -277,8 +277,8 @@ class GetAggregatedData(GetDataAsLayer):
         id_label = data[0][0]
         id_date_format = data[0][1]
         id_value_code = data[0][2].split('|')
-        id_value_type = data[0][3]
-        id_value_unit = data[0][4]
+        id_value_type = data[0][3].split('|')
+        id_value_unit = data[0][4].split('|')
 
         # BUILD SQL
 
@@ -344,7 +344,7 @@ class GetAggregatedData(GetDataAsLayer):
                     '{agg}( (ob_value->>{idx})::{id_value_type} ) AS "{agg}_{fieldname}"'.format(
                         agg=agg,
                         idx=idx,
-                        id_value_type=id_value_type,
+                        id_value_type=id_value_type[idx],
                         fieldname=s
                     )
                 )

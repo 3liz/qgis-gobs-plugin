@@ -118,7 +118,7 @@ class GetSeriesData(GetDataAsLayer):
             self.tr('Series ID. If given, it overrides previous choice'),
             optional=True
         )
-        p.setFlags(QgsProcessingParameterDefinition.FlagHidden)
+        # p.setFlags(QgsProcessingParameterDefinition.FlagHidden)
         self.addParameter(p)
 
     def checkParameterValues(self, parameters, context):
@@ -126,7 +126,7 @@ class GetSeriesData(GetDataAsLayer):
         serie_id = self.parameterAsInt(parameters, self.SERIE_ID, context)
 
         # Check serie id is in the list of existing series
-        if serie_id > 0:
+        if serie_id and serie_id > 0:
             if not serie_id in self.SERIES_DICT:
                 return False, self.tr('Series ID does not exists in the database')
 
@@ -156,8 +156,9 @@ class GetSeriesData(GetDataAsLayer):
                 id_label,
                 id_date_format,
                 array_to_string(id_value_code, '|') AS id_value_code,
-                id_value_type,
-                id_value_unit
+                array_to_string(id_value_type, '|') AS id_value_type,
+                array_to_string(id_value_unit, '|') AS id_value_unit
+
             FROM gobs.indicator AS i
             INNER JOIN gobs.series AS s
                 ON s.fk_id_protocol = i.id
@@ -183,11 +184,11 @@ class GetSeriesData(GetDataAsLayer):
         id_label = data[0][0]
         id_date_format = data[0][1]
         id_value_code = data[0][2].split('|')
-        id_value_type = data[0][3]
-        id_value_unit = data[0][4]
+        id_value_type = data[0][3].split('|')
+        id_value_unit = data[0][4].split('|')
 
         # Build SQL
-        get_values = ['(ob_value->>%s)::%s AS "%s"' % (idx, id_value_type, s) for idx, s in enumerate(id_value_code)]
+        get_values = ['(ob_value->>%s)::%s AS "%s"' % (idx, id_value_type[idx], s) for idx, s in enumerate(id_value_code)]
         values = ", ".join(get_values)
         sql = '''
             SELECT
