@@ -244,8 +244,8 @@ CREATE TABLE gobs.indicator (
     id_date_format text DEFAULT 'day'::text NOT NULL,
     id_value_code text[] NOT NULL,
     id_value_name text[] NOT NULL,
-    id_value_type text DEFAULT 'integer'::text NOT NULL,
-    id_value_unit text NOT NULL,
+    id_value_type text[] NOT NULL,
+    id_value_unit text[] NOT NULL,
     id_paths text
 );
 
