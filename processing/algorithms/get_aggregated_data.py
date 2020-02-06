@@ -51,10 +51,12 @@ class GetAggregatedData(GetDataAsLayer):
     SERIE = 'SERIE'
     SERIE_ID = 'SERIE_ID'
     SERIES_DICT = {}
+    AGGREGATE_FUNCTIONS_LIST = ('min', 'max', 'avg', 'sum')
 
     ADD_SPATIAL_OBJECT_DATA = 'ADD_SPATIAL_OBJECT_DATA'
     ADD_SPATIAL_OBJECT_GEOM = 'ADD_SPATIAL_OBJECT_GEOM'
-    TIMESTAMP_STEP = 'TIMESTAMP_STEP'
+    TEMPORAL_RESOLUTION = 'TEMPORAL_RESOLUTION'
+    AGGREGATE_FUNCTIONS = 'AGGREGATE_FUNCTIONS'
     GROUP_BY_DISTINCT_VALUES = 'GROUP_BY_DISTINCT_VALUES'
     MIN_TIMESTAMP = 'MIN_TIMESTAMP'
     MAX_TIMESTAMP = 'MAX_TIMESTAMP'
@@ -113,7 +115,7 @@ class GetAggregatedData(GetDataAsLayer):
         self.addParameter(
             QgsProcessingParameterEnum(
                 self.SERIE,
-                self.tr('Target serie'),
+                self.tr('SOURCE - Choose one serie'),
                 options=self.SERIES,
                 optional=False
             )
@@ -134,7 +136,7 @@ class GetAggregatedData(GetDataAsLayer):
         self.addParameter(
             QgsProcessingParameterBoolean(
                 self.ADD_SPATIAL_OBJECT_DATA,
-                self.tr('Add spatial object ID and label ?'),
+                self.tr('FIELDS - Add spatial object ID and label ?'),
                 defaultValue=True,
                 optional=False
             )
@@ -144,42 +146,54 @@ class GetAggregatedData(GetDataAsLayer):
         self.addParameter(
             QgsProcessingParameterBoolean(
                 self.ADD_SPATIAL_OBJECT_GEOM,
-                self.tr('Add spatial object geometry ?'),
+                self.tr('FIELDS - Add spatial object geometry ?'),
                 defaultValue=False,
                 optional=False
             )
         )
 
 
-        # Aggregate with a timestamp step, such as hour, day, etc. ?
-        self.TIMESTAMP_STEPS = [
-            'no',
+        # Aggregate with a temporal resolution, such as hour, day, etc. ?
+        self.TEMPORAL_RESOLUTIONS = [
+            'original',
             'second', 'minute', 'hour', 'day', 'week', 'month', 'year'
         ]
         self.addParameter(
             QgsProcessingParameterEnum(
-                self.TIMESTAMP_STEP,
-                self.tr('Group by timestamp step ?'),
-                options=self.TIMESTAMP_STEPS,
+                self.TEMPORAL_RESOLUTION,
+                self.tr('FIELDS - Timestamp extraction resolution'),
+                options=self.TEMPORAL_RESOLUTIONS,
                 optional=False
             )
         )
 
-        # Aggregate with a value
+        # Aggregate functions
         self.addParameter(
-            QgsProcessingParameterBoolean(
-                self.GROUP_BY_DISTINCT_VALUES,
-                self.tr('Group by the distinct values'),
-                defaultValue=False,
-                optional=False
+            QgsProcessingParameterEnum(
+                self.AGGREGATE_FUNCTIONS,
+                self.tr('FIELDS - Choose aggregate functions to use'),
+                options=self.AGGREGATE_FUNCTIONS_LIST,
+                optional=False,
+                allowMultiple=True,
+                defaultValue=[a for a in range(len(self.AGGREGATE_FUNCTIONS_LIST))]
             )
         )
+
+        # Aggregate with a value
+        # self.addParameter(
+            # QgsProcessingParameterBoolean(
+                # self.GROUP_BY_DISTINCT_VALUES,
+                # self.tr('Group by the distinct values'),
+                # defaultValue=False,
+                # optional=False
+            # )
+        # )
 
         # Min timestamp
         self.addParameter(
             QgsProcessingParameterString(
                 self.MIN_TIMESTAMP,
-                self.tr('Minimum timestamp, Ex: 2019-01-01 or 2019-01-06 00:00:00'),
+                self.tr('FILTER - Minimum timestamp, Ex: 2019-01-01 or 2019-01-06 00:00:00'),
                 defaultValue='',
                 optional=True
             )
@@ -189,7 +203,7 @@ class GetAggregatedData(GetDataAsLayer):
         self.addParameter(
             QgsProcessingParameterString(
                 self.MAX_TIMESTAMP,
-                self.tr('Maximum timestamp, Ex:2019-12-31 or 2019-12-31 23:59:53'),
+                self.tr('FILTER - Maximum timestamp, Ex:2019-12-31 or 2019-12-31 23:59:53'),
                 defaultValue='',
                 optional=True
             )
@@ -226,9 +240,9 @@ class GetAggregatedData(GetDataAsLayer):
 
         add_spatial_object_data = self.parameterAsBool(parameters, self.ADD_SPATIAL_OBJECT_DATA, context)
         add_spatial_object_geom = self.parameterAsBool(parameters, self.ADD_SPATIAL_OBJECT_GEOM, context)
-        timestamp_step = None
-        if parameters[self.TIMESTAMP_STEP] > 0:
-            timestamp_step = self.TIMESTAMP_STEPS[parameters[self.TIMESTAMP_STEP]]
+        temporal_resolution = None
+        if parameters[self.TEMPORAL_RESOLUTION] > 0:
+            temporal_resolution = self.TEMPORAL_RESOLUTIONS[parameters[self.TEMPORAL_RESOLUTION]]
 
         min_timestamp = (self.parameterAsString(parameters, self.MIN_TIMESTAMP, context)).strip().replace('/', '-')
         max_timestamp = (self.parameterAsString(parameters, self.MAX_TIMESTAMP, context)).strip().replace('/', '-')
@@ -296,11 +310,11 @@ class GetAggregatedData(GetDataAsLayer):
             unique_id = '''
             s.fk_id_spatial_object AS id,
             '''
-        if timestamp_step:
+        if temporal_resolution:
             unique_id = '''
             extract(epoch FROM timestamp_val) AS id,
             '''
-        if add_spatial_object_data and timestamp_step:
+        if add_spatial_object_data and temporal_resolution:
             unique_id = '''
             row_number() OVER() AS id,
             '''
@@ -327,20 +341,22 @@ class GetAggregatedData(GetDataAsLayer):
             so.geom,
             '''
 
-        # Add timestamp step if asked: second, minute, hour, day, week, month, year
-        if timestamp_step:
-            # (EXTRACT({timestamp_step} FROM o.ob_timestamp))::integer AS timestamp_step,
+        # Add temporal resolution if asked: second, minute, hour, day, week, month, year
+        if temporal_resolution:
+            # (EXTRACT({temporal_resolution} FROM o.ob_timestamp))::integer AS temporal_resolution,
             sql+= '''
-            date_trunc('{timestamp_step}', o.ob_timestamp) AS timestamp_val,
+            date_trunc('{temporal_resolution}', o.ob_timestamp) AS timestamp_val,
             '''.format(
-                timestamp_step=timestamp_step
+                temporal_resolution=temporal_resolution
             )
 
-        # Add values with all aggregate functions
-        aggregates = ('min', 'max', 'avg', 'sum')
+        # Add fields with chosen aggregate functions
         values_ls = []
+        aggregate_functions = parameters[self.AGGREGATE_FUNCTIONS]
         for idx, s in enumerate(id_value_code):
-            for agg in aggregates:
+            for a, agg in enumerate(self.AGGREGATE_FUNCTIONS_LIST):
+                if a not in aggregate_functions:
+                    continue
                 values_ls.append(
                     '{agg}( (ob_value->>{idx})::{id_value_type} ) AS "{agg}_{fieldname}"'.format(
                         agg=agg,
@@ -403,7 +419,7 @@ class GetAggregatedData(GetDataAsLayer):
             )
 
         # GROUP BY
-        if add_spatial_object_data or add_spatial_object_geom or timestamp_step:
+        if add_spatial_object_data or add_spatial_object_geom or temporal_resolution:
             sql+= '''
             GROUP BY 1
             '''
@@ -416,16 +432,16 @@ class GetAggregatedData(GetDataAsLayer):
             sql+= '''
             , so.geom
             '''
-        if timestamp_step:
-            # , EXTRACT({timestamp_step} FROM o.ob_timestamp)
+        if temporal_resolution:
+            # , EXTRACT({temporal_resolution} FROM o.ob_timestamp)
             sql+= '''
-            , date_trunc('{timestamp_step}', o.ob_timestamp)
+            , date_trunc('{temporal_resolution}', o.ob_timestamp)
             '''.format(
-                timestamp_step=timestamp_step
+                temporal_resolution=temporal_resolution
             )
 
         # ORDER
-        # if add_spatial_object_data or timestamp_step:
+        # if add_spatial_object_data or temporal_resolution:
             # sql+= '''
             # ORDER BY 1
             # '''
@@ -434,9 +450,9 @@ class GetAggregatedData(GetDataAsLayer):
             # sql+= '''
             # , so_unique_label
             # '''
-        # if timestamp_step:
+        # if temporal_resolution:
             # sql+= '''
-            # , timestamp_step
+            # , temporal_resolution
             # '''
 
 
