@@ -116,9 +116,10 @@ class GetSeriesData(GetDataAsLayer):
         p = QgsProcessingParameterNumber(
             self.SERIE_ID,
             self.tr('Series ID. If given, it overrides previous choice'),
-            optional=True
+            optional=True,
+            defaultValue=-1
         )
-        # p.setFlags(QgsProcessingParameterDefinition.FlagHidden)
+        p.setFlags(QgsProcessingParameterDefinition.FlagHidden)
         self.addParameter(p)
 
     def checkParameterValues(self, parameters, context):

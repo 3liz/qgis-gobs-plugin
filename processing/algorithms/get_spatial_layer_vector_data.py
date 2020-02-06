@@ -105,7 +105,8 @@ class GetSpatialLayerVectorData(GetDataAsLayer):
         p = QgsProcessingParameterNumber(
             self.SPATIALLAYER_ID,
             self.tr('Spatial layer ID. If given, it overrides previous choice'),
-            optional=True
+            optional=True,
+            defaultValue=-1
         )
         p.setFlags(QgsProcessingParameterDefinition.FlagHidden)
         self.addParameter(p)
@@ -115,7 +116,7 @@ class GetSpatialLayerVectorData(GetDataAsLayer):
         spatial_layer_id = self.parameterAsInt(parameters, self.SPATIALLAYER_ID, context)
 
         # Check serie id is in the list of existing spatial layers
-        if spatial_layer_id > 0:
+        if spatial_layer_id and spatial_layer_id > 0:
             if not spatial_layer_id in self.SPATIALLAYERS_DICT:
                 return False, self.tr('Spatial layer ID does not exists in the database')
 
@@ -132,7 +133,7 @@ class GetSpatialLayerVectorData(GetDataAsLayer):
 
         # Override spatial layer id from second number input
         spatial_layer_id = self.parameterAsInt(parameters, self.SPATIALLAYER_ID, context)
-        if spatial_layer_id in self.SPATIALLAYERS_DICT:
+        if spatial_layer_id and spatial_layer_id in self.SPATIALLAYERS_DICT:
             id_spatial_layer = spatial_layer_id
 
         feedback.pushInfo(
@@ -186,7 +187,7 @@ class GetSpatialLayerVectorData(GetDataAsLayer):
 
             # Override spatial layer id from second number input
             spatial_layer_id = self.parameterAsInt(parameters, self.SPATIALLAYER_ID, context)
-            if spatial_layer_id in self.SPATIALLAYERS_DICT:
+            if spatial_layer_id and spatial_layer_id in self.SPATIALLAYERS_DICT:
                 id_spatial_layer = spatial_layer_id
 
             output_layer_name = self.SPATIALLAYERS_DICT[id_spatial_layer]
