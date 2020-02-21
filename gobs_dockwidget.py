@@ -110,7 +110,6 @@ class GobsDockWidget(QtWidgets.QDockWidget, FORM_CLASS):
         # Run alg
         param = {}
         alg_name = 'gobs:{0}'.format(name)
-        print(alg_name)
         execAlgorithmDialog(alg_name, param)
 
     def closeEvent(self, event):

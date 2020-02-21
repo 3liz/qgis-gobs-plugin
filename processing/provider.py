@@ -43,6 +43,9 @@ from .algorithms.get_series_data import GetSeriesData
 from .algorithms.get_series_list import GetSeriesList
 from .algorithms.get_aggregated_data import GetAggregatedData
 
+from qgis.core import (
+    QgsExpressionContextUtils
+)
 
 class GobsProvider(QgsProcessingProvider):
 
@@ -51,9 +54,14 @@ class GobsProvider(QgsProcessingProvider):
         Unloads the provider. Any tear-down steps required by the provider
         should be implemented here.
         """
+        QgsExpressionContextUtils.setGlobalVariable('gobs_get_database_data', 'no')
         pass
 
     def loadAlgorithms(self):
+
+        # Add flag used by initAlgorithm method of algs
+        # so that they do not get data from database to fill in their combo boxes
+        QgsExpressionContextUtils.setGlobalVariable('gobs_get_database_data', 'no')
 
         self.addAlgorithm( ConfigurePlugin() )
         self.addAlgorithm( ExecuteSqlOnService() )
@@ -66,6 +74,9 @@ class GobsProvider(QgsProcessingProvider):
         self.addAlgorithm( GetSeriesData() )
         self.addAlgorithm( GetSeriesList() )
         self.addAlgorithm( GetAggregatedData() )
+
+        # Put the flag back to yes
+        QgsExpressionContextUtils.setGlobalVariable('gobs_get_database_data', 'yes')
 
     def id(self):
         return 'gobs'

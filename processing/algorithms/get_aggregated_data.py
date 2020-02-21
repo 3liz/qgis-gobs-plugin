@@ -84,6 +84,7 @@ class GetAggregatedData(GetDataAsLayer):
         super(self.__class__, self).initAlgorithm(config)
 
         connection_name = QgsExpressionContextUtils.globalScope().variable('gobs_connection_name')
+        get_data = QgsExpressionContextUtils.globalScope().variable('gobs_get_database_data')
 
         # List of series
         sql = '''
@@ -104,7 +105,7 @@ class GetAggregatedData(GetDataAsLayer):
         dbpluginclass = createDbPlugin( 'postgis' )
         connections = [c.connectionName() for c in dbpluginclass.connections()]
         data = []
-        if connection_name in connections:
+        if get_data == 'yes' and connection_name in connections:
             [header, data, rowCount, ok, error_message] = fetchDataFromSqlQuery(
                 connection_name,
                 sql
@@ -237,6 +238,9 @@ class GetAggregatedData(GetDataAsLayer):
 
         # Get parameters
         connection_name = QgsExpressionContextUtils.globalScope().variable('gobs_connection_name')
+        get_data = QgsExpressionContextUtils.globalScope().variable('gobs_get_database_data')
+        if get_data != 'yes':
+            return
 
         add_spatial_object_data = self.parameterAsBool(parameters, self.ADD_SPATIAL_OBJECT_DATA, context)
         add_spatial_object_geom = self.parameterAsBool(parameters, self.ADD_SPATIAL_OBJECT_GEOM, context)

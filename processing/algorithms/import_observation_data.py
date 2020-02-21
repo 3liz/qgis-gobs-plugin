@@ -87,6 +87,7 @@ class ImportObservationData(QgsProcessingAlgorithm):
         # INPUTS
 
         connection_name = QgsExpressionContextUtils.globalScope().variable('gobs_connection_name')
+        get_data = QgsExpressionContextUtils.globalScope().variable('gobs_get_database_data')
 
         # List of series
         sql = '''
@@ -107,7 +108,7 @@ class ImportObservationData(QgsProcessingAlgorithm):
         dbpluginclass = createDbPlugin( 'postgis' )
         connections = [c.connectionName() for c in dbpluginclass.connections()]
         data = []
-        if connection_name in connections:
+        if get_data == 'yes' and connection_name in connections:
             [header, data, rowCount, ok, error_message] = fetchDataFromSqlQuery(
                 connection_name,
                 sql

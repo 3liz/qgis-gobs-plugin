@@ -74,6 +74,7 @@ class GetSeriesData(GetDataAsLayer):
         super(self.__class__, self).initAlgorithm(config)
 
         connection_name = QgsExpressionContextUtils.globalScope().variable('gobs_connection_name')
+        get_data = QgsExpressionContextUtils.globalScope().variable('gobs_get_database_data')
 
         # List of series
         sql = '''
@@ -94,7 +95,7 @@ class GetSeriesData(GetDataAsLayer):
         dbpluginclass = createDbPlugin( 'postgis' )
         connections = [c.connectionName() for c in dbpluginclass.connections()]
         data = []
-        if connection_name in connections:
+        if get_data =='yes' and connection_name in connections:
             [header, data, rowCount, ok, error_message] = fetchDataFromSqlQuery(
                 connection_name,
                 sql
@@ -138,6 +139,9 @@ class GetSeriesData(GetDataAsLayer):
 
         # Database connection parameters
         connection_name = QgsExpressionContextUtils.globalScope().variable('gobs_connection_name')
+        get_data = QgsExpressionContextUtils.globalScope().variable('gobs_get_database_data')
+        if get_data != 'yes':
+            return
 
         # Get series id from first combo box
         serie = self.SERIES[parameters[self.SERIE]]
