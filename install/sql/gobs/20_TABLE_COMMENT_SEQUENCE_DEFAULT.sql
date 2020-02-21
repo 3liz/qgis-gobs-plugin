@@ -159,8 +159,7 @@ ALTER SEQUENCE gobs.glossary_id_seq OWNED BY gobs.glossary.id;
 -- graph_node
 CREATE TABLE gobs.graph_node (
     id integer NOT NULL,
-    gn_name text NOT NULL,
-    gn_description text NOT NULL
+    gn_name text NOT NULL
 );
 
 
@@ -174,10 +173,6 @@ COMMENT ON COLUMN gobs.graph_node.id IS 'ID';
 
 -- graph_node.gn_name
 COMMENT ON COLUMN gobs.graph_node.gn_name IS 'Name of the node';
-
-
--- graph_node.gn_description
-COMMENT ON COLUMN gobs.graph_node.gn_description IS 'Description of the node';
 
 
 -- graph_node_id_seq

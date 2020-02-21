@@ -33,6 +33,11 @@ ALTER TABLE ONLY gobs.glossary
     ADD CONSTRAINT glossary_pkey PRIMARY KEY (id);
 
 
+-- graph_node graph_node_gn_name_unique
+ALTER TABLE ONLY gobs.graph_node
+    ADD CONSTRAINT graph_node_gn_name_unique UNIQUE (gn_name);
+
+
 -- graph_node graph_node_pkey
 ALTER TABLE ONLY gobs.graph_node
     ADD CONSTRAINT graph_node_pkey PRIMARY KEY (id);
