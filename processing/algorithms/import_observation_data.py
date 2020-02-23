@@ -57,6 +57,7 @@ class ImportObservationData(QgsProcessingAlgorithm):
     OUTPUT_STRING = 'OUTPUT_STRING'
 
     SERIES = []
+    SERIES_DICT = {}
 
     def name(self):
         return 'import_observation_data'
@@ -113,7 +114,10 @@ class ImportObservationData(QgsProcessingAlgorithm):
                 connection_name,
                 sql
             )
-        self.SERIES = ['%s - %s' % (a[1], a[0]) for a in data]
+        self.SERIES = ['%s' % a[1] for a in data]
+        self.SERIES_DICT = {a[1]: a[0] for a in data}
+
+
         self.addParameter(
             QgsProcessingParameterEnum(
                 self.SERIE,
@@ -217,7 +221,6 @@ class ImportObservationData(QgsProcessingAlgorithm):
         # Database connection parameters
         connection_name = QgsExpressionContextUtils.globalScope().variable('gobs_connection_name')
 
-        serie = self.SERIES[parameters[self.SERIE]]
         sourcelayer = self.parameterAsVectorLayer(parameters, self.SOURCELAYER, context)
         field_timestamp = self.parameterAsString(parameters, self.FIELD_TIMESTAMP, context)
         manualdate = self.parameterAsString(parameters, self.MANUALDATE, context)
@@ -228,8 +231,9 @@ class ImportObservationData(QgsProcessingAlgorithm):
         msg = ''
         status = 1
 
-        # Get chosen serie id
-        id_serie = serie.split('-')[-1].strip()
+        # Get series id from first combo box
+        serie = self.SERIES[parameters[self.SERIE]]
+        id_serie = int(self.SERIES_DICT[serie])
 
         # Import data to temporary table
         feedback.pushInfo(
@@ -308,11 +312,13 @@ class ImportObservationData(QgsProcessingAlgorithm):
             WHERE id = (
                 SELECT s.fk_id_indicator
                 FROM gobs.series AS s
-                WHERE s.id = %s
+                WHERE s.id = {0}
                 LIMIT 1
             )
             ;
-        ''' % id_serie
+        '''.format(
+            id_serie
+        )
         id_date_format = None
         try:
             [header, data, rowCount, ok, error_message] = fetchDataFromSqlQuery(
