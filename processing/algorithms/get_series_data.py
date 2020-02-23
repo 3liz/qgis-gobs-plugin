@@ -101,8 +101,8 @@ class GetSeriesData(GetDataAsLayer):
                 sql
             )
 
-        self.SERIES = ['%s - %s' % (a[1], a[0]) for a in data]
-        self.SERIES_DICT = {a[0]: a[1] for a in data}
+        self.SERIES = ['%s' % a[1] for a in data]
+        self.SERIES_DICT = {a[1]: a[0] for a in data}
         self.addParameter(
             QgsProcessingParameterEnum(
                 self.SERIE,
@@ -129,7 +129,7 @@ class GetSeriesData(GetDataAsLayer):
 
         # Check serie id is in the list of existing series
         if serie_id and serie_id > 0:
-            if not serie_id in self.SERIES_DICT:
+            if not serie_id in self.SERIES_DICT.values():
                 return False, self.tr('Series ID does not exists in the database')
 
         return super(GetSeriesData, self).checkParameterValues(parameters, context)
@@ -145,12 +145,14 @@ class GetSeriesData(GetDataAsLayer):
 
         # Get series id from first combo box
         serie = self.SERIES[parameters[self.SERIE]]
-        id_serie = int(serie.split('-')[-1].strip())
+        id_serie = int(self.SERIES_DICT[serie])
 
         # Override series is from second number input
         serie_id = self.parameterAsInt(parameters, self.SERIE_ID, context)
-        if serie_id in self.SERIES_DICT:
+        if serie_id in self.SERIES_DICT.values():
             id_serie = serie_id
+
+        feedback.pushInfo("ID SERIE = {}".format(id_serie))
 
         # Get data from chosen series
         feedback.pushInfo(
@@ -166,7 +168,7 @@ class GetSeriesData(GetDataAsLayer):
 
             FROM gobs.indicator AS i
             INNER JOIN gobs.series AS s
-                ON s.fk_id_protocol = i.id
+                ON s.fk_id_indicator = i.id
             WHERE s.id = {0}
         '''.format(
             id_serie
@@ -193,7 +195,14 @@ class GetSeriesData(GetDataAsLayer):
         id_value_unit = data[0][4].split('|')
 
         # Build SQL
-        get_values = ['(ob_value->>%s)::%s AS "%s"' % (idx, id_value_type[idx], s) for idx, s in enumerate(id_value_code)]
+        get_values = [
+            '(ob_value->>%s)::%s AS "%s"' % (
+                idx,
+                id_value_type[idx],
+                s
+            )
+            for idx, s in enumerate(id_value_code)
+        ]
         values = ", ".join(get_values)
         sql = '''
             SELECT
@@ -220,13 +229,14 @@ class GetSeriesData(GetDataAsLayer):
         if not output_layer_name.strip():
             # Get series id from first combo box
             serie = self.SERIES[parameters[self.SERIE]]
-            id_serie = int(serie.split('-')[-1].strip())
+            id_serie = int(self.SERIES_DICT[serie])
 
             # Override series is from second number input
             serie_id = self.parameterAsInt(parameters, self.SERIE_ID, context)
-            if serie_id in self.SERIES_DICT:
+            if serie_id in self.SERIES_DICT.values():
                 id_serie = serie_id
-            output_layer_name = self.SERIES_DICT[id_serie]
+
+            output_layer_name = [k for k,v in self.SERIES_DICT.items() if v == id_serie ][0]
 
         # Set layer name
         self.LAYER_NAME = output_layer_name

@@ -44,6 +44,9 @@
       <layer-tree-layer checked="Qt::Checked" expanded="1" id="indicator_18ba18bf_0390_45a3_8edd_1cc049e8a251" name="indicator" providerKey="postgres" source="service='gobs' sslmode=disable key='id' estimatedmetadata=true checkPrimaryKeyUnicity='0' table=&quot;gobs&quot;.&quot;indicator&quot; sql=">
         <customproperties></customproperties>
       </layer-tree-layer>
+      <layer-tree-layer checked="Qt::Checked" expanded="1" id="protocol_5507f1c8_1802_4df0_a273_8e9b7f52c352" name="protocol" providerKey="postgres" source="service='gobs' sslmode=disable key='id' estimatedmetadata=true checkPrimaryKeyUnicity='0' table=&quot;gobs&quot;.&quot;protocol&quot; sql=">
+        <customproperties></customproperties>
+      </layer-tree-layer>
       <layer-tree-layer checked="Qt::Checked" expanded="1" id="series_04a7414a_ab6d_4611_8a60_bcd22071dc22" name="series" providerKey="postgres" source="service='gobs' sslmode=disable key='id' estimatedmetadata=true checkPrimaryKeyUnicity='0' table=&quot;gobs&quot;.&quot;series&quot; sql=">
         <customproperties></customproperties>
       </layer-tree-layer>
@@ -56,9 +59,6 @@
       <layer-tree-layer checked="Qt::Checked" expanded="1" id="r_graph_edge_f2eb47e9_728b_4c85_a839_3b488e132e06" name="r_graph_edge" providerKey="postgres" source="service='gobs' sslmode=disable key='ge_parent_node,ge_child_node' estimatedmetadata=true checkPrimaryKeyUnicity='0' table=&quot;gobs&quot;.&quot;r_graph_edge&quot; sql=">
         <customproperties></customproperties>
       </layer-tree-layer>
-      <layer-tree-layer checked="Qt::Checked" expanded="1" id="protocol_5507f1c8_1802_4df0_a273_8e9b7f52c352" name="protocol" providerKey="postgres" source="service='gobs' sslmode=disable key='id' estimatedmetadata=true checkPrimaryKeyUnicity='0' table=&quot;gobs&quot;.&quot;protocol&quot; sql=">
-        <customproperties></customproperties>
-      </layer-tree-layer>
       <layer-tree-layer checked="Qt::Checked" expanded="1" id="import_0343eb12_592e_4fd0_8380_51f4d62b6a56" name="import" providerKey="postgres" source="service='gobs' sslmode=disable key='id' estimatedmetadata=true checkPrimaryKeyUnicity='0' table=&quot;gobs&quot;.&quot;import&quot; sql=">
         <customproperties></customproperties>
       </layer-tree-layer>
@@ -69,7 +69,7 @@
         <customproperties></customproperties>
       </layer-tree-layer>
     </layer-tree-group>
-    <layer-tree-layer checked="Qt::Unchecked" expanded="1" id="osm_mapnik_73cc9876_fa44_4742_bc09_afe572b57bbe" name="osm-mapnik" providerKey="wms" source="crs=EPSG:3857&amp;format&amp;type=xyz&amp;url=http://tile.openstreetmap.org/%7Bz%7D/%7Bx%7D/%7By%7D.png">
+    <layer-tree-layer checked="Qt::Checked" expanded="1" id="osm_mapnik_73cc9876_fa44_4742_bc09_afe572b57bbe" name="osm-mapnik" providerKey="wms" source="crs=EPSG:3857&amp;format&amp;type=xyz&amp;url=http://tile.openstreetmap.org/%7Bz%7D/%7Bx%7D/%7By%7D.png">
       <customproperties></customproperties>
     </layer-tree-layer>
     <custom-order enabled="0">
@@ -119,10 +119,10 @@
   <mapcanvas annotationsVisible="1" name="theMapCanvas">
     <units>meters</units>
     <extent>
-      <xmin>1277255.11913331341929734</xmin>
-      <ymin>5411222.33299097511917353</ymin>
-      <xmax>1300638.12495368556119502</xmax>
-      <ymax>5422221.80414316337555647</ymax>
+      <xmin>-1635202.82408186816610396</xmin>
+      <ymin>3353340.05167477345094085</ymin>
+      <xmax>-1605788.46884433436207473</xmax>
+      <ymax>3378270.41222411720082164</ymax>
     </extent>
     <rotation>0</rotation>
     <destinationsrs>
@@ -251,6 +251,11 @@
           <legendlayerfile isInOverview="0" layerid="indicator_18ba18bf_0390_45a3_8edd_1cc049e8a251" visible="1"></legendlayerfile>
         </filegroup>
       </legendlayer>
+      <legendlayer checked="Qt::Checked" drawingOrder="-1" name="protocol" open="true" showFeatureCount="0">
+        <filegroup hidden="false" open="true">
+          <legendlayerfile isInOverview="0" layerid="protocol_5507f1c8_1802_4df0_a273_8e9b7f52c352" visible="1"></legendlayerfile>
+        </filegroup>
+      </legendlayer>
       <legendlayer checked="Qt::Checked" drawingOrder="-1" name="series" open="true" showFeatureCount="0">
         <filegroup hidden="false" open="true">
           <legendlayerfile isInOverview="0" layerid="series_04a7414a_ab6d_4611_8a60_bcd22071dc22" visible="1"></legendlayerfile>
@@ -271,11 +276,6 @@
           <legendlayerfile isInOverview="0" layerid="r_graph_edge_f2eb47e9_728b_4c85_a839_3b488e132e06" visible="1"></legendlayerfile>
         </filegroup>
       </legendlayer>
-      <legendlayer checked="Qt::Checked" drawingOrder="-1" name="protocol" open="true" showFeatureCount="0">
-        <filegroup hidden="false" open="true">
-          <legendlayerfile isInOverview="0" layerid="protocol_5507f1c8_1802_4df0_a273_8e9b7f52c352" visible="1"></legendlayerfile>
-        </filegroup>
-      </legendlayer>
       <legendlayer checked="Qt::Checked" drawingOrder="-1" name="import" open="true" showFeatureCount="0">
         <filegroup hidden="false" open="true">
           <legendlayerfile isInOverview="0" layerid="import_0343eb12_592e_4fd0_8380_51f4d62b6a56" visible="1"></legendlayerfile>
@@ -292,9 +292,9 @@
         </filegroup>
       </legendlayer>
     </legendgroup>
-    <legendlayer checked="Qt::Unchecked" drawingOrder="-1" name="osm-mapnik" open="true" showFeatureCount="0">
+    <legendlayer checked="Qt::Checked" drawingOrder="-1" name="osm-mapnik" open="true" showFeatureCount="0">
       <filegroup hidden="false" open="true">
-        <legendlayerfile isInOverview="0" layerid="osm_mapnik_73cc9876_fa44_4742_bc09_afe572b57bbe" visible="0"></legendlayerfile>
+        <legendlayerfile isInOverview="0" layerid="osm_mapnik_73cc9876_fa44_4742_bc09_afe572b57bbe" visible="1"></legendlayerfile>
       </filegroup>
     </legendlayer>
   </legend>
@@ -317,7 +317,7 @@
           <description></description>
           <projectionacronym></projectionacronym>
           <ellipsoidacronym></ellipsoidacronym>
-          <geographicflag>true</geographicflag>
+          <geographicflag>false</geographicflag>
         </spatialrefsys>
       </srs>
       <resourceMetadata>
@@ -982,7 +982,9 @@ def my_form_open(dialog, layer, feature):
         <Removable>1</Removable>
         <Searchable>1</Searchable>
       </flags>
-      <customproperties></customproperties>
+      <customproperties>
+        <property key="dualview/previewExpressions" value="gn_name"></property>
+      </customproperties>
       <geometryOptions geometryPrecision="0" removeDuplicateNodes="0">
         <activeChecks type="StringList">
           <Option type="QString" value=""></Option>
@@ -1004,31 +1006,46 @@ def my_form_open(dialog, layer, feature):
             </config>
           </editWidget>
         </field>
+        <field name="gn_description">
+          <editWidget type="">
+            <config>
+              <Option></Option>
+            </config>
+          </editWidget>
+        </field>
       </fieldConfiguration>
       <aliases>
         <alias field="id" index="0" name=""></alias>
         <alias field="gn_name" index="1" name=""></alias>
+        <alias field="gn_description" index="2" name=""></alias>
       </aliases>
       <excludeAttributesWMS></excludeAttributesWMS>
       <excludeAttributesWFS></excludeAttributesWFS>
       <defaults>
         <default applyOnUpdate="0" expression="" field="id"></default>
         <default applyOnUpdate="0" expression="" field="gn_name"></default>
+        <default applyOnUpdate="0" expression="" field="gn_description"></default>
       </defaults>
       <constraints>
         <constraint constraints="3" exp_strength="0" field="id" notnull_strength="1" unique_strength="1"></constraint>
         <constraint constraints="3" exp_strength="0" field="gn_name" notnull_strength="1" unique_strength="1"></constraint>
+        <constraint constraints="1" exp_strength="0" field="gn_description" notnull_strength="1" unique_strength="0"></constraint>
       </constraints>
       <constraintExpressions>
         <constraint desc="" exp="" field="id"></constraint>
         <constraint desc="" exp="" field="gn_name"></constraint>
+        <constraint desc="" exp="" field="gn_description"></constraint>
       </constraintExpressions>
       <expressionfields></expressionfields>
       <attributeactions>
         <defaultAction key="Canvas" value="{00000000-0000-0000-0000-000000000000}"></defaultAction>
       </attributeactions>
       <attributetableconfig actionWidgetStyle="dropDown" sortExpression="" sortOrder="0">
-        <columns></columns>
+        <columns>
+          <column hidden="0" name="id" type="field" width="-1"></column>
+          <column hidden="0" name="gn_name" type="field" width="-1"></column>
+          <column hidden="1" type="actions" width="-1"></column>
+        </columns>
       </attributetableconfig>
       <conditionalstyles>
         <rowstyles></rowstyles>
@@ -1352,9 +1369,12 @@ def my_form_open(dialog, layer, feature):
           </editWidget>
         </field>
         <field name="id_value_type">
-          <editWidget type="List">
+          <editWidget type="TextEdit">
             <config>
-              <Option></Option>
+              <Option type="Map">
+                <Option name="IsMultiline" type="bool" value="false"></Option>
+                <Option name="UseHtml" type="bool" value="false"></Option>
+              </Option>
             </config>
           </editWidget>
         </field>
@@ -2809,7 +2829,7 @@ def my_form_open(dialog, layer, feature):
       <attributetableconfig actionWidgetStyle="dropDown" sortExpression="" sortOrder="0">
         <columns>
           <column hidden="0" name="id" type="field" width="-1"></column>
-          <column hidden="0" name="fk_id_protocol" type="field" width="-1"></column>
+          <column hidden="0" name="fk_id_protocol" type="field" width="301"></column>
           <column hidden="0" name="fk_id_actor" type="field" width="-1"></column>
           <column hidden="0" name="fk_id_indicator" type="field" width="-1"></column>
           <column hidden="0" name="fk_id_spatial_layer" type="field" width="-1"></column>
@@ -3176,10 +3196,10 @@ def my_form_open(dialog, layer, feature):
     </maplayer>
     <maplayer autoRefreshEnabled="0" autoRefreshTime="0" geometry="Point" hasScaleBasedVisibilityFlag="0" labelsEnabled="0" maxScale="0" minScale="1e+8" readOnly="0" refreshOnNotifyEnabled="0" refreshOnNotifyMessage="" simplifyAlgorithm="0" simplifyDrawingHints="1" simplifyDrawingTol="1" simplifyLocal="0" simplifyMaxScale="1" styleCategories="AllStyleCategories" type="vector">
       <extent>
-        <xmin>-5.16287136077881037</xmin>
-        <ymin>47.26976013183590197</ymin>
-        <xmax>-0.99505710601806596</xmax>
-        <ymax>48.89256668090820313</ymax>
+        <xmin>-16.38038253784180043</xmin>
+        <ymin>16.00148773193360086</ymin>
+        <xmax>11.59993553161620028</xmax>
+        <ymax>48.50435256958009944</ymax>
       </extent>
       <id>spatial_object_c4852341_be7f_490c_b115_26d47b3e38f8</id>
       <datasource>service='gobs' key='id' estimatedmetadata=true srid=4326 type=Point checkPrimaryKeyUnicity='1' table="gobs"."spatial_object" (geom) sql=</datasource>
@@ -3367,130 +3387,72 @@ def my_form_open(dialog, layer, feature):
   </layerorder>
   <properties>
     <Gui>
-      <CanvasColorRedPart type="int">255</CanvasColorRedPart>
-      <SelectionColorAlphaPart type="int">255</SelectionColorAlphaPart>
       <SelectionColorBluePart type="int">0</SelectionColorBluePart>
-      <SelectionColorGreenPart type="int">255</SelectionColorGreenPart>
-      <SelectionColorRedPart type="int">255</SelectionColorRedPart>
       <CanvasColorGreenPart type="int">255</CanvasColorGreenPart>
       <CanvasColorBluePart type="int">255</CanvasColorBluePart>
+      <SelectionColorAlphaPart type="int">255</SelectionColorAlphaPart>
+      <CanvasColorRedPart type="int">255</CanvasColorRedPart>
+      <SelectionColorRedPart type="int">255</SelectionColorRedPart>
+      <SelectionColorGreenPart type="int">255</SelectionColorGreenPart>
     </Gui>
-    <WMTSPngLayers>
-      <Group type="QStringList"></Group>
-      <Project type="bool">false</Project>
-      <Layer type="QStringList"></Layer>
-    </WMTSPngLayers>
-    <SpatialRefSys>
-      <ProjectionsEnabled type="int">1</ProjectionsEnabled>
-    </SpatialRefSys>
-    <WMSRestrictedComposers type="QStringList"></WMSRestrictedComposers>
-    <WMSRestrictedLayers type="QStringList"></WMSRestrictedLayers>
+    <WMSSegmentizeFeatureInfoGeometry type="bool">false</WMSSegmentizeFeatureInfoGeometry>
+    <WMTSUrl type="QString"></WMTSUrl>
     <WMSContactPerson type="QString"></WMSContactPerson>
-    <WCSUrl type="QString"></WCSUrl>
+    <WFSTLayers>
+      <Delete type="QStringList"></Delete>
+      <Insert type="QStringList"></Insert>
+      <Update type="QStringList"></Update>
+    </WFSTLayers>
+    <Macros>
+      <pythonCode type="QString"></pythonCode>
+    </Macros>
+    <WMSPrecision type="QString">8</WMSPrecision>
     <PositionPrecision>
       <DecimalPlaces type="int">2</DecimalPlaces>
       <Automatic type="bool">true</Automatic>
       <DegreeFormat type="QString">MU</DegreeFormat>
     </PositionPrecision>
-    <WMSUseLayerIDs type="bool">false</WMSUseLayerIDs>
-    <WMSOnlineResource type="QString"></WMSOnlineResource>
-    <WFSTLayers>
-      <Delete type="QStringList"></Delete>
-      <Update type="QStringList"></Update>
-      <Insert type="QStringList"></Insert>
-    </WFSTLayers>
     <WMSContactPhone type="QString"></WMSContactPhone>
-    <qgis2web>
-      <Addlayerslist type="QString">None</Addlayerslist>
-      <Maxzoomlevel type="QString">28</Maxzoomlevel>
-      <Template type="QString">full-screen</Template>
-      <Precision type="QString">maintain</Precision>
-      <Minzoomlevel type="QString">1</Minzoomlevel>
-      <Layersearch type="QString">None</Layersearch>
-      <MatchprojectCRS type="bool">false</MatchprojectCRS>
-      <Highlightonhover type="bool">false</Highlightonhover>
-      <Restricttoextent type="bool">false</Restricttoextent>
-      <Geolocateuser type="bool">false</Geolocateuser>
-      <mapFormat type="QString">openlayers</mapFormat>
-      <Measuretool type="QString">None</Measuretool>
-      <WidgetIcon type="QString">#000000</WidgetIcon>
-      <Extent type="QString">Canvas extent</Extent>
-      <Exportfolder type="QString">/tmp/qgis2web</Exportfolder>
-      <Searchlayer type="QString"></Searchlayer>
-      <Showpopupsonhover type="bool">false</Showpopupsonhover>
-      <Exporter type="QString">folder</Exporter>
-      <WidgetBackground type="QString">#f8f8f8</WidgetBackground>
-      <Addaddresssearch type="bool">false</Addaddresssearch>
-      <MinifyGeoJSONfiles type="bool">false</MinifyGeoJSONfiles>
-    </qgis2web>
-    <WMSFees type="QString">conditions unknown</WMSFees>
-    <WMTSUrl type="QString"></WMTSUrl>
-    <WMSUrl type="QString"></WMSUrl>
-    <WMSRequestDefinedDataSources type="bool">false</WMSRequestDefinedDataSources>
-    <WMSServiceCapabilities type="bool">false</WMSServiceCapabilities>
-    <WMSServiceTitle type="QString">gobs_manager</WMSServiceTitle>
-    <WMSServiceAbstract type="QString"></WMSServiceAbstract>
+    <Paths>
+      <Absolute type="bool">false</Absolute>
+    </Paths>
+    <WCSLayers type="QStringList"></WCSLayers>
     <WMSImageQuality type="int">90</WMSImageQuality>
-    <WMSPrecision type="QString">8</WMSPrecision>
-    <Measurement>
-      <DistanceUnits type="QString">meters</DistanceUnits>
-      <AreaUnits type="QString">m2</AreaUnits>
-    </Measurement>
-    <WMTSJpegLayers>
-      <Group type="QStringList"></Group>
+    <WMTSPngLayers>
       <Project type="bool">false</Project>
       <Layer type="QStringList"></Layer>
-    </WMTSJpegLayers>
-    <Legend>
-      <filterByMap type="bool">false</filterByMap>
-    </Legend>
-    <WMSContactPosition type="QString"></WMSContactPosition>
-    <WMSExtent type="QStringList">
-      <value>763699.3042286554</value>
-      <value>6275302.4538766</value>
-      <value>778265.2454694429</value>
-      <value>6283782.243872829</value>
-    </WMSExtent>
-    <DefaultStyles>
-      <Marker type="QString"></Marker>
-      <Line type="QString"></Line>
-      <RandomColors type="bool">true</RandomColors>
-      <ColorRamp type="QString"></ColorRamp>
-      <Opacity type="double">1</Opacity>
-      <Fill type="QString"></Fill>
-    </DefaultStyles>
-    <WFSUrl type="QString"></WFSUrl>
-    <WFSLayersPrecision>
-      <observation_bcc90162_47c8_4097_bc24_a31af92d2708 type="int">8</observation_bcc90162_47c8_4097_bc24_a31af92d2708>
-      <r_indicator_node_2ca83116_e69f_4dcb_abcb_de5bdf44b2be type="int">8</r_indicator_node_2ca83116_e69f_4dcb_abcb_de5bdf44b2be>
-      <layername_92aa619b_5987_4160_8e22_c72475d3a9b4 type="int">8</layername_92aa619b_5987_4160_8e22_c72475d3a9b4>
-      <protocol_5507f1c8_1802_4df0_a273_8e9b7f52c352 type="int">8</protocol_5507f1c8_1802_4df0_a273_8e9b7f52c352>
-      <spatial_layer_18215d6d_1f4c_40d2_ba83_f2c9a9694e84 type="int">8</spatial_layer_18215d6d_1f4c_40d2_ba83_f2c9a9694e84>
-      <r_qgisproject_node_638ea86b_2e09_45d2_a4d3_3080ed8854fe type="int">8</r_qgisproject_node_638ea86b_2e09_45d2_a4d3_3080ed8854fe>
-      <qgisproject_c137d6c4_f1fa_4a70_bfe3_9c67c7628f63 type="int">8</qgisproject_c137d6c4_f1fa_4a70_bfe3_9c67c7628f63>
-      <actor_category_8a7edcf8_cb34_4689_b22b_7a8a6a2ab610 type="int">8</actor_category_8a7edcf8_cb34_4689_b22b_7a8a6a2ab610>
-      <rp_struct_pop_evolution_geom_9e098769_c0a3_48ea_af36_583a5b78040f type="int">8</rp_struct_pop_evolution_geom_9e098769_c0a3_48ea_af36_583a5b78040f>
-      <r_graph_edge_f2eb47e9_728b_4c85_a839_3b488e132e06 type="int">8</r_graph_edge_f2eb47e9_728b_4c85_a839_3b488e132e06>
-      <glossary_cee356e0_5be5_4d87_ac2b_e8e8967c4032 type="int">8</glossary_cee356e0_5be5_4d87_ac2b_e8e8967c4032>
-      <spatial_object_c4852341_be7f_490c_b115_26d47b3e38f8 type="int">8</spatial_object_c4852341_be7f_490c_b115_26d47b3e38f8>
-      <import_0343eb12_592e_4fd0_8380_51f4d62b6a56 type="int">8</import_0343eb12_592e_4fd0_8380_51f4d62b6a56>
-      <series_04a7414a_ab6d_4611_8a60_bcd22071dc22 type="int">8</series_04a7414a_ab6d_4611_8a60_bcd22071dc22>
-      <pluviometrie_horaire_historique_16e3e428_23be_4eae_a3e0_8eeddea0d3b9 type="int">8</pluviometrie_horaire_historique_16e3e428_23be_4eae_a3e0_8eeddea0d3b9>
-      <graph_node_2cd9eee8_46e2_401c_87f7_8b40d9d6260e type="int">8</graph_node_2cd9eee8_46e2_401c_87f7_8b40d9d6260e>
-      <actor_5f01a6e5_8205_462f_af40_0ffd7ff0a44f type="int">8</actor_5f01a6e5_8205_462f_af40_0ffd7ff0a44f>
-      <indicator_18ba18bf_0390_45a3_8edd_1cc049e8a251 type="int">8</indicator_18ba18bf_0390_45a3_8edd_1cc049e8a251>
-      <pluviometrie_stations_technique_66eb0c8c_1668_4009_a8fb_6437ffca93d3 type="int">8</pluviometrie_stations_technique_66eb0c8c_1668_4009_a8fb_6437ffca93d3>
-    </WFSLayersPrecision>
+      <Group type="QStringList"></Group>
+    </WMTSPngLayers>
+    <WMTSMinScale type="int">5000</WMTSMinScale>
     <Measure>
       <Ellipsoid type="QString">WGS84</Ellipsoid>
     </Measure>
-    <WMTSLayers>
-      <Group type="QStringList"></Group>
+    <WMSServiceAbstract type="QString"></WMSServiceAbstract>
+    <WMSContactMail type="QString"></WMSContactMail>
+    <Measurement>
+      <AreaUnits type="QString">m2</AreaUnits>
+      <DistanceUnits type="QString">meters</DistanceUnits>
+    </Measurement>
+    <WMSUseLayerIDs type="bool">false</WMSUseLayerIDs>
+    <WMSAccessConstraints type="QString">None</WMSAccessConstraints>
+    <WMSServiceTitle type="QString">gobs_manager</WMSServiceTitle>
+    <WMTSJpegLayers>
       <Project type="bool">false</Project>
       <Layer type="QStringList"></Layer>
-    </WMTSLayers>
-    <WMSContactOrganization type="QString"></WMSContactOrganization>
+      <Group type="QStringList"></Group>
+    </WMTSJpegLayers>
+    <WFSUrl type="QString"></WFSUrl>
     <WMSAddWktGeometry type="bool">false</WMSAddWktGeometry>
+    <WMSDefaultMapUnitsPerMm type="double">1</WMSDefaultMapUnitsPerMm>
+    <WMSOnlineResource type="QString"></WMSOnlineResource>
+    <WMSRequestDefinedDataSources type="bool">false</WMSRequestDefinedDataSources>
+    <WMSFees type="QString">conditions unknown</WMSFees>
+    <WMSKeywordList type="QStringList">
+      <value></value>
+    </WMSKeywordList>
+    <Legend>
+      <filterByMap type="bool">false</filterByMap>
+    </Legend>
     <WFSLayers type="QStringList">
       <value>actor_5f01a6e5_8205_462f_af40_0ffd7ff0a44f</value>
       <value>actor_category_8a7edcf8_cb34_4689_b22b_7a8a6a2ab610</value>
@@ -3512,33 +3474,91 @@ def my_form_open(dialog, layer, feature):
       <value>spatial_layer_18215d6d_1f4c_40d2_ba83_f2c9a9694e84</value>
       <value>spatial_object_c4852341_be7f_490c_b115_26d47b3e38f8</value>
     </WFSLayers>
-    <WMSContactMail type="QString"></WMSContactMail>
     <PAL>
-      <DrawRectOnly type="bool">false</DrawRectOnly>
-      <SearchMethod type="int">0</SearchMethod>
-      <CandidatesPolygon type="int">30</CandidatesPolygon>
       <CandidatesLine type="int">50</CandidatesLine>
+      <SearchMethod type="int">0</SearchMethod>
       <ShowingCandidates type="bool">false</ShowingCandidates>
+      <DrawRectOnly type="bool">false</DrawRectOnly>
+      <ShowingPartialsLabels type="bool">true</ShowingPartialsLabels>
+      <ShowingAllLabels type="bool">false</ShowingAllLabels>
+      <CandidatesPolygon type="int">30</CandidatesPolygon>
       <CandidatesPoint type="int">16</CandidatesPoint>
       <TextFormat type="int">0</TextFormat>
-      <ShowingAllLabels type="bool">false</ShowingAllLabels>
-      <ShowingPartialsLabels type="bool">true</ShowingPartialsLabels>
     </PAL>
-    <WCSLayers type="QStringList"></WCSLayers>
-    <WMSAccessConstraints type="QString">None</WMSAccessConstraints>
+    <SpatialRefSys>
+      <ProjectionsEnabled type="int">1</ProjectionsEnabled>
+    </SpatialRefSys>
+    <DefaultStyles>
+      <Fill type="QString"></Fill>
+      <Marker type="QString"></Marker>
+      <Line type="QString"></Line>
+      <ColorRamp type="QString"></ColorRamp>
+      <RandomColors type="bool">true</RandomColors>
+      <Opacity type="double">1</Opacity>
+    </DefaultStyles>
+    <WMTSLayers>
+      <Project type="bool">false</Project>
+      <Layer type="QStringList"></Layer>
+      <Group type="QStringList"></Group>
+    </WMTSLayers>
+    <WMSRestrictedLayers type="QStringList"></WMSRestrictedLayers>
+    <WCSUrl type="QString"></WCSUrl>
+    <WFSLayersPrecision>
+      <qgisproject_c137d6c4_f1fa_4a70_bfe3_9c67c7628f63 type="int">8</qgisproject_c137d6c4_f1fa_4a70_bfe3_9c67c7628f63>
+      <series_04a7414a_ab6d_4611_8a60_bcd22071dc22 type="int">8</series_04a7414a_ab6d_4611_8a60_bcd22071dc22>
+      <observation_bcc90162_47c8_4097_bc24_a31af92d2708 type="int">8</observation_bcc90162_47c8_4097_bc24_a31af92d2708>
+      <r_graph_edge_f2eb47e9_728b_4c85_a839_3b488e132e06 type="int">8</r_graph_edge_f2eb47e9_728b_4c85_a839_3b488e132e06>
+      <actor_category_8a7edcf8_cb34_4689_b22b_7a8a6a2ab610 type="int">8</actor_category_8a7edcf8_cb34_4689_b22b_7a8a6a2ab610>
+      <rp_struct_pop_evolution_geom_9e098769_c0a3_48ea_af36_583a5b78040f type="int">8</rp_struct_pop_evolution_geom_9e098769_c0a3_48ea_af36_583a5b78040f>
+      <pluviometrie_stations_technique_66eb0c8c_1668_4009_a8fb_6437ffca93d3 type="int">8</pluviometrie_stations_technique_66eb0c8c_1668_4009_a8fb_6437ffca93d3>
+      <graph_node_2cd9eee8_46e2_401c_87f7_8b40d9d6260e type="int">8</graph_node_2cd9eee8_46e2_401c_87f7_8b40d9d6260e>
+      <spatial_object_c4852341_be7f_490c_b115_26d47b3e38f8 type="int">8</spatial_object_c4852341_be7f_490c_b115_26d47b3e38f8>
+      <pluviometrie_horaire_historique_16e3e428_23be_4eae_a3e0_8eeddea0d3b9 type="int">8</pluviometrie_horaire_historique_16e3e428_23be_4eae_a3e0_8eeddea0d3b9>
+      <glossary_cee356e0_5be5_4d87_ac2b_e8e8967c4032 type="int">8</glossary_cee356e0_5be5_4d87_ac2b_e8e8967c4032>
+      <protocol_5507f1c8_1802_4df0_a273_8e9b7f52c352 type="int">8</protocol_5507f1c8_1802_4df0_a273_8e9b7f52c352>
+      <r_indicator_node_2ca83116_e69f_4dcb_abcb_de5bdf44b2be type="int">8</r_indicator_node_2ca83116_e69f_4dcb_abcb_de5bdf44b2be>
+      <import_0343eb12_592e_4fd0_8380_51f4d62b6a56 type="int">8</import_0343eb12_592e_4fd0_8380_51f4d62b6a56>
+      <layername_92aa619b_5987_4160_8e22_c72475d3a9b4 type="int">8</layername_92aa619b_5987_4160_8e22_c72475d3a9b4>
+      <r_qgisproject_node_638ea86b_2e09_45d2_a4d3_3080ed8854fe type="int">8</r_qgisproject_node_638ea86b_2e09_45d2_a4d3_3080ed8854fe>
+      <spatial_layer_18215d6d_1f4c_40d2_ba83_f2c9a9694e84 type="int">8</spatial_layer_18215d6d_1f4c_40d2_ba83_f2c9a9694e84>
+      <actor_5f01a6e5_8205_462f_af40_0ffd7ff0a44f type="int">8</actor_5f01a6e5_8205_462f_af40_0ffd7ff0a44f>
+      <indicator_18ba18bf_0390_45a3_8edd_1cc049e8a251 type="int">8</indicator_18ba18bf_0390_45a3_8edd_1cc049e8a251>
+    </WFSLayersPrecision>
+    <WMSContactOrganization type="QString"></WMSContactOrganization>
     <WMSRootName type="QString"></WMSRootName>
-    <Macros>
-      <pythonCode type="QString"></pythonCode>
-    </Macros>
-    <WMTSMinScale type="int">5000</WMTSMinScale>
-    <WMSDefaultMapUnitsPerMm type="double">1</WMSDefaultMapUnitsPerMm>
-    <WMSSegmentizeFeatureInfoGeometry type="bool">false</WMSSegmentizeFeatureInfoGeometry>
-    <Paths>
-      <Absolute type="bool">false</Absolute>
-    </Paths>
-    <WMSKeywordList type="QStringList">
-      <value></value>
-    </WMSKeywordList>
+    <WMSExtent type="QStringList">
+      <value>763699.3042286554</value>
+      <value>6275302.4538766</value>
+      <value>778265.2454694429</value>
+      <value>6283782.243872829</value>
+    </WMSExtent>
+    <qgis2web>
+      <Extent type="QString">Canvas extent</Extent>
+      <Precision type="QString">maintain</Precision>
+      <Highlightonhover type="bool">false</Highlightonhover>
+      <MinifyGeoJSONfiles type="bool">false</MinifyGeoJSONfiles>
+      <Maxzoomlevel type="QString">28</Maxzoomlevel>
+      <Showpopupsonhover type="bool">false</Showpopupsonhover>
+      <Searchlayer type="QString"></Searchlayer>
+      <Addlayerslist type="QString">None</Addlayerslist>
+      <Restricttoextent type="bool">false</Restricttoextent>
+      <Geolocateuser type="bool">false</Geolocateuser>
+      <Exporter type="QString">folder</Exporter>
+      <mapFormat type="QString">openlayers</mapFormat>
+      <Minzoomlevel type="QString">1</Minzoomlevel>
+      <Template type="QString">full-screen</Template>
+      <Addaddresssearch type="bool">false</Addaddresssearch>
+      <WidgetBackground type="QString">#f8f8f8</WidgetBackground>
+      <Layersearch type="QString">None</Layersearch>
+      <MatchprojectCRS type="bool">false</MatchprojectCRS>
+      <Exportfolder type="QString">/tmp/qgis2web</Exportfolder>
+      <WidgetIcon type="QString">#000000</WidgetIcon>
+      <Measuretool type="QString">None</Measuretool>
+    </qgis2web>
+    <WMSRestrictedComposers type="QStringList"></WMSRestrictedComposers>
+    <WMSContactPosition type="QString"></WMSContactPosition>
+    <WMSUrl type="QString"></WMSUrl>
+    <WMSServiceCapabilities type="bool">false</WMSServiceCapabilities>
   </properties>
   <visibility-presets></visibility-presets>
   <transformContext></transformContext>
