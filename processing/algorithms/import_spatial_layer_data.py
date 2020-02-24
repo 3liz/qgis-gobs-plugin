@@ -209,7 +209,7 @@ class ImportSpatialLayerData(QgsProcessingAlgorithm):
             if not ok:
                 status = 0
                 msg = self.tr('* The following error has been raised') + '  %s' % error_message
-                feedback.pushInfo(
+                feedback.reportError(
                     msg
                 )
             else:
@@ -243,7 +243,7 @@ class ImportSpatialLayerData(QgsProcessingAlgorithm):
                     self.tr('* Temporary data has been deleted.')
                 )
             else:
-                feedback.pushInfo(
+                feedback.reportError(
                     self.tr('* An error occured while droping temporary table') + ' "%s"."%s"' % (temp_schema, temp_table)
                 )
 

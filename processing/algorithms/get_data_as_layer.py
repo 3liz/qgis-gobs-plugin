@@ -172,8 +172,8 @@ class GetDataAsLayer(QgsProcessingAlgorithm):
         uri.setDataSource("", "(" + self.SQL + ")", self.GEOM_FIELD, "", id_field)
         vlayer = QgsVectorLayer(uri.uri(), "layername", "postgres")
         if not vlayer.isValid():
-            feedback.pushInfo(
-                self.tr('SQL = \n' + self.SQL)
+            feedback.reportError(
+                'SQL = \n' + self.SQL
             )
             raise QgsProcessingException(self.tr("""This layer is invalid!
                 Please check the PostGIS log for error messages."""))

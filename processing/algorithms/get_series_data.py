@@ -152,8 +152,6 @@ class GetSeriesData(GetDataAsLayer):
         if serie_id in self.SERIES_DICT.values():
             id_serie = serie_id
 
-        feedback.pushInfo("ID SERIE = {}".format(id_serie))
-
         # Get data from chosen series
         feedback.pushInfo(
             self.tr('GET DATA FROM CHOSEN SERIES')

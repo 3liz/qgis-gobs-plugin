@@ -171,7 +171,7 @@ class CreateDatabaseStructure(QgsProcessingAlgorithm):
             if ok:
                 feedback.pushInfo(self.tr("Schema gobs has been droped."))
             else:
-                feedback.pushInfo(error_message)
+                feedback.reportError(error_message)
                 status = 0
                 # raise Exception(msg)
                 return {
@@ -217,7 +217,7 @@ class CreateDatabaseStructure(QgsProcessingAlgorithm):
                 if ok:
                     feedback.pushInfo('  Success !')
                 else:
-                    feedback.pushInfo('* ' + error_message)
+                    feedback.reportError('* ' + error_message)
                     status = 0
                     raise Exception(error_message)
                     # return {

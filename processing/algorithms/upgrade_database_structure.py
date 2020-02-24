@@ -181,7 +181,7 @@ class UpgradeDatabaseStructure(QgsProcessingAlgorithm):
             sql
         )
         if not ok:
-            feedback.pushInfo(error_message)
+            feedback.reportError(error_message)
             status = 0
             raise Exception(error_message)
         db_version = None
@@ -255,7 +255,7 @@ class UpgradeDatabaseStructure(QgsProcessingAlgorithm):
                 if ok:
                     feedback.pushInfo('* ' + sf + ' -- SUCCESS !')
                 else:
-                    feedback.pushInfo(error_message)
+                    feedback.reportError(error_message)
                     status = 0
                     raise Exception(error_message)
                     # return {
