@@ -397,30 +397,37 @@ class ImportObservationData(QgsProcessingAlgorithm):
                         caster
                     )
             sql = '''
-                INSERT INTO gobs.observation
+                INSERT INTO gobs.observation AS o
                 (fk_id_series, fk_id_spatial_object, fk_id_import, ob_value, ob_timestamp)
                 SELECT
                 -- id of the serie
-                %s,
+                {id_serie},
                 -- id of the spatial object
                 so.id,
                 -- id of the import log
-                %s,
+                {id_import},
                 -- jsonb array value computed
-                %s,
+                {jsonb_array},
                 -- timestamp from the source
-                %s
-                FROM "%s"."%s" AS s
-                JOIN gobs.spatial_object AS so ON so.so_unique_id = s."%s"::text
+                {casted_timestamp}
+                FROM "{temp_schema}"."{temp_table}" AS s
+                JOIN gobs.spatial_object AS so ON so.so_unique_id = s."{field_spatial_object}"::text
+
+                -- Update line if data already exists
+                -- AND data is not validated
+                ON CONFLICT ON CONSTRAINT observation_data_unique
+                DO UPDATE
+                SET (fk_id_import, ob_value) = (EXCLUDED.fk_id_import, EXCLUDED.ob_value)
+                WHERE o.ob_validation IS NULL
                 ;
-            ''' % (
-                id_serie,
-                id_import,
-                jsonb_array,
-                casted_timestamp,
-                temp_schema,
-                temp_table,
-                field_spatial_object
+            '''.format(
+                id_serie=id_serie,
+                id_import=id_import,
+                jsonb_array=jsonb_array,
+                casted_timestamp=casted_timestamp,
+                temp_schema=temp_schema,
+                temp_table=temp_table,
+                field_spatial_object=field_spatial_object
             )
             try:
                 [header, data, rowCount, ok, error_message] = fetchDataFromSqlQuery(
