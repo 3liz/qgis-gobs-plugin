@@ -25,6 +25,14 @@ repository=http://github.com/3liz
 # Uncomment the following line and add your changelog:
 changelog=
   Version 0.2.5:
+  * Database - Update installation scripts & documentation
+  * QGIS - Fix bug with indicator type values (remove default value)
+  * Import observation - add constraint to override data only if not yet validated
+  * Feedback - Use reportError instead of pushInfo when needed
+  * Import observation - Remove useless series id in the end of series combobox
+  * Get series data - Fix bug giving wrong vector dimensions && remove useless series id in combo boxes
+
+  Version 0.2.4:
   * Indicator - Add trigger function to create graph nodes and edges from paths
   * Add workaround to avoid querying database on QGIS startup
 
