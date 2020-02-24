@@ -351,7 +351,8 @@ CREATE TABLE gobs.observation (
     fk_id_spatial_object bigint NOT NULL,
     fk_id_import integer NOT NULL,
     ob_value jsonb NOT NULL,
-    ob_timestamp timestamp without time zone NOT NULL
+    ob_timestamp timestamp without time zone NOT NULL,
+    ob_validation timestamp without time zone
 );
 
 
@@ -381,6 +382,10 @@ COMMENT ON COLUMN gobs.observation.ob_value IS 'Vector containing the measured o
 
 -- observation.ob_timestamp
 COMMENT ON COLUMN gobs.observation.ob_timestamp IS 'Timestamp of the data';
+
+
+-- observation.ob_validation
+COMMENT ON COLUMN gobs.observation.ob_validation IS 'Date and time when the data has been validated (the corresponding import status has been changed from pending to validated). Can be used to find all observations not yet validated, with NULL values in this field.';
 
 
 -- observation_id_seq

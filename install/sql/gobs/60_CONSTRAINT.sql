@@ -63,6 +63,11 @@ ALTER TABLE ONLY gobs.metadata
     ADD CONSTRAINT metadata_pkey PRIMARY KEY (id);
 
 
+-- observation observation_data_unique
+ALTER TABLE ONLY gobs.observation
+    ADD CONSTRAINT observation_data_unique UNIQUE (fk_id_series, fk_id_spatial_object, ob_timestamp);
+
+
 -- observation observation_pkey
 ALTER TABLE ONLY gobs.observation
     ADD CONSTRAINT observation_pkey PRIMARY KEY (id);
