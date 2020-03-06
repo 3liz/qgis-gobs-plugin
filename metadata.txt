@@ -10,7 +10,7 @@
 name=G-Obs
 qgisMinimumVersion=3.0
 description=This plugin provides tools to store and manage spatial and time data in a standardized way
-version=0.2.5
+version=0.2.6
 author=3liz
 email=info@3liz.com
 
@@ -24,6 +24,10 @@ repository=http://github.com/3liz
 
 # Uncomment the following line and add your changelog:
 changelog=
+  Version 0.2.6
+  * Create db structure - Fix bug when adding test data
+  * Move comments in specific SQL script file
+
   Version 0.2.5:
   * Database - Update installation scripts & documentation
   * QGIS - Fix bug with indicator type values (remove default value)
@@ -31,10 +35,6 @@ changelog=
   * Feedback - Use reportError instead of pushInfo when needed
   * Import observation - Remove useless series id in the end of series combobox
   * Get series data - Fix bug giving wrong vector dimensions && remove useless series id in combo boxes
-
-  Version 0.2.4:
-  * Indicator - Add trigger function to create graph nodes and edges from paths
-  * Add workaround to avoid querying database on QGIS startup
 
 # Tags are comma separated with spaces allowed
 tags=time observation stats
