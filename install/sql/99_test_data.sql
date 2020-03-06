@@ -11,8 +11,10 @@ https://www.cirad.fr/en/home-page', 'contact@cirad.fr', 2);
 INSERT INTO gobs.actor (id, a_name, a_description, a_email, id_category) VALUES (3, 'DREAL Bretagne', 'Direction régionale de l''environnement, de l''aménagement et du logement, région Bretagne.', 'email@dreal.fr', 1);
 
 -- indicator
-INSERT INTO gobs.indicator (id, id_label, id_title, id_description, id_date_format, id_value_code, id_value_name, id_value_type, id_value_unit, id_paths) VALUES (1, 'pluviometry', 'Hourly pluviometry ', 'Hourly rainfall pluviometry in millimetre', 'hour', '{pluviometry}', '{Pluviometry}', 'real', 'mm', 'Environment / Water / Data | Physical and chemical conditions / Water ');
-INSERT INTO gobs.indicator (id, id_label, id_title, id_description, id_date_format, id_value_code, id_value_name, id_value_type, id_value_unit, id_paths) VALUES (2, 'population', 'Population ', 'Number of inhabitants for city', 'year', '{population}', '{Population}', 'integer', 'people', 'Socio-eco / Demography / Population ');
+INSERT INTO gobs.indicator (id, id_label, id_title, id_description, id_date_format, id_value_code, id_value_name, id_value_type, id_value_unit, id_paths)
+VALUES (1, 'pluviometry', 'Hourly pluviometry ', 'Hourly rainfall pluviometry in millimetre', 'hour', '{pluviometry}', '{Pluviometry}', '{real}', '{mm}', 'Environment / Water / Data | Physical and chemical conditions / Water ');
+INSERT INTO gobs.indicator (id, id_label, id_title, id_description, id_date_format, id_value_code, id_value_name, id_value_type, id_value_unit, id_paths)
+VALUES (2, 'population', 'Population ', 'Number of inhabitants for city', 'year', '{population}', '{Population}', '{integer}', '{people}', 'Socio-eco / Demography / Population ');
 
 -- protocol
 INSERT INTO gobs.protocol (id, pr_code, pr_name, pr_description) VALUES (1, 'cirad-pluviometry', 'Pluviometry', 'Measure of rainfall in mm');

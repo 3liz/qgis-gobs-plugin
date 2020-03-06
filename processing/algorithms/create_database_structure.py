@@ -183,11 +183,12 @@ class CreateDatabaseStructure(QgsProcessingAlgorithm):
         sql_files = [
             '00_initialize_database.sql',
             'gobs/10_FUNCTION.sql',
-            'gobs/20_TABLE_COMMENT_SEQUENCE_DEFAULT.sql',
+            'gobs/20_TABLE_SEQUENCE_DEFAULT.sql',
             'gobs/30_VIEW.sql',
             'gobs/40_INDEX.sql',
             'gobs/50_TRIGGER.sql',
             'gobs/60_CONSTRAINT.sql',
+            'gobs/70_COMMENT.sql',
             'gobs/90_GLOSSARY.sql',
             '99_finalize_database.sql',
         ]
