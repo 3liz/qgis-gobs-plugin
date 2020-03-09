@@ -45,19 +45,14 @@ class ImportObservationData(QgsProcessingAlgorithm):
     # Constants used to refer to parameters and outputs. They will be
     # used when calling the algorithm from another algorithm, or when
     # calling from the QGIS console.
-    SERIE = 'SERIE'
     SOURCELAYER = 'SOURCELAYER'
     MANUALDATE = 'MANUALDATE'
     FIELD_TIMESTAMP = 'FIELD_TIMESTAMP'
     FIELD_SPATIAL_OBJECT = 'FIELD_SPATIAL_OBJECT'
-    FIELD1 = 'FIELD1'
-    FIELD2 = 'FIELD2'
+    FIELDS = 'FIELDS'
 
     OUTPUT_STATUS = 'OUTPUT_STATUS'
     OUTPUT_STRING = 'OUTPUT_STRING'
-
-    SERIES = []
-    SERIES_DICT = {}
 
     def name(self):
         return 'import_observation_data'
@@ -80,53 +75,19 @@ class ImportObservationData(QgsProcessingAlgorithm):
     def createInstance(self):
         return self.__class__()
 
+    def getSerieId(self):
+        '''
+        Get the serie ID
+        To be overriden by child instances
+        '''
+        return 0
+
     def initAlgorithm(self, config):
         """
         Here we define the inputs and output of the algorithm, along
         with some other properties.
         """
         # INPUTS
-
-        connection_name = QgsExpressionContextUtils.globalScope().variable('gobs_connection_name')
-        get_data = QgsExpressionContextUtils.globalScope().variable('gobs_get_database_data')
-
-        # List of series
-        sql = '''
-            SELECT s.id,
-            concat(
-                id_title,
-                ' (', p.pr_code, ')',
-                ' / Source: ', a_name,
-                ' / Layer: ', sl_label
-            ) AS label
-            FROM gobs.series s
-            INNER JOIN gobs.protocol p ON p.id = s.fk_id_protocol
-            INNER JOIN gobs.actor a ON a.id = s.fk_id_actor
-            INNER JOIN gobs.indicator i ON i.id = s.fk_id_indicator
-            INNER JOIN gobs.spatial_layer sl ON sl.id = s.fk_id_spatial_layer
-            ORDER BY label
-        '''
-        dbpluginclass = createDbPlugin( 'postgis' )
-        connections = [c.connectionName() for c in dbpluginclass.connections()]
-        data = []
-        if get_data == 'yes' and connection_name in connections:
-            [header, data, rowCount, ok, error_message] = fetchDataFromSqlQuery(
-                connection_name,
-                sql
-            )
-        self.SERIES = ['%s' % a[1] for a in data]
-        self.SERIES_DICT = {a[1]: a[0] for a in data}
-
-
-        self.addParameter(
-            QgsProcessingParameterEnum(
-                self.SERIE,
-                self.tr('Target serie'),
-                options=self.SERIES,
-                optional=False
-            )
-        )
-
         # Source layer
         self.addParameter(
             QgsProcessingParameterVectorLayer(
@@ -162,24 +123,21 @@ class ImportObservationData(QgsProcessingAlgorithm):
                 parentLayerParameterName=self.SOURCELAYER
             )
         )
-        # First field
-        self.addParameter(
-            QgsProcessingParameterField(
-                self.FIELD1,
-                self.tr('First field containing data'),
-                optional=False,
-                parentLayerParameterName=self.SOURCELAYER
-            )
-        )
-        # Second field
-        self.addParameter(
-            QgsProcessingParameterField(
-                self.FIELD2,
-                self.tr('Second field containing data'),
-                optional=True,
-                parentLayerParameterName=self.SOURCELAYER
-            )
-        )
+
+        # Parse new parameters
+        new_params = self.getAdditionnalParameters()
+        if new_params:
+            for param in new_params:
+                self.addParameter(
+                    param['widget'](
+                        param['name'],
+                        param['label'],
+                        optional=param['optional'],
+                        parentLayerParameterName=param['parentLayerParameterName'],
+                        type=param['type']
+                    )
+                )
+
 
         # OUTPUTS
         # Add output for message
@@ -213,6 +171,79 @@ class ImportObservationData(QgsProcessingAlgorithm):
         return super(ImportObservationData, self).checkParameterValues(parameters, context)
 
 
+    def getAdditionnalParameters(self):
+        """
+        Returns a dictionnary of parameters to add dynamically
+        Source is the dimensions of the indicator vector field.
+        """
+        new_params = []
+
+        # Get serie id
+        passed_serie = self.getSerieId()
+        if not passed_serie or passed_serie <= 0:
+            return new_params
+
+        # Get indicator fields data
+        id_value_code, id_value_name, id_value_type, id_value_unit = self.getIndicatorFields(passed_serie)
+
+        # Create dynamic parameters
+        for i, code in enumerate(id_value_code):
+            ptype = QgsProcessingParameterField.Any
+            new_params.append(
+                {
+                    'widget': QgsProcessingParameterField,
+                    'name': code,
+                    'label': id_value_name[i],
+                    'optional': False,
+                    'type': ptype,
+                    'parentLayerParameterName': self.SOURCELAYER
+                }
+            )
+        return new_params
+
+    def getIndicatorFields(self, given_serie):
+        '''
+        Get indicator data for the given serie id
+        '''
+        # GET INFORMATION of indicator
+        connection_name = QgsExpressionContextUtils.globalScope().variable('gobs_connection_name')
+        sql = '''
+            SELECT id_value_code, id_value_name, id_value_type, id_value_unit
+            FROM gobs.indicator AS i
+            WHERE id = (
+                SELECT s.fk_id_indicator
+                FROM gobs.series AS s
+                WHERE s.id = {0}
+                LIMIT 1
+            )
+            ;
+        '''.format(
+            given_serie
+        )
+        id_value_code = None
+        id_value_name = None
+        id_value_type = None
+        id_value_unit = None
+        try:
+            [header, data, rowCount, ok, error_message] = fetchDataFromSqlQuery(
+                connection_name,
+                sql
+            )
+            if not ok:
+                return None
+            else:
+                status = 1
+                id_value_code = data[0][0]
+                id_value_name = data[0][1]
+                id_value_type = data[0][2]
+                id_value_unit = data[0][3]
+        except:
+            status = 0
+            return None
+
+        return (id_value_code, id_value_name, id_value_type, id_value_unit)
+
+
     def processAlgorithm(self, parameters, context, feedback):
         """
         Here is where the processing itself takes place.
@@ -225,15 +256,19 @@ class ImportObservationData(QgsProcessingAlgorithm):
         field_timestamp = self.parameterAsString(parameters, self.FIELD_TIMESTAMP, context)
         manualdate = self.parameterAsString(parameters, self.MANUALDATE, context)
         field_spatial_object = self.parameterAsString(parameters, self.FIELD_SPATIAL_OBJECT, context)
-        field1 = self.parameterAsString(parameters, self.FIELD1, context)
-        field2 = self.parameterAsString(parameters, self.FIELD2, context)
+        fields = {}
+
+        # Parse new parameters
+        new_params = self.getAdditionnalParameters()
+        if new_params:
+            for param in new_params:
+                fields[param['name']] = self.parameterAsString(parameters, param['name'], context)
 
         msg = ''
         status = 1
 
         # Get series id from first combo box
-        serie = self.SERIES[parameters[self.SERIE]]
-        id_serie = int(self.SERIES_DICT[serie])
+        id_serie = self.getSerieId()
 
         # Import data to temporary table
         feedback.pushInfo(
@@ -300,7 +335,9 @@ class ImportObservationData(QgsProcessingAlgorithm):
         except:
             status = 0
             msg = self.tr('* An unknown error occured while adding import log item')
-
+            feedback.reportError(
+                msg
+            )
 
         # GET INFORMATION of indicator
         feedback.pushInfo(
@@ -353,9 +390,10 @@ class ImportObservationData(QgsProcessingAlgorithm):
 
             # Calculate value for jsonb array destination
             jsonb_array = 'json_build_array('
-            jsonb_array+= 's."%s"' % field1
-            if field2 and field2 != field1:
-                jsonb_array+= ', s."%s"' % field2
+            a = []
+            for name, value in fields.items():
+                a.append('s."%s"' % value)
+            jsonb_array+= ', '.join(a)
             jsonb_array+= ')'
 
             # Use the correct expression for casting date and/or time
@@ -429,6 +467,7 @@ class ImportObservationData(QgsProcessingAlgorithm):
                 temp_table=temp_table,
                 field_spatial_object=field_spatial_object
             )
+            # print(sql)
             try:
                 [header, data, rowCount, ok, error_message] = fetchDataFromSqlQuery(
                     connection_name,
@@ -449,6 +488,9 @@ class ImportObservationData(QgsProcessingAlgorithm):
             except:
                 status = 0
                 msg = self.tr('* An unknown error occured while adding features to spatial_object table')
+                feedback.reportError(
+                    msg
+                )
             finally:
 
                 # Remove temporary table
@@ -456,7 +498,8 @@ class ImportObservationData(QgsProcessingAlgorithm):
                     self.tr('DROP TEMPORARY DATA')
                 )
                 sql = '''
-                    DROP TABLE IF EXISTS "%s"."%s"
+                    --DROP TABLE IF EXISTS "%s"."%s"
+                    SELECT 1;
                 ;
                 ''' % (
                     temp_schema,

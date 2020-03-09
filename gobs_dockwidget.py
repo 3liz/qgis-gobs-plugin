@@ -34,10 +34,18 @@ from qgis.PyQt import (
     uic
 )
 from qgis.PyQt.QtWidgets import (
-    QPushButton
+    QPushButton,
+    QComboBox,
+    QDialog,
+    QVBoxLayout,
+    QDialogButtonBox
 )
-from qgis.PyQt.QtCore import pyqtSignal
-from qgis.core import Qgis
+from qgis.PyQt.QtCore import pyqtSignal, QCoreApplication
+from qgis.core import (
+    Qgis,
+    QgsApplication,
+    QgsExpressionContextUtils
+)
 from functools import partial
 try:
     # QGIS < 3.8
@@ -51,6 +59,10 @@ except ModuleNotFoundError:
     from qgis.processing import execAlgorithmDialog
     # noinspection PyPep8Naming,PyUnresolvedReferences
     from qgis.processing import run as execAlgorithm
+
+from .processing.algorithms.import_observation_data import ImportObservationData
+from .processing.algorithms.tools import fetchDataFromSqlQuery
+from db_manager.db_plugins import createDbPlugin
 
 FORM_CLASS, _ = uic.loadUiType(os.path.join(
     os.path.dirname(__file__), 'gobs_dockwidget_base.ui'))
@@ -80,7 +92,6 @@ class GobsDockWidget(QtWidgets.QDockWidget, FORM_CLASS):
             'upgrade_database_structure',
 
             'import_spatial_layer_data',
-            'import_observation_data',
 
             'get_spatial_layer_vector_data',
             'get_series_data',
@@ -93,8 +104,12 @@ class GobsDockWidget(QtWidgets.QDockWidget, FORM_CLASS):
                 continue
             button.clicked.connect(partial(self.runAlgorithm, alg))
 
+        button = self.findChild(QPushButton, 'button_import_observation_data')
+        if button:
+            button.clicked.connect(self.runImportObservationData)
 
-    def tr(string):
+
+    def tr(self, string):
         return QCoreApplication.translate('Processing', string)
 
     def runAlgorithm(self, name):
@@ -111,6 +126,102 @@ class GobsDockWidget(QtWidgets.QDockWidget, FORM_CLASS):
         param = {}
         alg_name = 'gobs:{0}'.format(name)
         execAlgorithmDialog(alg_name, param)
+
+    def getSeries(self):
+        # List of series
+        sql = '''
+            SELECT s.id,
+            concat(
+                id_title,
+                ' (', p.pr_code, ')',
+                ' / Source: ', a_name,
+                ' / Layer: ', sl_label
+            ) AS label
+            FROM gobs.series s
+            INNER JOIN gobs.protocol p ON p.id = s.fk_id_protocol
+            INNER JOIN gobs.actor a ON a.id = s.fk_id_actor
+            INNER JOIN gobs.indicator i ON i.id = s.fk_id_indicator
+            INNER JOIN gobs.spatial_layer sl ON sl.id = s.fk_id_spatial_layer
+            ORDER BY label
+        '''
+        connection_name = QgsExpressionContextUtils.globalScope().variable('gobs_connection_name')
+        get_data = QgsExpressionContextUtils.globalScope().variable('gobs_get_database_data')
+        dbpluginclass = createDbPlugin( 'postgis' )
+        connections = [c.connectionName() for c in dbpluginclass.connections()]
+        series = []
+        if get_data == 'yes' and connection_name in connections:
+            [header, data, rowCount, ok, error_message] = fetchDataFromSqlQuery(
+                connection_name,
+                sql
+            )
+            series = data
+
+        return series
+
+    def runImportObservationData(self):
+
+        # Get the list of series
+        series = self.getSeries()
+        if not series:
+            return
+
+        # Create dialog to let the user choose the serie
+        dialog = QDialog()
+        dialog.setWindowTitle(self.tr('Import observation data'))
+        layout = QVBoxLayout()
+        dialog.setLayout(layout)
+
+        # Combobox
+        combo_box = QComboBox()
+        combo_box.setObjectName((self.tr('Choose series')))
+        for i, d in enumerate(series):
+            combo_box.addItem(d[1])
+            combo_box.setItemData(i, d[0])
+        layout.addWidget(combo_box)
+
+        # Validation button
+        button_box = QDialogButtonBox()
+        button_box.addButton(QDialogButtonBox.Ok)
+        button_box.button(QDialogButtonBox.Ok).clicked.connect(dialog.accept)
+        layout.addWidget(button_box)
+
+        if dialog.exec_() == QDialog.Accepted:
+            idx = combo_box.currentIndex()
+            val = combo_box.itemData(idx)
+            self.openImportObservationData(val)
+
+    def openImportObservationData(self, serie_id):
+        '''
+        Opens the processing alg ImportObservationData
+        with dynamic inputs based on given serie id
+        '''
+
+        class DynamicImportObservationData(ImportObservationData):
+
+            def name(self):
+                return 'dynamic_import_observation_data'
+
+            def displayName(self):
+                return 'Import observation data'
+
+            def group(self):
+                return 'Manage'
+
+            def groupId(self):
+                return 'gobs_manage'
+
+            def getSerieId(self):
+                return serie_id
+
+            def initAlgorithm(self, config):
+
+                # use parent class to get other parameters
+                super(self.__class__, self).initAlgorithm(config)
+
+        alg = DynamicImportObservationData()
+        alg.setProvider(QgsApplication.processingRegistry().providerById("gobs"))
+        param = {}
+        execAlgorithmDialog(alg, param)
 
     def closeEvent(self, event):
         self.closingPlugin.emit()

@@ -35,7 +35,7 @@ from .algorithms.configure_plugin import ConfigurePlugin
 from .algorithms.execute_sql_on_service import ExecuteSqlOnService
 from .algorithms.create_database_structure import CreateDatabaseStructure
 from .algorithms.upgrade_database_structure import UpgradeDatabaseStructure
-from .algorithms.import_spatial_layer_data import ImportSpatialLayerData
+# from .algorithms.import_spatial_layer_data import ImportSpatialLayerData
 from .algorithms.import_observation_data import ImportObservationData
 # from .algorithms.get_data_as_layer import GetDataAsLayer
 from .algorithms.get_spatial_layer_vector_data import GetSpatialLayerVectorData
@@ -67,7 +67,10 @@ class GobsProvider(QgsProcessingProvider):
         self.addAlgorithm( ExecuteSqlOnService() )
         self.addAlgorithm( CreateDatabaseStructure() )
         self.addAlgorithm( UpgradeDatabaseStructure() )
-        self.addAlgorithm( ImportSpatialLayerData() )
+
+        # not imported because used as parent alg
+        # self.addAlgorithm( ImportSpatialLayerData() )
+
         self.addAlgorithm( ImportObservationData() )
         # self.addAlgorithm( GetDataAsLayer() ) # no need, because not used directly
         self.addAlgorithm( GetSpatialLayerVectorData() )
