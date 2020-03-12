@@ -10,7 +10,7 @@
 name=G-Obs
 qgisMinimumVersion=3.0
 description=This plugin provides tools to store and manage spatial and time data in a standardized way
-version=0.2.6
+version=0.2.7
 author=3liz
 email=info@3liz.com
 
@@ -24,6 +24,10 @@ repository=http://github.com/3liz
 
 # Uncomment the following line and add your changelog:
 changelog=
+  Version 0.2.7
+  * Rename name, title, label, code fields into normalized code label
+  * Import observation data - Adapt alg inputs based on the indicator caracteristics
+
   Version 0.2.6
   * Create db structure - Fix bug when adding test data
   * Move comments in specific SQL script file
