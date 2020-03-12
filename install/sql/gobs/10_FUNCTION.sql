@@ -33,7 +33,7 @@ BEGIN
 
     -- PARSE PATHS
     -- Insert root
-    INSERT INTO gobs.graph_node (gn_name)
+    INSERT INTO gobs.graph_node (gn_label)
     VALUES ('ROOT')
     ON CONFLICT DO NOTHING;
 
@@ -51,22 +51,22 @@ BEGIN
             RAISE NOTICE '  * word = "%", parent = "%" ', _word, _parent;
 
             -- gobs.graph_node
-            INSERT INTO gobs.graph_node (gn_name)
+            INSERT INTO gobs.graph_node (gn_label)
             VALUES (_word)
-            ON CONFLICT (gn_name)
+            ON CONFLICT (gn_label)
             DO NOTHING
             RETURNING id
             INTO _gid;
             IF _gid IS NULL THEN
                 SELECT id INTO _gid
                 FROM gobs.graph_node
-                WHERE gn_name = _word;
+                WHERE gn_label = _word;
             END IF;
 
             -- gobs.r_graph_edge
             INSERT INTO gobs.r_graph_edge (ge_parent_node, ge_child_node)
             VALUES (
-                (SELECT id FROM gobs.graph_node WHERE gn_name = coalesce(_parent, 'ROOT') LIMIT 1),
+                (SELECT id FROM gobs.graph_node WHERE gn_label = coalesce(_parent, 'ROOT') LIMIT 1),
                 _gid
             )
             ON CONFLICT DO NOTHING;
@@ -92,7 +92,7 @@ BEGIN
     INSERT INTO gobs.r_indicator_node
     (fk_id_indicator, fk_id_node)
     SELECT i_id, (
-        SELECT id FROM gobs.graph_node WHERE gn_name = leaf LIMIT 1
+        SELECT id FROM gobs.graph_node WHERE gn_label = leaf LIMIT 1
     )
     FROM (
         SELECT unnest(_leaves) AS leaf
