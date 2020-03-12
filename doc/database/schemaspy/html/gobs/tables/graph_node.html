@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <title>graph_node - gobs Database</title>
+  <title>graph_node - gobs_test Database</title>
   <!-- Tell the browser to be responsive to screen width -->
   <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
   <link rel="icon" type="image/png" sizes="16x16" href="../favicon.png">
@@ -46,7 +46,7 @@
     <nav class="navbar navbar-static-top">
       <div class="container">
         <div class="navbar-header">
-          <a href="../index.html" class="navbar-brand"><b>gobs</b> Database</a>
+          <a href="../index.html" class="navbar-brand"><b>gobs_test</b> Database</a>
           <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar-collapse">
             <i class="fa fa-bars"></i>
           </button>
@@ -152,7 +152,7 @@
 				 <td><p>ID</p></td>
 				</tr>
 				<tr>
-				 <td class='indexedColumn' title='Indexed'><i class='fa fa-sitemap fa-rotate-120' style='padding-right: 5px;'></i><span id="gn_name">gn_name</span></td>
+				 <td class='indexedColumn' title='Indexed'><i class='fa fa-sitemap fa-rotate-120' style='padding-right: 5px;'></i><span id="gn_label">gn_label</span></td>
 				 <td>text</td>
 				 <td>2147483647</td>
 				 <td title=''></td>
@@ -168,26 +168,9 @@
 				 </td>
 				 <td><p>Name of the node</p></td>
 				</tr>
-				<tr>
-				 <td><span id="gn_description">gn_description</span></td>
-				 <td>text</td>
-				 <td>2147483647</td>
-				 <td title=''></td>
-				 <td title=''></td>
-				 <td>null</td>
-				 <td>
-				  <table border='0' cellspacing='0' cellpadding='0'>
-				  </table>				 
-				 </td>
-				 <td>
-				  <table border='0' cellspacing='0' cellpadding='0'>
-				  </table>					 
-				 </td>
-				 <td><p>Description of the node</p></td>
-				</tr>
 								</tbody>
 				</table>
-				<p title='3 columns'>Table contained <span id="recordNumber">-1</span> rows<p/>
+				<p title='2 columns'>Table contained <span id="recordNumber">-1</span> rows<p/>
 			</div>
 		</div>
 		<div class="box box-primary">		
@@ -223,7 +206,13 @@
 				  <td title='Indexed'>graph_node_gn_name_idx</td>
 				  <td>Performance</td>
 				  <td><span title='Ascending'>Asc</span></td>
-				  <td>gn_name</td>
+				  <td>gn_label</td>
+				 </tr>				 
+				 <tr>
+				  <td class='uniqueKey' title='Unique Key'><i class='icon ion-key iconkey'></i> graph_node_gn_name_unique</td>
+				  <td>Must be unique</td>
+				  <td><span title='Ascending'>Asc</span></td>
+				  <td>gn_label</td>
 				 </tr>				 
 				</tbody>
 				</table>   			  
@@ -252,17 +241,17 @@
             <div class="tab-content no-padding">            
 				<div class="chart tab-pane active" id="oneDegreeImg-chart" style="position: relative; overflow-x:auto;">					
 					<map id="oneDegreeRelationshipsDiagram" name="oneDegreeRelationshipsDiagram">
-<area shape="rect" id="node1" href="r_indicator_node.html" title="r_indicator_node" alt="" coords="356,5,556,128">
-<area shape="rect" id="node2" href="graph_node.html" title="graph_node" alt="" coords="5,32,312,189">
+<area shape="rect" id="node1" href="r_indicator_node.html" title="r_indicator_node" alt="" coords="329,5,529,128">
+<area shape="rect" id="node2" href="graph_node.html" title="graph_node" alt="" coords="5,32,285,160">
 </map>
 
 					<a name='diagram'><img id='oneDegreeImg' src='../diagrams/graph_node.1degree.png' usemap='#oneDegreeRelationshipsDiagram' class='diagram' border='0' alt='' align='left'></a>							
 				</div>
 				<div class="chart tab-pane " id="twodegreesDegreeImg-chart" style="position: relative; overflow-x:auto;">					
 					<map id="twoDegreesRelationshipsDiagram" name="twoDegreesRelationshipsDiagram">
-<area shape="rect" id="node1" href="r_indicator_node.html" title="r_indicator_node" alt="" coords="356,44,556,167">
-<area shape="rect" id="node2" href="indicator.html" title="indicator" alt="" coords="87,5,230,93">
-<area shape="rect" id="node3" href="graph_node.html" title="graph_node" alt="" coords="5,111,312,268">
+<area shape="rect" id="node1" href="r_indicator_node.html" title="r_indicator_node" alt="" coords="329,44,529,167">
+<area shape="rect" id="node2" href="indicator.html" title="indicator" alt="" coords="74,5,217,93">
+<area shape="rect" id="node3" href="graph_node.html" title="graph_node" alt="" coords="5,111,285,239">
 </map>
 
 					<a name='diagram'><img id='twodegreesDegreeImg' src='../diagrams/graph_node.2degrees.png' usemap='#twoDegreesRelationshipsDiagram' class='diagram' border='0' alt='' align='left'></a>							

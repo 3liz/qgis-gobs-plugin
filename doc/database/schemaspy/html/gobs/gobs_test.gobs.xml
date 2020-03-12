@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<database name="gobs" schema="gobs" type="PostgreSQL - 9.6.16">
+<database name="gobs_test" schema="gobs" type="PostgreSQL - 9.6.16">
    <tables>
       <table name="actor" remarks="Actors" schema="gobs" type="TABLE">
          <column autoUpdated="true" defaultValue="nextval('gobs.actor_id_seq'::regclass)" digits="0" id="0" name="id" nullable="false" remarks="ID" size="10" type="serial">
             <child column="fk_id_actor" foreignKey="series_fk_id_actor_fkey" implied="false" onDeleteCascade="false" schema="gobs" table="series"/>
             <child column="fk_id_actor" foreignKey="spatial_layer_fk_id_actor_fkey" implied="false" onDeleteCascade="false" schema="gobs" table="spatial_layer"/>
          </column>
-         <column autoUpdated="false" digits="0" id="1" name="a_name" nullable="false" remarks="Name of the actor (can be a person or an entity)" size="2147483647" type="text"/>
+         <column autoUpdated="false" digits="0" id="1" name="a_label" nullable="false" remarks="Name of the actor (can be a person or an entity)" size="2147483647" type="text"/>
          <column autoUpdated="false" digits="0" id="2" name="a_description" nullable="false" remarks="Description of the actor" size="2147483647" type="text"/>
          <column autoUpdated="false" digits="0" id="3" name="a_email" nullable="false" remarks="Email of the actor" size="2147483647" type="text"/>
          <column autoUpdated="false" digits="0" id="4" name="id_category" nullable="false" remarks="Category of actor" size="10" type="int4">
@@ -17,14 +17,14 @@
             <column ascending="true" name="id"/>
          </index>
          <index name="actor_a_name_idx" unique="false">
-            <column ascending="true" name="a_name"/>
+            <column ascending="true" name="a_label"/>
          </index>
       </table>
       <table name="actor_category" remarks="Actors categories" schema="gobs" type="TABLE">
          <column autoUpdated="true" defaultValue="nextval('gobs.actor_category_id_seq'::regclass)" digits="0" id="0" name="id" nullable="false" remarks="ID" size="10" type="serial">
             <child column="id_category" foreignKey="actor_id_category_fkey" implied="false" onDeleteCascade="false" schema="gobs" table="actor"/>
          </column>
-         <column autoUpdated="false" digits="0" id="1" name="ac_name" nullable="false" remarks="Name of the actor category" size="2147483647" type="text"/>
+         <column autoUpdated="false" digits="0" id="1" name="ac_label" nullable="false" remarks="Name of the actor category" size="2147483647" type="text"/>
          <column autoUpdated="false" digits="0" id="2" name="ac_description" nullable="false" remarks="Description of the actor category" size="2147483647" type="text"/>
          <primaryKey column="id" sequenceNumberInPK="1"/>
          <index name="actor_category_pkey" unique="true">
@@ -50,14 +50,16 @@
          <column autoUpdated="true" defaultValue="nextval('gobs.graph_node_id_seq'::regclass)" digits="0" id="0" name="id" nullable="false" remarks="ID" size="10" type="serial">
             <child column="fk_id_node" foreignKey="r_indicator_node_fk_id_node_fkey" implied="false" onDeleteCascade="true" schema="gobs" table="r_indicator_node"/>
          </column>
-         <column autoUpdated="false" digits="0" id="1" name="gn_name" nullable="false" remarks="Name of the node" size="2147483647" type="text"/>
-         <column autoUpdated="false" digits="0" id="2" name="gn_description" nullable="false" remarks="Description of the node" size="2147483647" type="text"/>
+         <column autoUpdated="false" digits="0" id="1" name="gn_label" nullable="false" remarks="Name of the node" size="2147483647" type="text"/>
          <primaryKey column="id" sequenceNumberInPK="1"/>
          <index name="graph_node_pkey" unique="true">
             <column ascending="true" name="id"/>
          </index>
          <index name="graph_node_gn_name_idx" unique="false">
-            <column ascending="true" name="gn_name"/>
+            <column ascending="true" name="gn_label"/>
+         </index>
+         <index name="graph_node_gn_name_unique" unique="true">
+            <column ascending="true" name="gn_label"/>
          </index>
       </table>
       <table name="import" remarks="Journal des imports" schema="gobs" type="TABLE">
@@ -82,21 +84,21 @@
             <child column="fk_id_indicator" foreignKey="r_indicator_node_fk_id_indicator_fkey" implied="false" onDeleteCascade="true" schema="gobs" table="r_indicator_node"/>
             <child column="fk_id_indicator" foreignKey="series_fk_id_indicator_fkey" implied="false" onDeleteCascade="false" schema="gobs" table="series"/>
          </column>
-         <column autoUpdated="false" digits="0" id="1" name="id_label" nullable="false" remarks="Short name" size="2147483647" type="text"/>
-         <column autoUpdated="false" digits="0" id="2" name="id_title" nullable="false" remarks="Title" size="2147483647" type="text"/>
+         <column autoUpdated="false" digits="0" id="1" name="id_code" nullable="false" remarks="Short name" size="2147483647" type="text"/>
+         <column autoUpdated="false" digits="0" id="2" name="id_label" nullable="false" remarks="Title" size="2147483647" type="text"/>
          <column autoUpdated="false" digits="0" id="3" name="id_description" nullable="false" remarks="Describes the indicator regarding its rôle inside the project." size="2147483647" type="text"/>
          <column autoUpdated="false" defaultValue="'day'::text" digits="0" id="4" name="id_date_format" nullable="false" remarks="Help to know what is the format for the date. Example : ‘year’" size="2147483647" type="text"/>
          <column autoUpdated="false" digits="0" id="5" name="id_value_code" nullable="false" remarks="List of the codes of the vector dimensions. Ex : [‘pop_h’, ‘pop_f’]" size="2147483647" type="_text"/>
          <column autoUpdated="false" digits="0" id="6" name="id_value_name" nullable="false" remarks="List of the names of the vector dimensions. Ex : [‘population homme’, ‘population femme’]" size="2147483647" type="_text"/>
-         <column autoUpdated="false" defaultValue="'integer'::text" digits="0" id="7" name="id_value_type" nullable="false" remarks="Type of the stored values. Ex : ‘integer’ or ‘real’" size="2147483647" type="text"/>
-         <column autoUpdated="false" digits="0" id="8" name="id_value_unit" nullable="false" remarks="Unit ot the store values. Ex : ‘inhabitants’ or ‘°C’" size="2147483647" type="text"/>
+         <column autoUpdated="false" digits="0" id="7" name="id_value_type" nullable="false" remarks="Type of the stored values. Ex : ‘integer’ or ‘real’" size="2147483647" type="_text"/>
+         <column autoUpdated="false" digits="0" id="8" name="id_value_unit" nullable="false" remarks="Unit ot the store values. Ex : ‘inhabitants’ or ‘°C’" size="2147483647" type="_text"/>
          <column autoUpdated="false" digits="0" id="9" name="id_paths" nullable="true" remarks="Paths given to help finding an indicator. They will be split up to fill the graph_node and r_indicator_node tables. If you need multiple paths, use | as a separator. Ex: Environment / Water resources | Measure / Physics / Water" size="2147483647" type="text"/>
          <primaryKey column="id" sequenceNumberInPK="1"/>
          <index name="indicator_pkey" unique="true">
             <column ascending="true" name="id"/>
          </index>
          <index name="indicator_id_label_idx" unique="false">
-            <column ascending="true" name="id_label"/>
+            <column ascending="true" name="id_code"/>
          </index>
       </table>
       <table name="metadata" remarks="Metadata of the structure : version and date. Usefull for database structure and glossary data migrations between versions" schema="gobs" type="TABLE">
@@ -125,9 +127,15 @@
          </column>
          <column autoUpdated="false" digits="0" id="4" name="ob_value" nullable="false" remarks="Vector containing the measured or computed data values. Ex : [1543, 1637]" size="2147483647" type="jsonb"/>
          <column autoUpdated="false" digits="6" id="5" name="ob_timestamp" nullable="false" remarks="Timestamp of the data" size="29" type="timestamp"/>
+         <column autoUpdated="false" digits="6" id="6" name="ob_validation" nullable="true" remarks="Date and time when the data has been validated (the corresponding import status has been changed from pending to validated). Can be used to find all observations not yet validated, with NULL values in this field." size="29" type="timestamp"/>
          <primaryKey column="id" sequenceNumberInPK="1"/>
          <index name="observation_pkey" unique="true">
             <column ascending="true" name="id"/>
+         </index>
+         <index name="observation_data_unique" unique="true">
+            <column ascending="true" name="fk_id_series"/>
+            <column ascending="true" name="fk_id_spatial_object"/>
+            <column ascending="true" name="ob_timestamp"/>
          </index>
          <index name="observation_fk_id_import_idx" unique="false">
             <column ascending="true" name="fk_id_import"/>
@@ -147,7 +155,7 @@
             <child column="fk_id_protocol" foreignKey="series_fk_id_protocol_fkey" implied="false" onDeleteCascade="false" schema="gobs" table="series"/>
          </column>
          <column autoUpdated="false" digits="0" id="1" name="pr_code" nullable="false" remarks="Code" size="2147483647" type="text"/>
-         <column autoUpdated="false" digits="0" id="2" name="pr_name" nullable="false" remarks="Name of the indicator" size="2147483647" type="text"/>
+         <column autoUpdated="false" digits="0" id="2" name="pr_label" nullable="false" remarks="Name of the indicator" size="2147483647" type="text"/>
          <column autoUpdated="false" digits="0" id="3" name="pr_description" nullable="false" remarks="Description, including URLs to references and authors." size="2147483647" type="text"/>
          <primaryKey column="id" sequenceNumberInPK="1"/>
          <index name="protocol_pkey" unique="true">

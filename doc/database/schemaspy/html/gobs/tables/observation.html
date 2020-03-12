@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <title>observation - gobs Database</title>
+  <title>observation - gobs_test Database</title>
   <!-- Tell the browser to be responsive to screen width -->
   <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
   <link rel="icon" type="image/png" sizes="16x16" href="../favicon.png">
@@ -46,7 +46,7 @@
     <nav class="navbar navbar-static-top">
       <div class="container">
         <div class="navbar-header">
-          <a href="../index.html" class="navbar-brand"><b>gobs</b> Database</a>
+          <a href="../index.html" class="navbar-brand"><b>gobs_test</b> Database</a>
           <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar-collapse">
             <i class="fa fa-bars"></i>
           </button>
@@ -252,9 +252,26 @@
 				 </td>
 				 <td><p>Timestamp of the data</p></td>
 				</tr>
+				<tr>
+				 <td><span id="ob_validation">ob_validation</span></td>
+				 <td>timestamp</td>
+				 <td>29,6</td>
+				 <td title='nullable'>√</td>
+				 <td title=''></td>
+				 <td>null</td>
+				 <td>
+				  <table border='0' cellspacing='0' cellpadding='0'>
+				  </table>				 
+				 </td>
+				 <td>
+				  <table border='0' cellspacing='0' cellpadding='0'>
+				  </table>					 
+				 </td>
+				 <td><p>Date and time when the data has been validated (the corresponding import status has been changed from pending to validated). Can be used to find all observations not yet validated, with NULL values in this field.</p></td>
+				</tr>
 								</tbody>
 				</table>
-				<p title='6 columns'>Table contained <span id="recordNumber">-1</span> rows<p/>
+				<p title='7 columns'>Table contained <span id="recordNumber">-1</span> rows<p/>
 			</div>
 		</div>
 		<div class="box box-primary">		
@@ -285,6 +302,12 @@
 				  <td>Primary key</td>
 				  <td><span title='Ascending'>Asc</span></td>
 				  <td>id</td>
+				 </tr>				 
+				 <tr>
+				  <td class='uniqueKey' title='Unique Key'><i class='icon ion-key iconkey'></i> observation_data_unique</td>
+				  <td>Must be unique</td>
+				  <td><span title='Ascending'>Asc</span>/<span title='Ascending'>Asc</span>/<span title='Ascending'>Asc</span></td>
+				  <td>fk_id_series + fk_id_spatial_object + ob_timestamp</td>
 				 </tr>				 
 				 <tr>
 				  <td title='Indexed'>observation_fk_id_import_idx</td>
@@ -339,7 +362,7 @@
 					<map id="oneDegreeRelationshipsDiagram" name="oneDegreeRelationshipsDiagram">
 <area shape="rect" id="node1" href="import.html" title="import" alt="" coords="281,289,457,436">
 <area shape="rect" id="node2" href="series.html" title="series" alt="" coords="5,155,219,365">
-<area shape="rect" id="node3" href="observation.html" title="observation" alt="" coords="520,5,880,251">
+<area shape="rect" id="node3" href="observation.html" title="observation" alt="" coords="520,5,880,280">
 <area shape="rect" id="node4" href="spatial_object.html" title="spatial_object" alt="" coords="263,67,476,272">
 </map>
 
@@ -353,7 +376,7 @@
 <area shape="rect" id="node6" href="indicator.html" title="indicator" alt="" coords="180,165,323,253">
 <area shape="rect" id="node7" href="protocol.html" title="protocol" alt="" coords="181,24,321,112">
 <area shape="rect" id="node8" href="spatial_layer.html" title="spatial_layer" alt="" coords="167,271,336,359">
-<area shape="rect" id="node3" href="observation.html" title="observation" alt="" coords="857,5,1217,251">
+<area shape="rect" id="node3" href="observation.html" title="observation" alt="" coords="857,5,1217,280">
 <area shape="rect" id="node4" href="spatial_object.html" title="spatial_object" alt="" coords="380,259,593,464">
 </map>
 

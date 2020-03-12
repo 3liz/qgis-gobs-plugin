@@ -23,7 +23,7 @@ SET default_with_oids = false;
 -- actor
 CREATE TABLE gobs.actor (
     id integer NOT NULL,
-    a_name text NOT NULL,
+    a_label text NOT NULL,
     a_description text NOT NULL,
     a_email text NOT NULL,
     id_category integer NOT NULL
@@ -37,7 +37,7 @@ COMMENT ON TABLE gobs.actor IS 'Actors';
 -- actor_category
 CREATE TABLE gobs.actor_category (
     id integer NOT NULL,
-    ac_name text NOT NULL,
+    ac_label text NOT NULL,
     ac_description text NOT NULL
 );
 
@@ -103,7 +103,7 @@ ALTER SEQUENCE gobs.glossary_id_seq OWNED BY gobs.glossary.id;
 -- graph_node
 CREATE TABLE gobs.graph_node (
     id integer NOT NULL,
-    gn_name text NOT NULL
+    gn_label text NOT NULL
 );
 
 
@@ -153,8 +153,8 @@ ALTER SEQUENCE gobs.import_id_seq OWNED BY gobs.import.id;
 -- indicator
 CREATE TABLE gobs.indicator (
     id integer NOT NULL,
+    id_code text NOT NULL,
     id_label text NOT NULL,
-    id_title text NOT NULL,
     id_description text NOT NULL,
     id_date_format text DEFAULT 'day'::text NOT NULL,
     id_value_code text[] NOT NULL,
@@ -241,7 +241,7 @@ ALTER SEQUENCE gobs.observation_id_seq OWNED BY gobs.observation.id;
 CREATE TABLE gobs.protocol (
     id integer NOT NULL,
     pr_code text NOT NULL,
-    pr_name text NOT NULL,
+    pr_label text NOT NULL,
     pr_description text NOT NULL
 );
 

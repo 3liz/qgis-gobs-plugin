@@ -35,7 +35,7 @@ ALTER TABLE ONLY gobs.glossary
 
 -- graph_node graph_node_gn_name_unique
 ALTER TABLE ONLY gobs.graph_node
-    ADD CONSTRAINT graph_node_gn_name_unique UNIQUE (gn_name);
+    ADD CONSTRAINT graph_node_gn_name_unique UNIQUE (gn_label);
 
 
 -- graph_node graph_node_pkey

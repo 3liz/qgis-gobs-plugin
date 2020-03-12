@@ -90,9 +90,9 @@ class GetAggregatedData(GetDataAsLayer):
         sql = '''
             SELECT s.id,
             concat(
-                id_title,
-                ' (', p.pr_code, ')',
-                ' / Source: ', a_name,
+                id_label,
+                ' (', p.pr_label, ')',
+                ' / Source: ', a_label,
                 ' / Layer: ', sl_label
             ) AS label
             FROM gobs.series s

@@ -19,7 +19,7 @@ SET row_security = off;
 SET default_tablespace = '';
 
 -- actor_a_name_idx
-CREATE INDEX actor_a_name_idx ON gobs.actor USING btree (a_name);
+CREATE INDEX actor_a_name_idx ON gobs.actor USING btree (a_label);
 
 
 -- glossary_gl_field_idx
@@ -27,7 +27,7 @@ CREATE INDEX glossary_gl_field_idx ON gobs.glossary USING btree (gl_field);
 
 
 -- graph_node_gn_name_idx
-CREATE INDEX graph_node_gn_name_idx ON gobs.graph_node USING btree (gn_name);
+CREATE INDEX graph_node_gn_name_idx ON gobs.graph_node USING btree (gn_label);
 
 
 -- import_fk_id_series_idx
@@ -35,7 +35,7 @@ CREATE INDEX import_fk_id_series_idx ON gobs.import USING btree (fk_id_series);
 
 
 -- indicator_id_label_idx
-CREATE INDEX indicator_id_label_idx ON gobs.indicator USING btree (id_label);
+CREATE INDEX indicator_id_label_idx ON gobs.indicator USING btree (id_code);
 
 
 -- observation_fk_id_import_idx

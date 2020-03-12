@@ -24,8 +24,8 @@ COMMENT ON TABLE gobs.actor IS 'Actors';
 COMMENT ON COLUMN gobs.actor.id IS 'ID';
 
 
--- actor.a_name
-COMMENT ON COLUMN gobs.actor.a_name IS 'Name of the actor (can be a person or an entity)';
+-- actor.a_label
+COMMENT ON COLUMN gobs.actor.a_label IS 'Name of the actor (can be a person or an entity)';
 
 
 -- actor.a_description
@@ -48,8 +48,8 @@ COMMENT ON TABLE gobs.actor_category IS 'Actors categories';
 COMMENT ON COLUMN gobs.actor_category.id IS 'ID';
 
 
--- actor_category.ac_name
-COMMENT ON COLUMN gobs.actor_category.ac_name IS 'Name of the actor category';
+-- actor_category.ac_label
+COMMENT ON COLUMN gobs.actor_category.ac_label IS 'Name of the actor category';
 
 
 -- actor_category.ac_description
@@ -92,8 +92,8 @@ COMMENT ON TABLE gobs.graph_node IS 'Graph nodes, to store key words used to fin
 COMMENT ON COLUMN gobs.graph_node.id IS 'ID';
 
 
--- graph_node.gn_name
-COMMENT ON COLUMN gobs.graph_node.gn_name IS 'Name of the node';
+-- graph_node.gn_label
+COMMENT ON COLUMN gobs.graph_node.gn_label IS 'Name of the node';
 
 
 -- import
@@ -124,12 +124,12 @@ COMMENT ON TABLE gobs.indicator IS 'Groups of observation data for decisional pu
 COMMENT ON COLUMN gobs.indicator.id IS 'ID';
 
 
+-- indicator.id_code
+COMMENT ON COLUMN gobs.indicator.id_code IS 'Short name';
+
+
 -- indicator.id_label
-COMMENT ON COLUMN gobs.indicator.id_label IS 'Short name';
-
-
--- indicator.id_title
-COMMENT ON COLUMN gobs.indicator.id_title IS 'Title';
+COMMENT ON COLUMN gobs.indicator.id_label IS 'Title';
 
 
 -- indicator.id_description
@@ -224,8 +224,8 @@ COMMENT ON COLUMN gobs.protocol.id IS 'ID';
 COMMENT ON COLUMN gobs.protocol.pr_code IS 'Code';
 
 
--- protocol.pr_name
-COMMENT ON COLUMN gobs.protocol.pr_name IS 'Name of the indicator';
+-- protocol.pr_label
+COMMENT ON COLUMN gobs.protocol.pr_label IS 'Name of the indicator';
 
 
 -- protocol.pr_description

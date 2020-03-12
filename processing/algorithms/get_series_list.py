@@ -80,9 +80,9 @@ class GetSeriesList(GetDataAsLayer):
                 s.id,
                 id_label AS indicator,
                 id_paths AS indicator_paths,
-                a_name AS actor_source,
+                a_label AS actor_source,
                 sl_label AS spatial_layer,
-                pr_name AS protocol,
+                pr_label AS protocol,
                 count(o.id) AS nb_observation,
                 min(o.ob_timestamp) AS min_date,
                 max(o.ob_timestamp) AS max_date
@@ -94,7 +94,7 @@ class GetSeriesList(GetDataAsLayer):
             INNER JOIN gobs.spatial_layer sl ON sl.id = s.fk_id_spatial_layer
             INNER JOIN gobs.protocol p ON p.id = s.fk_id_protocol
 
-            GROUP BY s.id, id_label, id_paths, a_name, sl_label, pr_name
+            GROUP BY s.id, id_label, id_paths, a_label, sl_label, pr_label
 
         '''
         self.SQL = sql.replace('\n', ' ').rstrip(';')
