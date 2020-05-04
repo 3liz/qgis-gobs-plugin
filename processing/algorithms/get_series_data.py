@@ -64,7 +64,14 @@ class GetSeriesData(GetDataAsLayer):
         return 'gobs_tools'
 
     def shortHelpString(self):
-        return getShortHelpString(os.path.basename(__file__))
+        short_help = tr(
+            'This algorithm allows to add a table layer in your QGIS project containing the observation data from the chosen G-Obs series. Data are dynamically fetched from the database, meaning they are always up-to-date.'
+            '\n'
+            '* Name of the output layer: choose the name of the QGIS table layer to create. If not given, the label of the series will be used, by concatening the label of the indicator, protocol, source actor and spatial layer defining the chosen series.'
+            '\n'
+            '* Series of observations: choose the G-Obs series of observation you want to use as the data source.'
+        )
+        return short_help
 
     def initAlgorithm(self, config):
         """
@@ -106,13 +113,13 @@ class GetSeriesData(GetDataAsLayer):
         self.addParameter(
             QgsProcessingParameterEnum(
                 self.SERIE,
-                self.tr('Target serie'),
+                self.tr('Series of observations'),
                 options=self.SERIES,
                 optional=False
             )
         )
 
-        # Id of series, to get the serie directly
+        # Id of series, to get the series directly
         # mainly used from other processing algs
         p = QgsProcessingParameterNumber(
             self.SERIE_ID,
@@ -127,7 +134,7 @@ class GetSeriesData(GetDataAsLayer):
 
         serie_id = self.parameterAsInt(parameters, self.SERIE_ID, context)
 
-        # Check serie id is in the list of existing series
+        # Check series id is in the list of existing series
         if serie_id and serie_id > 0:
             if not serie_id in self.SERIES_DICT.values():
                 return False, self.tr('Series ID does not exists in the database')

@@ -69,7 +69,22 @@ class ImportSpatialLayerData(QgsProcessingAlgorithm):
         return 'gobs_manage'
 
     def shortHelpString(self):
-        return getShortHelpString(os.path.basename(__file__))
+        short_help = tr(
+            'This algorithm allows to import data from a QGIS spatial layer into the G-Obs database'
+            '\n'
+            '\n'
+            'The G-Obs administrator must have created the needed spatial layer beforehand by addind the required items in the related database tables: gobs.actor_category, gobs.actor and gobs.spatial_layer.'
+            '\n'
+            '* Target spatial layer: choose one of the spatial layers available in G-Obs database'
+            '\n'
+            '* Source data layer: choose the QGIS vector layer containing the spatial data you want to import into the chosen spatial layer.'
+            '\n'
+            '* Unique identifier: choose the field containing the unique ID. It can be an integer or a text field, but must be unique.'
+            '\n'
+            '* Unique label: choose the text field containing the unique label of the layer feature. You could use the QGIS field calculator to create one if needed.'
+            '\n'
+        )
+        return short_help
 
     def tr(self, string):
         return QCoreApplication.translate('Processing', string)

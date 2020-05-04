@@ -64,7 +64,16 @@ class CreateDatabaseStructure(QgsProcessingAlgorithm):
         return 'gobs_structure'
 
     def shortHelpString(self):
-        return getShortHelpString(os.path.basename(__file__))
+        short_help = tr(
+            'Install the G-Obs database structure with tables and function on the chosen database.'
+            '\n'
+            '\n'
+            'This script will add a gobs schema with needed tables and functions'
+            '\n'
+            '\n'
+            'Beware ! If you check the "override" checkboxes, you will loose all existing data in the existing gobs schema !'
+        )
+        return short_help
 
     def tr(self, string):
         return QCoreApplication.translate('Processing', string)

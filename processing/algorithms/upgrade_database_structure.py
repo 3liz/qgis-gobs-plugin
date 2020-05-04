@@ -63,7 +63,14 @@ class UpgradeDatabaseStructure(QgsProcessingAlgorithm):
         return 'gobs_structure'
 
     def shortHelpString(self):
-        return getShortHelpString(os.path.basename(__file__))
+        short_help = tr(
+            'Upgrade the G-Obs tables and functions in the chosen database.'
+            '\n'
+            '\n'
+            'If you have upgraded your QGIS G-Obs plugin, you can run this script'
+            ' to upgrade your database to the new plugin version.'
+        )
+        return short_help
 
     def tr(self, string):
         return QCoreApplication.translate('Processing', string)

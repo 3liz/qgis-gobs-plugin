@@ -57,7 +57,12 @@ class GetSeriesList(GetDataAsLayer):
         return 'gobs_tools'
 
     def shortHelpString(self):
-        return getShortHelpString(os.path.basename(__file__))
+        short_help = tr(
+            ' bla'
+            '\n'
+            ' bla'
+        )
+        return short_help
 
     def initAlgorithm(self, config):
         """

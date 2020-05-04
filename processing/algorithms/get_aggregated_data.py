@@ -74,7 +74,26 @@ class GetAggregatedData(GetDataAsLayer):
         return 'gobs_tools'
 
     def shortHelpString(self):
-        return getShortHelpString(os.path.basename(__file__))
+        short_help = tr(
+            'This algorithm allows to add a table or vector layer in your QGIS project containing the aggregated observation data from the chosen G-Obs series. The aggregation is made depending of the user input. Data are dynamically fetched from the database, meaning they are always up-to-date.'
+            '\n'
+            '* Names of the output layer: choose the name of the QGIS layer to create. If not given, the label of the series of observations, as written in the series combo box.'
+            '\n'
+            '* Series of observations: the G-Obs series containing the observation data.'
+            '\n'
+            '* Add spatial object ID and label ? If checked, the output layer will have two more columns with the spatial layer unique identifiers (ID and label).'
+            '\n'
+            '* Add spatial object geometry ? If checked, the output layer will be a spatial QGIS vector layer, displayed in the map, and not a geometryless table layer. The result can show duplicated geometries, for observations defined by the same geometry at different dates or times.'
+            '\n'
+            '* Timestamp extraction resolution: choose the desired temporal resolution of the output. Aggregates will be calculated (sum, average, etc.) by grouping the source data by this temporal resolution.'
+            '\n'
+            '* Choose aggregate functions to use: you can choose between minimum (min), maximum (max), average (avg) and  sum.'
+            '\n'
+            '* Minimum observation timestamp: if you enter a valid ISO timestamp in this field, only observations with a timestamp after this value will be processed.'
+            '\n'
+            '* Maximum observation timestamp: if you enter a valid ISO timestamp in this field, only observations with a timestamp before this value will be processed.'
+        )
+        return short_help
 
     def initAlgorithm(self, config):
         """
@@ -117,13 +136,13 @@ class GetAggregatedData(GetDataAsLayer):
         self.addParameter(
             QgsProcessingParameterEnum(
                 self.SERIE,
-                self.tr('SOURCE - Choose one serie'),
+                self.tr('Series of observations'),
                 options=self.SERIES,
                 optional=False
             )
         )
 
-        # Id of series, to get the serie directly
+        # Id of series, to get the series directly
         # mainly used from other processing algs
         p = QgsProcessingParameterNumber(
             self.SERIE_ID,
@@ -138,7 +157,7 @@ class GetAggregatedData(GetDataAsLayer):
         self.addParameter(
             QgsProcessingParameterBoolean(
                 self.ADD_SPATIAL_OBJECT_DATA,
-                self.tr('FIELDS - Add spatial object ID and label ?'),
+                self.tr('Add spatial object ID and label ?'),
                 defaultValue=True,
                 optional=False
             )
@@ -148,7 +167,7 @@ class GetAggregatedData(GetDataAsLayer):
         self.addParameter(
             QgsProcessingParameterBoolean(
                 self.ADD_SPATIAL_OBJECT_GEOM,
-                self.tr('FIELDS - Add spatial object geometry ?'),
+                self.tr('Add spatial object geometry ?'),
                 defaultValue=False,
                 optional=False
             )
@@ -163,7 +182,7 @@ class GetAggregatedData(GetDataAsLayer):
         self.addParameter(
             QgsProcessingParameterEnum(
                 self.TEMPORAL_RESOLUTION,
-                self.tr('FIELDS - Timestamp extraction resolution'),
+                self.tr('Timestamp extraction resolution'),
                 options=self.TEMPORAL_RESOLUTIONS,
                 optional=False
             )
@@ -173,7 +192,7 @@ class GetAggregatedData(GetDataAsLayer):
         self.addParameter(
             QgsProcessingParameterEnum(
                 self.AGGREGATE_FUNCTIONS,
-                self.tr('FIELDS - Choose aggregate functions to use'),
+                self.tr('Choose aggregate functions to use'),
                 options=self.AGGREGATE_FUNCTIONS_LIST,
                 optional=False,
                 allowMultiple=True,
@@ -195,7 +214,7 @@ class GetAggregatedData(GetDataAsLayer):
         self.addParameter(
             QgsProcessingParameterString(
                 self.MIN_TIMESTAMP,
-                self.tr('FILTER - Minimum timestamp, Ex: 2019-01-01 or 2019-01-06 00:00:00'),
+                self.tr('Minimum observation timestamp, Ex: 2019-01-01 or 2019-01-06 00:00:00'),
                 defaultValue='',
                 optional=True
             )
@@ -205,7 +224,7 @@ class GetAggregatedData(GetDataAsLayer):
         self.addParameter(
             QgsProcessingParameterString(
                 self.MAX_TIMESTAMP,
-                self.tr('FILTER - Maximum timestamp, Ex:2019-12-31 or 2019-12-31 23:59:53'),
+                self.tr('Maximum observation timestamp, Ex:2019-12-31 or 2019-12-31 23:59:53'),
                 defaultValue='',
                 optional=True
             )
@@ -215,7 +234,7 @@ class GetAggregatedData(GetDataAsLayer):
 
         serie_id = self.parameterAsInt(parameters, self.SERIE_ID, context)
 
-        # Check serie id is in the list of existing series
+        # Check series id is in the list of existing series
         if serie_id > 0:
             if not serie_id in self.SERIES_DICT.values():
                 return False, self.tr('Series ID does not exists in the database')
@@ -226,11 +245,11 @@ class GetAggregatedData(GetDataAsLayer):
         if min_timestamp:
             ok, msg = validateTimestamp(min_timestamp)
             if not ok:
-                return ok, self.tr('Minimum timestamp: ') + msg
+                return ok, self.tr('Minimum observation timestamp: ') + msg
         if max_timestamp:
             ok, msg = validateTimestamp(max_timestamp)
             if not ok:
-                return ok, self.tr('Maximum timestamp: ') + msg
+                return ok, self.tr('Maximum observation timestamp: ') + msg
 
         return super(GetAggregatedData, self).checkParameterValues(parameters, context)
 

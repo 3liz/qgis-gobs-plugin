@@ -63,7 +63,14 @@ class GetSpatialLayerVectorData(GetDataAsLayer):
         return 'gobs_tools'
 
     def shortHelpString(self):
-        return getShortHelpString(os.path.basename(__file__))
+        short_help = tr(
+            'This algorithm allows to add a vector layer in your QGIS project containing the spatial data from the chosen G-Obs spatial layer. Data are dynamically fetched from the database, meaning they are always up-to-date.'
+            '\n'
+            '* Name of the output layer: choose the name of the QGIS layer to create. If not given, the label of the spatial layer will be used.'
+            '\n'
+            '* Spatial layer: choose the G-Obs spatial layer you want to use as the data source.'
+        )
+        return short_help
 
     def initAlgorithm(self, config):
         """
