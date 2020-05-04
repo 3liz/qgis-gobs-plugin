@@ -206,7 +206,7 @@ class ImportSpatialLayerData(QgsProcessingAlgorithm):
         sql = '''
             INSERT INTO gobs.spatial_object
             (so_unique_id, so_unique_label, geom, fk_id_spatial_layer)
-            SELECT "%s", "%s", ST_Transform(geom, 4326) AS geom, %s
+            SELECT "%s", "%s", ST_Transform(ST_Buffer(geom,0), 4326) AS geom, %s
             FROM "%s"."%s"
             ;
         ''' % (
