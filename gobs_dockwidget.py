@@ -85,7 +85,9 @@ class GobsDockWidget(QtWidgets.QDockWidget, FORM_CLASS):
         # #widgets-and-dialogs-with-auto-connect
         self.setupUi(self)
 
-        # Declare algs
+        # BUTTONS
+
+        # Buttons directly linked to an algorithm
         self.algorithms = [
             'configure_plugin',
             'create_database_structure',
@@ -104,9 +106,22 @@ class GobsDockWidget(QtWidgets.QDockWidget, FORM_CLASS):
                 continue
             button.clicked.connect(partial(self.runAlgorithm, alg))
 
+        # Buttons not linked to algs
+        #
+        # Import observation data: need to dynamically instantiate the alg
         button = self.findChild(QPushButton, 'button_import_observation_data')
         if button:
             button.clicked.connect(self.runImportObservationData)
+
+        # Help on concepts
+        button = self.findChild(QPushButton, 'button_help_concept')
+        if button:
+            button.clicked.connect(self.helpConcept)
+
+        # Help on database
+        button = self.findChild(QPushButton, 'button_help_database')
+        if button:
+            button.clicked.connect(self.helpDatabase)
 
 
     def tr(self, string):
@@ -226,3 +241,32 @@ class GobsDockWidget(QtWidgets.QDockWidget, FORM_CLASS):
     def closeEvent(self, event):
         self.closingPlugin.emit()
         event.accept()
+
+    def openFile(self, file_path):
+        '''
+        Opens a file with default system app
+        '''
+        import webbrowser
+        webbrowser.open_new(r'file://%s' % file_path)
+
+    def helpConcept(self):
+        '''
+        Display the help on concepts
+        '''
+        help_file = os.path.join(
+            os.path.dirname(__file__),
+            'doc/concepts.md'
+        )
+        self.openFile(help_file)
+
+
+    def helpDatabase(self):
+        '''
+        Display the help on database structure
+        '''
+        help_file = os.path.join(
+            os.path.dirname(__file__),
+            'doc/database/schemaspy/html/gobs/',
+            'diagrams/summary/relationships.real.large.png'
+        )
+        self.openFile(help_file)

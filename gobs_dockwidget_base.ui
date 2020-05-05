@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>386</width>
-    <height>487</height>
+    <width>368</width>
+    <height>598</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -25,8 +25,8 @@
         <rect>
          <x>0</x>
          <y>0</y>
-         <width>366</width>
-         <height>448</height>
+         <width>348</width>
+         <height>559</height>
         </rect>
        </property>
        <layout class="QVBoxLayout" name="verticalLayout">
@@ -107,6 +107,29 @@
             <widget class="QPushButton" name="button_get_aggregated_data">
              <property name="text">
               <string>Get aggregated data</string>
+             </property>
+            </widget>
+           </item>
+          </layout>
+         </widget>
+        </item>
+        <item>
+         <widget class="QGroupBox" name="groupBox_4">
+          <property name="title">
+           <string>Help</string>
+          </property>
+          <layout class="QVBoxLayout" name="verticalLayout_5">
+           <item>
+            <widget class="QPushButton" name="button_help_concept">
+             <property name="text">
+              <string>Concepts</string>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <widget class="QPushButton" name="button_help_database">
+             <property name="text">
+              <string>Database model</string>
              </property>
             </widget>
            </item>
