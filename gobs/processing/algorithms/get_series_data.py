@@ -88,10 +88,10 @@ class GetSeriesData(GetDataAsLayer):
             INNER JOIN gobs.spatial_layer sl ON sl.id = s.fk_id_spatial_layer
             ORDER BY label
         '''
-        dbpluginclass = createDbPlugin( 'postgis' )
+        dbpluginclass = createDbPlugin('postgis')
         connections = [c.connectionName() for c in dbpluginclass.connections()]
         data = []
-        if get_data =='yes' and connection_name in connections:
+        if get_data == 'yes' and connection_name in connections:
             [header, data, rowCount, ok, error_message] = fetchDataFromSqlQuery(
                 connection_name,
                 sql
@@ -125,11 +125,10 @@ class GetSeriesData(GetDataAsLayer):
 
         # Check series id is in the list of existing series
         if serie_id and serie_id > 0:
-            if not serie_id in self.SERIES_DICT.values():
+            if serie_id not in self.SERIES_DICT.values():
                 return False, self.tr('Series ID does not exists in the database')
 
         return super(GetSeriesData, self).checkParameterValues(parameters, context)
-
 
     def setSql(self, parameters, context, feedback):
 
@@ -182,11 +181,11 @@ class GetSeriesData(GetDataAsLayer):
             raise QgsProcessingException(message)
 
         # Retrieve needed data
-        id_label = data[0][0]
-        id_date_format = data[0][1]
+        # id_label = data[0][0]
+        # id_date_format = data[0][1]
         id_value_code = data[0][2].split('|')
         id_value_type = data[0][3].split('|')
-        id_value_unit = data[0][4].split('|')
+        # id_value_unit = data[0][4].split('|')
 
         # Build SQL
         get_values = [
@@ -230,7 +229,7 @@ class GetSeriesData(GetDataAsLayer):
             if serie_id in self.SERIES_DICT.values():
                 id_serie = serie_id
 
-            output_layer_name = [k for k,v in self.SERIES_DICT.items() if v == id_serie ][0]
+            output_layer_name = [k for k, v in self.SERIES_DICT.items() if v == id_serie][0]
 
         # Set layer name
         self.LAYER_NAME = output_layer_name

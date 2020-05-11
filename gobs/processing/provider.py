@@ -61,19 +61,19 @@ class GobsProvider(QgsProcessingProvider):
         # so that they do not get data from database to fill in their combo boxes
         QgsExpressionContextUtils.setGlobalVariable('gobs_get_database_data', 'no')
 
-        self.addAlgorithm( ConfigurePlugin() )
-        self.addAlgorithm( ExecuteSqlOnService() )
-        self.addAlgorithm( CreateDatabaseStructure() )
-        self.addAlgorithm( UpgradeDatabaseStructure() )
+        self.addAlgorithm(ConfigurePlugin())
+        self.addAlgorithm(ExecuteSqlOnService())
+        self.addAlgorithm(CreateDatabaseStructure())
+        self.addAlgorithm(UpgradeDatabaseStructure())
 
         # not imported because used as parent alg
         # self.addAlgorithm( ImportObservationData() )
-        self.addAlgorithm( ImportSpatialLayerData() )
+        self.addAlgorithm(ImportSpatialLayerData())
         # self.addAlgorithm( GetDataAsLayer() ) # no need, because not used directly
-        self.addAlgorithm( GetSpatialLayerVectorData() )
-        self.addAlgorithm( GetSeriesData() )
-        self.addAlgorithm( GetSeriesList() )
-        self.addAlgorithm( GetAggregatedData() )
+        self.addAlgorithm(GetSpatialLayerVectorData())
+        self.addAlgorithm(GetSeriesData())
+        self.addAlgorithm(GetSeriesList())
+        self.addAlgorithm(GetAggregatedData())
 
         # Put the flag back to yes
         QgsExpressionContextUtils.setGlobalVariable('gobs_get_database_data', 'yes')

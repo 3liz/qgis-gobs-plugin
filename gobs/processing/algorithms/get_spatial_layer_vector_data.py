@@ -78,7 +78,7 @@ class GetSpatialLayerVectorData(GetDataAsLayer):
             FROM gobs.spatial_layer
             ORDER BY sl_label
         '''
-        dbpluginclass = createDbPlugin( 'postgis' )
+        dbpluginclass = createDbPlugin('postgis')
         connections = [c.connectionName() for c in dbpluginclass.connections()]
         data = []
         if get_data == 'yes' and connection_name in connections:
@@ -114,7 +114,7 @@ class GetSpatialLayerVectorData(GetDataAsLayer):
 
         # Check serie id is in the list of existing spatial layers
         if spatial_layer_id and spatial_layer_id > 0:
-            if not spatial_layer_id in self.SPATIALLAYERS_DICT:
+            if spatial_layer_id not in self.SPATIALLAYERS_DICT:
                 return False, self.tr('Spatial layer ID does not exists in the database')
 
         return super(GetSpatialLayerVectorData, self).checkParameterValues(parameters, context)
@@ -172,7 +172,6 @@ class GetSpatialLayerVectorData(GetDataAsLayer):
             geometry_type
         )
         self.SQL = sql.replace('\n', ' ').rstrip(';')
-
 
     def setLayerName(self, parameters, context, feedback):
 

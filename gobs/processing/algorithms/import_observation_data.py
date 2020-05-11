@@ -157,7 +157,6 @@ class ImportObservationData(QgsProcessingAlgorithm):
                     )
                 )
 
-
         # OUTPUTS
         # Add output for message
         self.addOutput(
@@ -166,7 +165,6 @@ class ImportObservationData(QgsProcessingAlgorithm):
                 self.tr('Output message')
             )
         )
-
 
     def checkParameterValues(self, parameters, context):
 
@@ -188,7 +186,6 @@ class ImportObservationData(QgsProcessingAlgorithm):
         if not ok:
             return False, msg
         return super(ImportObservationData, self).checkParameterValues(parameters, context)
-
 
     def getAdditionnalParameters(self):
         """
@@ -239,10 +236,10 @@ class ImportObservationData(QgsProcessingAlgorithm):
         '''.format(
             given_serie
         )
-        id_value_code = None
-        id_value_name = None
-        id_value_type = None
-        id_value_unit = None
+        # id_value_code = None
+        # id_value_name = None
+        # id_value_type = None
+        # id_value_unit = None
         try:
             [header, data, rowCount, ok, error_message] = fetchDataFromSqlQuery(
                 connection_name,
@@ -251,17 +248,16 @@ class ImportObservationData(QgsProcessingAlgorithm):
             if not ok:
                 return None
             else:
-                status = 1
+                # status = 1
                 id_value_code = data[0][0]
                 id_value_name = data[0][1]
                 id_value_type = data[0][2]
                 id_value_unit = data[0][3]
-        except:
-            status = 0
+        except Exception:
+            # status = 0
             return None
 
-        return (id_value_code, id_value_name, id_value_type, id_value_unit)
-
+        return id_value_code, id_value_name, id_value_type, id_value_unit
 
     def processAlgorithm(self, parameters, context, feedback):
         """
@@ -271,7 +267,7 @@ class ImportObservationData(QgsProcessingAlgorithm):
         # Database connection parameters
         connection_name = QgsExpressionContextUtils.globalScope().variable('gobs_connection_name')
 
-        sourcelayer = self.parameterAsVectorLayer(parameters, self.SOURCELAYER, context)
+        # sourcelayer = self.parameterAsVectorLayer(parameters, self.SOURCELAYER, context)
         field_timestamp = self.parameterAsString(parameters, self.FIELD_TIMESTAMP, context)
         manualdate = self.parameterAsString(parameters, self.MANUALDATE, context)
         field_spatial_object = self.parameterAsString(parameters, self.FIELD_SPATIAL_OBJECT, context)
@@ -283,8 +279,8 @@ class ImportObservationData(QgsProcessingAlgorithm):
             for param in new_params:
                 fields[param['name']] = self.parameterAsString(parameters, param['name'], context)
 
-        msg = ''
-        status = 1
+        # msg = ''
+        # status = 1
 
         # Get series id from first combo box
         id_serie = self.getSerieId()
@@ -295,7 +291,7 @@ class ImportObservationData(QgsProcessingAlgorithm):
         )
         temp_schema = 'public'
         temp_table = 'temp_' + str(time.time()).replace('.', '')
-        ouvrages_conversion = processing.run("qgis:importintopostgis", {
+        processing.run("qgis:importintopostgis", {
             'INPUT': parameters[self.SOURCELAYER],
             'DATABASE': connection_name,
             'SCHEMA': temp_schema,
@@ -309,6 +305,7 @@ class ImportObservationData(QgsProcessingAlgorithm):
             'DROP_STRING_LENGTH': True,
             'FORCE_SINGLEPART': False
         }, context=context, feedback=feedback)
+
         feedback.pushInfo(
             self.tr('* Source layer has been imported into temporary table')
         )
@@ -338,21 +335,21 @@ class ImportObservationData(QgsProcessingAlgorithm):
                 sql
             )
             if not ok:
-                status = 0
+                # status = 0
                 msg = self.tr('* The following error has been raised') + '  %s' % error_message
                 feedback.reportError(
                     msg
                 )
             else:
-                status = 1
+                # status = 1
                 id_import = data[0][0]
                 msg = self.tr('* New import data has been created with ID')
-                msg+= ' = %s !' % id_import
+                msg += ' = %s !' % id_import
                 feedback.pushInfo(
                     msg
                 )
-        except:
-            status = 0
+        except Exception:
+            # status = 0
             msg = self.tr('* An unknown error occured while adding import log item')
             feedback.reportError(
                 msg
@@ -391,14 +388,13 @@ class ImportObservationData(QgsProcessingAlgorithm):
                 status = 1
                 id_date_format = data[0][0]
                 msg = self.tr('* Indicator date format is')
-                msg+= " '%s'" % id_date_format
+                msg += " '%s'" % id_date_format
                 feedback.pushInfo(
                     msg
                 )
-        except:
+        except Exception:
             status = 0
             msg = self.tr('* An unknown error occured while getting indicator date format')
-
 
         # COPY DATA TO OBSERVATION TABLE
         if status:
@@ -412,8 +408,8 @@ class ImportObservationData(QgsProcessingAlgorithm):
             a = []
             for name, value in fields.items():
                 a.append('s."%s"' % value)
-            jsonb_array+= ', '.join(a)
-            jsonb_array+= ')'
+            jsonb_array += ', '.join(a)
+            jsonb_array += ')'
 
             # Use the correct expression for casting date and/or time
             caster = 'timestamp'
@@ -504,7 +500,7 @@ class ImportObservationData(QgsProcessingAlgorithm):
                     feedback.pushInfo(
                         msg
                     )
-            except:
+            except Exception:
                 status = 0
                 msg = self.tr('* An unknown error occured while adding features to spatial_object table')
                 feedback.reportError(

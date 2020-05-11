@@ -106,7 +106,6 @@ class UpgradeDatabaseStructure(QgsProcessingAlgorithm):
             )
         )
 
-
     def checkParameterValues(self, parameters, context):
         # Check if runit is checked
         runit = self.parameterAsBool(parameters, self.RUNIT, context)
@@ -121,7 +120,7 @@ class UpgradeDatabaseStructure(QgsProcessingAlgorithm):
             return False, self.tr('You must use the "Configure G-obs plugin" alg to set the database connection name')
 
         # Check that it corresponds to an existing connection
-        dbpluginclass = createDbPlugin( 'postgis' )
+        dbpluginclass = createDbPlugin('postgis')
         connections = [c.connectionName() for c in dbpluginclass.connections()]
         if connection_name not in connections:
             return False, self.tr('The configured connection name does not exists in QGIS')
@@ -214,7 +213,6 @@ class UpgradeDatabaseStructure(QgsProcessingAlgorithm):
 
         # Get all the upgrade SQL files between db versions and plugin version
         upgrade_dir = os.path.join(plugin_dir, 'install/sql/upgrade/')
-        ff = {}
         get_files = [
             f for f in os.listdir(upgrade_dir)
             if os.path.isfile(os.path.join(upgrade_dir, f))
@@ -229,8 +227,10 @@ class UpgradeDatabaseStructure(QgsProcessingAlgorithm):
                 files.append(
                     [k, f]
                 )
+
         def getKey(item):
             return item[0]
+
         sfiles = sorted(files, key=getKey)
         sql_files = [s[1] for s in sfiles]
 
@@ -246,8 +246,8 @@ class UpgradeDatabaseStructure(QgsProcessingAlgorithm):
 
                 # Add SQL database version in gobs.metadata
                 new_db_version = sf.replace('upgrade_to_', '').replace('.sql', '').strip()
-                feedback.pushInfo('* NEW DB VERSION' + new_db_version )
-                sql+= '''
+                feedback.pushInfo('* NEW DB VERSION' + new_db_version)
+                sql += '''
                     UPDATE gobs.metadata
                     SET (me_version, me_version_date)
                     = ( '%s', now()::timestamp(0) );
@@ -261,11 +261,11 @@ class UpgradeDatabaseStructure(QgsProcessingAlgorithm):
                     feedback.pushInfo('* ' + sf + ' -- SUCCESS !')
                 else:
                     feedback.reportError(error_message)
-                    status = 0
                     raise Exception(error_message)
+                    # status = 0
                     # return {
-                        # self.OUTPUT_STATUS: status,
-                        # self.OUTPUT_STRING: error_message
+                    #   self.OUTPUT_STATUS: status,
+                    #   self.OUTPUT_STRING: error_message
                     # }
 
         return {

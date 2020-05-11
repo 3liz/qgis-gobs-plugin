@@ -75,12 +75,10 @@ class GobsPlugin(object):
         self.provider = GobsProvider()
         QgsApplication.processingRegistry().addProvider(self.provider)
 
-
     def initGui(self):
         self.initProcessing()
         self.dock = GobsDockWidget(self.iface)
         self.iface.addDockWidget(Qt.RightDockWidgetArea, self.dock)
-
 
     def unload(self):
         self.iface.removeDockWidget(self.dock)

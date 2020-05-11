@@ -45,18 +45,7 @@ from qgis.core import (
     QgsExpressionContextUtils,
 )
 
-try:
-    # QGIS < 3.8
-    # noinspection PyPep8Naming,PyUnresolvedReferences
-    from processing import execAlgorithmDialog
-    # noinspection PyPep8Naming,PyUnresolvedReferences
-    from processing import run as execAlgorithm
-except ModuleNotFoundError:
-    # QGIS >= 3.8
-    # noinspection PyPep8Naming,PyUnresolvedReferences
-    from qgis.processing import execAlgorithmDialog
-    # noinspection PyPep8Naming,PyUnresolvedReferences
-    from qgis.processing import run as execAlgorithm
+from processing import execAlgorithmDialog
 
 from .processing.algorithms.import_observation_data import ImportObservationData
 from .processing.algorithms.tools import fetchDataFromSqlQuery
@@ -121,13 +110,12 @@ class GobsDockWidget(QtWidgets.QDockWidget, FORM_CLASS):
         if button:
             button.clicked.connect(self.helpDatabase)
 
-
     def tr(self, string):
         return QCoreApplication.translate('Processing', string)
 
     def runAlgorithm(self, name):
 
-        if not name in self.algorithms:
+        if name not in self.algorithms:
             self.iface.messageBar().pushMessage(
                 self.tr("Error"),
                 self.tr("This algorithm cannot be found") + ' {}'.format(name),
@@ -159,7 +147,7 @@ class GobsDockWidget(QtWidgets.QDockWidget, FORM_CLASS):
         '''
         connection_name = QgsExpressionContextUtils.globalScope().variable('gobs_connection_name')
         get_data = QgsExpressionContextUtils.globalScope().variable('gobs_get_database_data')
-        dbpluginclass = createDbPlugin( 'postgis' )
+        dbpluginclass = createDbPlugin('postgis')
         connections = [c.connectionName() for c in dbpluginclass.connections()]
         series = []
         if get_data == 'yes' and connection_name in connections:
@@ -256,7 +244,6 @@ class GobsDockWidget(QtWidgets.QDockWidget, FORM_CLASS):
             'doc/concepts.md'
         )
         self.openFile(help_file)
-
 
     def helpDatabase(self):
         '''

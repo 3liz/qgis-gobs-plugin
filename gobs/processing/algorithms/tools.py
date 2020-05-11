@@ -21,6 +21,7 @@ from PyQt5.QtCore import QCoreApplication
 def tr(string):
     return QCoreApplication.translate('Processing', string)
 
+
 def plugin_path(*args):
     """Get the path to plugin root folder.
     :param args List of path elements e.g. ['img', 'logos', 'image.png']
@@ -35,6 +36,7 @@ def plugin_path(*args):
 
     return path
 
+
 def resources_path(*args):
     """Get the path to our resources folder.
     :param args List of path elements e.g. ['img', 'logos', 'image.png']
@@ -47,6 +49,7 @@ def resources_path(*args):
         path = abspath(join(path, item))
 
     return path
+
 
 def fetchDataFromSqlQuery(connection_name, sql):
 
@@ -64,13 +67,13 @@ def fetchDataFromSqlQuery(connection_name, sql):
     # Create plugin class and try to connect
     ok = True
     try:
-        dbpluginclass = createDbPlugin( 'postgis', connection_name )
+        dbpluginclass = createDbPlugin('postgis', connection_name)
         connection = dbpluginclass.connect()
     except BaseError as e:
-        #DlgDbError.showError(e, self.dialog)
+        # DlgDbError.showError(e, self.dialog)
         ok = False
         error_message = e.msg
-    except:
+    except Exception:
         ok = False
         error_message = 'Cannot connect to database'
 
@@ -87,19 +90,19 @@ def fetchDataFromSqlQuery(connection_name, sql):
     uri = db.uri()
     try:
         connector = PostGisDBConnector(uri)
-    except:
+    except Exception:
         error_message = tr('Cannot connect to database')
         ok = False
         return [header, data, rowCount, ok, error_message]
 
     c = None
     ok = True
-    #print "run query"
+    # print "run query"
     try:
-        c = connector._execute(None,str(sql))
+        c = connector._execute(None, str(sql))
         data = []
         header = connector._get_cursor_columns(c)
-        if header == None:
+        if header is None:
             header = []
         if len(header) > 0:
             data = connector._fetchall(c)
@@ -137,6 +140,7 @@ def validateTimestamp(timestamp_text):
         msg = str(e)
     return valid, msg
 
+
 def getVersionInteger(f):
     '''
     Transform "0.1.2" into "000102"
@@ -145,4 +149,3 @@ def getVersionInteger(f):
     and sorting the upgrade files
     '''
     return ''.join([a.zfill(2) for a in f.strip().split('.')])
-

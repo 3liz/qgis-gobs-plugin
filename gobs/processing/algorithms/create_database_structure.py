@@ -115,7 +115,6 @@ class CreateDatabaseStructure(QgsProcessingAlgorithm):
             )
         )
 
-
     def checkParameterValues(self, parameters, context):
         # Check that the connection name has been configured
         connection_name = QgsExpressionContextUtils.globalScope().variable('gobs_connection_name')
@@ -123,7 +122,7 @@ class CreateDatabaseStructure(QgsProcessingAlgorithm):
             return False, self.tr('You must use the "Configure G-obs plugin" alg to set the database connection name')
 
         # Check that it corresponds to an existing connection
-        dbpluginclass = createDbPlugin( 'postgis' )
+        dbpluginclass = createDbPlugin('postgis')
         connections = [c.connectionName() for c in dbpluginclass.connections()]
         if connection_name not in connections:
             return False, self.tr('The configured connection name does not exists in QGIS')
@@ -202,7 +201,6 @@ class CreateDatabaseStructure(QgsProcessingAlgorithm):
         if addtestdata:
             sql_files.append('99_test_data.sql')
 
-        msg = ''
         alg_dir = os.path.dirname(__file__)
         plugin_dir = os.path.join(alg_dir, '../../')
 
@@ -224,11 +222,11 @@ class CreateDatabaseStructure(QgsProcessingAlgorithm):
                     feedback.pushInfo('  Success !')
                 else:
                     feedback.reportError('* ' + error_message)
-                    status = 0
                     raise Exception(error_message)
+                    # status = 0
                     # return {
-                        # self.OUTPUT_STATUS: status,
-                        # self.OUTPUT_STRING: error_message
+                    #   self.OUTPUT_STATUS: status,
+                    #   self.OUTPUT_STRING: error_message
                     # }
 
         # Add version

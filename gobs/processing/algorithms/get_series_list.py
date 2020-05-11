@@ -92,4 +92,3 @@ class GetSeriesList(GetDataAsLayer):
 
     def setLayerName(self, parameters, context, feedback):
         pass
-

@@ -103,7 +103,7 @@ class ImportSpatialLayerData(QgsProcessingAlgorithm):
             FROM gobs.spatial_layer
             ORDER BY sl_label
         '''
-        dbpluginclass = createDbPlugin( 'postgis' )
+        dbpluginclass = createDbPlugin('postgis')
         connections = [c.connectionName() for c in dbpluginclass.connections()]
         data = []
         if get_data == 'yes' and connection_name in connections:
@@ -161,7 +161,7 @@ class ImportSpatialLayerData(QgsProcessingAlgorithm):
         connection_name = QgsExpressionContextUtils.globalScope().variable('gobs_connection_name')
 
         spatiallayer = self.SPATIALLAYERS[parameters[self.SPATIALLAYER]]
-        sourcelayer = self.parameterAsVectorLayer(parameters, self.SOURCELAYER, context)
+        # sourcelayer = self.parameterAsVectorLayer(parameters, self.SOURCELAYER, context)
         uniqueid = self.parameterAsString(parameters, self.UNIQUEID, context)
         uniquelabel = self.parameterAsString(parameters, self.UNIQUELABEL, context)
 
@@ -177,7 +177,7 @@ class ImportSpatialLayerData(QgsProcessingAlgorithm):
         )
         temp_schema = 'public'
         temp_table = 'temp_' + str(time.time()).replace('.', '')
-        ouvrages_conversion = processing.run("qgis:importintopostgis", {
+        processing.run("qgis:importintopostgis", {
             'INPUT': parameters[self.SOURCELAYER],
             'DATABASE': connection_name,
             'SCHEMA': temp_schema,
@@ -229,9 +229,9 @@ class ImportSpatialLayerData(QgsProcessingAlgorithm):
                 feedback.pushInfo(
                     msg
                 )
-        except:
+        except Exception:
             status = 0
-            msg = self.tr('* An unknown error occured while adding features to spatial_object table')
+            # msg = self.tr('* An unknown error occured while adding features to spatial_object table')
         finally:
 
             # Remove temporary table
@@ -257,7 +257,6 @@ class ImportSpatialLayerData(QgsProcessingAlgorithm):
                 feedback.reportError(
                     self.tr('* An error occured while droping temporary table') + ' "%s"."%s"' % (temp_schema, temp_table)
                 )
-
 
         msg = self.tr('SPATIAL LAYER HAS BEEN SUCCESSFULLY IMPORTED !')
 
