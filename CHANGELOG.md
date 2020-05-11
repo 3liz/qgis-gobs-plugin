@@ -7,3 +7,21 @@
 * Documentation - Describe each algorithms usage and parameters.
 * Documenation - Add 2 button to see Concepts and Database schema
 
+### 0.2.7 - 12/03/2020
+ 
+* Rename name, title, label, code fields into normalized code label
+* Import observation data - Adapt alg inputs based on the indicator caracteristics
+
+### 0.2.6 - 06/03/2020
+
+* Create db structure - Fix bug when adding test data
+* Move comments in specific SQL script file
+
+### 0.2.5 - 24/02/2020
+
+* Database - Update installation scripts & documentation
+* QGIS - Fix bug with indicator type values (remove default value)
+* Import observation - add constraint to override data only if not yet validated
+* Feedback - Use reportError instead of pushInfo when needed
+* Import observation - Remove useless series id in the end of series combobox
+* Get series data - Fix bug giving wrong vector dimensions && remove useless series id in combo boxes
