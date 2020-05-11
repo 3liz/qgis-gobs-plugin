@@ -29,8 +29,12 @@ from qgis.core import (
     QgsProcessingOutputString,
     QgsExpressionContextUtils,
 )
+from qgis.PyQt.QtCore import QCoreApplication
 
-from .tools import *
+from .tools import (
+    fetchDataFromSqlQuery,
+    validateTimestamp,
+)
 
 
 class ImportObservationData(QgsProcessingAlgorithm):
@@ -62,7 +66,7 @@ class ImportObservationData(QgsProcessingAlgorithm):
         return 'gobs_manage'
 
     def shortHelpString(self):
-        short_help = tr(
+        short_help = self.tr(
             'This algorithm allows to import observation data from a QGIS vector or table layer into the G-Obs database'
             '\n'
             '\n'

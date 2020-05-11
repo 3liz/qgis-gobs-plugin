@@ -19,12 +19,15 @@ __revision__ = '$Format:%H$'
 
 from db_manager.db_plugins import createDbPlugin
 from qgis.core import (
+    QgsExpressionContextUtils,
+    QgsProcessingException,
     QgsProcessingParameterEnum,
     QgsProcessingParameterNumber,
     QgsProcessingParameterDefinition,
 )
 
-from .get_data_as_layer import *
+from .get_data_as_layer import GetDataAsLayer
+from .tools import fetchDataFromSqlQuery
 
 
 class GetSeriesData(GetDataAsLayer):
@@ -50,7 +53,7 @@ class GetSeriesData(GetDataAsLayer):
         return 'gobs_tools'
 
     def shortHelpString(self):
-        short_help = tr(
+        short_help = self.tr(
             'This algorithm allows to add a table layer in your QGIS project containing the observation data from the chosen G-Obs series. Data are dynamically fetched from the database, meaning they are always up-to-date.'
             '\n'
             '* Name of the output layer: choose the name of the QGIS table layer to create. If not given, the label of the series will be used, by concatening the label of the indicator, protocol, source actor and spatial layer defining the chosen series.'
@@ -231,4 +234,3 @@ class GetSeriesData(GetDataAsLayer):
 
         # Set layer name
         self.LAYER_NAME = output_layer_name
-

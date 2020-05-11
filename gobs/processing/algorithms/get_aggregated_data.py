@@ -19,13 +19,20 @@ __revision__ = '$Format:%H$'
 
 from db_manager.db_plugins import createDbPlugin
 from qgis.core import (
+    QgsExpressionContextUtils,
+    QgsProcessingException,
     QgsProcessingParameterEnum,
     QgsProcessingParameterNumber,
     QgsProcessingParameterBoolean,
     QgsProcessingParameterDefinition,
+    QgsProcessingParameterString,
 )
 
-from .get_data_as_layer import *
+from .get_data_as_layer import GetDataAsLayer
+from .tools import (
+    fetchDataFromSqlQuery,
+    validateTimestamp,
+)
 
 
 class GetAggregatedData(GetDataAsLayer):
@@ -60,7 +67,7 @@ class GetAggregatedData(GetDataAsLayer):
         return 'gobs_tools'
 
     def shortHelpString(self):
-        short_help = tr(
+        short_help = self.tr(
             'This algorithm allows to add a table or vector layer in your QGIS project containing the aggregated observation data from the chosen G-Obs series. The aggregation is made depending of the user input. Data are dynamically fetched from the database, meaning they are always up-to-date.'
             '\n'
             '* Names of the output layer: choose the name of the QGIS layer to create. If not given, the label of the series of observations, as written in the series combo box.'

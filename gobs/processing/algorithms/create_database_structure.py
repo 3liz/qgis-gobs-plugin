@@ -28,8 +28,10 @@ from qgis.core import (
     QgsProcessingOutputString,
     QgsExpressionContextUtils,
 )
+from qgis.PyQt.QtCore import QCoreApplication
 
-from .tools import *
+
+from .tools import fetchDataFromSqlQuery
 
 
 class CreateDatabaseStructure(QgsProcessingAlgorithm):
@@ -58,7 +60,7 @@ class CreateDatabaseStructure(QgsProcessingAlgorithm):
         return 'gobs_structure'
 
     def shortHelpString(self):
-        short_help = tr(
+        short_help = self.tr(
             'Install the G-Obs database structure with tables and function on the chosen database.'
             '\n'
             '\n'
@@ -172,14 +174,14 @@ class CreateDatabaseStructure(QgsProcessingAlgorithm):
                 sql
             )
             if ok:
-                feedback.pushInfo(self.tr("Schema gobs has been droped."))
+                feedback.pushInfo(self.tr("Schema gobs has been dropped."))
             else:
                 feedback.reportError(error_message)
                 status = 0
                 # raise Exception(msg)
                 return {
                     self.OUTPUT_STATUS: status,
-                    self.OUTPUT_STRING: msg
+                    self.OUTPUT_STRING: error_message
                 }
 
         # Create full structure

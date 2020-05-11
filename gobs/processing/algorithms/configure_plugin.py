@@ -24,8 +24,7 @@ from qgis.core import (
     QgsProcessingOutputNumber,
     QgsExpressionContextUtils,
 )
-
-from .tools import *
+from qgis.PyQt.QtCore import QCoreApplication
 
 
 class ConfigurePlugin(QgsProcessingAlgorithm):
@@ -55,7 +54,7 @@ class ConfigurePlugin(QgsProcessingAlgorithm):
         return 'gobs_configuration'
 
     def shortHelpString(self):
-        short_help = tr(
+        short_help = self.tr(
             'You must run this script before any other script.'
             '\n'
             'Every parameter will be used in the other algorithms, as default values for parameters.'

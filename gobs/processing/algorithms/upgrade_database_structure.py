@@ -28,8 +28,12 @@ from qgis.core import (
     QgsProcessingOutputString,
     QgsExpressionContextUtils,
 )
+from qgis.PyQt.QtCore import QCoreApplication
 
-from .tools import *
+from .tools import (
+    fetchDataFromSqlQuery,
+    getVersionInteger,
+)
 
 
 class UpgradeDatabaseStructure(QgsProcessingAlgorithm):
@@ -57,7 +61,7 @@ class UpgradeDatabaseStructure(QgsProcessingAlgorithm):
         return 'gobs_structure'
 
     def shortHelpString(self):
-        short_help = tr(
+        short_help = self.tr(
             'Upgrade the G-Obs tables and functions in the chosen database.'
             '\n'
             '\n'

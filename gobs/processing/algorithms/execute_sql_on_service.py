@@ -17,14 +17,17 @@ __copyright__ = '(C) 2019 by 3liz'
 
 __revision__ = '$Format:%H$'
 
+import os
+
 from qgis.core import (
     QgsProcessingAlgorithm,
     QgsProcessingParameterString,
     QgsProcessingOutputString,
     QgsProcessingOutputNumber,
 )
+from qgis.PyQt.QtCore import QCoreApplication
 
-from .tools import *
+from .tools import fetchDataFromSqlQuery
 
 
 class ExecuteSqlOnService(QgsProcessingAlgorithm):
@@ -52,9 +55,6 @@ class ExecuteSqlOnService(QgsProcessingAlgorithm):
 
     def groupId(self):
         return 'gobs_tools'
-
-    def shortHelpString(self):
-        return getShortHelpString(os.path.basename(__file__))
 
     def tr(self, string):
         return QCoreApplication.translate('Processing', string)

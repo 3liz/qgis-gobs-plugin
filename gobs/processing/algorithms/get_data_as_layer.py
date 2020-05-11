@@ -30,8 +30,7 @@ from qgis.core import (
     QgsProcessingOutputVectorLayer,
     QgsExpressionContextUtils,
 )
-
-from .tools import *
+from qgis.PyQt.QtCore import QCoreApplication
 
 
 class GetDataAsLayer(QgsProcessingAlgorithm):
@@ -66,7 +65,7 @@ class GetDataAsLayer(QgsProcessingAlgorithm):
         return 'gobs_tools'
 
     def shortHelpString(self):
-        short_help = tr(
+        short_help = self.tr(
             ' bla'
             '\n'
             ' bla'

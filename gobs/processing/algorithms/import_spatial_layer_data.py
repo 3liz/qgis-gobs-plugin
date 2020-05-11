@@ -29,8 +29,9 @@ from qgis.core import (
     QgsProcessingOutputString,
     QgsExpressionContextUtils,
 )
+from qgis.PyQt.QtCore import QCoreApplication
 
-from .tools import *
+from .tools import fetchDataFromSqlQuery
 
 
 class ImportSpatialLayerData(QgsProcessingAlgorithm):
@@ -64,7 +65,7 @@ class ImportSpatialLayerData(QgsProcessingAlgorithm):
         return 'gobs_manage'
 
     def shortHelpString(self):
-        short_help = tr(
+        short_help = self.tr(
             'This algorithm allows to import data from a QGIS spatial layer into the G-Obs database'
             '\n'
             '\n'

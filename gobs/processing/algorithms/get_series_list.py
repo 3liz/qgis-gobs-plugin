@@ -17,16 +17,18 @@ __copyright__ = '(C) 2019 by 3liz'
 
 __revision__ = '$Format:%H$'
 
-from .get_data_as_layer import *
+from qgis.core import QgsExpressionContextUtils
+
+from .get_data_as_layer import GetDataAsLayer
 
 
 class GetSeriesList(GetDataAsLayer):
     """
 
     """
-
-    GEOM_FIELD = None
-    LAYER_NAME = tr('List of series')
+    def __init__(self):
+        self.GEOM_FIELD = None
+        self.LAYER_NAME = self.tr('List of series')
 
     def name(self):
         return 'get_series_list'
@@ -41,7 +43,7 @@ class GetSeriesList(GetDataAsLayer):
         return 'gobs_tools'
 
     def shortHelpString(self):
-        short_help = tr(
+        short_help = self.tr(
             ' bla'
             '\n'
             ' bla'
