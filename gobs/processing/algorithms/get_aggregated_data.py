@@ -296,7 +296,7 @@ class GetAggregatedData(GetDataAsLayer):
         if ok:
             id_label = data[0][0]
             message = self.tr('* Data has been fetched for chosen series and related indicator')
-            message+= ' %s !' % id_label
+            message += ' %s !' % id_label
             feedback.pushInfo(
                 message
             )
@@ -334,7 +334,7 @@ class GetAggregatedData(GetDataAsLayer):
             row_number() OVER() AS id,
             '''
 
-        sql+= '''
+        sql += '''
             {unique_id}
             s.*
 
@@ -346,20 +346,20 @@ class GetAggregatedData(GetDataAsLayer):
 
         # Add spatial object data if asked
         if add_spatial_object_data:
-            sql+= '''
+            sql += '''
             o.fk_id_spatial_object, so_unique_id, so_unique_label,
             '''
 
         # Add spatial object geom
         if add_spatial_object_geom:
-            sql+= '''
+            sql += '''
             so.geom,
             '''
 
         # Add temporal resolution if asked: second, minute, hour, day, week, month, year
         if temporal_resolution:
             # (EXTRACT({temporal_resolution} FROM o.ob_timestamp))::integer AS temporal_resolution,
-            sql+= '''
+            sql += '''
             date_trunc('{temporal_resolution}', o.ob_timestamp) AS timestamp_val,
             '''.format(
                 temporal_resolution=temporal_resolution
@@ -381,38 +381,38 @@ class GetAggregatedData(GetDataAsLayer):
                     )
                 )
         values = ", ".join(values_ls)
-        sql+= '''
+        sql += '''
             {values},
         '''.format(
             values=values
         )
 
         # Add information about observation timestamps
-        sql+= '''
+        sql += '''
             count(o.id) as observation_count,
             min(o.ob_timestamp) AS min_timestamp,
             max(o.ob_timestamp) AS max_timestamp
         '''
 
         # FROM
-        sql+= '''
+        sql += '''
             FROM gobs.observation AS o
         '''
 
         # Add spatial_object table to join data
         if add_spatial_object_data or add_spatial_object_geom:
-            sql+= '''
+            sql += '''
             INNER JOIN gobs.spatial_object so
                 ON so.id = o.fk_id_spatial_object
             '''
 
         # WHERE
-        sql+= '''
+        sql += '''
             WHERE true
         '''
 
         # Filter by series id
-        sql+= '''
+        sql += '''
             AND fk_id_series = {id_serie}
         '''.format(
             id_serie=id_serie
@@ -420,14 +420,14 @@ class GetAggregatedData(GetDataAsLayer):
 
         # Filter by min and/or max timestamps
         if min_timestamp:
-            sql+= '''
+            sql += '''
             AND ob_timestamp >= '{timestamp}'::timestamp
             '''.format(
                 timestamp=min_timestamp
             )
 
         if max_timestamp:
-            sql+= '''
+            sql += '''
             AND ob_timestamp <= '{timestamp}'::timestamp
             '''.format(
                 timestamp=max_timestamp
@@ -435,21 +435,21 @@ class GetAggregatedData(GetDataAsLayer):
 
         # GROUP BY
         if add_spatial_object_data or add_spatial_object_geom or temporal_resolution:
-            sql+= '''
+            sql += '''
             GROUP BY 1
             '''
 
         if add_spatial_object_data:
-            sql+= '''
+            sql += '''
             , o.fk_id_spatial_object, so_unique_id, so_unique_label
             '''
         if add_spatial_object_geom:
-            sql+= '''
+            sql += '''
             , so.geom
             '''
         if temporal_resolution:
             # , EXTRACT({temporal_resolution} FROM o.ob_timestamp)
-            sql+= '''
+            sql += '''
             , date_trunc('{temporal_resolution}', o.ob_timestamp)
             '''.format(
                 temporal_resolution=temporal_resolution

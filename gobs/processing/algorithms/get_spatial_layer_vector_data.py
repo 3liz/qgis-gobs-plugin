@@ -147,7 +147,7 @@ class GetSpatialLayerVectorData(GetDataAsLayer):
         if ok:
             label = data[0][1]
             message = self.tr('* Data has been fetched for spatial layer')
-            message+= ' %s !' % label
+            message += ' %s !' % label
             feedback.pushInfo(
                 message
             )

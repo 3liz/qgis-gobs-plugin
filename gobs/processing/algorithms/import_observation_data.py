@@ -95,10 +95,10 @@ class ImportObservationData(QgsProcessingAlgorithm):
         return self.__class__()
 
     def getSerieId(self):
-        '''
+        """
         Get the serie ID
         To be overriden by child instances
-        '''
+        """
         return 0
 
     def initAlgorithm(self, config):
@@ -218,9 +218,9 @@ class ImportObservationData(QgsProcessingAlgorithm):
         return new_params
 
     def getIndicatorFields(self, given_serie):
-        '''
+        """
         Get indicator data for the given serie id
-        '''
+        """
         # GET INFORMATION of indicator
         connection_name = QgsExpressionContextUtils.globalScope().variable('gobs_connection_name')
         sql = '''

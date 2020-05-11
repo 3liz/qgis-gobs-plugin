@@ -173,7 +173,7 @@ class GetSeriesData(GetDataAsLayer):
         if ok:
             id_label = data[0][0]
             message = self.tr('* Data has been fetched for chosen series and related indicator')
-            message+= ' %s !' % id_label
+            message += ' %s !' % id_label
             feedback.pushInfo(
                 message
             )
