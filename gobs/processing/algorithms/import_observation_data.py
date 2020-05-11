@@ -17,24 +17,21 @@ __copyright__ = '(C) 2019 by 3liz'
 
 __revision__ = '$Format:%H$'
 
-from PyQt5.QtCore import QCoreApplication
+import time
+
+import processing
 from qgis.core import (
     QgsProcessing,
     QgsProcessingAlgorithm,
-    QgsProcessingUtils,
-    QgsProcessingException,
     QgsProcessingParameterString,
     QgsProcessingParameterVectorLayer,
     QgsProcessingParameterField,
-    QgsProcessingParameterEnum,
     QgsProcessingOutputString,
-    QgsExpressionContextUtils
+    QgsExpressionContextUtils,
 )
-import processing
-import os
+
 from .tools import *
-import time
-from db_manager.db_plugins import createDbPlugin
+
 
 class ImportObservationData(QgsProcessingAlgorithm):
     """

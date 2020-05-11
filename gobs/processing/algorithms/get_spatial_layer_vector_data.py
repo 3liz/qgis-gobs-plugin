@@ -17,27 +17,15 @@ __copyright__ = '(C) 2019 by 3liz'
 
 __revision__ = '$Format:%H$'
 
-from PyQt5.QtCore import QCoreApplication
-from qgis.core import (
-    QgsVectorLayer,
-    QgsProcessing,
-    QgsProcessingAlgorithm,
-    QgsProcessingContext,
-    QgsProcessingUtils,
-    QgsProcessingException,
-    QgsProcessingParameterEnum,
-    QgsProcessingParameterString,
-    QgsProcessingParameterNumber,
-    QgsProcessingOutputString,
-    QgsProcessingOutputNumber,
-    QgsProcessingOutputVectorLayer,
-    QgsExpressionContextUtils,
-    QgsProcessingParameterDefinition
-)
-from .tools import *
-from .get_data_as_layer import *
-from processing.tools import postgis
 from db_manager.db_plugins import createDbPlugin
+from qgis.core import (
+    QgsProcessingParameterEnum,
+    QgsProcessingParameterNumber,
+    QgsProcessingParameterDefinition,
+)
+
+from .get_data_as_layer import *
+
 
 class GetSpatialLayerVectorData(GetDataAsLayer):
     """

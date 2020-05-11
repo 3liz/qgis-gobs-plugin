@@ -17,28 +17,16 @@ __copyright__ = '(C) 2019 by 3liz'
 
 __revision__ = '$Format:%H$'
 
-from PyQt5.QtCore import QCoreApplication
+from db_manager.db_plugins import createDbPlugin
 from qgis.core import (
-    QgsVectorLayer,
-    QgsProcessing,
-    QgsProcessingAlgorithm,
-    QgsProcessingContext,
-    QgsProcessingUtils,
-    QgsProcessingException,
     QgsProcessingParameterEnum,
     QgsProcessingParameterNumber,
     QgsProcessingParameterBoolean,
-    QgsProcessingParameterString,
-    QgsProcessingOutputString,
-    QgsProcessingOutputNumber,
-    QgsProcessingOutputVectorLayer,
-    QgsExpressionContextUtils,
-    QgsProcessingParameterDefinition
+    QgsProcessingParameterDefinition,
 )
-from .tools import *
+
 from .get_data_as_layer import *
-from processing.tools import postgis
-from db_manager.db_plugins import createDbPlugin
+
 
 class GetAggregatedData(GetDataAsLayer):
     """

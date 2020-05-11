@@ -28,21 +28,22 @@ __copyright__ = '(C) 2019 by 3liz'
 
 __revision__ = '$Format:%H$'
 
-from qgis.core import QgsProcessingProvider
+from qgis.core import (
+    QgsExpressionContextUtils,
+    QgsProcessingProvider,
+)
+
 from .algorithms.configure_plugin import ConfigurePlugin
-from .algorithms.execute_sql_on_service import ExecuteSqlOnService
 from .algorithms.create_database_structure import CreateDatabaseStructure
-from .algorithms.upgrade_database_structure import UpgradeDatabaseStructure
-from .algorithms.import_spatial_layer_data import ImportSpatialLayerData
-# from .algorithms.import_observation_data import ImportObservationData
-from .algorithms.get_spatial_layer_vector_data import GetSpatialLayerVectorData
+from .algorithms.execute_sql_on_service import ExecuteSqlOnService
+from .algorithms.get_aggregated_data import GetAggregatedData
 from .algorithms.get_series_data import GetSeriesData
 from .algorithms.get_series_list import GetSeriesList
-from .algorithms.get_aggregated_data import GetAggregatedData
+# from .algorithms.import_observation_data import ImportObservationData
+from .algorithms.get_spatial_layer_vector_data import GetSpatialLayerVectorData
+from .algorithms.import_spatial_layer_data import ImportSpatialLayerData
+from .algorithms.upgrade_database_structure import UpgradeDatabaseStructure
 
-from qgis.core import (
-    QgsExpressionContextUtils
-)
 
 class GobsProvider(QgsProcessingProvider):
 

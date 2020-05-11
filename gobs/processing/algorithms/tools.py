@@ -13,12 +13,10 @@ __author__ = '3liz'
 __date__ = '2019-02-15'
 __copyright__ = '(C) 2019 by 3liz'
 
-from PyQt5.QtCore import QCoreApplication
-from qgis.core import (
-    QgsDataSourceUri
-)
-import os
 from os.path import dirname, abspath, join, pardir
+
+from PyQt5.QtCore import QCoreApplication
+
 
 def tr(string):
     return QCoreApplication.translate('Processing', string)

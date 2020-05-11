@@ -25,26 +25,26 @@ __date__ = '2019-02-15'
 __copyright__ = '(C) 2019 by 3liz'
 
 import os
+from functools import partial
 
 from qgis.PyQt import (
-    QtGui,
     QtWidgets,
-    uic
+    uic,
 )
+from qgis.PyQt.QtCore import pyqtSignal, QCoreApplication
 from qgis.PyQt.QtWidgets import (
     QPushButton,
     QComboBox,
     QDialog,
     QVBoxLayout,
-    QDialogButtonBox
+    QDialogButtonBox,
 )
-from qgis.PyQt.QtCore import pyqtSignal, QCoreApplication
 from qgis.core import (
     Qgis,
     QgsApplication,
-    QgsExpressionContextUtils
+    QgsExpressionContextUtils,
 )
-from functools import partial
+
 try:
     # QGIS < 3.8
     # noinspection PyPep8Naming,PyUnresolvedReferences

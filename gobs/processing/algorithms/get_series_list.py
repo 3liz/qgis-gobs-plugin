@@ -17,22 +17,8 @@ __copyright__ = '(C) 2019 by 3liz'
 
 __revision__ = '$Format:%H$'
 
-from PyQt5.QtCore import QCoreApplication
-from qgis.core import (
-    QgsVectorLayer,
-    QgsProcessing,
-    QgsProcessingAlgorithm,
-    QgsProcessingContext,
-    QgsProcessingUtils,
-    QgsProcessingException,
-    QgsProcessingParameterString,
-    QgsProcessingOutputString,
-    QgsProcessingOutputNumber,
-    QgsProcessingOutputVectorLayer
-)
-from .tools import *
 from .get_data_as_layer import *
-from processing.tools import postgis
+
 
 class GetSeriesList(GetDataAsLayer):
     """

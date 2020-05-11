@@ -17,25 +17,15 @@ __copyright__ = '(C) 2019 by 3liz'
 
 __revision__ = '$Format:%H$'
 
-from PyQt5.QtCore import QCoreApplication, QVariant
 from qgis.core import (
-    QgsProcessing,
-    QgsProcessingContext,
     QgsProcessingAlgorithm,
-    QgsProcessingUtils,
-    QgsProcessingException,
     QgsProcessingParameterString,
     QgsProcessingOutputString,
     QgsProcessingOutputNumber,
-    QgsDataSourceUri,
-    QgsField,
-    QgsFields,
-    QgsFeature
 )
-from db_manager.db_plugins.plugin import BaseError
-from db_manager.db_plugins.postgis.connector import PostGisDBConnector
 
 from .tools import *
+
 
 class ExecuteSqlOnService(QgsProcessingAlgorithm):
     """

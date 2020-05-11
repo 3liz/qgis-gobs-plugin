@@ -28,23 +28,23 @@ __copyright__ = '(C) 2019 by 3liz'
 
 __revision__ = '$Format:%H$'
 
+import inspect
 import os
 import sys
-import inspect
 
-from qgis.core import (
-    QgsProcessingAlgorithm,
-    QgsApplication,
-    QgsSettings
-)
 from qgis.PyQt.QtCore import (
     Qt,
     QTranslator,
-    QCoreApplication
+    QCoreApplication,
 )
-from .processing.provider import GobsProvider
+from qgis.core import (
+    QgsApplication,
+    QgsSettings,
+)
+
 from .gobs_dockwidget import GobsDockWidget
 from .processing.algorithms.tools import resources_path
+from .processing.provider import GobsProvider
 
 cmd_folder = os.path.split(inspect.getfile(inspect.currentframe()))[0]
 
