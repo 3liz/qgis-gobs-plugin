@@ -524,8 +524,7 @@
       <editforminit></editforminit>
       <editforminitcodesource>0</editforminitcodesource>
       <editforminitfilepath></editforminitfilepath>
-      <editforminitcode># -*- coding: utf-8 -*-
-"""
+      <editforminitcode>"""
 Les formulaires QGIS peuvent avoir une fonction Python qui sera appelée à l'ouverture du formulaire.
 
 Utilisez cette fonction pour ajouter plus de fonctionnalités à vos formulaires.
@@ -738,8 +737,7 @@ def my_form_open(dialog, layer, feature):
       <editforminit></editforminit>
       <editforminitcodesource>0</editforminitcodesource>
       <editforminitfilepath></editforminitfilepath>
-      <editforminitcode># -*- coding: utf-8 -*-
-"""
+      <editforminitcode>"""
 Les formulaires QGIS peuvent avoir une fonction Python qui sera appelée à l'ouverture du formulaire.
 
 Utilisez cette fonction pour ajouter plus de fonctionnalités à vos formulaires.
@@ -980,8 +978,7 @@ def my_form_open(dialog, layer, feature):
       <editforminit></editforminit>
       <editforminitcodesource>0</editforminitcodesource>
       <editforminitfilepath></editforminitfilepath>
-      <editforminitcode># -*- coding: utf-8 -*-
-"""
+      <editforminitcode>"""
 Les formulaires QGIS peuvent avoir une fonction Python qui sera appelée à l'ouverture du formulaire.
 
 Utilisez cette fonction pour ajouter plus de fonctionnalités à vos formulaires.
@@ -1159,8 +1156,7 @@ def my_form_open(dialog, layer, feature):
       <editforminit></editforminit>
       <editforminitcodesource>0</editforminitcodesource>
       <editforminitfilepath></editforminitfilepath>
-      <editforminitcode># -*- coding: utf-8 -*-
-"""
+      <editforminitcode>"""
 Les formulaires QGIS peuvent avoir une fonction Python qui sera appelée à l'ouverture du formulaire.
 
 Utilisez cette fonction pour ajouter plus de fonctionnalités à vos formulaires.
@@ -1601,8 +1597,7 @@ def my_form_open(dialog, layer, feature):
       <editforminit></editforminit>
       <editforminitcodesource>0</editforminitcodesource>
       <editforminitfilepath></editforminitfilepath>
-      <editforminitcode># -*- coding: utf-8 -*-
-"""
+      <editforminitcode>"""
 QGIS forms can have a Python function that is called when the form is
 opened.
 
@@ -1907,8 +1902,7 @@ def my_form_open(dialog, layer, feature):
       <editforminit></editforminit>
       <editforminitcodesource>0</editforminitcodesource>
       <editforminitfilepath></editforminitfilepath>
-      <editforminitcode># -*- coding: utf-8 -*-
-"""
+      <editforminitcode>"""
 Les formulaires QGIS peuvent avoir une fonction Python qui sera appelée à l'ouverture du formulaire.
 
 Utilisez cette fonction pour ajouter plus de fonctionnalités à vos formulaires.
@@ -2182,8 +2176,7 @@ def my_form_open(dialog, layer, feature):
       <editforminit></editforminit>
       <editforminitcodesource>0</editforminitcodesource>
       <editforminitfilepath></editforminitfilepath>
-      <editforminitcode># -*- coding: utf-8 -*-
-"""
+      <editforminitcode>"""
 Les formulaires QGIS peuvent avoir une fonction Python qui sera appelée à l'ouverture du formulaire.
 
 Utilisez cette fonction pour ajouter plus de fonctionnalités à vos formulaires.
@@ -2475,8 +2468,7 @@ def my_form_open(dialog, layer, feature):
       <editforminit></editforminit>
       <editforminitcodesource>0</editforminitcodesource>
       <editforminitfilepath></editforminitfilepath>
-      <editforminitcode># -*- coding: utf-8 -*-
-"""
+      <editforminitcode>"""
 Les formulaires QGIS peuvent avoir une fonction Python qui sera appelée à l'ouverture du formulaire.
 
 Utilisez cette fonction pour ajouter plus de fonctionnalités à vos formulaires.
@@ -2983,8 +2975,7 @@ def my_form_open(dialog, layer, feature):
       <editforminit></editforminit>
       <editforminitcodesource>0</editforminitcodesource>
       <editforminitfilepath></editforminitfilepath>
-      <editforminitcode># -*- coding: utf-8 -*-
-"""
+      <editforminitcode>"""
 Les formulaires QGIS peuvent avoir une fonction Python qui sera appelée à l'ouverture du formulaire.
 
 Utilisez cette fonction pour ajouter plus de fonctionnalités à vos formulaires.
@@ -3276,8 +3267,7 @@ def my_form_open(dialog, layer, feature):
       <editforminit></editforminit>
       <editforminitcodesource>0</editforminitcodesource>
       <editforminitfilepath></editforminitfilepath>
-      <editforminitcode># -*- coding: utf-8 -*-
-"""
+      <editforminitcode>"""
 Les formulaires QGIS peuvent avoir une fonction Python qui sera appelée à l'ouverture du formulaire.
 
 Utilisez cette fonction pour ajouter plus de fonctionnalités à vos formulaires.
