@@ -25,9 +25,6 @@ class CreateDatabaseStructure(QgsProcessingAlgorithm):
     Create gobs structure in Database
     """
 
-    # Constants used to refer to parameters and outputs. They will be
-    # used when calling the algorithm from another algorithm, or when
-    # calling from the QGIS console.
     OVERRIDE = 'OVERRIDE'
     ADDTESTDATA = 'ADDTESTDATA'
     OUTPUT_STATUS = 'OUTPUT_STATUS'
@@ -64,12 +61,7 @@ class CreateDatabaseStructure(QgsProcessingAlgorithm):
         return self.__class__()
 
     def initAlgorithm(self, config):
-        """
-        Here we define the inputs and output of the algorithm, along
-        with some other properties.
-        """
         # INPUTS
-
         self.addParameter(
             QgsProcessingParameterBoolean(
                 self.OVERRIDE,

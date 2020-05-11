@@ -19,10 +19,6 @@ class ExecuteSqlOnService(QgsProcessingAlgorithm):
     Execute SQL into a PostgreSQL database given a service name
     """
 
-    # Constants used to refer to parameters and outputs. They will be
-    # used when calling the algorithm from another algorithm, or when
-    # calling from the QGIS console.
-
     PGSERVICE = 'PGSERVICE'
     INPUT_SQL = 'INPUT_SQL'
     OUTPUT_STATUS = 'OUTPUT_STATUS'
@@ -47,10 +43,6 @@ class ExecuteSqlOnService(QgsProcessingAlgorithm):
         return self.__class__()
 
     def initAlgorithm(self, config):
-        """
-        Here we define the inputs and output of the algorithm, along
-        with some other properties.
-        """
         # INPUTS
         self.addParameter(
             QgsProcessingParameterString(
@@ -81,13 +73,10 @@ class ExecuteSqlOnService(QgsProcessingAlgorithm):
         )
 
     def processAlgorithm(self, parameters, context, feedback):
-        """
-        Here is where the processing itself takes place.
-        """
-        out = {
-            self.OUTPUT_STATUS: 1,
-            self.OUTPUT_STRING: 'ok'
-        }
+        # out = {
+        #     self.OUTPUT_STATUS: 1,
+        #     self.OUTPUT_STRING: 'ok'
+        # }
         # parameters
         service = parameters[self.PGSERVICE]
         sql = parameters[self.INPUT_SQL]

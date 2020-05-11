@@ -22,9 +22,6 @@ from .tools import (
 
 
 class GetAggregatedData(GetDataAsLayer):
-    """
-
-    """
 
     GEOM_FIELD = None
     SERIE = 'SERIE'
@@ -75,9 +72,6 @@ class GetAggregatedData(GetDataAsLayer):
         return short_help
 
     def initAlgorithm(self, config):
-        """
-        """
-
         # use parent class to get other parameters
         super(self.__class__, self).initAlgorithm(config)
 

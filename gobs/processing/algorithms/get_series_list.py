@@ -9,9 +9,7 @@ from .get_data_as_layer import GetDataAsLayer
 
 
 class GetSeriesList(GetDataAsLayer):
-    """
 
-    """
     def __init__(self):
         self.GEOM_FIELD = None
         self.LAYER_NAME = self.tr('List of series')
@@ -37,8 +35,6 @@ class GetSeriesList(GetDataAsLayer):
         return short_help
 
     def initAlgorithm(self, config):
-        """
-        """
         # use parent class to get other parameters
         super(self.__class__, self).initAlgorithm(config)
 

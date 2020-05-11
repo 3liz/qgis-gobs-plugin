@@ -17,9 +17,6 @@ from .tools import fetchDataFromSqlQuery
 
 
 class GetSpatialLayerVectorData(GetDataAsLayer):
-    """
-
-    """
 
     SPATIALLAYER = 'SPATIALLAYER'
     SPATIALLAYER_ID = 'SPATIALLAYER_ID'
@@ -48,8 +45,6 @@ class GetSpatialLayerVectorData(GetDataAsLayer):
         return short_help
 
     def initAlgorithm(self, config):
-        """
-        """
 
         # use parent class to get other parameters
         super(self.__class__, self).initAlgorithm(config)

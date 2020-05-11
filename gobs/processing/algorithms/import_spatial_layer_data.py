@@ -21,12 +21,6 @@ from .tools import fetchDataFromSqlQuery
 
 
 class ImportSpatialLayerData(QgsProcessingAlgorithm):
-    """
-    """
-
-    # Constants used to refer to parameters and outputs. They will be
-    # used when calling the algorithm from another algorithm, or when
-    # calling from the QGIS console.
 
     SPATIALLAYER = 'SPATIALLAYER'
     SOURCELAYER = 'SOURCELAYER'
@@ -75,10 +69,6 @@ class ImportSpatialLayerData(QgsProcessingAlgorithm):
         return self.__class__()
 
     def initAlgorithm(self, config):
-        """
-        Here we define the inputs and output of the algorithm, along
-        with some other properties.
-        """
         # INPUTS
         connection_name = QgsExpressionContextUtils.globalScope().variable('gobs_connection_name')
         get_data = QgsExpressionContextUtils.globalScope().variable('gobs_get_database_data')
@@ -139,9 +129,6 @@ class ImportSpatialLayerData(QgsProcessingAlgorithm):
         )
 
     def processAlgorithm(self, parameters, context, feedback):
-        """
-        Here is where the processing itself takes place.
-        """
         # parameters
         # Database connection parameters
         connection_name = QgsExpressionContextUtils.globalScope().variable('gobs_connection_name')

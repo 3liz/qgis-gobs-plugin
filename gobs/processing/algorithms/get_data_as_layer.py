@@ -20,13 +20,6 @@ from qgis.PyQt.QtCore import QCoreApplication
 
 
 class GetDataAsLayer(QgsProcessingAlgorithm):
-    """
-
-    """
-
-    # Constants used to refer to parameters and outputs. They will be
-    # used when calling the algorithm from another algorithm, or when
-    # calling from the QGIS console.
 
     OUTPUT_STATUS = 'OUTPUT_STATUS'
     OUTPUT_STRING = 'OUTPUT_STRING'
@@ -65,10 +58,6 @@ class GetDataAsLayer(QgsProcessingAlgorithm):
         return self.__class__()
 
     def initAlgorithm(self, config):
-        """
-        Here we define the inputs and output of the algorithm, along
-        with some other properties.
-        """
         # INPUTS
 
         # Name of the layer
@@ -138,9 +127,6 @@ class GetDataAsLayer(QgsProcessingAlgorithm):
         self.LAYER_NAME = output_layer_name
 
     def processAlgorithm(self, parameters, context, feedback):
-        """
-        Here is where the processing itself takes place.
-        """
         # Database connection parameters
         connection_name = QgsExpressionContextUtils.globalScope().variable('gobs_connection_name')
 

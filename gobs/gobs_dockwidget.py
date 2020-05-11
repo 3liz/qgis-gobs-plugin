@@ -107,7 +107,8 @@ class GobsDockWidget(QtWidgets.QDockWidget, FORM_CLASS):
         alg_name = 'gobs:{0}'.format(name)
         execAlgorithmDialog(alg_name, param)
 
-    def getSeries(self):
+    @staticmethod
+    def getSeries():
         # List of series
         sql = '''
             SELECT s.id,
@@ -171,10 +172,10 @@ class GobsDockWidget(QtWidgets.QDockWidget, FORM_CLASS):
             self.openImportObservationData(val)
 
     def openImportObservationData(self, serie_id):
-        '''
+        """
         Opens the processing alg ImportObservationData
         with dynamic inputs based on given serie id
-        '''
+        """
 
         class DynamicImportObservationData(ImportObservationData):
 
@@ -207,17 +208,18 @@ class GobsDockWidget(QtWidgets.QDockWidget, FORM_CLASS):
         self.closingPlugin.emit()
         event.accept()
 
-    def openFile(self, file_path):
-        '''
+    @staticmethod
+    def openFile(file_path):
+        """
         Opens a file with default system app
-        '''
+        """
         import webbrowser
         webbrowser.open_new(r'file://%s' % file_path)
 
     def helpConcept(self):
-        '''
+        """
         Display the help on concepts
-        '''
+        """
         help_file = os.path.join(
             os.path.dirname(__file__),
             'doc/concepts.md'
@@ -225,9 +227,9 @@ class GobsDockWidget(QtWidgets.QDockWidget, FORM_CLASS):
         self.openFile(help_file)
 
     def helpDatabase(self):
-        '''
+        """
         Display the help on database structure
-        '''
+        """
         help_file = os.path.join(
             os.path.dirname(__file__),
             'doc/database/schemaspy/html/gobs/',

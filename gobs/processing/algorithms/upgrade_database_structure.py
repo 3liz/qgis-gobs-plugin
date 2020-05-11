@@ -23,13 +23,7 @@ from .tools import (
 
 
 class UpgradeDatabaseStructure(QgsProcessingAlgorithm):
-    """
 
-    """
-
-    # Constants used to refer to parameters and outputs. They will be
-    # used when calling the algorithm from another algorithm, or when
-    # calling from the QGIS console.
     RUNIT = 'RUNIT'
     OUTPUT_STATUS = 'OUTPUT_STATUS'
     OUTPUT_STRING = 'OUTPUT_STRING'
@@ -63,10 +57,6 @@ class UpgradeDatabaseStructure(QgsProcessingAlgorithm):
         return self.__class__()
 
     def initAlgorithm(self, config):
-        """
-        Here we define the inputs and output of the algorithm, along
-        with some other properties.
-        """
         # INPUTS
 
         self.addParameter(
@@ -141,9 +131,6 @@ class UpgradeDatabaseStructure(QgsProcessingAlgorithm):
         return ok, msg
 
     def processAlgorithm(self, parameters, context, feedback):
-        """
-        Here is where the processing itself takes place.
-        """
 
         connection_name = QgsExpressionContextUtils.globalScope().variable('gobs_connection_name')
 

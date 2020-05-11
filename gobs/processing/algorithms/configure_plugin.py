@@ -14,13 +14,6 @@ from qgis.PyQt.QtCore import QCoreApplication
 
 
 class ConfigurePlugin(QgsProcessingAlgorithm):
-    """
-
-    """
-
-    # Constants used to refer to parameters and outputs. They will be
-    # used when calling the algorithm from another algorithm, or when
-    # calling from the QGIS console.
 
     CONNECTION_NAME = 'CONNECTION_NAME'
 
@@ -54,12 +47,7 @@ class ConfigurePlugin(QgsProcessingAlgorithm):
         return self.__class__()
 
     def initAlgorithm(self, config):
-        """
-        Here we define the inputs and output of the algorithm, along
-        with some other properties.
-        """
         # INPUTS
-
         # Database connection parameters
         connection_name = QgsExpressionContextUtils.globalScope().variable('gobs_connection_name')
         db_param = QgsProcessingParameterString(
@@ -92,9 +80,6 @@ class ConfigurePlugin(QgsProcessingAlgorithm):
         )
 
     def processAlgorithm(self, parameters, context, feedback):
-        """
-        Here is where the processing itself takes place.
-        """
         connection_name = parameters[self.CONNECTION_NAME]
 
         # Set global variable

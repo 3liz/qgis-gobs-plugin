@@ -17,9 +17,6 @@ from .tools import fetchDataFromSqlQuery
 
 
 class GetSeriesData(GetDataAsLayer):
-    """
-
-    """
 
     GEOM_FIELD = None
     SERIE = 'SERIE'
@@ -49,9 +46,6 @@ class GetSeriesData(GetDataAsLayer):
         return short_help
 
     def initAlgorithm(self, config):
-        """
-        """
-
         # use parent class to get other parameters
         super(self.__class__, self).initAlgorithm(config)
 

@@ -24,12 +24,7 @@ from .tools import (
 
 
 class ImportObservationData(QgsProcessingAlgorithm):
-    """
-    """
 
-    # Constants used to refer to parameters and outputs. They will be
-    # used when calling the algorithm from another algorithm, or when
-    # calling from the QGIS console.
     SOURCELAYER = 'SOURCELAYER'
     MANUALDATE = 'MANUALDATE'
     FIELD_TIMESTAMP = 'FIELD_TIMESTAMP'
@@ -88,10 +83,6 @@ class ImportObservationData(QgsProcessingAlgorithm):
         return 0
 
     def initAlgorithm(self, config):
-        """
-        Here we define the inputs and output of the algorithm, along
-        with some other properties.
-        """
         # INPUTS
         # Source layer
         self.addParameter(
@@ -203,7 +194,8 @@ class ImportObservationData(QgsProcessingAlgorithm):
             )
         return new_params
 
-    def getIndicatorFields(self, given_serie):
+    @staticmethod
+    def getIndicatorFields(given_serie):
         """
         Get indicator data for the given serie id
         """
@@ -246,9 +238,6 @@ class ImportObservationData(QgsProcessingAlgorithm):
         return id_value_code, id_value_name, id_value_type, id_value_unit
 
     def processAlgorithm(self, parameters, context, feedback):
-        """
-        Here is where the processing itself takes place.
-        """
         # parameters
         # Database connection parameters
         connection_name = QgsExpressionContextUtils.globalScope().variable('gobs_connection_name')

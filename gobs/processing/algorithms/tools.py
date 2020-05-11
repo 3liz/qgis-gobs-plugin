@@ -14,6 +14,7 @@ def tr(string):
 
 def plugin_path(*args):
     """Get the path to plugin root folder.
+
     :param args List of path elements e.g. ['img', 'logos', 'image.png']
     :type args: str
     :return: Absolute path to the resoure.
@@ -29,6 +30,7 @@ def plugin_path(*args):
 
 def resources_path(*args):
     """Get the path to our resources folder.
+
     :param args List of path elements e.g. ['img', 'logos', 'image.png']
     :type args: str
     :return: Absolute path to the resources folder.
