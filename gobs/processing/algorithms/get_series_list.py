@@ -11,6 +11,7 @@ from .get_data_as_layer import GetDataAsLayer
 class GetSeriesList(GetDataAsLayer):
 
     def __init__(self):
+        super().__init__()
         self.GEOM_FIELD = None
         self.LAYER_NAME = self.tr('List of series')
 
