@@ -17,8 +17,8 @@ from qgis.core import (
     QgsSettings,
 )
 
+from gobs.qgis_plugin_tools.tools.resources import resources_path
 from .gobs_dockwidget import GobsDockWidget
-from .processing.algorithms.tools import resources_path
 from .processing.provider import GobsProvider
 
 cmd_folder = os.path.split(inspect.getfile(inspect.currentframe()))[0]
