@@ -3,11 +3,11 @@ __license__ = "GPL version 3"
 __email__ = "info@3liz.org"
 __revision__ = "$Format:%H$"
 
-import configparser
 import os
 
 from db_manager.db_plugins import createDbPlugin
 from qgis.core import (
+    QgsProcessingException,
     QgsProcessingParameterBoolean,
     QgsProcessingOutputNumber,
     QgsProcessingOutputString,
@@ -15,6 +15,8 @@ from qgis.core import (
 )
 
 from gobs.qgis_plugin_tools.tools.i18n import tr
+from gobs.qgis_plugin_tools.tools.resources import plugin_path
+from gobs.qgis_plugin_tools.tools.version import version
 from gobs.qgis_plugin_tools.tools.algorithm_processing import BaseProcessingAlgorithm
 from .tools import (
     fetchDataFromSqlQuery,
@@ -131,13 +133,7 @@ class UpgradeDatabaseStructure(BaseProcessingAlgorithm):
         # Drop schema if needed
         runit = self.parameterAsBool(parameters, self.RUNIT, context)
         if not runit:
-            status = 0
-            msg = tr('You must check the box to run the upgrade !')
-            # raise Exception(msg)
-            return {
-                self.OUTPUT_STATUS: status,
-                self.OUTPUT_STRING: msg
-            }
+            raise QgsProcessingException(tr('You must check the box to run the upgrade !'))
 
         # get database version
         sql = '''
@@ -152,23 +148,20 @@ class UpgradeDatabaseStructure(BaseProcessingAlgorithm):
             sql
         )
         if not ok:
-            feedback.reportError(error_message)
-            status = 0
-            raise Exception(error_message)
+            raise QgsProcessingException(error_message)
+
         db_version = None
         for a in data:
             db_version = a[0]
         if not db_version:
             error_message = tr('No installed version found in the database !')
-            raise Exception(error_message)
+            raise QgsProcessingException(error_message)
+
         feedback.pushInfo(tr('Database structure version') + ' = %s' % db_version)
 
-        # get plugin version
-        alg_dir = os.path.dirname(__file__)
-        plugin_dir = os.path.join(alg_dir, '../../')
-        config = configparser.ConfigParser()
-        config.read(os.path.join(plugin_dir, 'metadata.txt'))
-        plugin_version = config['general']['version']
+        plugin_dir = plugin_path()
+        plugin_version = version()
+
         feedback.pushInfo(tr('Plugin version') + ' = %s' % plugin_version)
 
         # Return if nothing to do
@@ -201,7 +194,6 @@ class UpgradeDatabaseStructure(BaseProcessingAlgorithm):
         sfiles = sorted(files, key=getKey)
         sql_files = [s[1] for s in sfiles]
 
-        msg = ''
         # Loop sql files and run SQL code
         for sf in sql_files:
             sql_file = os.path.join(plugin_dir, 'install/sql/upgrade/%s' % sf)
@@ -227,15 +219,22 @@ class UpgradeDatabaseStructure(BaseProcessingAlgorithm):
                 if ok:
                     feedback.pushInfo('* ' + sf + ' -- SUCCESS !')
                 else:
-                    feedback.reportError(error_message)
-                    raise Exception(error_message)
-                    # status = 0
-                    # return {
-                    #   self.OUTPUT_STATUS: status,
-                    #   self.OUTPUT_STRING: error_message
-                    # }
+                    raise QgsProcessingException(error_message)
+
+        # Everything went fine, update to the plugin version
+        sql = '''
+            UPDATE gobs.metadata
+            SET (me_version, me_version_date)
+            = ( '%s', now()::timestamp(0) );
+        ''' % plugin_version
+        [_, _, _, ok, error_message] = fetchDataFromSqlQuery(
+            connection_name,
+            sql
+        )
+        if not ok:
+            raise QgsProcessingException(error_message)
 
         return {
             self.OUTPUT_STATUS: 1,
-            self.OUTPUT_STRING: tr('*** GOBS STRUCTURE HAS BEEN SUCCESSFULLY UPGRADED ***')
+            self.OUTPUT_STRING: tr('Gobs database structure has been successfully upgraded to version "{}".'.format(plugin_version))
         }

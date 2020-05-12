@@ -3,7 +3,6 @@ __license__ = "GPL version 3"
 __email__ = "info@3liz.org"
 __revision__ = "$Format:%H$"
 
-import configparser
 import os
 
 from db_manager.db_plugins import createDbPlugin
@@ -11,10 +10,12 @@ from qgis.core import (
     QgsProcessingParameterBoolean,
     QgsProcessingOutputNumber,
     QgsProcessingOutputString,
-    QgsExpressionContextUtils,
+    QgsExpressionContextUtils, QgsProcessingException,
 )
 
 from gobs.qgis_plugin_tools.tools.i18n import tr
+from gobs.qgis_plugin_tools.tools.resources import plugin_path, plugin_test_data_path
+from gobs.qgis_plugin_tools.tools.version import version
 from gobs.qgis_plugin_tools.tools.algorithm_processing import BaseProcessingAlgorithm
 from .tools import fetchDataFromSqlQuery
 
@@ -172,8 +173,17 @@ class CreateDatabaseStructure(BaseProcessingAlgorithm):
         if addtestdata:
             sql_files.append('99_test_data.sql')
 
-        alg_dir = os.path.dirname(__file__)
-        plugin_dir = os.path.join(alg_dir, '../../')
+        plugin_dir = plugin_path()
+        plugin_version = version()
+
+        run_migration = os.environ.get("DATABASE_RUN_MIGRATION")
+        if run_migration:
+            feedback.reportError(
+                "Be careful, running migrations on an empty database using {} "
+                "instead of {}".format(run_migration, plugin_version)
+            )
+            plugin_version = run_migration
+            plugin_dir = plugin_test_data_path()
 
         # Loop sql files and run SQL code
         for sf in sql_files:
@@ -192,25 +202,16 @@ class CreateDatabaseStructure(BaseProcessingAlgorithm):
                 if ok:
                     feedback.pushInfo('  Success !')
                 else:
-                    feedback.reportError('* ' + error_message)
-                    raise Exception(error_message)
-                    # status = 0
-                    # return {
-                    #   self.OUTPUT_STATUS: status,
-                    #   self.OUTPUT_STRING: error_message
-                    # }
+                    raise QgsProcessingException(error_message)
 
         # Add version
-        config = configparser.ConfigParser()
-        config.read(str(os.path.join(plugin_dir, 'metadata.txt')))
-        version = config['general']['version']
         sql = '''
             INSERT INTO gobs.metadata
             (me_version, me_version_date, me_status)
             VALUES (
                 '%s', now()::timestamp(0), 1
             )
-        ''' % version
+        ''' % plugin_version
         [header, data, rowCount, ok, error_message] = fetchDataFromSqlQuery(
             connection_name,
             sql
@@ -218,5 +219,5 @@ class CreateDatabaseStructure(BaseProcessingAlgorithm):
 
         return {
             self.OUTPUT_STATUS: 1,
-            self.OUTPUT_STRING: tr('*** GOBS STRUCTURE HAS BEEN SUCCESSFULLY CREATED ***')
+            self.OUTPUT_STRING: tr('Gobs database structure has been successfully created to version "{}".'.format(plugin_version))
         }
