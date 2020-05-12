@@ -19,6 +19,7 @@ from .algorithms.get_series_list import GetSeriesList
 from .algorithms.get_spatial_layer_vector_data import GetSpatialLayerVectorData
 from .algorithms.import_spatial_layer_data import ImportSpatialLayerData
 from .algorithms.upgrade_database_structure import UpgradeDatabaseStructure
+from gobs.qgis_plugin_tools.tools.i18n import tr
 from gobs.qgis_plugin_tools.tools.resources import resources_path
 
 
@@ -51,10 +52,10 @@ class GobsProvider(QgsProcessingProvider):
         return 'gobs'
 
     def name(self):
-        return self.tr('G-Obs')
+        return tr('G-Obs')
 
     def longName(self):
-        return self.tr('G-Obs')
+        return self.name()
 
     def icon(self):
         return QIcon(resources_path('icons', 'icon.png'))

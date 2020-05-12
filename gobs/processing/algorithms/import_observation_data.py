@@ -14,8 +14,8 @@ from qgis.core import (
     QgsProcessingOutputString,
     QgsExpressionContextUtils,
 )
-from qgis.PyQt.QtCore import QCoreApplication
 
+from gobs.qgis_plugin_tools.tools.i18n import tr
 from gobs.qgis_plugin_tools.tools.algorithm_processing import BaseProcessingAlgorithm
 
 from .tools import (
@@ -39,16 +39,16 @@ class ImportObservationData(BaseProcessingAlgorithm):
         return 'import_observation_data'
 
     def displayName(self):
-        return self.tr('Import observation data')
+        return tr('Import observation data')
 
     def group(self):
-        return self.tr('Manage')
+        return tr('Manage')
 
     def groupId(self):
         return 'gobs_manage'
 
     def shortHelpString(self):
-        short_help = self.tr(
+        short_help = tr(
             'This algorithm allows to import observation data from a QGIS vector or table layer into the G-Obs database'
             '\n'
             '\n'
@@ -70,9 +70,6 @@ class ImportObservationData(BaseProcessingAlgorithm):
         )
         return short_help
 
-    def tr(self, string):
-        return QCoreApplication.translate('Processing', string)
-
     def getSerieId(self):
         """
         Get the serie ID
@@ -86,7 +83,7 @@ class ImportObservationData(BaseProcessingAlgorithm):
         self.addParameter(
             QgsProcessingParameterVectorLayer(
                 self.SOURCELAYER,
-                self.tr('Source data layer'),
+                tr('Source data layer'),
                 optional=False,
                 types=[QgsProcessing.TypeVector]
             )
@@ -95,7 +92,7 @@ class ImportObservationData(BaseProcessingAlgorithm):
         self.addParameter(
             QgsProcessingParameterField(
                 self.FIELD_TIMESTAMP,
-                self.tr('Date and time field. ISO Format'),
+                tr('Date and time field. ISO Format'),
                 optional=True,
                 parentLayerParameterName=self.SOURCELAYER
             )
@@ -104,7 +101,7 @@ class ImportObservationData(BaseProcessingAlgorithm):
         self.addParameter(
             QgsProcessingParameterString(
                 self.MANUALDATE,
-                self.tr('Manual date or timestamp, (2019-01-06 or 2019-01-06 22:59:50) Use when the data refers to only one date or time'),
+                tr('Manual date or timestamp, (2019-01-06 or 2019-01-06 22:59:50) Use when the data refers to only one date or time'),
                 optional=True
             )
         )
@@ -112,7 +109,7 @@ class ImportObservationData(BaseProcessingAlgorithm):
         self.addParameter(
             QgsProcessingParameterField(
                 self.FIELD_SPATIAL_OBJECT,
-                self.tr('Field containing the spatial object id'),
+                tr('Field containing the spatial object id'),
                 optional=False,
                 parentLayerParameterName=self.SOURCELAYER
             )
@@ -137,7 +134,7 @@ class ImportObservationData(BaseProcessingAlgorithm):
         self.addOutput(
             QgsProcessingOutputString(
                 self.OUTPUT_STRING,
-                self.tr('Output message')
+                tr('Output message')
             )
         )
 
@@ -149,13 +146,13 @@ class ImportObservationData(BaseProcessingAlgorithm):
         manualdate = (self.parameterAsString(parameters, self.MANUALDATE, context)).strip().replace('/', '-')
         if not field_timestamp and not manualdate:
             ok = False
-            msg = self.tr('You need to enter either a date/time field or a manual date/time')
+            msg = tr('You need to enter either a date/time field or a manual date/time')
 
         # check validity of given manual date
         if manualdate:
             ok, msg = validateTimestamp(manualdate)
             if not ok:
-                return ok, self.tr('Manual date or timestamp: ') + msg
+                return ok, tr('Manual date or timestamp: ') + msg
             ok = True
 
         if not ok:
@@ -260,7 +257,7 @@ class ImportObservationData(BaseProcessingAlgorithm):
 
         # Import data to temporary table
         feedback.pushInfo(
-            self.tr('IMPORT SOURCE DATA INTO TEMPORARY TABLE')
+            tr('IMPORT SOURCE DATA INTO TEMPORARY TABLE')
         )
         temp_schema = 'public'
         temp_table = 'temp_' + str(time.time()).replace('.', '')
@@ -280,12 +277,12 @@ class ImportObservationData(BaseProcessingAlgorithm):
         }, context=context, feedback=feedback)
 
         feedback.pushInfo(
-            self.tr('* Source layer has been imported into temporary table')
+            tr('* Source layer has been imported into temporary table')
         )
 
         # Create import data
         feedback.pushInfo(
-            self.tr('LOG IMPORT INTO import TABLE')
+            tr('LOG IMPORT INTO import TABLE')
         )
         sql = '''
             INSERT INTO gobs.import
@@ -309,28 +306,28 @@ class ImportObservationData(BaseProcessingAlgorithm):
             )
             if not ok:
                 # status = 0
-                msg = self.tr('* The following error has been raised') + '  %s' % error_message
+                msg = tr('* The following error has been raised') + '  %s' % error_message
                 feedback.reportError(
                     msg
                 )
             else:
                 # status = 1
                 id_import = data[0][0]
-                msg = self.tr('* New import data has been created with ID')
+                msg = tr('* New import data has been created with ID')
                 msg += ' = %s !' % id_import
                 feedback.pushInfo(
                     msg
                 )
         except Exception:
             # status = 0
-            msg = self.tr('* An unknown error occured while adding import log item')
+            msg = tr('* An unknown error occured while adding import log item')
             feedback.reportError(
                 msg
             )
 
         # GET INFORMATION of indicator
         feedback.pushInfo(
-            self.tr('GET DATA OF RELATED indicator')
+            tr('GET DATA OF RELATED indicator')
         )
         sql = '''
             SELECT id_date_format
@@ -353,27 +350,27 @@ class ImportObservationData(BaseProcessingAlgorithm):
             )
             if not ok:
                 status = 0
-                msg = self.tr('* The following error has been raised') + '  %s' % error_message
+                msg = tr('* The following error has been raised') + '  %s' % error_message
                 feedback.reportError(
                     msg
                 )
             else:
                 status = 1
                 id_date_format = data[0][0]
-                msg = self.tr('* Indicator date format is')
+                msg = tr('* Indicator date format is')
                 msg += " '%s'" % id_date_format
                 feedback.pushInfo(
                     msg
                 )
         except Exception:
             status = 0
-            msg = self.tr('* An unknown error occured while getting indicator date format')
+            msg = tr('* An unknown error occured while getting indicator date format')
 
         # COPY DATA TO OBSERVATION TABLE
         if status:
 
             feedback.pushInfo(
-                self.tr('COPY IMPORTED DATA TO observation TABLE')
+                tr('COPY IMPORTED DATA TO observation TABLE')
             )
 
             # Calculate value for jsonb array destination
@@ -463,19 +460,19 @@ class ImportObservationData(BaseProcessingAlgorithm):
                 )
                 if not ok:
                     status = 0
-                    msg = self.tr('* The following error has been raised') + '  %s' % error_message
+                    msg = tr('* The following error has been raised') + '  %s' % error_message
                     feedback.reportError(
                         msg + ' \n' + sql
                     )
                 else:
                     status = 1
-                    msg = self.tr('* Source data has been successfully imported !')
+                    msg = tr('* Source data has been successfully imported !')
                     feedback.pushInfo(
                         msg
                     )
             except Exception:
                 status = 0
-                msg = self.tr('* An unknown error occured while adding features to spatial_object table')
+                msg = tr('* An unknown error occured while adding features to spatial_object table')
                 feedback.reportError(
                     msg
                 )
@@ -483,7 +480,7 @@ class ImportObservationData(BaseProcessingAlgorithm):
 
                 # Remove temporary table
                 feedback.pushInfo(
-                    self.tr('DROP TEMPORARY DATA')
+                    tr('DROP TEMPORARY DATA')
                 )
                 sql = '''
                     --DROP TABLE IF EXISTS "%s"."%s"
@@ -499,11 +496,11 @@ class ImportObservationData(BaseProcessingAlgorithm):
                 )
                 if ok:
                     feedback.pushInfo(
-                        self.tr('* Temporary data has been deleted.')
+                        tr('* Temporary data has been deleted.')
                     )
                 else:
                     feedback.reportError(
-                        self.tr('* An error occured while droping temporary table') + ' "%s"."%s"' % (temp_schema, temp_table)
+                        tr('* An error occured while droping temporary table') + ' "%s"."%s"' % (temp_schema, temp_table)
                     )
 
             if not status and id_import:
@@ -512,7 +509,7 @@ class ImportObservationData(BaseProcessingAlgorithm):
                     'DELETE FROM gobs.import WHERE id = %s ' % id_import
                 )
 
-            msg = self.tr('OBSERVATION DATA HAS BEEN SUCCESSFULLY IMPORTED !')
+            msg = tr('OBSERVATION DATA HAS BEEN SUCCESSFULLY IMPORTED !')
 
         return {
             self.OUTPUT_STATUS: status,

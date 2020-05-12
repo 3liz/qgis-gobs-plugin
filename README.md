@@ -1,3 +1,7 @@
+# G-Obs
+
+![G-Obs](gobs/resources/icons/icon.png)
+
 ## Scripts
 
 ### Database structure installation files

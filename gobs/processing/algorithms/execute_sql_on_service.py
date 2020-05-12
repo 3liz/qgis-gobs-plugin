@@ -8,8 +8,8 @@ from qgis.core import (
     QgsProcessingOutputString,
     QgsProcessingOutputNumber,
 )
-from qgis.PyQt.QtCore import QCoreApplication
 
+from gobs.qgis_plugin_tools.tools.i18n import tr
 from gobs.qgis_plugin_tools.tools.algorithm_processing import BaseProcessingAlgorithm
 from .tools import fetchDataFromSqlQuery
 
@@ -28,19 +28,16 @@ class ExecuteSqlOnService(BaseProcessingAlgorithm):
         return 'execute_sql_on_service'
 
     def displayName(self):
-        return self.tr('Execute SQL on service database')
+        return tr('Execute SQL on service database')
 
     def group(self):
-        return self.tr('Tools')
+        return tr('Tools')
 
     def groupId(self):
         return 'gobs_tools'
 
-    def tr(self, string):
-        return QCoreApplication.translate('Processing', string)
-
     def shortHelpString(self):
-        return self.tr('Execute a query on the service database')
+        return tr('Execute a query on the service database')
 
     def initAlgorithm(self, config):
         # INPUTS
@@ -63,12 +60,12 @@ class ExecuteSqlOnService(BaseProcessingAlgorithm):
         # Add output for status (integer) and message (string)
         self.addOutput(
             QgsProcessingOutputNumber(
-                self.OUTPUT_STATUS, self.tr('Output status')
+                self.OUTPUT_STATUS, tr('Output status')
             )
         )
         self.addOutput(
             QgsProcessingOutputString(
-                self.OUTPUT_STRING, self.tr('Output message')
+                self.OUTPUT_STRING, tr('Output message')
             )
         )
 

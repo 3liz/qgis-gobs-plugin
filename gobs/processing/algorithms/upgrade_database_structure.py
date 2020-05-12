@@ -13,8 +13,8 @@ from qgis.core import (
     QgsProcessingOutputString,
     QgsExpressionContextUtils,
 )
-from qgis.PyQt.QtCore import QCoreApplication
 
+from gobs.qgis_plugin_tools.tools.i18n import tr
 from gobs.qgis_plugin_tools.tools.algorithm_processing import BaseProcessingAlgorithm
 from .tools import (
     fetchDataFromSqlQuery,
@@ -32,16 +32,16 @@ class UpgradeDatabaseStructure(BaseProcessingAlgorithm):
         return 'upgrade_database_structure'
 
     def displayName(self):
-        return self.tr('Upgrade database structure')
+        return tr('Upgrade database structure')
 
     def group(self):
-        return self.tr('Structure')
+        return tr('Structure')
 
     def groupId(self):
         return 'gobs_structure'
 
     def shortHelpString(self):
-        short_help = self.tr(
+        short_help = tr(
             'Upgrade the G-Obs tables and functions in the chosen database.'
             '\n'
             '\n'
@@ -50,19 +50,13 @@ class UpgradeDatabaseStructure(BaseProcessingAlgorithm):
         )
         return short_help
 
-    def tr(self, string):
-        return QCoreApplication.translate('Processing', string)
-
-    def createInstance(self):
-        return self.__class__()
-
     def initAlgorithm(self, config):
         # INPUTS
 
         self.addParameter(
             QgsProcessingParameterBoolean(
                 self.RUNIT,
-                self.tr('Check this box to upgrade. No action will be done otherwise'),
+                tr('Check this box to upgrade. No action will be done otherwise'),
                 defaultValue=False,
                 optional=False
             )
@@ -72,13 +66,13 @@ class UpgradeDatabaseStructure(BaseProcessingAlgorithm):
         self.addOutput(
             QgsProcessingOutputNumber(
                 self.OUTPUT_STATUS,
-                self.tr('Output status')
+                tr('Output status')
             )
         )
         self.addOutput(
             QgsProcessingOutputString(
                 self.OUTPUT_STRING,
-                self.tr('Output message')
+                tr('Output message')
             )
         )
 
@@ -86,20 +80,20 @@ class UpgradeDatabaseStructure(BaseProcessingAlgorithm):
         # Check if runit is checked
         runit = self.parameterAsBool(parameters, self.RUNIT, context)
         if not runit:
-            msg = self.tr('You must check the box to run the upgrade !')
+            msg = tr('You must check the box to run the upgrade !')
             ok = False
             return ok, msg
 
         # Check that the connection name has been configured
         connection_name = QgsExpressionContextUtils.globalScope().variable('gobs_connection_name')
         if not connection_name:
-            return False, self.tr('You must use the "Configure G-obs plugin" alg to set the database connection name')
+            return False, tr('You must use the "Configure G-obs plugin" alg to set the database connection name')
 
         # Check that it corresponds to an existing connection
         dbpluginclass = createDbPlugin('postgis')
         connections = [c.connectionName() for c in dbpluginclass.connections()]
         if connection_name not in connections:
-            return False, self.tr('The configured connection name does not exists in QGIS')
+            return False, tr('The configured connection name does not exists in QGIS')
 
         # Check database content
         ok, msg = self.checkSchema(parameters, context)
@@ -122,7 +116,7 @@ class UpgradeDatabaseStructure(BaseProcessingAlgorithm):
         if not ok:
             return ok, error_message
         ok = False
-        msg = self.tr("Schema gobs does not exist in database !")
+        msg = tr("Schema gobs does not exist in database !")
         for a in data:
             schema = a[0]
             if schema == 'gobs':
@@ -138,7 +132,7 @@ class UpgradeDatabaseStructure(BaseProcessingAlgorithm):
         runit = self.parameterAsBool(parameters, self.RUNIT, context)
         if not runit:
             status = 0
-            msg = self.tr('You must check the box to run the upgrade !')
+            msg = tr('You must check the box to run the upgrade !')
             # raise Exception(msg)
             return {
                 self.OUTPUT_STATUS: status,
@@ -165,9 +159,9 @@ class UpgradeDatabaseStructure(BaseProcessingAlgorithm):
         for a in data:
             db_version = a[0]
         if not db_version:
-            error_message = self.tr('No installed version found in the database !')
+            error_message = tr('No installed version found in the database !')
             raise Exception(error_message)
-        feedback.pushInfo(self.tr('Database structure version') + ' = %s' % db_version)
+        feedback.pushInfo(tr('Database structure version') + ' = %s' % db_version)
 
         # get plugin version
         alg_dir = os.path.dirname(__file__)
@@ -175,13 +169,13 @@ class UpgradeDatabaseStructure(BaseProcessingAlgorithm):
         config = configparser.ConfigParser()
         config.read(os.path.join(plugin_dir, 'metadata.txt'))
         plugin_version = config['general']['version']
-        feedback.pushInfo(self.tr('Plugin version') + ' = %s' % plugin_version)
+        feedback.pushInfo(tr('Plugin version') + ' = %s' % plugin_version)
 
         # Return if nothing to do
         if db_version == plugin_version:
             return {
                 self.OUTPUT_STATUS: 1,
-                self.OUTPUT_STRING: self.tr('The database version already matches the plugin version. No upgrade needed.')
+                self.OUTPUT_STRING: tr('The database version already matches the plugin version. No upgrade needed.')
             }
 
         # Get all the upgrade SQL files between db versions and plugin version
@@ -243,5 +237,5 @@ class UpgradeDatabaseStructure(BaseProcessingAlgorithm):
 
         return {
             self.OUTPUT_STATUS: 1,
-            self.OUTPUT_STRING: self.tr('*** GOBS STRUCTURE HAS BEEN SUCCESSFULLY UPGRADED ***')
+            self.OUTPUT_STRING: tr('*** GOBS STRUCTURE HAS BEEN SUCCESSFULLY UPGRADED ***')
         }

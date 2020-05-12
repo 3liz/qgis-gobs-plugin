@@ -13,8 +13,8 @@ from qgis.core import (
     QgsProcessingOutputString,
     QgsExpressionContextUtils,
 )
-from qgis.PyQt.QtCore import QCoreApplication
 
+from gobs.qgis_plugin_tools.tools.i18n import tr
 from gobs.qgis_plugin_tools.tools.algorithm_processing import BaseProcessingAlgorithm
 from .tools import fetchDataFromSqlQuery
 
@@ -33,16 +33,16 @@ class CreateDatabaseStructure(BaseProcessingAlgorithm):
         return 'create_database_structure'
 
     def displayName(self):
-        return self.tr('Create database structure')
+        return tr('Create database structure')
 
     def group(self):
-        return self.tr('Structure')
+        return tr('Structure')
 
     def groupId(self):
         return 'gobs_structure'
 
     def shortHelpString(self):
-        short_help = self.tr(
+        short_help = tr(
             'Install the G-Obs database structure with tables and function on the chosen database.'
             '\n'
             '\n'
@@ -53,15 +53,12 @@ class CreateDatabaseStructure(BaseProcessingAlgorithm):
         )
         return short_help
 
-    def tr(self, string):
-        return QCoreApplication.translate('Processing', string)
-
     def initAlgorithm(self, config):
         # INPUTS
         self.addParameter(
             QgsProcessingParameterBoolean(
                 self.OVERRIDE,
-                self.tr('Overwrite schema gobs and all data ? ** CAUTION ** It will remove all existing data !'),
+                tr('Overwrite schema gobs and all data ? ** CAUTION ** It will remove all existing data !'),
                 defaultValue=False,
                 optional=False
             )
@@ -69,7 +66,7 @@ class CreateDatabaseStructure(BaseProcessingAlgorithm):
         self.addParameter(
             QgsProcessingParameterBoolean(
                 self.ADDTESTDATA,
-                self.tr('Add test data ?'),
+                tr('Add test data ?'),
                 defaultValue=False,
                 optional=False
             )
@@ -79,13 +76,13 @@ class CreateDatabaseStructure(BaseProcessingAlgorithm):
         self.addOutput(
             QgsProcessingOutputNumber(
                 self.OUTPUT_STATUS,
-                self.tr('Output status')
+                tr('Output status')
             )
         )
         self.addOutput(
             QgsProcessingOutputString(
                 self.OUTPUT_STRING,
-                self.tr('Output message')
+                tr('Output message')
             )
         )
 
@@ -93,13 +90,13 @@ class CreateDatabaseStructure(BaseProcessingAlgorithm):
         # Check that the connection name has been configured
         connection_name = QgsExpressionContextUtils.globalScope().variable('gobs_connection_name')
         if not connection_name:
-            return False, self.tr('You must use the "Configure G-obs plugin" alg to set the database connection name')
+            return False, tr('You must use the "Configure G-obs plugin" alg to set the database connection name')
 
         # Check that it corresponds to an existing connection
         dbpluginclass = createDbPlugin('postgis')
         connections = [c.connectionName() for c in dbpluginclass.connections()]
         if connection_name not in connections:
-            return False, self.tr('The configured connection name does not exists in QGIS')
+            return False, tr('The configured connection name does not exists in QGIS')
 
         # Check database content
         ok, msg = self.checkSchema(parameters, context)
@@ -121,12 +118,12 @@ class CreateDatabaseStructure(BaseProcessingAlgorithm):
         if not ok:
             return ok, error_message
         override = parameters[self.OVERRIDE]
-        msg = self.tr('Schema gobs does not exists. Continue...')
+        msg = tr('Schema gobs does not exists. Continue...')
         for a in data:
             schema = a[0]
             if schema == 'gobs' and not override:
                 ok = False
-                msg = self.tr("Schema gobs already exists in database ! If you REALLY want to drop and recreate it (and loose all data), check the *Overwrite* checkbox")
+                msg = tr("Schema gobs already exists in database ! If you REALLY want to drop and recreate it (and loose all data), check the *Overwrite* checkbox")
         return ok, msg
 
     def processAlgorithm(self, parameters, context, feedback):
@@ -139,7 +136,7 @@ class CreateDatabaseStructure(BaseProcessingAlgorithm):
         # Drop schema if needed
         override = self.parameterAsBool(parameters, self.OVERRIDE, context)
         if override:
-            feedback.pushInfo(self.tr("Trying to drop schema gobs..."))
+            feedback.pushInfo(tr("Trying to drop schema gobs..."))
             sql = 'DROP SCHEMA IF EXISTS gobs CASCADE;'
 
             [header, data, rowCount, ok, error_message] = fetchDataFromSqlQuery(
@@ -147,7 +144,7 @@ class CreateDatabaseStructure(BaseProcessingAlgorithm):
                 sql
             )
             if ok:
-                feedback.pushInfo(self.tr("Schema gobs has been dropped."))
+                feedback.pushInfo(tr("Schema gobs has been dropped."))
             else:
                 feedback.reportError(error_message)
                 status = 0
@@ -221,5 +218,5 @@ class CreateDatabaseStructure(BaseProcessingAlgorithm):
 
         return {
             self.OUTPUT_STATUS: 1,
-            self.OUTPUT_STRING: self.tr('*** GOBS STRUCTURE HAS BEEN SUCCESSFULLY CREATED ***')
+            self.OUTPUT_STRING: tr('*** GOBS STRUCTURE HAS BEEN SUCCESSFULLY CREATED ***')
         }

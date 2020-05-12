@@ -14,6 +14,7 @@ from qgis.core import (
     QgsProcessingParameterString,
 )
 
+from gobs.qgis_plugin_tools.tools.i18n import tr
 from .get_data_as_layer import GetDataAsLayer
 from .tools import (
     fetchDataFromSqlQuery,
@@ -41,16 +42,16 @@ class GetAggregatedData(GetDataAsLayer):
         return 'get_aggregated_data'
 
     def displayName(self):
-        return self.tr('Get aggregated data')
+        return tr('Get aggregated data')
 
     def group(self):
-        return self.tr('Tools')
+        return tr('Tools')
 
     def groupId(self):
         return 'gobs_tools'
 
     def shortHelpString(self):
-        short_help = self.tr(
+        short_help = tr(
             'This algorithm allows to add a table or vector layer in your QGIS project containing the aggregated observation data from the chosen G-Obs series. The aggregation is made depending of the user input. Data are dynamically fetched from the database, meaning they are always up-to-date.'
             '\n'
             '* Names of the output layer: choose the name of the QGIS layer to create. If not given, the label of the series of observations, as written in the series combo box.'
@@ -109,7 +110,7 @@ class GetAggregatedData(GetDataAsLayer):
         self.addParameter(
             QgsProcessingParameterEnum(
                 self.SERIE,
-                self.tr('Series of observations'),
+                tr('Series of observations'),
                 options=self.SERIES,
                 optional=False
             )
@@ -119,7 +120,7 @@ class GetAggregatedData(GetDataAsLayer):
         # mainly used from other processing algs
         p = QgsProcessingParameterNumber(
             self.SERIE_ID,
-            self.tr('Series ID. If given, it overrides previous choice'),
+            tr('Series ID. If given, it overrides previous choice'),
             optional=True,
             defaultValue=-1
         )
@@ -130,7 +131,7 @@ class GetAggregatedData(GetDataAsLayer):
         self.addParameter(
             QgsProcessingParameterBoolean(
                 self.ADD_SPATIAL_OBJECT_DATA,
-                self.tr('Add spatial object ID and label ?'),
+                tr('Add spatial object ID and label ?'),
                 defaultValue=True,
                 optional=False
             )
@@ -140,7 +141,7 @@ class GetAggregatedData(GetDataAsLayer):
         self.addParameter(
             QgsProcessingParameterBoolean(
                 self.ADD_SPATIAL_OBJECT_GEOM,
-                self.tr('Add spatial object geometry ?'),
+                tr('Add spatial object geometry ?'),
                 defaultValue=False,
                 optional=False
             )
@@ -154,7 +155,7 @@ class GetAggregatedData(GetDataAsLayer):
         self.addParameter(
             QgsProcessingParameterEnum(
                 self.TEMPORAL_RESOLUTION,
-                self.tr('Timestamp extraction resolution'),
+                tr('Timestamp extraction resolution'),
                 options=self.TEMPORAL_RESOLUTIONS,
                 optional=False
             )
@@ -164,7 +165,7 @@ class GetAggregatedData(GetDataAsLayer):
         self.addParameter(
             QgsProcessingParameterEnum(
                 self.AGGREGATE_FUNCTIONS,
-                self.tr('Choose aggregate functions to use'),
+                tr('Choose aggregate functions to use'),
                 options=self.AGGREGATE_FUNCTIONS_LIST,
                 optional=False,
                 allowMultiple=True,
@@ -176,7 +177,7 @@ class GetAggregatedData(GetDataAsLayer):
         # self.addParameter(
         #   QgsProcessingParameterBoolean(
         #       self.GROUP_BY_DISTINCT_VALUES,
-        #       self.tr('Group by the distinct values'),
+        #       tr('Group by the distinct values'),
         #       defaultValue=False,
         #       optional=False
         #   )
@@ -186,7 +187,7 @@ class GetAggregatedData(GetDataAsLayer):
         self.addParameter(
             QgsProcessingParameterString(
                 self.MIN_TIMESTAMP,
-                self.tr('Minimum observation timestamp, Ex: 2019-01-01 or 2019-01-06 00:00:00'),
+                tr('Minimum observation timestamp, Ex: 2019-01-01 or 2019-01-06 00:00:00'),
                 defaultValue='',
                 optional=True
             )
@@ -196,7 +197,7 @@ class GetAggregatedData(GetDataAsLayer):
         self.addParameter(
             QgsProcessingParameterString(
                 self.MAX_TIMESTAMP,
-                self.tr('Maximum observation timestamp, Ex:2019-12-31 or 2019-12-31 23:59:53'),
+                tr('Maximum observation timestamp, Ex:2019-12-31 or 2019-12-31 23:59:53'),
                 defaultValue='',
                 optional=True
             )
@@ -209,7 +210,7 @@ class GetAggregatedData(GetDataAsLayer):
         # Check series id is in the list of existing series
         if serie_id > 0:
             if serie_id not in self.SERIES_DICT.values():
-                return False, self.tr('Series ID does not exists in the database')
+                return False, tr('Series ID does not exists in the database')
 
         # Check timestamps
         min_timestamp = (self.parameterAsString(parameters, self.MIN_TIMESTAMP, context)).strip().replace('/', '-')
@@ -217,11 +218,11 @@ class GetAggregatedData(GetDataAsLayer):
         if min_timestamp:
             ok, msg = validateTimestamp(min_timestamp)
             if not ok:
-                return ok, self.tr('Minimum observation timestamp: ') + msg
+                return ok, tr('Minimum observation timestamp: ') + msg
         if max_timestamp:
             ok, msg = validateTimestamp(max_timestamp)
             if not ok:
-                return ok, self.tr('Maximum observation timestamp: ') + msg
+                return ok, tr('Maximum observation timestamp: ') + msg
 
         return super(GetAggregatedData, self).checkParameterValues(parameters, context)
 
@@ -253,7 +254,7 @@ class GetAggregatedData(GetDataAsLayer):
 
         # Get data from chosen series
         feedback.pushInfo(
-            self.tr('GET DATA FROM CHOSEN SERIES')
+            tr('GET DATA FROM CHOSEN SERIES')
         )
         sql = '''
             SELECT
@@ -275,7 +276,7 @@ class GetAggregatedData(GetDataAsLayer):
         )
         if ok:
             id_label = data[0][0]
-            message = self.tr('* Data has been fetched for chosen series and related indicator')
+            message = tr('* Data has been fetched for chosen series and related indicator')
             message += ' %s !' % id_label
             feedback.pushInfo(
                 message
@@ -455,7 +456,7 @@ class GetAggregatedData(GetDataAsLayer):
         '''
 
         feedback.pushInfo(
-            self.tr('SQL = \n' + self.SQL.replace('            ', '''
+            tr('SQL = \n' + self.SQL.replace('            ', '''
 '''))
         )
         self.SQL = sql.replace('\n', ' ').rstrip(';')

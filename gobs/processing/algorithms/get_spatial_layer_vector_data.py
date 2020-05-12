@@ -12,6 +12,7 @@ from qgis.core import (
     QgsProcessingParameterDefinition,
 )
 
+from gobs.qgis_plugin_tools.tools.i18n import tr
 from .get_data_as_layer import GetDataAsLayer
 from .tools import fetchDataFromSqlQuery
 
@@ -26,16 +27,16 @@ class GetSpatialLayerVectorData(GetDataAsLayer):
         return 'get_spatial_layer_vector_data'
 
     def displayName(self):
-        return self.tr('Get spatial layer vector data')
+        return tr('Get spatial layer vector data')
 
     def group(self):
-        return self.tr('Tools')
+        return tr('Tools')
 
     def groupId(self):
         return 'gobs_tools'
 
     def shortHelpString(self):
-        short_help = self.tr(
+        short_help = tr(
             'This algorithm allows to add a vector layer in your QGIS project containing the spatial data from the chosen G-Obs spatial layer. Data are dynamically fetched from the database, meaning they are always up-to-date.'
             '\n'
             '* Name of the output layer: choose the name of the QGIS layer to create. If not given, the label of the spatial layer will be used.'
@@ -72,7 +73,7 @@ class GetSpatialLayerVectorData(GetDataAsLayer):
         self.addParameter(
             QgsProcessingParameterEnum(
                 self.SPATIALLAYER,
-                self.tr('Spatial layer'),
+                tr('Spatial layer'),
                 options=self.SPATIALLAYERS,
                 optional=False
             )
@@ -82,7 +83,7 @@ class GetSpatialLayerVectorData(GetDataAsLayer):
         # mainly used from other processing algs
         p = QgsProcessingParameterNumber(
             self.SPATIALLAYER_ID,
-            self.tr('Spatial layer ID. If given, it overrides previous choice'),
+            tr('Spatial layer ID. If given, it overrides previous choice'),
             optional=True,
             defaultValue=-1
         )
@@ -96,7 +97,7 @@ class GetSpatialLayerVectorData(GetDataAsLayer):
         # Check serie id is in the list of existing spatial layers
         if spatial_layer_id and spatial_layer_id > 0:
             if spatial_layer_id not in self.SPATIALLAYERS_DICT:
-                return False, self.tr('Spatial layer ID does not exists in the database')
+                return False, tr('Spatial layer ID does not exists in the database')
 
         return super(GetSpatialLayerVectorData, self).checkParameterValues(parameters, context)
 
@@ -118,7 +119,7 @@ class GetSpatialLayerVectorData(GetDataAsLayer):
             id_spatial_layer = spatial_layer_id
 
         feedback.pushInfo(
-            self.tr('GET DATA FROM CHOSEN SPATIAL LAYER')
+            tr('GET DATA FROM CHOSEN SPATIAL LAYER')
         )
         sql = "SELECT id, sl_label, sl_geometry_type FROM gobs.spatial_layer WHERE id = %s" % id_spatial_layer
         [header, data, rowCount, ok, message] = fetchDataFromSqlQuery(
@@ -127,7 +128,7 @@ class GetSpatialLayerVectorData(GetDataAsLayer):
         )
         if ok:
             label = data[0][1]
-            message = self.tr('* Data has been fetched for spatial layer')
+            message = tr('* Data has been fetched for spatial layer')
             message += ' %s !' % label
             feedback.pushInfo(
                 message

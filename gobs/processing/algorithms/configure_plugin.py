@@ -9,8 +9,8 @@ from qgis.core import (
     QgsProcessingOutputNumber,
     QgsExpressionContextUtils,
 )
-from qgis.PyQt.QtCore import QCoreApplication
 
+from gobs.qgis_plugin_tools.tools.i18n import tr
 from gobs.qgis_plugin_tools.tools.algorithm_processing import BaseProcessingAlgorithm
 
 
@@ -25,24 +25,21 @@ class ConfigurePlugin(BaseProcessingAlgorithm):
         return 'configure_plugin'
 
     def displayName(self):
-        return self.tr('Configure G-Obs plugin')
+        return tr('Configure G-Obs plugin')
 
     def group(self):
-        return self.tr('Configuration')
+        return tr('Configuration')
 
     def groupId(self):
         return 'gobs_configuration'
 
     def shortHelpString(self):
-        short_help = self.tr(
+        short_help = tr(
             'You must run this script before any other script.'
             '\n'
             'Every parameter will be used in the other algorithms, as default values for parameters.'
         )
         return short_help
-
-    def tr(self, string):
-        return QCoreApplication.translate('Processing', string)
 
     def initAlgorithm(self, config):
         # INPUTS
@@ -50,7 +47,7 @@ class ConfigurePlugin(BaseProcessingAlgorithm):
         connection_name = QgsExpressionContextUtils.globalScope().variable('gobs_connection_name')
         db_param = QgsProcessingParameterString(
             self.CONNECTION_NAME,
-            self.tr('PostgreSQL connection to G-Obs database'),
+            tr('PostgreSQL connection to G-Obs database'),
             defaultValue=connection_name,
             optional=False
         )
@@ -66,14 +63,14 @@ class ConfigurePlugin(BaseProcessingAlgorithm):
         self.addOutput(
             QgsProcessingOutputNumber(
                 self.OUTPUT_STATUS,
-                self.tr('Output status')
+                tr('Output status')
             )
         )
         # Add output for message
         self.addOutput(
             QgsProcessingOutputString(
                 self.OUTPUT_STRING,
-                self.tr('Output message')
+                tr('Output message')
             )
         )
 
@@ -82,9 +79,9 @@ class ConfigurePlugin(BaseProcessingAlgorithm):
 
         # Set global variable
         QgsExpressionContextUtils.setGlobalVariable('gobs_connection_name', connection_name)
-        feedback.pushInfo(self.tr('PostgreSQL connection to G-Obs database') + ' = ' + connection_name)
+        feedback.pushInfo(tr('PostgreSQL connection to G-Obs database') + ' = ' + connection_name)
 
-        msg = self.tr('Configuration has been saved')
+        msg = tr('Configuration has been saved')
         feedback.pushInfo(msg)
         status = 1
 

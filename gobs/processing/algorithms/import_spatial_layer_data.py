@@ -14,8 +14,8 @@ from qgis.core import (
     QgsProcessingOutputString,
     QgsExpressionContextUtils,
 )
-from qgis.PyQt.QtCore import QCoreApplication
 
+from gobs.qgis_plugin_tools.tools.i18n import tr
 from gobs.qgis_plugin_tools.tools.algorithm_processing import BaseProcessingAlgorithm
 from .tools import fetchDataFromSqlQuery
 
@@ -36,16 +36,16 @@ class ImportSpatialLayerData(BaseProcessingAlgorithm):
         return 'import_spatial_layer_data'
 
     def displayName(self):
-        return self.tr('Import spatial layer data')
+        return tr('Import spatial layer data')
 
     def group(self):
-        return self.tr('Manage')
+        return tr('Manage')
 
     def groupId(self):
         return 'gobs_manage'
 
     def shortHelpString(self):
-        short_help = self.tr(
+        short_help = tr(
             'This algorithm allows to import data from a QGIS spatial layer into the G-Obs database'
             '\n'
             '\n'
@@ -61,12 +61,6 @@ class ImportSpatialLayerData(BaseProcessingAlgorithm):
             '\n'
         )
         return short_help
-
-    def tr(self, string):
-        return QCoreApplication.translate('Processing', string)
-
-    def createInstance(self):
-        return self.__class__()
 
     def initAlgorithm(self, config):
         # INPUTS
@@ -91,7 +85,7 @@ class ImportSpatialLayerData(BaseProcessingAlgorithm):
         self.addParameter(
             QgsProcessingParameterEnum(
                 self.SPATIALLAYER,
-                self.tr('Target spatial layer'),
+                tr('Target spatial layer'),
                 options=self.SPATIALLAYERS,
                 optional=False
             )
@@ -99,21 +93,21 @@ class ImportSpatialLayerData(BaseProcessingAlgorithm):
         self.addParameter(
             QgsProcessingParameterVectorLayer(
                 self.SOURCELAYER,
-                self.tr('Source data layer'),
+                tr('Source data layer'),
                 optional=False
             )
         )
         self.addParameter(
             QgsProcessingParameterField(
                 self.UNIQUEID,
-                self.tr('Unique identifier'),
+                tr('Unique identifier'),
                 parentLayerParameterName=self.SOURCELAYER
             )
         )
         self.addParameter(
             QgsProcessingParameterField(
                 self.UNIQUELABEL,
-                self.tr('Unique label'),
+                tr('Unique label'),
                 parentLayerParameterName=self.SOURCELAYER,
                 type=QgsProcessingParameterField.String
             )
@@ -124,7 +118,7 @@ class ImportSpatialLayerData(BaseProcessingAlgorithm):
         self.addOutput(
             QgsProcessingOutputString(
                 self.OUTPUT_STRING,
-                self.tr('Output message')
+                tr('Output message')
             )
         )
 
@@ -146,7 +140,7 @@ class ImportSpatialLayerData(BaseProcessingAlgorithm):
 
         # Import data to temporary table
         feedback.pushInfo(
-            self.tr('IMPORT SOURCE LAYER INTO TEMPORARY TABLE')
+            tr('IMPORT SOURCE LAYER INTO TEMPORARY TABLE')
         )
         temp_schema = 'public'
         temp_table = 'temp_' + str(time.time()).replace('.', '')
@@ -165,12 +159,12 @@ class ImportSpatialLayerData(BaseProcessingAlgorithm):
             'FORCE_SINGLEPART': False
         }, context=context, feedback=feedback)
         feedback.pushInfo(
-            self.tr('* Source layer has been imported into temporary table')
+            tr('* Source layer has been imported into temporary table')
         )
 
         # Copy data to spatial_object
         feedback.pushInfo(
-            self.tr('COPY IMPORTED DATA TO spatial_object')
+            tr('COPY IMPORTED DATA TO spatial_object')
         )
         sql = '''
             INSERT INTO gobs.spatial_object
@@ -192,24 +186,24 @@ class ImportSpatialLayerData(BaseProcessingAlgorithm):
             )
             if not ok:
                 status = 0
-                msg = self.tr('* The following error has been raised') + '  %s' % error_message
+                msg = tr('* The following error has been raised') + '  %s' % error_message
                 feedback.reportError(
                     msg
                 )
             else:
                 status = 1
-                msg = self.tr('* Source data has been successfully imported !')
+                msg = tr('* Source data has been successfully imported !')
                 feedback.pushInfo(
                     msg
                 )
         except Exception:
             status = 0
-            # msg = self.tr('* An unknown error occured while adding features to spatial_object table')
+            # msg = tr('* An unknown error occured while adding features to spatial_object table')
         finally:
 
             # Remove temporary table
             feedback.pushInfo(
-                self.tr('DROP TEMPORARY DATA')
+                tr('DROP TEMPORARY DATA')
             )
             sql = '''
                 DROP TABLE IF EXISTS "%s"."%s"
@@ -224,14 +218,14 @@ class ImportSpatialLayerData(BaseProcessingAlgorithm):
             )
             if ok:
                 feedback.pushInfo(
-                    self.tr('* Temporary data has been deleted.')
+                    tr('* Temporary data has been deleted.')
                 )
             else:
                 feedback.reportError(
-                    self.tr('* An error occured while droping temporary table') + ' "%s"."%s"' % (temp_schema, temp_table)
+                    tr('* An error occured while droping temporary table') + ' "%s"."%s"' % (temp_schema, temp_table)
                 )
 
-        msg = self.tr('SPATIAL LAYER HAS BEEN SUCCESSFULLY IMPORTED !')
+        msg = tr('SPATIAL LAYER HAS BEEN SUCCESSFULLY IMPORTED !')
 
         return {
             self.OUTPUT_STATUS: status,

@@ -15,8 +15,8 @@ from qgis.core import (
     QgsProcessingOutputVectorLayer,
     QgsExpressionContextUtils,
 )
-from qgis.PyQt.QtCore import QCoreApplication
 
+from gobs.qgis_plugin_tools.tools.i18n import tr
 from gobs.qgis_plugin_tools.tools.algorithm_processing import BaseProcessingAlgorithm
 
 
@@ -36,22 +36,16 @@ class GetDataAsLayer(BaseProcessingAlgorithm):
         return 'get_data_as_layer'
 
     def displayName(self):
-        return self.tr('Get data as layer')
+        return tr('Get data as layer')
 
     def group(self):
-        return self.tr('Tools')
+        return tr('Tools')
 
     def groupId(self):
         return 'gobs_tools'
 
     def shortHelpString(self):
         pass
-
-    def tr(self, string):
-        return QCoreApplication.translate('Processing', string)
-
-    def createInstance(self):
-        return self.__class__()
 
     def initAlgorithm(self, config):
         # INPUTS
@@ -60,7 +54,7 @@ class GetDataAsLayer(BaseProcessingAlgorithm):
         self.addParameter(
             QgsProcessingParameterString(
                 self.OUTPUT_LAYER_NAME,
-                self.tr('Name of the output layer'),
+                tr('Name of the output layer'),
                 optional=True
             )
         )
@@ -70,14 +64,14 @@ class GetDataAsLayer(BaseProcessingAlgorithm):
         self.addOutput(
             QgsProcessingOutputNumber(
                 self.OUTPUT_STATUS,
-                self.tr('Output status')
+                tr('Output status')
             )
         )
         # Add output for message
         self.addOutput(
             QgsProcessingOutputString(
                 self.OUTPUT_STRING,
-                self.tr('Output message')
+                tr('Output message')
             )
         )
 
@@ -85,7 +79,7 @@ class GetDataAsLayer(BaseProcessingAlgorithm):
         self.addOutput(
             QgsProcessingOutputVectorLayer(
                 self.OUTPUT_LAYER,
-                self.tr('Output layer')
+                tr('Output layer')
             )
         )
 
@@ -93,7 +87,7 @@ class GetDataAsLayer(BaseProcessingAlgorithm):
         self.addOutput(
             QgsProcessingOutputString(
                 self.OUTPUT_LAYER_RESULT_NAME,
-                self.tr('Output layer name')
+                tr('Output layer name')
             )
         )
 
@@ -102,13 +96,13 @@ class GetDataAsLayer(BaseProcessingAlgorithm):
         # Check that the connection name has been configured
         connection_name = QgsExpressionContextUtils.globalScope().variable('gobs_connection_name')
         if not connection_name:
-            return False, self.tr('You must use the "Configure G-obs plugin" alg to set the database connection name')
+            return False, tr('You must use the "Configure G-obs plugin" alg to set the database connection name')
 
         # Check that it corresponds to an existing connection
         dbpluginclass = createDbPlugin('postgis')
         connections = [c.connectionName() for c in dbpluginclass.connections()]
         if connection_name not in connections:
-            return False, self.tr('The configured connection name does not exists in QGIS')
+            return False, tr('The configured connection name does not exists in QGIS')
 
         return super(GetDataAsLayer, self).checkParameterValues(parameters, context)
 
@@ -143,7 +137,7 @@ class GetDataAsLayer(BaseProcessingAlgorithm):
             feedback.reportError(
                 'SQL = \n' + self.SQL
             )
-            raise QgsProcessingException(self.tr("""This layer is invalid!
+            raise QgsProcessingException(tr("""This layer is invalid!
                 Please check the PostGIS log for error messages."""))
 
         # Load layer

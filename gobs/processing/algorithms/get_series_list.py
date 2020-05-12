@@ -5,6 +5,7 @@ __revision__ = "$Format:%H$"
 
 from qgis.core import QgsExpressionContextUtils
 
+from gobs.qgis_plugin_tools.tools.i18n import tr
 from .get_data_as_layer import GetDataAsLayer
 
 
@@ -13,27 +14,22 @@ class GetSeriesList(GetDataAsLayer):
     def __init__(self):
         super().__init__()
         self.GEOM_FIELD = None
-        self.LAYER_NAME = self.tr('List of series')
+        self.LAYER_NAME = tr('List of series')
 
     def name(self):
         return 'get_series_list'
 
     def displayName(self):
-        return self.tr('Get the list of series')
+        return tr('Get the list of series')
 
     def group(self):
-        return self.tr('Tools')
+        return tr('Tools')
 
     def groupId(self):
         return 'gobs_tools'
 
     def shortHelpString(self):
-        short_help = self.tr(
-            ' bla'
-            '\n'
-            ' bla'
-        )
-        return short_help
+        pass
 
     def initAlgorithm(self, config):
         # use parent class to get other parameters

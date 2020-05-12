@@ -12,6 +12,7 @@ from qgis.core import (
     QgsProcessingParameterDefinition,
 )
 
+from gobs.qgis_plugin_tools.tools.i18n import tr
 from .get_data_as_layer import GetDataAsLayer
 from .tools import fetchDataFromSqlQuery
 
@@ -27,16 +28,16 @@ class GetSeriesData(GetDataAsLayer):
         return 'get_series_data'
 
     def displayName(self):
-        return self.tr('Get series data')
+        return tr('Get series data')
 
     def group(self):
-        return self.tr('Tools')
+        return tr('Tools')
 
     def groupId(self):
         return 'gobs_tools'
 
     def shortHelpString(self):
-        short_help = self.tr(
+        short_help = tr(
             'This algorithm allows to add a table layer in your QGIS project containing the observation data from the chosen G-Obs series. Data are dynamically fetched from the database, meaning they are always up-to-date.'
             '\n'
             '* Name of the output layer: choose the name of the QGIS table layer to create. If not given, the label of the series will be used, by concatening the label of the indicator, protocol, source actor and spatial layer defining the chosen series.'
@@ -82,7 +83,7 @@ class GetSeriesData(GetDataAsLayer):
         self.addParameter(
             QgsProcessingParameterEnum(
                 self.SERIE,
-                self.tr('Series of observations'),
+                tr('Series of observations'),
                 options=self.SERIES,
                 optional=False
             )
@@ -92,7 +93,7 @@ class GetSeriesData(GetDataAsLayer):
         # mainly used from other processing algs
         p = QgsProcessingParameterNumber(
             self.SERIE_ID,
-            self.tr('Series ID. If given, it overrides previous choice'),
+            tr('Series ID. If given, it overrides previous choice'),
             optional=True,
             defaultValue=-1
         )
@@ -106,7 +107,7 @@ class GetSeriesData(GetDataAsLayer):
         # Check series id is in the list of existing series
         if serie_id and serie_id > 0:
             if serie_id not in self.SERIES_DICT.values():
-                return False, self.tr('Series ID does not exists in the database')
+                return False, tr('Series ID does not exists in the database')
 
         return super(GetSeriesData, self).checkParameterValues(parameters, context)
 
@@ -129,7 +130,7 @@ class GetSeriesData(GetDataAsLayer):
 
         # Get data from chosen series
         feedback.pushInfo(
-            self.tr('GET DATA FROM CHOSEN SERIES')
+            tr('GET DATA FROM CHOSEN SERIES')
         )
         sql = '''
             SELECT
@@ -152,7 +153,7 @@ class GetSeriesData(GetDataAsLayer):
         )
         if ok:
             id_label = data[0][0]
-            message = self.tr('* Data has been fetched for chosen series and related indicator')
+            message = tr('* Data has been fetched for chosen series and related indicator')
             message += ' %s !' % id_label
             feedback.pushInfo(
                 message
