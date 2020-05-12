@@ -7,7 +7,6 @@ from db_manager.db_plugins import createDbPlugin
 from processing.tools import postgis
 from qgis.core import (
     QgsVectorLayer,
-    QgsProcessingAlgorithm,
     QgsProcessingContext,
     QgsProcessingException,
     QgsProcessingParameterString,
@@ -18,8 +17,10 @@ from qgis.core import (
 )
 from qgis.PyQt.QtCore import QCoreApplication
 
+from gobs.qgis_plugin_tools.tools.algorithm_processing import BaseProcessingAlgorithm
 
-class GetDataAsLayer(QgsProcessingAlgorithm):
+
+class GetDataAsLayer(BaseProcessingAlgorithm):
 
     OUTPUT_STATUS = 'OUTPUT_STATUS'
     OUTPUT_STRING = 'OUTPUT_STRING'
@@ -44,12 +45,7 @@ class GetDataAsLayer(QgsProcessingAlgorithm):
         return 'gobs_tools'
 
     def shortHelpString(self):
-        short_help = self.tr(
-            ' bla'
-            '\n'
-            ' bla'
-        )
-        return short_help
+        pass
 
     def tr(self, string):
         return QCoreApplication.translate('Processing', string)

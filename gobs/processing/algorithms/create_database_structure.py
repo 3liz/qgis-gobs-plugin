@@ -8,7 +8,6 @@ import os
 
 from db_manager.db_plugins import createDbPlugin
 from qgis.core import (
-    QgsProcessingAlgorithm,
     QgsProcessingParameterBoolean,
     QgsProcessingOutputNumber,
     QgsProcessingOutputString,
@@ -16,11 +15,11 @@ from qgis.core import (
 )
 from qgis.PyQt.QtCore import QCoreApplication
 
-
+from gobs.qgis_plugin_tools.tools.algorithm_processing import BaseProcessingAlgorithm
 from .tools import fetchDataFromSqlQuery
 
 
-class CreateDatabaseStructure(QgsProcessingAlgorithm):
+class CreateDatabaseStructure(BaseProcessingAlgorithm):
     """
     Create gobs structure in Database
     """
@@ -56,9 +55,6 @@ class CreateDatabaseStructure(QgsProcessingAlgorithm):
 
     def tr(self, string):
         return QCoreApplication.translate('Processing', string)
-
-    def createInstance(self):
-        return self.__class__()
 
     def initAlgorithm(self, config):
         # INPUTS

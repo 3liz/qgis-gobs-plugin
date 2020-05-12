@@ -7,7 +7,7 @@ author=3liz
 email=info@3liz.com
 tags=time,observation,stats
 about=This plugin provides tools to store and manage spatial and time data in a standardized way
-# icon=icon.png
+icon=resources/icons/icon.png
 category=Analysis
 
 tracker=http://github.com/3liz

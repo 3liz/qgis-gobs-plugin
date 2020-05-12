@@ -7,6 +7,7 @@ from qgis.core import (
     QgsExpressionContextUtils,
     QgsProcessingProvider,
 )
+from qgis.PyQt.QtGui import QIcon
 
 from .algorithms.configure_plugin import ConfigurePlugin
 from .algorithms.create_database_structure import CreateDatabaseStructure
@@ -18,6 +19,7 @@ from .algorithms.get_series_list import GetSeriesList
 from .algorithms.get_spatial_layer_vector_data import GetSpatialLayerVectorData
 from .algorithms.import_spatial_layer_data import ImportSpatialLayerData
 from .algorithms.upgrade_database_structure import UpgradeDatabaseStructure
+from gobs.qgis_plugin_tools.tools.resources import resources_path
 
 
 class GobsProvider(QgsProcessingProvider):
@@ -53,3 +55,6 @@ class GobsProvider(QgsProcessingProvider):
 
     def longName(self):
         return self.tr('G-Obs')
+
+    def icon(self):
+        return QIcon(resources_path('icons', 'icon.png'))

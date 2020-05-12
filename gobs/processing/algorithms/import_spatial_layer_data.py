@@ -8,7 +8,6 @@ import time
 import processing
 from db_manager.db_plugins import createDbPlugin
 from qgis.core import (
-    QgsProcessingAlgorithm,
     QgsProcessingParameterVectorLayer,
     QgsProcessingParameterField,
     QgsProcessingParameterEnum,
@@ -17,10 +16,11 @@ from qgis.core import (
 )
 from qgis.PyQt.QtCore import QCoreApplication
 
+from gobs.qgis_plugin_tools.tools.algorithm_processing import BaseProcessingAlgorithm
 from .tools import fetchDataFromSqlQuery
 
 
-class ImportSpatialLayerData(QgsProcessingAlgorithm):
+class ImportSpatialLayerData(BaseProcessingAlgorithm):
 
     SPATIALLAYER = 'SPATIALLAYER'
     SOURCELAYER = 'SOURCELAYER'

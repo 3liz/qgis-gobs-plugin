@@ -4,7 +4,6 @@ __email__ = "info@3liz.org"
 __revision__ = "$Format:%H$"
 
 from qgis.core import (
-    QgsProcessingAlgorithm,
     QgsProcessingParameterString,
     QgsProcessingOutputString,
     QgsProcessingOutputNumber,
@@ -12,8 +11,10 @@ from qgis.core import (
 )
 from qgis.PyQt.QtCore import QCoreApplication
 
+from gobs.qgis_plugin_tools.tools.algorithm_processing import BaseProcessingAlgorithm
 
-class ConfigurePlugin(QgsProcessingAlgorithm):
+
+class ConfigurePlugin(BaseProcessingAlgorithm):
 
     CONNECTION_NAME = 'CONNECTION_NAME'
 
@@ -42,9 +43,6 @@ class ConfigurePlugin(QgsProcessingAlgorithm):
 
     def tr(self, string):
         return QCoreApplication.translate('Processing', string)
-
-    def createInstance(self):
-        return self.__class__()
 
     def initAlgorithm(self, config):
         # INPUTS

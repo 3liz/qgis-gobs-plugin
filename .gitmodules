@@ -1,0 +1,3 @@
+[submodule "gobs/qgis_plugin_tools"]
+	path = gobs/qgis_plugin_tools
+	url = https://github.com/3liz/qgis_plugin_tools.git

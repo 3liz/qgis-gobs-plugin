@@ -4,17 +4,17 @@ __email__ = "info@3liz.org"
 __revision__ = "$Format:%H$"
 
 from qgis.core import (
-    QgsProcessingAlgorithm,
     QgsProcessingParameterString,
     QgsProcessingOutputString,
     QgsProcessingOutputNumber,
 )
 from qgis.PyQt.QtCore import QCoreApplication
 
+from gobs.qgis_plugin_tools.tools.algorithm_processing import BaseProcessingAlgorithm
 from .tools import fetchDataFromSqlQuery
 
 
-class ExecuteSqlOnService(QgsProcessingAlgorithm):
+class ExecuteSqlOnService(BaseProcessingAlgorithm):
     """
     Execute SQL into a PostgreSQL database given a service name
     """
@@ -39,8 +39,8 @@ class ExecuteSqlOnService(QgsProcessingAlgorithm):
     def tr(self, string):
         return QCoreApplication.translate('Processing', string)
 
-    def createInstance(self):
-        return self.__class__()
+    def shortHelpString(self):
+        return self.tr('Execute a query on the service database')
 
     def initAlgorithm(self, config):
         # INPUTS

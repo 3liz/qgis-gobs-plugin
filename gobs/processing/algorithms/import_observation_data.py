@@ -8,7 +8,6 @@ import time
 import processing
 from qgis.core import (
     QgsProcessing,
-    QgsProcessingAlgorithm,
     QgsProcessingParameterString,
     QgsProcessingParameterVectorLayer,
     QgsProcessingParameterField,
@@ -17,13 +16,15 @@ from qgis.core import (
 )
 from qgis.PyQt.QtCore import QCoreApplication
 
+from gobs.qgis_plugin_tools.tools.algorithm_processing import BaseProcessingAlgorithm
+
 from .tools import (
     fetchDataFromSqlQuery,
     validateTimestamp,
 )
 
 
-class ImportObservationData(QgsProcessingAlgorithm):
+class ImportObservationData(BaseProcessingAlgorithm):
 
     SOURCELAYER = 'SOURCELAYER'
     MANUALDATE = 'MANUALDATE'
@@ -71,9 +72,6 @@ class ImportObservationData(QgsProcessingAlgorithm):
 
     def tr(self, string):
         return QCoreApplication.translate('Processing', string)
-
-    def createInstance(self):
-        return self.__class__()
 
     def getSerieId(self):
         """

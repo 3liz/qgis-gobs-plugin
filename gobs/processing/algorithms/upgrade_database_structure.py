@@ -8,7 +8,6 @@ import os
 
 from db_manager.db_plugins import createDbPlugin
 from qgis.core import (
-    QgsProcessingAlgorithm,
     QgsProcessingParameterBoolean,
     QgsProcessingOutputNumber,
     QgsProcessingOutputString,
@@ -16,13 +15,14 @@ from qgis.core import (
 )
 from qgis.PyQt.QtCore import QCoreApplication
 
+from gobs.qgis_plugin_tools.tools.algorithm_processing import BaseProcessingAlgorithm
 from .tools import (
     fetchDataFromSqlQuery,
     getVersionInteger,
 )
 
 
-class UpgradeDatabaseStructure(QgsProcessingAlgorithm):
+class UpgradeDatabaseStructure(BaseProcessingAlgorithm):
 
     RUNIT = 'RUNIT'
     OUTPUT_STATUS = 'OUTPUT_STATUS'
