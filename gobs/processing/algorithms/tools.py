@@ -3,6 +3,8 @@ __license__ = "GPL version 3"
 __email__ = "info@3liz.org"
 __revision__ = "$Format:%H$"
 
+from gobs.qgis_plugin_tools.tools.i18n import tr
+
 
 def fetchDataFromSqlQuery(connection_name, sql):
 
