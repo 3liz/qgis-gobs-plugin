@@ -3,14 +3,12 @@ __license__ = "GPL version 3"
 __email__ = "info@3liz.org"
 __revision__ = "$Format:%H$"
 
-import os
 from functools import partial
 
 from qgis.PyQt import (
     QtWidgets,
-    uic,
 )
-from qgis.PyQt.QtCore import pyqtSignal, QCoreApplication
+from qgis.PyQt.QtCore import pyqtSignal
 from qgis.PyQt.QtWidgets import (
     QPushButton,
     QComboBox,
@@ -30,8 +28,10 @@ from .processing.algorithms.import_observation_data import ImportObservationData
 from .processing.algorithms.tools import fetchDataFromSqlQuery
 from db_manager.db_plugins import createDbPlugin
 
-FORM_CLASS, _ = uic.loadUiType(os.path.join(
-    os.path.dirname(__file__), 'gobs_dockwidget_base.ui'))
+from gobs.qgis_plugin_tools.tools.i18n import tr
+from gobs.qgis_plugin_tools.tools.resources import load_ui, plugin_path
+
+FORM_CLASS = load_ui('gobs_dockwidget_base.ui')
 
 
 class GobsDockWidget(QtWidgets.QDockWidget, FORM_CLASS):
@@ -43,15 +43,7 @@ class GobsDockWidget(QtWidgets.QDockWidget, FORM_CLASS):
         super(GobsDockWidget, self).__init__(parent)
 
         self.iface = iface
-
-        # Set up the user interface from Designer.
-        # After setupUI you can access any designer object by doing
-        # self.<objectname>, and you can use autoconnect slots - see
-        # http://doc.qt.io/qt-5/designer-using-a-ui-file.html
-        # #widgets-and-dialogs-with-auto-connect
         self.setupUi(self)
-
-        # BUTTONS
 
         # Buttons directly linked to an algorithm
         self.algorithms = [
@@ -64,7 +56,7 @@ class GobsDockWidget(QtWidgets.QDockWidget, FORM_CLASS):
             'get_spatial_layer_vector_data',
             'get_series_data',
             'get_series_list',
-            'get_aggregated_data'
+            'get_aggregated_data',
         ]
         for alg in self.algorithms:
             button = self.findChild(QPushButton, 'button_{0}'.format(alg))
@@ -89,15 +81,12 @@ class GobsDockWidget(QtWidgets.QDockWidget, FORM_CLASS):
         if button:
             button.clicked.connect(self.helpDatabase)
 
-    def tr(self, string):
-        return QCoreApplication.translate('Processing', string)
-
     def runAlgorithm(self, name):
 
         if name not in self.algorithms:
             self.iface.messageBar().pushMessage(
-                self.tr("Error"),
-                self.tr("This algorithm cannot be found") + ' {}'.format(name),
+                tr("Error"),
+                tr("This algorithm cannot be found") + ' {}'.format(name),
                 level=Qgis.Critical
             )
             return
@@ -148,13 +137,13 @@ class GobsDockWidget(QtWidgets.QDockWidget, FORM_CLASS):
 
         # Create dialog to let the user choose the serie
         dialog = QDialog()
-        dialog.setWindowTitle(self.tr('Import observation data'))
+        dialog.setWindowTitle(tr('Import observation data'))
         layout = QVBoxLayout()
         dialog.setLayout(layout)
 
         # Combobox
         combo_box = QComboBox()
-        combo_box.setObjectName((self.tr('Choose series')))
+        combo_box.setObjectName((tr('Choose series')))
         for i, d in enumerate(series):
             combo_box.addItem(d[1])
             combo_box.setItemData(i, d[0])
@@ -220,19 +209,15 @@ class GobsDockWidget(QtWidgets.QDockWidget, FORM_CLASS):
         """
         Display the help on concepts
         """
-        help_file = os.path.join(
-            os.path.dirname(__file__),
-            'doc/concepts.md'
-        )
+        help_file = plugin_path('doc', 'concepts.md')
         self.openFile(help_file)
 
     def helpDatabase(self):
         """
         Display the help on database structure
         """
-        help_file = os.path.join(
-            os.path.dirname(__file__),
-            'doc/database/schemaspy/html/gobs/',
-            'diagrams/summary/relationships.real.large.png'
+        help_file = plugin_path(
+            'doc', 'database', 'schemaspy', 'html', 'gobs',
+            'diagrams', 'summary', 'relationships.real.large.png'
         )
         self.openFile(help_file)
