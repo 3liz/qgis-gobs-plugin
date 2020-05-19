@@ -13,12 +13,12 @@ from qgis.core import (
     QgsProcessingParameterEnum,
     QgsProcessingOutputString,
     QgsExpressionContextUtils,
+    QgsWkbTypes
 )
 
 from gobs.qgis_plugin_tools.tools.i18n import tr
 from gobs.qgis_plugin_tools.tools.algorithm_processing import BaseProcessingAlgorithm
 from .tools import fetchDataFromSqlQuery
-
 
 class ImportSpatialLayerData(BaseProcessingAlgorithm):
 
@@ -73,7 +73,7 @@ class ImportSpatialLayerData(BaseProcessingAlgorithm):
             FROM gobs.spatial_layer
             ORDER BY sl_label
         '''
-        dbpluginclass = createDbPlugin('postgis')
+        dbpluginclass = createDbPlugin( 'postgis' )
         connections = [c.connectionName() for c in dbpluginclass.connections()]
         data = []
         if get_data == 'yes' and connection_name in connections:
@@ -128,7 +128,7 @@ class ImportSpatialLayerData(BaseProcessingAlgorithm):
         connection_name = QgsExpressionContextUtils.globalScope().variable('gobs_connection_name')
 
         spatiallayer = self.SPATIALLAYERS[parameters[self.SPATIALLAYER]]
-        # sourcelayer = self.parameterAsVectorLayer(parameters, self.SOURCELAYER, context)
+        sourcelayer = self.parameterAsVectorLayer(parameters, self.SOURCELAYER, context)
         uniqueid = self.parameterAsString(parameters, self.UNIQUEID, context)
         uniquelabel = self.parameterAsString(parameters, self.UNIQUELABEL, context)
 
@@ -137,6 +137,63 @@ class ImportSpatialLayerData(BaseProcessingAlgorithm):
 
         # Get chosen spatial layer id
         id_spatial_layer = spatiallayer.split('-')[-1].strip()
+        feedback.pushInfo(
+            tr('CHECK COMPATIBILITY BETWEEN SOURCE AND TARGET GEOMETRY TYPES')
+        )
+        # Get spatial layer geometry type
+        sql = '''
+        SELECT sl_geometry_type
+        FROM gobs.spatial_layer
+        WHERE id = {0}
+        LIMIT 1
+        '''.format(
+            id_spatial_layer
+        )
+        target_type = None
+        geometry_type = None
+        [header, data, rowCount, ok, error_message] = fetchDataFromSqlQuery(
+            connection_name,
+            sql
+        )
+        if not ok:
+            status = 0
+            msg = tr('* The following error has been raised') + '  %s' % error_message
+            feedback.reportError(
+                msg
+            )
+            raise QgsProcessingException(msg)
+        else:
+            for line in data:
+                target_type = line[0].lower()
+
+        # Check multi type
+        target_is_multi = target_type.startswith('multi')
+
+        # Get vector layer geometry type
+        # And compare it with the spatial_layer type
+        source_type = QgsWkbTypes.geometryDisplayString(int(sourcelayer.geometryType())).lower()
+        source_wtype = QgsWkbTypes.displayString(int(sourcelayer.wkbType())).lower()
+        ok = True
+        if not target_type.endswith(source_type):
+            ok = False
+            msg = tr('Source vector layer and target spatial layer do not have compatible geometry types')
+            msg+= ' - SOURCE: {}, TARGET: {}'.format(
+                source_type, target_type
+            )
+            feedback.pushInfo(msg)
+            raise QgsProcessingException(msg)
+
+        source_is_multi = source_wtype.startswith('multi')
+
+        # Cannot import multi type into single type target spatial layer
+        if source_is_multi and not target_is_multi:
+            ok = False
+            msg = tr('Cannot import a vector layer with multi geometries into a target spatial layer with a simple geometry type defined')
+            msg+= ' - SOURCE: {}, TARGET: {}'.format(
+                source_wtype, target_type
+            )
+            feedback.pushInfo(msg)
+            raise QgsProcessingException(msg)
 
         # Import data to temporary table
         feedback.pushInfo(
@@ -161,6 +218,12 @@ class ImportSpatialLayerData(BaseProcessingAlgorithm):
         feedback.pushInfo(
             tr('* Source layer has been imported into temporary table')
         )
+        # Add ST_Multi if needed
+        st_multi_a = ''
+        st_multi_b = ''
+        if target_is_multi:
+            st_multi_a = 'ST_Multi('
+            st_multi_b = ')'
 
         # Copy data to spatial_object
         feedback.pushInfo(
@@ -175,6 +238,8 @@ class ImportSpatialLayerData(BaseProcessingAlgorithm):
         ''' % (
             uniqueid,
             uniquelabel,
+            st_multi_a,
+            st_multi_b,
             id_spatial_layer,
             temp_schema,
             temp_table
@@ -198,7 +263,7 @@ class ImportSpatialLayerData(BaseProcessingAlgorithm):
                 )
         except Exception:
             status = 0
-            # msg = tr('* An unknown error occured while adding features to spatial_object table')
+            msg = self.tr('* An unknown error occured while adding features to spatial_object table')
         finally:
 
             # Remove temporary table
@@ -224,6 +289,7 @@ class ImportSpatialLayerData(BaseProcessingAlgorithm):
                 feedback.reportError(
                     tr('* An error occured while droping temporary table') + ' "%s"."%s"' % (temp_schema, temp_table)
                 )
+
 
         msg = tr('SPATIAL LAYER HAS BEEN SUCCESSFULLY IMPORTED !')
 
