@@ -25,7 +25,6 @@ from .tools import (
 
 
 class ImportObservationData(BaseProcessingAlgorithm):
-
     SOURCELAYER = 'SOURCELAYER'
     MANUALDATE = 'MANUALDATE'
     FIELD_TIMESTAMP = 'FIELD_TIMESTAMP'
@@ -129,6 +128,7 @@ class ImportObservationData(BaseProcessingAlgorithm):
                     )
                 )
 
+
         # OUTPUTS
         # Add output for message
         self.addOutput(
@@ -137,6 +137,7 @@ class ImportObservationData(BaseProcessingAlgorithm):
                 tr('Output message')
             )
         )
+
 
     def checkParameterValues(self, parameters, context):
 
@@ -158,6 +159,7 @@ class ImportObservationData(BaseProcessingAlgorithm):
         if not ok:
             return False, msg
         return super(ImportObservationData, self).checkParameterValues(parameters, context)
+
 
     def getAdditionnalParameters(self):
         """
@@ -209,10 +211,7 @@ class ImportObservationData(BaseProcessingAlgorithm):
         '''.format(
             given_serie
         )
-        # id_value_code = None
-        # id_value_name = None
-        # id_value_type = None
-        # id_value_unit = None
+
         try:
             [header, data, rowCount, ok, error_message] = fetchDataFromSqlQuery(
                 connection_name,
@@ -221,36 +220,35 @@ class ImportObservationData(BaseProcessingAlgorithm):
             if not ok:
                 return None
             else:
-                # status = 1
                 id_value_code = data[0][0]
                 id_value_name = data[0][1]
                 id_value_type = data[0][2]
                 id_value_unit = data[0][3]
         except Exception:
-            # status = 0
             return None
 
         return id_value_code, id_value_name, id_value_type, id_value_unit
+
 
     def processAlgorithm(self, parameters, context, feedback):
         # parameters
         # Database connection parameters
         connection_name = QgsExpressionContextUtils.globalScope().variable('gobs_connection_name')
 
-        # sourcelayer = self.parameterAsVectorLayer(parameters, self.SOURCELAYER, context)
         field_timestamp = self.parameterAsString(parameters, self.FIELD_TIMESTAMP, context)
         manualdate = self.parameterAsString(parameters, self.MANUALDATE, context)
         field_spatial_object = self.parameterAsString(parameters, self.FIELD_SPATIAL_OBJECT, context)
-        fields = {}
+        new_params_values = []
 
         # Parse new parameters
+        # Add add values in the correct order
         new_params = self.getAdditionnalParameters()
         if new_params:
             for param in new_params:
-                fields[param['name']] = self.parameterAsString(parameters, param['name'], context)
+                new_params_values.append(self.parameterAsString(parameters, param['name'], context))
 
-        # msg = ''
-        # status = 1
+        msg = ''
+        status = 1
 
         # Get series id from first combo box
         id_serie = self.getSerieId()
@@ -275,7 +273,6 @@ class ImportObservationData(BaseProcessingAlgorithm):
             'DROP_STRING_LENGTH': True,
             'FORCE_SINGLEPART': False
         }, context=context, feedback=feedback)
-
         feedback.pushInfo(
             tr('* Source layer has been imported into temporary table')
         )
@@ -305,21 +302,18 @@ class ImportObservationData(BaseProcessingAlgorithm):
                 sql
             )
             if not ok:
-                # status = 0
-                msg = tr('* The following error has been raised') + '  %s' % error_message
+                msg = self.tr('* The following error has been raised') + '  %s' % error_message
                 feedback.reportError(
                     msg
                 )
             else:
-                # status = 1
                 id_import = data[0][0]
                 msg = tr('* New import data has been created with ID')
-                msg += ' = %s !' % id_import
+                msg+= ' = %s !' % id_import
                 feedback.pushInfo(
                     msg
                 )
         except Exception:
-            # status = 0
             msg = tr('* An unknown error occured while adding import log item')
             feedback.reportError(
                 msg
@@ -330,7 +324,7 @@ class ImportObservationData(BaseProcessingAlgorithm):
             tr('GET DATA OF RELATED indicator')
         )
         sql = '''
-            SELECT id_date_format
+            SELECT id_date_format, array_to_string(id_value_type, ',')
             FROM gobs.indicator AS i
             WHERE id = (
                 SELECT s.fk_id_indicator
@@ -343,6 +337,7 @@ class ImportObservationData(BaseProcessingAlgorithm):
             id_serie
         )
         id_date_format = None
+        id_value_types = None
         try:
             [header, data, rowCount, ok, error_message] = fetchDataFromSqlQuery(
                 connection_name,
@@ -357,14 +352,16 @@ class ImportObservationData(BaseProcessingAlgorithm):
             else:
                 status = 1
                 id_date_format = data[0][0]
-                msg = tr('* Indicator date format is')
-                msg += " '%s'" % id_date_format
+                id_value_types = data[0][1].split(',')
+                msg = self.tr('* Indicator date format is')
+                msg+= " '%s'" % id_date_format
                 feedback.pushInfo(
                     msg
                 )
         except Exception:
             status = 0
             msg = tr('* An unknown error occured while getting indicator date format')
+
 
         # COPY DATA TO OBSERVATION TABLE
         if status:
@@ -375,11 +372,25 @@ class ImportObservationData(BaseProcessingAlgorithm):
 
             # Calculate value for jsonb array destination
             jsonb_array = 'json_build_array('
-            a = []
-            for name, value in fields.items():
-                a.append('s."%s"' % value)
-            jsonb_array += ', '.join(a)
-            jsonb_array += ')'
+            jsonb_array_list = []
+            for i,fieldname in enumerate(new_params_values):
+                id_value_type = id_value_types[i]
+                convertor_a = ''
+                convertor_b = ''
+                if id_value_type in ('integer', 'real'):
+                    # remove useless spaces if data is supposed to be integer or real
+                    convertor_a = "regexp_replace("
+                    convertor_b = ", '[^0-9,\.]', '', 'g')"
+                vector_value =  '{a}trim(s."{fieldname}"::text){b}::{value_type}'.format(
+                    a=convertor_a,
+                    fieldname=fieldname,
+                    b=convertor_b,
+                    value_type=id_value_type
+                )
+
+                jsonb_array_list.append(vector_value)
+            jsonb_array+= ', '.join(jsonb_array_list)
+            jsonb_array+= ')'
 
             # Use the correct expression for casting date and/or time
             caster = 'timestamp'
@@ -483,8 +494,7 @@ class ImportObservationData(BaseProcessingAlgorithm):
                     tr('DROP TEMPORARY DATA')
                 )
                 sql = '''
-                    --DROP TABLE IF EXISTS "%s"."%s"
-                    SELECT 1;
+                    DROP TABLE IF EXISTS "%s"."%s"
                 ;
                 ''' % (
                     temp_schema,
