@@ -44,3 +44,4 @@ nosetests.xml
 *.DS_Store
 
 *.zip
+*.bak
