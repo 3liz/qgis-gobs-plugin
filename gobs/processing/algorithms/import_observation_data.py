@@ -128,7 +128,6 @@ class ImportObservationData(BaseProcessingAlgorithm):
                     )
                 )
 
-
         # OUTPUTS
         # Add output for message
         self.addOutput(
@@ -137,7 +136,6 @@ class ImportObservationData(BaseProcessingAlgorithm):
                 tr('Output message')
             )
         )
-
 
     def checkParameterValues(self, parameters, context):
 
@@ -160,10 +158,9 @@ class ImportObservationData(BaseProcessingAlgorithm):
             return False, msg
         return super(ImportObservationData, self).checkParameterValues(parameters, context)
 
-
     def getAdditionnalParameters(self):
         """
-        Returns a dictionnary of parameters to add dynamically
+        Returns a dictionary of parameters to add dynamically
         Source is the dimensions of the indicator vector field.
         """
         new_params = []
@@ -228,7 +225,6 @@ class ImportObservationData(BaseProcessingAlgorithm):
             return None
 
         return id_value_code, id_value_name, id_value_type, id_value_unit
-
 
     def processAlgorithm(self, parameters, context, feedback):
         # parameters
@@ -362,7 +358,6 @@ class ImportObservationData(BaseProcessingAlgorithm):
             status = 0
             msg = tr('* An unknown error occured while getting indicator date format')
 
-
         # COPY DATA TO OBSERVATION TABLE
         if status:
 
@@ -373,15 +368,15 @@ class ImportObservationData(BaseProcessingAlgorithm):
             # Calculate value for jsonb array destination
             jsonb_array = 'json_build_array('
             jsonb_array_list = []
-            for i,fieldname in enumerate(new_params_values):
+            for i, fieldname in enumerate(new_params_values):
                 id_value_type = id_value_types[i]
                 convertor_a = ''
                 convertor_b = ''
                 if id_value_type in ('integer', 'real'):
                     # remove useless spaces if data is supposed to be integer or real
                     convertor_a = "regexp_replace("
-                    convertor_b = ", '[^0-9,\.]', '', 'g')"
-                vector_value =  '{a}trim(s."{fieldname}"::text){b}::{value_type}'.format(
+                    convertor_b = ", '[^0-9,\.]', '', 'g')"  # NOQA
+                vector_value = '{a}trim(s."{fieldname}"::text){b}::{value_type}'.format(
                     a=convertor_a,
                     fieldname=fieldname,
                     b=convertor_b,

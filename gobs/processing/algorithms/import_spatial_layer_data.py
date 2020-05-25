@@ -13,12 +13,14 @@ from qgis.core import (
     QgsProcessingParameterEnum,
     QgsProcessingOutputString,
     QgsExpressionContextUtils,
+    QgsProcessingException,
     QgsWkbTypes
 )
 
 from gobs.qgis_plugin_tools.tools.i18n import tr
 from gobs.qgis_plugin_tools.tools.algorithm_processing import BaseProcessingAlgorithm
 from .tools import fetchDataFromSqlQuery
+
 
 class ImportSpatialLayerData(BaseProcessingAlgorithm):
 
@@ -73,7 +75,7 @@ class ImportSpatialLayerData(BaseProcessingAlgorithm):
             FROM gobs.spatial_layer
             ORDER BY sl_label
         '''
-        dbpluginclass = createDbPlugin( 'postgis' )
+        dbpluginclass = createDbPlugin('postgis')
         connections = [c.connectionName() for c in dbpluginclass.connections()]
         data = []
         if get_data == 'yes' and connection_name in connections:
@@ -150,7 +152,6 @@ class ImportSpatialLayerData(BaseProcessingAlgorithm):
             id_spatial_layer
         )
         target_type = None
-        geometry_type = None
         [header, data, rowCount, ok, error_message] = fetchDataFromSqlQuery(
             connection_name,
             sql
@@ -289,7 +290,6 @@ class ImportSpatialLayerData(BaseProcessingAlgorithm):
                 feedback.reportError(
                     tr('* An error occured while droping temporary table') + ' "%s"."%s"' % (temp_schema, temp_table)
                 )
-
 
         msg = tr('SPATIAL LAYER HAS BEEN SUCCESSFULLY IMPORTED !')
 
