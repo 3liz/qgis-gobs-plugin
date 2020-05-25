@@ -18,12 +18,15 @@ else:
 
 from ..processing.provider import GobsProvider as ProcessingProvider
 from ..qgis_plugin_tools.tools.logger_processing import LoggerProcessingFeedBack
-from ..qgis_plugin_tools.tools.version import version
+from ..qgis_plugin_tools.tools.database import available_migrations
 
 __copyright__ = "Copyright 2020, 3Liz"
 __license__ = "GPL version 3"
 __email__ = "info@3liz.org"
 __revision__ = "$Format:%H$"
+
+SCHEMA = "gobs"
+VERSION = "0.2.2"
 
 
 class TestProcessing(unittest.TestCase):
@@ -40,27 +43,27 @@ class TestProcessing(unittest.TestCase):
 
     def test_load_structure_with_migration(self):
         """Test we can load the PostGIS structure with migrations."""
-        VERSION = "0.2.2"
         provider = ProcessingProvider()
         QgsApplication.processingRegistry().addProvider(provider)
 
         feedback = LoggerProcessingFeedBack()
         params = {
-            'OVERRIDE': True,
-            'ADDTESTDATA': True,
+            "OVERRIDE": True,
+            "ADD_TEST_DATA": True,
         }
 
-        os.environ["DATABASE_RUN_MIGRATION"] = VERSION
+        os.environ["TEST_DATABASE_INSTALL_{}".format(SCHEMA.capitalize())] = VERSION
+        alg = "{}:create_database_structure".format(provider.id())
         try:
-            processing_output = processing.run(
-                "gobs:create_database_structure", params, feedback=feedback
-            )
+            processing_output = processing.run(alg, params, feedback=feedback)
         except QgsProcessingException as e:
             self.assertTrue(False, e)
-        del os.environ["DATABASE_RUN_MIGRATION"]
+        del os.environ["TEST_DATABASE_INSTALL_{}".format(SCHEMA.capitalize())]
 
         self.cursor.execute(
-            "SELECT table_name FROM information_schema.tables WHERE table_schema = 'gobs'"
+            "SELECT table_name FROM information_schema.tables WHERE table_schema = '{}'".format(
+                SCHEMA
+            )
         )
         records = self.cursor.fetchall()
         result = [r[0] for r in records]
@@ -82,41 +85,56 @@ class TestProcessing(unittest.TestCase):
             'spatial_layer',
             'spatial_object',
         ]
-
-        self.assertCountEqual(expected, result, result)
-        expected = "Gobs database structure has been successfully created to version \"{}\".".format(VERSION)
+        self.assertCountEqual(expected, result)
+        expected = "*** THE STRUCTURE gobs HAS BEEN CREATED WITH VERSION '{}'***".format(VERSION)
         self.assertEqual(expected, processing_output["OUTPUT_STRING"])
 
-        sql = '''
+        sql = """
             SELECT me_version
-            FROM gobs.metadata
+            FROM {}.metadata
+            WHERE me_status = 1
             ORDER BY me_version_date DESC
             LIMIT 1;
-        '''
+        """.format(
+            SCHEMA
+        )
         self.cursor.execute(sql)
         record = self.cursor.fetchone()
         self.assertEqual(VERSION, record[0])
 
         feedback.pushDebugInfo("Update the database")
-        params = {
-            "CONNECTION_NAME_CENTRAL": "test",
-            "RUNIT": True,
-        }
-        results = processing.run(
-            "gobs:upgrade_database_structure", params, feedback=feedback
-        )
+        params = {"CONNECTION_NAME": "test", "RUN_MIGRATIONS": True}
+        alg = "{}:upgrade_database_structure".format(provider.id())
+        results = processing.run(alg, params, feedback=feedback)
         self.assertEqual(1, results["OUTPUT_STATUS"], 1)
         self.assertEqual(
-            "Gobs database structure has been successfully upgraded to version \"{}\".".format(version()),
+            "*** THE DATABASE STRUCTURE HAS BEEN UPDATED ***",
             results["OUTPUT_STRING"],
         )
 
+        sql = """
+            SELECT me_version
+            FROM {}.metadata
+            WHERE me_status = 1
+            ORDER BY me_version_date DESC
+            LIMIT 1;
+        """.format(
+            SCHEMA
+        )
         self.cursor.execute(sql)
         record = self.cursor.fetchone()
-        self.assertEqual(version(), record[0])
+
+        migrations = available_migrations(000000)
+        last_migration = migrations[-1]
+        metadata_version = (
+            last_migration.replace("upgrade_to_", "").replace(".sql", "").strip()
+        )
+        self.assertEqual(metadata_version, record[0])
 
         self.cursor.execute(
-            "SELECT table_name FROM information_schema.tables WHERE table_schema = 'gobs'"
+            "SELECT table_name FROM information_schema.tables WHERE table_schema = '{}'".format(
+                SCHEMA
+            )
         )
         records = self.cursor.fetchall()
         result = [r[0] for r in records]
@@ -153,13 +171,17 @@ class TestProcessing(unittest.TestCase):
         feedback.pushInfo("PostGIS version : {}".format(record[0]))
 
         params = {
-            'OVERRIDE': True,
-            'ADDTESTDATA': True,
+            "OVERRIDE": True,  # Must be true, for the time in the test.
+            "ADD_TEST_DATA": True,
         }
-        processing.run("gobs:create_database_structure", params, feedback=feedback)
+
+        alg = "{}:create_database_structure".format(provider.id())
+        processing.run(alg, params, feedback=feedback)
 
         self.cursor.execute(
-            "SELECT table_name FROM information_schema.tables WHERE table_schema = 'gobs'"
+            "SELECT table_name FROM information_schema.tables WHERE table_schema = '{}'".format(
+                SCHEMA
+            )
         )
         records = self.cursor.fetchall()
         result = [r[0] for r in records]
@@ -183,24 +205,25 @@ class TestProcessing(unittest.TestCase):
 
         feedback.pushDebugInfo("Relaunch the algorithm without override")
         params = {
-            'OVERRIDE': False,
-            'ADDTESTDATA': True,
+            "OVERRIDE": False,
         }
 
         with self.assertRaises(QgsProcessingException):
-            processing.run("gobs:create_database_structure", params, feedback=feedback)
+            processing.run(alg, params, feedback=feedback)
 
-        self.assertTrue(feedback.last.startswith('Unable to execute algorithm'), feedback.last)
+        expected = (
+            "Unable to execute algorithm\nSchema {} already exists in database ! "
+            "If you REALLY want to drop and recreate it (and loose all data), "
+            "check the *Overwrite* checkbox"
+        ).format(SCHEMA)
+        self.assertEqual(expected, feedback.last)
 
         feedback.pushDebugInfo("Update the database")
-        params = {
-            "RUNIT": True,
-        }
-        results = processing.run(
-            "gobs:upgrade_database_structure", params, feedback=feedback
-        )
+        params = {"CONNECTION_NAME": "test", "RUN_MIGRATIONS": True}
+        alg = "{}:upgrade_database_structure".format(provider.id())
+        results = processing.run(alg, params, feedback=feedback)
         self.assertEqual(1, results["OUTPUT_STATUS"], 1)
         self.assertEqual(
-            "The database version already matches the plugin version. No upgrade needed.",
+            " The database version already matches the plugin version. No upgrade needed.",
             results["OUTPUT_STRING"],
         )

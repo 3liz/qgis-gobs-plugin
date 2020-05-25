@@ -16,17 +16,18 @@ from qgis.core import (
 
 from gobs.qgis_plugin_tools.tools.i18n import tr
 from gobs.qgis_plugin_tools.tools.resources import plugin_path
-from gobs.qgis_plugin_tools.tools.version import version
+from gobs.qgis_plugin_tools.tools.version import version, format_version_integer
 from gobs.qgis_plugin_tools.tools.algorithm_processing import BaseProcessingAlgorithm
-from .tools import (
-    fetchDataFromSqlQuery,
-    getVersionInteger,
+from gobs.qgis_plugin_tools.tools.database import (
+    available_migrations,
+    fetch_data_from_sql_query,
 )
+SCHEMA = "gobs"
 
 
 class UpgradeDatabaseStructure(BaseProcessingAlgorithm):
 
-    RUNIT = 'RUNIT'
+    RUN_MIGRATIONS = "RUN_MIGRATIONS"
     OUTPUT_STATUS = 'OUTPUT_STATUS'
     OUTPUT_STRING = 'OUTPUT_STRING'
 
@@ -57,10 +58,9 @@ class UpgradeDatabaseStructure(BaseProcessingAlgorithm):
 
         self.addParameter(
             QgsProcessingParameterBoolean(
-                self.RUNIT,
+                self.RUN_MIGRATIONS,
                 tr('Check this box to upgrade. No action will be done otherwise'),
                 defaultValue=False,
-                optional=False
             )
         )
         # OUTPUTS
@@ -80,8 +80,8 @@ class UpgradeDatabaseStructure(BaseProcessingAlgorithm):
 
     def checkParameterValues(self, parameters, context):
         # Check if runit is checked
-        runit = self.parameterAsBool(parameters, self.RUNIT, context)
-        if not runit:
+        run_migrations = self.parameterAsBool(parameters, self.RUN_MIGRATIONS, context)
+        if not run_migrations:
             msg = tr('You must check the box to run the upgrade !')
             ok = False
             return ok, msg
@@ -111,7 +111,7 @@ class UpgradeDatabaseStructure(BaseProcessingAlgorithm):
             WHERE schema_name = 'gobs';
         '''
         connection_name = QgsExpressionContextUtils.globalScope().variable('gobs_connection_name')
-        [header, data, rowCount, ok, error_message] = fetchDataFromSqlQuery(
+        [header, data, rowCount, ok, error_message] = fetch_data_from_sql_query(
             connection_name,
             sql
         )
@@ -131,22 +131,22 @@ class UpgradeDatabaseStructure(BaseProcessingAlgorithm):
         connection_name = QgsExpressionContextUtils.globalScope().variable('gobs_connection_name')
 
         # Drop schema if needed
-        runit = self.parameterAsBool(parameters, self.RUNIT, context)
-        if not runit:
-            raise QgsProcessingException(tr('You must check the box to run the upgrade !'))
+        run_migrations = self.parameterAsBool(parameters, self.RUN_MIGRATIONS, context)
+        if not run_migrations:
+            msg = tr("Vous devez cocher cette case pour réaliser la mise à jour !")
+            raise QgsProcessingException(msg)
 
-        # get database version
-        sql = '''
+        # Get database version
+        sql = """
             SELECT me_version
-            FROM gobs.metadata
+            FROM {}.metadata
             WHERE me_status = 1
             ORDER BY me_version_date DESC
             LIMIT 1;
-        '''
-        [header, data, rowCount, ok, error_message] = fetchDataFromSqlQuery(
-            connection_name,
-            sql
+        """.format(
+            SCHEMA
         )
+        _, data, _, ok, error_message = fetch_data_from_sql_query(connection_name, sql)
         if not ok:
             raise QgsProcessingException(error_message)
 
@@ -154,87 +154,86 @@ class UpgradeDatabaseStructure(BaseProcessingAlgorithm):
         for a in data:
             db_version = a[0]
         if not db_version:
-            error_message = tr('No installed version found in the database !')
+            error_message = tr("No installed version found in the database !")
             raise QgsProcessingException(error_message)
 
-        feedback.pushInfo(tr('Database structure version') + ' = %s' % db_version)
+        feedback.pushInfo(
+            tr("Database structure version") + " = {}".format(db_version)
+        )
 
-        plugin_dir = plugin_path()
+        # Get plugin version
         plugin_version = version()
-
-        feedback.pushInfo(tr('Plugin version') + ' = %s' % plugin_version)
+        if plugin_version in ["master", "dev"]:
+            migrations = available_migrations(000000)
+            last_migration = migrations[-1]
+            plugin_version = (
+                last_migration.replace("upgrade_to_", "").replace(".sql", "").strip()
+            )
+            feedback.reportError(
+                "Be careful, running the migrations on a development branch!"
+            )
+            feedback.reportError(
+                "Latest available migration is {}".format(plugin_version)
+            )
+        else:
+            feedback.pushInfo(tr("Plugin version") + " = {}".format(plugin_version))
 
         # Return if nothing to do
         if db_version == plugin_version:
             return {
                 self.OUTPUT_STATUS: 1,
-                self.OUTPUT_STRING: tr('The database version already matches the plugin version. No upgrade needed.')
+                self.OUTPUT_STRING: tr(
+                    " The database version already matches the plugin version. No upgrade needed."
+                ),
             }
 
-        # Get all the upgrade SQL files between db versions and plugin version
-        upgrade_dir = os.path.join(plugin_dir, 'install/sql/upgrade/')
-        get_files = [
-            f for f in os.listdir(upgrade_dir)
-            if os.path.isfile(os.path.join(upgrade_dir, f))
-        ]
-        files = []
-        db_version_integer = getVersionInteger(db_version)
-        for f in get_files:
-            k = getVersionInteger(
-                f.replace('upgrade_to_', '').replace('.sql', '').strip()
-            )
-            if k > db_version_integer:
-                files.append(
-                    [k, f]
-                )
-
-        def getKey(item):
-            return item[0]
-
-        sfiles = sorted(files, key=getKey)
-        sql_files = [s[1] for s in sfiles]
+        db_version_integer = format_version_integer(db_version)
+        sql_files = available_migrations(db_version_integer)
 
         # Loop sql files and run SQL code
         for sf in sql_files:
-            sql_file = os.path.join(plugin_dir, 'install/sql/upgrade/%s' % sf)
-            with open(sql_file, 'r') as f:
+            sql_file = os.path.join(plugin_path(), "install/sql/upgrade/{}".format(sf))
+            with open(sql_file, "r") as f:
                 sql = f.read()
                 if len(sql.strip()) == 0:
                     feedback.pushInfo('* ' + sf + ' -- SKIPPED (EMPTY FILE)')
                     continue
 
-                # Add SQL database version in gobs.metadata
-                new_db_version = sf.replace('upgrade_to_', '').replace('.sql', '').strip()
-                feedback.pushInfo('* NEW DB VERSION' + new_db_version)
-                sql += '''
-                    UPDATE gobs.metadata
-                    SET (me_version, me_version_date)
-                    = ( '%s', now()::timestamp(0) );
-                ''' % new_db_version
-
-                [header, data, rowCount, ok, error_message] = fetchDataFromSqlQuery(
-                    connection_name,
-                    sql
+                # Add SQL database version in adresse.metadata
+                new_db_version = (
+                    sf.replace("upgrade_to_", "").replace(".sql", "").strip()
                 )
-                if ok:
-                    feedback.pushInfo('* ' + sf + ' -- SUCCESS !')
-                else:
+                feedback.pushInfo(tr("* NEW DB VERSION ") + new_db_version)
+                sql += """
+                    UPDATE {}.metadata
+                    SET (me_version, me_version_date)
+                    = ( '{}', now()::timestamp(0) );
+                """.format(
+                    SCHEMA, new_db_version
+                )
+
+                _, _, _, ok, error_message = fetch_data_from_sql_query(
+                    connection_name, sql
+                )
+                if not ok:
                     raise QgsProcessingException(error_message)
 
-        # Everything went fine, update to the plugin version
-        sql = '''
-            UPDATE gobs.metadata
+                feedback.pushInfo("* " + sf + " -- OK !")
+
+        # Everything is fine, we now update to the plugin version
+        sql = """
+            UPDATE {}.metadata
             SET (me_version, me_version_date)
-            = ( '%s', now()::timestamp(0) );
-        ''' % plugin_version
-        [_, _, _, ok, error_message] = fetchDataFromSqlQuery(
-            connection_name,
-            sql
+            = ( '{}', now()::timestamp(0) );
+        """.format(
+            SCHEMA, plugin_version
         )
+
+        _, _, _, ok, error_message = fetch_data_from_sql_query(connection_name, sql)
         if not ok:
             raise QgsProcessingException(error_message)
 
-        return {
-            self.OUTPUT_STATUS: 1,
-            self.OUTPUT_STRING: tr('Gobs database structure has been successfully upgraded to version "{}".'.format(plugin_version))
-        }
+        msg = tr("*** THE DATABASE STRUCTURE HAS BEEN UPDATED ***")
+        feedback.pushInfo(msg)
+
+        return {self.OUTPUT_STATUS: 1, self.OUTPUT_STRING: msg}

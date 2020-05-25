@@ -10,14 +10,19 @@ from qgis.core import (
     QgsProcessingParameterBoolean,
     QgsProcessingOutputNumber,
     QgsProcessingOutputString,
-    QgsExpressionContextUtils, QgsProcessingException,
+    QgsExpressionContextUtils,
+    QgsProcessingException,
 )
 
 from gobs.qgis_plugin_tools.tools.i18n import tr
 from gobs.qgis_plugin_tools.tools.resources import plugin_path, plugin_test_data_path
 from gobs.qgis_plugin_tools.tools.version import version
 from gobs.qgis_plugin_tools.tools.algorithm_processing import BaseProcessingAlgorithm
-from .tools import fetchDataFromSqlQuery
+from ...qgis_plugin_tools.tools.database import (
+    available_migrations,
+    fetch_data_from_sql_query,
+)
+SCHEMA = "gobs"
 
 
 class CreateDatabaseStructure(BaseProcessingAlgorithm):
@@ -26,7 +31,7 @@ class CreateDatabaseStructure(BaseProcessingAlgorithm):
     """
 
     OVERRIDE = 'OVERRIDE'
-    ADDTESTDATA = 'ADDTESTDATA'
+    ADD_TEST_DATA = 'ADD_TEST_DATA'
     OUTPUT_STATUS = 'OUTPUT_STATUS'
     OUTPUT_STRING = 'OUTPUT_STRING'
 
@@ -61,15 +66,13 @@ class CreateDatabaseStructure(BaseProcessingAlgorithm):
                 self.OVERRIDE,
                 tr('Overwrite schema gobs and all data ? ** CAUTION ** It will remove all existing data !'),
                 defaultValue=False,
-                optional=False
             )
         )
         self.addParameter(
             QgsProcessingParameterBoolean(
-                self.ADDTESTDATA,
+                self.ADD_TEST_DATA,
                 tr('Add test data ?'),
                 defaultValue=False,
-                optional=False
             )
         )
         # OUTPUTS
@@ -112,7 +115,7 @@ class CreateDatabaseStructure(BaseProcessingAlgorithm):
             WHERE schema_name = 'gobs';
         '''
         connection_name = QgsExpressionContextUtils.globalScope().variable('gobs_connection_name')
-        [header, data, rowCount, ok, error_message] = fetchDataFromSqlQuery(
+        [header, data, rowCount, ok, error_message] = fetch_data_from_sql_query(
             connection_name,
             sql
         )
@@ -128,96 +131,106 @@ class CreateDatabaseStructure(BaseProcessingAlgorithm):
         return ok, msg
 
     def processAlgorithm(self, parameters, context, feedback):
-        """
-        Here is where the processing itself takes place.
-        """
-
         connection_name = QgsExpressionContextUtils.globalScope().variable('gobs_connection_name')
 
         # Drop schema if needed
         override = self.parameterAsBool(parameters, self.OVERRIDE, context)
         if override:
-            feedback.pushInfo(tr("Trying to drop schema gobs..."))
-            sql = 'DROP SCHEMA IF EXISTS gobs CASCADE;'
+            feedback.pushInfo(tr("Trying to drop schema {}…").format(SCHEMA))
+            sql = "DROP SCHEMA IF EXISTS {} CASCADE;".format(SCHEMA)
 
-            [header, data, rowCount, ok, error_message] = fetchDataFromSqlQuery(
-                connection_name,
-                sql
-            )
+            _, _, _, ok, error_message = fetch_data_from_sql_query(connection_name, sql)
             if ok:
-                feedback.pushInfo(tr("Schema gobs has been dropped."))
+                feedback.pushInfo(tr("Schema {} has been dropped.").format(SCHEMA))
             else:
-                feedback.reportError(error_message)
-                status = 0
-                # raise Exception(msg)
-                return {
-                    self.OUTPUT_STATUS: status,
-                    self.OUTPUT_STRING: error_message
-                }
+                raise QgsProcessingException(error_message)
 
         # Create full structure
         sql_files = [
-            '00_initialize_database.sql',
-            'gobs/10_FUNCTION.sql',
-            'gobs/20_TABLE_SEQUENCE_DEFAULT.sql',
-            'gobs/30_VIEW.sql',
-            'gobs/40_INDEX.sql',
-            'gobs/50_TRIGGER.sql',
-            'gobs/60_CONSTRAINT.sql',
-            'gobs/70_COMMENT.sql',
-            'gobs/90_GLOSSARY.sql',
-            '99_finalize_database.sql',
+            "00_initialize_database.sql",
+            "{}/10_FUNCTION.sql".format(SCHEMA),
+            "{}/20_TABLE_SEQUENCE_DEFAULT.sql".format(SCHEMA),
+            "{}/30_VIEW.sql".format(SCHEMA),
+            "{}/40_INDEX.sql".format(SCHEMA),
+            "{}/50_TRIGGER.sql".format(SCHEMA),
+            "{}/60_CONSTRAINT.sql".format(SCHEMA),
+            "{}/70_COMMENT.sql".format(SCHEMA),
+            "{}/90_GLOSSARY.sql".format(SCHEMA),
+            "99_finalize_database.sql",
         ]
         # Add test data
-        addtestdata = self.parameterAsBool(parameters, self.ADDTESTDATA, context)
-        if addtestdata:
-            sql_files.append('99_test_data.sql')
+        add_test_data = self.parameterAsBool(parameters, self.ADD_TEST_DATA, context)
+        if add_test_data:
+            sql_files.append("99_test_data.sql")
 
         plugin_dir = plugin_path()
         plugin_version = version()
+        dev_version = False
+        run_migration = os.environ.get(
+            "TEST_DATABASE_INSTALL_{}".format(SCHEMA.capitalize())
+        )
+        if plugin_version in ["master", "dev"] and not run_migration:
+            feedback.reportError(
+                "Be careful, running the install on a development branch!"
+            )
+            dev_version = True
 
-        run_migration = os.environ.get("DATABASE_RUN_MIGRATION")
         if run_migration:
+            plugin_dir = plugin_test_data_path()
             feedback.reportError(
                 "Be careful, running migrations on an empty database using {} "
                 "instead of {}".format(run_migration, plugin_version)
             )
             plugin_version = run_migration
-            plugin_dir = plugin_test_data_path()
 
         # Loop sql files and run SQL code
         for sf in sql_files:
             feedback.pushInfo(sf)
-            sql_file = os.path.join(plugin_dir, 'install/sql/%s' % sf)
-            with open(sql_file, 'r') as f:
+            sql_file = os.path.join(plugin_dir, "install/sql/{}".format(sf))
+            with open(sql_file, "r") as f:
                 sql = f.read()
                 if len(sql.strip()) == 0:
-                    feedback.pushInfo('  Skipped (empty file)')
+                    feedback.pushInfo("  Skipped (empty file)")
                     continue
 
-                [header, data, rowCount, ok, error_message] = fetchDataFromSqlQuery(
-                    connection_name,
-                    sql
+                _, _, _, ok, error_message = fetch_data_from_sql_query(
+                    connection_name, sql
                 )
                 if ok:
-                    feedback.pushInfo('  Success !')
+                    feedback.pushInfo("  Success !")
                 else:
                     raise QgsProcessingException(error_message)
 
         # Add version
-        sql = '''
-            INSERT INTO gobs.metadata
+        if run_migration or not dev_version:
+            metadata_version = plugin_version
+        else:
+            migrations = available_migrations(000000)
+            last_migration = migrations[-1]
+            metadata_version = (
+                last_migration.replace("upgrade_to_", "").replace(".sql", "").strip()
+            )
+            feedback.reportError("Latest migration is {}".format(metadata_version))
+
+        sql = """
+            INSERT INTO {}.metadata
             (me_version, me_version_date, me_status)
             VALUES (
-                '%s', now()::timestamp(0), 1
-            )
-        ''' % plugin_version
-        [header, data, rowCount, ok, error_message] = fetchDataFromSqlQuery(
-            connection_name,
-            sql
+                '{}', now()::timestamp(0), 1
+            )""".format(
+            SCHEMA, metadata_version
+        )
+
+        fetch_data_from_sql_query(connection_name, sql)
+        feedback.pushInfo(
+            "Database version '{}'.".format(metadata_version)
         )
 
         return {
             self.OUTPUT_STATUS: 1,
-            self.OUTPUT_STRING: tr('Gobs database structure has been successfully created to version "{}".'.format(plugin_version))
+            self.OUTPUT_STRING: tr(
+                "*** THE STRUCTURE {} HAS BEEN CREATED WITH VERSION '{}'***".format(
+                    SCHEMA, metadata_version
+                )
+            ),
         }
