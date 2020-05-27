@@ -220,11 +220,11 @@ class ImportSpatialLayerData(BaseProcessingAlgorithm):
             tr('* Source layer has been imported into temporary table')
         )
         # Add ST_Multi if needed
-        st_multi_a = ''
-        st_multi_b = ''
+        st_multi_left = ''
+        st_multi_right = ''
         if target_is_multi:
-            st_multi_a = 'ST_Multi('
-            st_multi_b = ')'
+            st_multi_left = 'ST_Multi('
+            st_multi_right = ')'
 
         # Copy data to spatial_object
         feedback.pushInfo(
@@ -233,17 +233,17 @@ class ImportSpatialLayerData(BaseProcessingAlgorithm):
         sql = '''
             INSERT INTO gobs.spatial_object
             (so_unique_id, so_unique_label, geom, fk_id_spatial_layer)
-            SELECT "%s", "%s", ST_Transform(ST_Buffer(geom,0), 4326) AS geom, %s
-            FROM "%s"."%s"
+            SELECT "{so_unique_id}", "{so_unique_label}", {st_multi_left}ST_Transform(ST_Buffer(geom,0), 4326){st_multi_right} AS geom, {id_spatial_layer}
+            FROM "{temp_schema}"."{temp_table}"
             ;
-        ''' % (
-            uniqueid,
-            uniquelabel,
-            st_multi_a,
-            st_multi_b,
-            id_spatial_layer,
-            temp_schema,
-            temp_table
+        '''.format(
+            so_unique_id=uniqueid,
+            so_unique_label=uniquelabel,
+            st_multi_left=st_multi_left,
+            st_multi_right=st_multi_right,
+            id_spatial_layer=id_spatial_layer,
+            temp_schema=temp_schema,
+            temp_table=temp_table
         )
         try:
             [header, data, rowCount, ok, error_message] = fetchDataFromSqlQuery(
