@@ -1,0 +1,18 @@
+variables:
+  GIT_SUBMODULE_STRATEGY: recursive
+
+stages:
+- package 📦
+
+package:
+  stage: package 📦
+  only:
+    - schedules
+    - tags
+  script:
+    - docker run --rm -w /plugin -v ${CI_PROJECT_DIR}:/plugin -u $(id -u):$(id -g) etrimaille/qgis-plugin-ci package ${CI_COMMIT_REF_NAME} --allow-uncommitted-changes --disallow-submodule-update
+  tags:
+    - factory
+  artifacts:
+    paths:
+    - gobs.${CI_COMMIT_REF_NAME}.zip
