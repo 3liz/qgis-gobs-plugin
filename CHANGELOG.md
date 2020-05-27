@@ -1,5 +1,12 @@
 # CHANGELOG
 
+### 0.2.9 - 27/05/2020
+
+* Import observation data - Explicitly convert source value to target format and remove useless spaces from source data
+* Import spatial layer - Check geometry types compatibility between QGIS layer and target spatial layer
+* Demo data - fix encoding for subdistricts layer
+* Continuous integration & test - many fixes and improvements
+
 ### 0.2.8 - 05/05/2020
 
 * Import spatial layer data - Use ST_Buffer(geom, 0) to remove invalid geometries
