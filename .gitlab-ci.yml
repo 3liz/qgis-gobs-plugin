@@ -15,4 +15,4 @@ package:
     - factory
   artifacts:
     paths:
-    - gobs.${CI_COMMIT_REF_NAME}.zip
+    - g-obs.${CI_COMMIT_REF_NAME}.zip
