@@ -226,6 +226,13 @@ class ImportSpatialLayerData(BaseProcessingAlgorithm):
             st_multi_left = 'ST_Multi('
             st_multi_right = ')'
 
+        # Get target geometry type in integer
+        geometry_type_integer = 1
+        if target_type.replace('multi','') == 'linestring':
+            geometry_type_integer = 2
+        if target_type.replace('multi','') == 'polygon':
+            geometry_type_integer = 3
+
         # Copy data to spatial_object
         feedback.pushInfo(
             tr('COPY IMPORTED DATA TO spatial_object')
@@ -233,18 +240,26 @@ class ImportSpatialLayerData(BaseProcessingAlgorithm):
         sql = '''
             INSERT INTO gobs.spatial_object
             (so_unique_id, so_unique_label, geom, fk_id_spatial_layer)
-            SELECT "{so_unique_id}", "{so_unique_label}", {st_multi_left}ST_Transform(ST_Buffer(geom,0), 4326){st_multi_right} AS geom, {id_spatial_layer}
+            SELECT "{so_unique_id}", "{so_unique_label}", {st_multi_left}ST_Transform(ST_CollectionExtract(ST_MakeValid(geom),{geometry_type_integer}), 4326){st_multi_right} AS geom, {id_spatial_layer}
             FROM "{temp_schema}"."{temp_table}"
+
+            -- Update line if data already exists
+            ON CONFLICT ON CONSTRAINT spatial_object_so_unique_id_fk_id_spatial_layer_key
+            DO UPDATE
+            SET (geom, so_unique_label) = (EXCLUDED.geom, EXCLUDED.so_unique_label)
+            WHERE True
             ;
         '''.format(
             so_unique_id=uniqueid,
             so_unique_label=uniquelabel,
             st_multi_left=st_multi_left,
+            geometry_type_integer=geometry_type_integer,
             st_multi_right=st_multi_right,
             id_spatial_layer=id_spatial_layer,
             temp_schema=temp_schema,
             temp_table=temp_table
         )
+        feedback.pushInfo(sql)
         try:
             [header, data, rowCount, ok, error_message] = fetchDataFromSqlQuery(
                 connection_name,
