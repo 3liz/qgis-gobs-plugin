@@ -228,9 +228,9 @@ class ImportSpatialLayerData(BaseProcessingAlgorithm):
 
         # Get target geometry type in integer
         geometry_type_integer = 1
-        if target_type.replace('multi','') == 'linestring':
+        if target_type.replace('multi', '') == 'linestring':
             geometry_type_integer = 2
-        if target_type.replace('multi','') == 'polygon':
+        if target_type.replace('multi', '') == 'polygon':
             geometry_type_integer = 3
 
         # Copy data to spatial_object
@@ -277,9 +277,10 @@ class ImportSpatialLayerData(BaseProcessingAlgorithm):
                 feedback.pushInfo(
                     msg
                 )
-        except Exception:
+        except Exception as e:
             status = 0
-            msg = self.tr('* An unknown error occured while adding features to spatial_object table')
+            msg = tr('* An unknown error occured while adding features to spatial_object table')
+            msg+= ' ' + str(e)
         finally:
 
             # Remove temporary table

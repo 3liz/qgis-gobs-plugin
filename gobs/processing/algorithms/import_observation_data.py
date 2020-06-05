@@ -298,7 +298,7 @@ class ImportObservationData(BaseProcessingAlgorithm):
                 sql
             )
             if not ok:
-                msg = self.tr('* The following error has been raised') + '  %s' % error_message
+                msg = tr('* The following error has been raised') + '  %s' % error_message
                 feedback.reportError(
                     msg
                 )
@@ -349,14 +349,17 @@ class ImportObservationData(BaseProcessingAlgorithm):
                 status = 1
                 id_date_format = data[0][0]
                 id_value_types = data[0][1].split(',')
-                msg = self.tr('* Indicator date format is')
+                msg = tr('* Indicator date format is')
                 msg+= " '%s'" % id_date_format
                 feedback.pushInfo(
                     msg
                 )
-        except Exception:
+        except Exception as e:
             status = 0
             msg = tr('* An unknown error occured while getting indicator date format')
+            feedback.reportError(
+                msg + ' ' + str(e)
+            )
 
         # COPY DATA TO OBSERVATION TABLE
         if status:
