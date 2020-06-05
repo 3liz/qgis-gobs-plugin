@@ -1,5 +1,13 @@
 # CHANGELOG
 
+### 0.2.11 - 05/06/2020
+
+* Import scripts - Fix bugs related to old use of self.tr instead of tr
+
+### 0.2.10 - 28/05/2020
+
+* Import spatial layer - Fix bug with points & linestrings
+
 ### 0.2.9 - 27/05/2020
 
 * Import observation data - Explicitly convert source value to target format and remove useless spaces from source data
