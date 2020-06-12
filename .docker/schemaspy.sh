@@ -1,10 +1,11 @@
 #!/usr/bin/env bash
 export $(grep -v '^#' .env | xargs)
 
+chmod 777 -R "${PWD}"/../docs
 docker run \
   -v "${PWD}/../docs:/output" \
   --network=docker_${NETWORK} \
-  etrimaille/docker-schemaspy-pg:latest \
+  etrimaille/schemaspy-pg:latest \
   -t pgsql-mat \
   -dp /drivers \
   -host db \

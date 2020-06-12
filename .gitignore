@@ -7,7 +7,7 @@
 # Packages
 *.egg
 *.egg-info
-dist
+# dist Needed for schemaspy
 build
 eggs
 parts
@@ -29,6 +29,7 @@ nosetests.xml
 
 # Translations
 *.mo
+*.ts
 
 # Mr Developer
 .mr.developer.cfg
