@@ -1,0 +1,408 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<database name="gis" schema="gobs" type="PostgreSQL - 9.6.17">
+   <sequences>
+      <sequence increment="1" name="actor_category_id_seq" startValue="1"/>
+      <sequence increment="1" name="actor_id_seq" startValue="1"/>
+      <sequence increment="1" name="glossary_id_seq" startValue="1"/>
+      <sequence increment="1" name="graph_node_id_seq" startValue="1"/>
+      <sequence increment="1" name="import_id_seq" startValue="1"/>
+      <sequence increment="1" name="indicator_id_seq" startValue="1"/>
+      <sequence increment="1" name="metadata_id_seq" startValue="1"/>
+      <sequence increment="1" name="observation_id_seq" startValue="1"/>
+      <sequence increment="1" name="protocol_id_seq" startValue="1"/>
+      <sequence increment="1" name="series_id_seq" startValue="1"/>
+      <sequence increment="1" name="spatial_layer_id_seq" startValue="1"/>
+      <sequence increment="1" name="spatial_object_id_seq" startValue="1"/>
+   </sequences>
+   <tables>
+      <table name="actor" numRows="0" remarks="Actors" schema="gobs" type="TABLE">
+         <column autoUpdated="true" defaultValue="nextval('gobs.actor_id_seq'::regclass)" digits="0" id="0" name="id" nullable="false" remarks="ID" size="10" type="serial" typeCode="4">
+            <child column="fk_id_actor" foreignKey="series_fk_id_actor_fkey" implied="false" onDeleteCascade="false" schema="gobs" table="series"/>
+            <child column="fk_id_actor" foreignKey="spatial_layer_fk_id_actor_fkey" implied="false" onDeleteCascade="false" schema="gobs" table="spatial_layer"/>
+         </column>
+         <column autoUpdated="false" defaultValue="null" digits="0" id="1" name="a_label" nullable="false" remarks="Name of the actor (can be a person or an entity)" size="2147483647" type="text" typeCode="12"/>
+         <column autoUpdated="false" defaultValue="null" digits="0" id="2" name="a_description" nullable="false" remarks="Description of the actor" size="2147483647" type="text" typeCode="12"/>
+         <column autoUpdated="false" defaultValue="null" digits="0" id="3" name="a_email" nullable="false" remarks="Email of the actor" size="2147483647" type="text" typeCode="12"/>
+         <column autoUpdated="false" defaultValue="null" digits="0" id="4" name="id_category" nullable="false" remarks="Category of actor" size="10" type="int4" typeCode="4">
+            <parent column="id" foreignKey="actor_id_category_fkey" implied="false" onDeleteCascade="false" schema="gobs" table="actor_category"/>
+         </column>
+         <primaryKey column="id" sequenceNumberInPK="1"/>
+         <index name="actor_pkey" unique="true">
+            <column ascending="true" name="id"/>
+         </index>
+         <index name="actor_a_name_idx" unique="false">
+            <column ascending="true" name="a_label"/>
+         </index>
+      </table>
+      <table name="actor_category" numRows="0" remarks="Actors categories" schema="gobs" type="TABLE">
+         <column autoUpdated="true" defaultValue="nextval('gobs.actor_category_id_seq'::regclass)" digits="0" id="0" name="id" nullable="false" remarks="ID" size="10" type="serial" typeCode="4">
+            <child column="id_category" foreignKey="actor_id_category_fkey" implied="false" onDeleteCascade="false" schema="gobs" table="actor"/>
+         </column>
+         <column autoUpdated="false" defaultValue="null" digits="0" id="1" name="ac_label" nullable="false" remarks="Name of the actor category" size="2147483647" type="text" typeCode="12"/>
+         <column autoUpdated="false" defaultValue="null" digits="0" id="2" name="ac_description" nullable="false" remarks="Description of the actor category" size="2147483647" type="text" typeCode="12"/>
+         <primaryKey column="id" sequenceNumberInPK="1"/>
+         <index name="actor_category_pkey" unique="true">
+            <column ascending="true" name="id"/>
+         </index>
+      </table>
+      <table name="glossary" numRows="20" remarks="List of labels and words used as labels for stored data" schema="gobs" type="TABLE">
+         <column autoUpdated="true" defaultValue="nextval('gobs.glossary_id_seq'::regclass)" digits="0" id="0" name="id" nullable="false" remarks="ID" size="10" type="serial" typeCode="4"/>
+         <column autoUpdated="false" defaultValue="null" digits="0" id="1" name="gl_field" nullable="false" remarks="Target field for this glossary item" size="2147483647" type="text" typeCode="12"/>
+         <column autoUpdated="false" defaultValue="null" digits="0" id="2" name="gl_code" nullable="false" remarks="Item code to store in tables" size="2147483647" type="text" typeCode="12"/>
+         <column autoUpdated="false" defaultValue="null" digits="0" id="3" name="gl_label" nullable="false" remarks="Item label to show for users" size="2147483647" type="text" typeCode="12"/>
+         <column autoUpdated="false" defaultValue="null" digits="0" id="4" name="gl_description" nullable="false" remarks="Description of the item" size="2147483647" type="text" typeCode="12"/>
+         <column autoUpdated="false" defaultValue="null" digits="0" id="5" name="gl_order" nullable="true" remarks="Display order among the field items" size="5" type="int2" typeCode="5"/>
+         <primaryKey column="id" sequenceNumberInPK="1"/>
+         <index name="glossary_pkey" unique="true">
+            <column ascending="true" name="id"/>
+         </index>
+         <index name="glossary_gl_field_idx" unique="false">
+            <column ascending="true" name="gl_field"/>
+         </index>
+      </table>
+      <table name="graph_node" numRows="0" remarks="Graph nodes, to store key words used to find an indicator." schema="gobs" type="TABLE">
+         <column autoUpdated="true" defaultValue="nextval('gobs.graph_node_id_seq'::regclass)" digits="0" id="0" name="id" nullable="false" remarks="ID" size="10" type="serial" typeCode="4">
+            <child column="fk_id_node" foreignKey="r_indicator_node_fk_id_node_fkey" implied="false" onDeleteCascade="true" schema="gobs" table="r_indicator_node"/>
+         </column>
+         <column autoUpdated="false" defaultValue="null" digits="0" id="1" name="gn_label" nullable="false" remarks="Name of the node" size="2147483647" type="text" typeCode="12"/>
+         <primaryKey column="id" sequenceNumberInPK="1"/>
+         <index name="graph_node_pkey" unique="true">
+            <column ascending="true" name="id"/>
+         </index>
+         <index name="graph_node_gn_name_idx" unique="false">
+            <column ascending="true" name="gn_label"/>
+         </index>
+         <index name="graph_node_gn_name_unique" unique="true">
+            <column ascending="true" name="gn_label"/>
+         </index>
+      </table>
+      <table name="import" numRows="0" remarks="Journal des imports" schema="gobs" type="TABLE">
+         <column autoUpdated="true" defaultValue="nextval('gobs.import_id_seq'::regclass)" digits="0" id="0" name="id" nullable="false" remarks="Id" size="10" type="serial" typeCode="4">
+            <child column="fk_id_import" foreignKey="observation_fk_id_import_fkey" implied="false" onDeleteCascade="false" schema="gobs" table="observation"/>
+         </column>
+         <column autoUpdated="false" defaultValue="'2018-06-28 12:15:46.635568'::timestamp without time zone" digits="6" id="1" name="im_timestamp" nullable="false" remarks="Import date" size="29" type="timestamp" typeCode="93"/>
+         <column autoUpdated="false" defaultValue="null" digits="0" id="2" name="fk_id_series" nullable="false" remarks="Series ID" size="10" type="int4" typeCode="4">
+            <parent column="id" foreignKey="import_fk_id_series_fkey" implied="false" onDeleteCascade="false" schema="gobs" table="series"/>
+         </column>
+         <column autoUpdated="false" defaultValue="'p'::text" digits="0" id="3" name="im_status" nullable="true" remarks="Status of import : pending, validated" size="2147483647" type="text" typeCode="12"/>
+         <primaryKey column="id" sequenceNumberInPK="1"/>
+         <index name="import_pkey" unique="true">
+            <column ascending="true" name="id"/>
+         </index>
+         <index name="import_fk_id_series_idx" unique="false">
+            <column ascending="true" name="fk_id_series"/>
+         </index>
+      </table>
+      <table name="indicator" numRows="0" remarks="Groups of observation data for decisional purpose." schema="gobs" type="TABLE">
+         <column autoUpdated="true" defaultValue="nextval('gobs.indicator_id_seq'::regclass)" digits="0" id="0" name="id" nullable="false" remarks="ID" size="10" type="serial" typeCode="4">
+            <child column="fk_id_indicator" foreignKey="r_indicator_node_fk_id_indicator_fkey" implied="false" onDeleteCascade="true" schema="gobs" table="r_indicator_node"/>
+            <child column="fk_id_indicator" foreignKey="series_fk_id_indicator_fkey" implied="false" onDeleteCascade="false" schema="gobs" table="series"/>
+         </column>
+         <column autoUpdated="false" defaultValue="null" digits="0" id="1" name="id_code" nullable="false" remarks="Short name" size="2147483647" type="text" typeCode="12"/>
+         <column autoUpdated="false" defaultValue="null" digits="0" id="2" name="id_label" nullable="false" remarks="Title" size="2147483647" type="text" typeCode="12"/>
+         <column autoUpdated="false" defaultValue="null" digits="0" id="3" name="id_description" nullable="false" remarks="Describes the indicator regarding its rôle inside the project." size="2147483647" type="text" typeCode="12"/>
+         <column autoUpdated="false" defaultValue="'day'::text" digits="0" id="4" name="id_date_format" nullable="false" remarks="Help to know what is the format for the date. Example : ‘year’" size="2147483647" type="text" typeCode="12"/>
+         <column autoUpdated="false" defaultValue="null" digits="0" id="5" name="id_value_code" nullable="false" remarks="List of the codes of the vector dimensions. Ex : [‘pop_h’, ‘pop_f’]" size="2147483647" type="_text" typeCode="2003"/>
+         <column autoUpdated="false" defaultValue="null" digits="0" id="6" name="id_value_name" nullable="false" remarks="List of the names of the vector dimensions. Ex : [‘population homme’, ‘population femme’]" size="2147483647" type="_text" typeCode="2003"/>
+         <column autoUpdated="false" defaultValue="null" digits="0" id="7" name="id_value_type" nullable="false" remarks="Type of the stored values. Ex : ‘integer’ or ‘real’" size="2147483647" type="_text" typeCode="2003"/>
+         <column autoUpdated="false" defaultValue="null" digits="0" id="8" name="id_value_unit" nullable="false" remarks="Unit ot the store values. Ex : ‘inhabitants’ or ‘°C’" size="2147483647" type="_text" typeCode="2003"/>
+         <column autoUpdated="false" defaultValue="null" digits="0" id="9" name="id_paths" nullable="true" remarks="Paths given to help finding an indicator. They will be split up to fill the graph_node and r_indicator_node tables. If you need multiple paths, use | as a separator. Ex: Environment / Water resources | Measure / Physics / Water" size="2147483647" type="text" typeCode="12"/>
+         <primaryKey column="id" sequenceNumberInPK="1"/>
+         <index name="indicator_pkey" unique="true">
+            <column ascending="true" name="id"/>
+         </index>
+         <index name="indicator_id_label_idx" unique="false">
+            <column ascending="true" name="id_code"/>
+         </index>
+      </table>
+      <table name="metadata" numRows="0" remarks="Metadata of the structure : version and date. Usefull for database structure and glossary data migrations between versions" schema="gobs" type="TABLE">
+         <column autoUpdated="true" defaultValue="nextval('gobs.metadata_id_seq'::regclass)" digits="0" id="0" name="id" nullable="false" remarks="Id of the version" size="10" type="serial" typeCode="4"/>
+         <column autoUpdated="false" defaultValue="null" digits="0" id="1" name="me_version" nullable="false" remarks="Version. Ex: 1.0.2" size="2147483647" type="text" typeCode="12"/>
+         <column autoUpdated="false" defaultValue="null" digits="0" id="2" name="me_version_date" nullable="false" remarks="Date of the version. Ex: 2019-06-01" size="13" type="date" typeCode="91"/>
+         <column autoUpdated="false" defaultValue="null" digits="0" id="3" name="me_status" nullable="false" remarks="Status of the version. 1 means active version, 0 means older version" size="5" type="int2" typeCode="5"/>
+         <primaryKey column="id" sequenceNumberInPK="1"/>
+         <index name="metadata_pkey" unique="true">
+            <column ascending="true" name="id"/>
+         </index>
+         <index name="metadata_me_version_key" unique="true">
+            <column ascending="true" name="me_version"/>
+         </index>
+      </table>
+      <table name="observation" numRows="0" remarks="Les données brutes au format pivot ( indicateur, date, valeurs et entité spatiale, auteur, etc.)" schema="gobs" type="TABLE">
+         <column autoUpdated="true" defaultValue="nextval('gobs.observation_id_seq'::regclass)" digits="0" id="0" name="id" nullable="false" remarks="ID" size="19" type="bigserial" typeCode="-5"/>
+         <column autoUpdated="false" defaultValue="null" digits="0" id="1" name="fk_id_series" nullable="false" remarks="Series ID" size="10" type="int4" typeCode="4">
+            <parent column="id" foreignKey="observation_fk_id_series_fkey" implied="false" onDeleteCascade="false" schema="gobs" table="series"/>
+         </column>
+         <column autoUpdated="false" defaultValue="null" digits="0" id="2" name="fk_id_spatial_object" nullable="false" remarks="ID of the object in the spatial object table" size="19" type="int8" typeCode="-5">
+            <parent column="id" foreignKey="observation_fk_id_spatial_object_fkey" implied="false" onDeleteCascade="false" schema="gobs" table="spatial_object"/>
+         </column>
+         <column autoUpdated="false" defaultValue="null" digits="0" id="3" name="fk_id_import" nullable="false" remarks="Import id" size="10" type="int4" typeCode="4">
+            <parent column="id" foreignKey="observation_fk_id_import_fkey" implied="false" onDeleteCascade="false" schema="gobs" table="import"/>
+         </column>
+         <column autoUpdated="false" defaultValue="null" digits="0" id="4" name="ob_value" nullable="false" remarks="Vector containing the measured or computed data values. Ex : [1543, 1637]" size="2147483647" type="jsonb" typeCode="1111"/>
+         <column autoUpdated="false" defaultValue="null" digits="6" id="5" name="ob_timestamp" nullable="false" remarks="Timestamp of the data" size="29" type="timestamp" typeCode="93"/>
+         <column autoUpdated="false" defaultValue="null" digits="6" id="6" name="ob_validation" nullable="true" remarks="Date and time when the data has been validated (the corresponding import status has been changed from pending to validated). Can be used to find all observations not yet validated, with NULL values in this field." size="29" type="timestamp" typeCode="93"/>
+         <primaryKey column="id" sequenceNumberInPK="1"/>
+         <index name="observation_pkey" unique="true">
+            <column ascending="true" name="id"/>
+         </index>
+         <index name="observation_data_unique" unique="true">
+            <column ascending="true" name="fk_id_series"/>
+            <column ascending="true" name="fk_id_spatial_object"/>
+            <column ascending="true" name="ob_timestamp"/>
+         </index>
+         <index name="observation_fk_id_import_idx" unique="false">
+            <column ascending="true" name="fk_id_import"/>
+         </index>
+         <index name="observation_fk_id_series_idx" unique="false">
+            <column ascending="true" name="fk_id_series"/>
+         </index>
+         <index name="observation_fk_id_spatial_object_idx" unique="false">
+            <column ascending="true" name="fk_id_spatial_object"/>
+         </index>
+         <index name="observation_ob_timestamp_idx" unique="false">
+            <column ascending="true" name="ob_timestamp"/>
+         </index>
+      </table>
+      <table name="protocol" numRows="0" remarks="List of protocols" schema="gobs" type="TABLE">
+         <column autoUpdated="true" defaultValue="nextval('gobs.protocol_id_seq'::regclass)" digits="0" id="0" name="id" nullable="false" remarks="ID" size="10" type="serial" typeCode="4">
+            <child column="fk_id_protocol" foreignKey="series_fk_id_protocol_fkey" implied="false" onDeleteCascade="false" schema="gobs" table="series"/>
+         </column>
+         <column autoUpdated="false" defaultValue="null" digits="0" id="1" name="pr_code" nullable="false" remarks="Code" size="2147483647" type="text" typeCode="12"/>
+         <column autoUpdated="false" defaultValue="null" digits="0" id="2" name="pr_label" nullable="false" remarks="Name of the indicator" size="2147483647" type="text" typeCode="12"/>
+         <column autoUpdated="false" defaultValue="null" digits="0" id="3" name="pr_description" nullable="false" remarks="Description, including URLs to references and authors." size="2147483647" type="text" typeCode="12"/>
+         <primaryKey column="id" sequenceNumberInPK="1"/>
+         <index name="protocol_pkey" unique="true">
+            <column ascending="true" name="id"/>
+         </index>
+         <index name="protocol_pr_code_idx" unique="false">
+            <column ascending="true" name="pr_code"/>
+         </index>
+      </table>
+      <table name="r_graph_edge" numRows="0" remarks="Graph edges: relations between nodes" schema="gobs" type="TABLE">
+         <column autoUpdated="false" defaultValue="null" digits="0" id="0" name="ge_parent_node" nullable="false" remarks="Parent node" size="10" type="int4" typeCode="4"/>
+         <column autoUpdated="false" defaultValue="null" digits="0" id="1" name="ge_child_node" nullable="false" remarks="Child node" size="10" type="int4" typeCode="4"/>
+         <primaryKey column="ge_parent_node" sequenceNumberInPK="1"/>
+         <primaryKey column="ge_child_node" sequenceNumberInPK="2"/>
+         <index name="r_graph_edge_pkey" unique="true">
+            <column ascending="true" name="ge_parent_node"/>
+            <column ascending="true" name="ge_child_node"/>
+         </index>
+      </table>
+      <table name="r_indicator_node" numRows="0" remarks="Pivot table between indicators and nodes" schema="gobs" type="TABLE">
+         <column autoUpdated="false" defaultValue="null" digits="0" id="0" name="fk_id_indicator" nullable="false" remarks="Parent indicator" size="10" type="int4" typeCode="4">
+            <parent column="id" foreignKey="r_indicator_node_fk_id_indicator_fkey" implied="false" onDeleteCascade="true" schema="gobs" table="indicator"/>
+         </column>
+         <column autoUpdated="false" defaultValue="null" digits="0" id="1" name="fk_id_node" nullable="false" remarks="Parent node" size="10" type="int4" typeCode="4">
+            <parent column="id" foreignKey="r_indicator_node_fk_id_node_fkey" implied="false" onDeleteCascade="true" schema="gobs" table="graph_node"/>
+         </column>
+         <primaryKey column="fk_id_indicator" sequenceNumberInPK="1"/>
+         <primaryKey column="fk_id_node" sequenceNumberInPK="2"/>
+         <index name="r_indicator_node_pkey" unique="true">
+            <column ascending="true" name="fk_id_indicator"/>
+            <column ascending="true" name="fk_id_node"/>
+         </index>
+      </table>
+      <table name="series" numRows="0" remarks="Series of data" schema="gobs" type="TABLE">
+         <column autoUpdated="true" defaultValue="nextval('gobs.series_id_seq'::regclass)" digits="0" id="0" name="id" nullable="false" remarks="Id" size="10" type="serial" typeCode="4">
+            <child column="fk_id_series" foreignKey="import_fk_id_series_fkey" implied="false" onDeleteCascade="false" schema="gobs" table="import"/>
+            <child column="fk_id_series" foreignKey="observation_fk_id_series_fkey" implied="false" onDeleteCascade="false" schema="gobs" table="observation"/>
+         </column>
+         <column autoUpdated="false" defaultValue="null" digits="0" id="1" name="fk_id_protocol" nullable="false" remarks="Protocol" size="10" type="int4" typeCode="4">
+            <parent column="id" foreignKey="series_fk_id_protocol_fkey" implied="false" onDeleteCascade="false" schema="gobs" table="protocol"/>
+         </column>
+         <column autoUpdated="false" defaultValue="null" digits="0" id="2" name="fk_id_actor" nullable="false" remarks="Actor, source of the observation data." size="10" type="int4" typeCode="4">
+            <parent column="id" foreignKey="series_fk_id_actor_fkey" implied="false" onDeleteCascade="false" schema="gobs" table="actor"/>
+         </column>
+         <column autoUpdated="false" defaultValue="null" digits="0" id="3" name="fk_id_indicator" nullable="false" remarks="Indicator. The series is named after the indicator." size="10" type="int4" typeCode="4">
+            <parent column="id" foreignKey="series_fk_id_indicator_fkey" implied="false" onDeleteCascade="false" schema="gobs" table="indicator"/>
+         </column>
+         <column autoUpdated="false" defaultValue="null" digits="0" id="4" name="fk_id_spatial_layer" nullable="false" remarks="Spatial layer, mandatory. If needed, use a global spatial layer with only 1 object representing the global area." size="10" type="int4" typeCode="4">
+            <parent column="id" foreignKey="series_fk_id_spatial_layer_fkey" implied="false" onDeleteCascade="false" schema="gobs" table="spatial_layer"/>
+         </column>
+         <primaryKey column="id" sequenceNumberInPK="1"/>
+         <index name="series_pkey" unique="true">
+            <column ascending="true" name="id"/>
+         </index>
+         <index name="series_fk_id_actor_idx" unique="false">
+            <column ascending="true" name="fk_id_actor"/>
+         </index>
+         <index name="series_fk_id_indicator_idx" unique="false">
+            <column ascending="true" name="fk_id_indicator"/>
+         </index>
+         <index name="series_fk_id_protocol_idx" unique="false">
+            <column ascending="true" name="fk_id_protocol"/>
+         </index>
+         <index name="series_fk_id_spatial_layer_idx" unique="false">
+            <column ascending="true" name="fk_id_spatial_layer"/>
+         </index>
+      </table>
+      <table name="spatial_layer" numRows="0" remarks="List the spatial layers, used to regroup the spatial data. Ex : cities, rivers, stations" schema="gobs" type="TABLE">
+         <column autoUpdated="true" defaultValue="nextval('gobs.spatial_layer_id_seq'::regclass)" digits="0" id="0" name="id" nullable="false" remarks="" size="10" type="serial" typeCode="4">
+            <child column="fk_id_spatial_layer" foreignKey="series_fk_id_spatial_layer_fkey" implied="false" onDeleteCascade="false" schema="gobs" table="series"/>
+            <child column="fk_id_spatial_layer" foreignKey="spatial_object_fk_id_spatial_layer_fkey" implied="false" onDeleteCascade="false" schema="gobs" table="spatial_object"/>
+         </column>
+         <column autoUpdated="false" defaultValue="null" digits="0" id="1" name="sl_code" nullable="false" remarks="Unique short code for the spatial layer" size="2147483647" type="text" typeCode="12"/>
+         <column autoUpdated="false" defaultValue="null" digits="0" id="2" name="sl_label" nullable="false" remarks="Label of the spatial layer" size="2147483647" type="text" typeCode="12"/>
+         <column autoUpdated="false" defaultValue="null" digits="0" id="3" name="sl_description" nullable="false" remarks="Description" size="2147483647" type="text" typeCode="12"/>
+         <column autoUpdated="false" defaultValue="'2018-06-28'::date" digits="0" id="4" name="sl_creation_date" nullable="false" remarks="Creation date" size="13" type="date" typeCode="91"/>
+         <column autoUpdated="false" defaultValue="null" digits="0" id="5" name="fk_id_actor" nullable="false" remarks="Source actor." size="10" type="int4" typeCode="4">
+            <parent column="id" foreignKey="spatial_layer_fk_id_actor_fkey" implied="false" onDeleteCascade="false" schema="gobs" table="actor"/>
+         </column>
+         <column autoUpdated="false" defaultValue="null" digits="0" id="6" name="sl_geometry_type" nullable="false" remarks="Type of geometry (POINT, POLYGON, MULTIPOLYGON, etc.)" size="2147483647" type="text" typeCode="12"/>
+         <primaryKey column="id" sequenceNumberInPK="1"/>
+         <index name="spatial_layer_pkey" unique="true">
+            <column ascending="true" name="id"/>
+         </index>
+         <index name="spatial_layer_sl_code_idx" unique="false">
+            <column ascending="true" name="sl_code"/>
+         </index>
+      </table>
+      <table name="spatial_object" numRows="0" remarks="Contains all the spatial objects, caracterized by a geometry type and an entity" schema="gobs" type="TABLE">
+         <column autoUpdated="true" defaultValue="nextval('gobs.spatial_object_id_seq'::regclass)" digits="0" id="0" name="id" nullable="false" remarks="ID" size="19" type="bigserial" typeCode="-5">
+            <child column="fk_id_spatial_object" foreignKey="observation_fk_id_spatial_object_fkey" implied="false" onDeleteCascade="false" schema="gobs" table="observation"/>
+         </column>
+         <column autoUpdated="false" defaultValue="null" digits="0" id="1" name="so_unique_id" nullable="false" remarks="Unique code of each object in the spatial layer ( INSEE, tag, etc.)" size="2147483647" type="text" typeCode="12"/>
+         <column autoUpdated="false" defaultValue="null" digits="0" id="2" name="so_unique_label" nullable="false" remarks="Label of each spatial object. Ex : name of the city." size="2147483647" type="text" typeCode="12"/>
+         <column autoUpdated="false" defaultValue="null" digits="0" id="3" name="geom" nullable="false" remarks="Geometry of the spatial object. Alway in EPSG:4326" size="2147483647" type="geometry" typeCode="1111"/>
+         <column autoUpdated="false" defaultValue="null" digits="0" id="4" name="fk_id_spatial_layer" nullable="false" remarks="Spatial layer" size="10" type="int4" typeCode="4">
+            <parent column="id" foreignKey="spatial_object_fk_id_spatial_layer_fkey" implied="false" onDeleteCascade="false" schema="gobs" table="spatial_layer"/>
+         </column>
+         <primaryKey column="id" sequenceNumberInPK="1"/>
+         <index name="spatial_object_pkey" unique="true">
+            <column ascending="true" name="id"/>
+         </index>
+         <index name="spatial_object_fk_id_spatial_layer_idx" unique="false">
+            <column ascending="true" name="fk_id_spatial_layer"/>
+         </index>
+         <index name="spatial_object_geom_idx" unique="false">
+            <column ascending="true" name="geom"/>
+         </index>
+         <index name="spatial_object_so_unique_id_fk_id_spatial_layer_key" unique="true">
+            <column ascending="true" name="so_unique_id"/>
+            <column ascending="true" name="fk_id_spatial_layer"/>
+         </index>
+      </table>
+   </tables>
+   <routines>
+      <routine dataAccess="MODIFIES" deterministic="false" name="parse_indicator_paths" returnType="integer" securityType="INVOKER" type="FUNCTION">
+         <comment/>
+         <definition language="PLPGSQL"><![CDATA[
+DECLARE
+    _path text;
+    _group text;
+    _word text;
+    _parent text;
+    _gid integer;
+    _leaf text;
+    _leaves text[];
+BEGIN
+    _parent = NULL;
+
+    -- PARSE PATHS
+    -- Insert root
+    INSERT INTO gobs.graph_node (gn_label)
+    VALUES ('ROOT')
+    ON CONFLICT DO NOTHING;
+
+    -- Explode path
+    FOR _group IN
+        SELECT trim(g)
+        FROM regexp_split_to_table(i_path, ',') AS g
+    LOOP
+        RAISE NOTICE 'groupe = "%" ', _group;
+        -- Explode group
+        FOR _word IN
+            SELECT trim(w) AS w
+            FROM regexp_split_to_table(_group, '/') AS w
+        LOOP
+            RAISE NOTICE '  * word = "%", parent = "%" ', _word, _parent;
+
+            -- gobs.graph_node
+            INSERT INTO gobs.graph_node (gn_label)
+            VALUES (_word)
+            ON CONFLICT (gn_label)
+            DO NOTHING
+            RETURNING id
+            INTO _gid;
+            IF _gid IS NULL THEN
+                SELECT id INTO _gid
+                FROM gobs.graph_node
+                WHERE gn_label = _word;
+            END IF;
+
+            -- gobs.r_graph_edge
+            INSERT INTO gobs.r_graph_edge (ge_parent_node, ge_child_node)
+            VALUES (
+                (SELECT id FROM gobs.graph_node WHERE gn_label = coalesce(_parent, 'ROOT') LIMIT 1),
+                _gid
+            )
+            ON CONFLICT DO NOTHING;
+
+            -- Change parent with current word -> Next will have it as parent
+            _parent =  _word;
+
+            -- store leaf
+            _leaf = _word;
+
+        END LOOP;
+        -- Put back parent to NULL -> next will start with ROOT
+        _parent =  NULL;
+
+        -- Add leaf to leaves
+        _leaves = _leaves || _leaf ;
+        _leaf = NULL;
+    END LOOP;
+
+    -- Add leaves to r_indicator_node
+    RAISE NOTICE '  leaves % ', _leaves;
+
+    INSERT INTO gobs.r_indicator_node
+    (fk_id_indicator, fk_id_node)
+    SELECT i_id, (
+        SELECT id FROM gobs.graph_node WHERE gn_label = leaf LIMIT 1
+    )
+    FROM (
+        SELECT unnest(_leaves) AS leaf
+    ) AS source
+    ON CONFLICT DO NOTHING;
+
+    RETURN 1;
+END;
+]]></definition>
+      </routine>
+      <routine dataAccess="MODIFIES" deterministic="false" name="trg_after_import_validation" returnType="trigger" securityType="INVOKER" type="FUNCTION">
+         <comment/>
+         <definition language="PLPGSQL"><![CDATA[
+DECLARE
+    _output integer;
+BEGIN
+    IF TG_OP = 'UPDATE' AND NEW.im_status = 'V' AND NEW.im_status != OLD.im_status THEN
+        UPDATE gobs.observation
+        SET ob_validation = now()
+        WHERE TRUE
+        AND fk_id_import = NEW.id
+        ;
+    END IF;
+
+    RETURN NEW;
+END;
+]]></definition>
+      </routine>
+      <routine dataAccess="MODIFIES" deterministic="false" name="trg_parse_indicator_paths" returnType="trigger" securityType="INVOKER" type="FUNCTION">
+         <comment/>
+         <definition language="PLPGSQL"><![CDATA[
+DECLARE
+    _output integer;
+BEGIN
+    IF TG_OP = 'INSERT' OR NEW.id_paths != OLD.id_paths THEN
+        SELECT gobs.parse_indicator_paths(NEW.id, NEW.id_paths)
+        INTO _output;
+    END IF;
+
+    RETURN NEW;
+END;
+]]></definition>
+      </routine>
+   </routines>
+</database>

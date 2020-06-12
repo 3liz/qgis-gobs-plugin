@@ -1,16 +1,11 @@
 # G-Obs
 
+* QGIS plugin repository : https://github.com/3liz/qgis-gobs-plugin/releases/latest/download/plugins.xml
+* Database documentation : https://3liz.github.io/qgis-gobs-plugin/
+
 ![G-Obs](gobs/resources/icons/icon.png)
 
-## Scripts
-
-### Database structure installation files
-
-To generate automatically the SQL files in the `gobs/install/sql` folder, see [README](gobs/install/sql/README.md)
-
-### Database documentation
-
-You can generate the database schema documentation. See [README](gobs/doc/database/README.md)
+![Preview](demo.png)
 
 ## Contributors
 
