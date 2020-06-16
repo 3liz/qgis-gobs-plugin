@@ -24,9 +24,9 @@
        <property name="geometry">
         <rect>
          <x>0</x>
-         <y>0</y>
-         <width>348</width>
-         <height>559</height>
+         <y>-51</y>
+         <width>334</width>
+         <height>610</height>
         </rect>
        </property>
        <layout class="QVBoxLayout" name="verticalLayout">
@@ -114,6 +114,29 @@
          </widget>
         </item>
         <item>
+         <widget class="QGroupBox" name="groupBox_5">
+          <property name="title">
+           <string>Remove data from G-Obs</string>
+          </property>
+          <layout class="QVBoxLayout" name="verticalLayout_6">
+           <item>
+            <widget class="QPushButton" name="button_remove_series_data">
+             <property name="text">
+              <string>Remove series data</string>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <widget class="QPushButton" name="button_remove_spatial_layer_data">
+             <property name="text">
+              <string>Remove spatial layer data</string>
+             </property>
+            </widget>
+           </item>
+          </layout>
+         </widget>
+        </item>
+        <item>
          <widget class="QGroupBox" name="groupBox_4">
           <property name="title">
            <string>Help</string>
@@ -156,6 +179,21 @@
    </layout>
   </widget>
  </widget>
+ <tabstops>
+  <tabstop>scrollArea</tabstop>
+  <tabstop>button_configure_plugin</tabstop>
+  <tabstop>button_create_database_structure</tabstop>
+  <tabstop>button_upgrade_database_structure</tabstop>
+  <tabstop>button_import_spatial_layer_data</tabstop>
+  <tabstop>button_import_observation_data</tabstop>
+  <tabstop>button_get_spatial_layer_vector_data</tabstop>
+  <tabstop>button_get_series_data</tabstop>
+  <tabstop>button_get_aggregated_data</tabstop>
+  <tabstop>button_remove_series_data</tabstop>
+  <tabstop>button_remove_spatial_layer_data</tabstop>
+  <tabstop>button_help_concept</tabstop>
+  <tabstop>button_help_database</tabstop>
+ </tabstops>
  <resources/>
  <connections/>
 </ui>
