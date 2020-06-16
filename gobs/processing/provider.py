@@ -20,6 +20,7 @@ from .algorithms.get_spatial_layer_vector_data import GetSpatialLayerVectorData
 from .algorithms.import_spatial_layer_data import ImportSpatialLayerData
 from .algorithms.upgrade_database_structure import UpgradeDatabaseStructure
 from .algorithms.remove_series_data import RemoveSeriesData
+from .algorithms.remove_spatial_layer_data import RemoveSpatialLayerData
 from gobs.qgis_plugin_tools.tools.i18n import tr
 from gobs.qgis_plugin_tools.tools.resources import resources_path
 
@@ -47,6 +48,7 @@ class GobsProvider(QgsProcessingProvider):
         self.addAlgorithm(GetAggregatedData())
 
         self.addAlgorithm(RemoveSeriesData())
+        self.addAlgorithm(RemoveSpatialLayerData())
 
         # Put the flag back to yes
         QgsExpressionContextUtils.setGlobalVariable('gobs_get_database_data', 'yes')

@@ -59,6 +59,7 @@ class GobsDockWidget(QtWidgets.QDockWidget, FORM_CLASS):
             'get_aggregated_data',
 
             'remove_series_data',
+            'remove_spatial_layer_data',
         ]
         for alg in self.algorithms:
             button = self.findChild(QPushButton, 'button_{0}'.format(alg))

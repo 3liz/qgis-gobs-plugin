@@ -20,23 +20,22 @@ from gobs.qgis_plugin_tools.tools.algorithm_processing import BaseProcessingAlgo
 from .tools import fetchDataFromSqlQuery
 
 
-class RemoveSeriesData(BaseProcessingAlgorithm):
+class RemoveSpatialLayerData(BaseProcessingAlgorithm):
 
-    SERIE = 'SERIE'
-    SERIE_ID = 'SERIE_ID'
-    SERIES_DICT = {}
+    SPATIALLAYER = 'SPATIALLAYER'
+    SPATIALLAYER_ID = 'SPATIALLAYER_ID'
 
     RUN_DELETE = 'RUN_DELETE'
-    DELETE_SERIES = 'DELETE_SERIES'
+    DELETE_SPATIAL_LAYER = 'DELETE_SPATIAL_LAYER'
 
     OUTPUT_STATUS = 'OUTPUT_STATUS'
     OUTPUT_STRING = 'OUTPUT_STRING'
 
     def name(self):
-        return 'remove_series_data'
+        return 'remove_spatial_layer_data'
 
     def displayName(self):
-        return tr('Remove series data')
+        return tr('Remove spatial layer data')
 
     def group(self):
         return tr('Tools')
@@ -46,13 +45,13 @@ class RemoveSeriesData(BaseProcessingAlgorithm):
 
     def shortHelpString(self):
         short_help = tr(
-            'This algorithms allows to completely delete observation data for a specific series'
+            'This algorithms allows to completely delete spatial layer data (objects) for a specific spatial layer'
             '\n'
-            '* Series of observations: the G-Obs series containing the observation data.'
+            '* Spatial layer: choose the G-Obs spatial layer.'
             '\n'
-            '* Check this box to delete: this box must be checked in order to proceed. It is mainly here as a security. Please check the chosen series before proceeding !'
+            '* Check this box to delete: this box must be checked in order to proceed. It is mainly here as a security. Please check the chosen spatial layer before proceeding !'
             '\n'
-            '* Also delete the series item: if you want to delete not only the observation data of the series, but also the series item in the table.'
+            '* Also delete the spatial layer item: if you want to delete not only the spatial objects of the spatial layers, but also the spatial layer item in the table.'
         )
         return short_help
 
@@ -61,21 +60,12 @@ class RemoveSeriesData(BaseProcessingAlgorithm):
         connection_name = QgsExpressionContextUtils.globalScope().variable('gobs_connection_name')
         get_data = QgsExpressionContextUtils.globalScope().variable('gobs_get_database_data')
 
-        # List of series
+        # Add spatial layer choice
+        # List of spatial_layer
         sql = '''
-            SELECT s.id,
-            concat(
-                id_label,
-                ' (', p.pr_label, ')',
-                ' / Source: ', a_label,
-                ' / Layer: ', sl_label
-            ) AS label
-            FROM gobs.series s
-            INNER JOIN gobs.protocol p ON p.id = s.fk_id_protocol
-            INNER JOIN gobs.actor a ON a.id = s.fk_id_actor
-            INNER JOIN gobs.indicator i ON i.id = s.fk_id_indicator
-            INNER JOIN gobs.spatial_layer sl ON sl.id = s.fk_id_spatial_layer
-            ORDER BY label
+            SELECT id, sl_label
+            FROM gobs.spatial_layer
+            ORDER BY sl_label
         '''
         dbpluginclass = createDbPlugin('postgis')
         connections = [c.connectionName() for c in dbpluginclass.connections()]
@@ -85,23 +75,22 @@ class RemoveSeriesData(BaseProcessingAlgorithm):
                 connection_name,
                 sql
             )
-
-        self.SERIES = ['%s' % a[1] for a in data]
-        self.SERIES_DICT = {a[1]: a[0] for a in data}
+        self.SPATIALLAYERS = ['%s - %s' % (a[1], a[0]) for a in data]
+        self.SPATIALLAYERS_DICT = {a[0]: a[1] for a in data}
         self.addParameter(
             QgsProcessingParameterEnum(
-                self.SERIE,
-                tr('Series of observations'),
-                options=self.SERIES,
+                self.SPATIALLAYER,
+                tr('Spatial layer'),
+                options=self.SPATIALLAYERS,
                 optional=False
             )
         )
 
-        # Id of series, to get the series directly
+        # Id of spatial layer, to get the layer directly
         # mainly used from other processing algs
         p = QgsProcessingParameterNumber(
-            self.SERIE_ID,
-            tr('Series ID. If given, it overrides previous choice'),
+            self.SPATIALLAYER_ID,
+            tr('Spatial layer ID. If given, it overrides previous choice'),
             optional=True,
             defaultValue=-1
         )
@@ -120,8 +109,8 @@ class RemoveSeriesData(BaseProcessingAlgorithm):
         # Delete the series
         self.addParameter(
             QgsProcessingParameterBoolean(
-                self.DELETE_SERIES,
-                tr('Also delete the series item'),
+                self.DELETE_SPATIAL_LAYER,
+                tr('Also delete the spatial layer item'),
                 defaultValue=False,
             )
         )
@@ -146,7 +135,7 @@ class RemoveSeriesData(BaseProcessingAlgorithm):
         # Check if runit is checked
         run_delete = self.parameterAsBool(parameters, self.RUN_DELETE, context)
         if not run_delete:
-            msg = tr('You must check the box to delete the observation data !')
+            msg = tr('You must check the box to delete the spatial layer data !')
             ok = False
             return ok, msg
 
@@ -161,56 +150,50 @@ class RemoveSeriesData(BaseProcessingAlgorithm):
         if connection_name not in connections:
             return False, tr('The configured connection name does not exists in QGIS')
 
-        # Check series id is in the list of existing series
-        serie_id = self.parameterAsInt(parameters, self.SERIE_ID, context)
-        if serie_id and serie_id > 0:
-            if serie_id not in self.SERIES_DICT.values():
-                return False, tr('Series ID does not exists in the database')
-        return super(RemoveSeriesData, self).checkParameterValues(parameters, context)
+        # Check layyer id is in the list of existing spatial layers
+        spatial_layer_id = self.parameterAsInt(parameters, self.SPATIALLAYER_ID, context)
+        if spatial_layer_id and spatial_layer_id > 0:
+            if spatial_layer_id not in self.SPATIALLAYERS_DICT:
+                return False, tr('Spatial layer ID does not exists in the database')
+
+        return super(RemoveSpatialLayerData, self).checkParameterValues(parameters, context)
 
     def processAlgorithm(self, parameters, context, feedback):
 
         # parameters
         connection_name = QgsExpressionContextUtils.globalScope().variable('gobs_connection_name')
-        delete_series = self.parameterAsBool(parameters, self.DELETE_SERIES, context)
+        delete_spatial_layer = self.parameterAsBool(parameters, self.DELETE_SPATIAL_LAYER, context)
 
-        # Get series id from first combo box
-        serie = self.SERIES[parameters[self.SERIE]]
-        id_serie = int(self.SERIES_DICT[serie])
+        # Get id, label and geometry type from chosen spatial layer
+        spatiallayer = self.SPATIALLAYERS[parameters[self.SPATIALLAYER]]
+        id_spatial_layer = int(spatiallayer.split('-')[-1].strip())
 
-        # Override series is from second number input
-        serie_id = self.parameterAsInt(parameters, self.SERIE_ID, context)
-        if serie_id in self.SERIES_DICT.values():
-            id_serie = serie_id
+        # Override spatial layer id from second number input
+        spatial_layer_id = self.parameterAsInt(parameters, self.SPATIALLAYER_ID, context)
+        if spatial_layer_id and spatial_layer_id in self.SPATIALLAYERS_DICT:
+            id_spatial_layer = spatial_layer_id
 
         sql = '''
-            DELETE FROM gobs.observation
-            WHERE fk_id_series = {0};
+            DELETE FROM gobs.spatial_object
+            WHERE fk_id_spatial_layer = {0};
             SELECT setval(
-                pg_get_serial_sequence('gobs.observation', 'id'),
+                pg_get_serial_sequence('gobs.spatial_object', 'id'),
                 coalesce(max(id),0) + 1, false
-            ) FROM gobs.observation;
-
-            DELETE FROM gobs.import
-            WHERE fk_id_series = {0};
-            SELECT setval(
-                pg_get_serial_sequence('gobs.import', 'id'),
-                coalesce(max(id),0) + 1, false
-            ) FROM gobs.import;
+            ) FROM gobs.spatial_object;
         '''.format(
-            id_serie
+            id_spatial_layer
         )
 
-        if delete_series:
+        if delete_spatial_layer:
             sql+= '''
-            DELETE FROM gobs.series
+            DELETE FROM gobs.spatial_layer
             WHERE id = {0};
             SELECT setval(
-                pg_get_serial_sequence('gobs.series', 'id'),
+                pg_get_serial_sequence('gobs.spatial_layer', 'id'),
                 coalesce(max(id),0) + 1, false
-            ) FROM gobs.series;
+            ) FROM gobs.spatial_layer;
             '''.format(
-                id_serie
+                id_spatial_layer
             )
 
         [header, data, rowCount, ok, message] = fetchDataFromSqlQuery(
@@ -218,9 +201,9 @@ class RemoveSeriesData(BaseProcessingAlgorithm):
             sql
         )
         if ok:
-            message = tr('Data has been deleted for the chosen series')
-            if delete_series:
-                message+= '. '+ tr('The series has also been deleted')
+            message = tr('Spatial objects has been deleted for the chosen spatial layer')
+            if delete_spatial_layer:
+                message+= '. '+ tr('The spatial layer has also been deleted')
             feedback.pushInfo(
                 message
             )

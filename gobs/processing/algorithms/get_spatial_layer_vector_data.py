@@ -94,7 +94,7 @@ class GetSpatialLayerVectorData(GetDataAsLayer):
 
         spatial_layer_id = self.parameterAsInt(parameters, self.SPATIALLAYER_ID, context)
 
-        # Check serie id is in the list of existing spatial layers
+        # Check layyer id is in the list of existing spatial layers
         if spatial_layer_id and spatial_layer_id > 0:
             if spatial_layer_id not in self.SPATIALLAYERS_DICT:
                 return False, tr('Spatial layer ID does not exists in the database')
