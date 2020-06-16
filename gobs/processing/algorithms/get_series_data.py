@@ -8,6 +8,7 @@ from qgis.core import (
     QgsExpressionContextUtils,
     QgsProcessingException,
     QgsProcessingParameterEnum,
+    QgsProcessingParameterBoolean,
     QgsProcessingParameterNumber,
     QgsProcessingParameterDefinition,
 )
@@ -23,6 +24,7 @@ class GetSeriesData(GetDataAsLayer):
     SERIE = 'SERIE'
     SERIE_ID = 'SERIE_ID'
     SERIES_DICT = {}
+    ADD_SPATIAL_OBJECT_GEOM = 'ADD_SPATIAL_OBJECT_GEOM'
 
     def name(self):
         return 'get_series_data'
@@ -43,6 +45,9 @@ class GetSeriesData(GetDataAsLayer):
             '* Name of the output layer: choose the name of the QGIS table layer to create. If not given, the label of the series will be used, by concatening the label of the indicator, protocol, source actor and spatial layer defining the chosen series.'
             '\n'
             '* Series of observations: choose the G-Obs series of observation you want to use as the data source.'
+            '\n'
+            '* Add spatial object geometry ? If checked, the output layer will be a spatial QGIS vector layer, displayed in the map, and not a geometryless table layer. The result can show duplicated geometries, for observations defined by the same geometry at different dates or times.'
+            '\n'
         )
         return short_help
 
@@ -100,6 +105,16 @@ class GetSeriesData(GetDataAsLayer):
         p.setFlags(QgsProcessingParameterDefinition.FlagHidden)
         self.addParameter(p)
 
+        # Add spatial object geometry ?
+        self.addParameter(
+            QgsProcessingParameterBoolean(
+                self.ADD_SPATIAL_OBJECT_GEOM,
+                tr('Add spatial object geometry ?'),
+                defaultValue=False,
+                optional=False
+            )
+        )
+
     def checkParameterValues(self, parameters, context):
 
         serie_id = self.parameterAsInt(parameters, self.SERIE_ID, context)
@@ -127,6 +142,9 @@ class GetSeriesData(GetDataAsLayer):
         serie_id = self.parameterAsInt(parameters, self.SERIE_ID, context)
         if serie_id in self.SERIES_DICT.values():
             id_serie = serie_id
+
+        # Other parameters
+        add_spatial_object_geom = self.parameterAsBool(parameters, self.ADD_SPATIAL_OBJECT_GEOM, context)
 
         # Get data from chosen series
         feedback.pushInfo(
@@ -182,6 +200,13 @@ class GetSeriesData(GetDataAsLayer):
             SELECT
                 o.id,
                 so_unique_id AS spatial_object_code,
+            '''
+        # Add spatial object geom
+        if add_spatial_object_geom:
+            sql += '''
+            so.geom,
+            '''
+        sql+= '''
                 ob_timestamp AS observation_timestamp,
                 {0}
             FROM gobs.observation AS o
@@ -193,6 +218,10 @@ class GetSeriesData(GetDataAsLayer):
             id_serie
         )
         self.SQL = sql.replace('\n', ' ').rstrip(';')
+
+        # Set GEOM_FIELD depending on parameter
+        if add_spatial_object_geom:
+            self.GEOM_FIELD = 'geom'
 
     def setLayerName(self, parameters, context, feedback):
 
