@@ -23,6 +23,6 @@ upload_files() {
 }
 
 setup_git
-commit_i18n_files
+#commit_i18n_files
 commit_schemaspy_files
 upload_files

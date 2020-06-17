@@ -32,11 +32,11 @@ jobs:
       script:
         - ./install_migrate_generate.sh
 
-    - stage: Push translations to Transifex
-      if: branch = master AND type != pull_request
-      install:
-        - pip3 install git+https://github.com/Gustry/qgis-plugin-ci.git
-      script: qgis-plugin-ci push-translation ${TX_TOKEN}
+#    - stage: Push translations to Transifex
+#      if: branch = master AND type != pull_request
+#      install:
+#        - pip3 install git+https://github.com/Gustry/qgis-plugin-ci.git
+#      script: qgis-plugin-ci push-translation ${TX_TOKEN}
 
     - stage: Deploy
       if: tag IS present
@@ -60,7 +60,8 @@ jobs:
             tags: true
 
         - provider: script
-          script: qgis-plugin-ci release ${TRAVIS_TAG} --github-token ${GH_TOKEN} --transifex-token ${TX_TOKEN} --create-plugin-repo --allow-uncommitted-changes
+#         script: qgis-plugin-ci release ${TRAVIS_TAG} --github-token ${GH_TOKEN} --transifex-token ${TX_TOKEN} --create-plugin-repo --allow-uncommitted-changes
+          script: qgis-plugin-ci release ${TRAVIS_TAG} --github-token ${GH_TOKEN} --create-plugin-repo --allow-uncommitted-changes
           on:
             tags: true
 

@@ -6,8 +6,7 @@
 * Remove series data - new algorithm to proceed observation data deletion
 * QGIS gobs_manager project - change SCR and map extent
 * Get observation data - Add option to also get the corresponding geometry
-* Publish on Github: https://github.com/3liz/qgis-gobs-plugin
-* Add translation to Transifex: https://www.transifex.com/3liz-1/g-obs/dashboard/
+* Publish on GitHub: https://github.com/3liz/qgis-gobs-plugin
 
 ### 0.2.11 - 05/06/2020
 
