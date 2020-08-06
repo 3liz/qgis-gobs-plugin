@@ -48,8 +48,9 @@ class TestProcessing(unittest.TestCase):
 
         feedback = LoggerProcessingFeedBack()
         params = {
-            "OVERRIDE": True,
-            "ADD_TEST_DATA": True,
+            'CONNECTION_NAME': 'test',
+            'OVERRIDE': True,
+            'ADD_TEST_DATA': True,
         }
 
         os.environ["TEST_DATABASE_INSTALL_{}".format(SCHEMA.capitalize())] = VERSION
@@ -103,7 +104,10 @@ class TestProcessing(unittest.TestCase):
         self.assertEqual(VERSION, record[0])
 
         feedback.pushDebugInfo("Update the database")
-        params = {"CONNECTION_NAME": "test", "RUN_MIGRATIONS": True}
+        params = {
+            "CONNECTION_NAME": "test",
+            "RUN_MIGRATIONS": True
+        }
         alg = "{}:upgrade_database_structure".format(provider.id())
         results = processing.run(alg, params, feedback=feedback)
         self.assertEqual(1, results["OUTPUT_STATUS"], 1)
@@ -171,6 +175,7 @@ class TestProcessing(unittest.TestCase):
         feedback.pushInfo("PostGIS version : {}".format(record[0]))
 
         params = {
+            'CONNECTION_NAME': 'test',
             "OVERRIDE": True,  # Must be true, for the time in the test.
             "ADD_TEST_DATA": True,
         }
@@ -205,6 +210,7 @@ class TestProcessing(unittest.TestCase):
 
         feedback.pushDebugInfo("Relaunch the algorithm without override")
         params = {
+            'CONNECTION_NAME': 'test',
             "OVERRIDE": False,
         }
 
@@ -219,7 +225,10 @@ class TestProcessing(unittest.TestCase):
         self.assertEqual(expected, feedback.last)
 
         feedback.pushDebugInfo("Update the database")
-        params = {"CONNECTION_NAME": "test", "RUN_MIGRATIONS": True}
+        params = {
+            "CONNECTION_NAME": "test",
+            "RUN_MIGRATIONS": True
+        }
         alg = "{}:upgrade_database_structure".format(provider.id())
         results = processing.run(alg, params, feedback=feedback)
         self.assertEqual(1, results["OUTPUT_STATUS"], 1)

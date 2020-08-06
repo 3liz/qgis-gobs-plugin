@@ -56,7 +56,8 @@ class GobsPlugin(object):
         self.iface.addDockWidget(Qt.RightDockWidgetArea, self.dock)
 
     def unload(self):
-        self.iface.removeDockWidget(self.dock)
-        self.dock.deleteLater()
-
-        QgsApplication.processingRegistry().removeProvider(self.provider)
+        if self.dock:
+            self.iface.removeDockWidget(self.dock)
+            self.dock.deleteLater()
+        if self.provider:
+            QgsApplication.processingRegistry().removeProvider(self.provider)

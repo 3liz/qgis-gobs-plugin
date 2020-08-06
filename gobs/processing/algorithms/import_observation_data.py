@@ -13,6 +13,7 @@ from qgis.core import (
     QgsProcessingParameterField,
     QgsProcessingOutputString,
     QgsExpressionContextUtils,
+    QgsProject,
 )
 
 from gobs.qgis_plugin_tools.tools.i18n import tr
@@ -21,6 +22,7 @@ from gobs.qgis_plugin_tools.tools.algorithm_processing import BaseProcessingAlgo
 from .tools import (
     fetchDataFromSqlQuery,
     validateTimestamp,
+    getPostgisConnectionList,
 )
 
 
@@ -115,7 +117,8 @@ class ImportObservationData(BaseProcessingAlgorithm):
         )
 
         # Parse new parameters
-        new_params = self.getAdditionnalParameters()
+        project = QgsProject.instance()
+        new_params = self.getAdditionnalParameters(project)
         if new_params:
             for param in new_params:
                 self.addParameter(
@@ -139,6 +142,15 @@ class ImportObservationData(BaseProcessingAlgorithm):
 
     def checkParameterValues(self, parameters, context):
 
+        # Check that the connection name has been configured
+        connection_name = QgsExpressionContextUtils.projectScope(context.project()).variable('gobs_connection_name')
+        if not connection_name:
+            return False, tr('You must use the "Configure G-obs plugin" alg to set the database connection name')
+
+        # Check that it corresponds to an existing connection
+        if connection_name not in getPostgisConnectionList():
+            return False, tr('The configured connection name does not exists in QGIS')
+
         # Check date has been given
         ok = True
         field_timestamp = self.parameterAsString(parameters, self.FIELD_TIMESTAMP, context)
@@ -158,7 +170,7 @@ class ImportObservationData(BaseProcessingAlgorithm):
             return False, msg
         return super(ImportObservationData, self).checkParameterValues(parameters, context)
 
-    def getAdditionnalParameters(self):
+    def getAdditionnalParameters(self, project):
         """
         Returns a dictionary of parameters to add dynamically
         Source is the dimensions of the indicator vector field.
@@ -171,7 +183,8 @@ class ImportObservationData(BaseProcessingAlgorithm):
             return new_params
 
         # Get indicator fields data
-        id_value_code, id_value_name, id_value_type, id_value_unit = self.getIndicatorFields(passed_serie)
+        connection_name = QgsExpressionContextUtils.projectScope(project).variable('gobs_connection_name')
+        id_value_code, id_value_name, id_value_type, id_value_unit = self.getIndicatorFields(connection_name, passed_serie)
 
         # Create dynamic parameters
         for i, code in enumerate(id_value_code):
@@ -189,12 +202,11 @@ class ImportObservationData(BaseProcessingAlgorithm):
         return new_params
 
     @staticmethod
-    def getIndicatorFields(given_serie):
+    def getIndicatorFields(connection_name, given_serie):
         """
         Get indicator data for the given serie id
         """
         # GET INFORMATION of indicator
-        connection_name = QgsExpressionContextUtils.globalScope().variable('gobs_connection_name')
         sql = '''
             SELECT id_value_code, id_value_name, id_value_type, id_value_unit
             FROM gobs.indicator AS i
@@ -229,7 +241,7 @@ class ImportObservationData(BaseProcessingAlgorithm):
     def processAlgorithm(self, parameters, context, feedback):
         # parameters
         # Database connection parameters
-        connection_name = QgsExpressionContextUtils.globalScope().variable('gobs_connection_name')
+        connection_name = QgsExpressionContextUtils.projectScope(context.project()).variable('gobs_connection_name')
 
         field_timestamp = self.parameterAsString(parameters, self.FIELD_TIMESTAMP, context)
         manualdate = self.parameterAsString(parameters, self.MANUALDATE, context)
@@ -238,7 +250,7 @@ class ImportObservationData(BaseProcessingAlgorithm):
 
         # Parse new parameters
         # Add add values in the correct order
-        new_params = self.getAdditionnalParameters()
+        new_params = self.getAdditionnalParameters(context.project())
         if new_params:
             for param in new_params:
                 new_params_values.append(self.parameterAsString(parameters, param['name'], context))

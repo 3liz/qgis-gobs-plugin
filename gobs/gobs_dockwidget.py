@@ -20,13 +20,16 @@ from qgis.core import (
     Qgis,
     QgsApplication,
     QgsExpressionContextUtils,
+    QgsProject,
 )
 
 from processing import execAlgorithmDialog
 
 from .processing.algorithms.import_observation_data import ImportObservationData
-from .processing.algorithms.tools import fetchDataFromSqlQuery
-from db_manager.db_plugins import createDbPlugin
+from .processing.algorithms.tools import (
+    getPostgisConnectionList,
+    fetchDataFromSqlQuery,
+)
 
 from gobs.qgis_plugin_tools.tools.i18n import tr
 from gobs.qgis_plugin_tools.tools.resources import load_ui, plugin_path
@@ -84,6 +87,56 @@ class GobsDockWidget(QtWidgets.QDockWidget, FORM_CLASS):
         if button:
             button.clicked.connect(self.helpDatabase)
 
+        # Connect on project load or new
+        self.project = QgsProject.instance()
+        self.iface.projectRead.connect(self.setInformationFromProject)
+        self.iface.newProjectCreated.connect(self.setInformationFromProject)
+        self.project.customVariablesChanged.connect(self.setInformationFromProject)
+
+        # Set information from project
+        self.setInformationFromProject()
+
+    def setInformationFromProject(self):
+        """Set project based information such as database connection name"""
+
+        # Active connection
+        connection_name = QgsExpressionContextUtils.projectScope(self.project).variable('gobs_connection_name')
+        stylesheet = 'padding:5px; font-weight: bold;'
+        enable = False
+
+        if connection_name:
+            if connection_name in getPostgisConnectionList():
+                connection_info = connection_name
+                stylesheet += "color: green;"
+                enable = True
+            else:
+                connection_info = tr(
+                    'The connection "{}" does not exist'.format(connection_name)
+                )
+                stylesheet += "color: red;"
+        else:
+            connection_info = tr(
+                'No connection set for this project. '
+                'Use the "Configure plugin" algorithm'
+            )
+            stylesheet += "color: red;"
+
+        # Toggle activation for buttons
+        all_buttons = self.algorithms + [
+            'import_observation_data',
+        ]
+        for but in all_buttons:
+            if but == 'configure_plugin':
+                continue
+            button = self.findChild(QPushButton, 'button_{0}'.format(but))
+            if not button:
+                continue
+            button.setEnabled(enable)
+
+        # Set project connection name and stylesheet
+        self.database_connection_name.setText(connection_info)
+        self.database_connection_name.setStyleSheet(stylesheet)
+
     def runAlgorithm(self, name):
 
         if name not in self.algorithms:
@@ -117,12 +170,12 @@ class GobsDockWidget(QtWidgets.QDockWidget, FORM_CLASS):
             INNER JOIN gobs.spatial_layer sl ON sl.id = s.fk_id_spatial_layer
             ORDER BY label
         '''
-        connection_name = QgsExpressionContextUtils.globalScope().variable('gobs_connection_name')
+        project = QgsProject.instance()
+        connection_name = QgsExpressionContextUtils.projectScope(project).variable('gobs_connection_name')
         get_data = QgsExpressionContextUtils.globalScope().variable('gobs_get_database_data')
-        dbpluginclass = createDbPlugin('postgis')
-        connections = [c.connectionName() for c in dbpluginclass.connections()]
+
         series = []
-        if get_data == 'yes' and connection_name in connections:
+        if get_data == 'yes' and connection_name in getPostgisConnectionList():
             [header, data, rowCount, ok, error_message] = fetchDataFromSqlQuery(
                 connection_name,
                 sql

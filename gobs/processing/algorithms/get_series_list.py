@@ -40,7 +40,7 @@ class GetSeriesList(GetDataAsLayer):
 
     def setSql(self, parameters, context, feedback):
 
-        get_data = QgsExpressionContextUtils.globalScope().variable('gobs_get_database_data')
+        get_data = QgsExpressionContextUtils.projectScope(context.project()).variable('gobs_get_database_data')
         if get_data != 'yes':
             return
 

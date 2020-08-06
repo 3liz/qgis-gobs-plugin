@@ -8,6 +8,7 @@ from qgis.core import (
     QgsProcessingOutputString,
     QgsProcessingOutputNumber,
     QgsExpressionContextUtils,
+    QgsProject,
 )
 
 from gobs.qgis_plugin_tools.tools.i18n import tr
@@ -44,7 +45,8 @@ class ConfigurePlugin(BaseProcessingAlgorithm):
     def initAlgorithm(self, config):
         # INPUTS
         # Database connection parameters
-        connection_name = QgsExpressionContextUtils.globalScope().variable('gobs_connection_name')
+        project = QgsProject.instance()
+        connection_name = QgsExpressionContextUtils.projectScope(project).variable('gobs_connection_name')
         db_param = QgsProcessingParameterString(
             self.CONNECTION_NAME,
             tr('PostgreSQL connection to G-Obs database'),
@@ -77,8 +79,8 @@ class ConfigurePlugin(BaseProcessingAlgorithm):
     def processAlgorithm(self, parameters, context, feedback):
         connection_name = parameters[self.CONNECTION_NAME]
 
-        # Set global variable
-        QgsExpressionContextUtils.setGlobalVariable('gobs_connection_name', connection_name)
+        # Set project variable
+        QgsExpressionContextUtils.setProjectVariable(context.project(), 'gobs_connection_name', connection_name)
         feedback.pushInfo(tr('PostgreSQL connection to G-Obs database') + ' = ' + connection_name)
 
         msg = tr('Configuration has been saved')

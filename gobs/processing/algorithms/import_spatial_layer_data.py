@@ -6,7 +6,6 @@ __revision__ = "$Format:%H$"
 import time
 
 import processing
-from db_manager.db_plugins import createDbPlugin
 from qgis.core import (
     QgsProcessingParameterVectorLayer,
     QgsProcessingParameterField,
@@ -14,12 +13,16 @@ from qgis.core import (
     QgsProcessingOutputString,
     QgsExpressionContextUtils,
     QgsProcessingException,
-    QgsWkbTypes
+    QgsWkbTypes,
+    QgsProject,
 )
 
 from gobs.qgis_plugin_tools.tools.i18n import tr
 from gobs.qgis_plugin_tools.tools.algorithm_processing import BaseProcessingAlgorithm
-from .tools import fetchDataFromSqlQuery
+from .tools import (
+    fetchDataFromSqlQuery,
+    getPostgisConnectionList,
+)
 
 
 class ImportSpatialLayerData(BaseProcessingAlgorithm):
@@ -66,7 +69,8 @@ class ImportSpatialLayerData(BaseProcessingAlgorithm):
 
     def initAlgorithm(self, config):
         # INPUTS
-        connection_name = QgsExpressionContextUtils.globalScope().variable('gobs_connection_name')
+        project = QgsProject.instance()
+        connection_name = QgsExpressionContextUtils.projectScope(project).variable('gobs_connection_name')
         get_data = QgsExpressionContextUtils.globalScope().variable('gobs_get_database_data')
 
         # List of spatial_layer
@@ -75,10 +79,8 @@ class ImportSpatialLayerData(BaseProcessingAlgorithm):
             FROM gobs.spatial_layer
             ORDER BY sl_label
         '''
-        dbpluginclass = createDbPlugin('postgis')
-        connections = [c.connectionName() for c in dbpluginclass.connections()]
         data = []
-        if get_data == 'yes' and connection_name in connections:
+        if get_data == 'yes' and connection_name in getPostgisConnectionList():
             [header, data, rowCount, ok, error_message] = fetchDataFromSqlQuery(
                 connection_name,
                 sql
@@ -124,10 +126,23 @@ class ImportSpatialLayerData(BaseProcessingAlgorithm):
             )
         )
 
+    def checkParameterValues(self, parameters, context):
+
+        # Check that the connection name has been configured
+        connection_name = QgsExpressionContextUtils.projectScope(context.project()).variable('gobs_connection_name')
+        if not connection_name:
+            return False, tr('You must use the "Configure G-obs plugin" alg to set the database connection name')
+
+        # Check that it corresponds to an existing connection
+        if connection_name not in getPostgisConnectionList():
+            return False, tr('The configured connection name does not exists in QGIS')
+
+        return super(ImportSpatialLayerData, self).checkParameterValues(parameters, context)
+
     def processAlgorithm(self, parameters, context, feedback):
         # parameters
         # Database connection parameters
-        connection_name = QgsExpressionContextUtils.globalScope().variable('gobs_connection_name')
+        connection_name = QgsExpressionContextUtils.projectScope(context.project()).variable('gobs_connection_name')
 
         spatiallayer = self.SPATIALLAYERS[parameters[self.SPATIALLAYER]]
         sourcelayer = self.parameterAsVectorLayer(parameters, self.SOURCELAYER, context)

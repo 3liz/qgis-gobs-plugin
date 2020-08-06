@@ -5,13 +5,14 @@ __revision__ = "$Format:%H$"
 
 import os
 
-from db_manager.db_plugins import createDbPlugin
 from qgis.core import (
+    QgsProcessingParameterString,
     QgsProcessingParameterBoolean,
     QgsProcessingOutputNumber,
     QgsProcessingOutputString,
     QgsExpressionContextUtils,
     QgsProcessingException,
+    QgsProject,
 )
 
 from gobs.qgis_plugin_tools.tools.i18n import tr
@@ -22,6 +23,9 @@ from ...qgis_plugin_tools.tools.database import (
     available_migrations,
     fetch_data_from_sql_query,
 )
+from .tools import (
+    getPostgisConnectionList,
+)
 SCHEMA = "gobs"
 
 
@@ -30,8 +34,10 @@ class CreateDatabaseStructure(BaseProcessingAlgorithm):
     Create gobs structure in Database
     """
 
+    CONNECTION_NAME = 'CONNECTION_NAME'
     OVERRIDE = 'OVERRIDE'
     ADD_TEST_DATA = 'ADD_TEST_DATA'
+
     OUTPUT_STATUS = 'OUTPUT_STATUS'
     OUTPUT_STRING = 'OUTPUT_STRING'
 
@@ -61,6 +67,21 @@ class CreateDatabaseStructure(BaseProcessingAlgorithm):
 
     def initAlgorithm(self, config):
         # INPUTS
+        project = QgsProject.instance()
+        connection_name = QgsExpressionContextUtils.projectScope(project).variable('gobs_connection_name')
+        db_param = QgsProcessingParameterString(
+            self.CONNECTION_NAME,
+            tr('PostgreSQL connection to G-Obs database'),
+            defaultValue=connection_name,
+            optional=False
+        )
+        db_param.setMetadata({
+            'widget_wrapper': {
+                'class': 'processing.gui.wrappers_postgis.ConnectionWidgetWrapper'
+            }
+        })
+        self.addParameter(db_param)
+
         self.addParameter(
             QgsProcessingParameterBoolean(
                 self.OVERRIDE,
@@ -92,14 +113,12 @@ class CreateDatabaseStructure(BaseProcessingAlgorithm):
 
     def checkParameterValues(self, parameters, context):
         # Check that the connection name has been configured
-        connection_name = QgsExpressionContextUtils.globalScope().variable('gobs_connection_name')
+        connection_name = parameters[self.CONNECTION_NAME]
         if not connection_name:
             return False, tr('You must use the "Configure G-obs plugin" alg to set the database connection name')
 
         # Check that it corresponds to an existing connection
-        dbpluginclass = createDbPlugin('postgis')
-        connections = [c.connectionName() for c in dbpluginclass.connections()]
-        if connection_name not in connections:
+        if connection_name not in getPostgisConnectionList():
             return False, tr('The configured connection name does not exists in QGIS')
 
         # Check database content
@@ -114,7 +133,7 @@ class CreateDatabaseStructure(BaseProcessingAlgorithm):
             FROM information_schema.schemata
             WHERE schema_name = 'gobs';
         '''
-        connection_name = QgsExpressionContextUtils.globalScope().variable('gobs_connection_name')
+        connection_name = parameters[self.CONNECTION_NAME]
         [header, data, rowCount, ok, error_message] = fetch_data_from_sql_query(
             connection_name,
             sql
@@ -131,7 +150,7 @@ class CreateDatabaseStructure(BaseProcessingAlgorithm):
         return ok, msg
 
     def processAlgorithm(self, parameters, context, feedback):
-        connection_name = QgsExpressionContextUtils.globalScope().variable('gobs_connection_name')
+        connection_name = parameters[self.CONNECTION_NAME]
 
         # Drop schema if needed
         override = self.parameterAsBool(parameters, self.OVERRIDE, context)

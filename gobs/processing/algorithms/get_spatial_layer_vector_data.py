@@ -3,18 +3,21 @@ __license__ = "GPL version 3"
 __email__ = "info@3liz.org"
 __revision__ = "$Format:%H$"
 
-from db_manager.db_plugins import createDbPlugin
 from qgis.core import (
     QgsExpressionContextUtils,
     QgsProcessingException,
     QgsProcessingParameterEnum,
     QgsProcessingParameterNumber,
     QgsProcessingParameterDefinition,
+    QgsProject,
 )
 
 from gobs.qgis_plugin_tools.tools.i18n import tr
 from .get_data_as_layer import GetDataAsLayer
-from .tools import fetchDataFromSqlQuery
+from .tools import (
+    fetchDataFromSqlQuery,
+    getPostgisConnectionList,
+)
 
 
 class GetSpatialLayerVectorData(GetDataAsLayer):
@@ -37,9 +40,12 @@ class GetSpatialLayerVectorData(GetDataAsLayer):
 
     def shortHelpString(self):
         short_help = tr(
-            'This algorithm allows to add a vector layer in your QGIS project containing the spatial data from the chosen G-Obs spatial layer. Data are dynamically fetched from the database, meaning they are always up-to-date.'
+            'This algorithm allows to add a vector layer in your QGIS project containing the spatial data '
+            'from the chosen G-Obs spatial layer. Data are dynamically fetched from the database, '
+            'meaning they are always up-to-date.'
             '\n'
-            '* Name of the output layer: choose the name of the QGIS layer to create. If not given, the label of the spatial layer will be used.'
+            '* Name of the output layer: choose the name of the QGIS layer to create. '
+            'If not given, the label of the spatial layer will be used.'
             '\n'
             '* Spatial layer: choose the G-Obs spatial layer you want to use as the data source.'
         )
@@ -50,7 +56,8 @@ class GetSpatialLayerVectorData(GetDataAsLayer):
         # use parent class to get other parameters
         super(self.__class__, self).initAlgorithm(config)
 
-        connection_name = QgsExpressionContextUtils.globalScope().variable('gobs_connection_name')
+        project = QgsProject.instance()
+        connection_name = QgsExpressionContextUtils.projectScope(project).variable('gobs_connection_name')
         get_data = QgsExpressionContextUtils.globalScope().variable('gobs_get_database_data')
 
         # Add spatial layer choice
@@ -60,10 +67,8 @@ class GetSpatialLayerVectorData(GetDataAsLayer):
             FROM gobs.spatial_layer
             ORDER BY sl_label
         '''
-        dbpluginclass = createDbPlugin('postgis')
-        connections = [c.connectionName() for c in dbpluginclass.connections()]
         data = []
-        if get_data == 'yes' and connection_name in connections:
+        if get_data == 'yes' and connection_name in getPostgisConnectionList():
             [header, data, rowCount, ok, error_message] = fetchDataFromSqlQuery(
                 connection_name,
                 sql
@@ -92,6 +97,15 @@ class GetSpatialLayerVectorData(GetDataAsLayer):
 
     def checkParameterValues(self, parameters, context):
 
+        # Check that the connection name has been configured
+        connection_name = QgsExpressionContextUtils.projectScope(context.project()).variable('gobs_connection_name')
+        if not connection_name:
+            return False, tr('You must use the "Configure G-obs plugin" alg to set the database connection name')
+
+        # Check that it corresponds to an existing connection
+        if connection_name not in getPostgisConnectionList():
+            return False, tr('The configured connection name does not exists in QGIS')
+
         spatial_layer_id = self.parameterAsInt(parameters, self.SPATIALLAYER_ID, context)
 
         # Check layyer id is in the list of existing spatial layers
@@ -104,7 +118,7 @@ class GetSpatialLayerVectorData(GetDataAsLayer):
     def setSql(self, parameters, context, feedback):
 
         # Database connection parameters
-        connection_name = QgsExpressionContextUtils.globalScope().variable('gobs_connection_name')
+        connection_name = QgsExpressionContextUtils.projectScope(context.project()).variable('gobs_connection_name')
         get_data = QgsExpressionContextUtils.globalScope().variable('gobs_get_database_data')
         if get_data != 'yes':
             return

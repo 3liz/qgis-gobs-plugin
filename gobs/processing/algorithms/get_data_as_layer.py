@@ -3,7 +3,6 @@ __license__ = "GPL version 3"
 __email__ = "info@3liz.org"
 __revision__ = "$Format:%H$"
 
-from db_manager.db_plugins import createDbPlugin
 from processing.tools import postgis
 from qgis.core import (
     QgsVectorLayer,
@@ -18,6 +17,10 @@ from qgis.core import (
 
 from gobs.qgis_plugin_tools.tools.i18n import tr
 from gobs.qgis_plugin_tools.tools.algorithm_processing import BaseProcessingAlgorithm
+
+from .tools import (
+    getPostgisConnectionList,
+)
 
 
 class GetDataAsLayer(BaseProcessingAlgorithm):
@@ -94,14 +97,12 @@ class GetDataAsLayer(BaseProcessingAlgorithm):
     def checkParameterValues(self, parameters, context):
 
         # Check that the connection name has been configured
-        connection_name = QgsExpressionContextUtils.globalScope().variable('gobs_connection_name')
+        connection_name = QgsExpressionContextUtils.projectScope(context.project()).variable('gobs_connection_name')
         if not connection_name:
             return False, tr('You must use the "Configure G-obs plugin" alg to set the database connection name')
 
         # Check that it corresponds to an existing connection
-        dbpluginclass = createDbPlugin('postgis')
-        connections = [c.connectionName() for c in dbpluginclass.connections()]
-        if connection_name not in connections:
+        if connection_name not in getPostgisConnectionList():
             return False, tr('The configured connection name does not exists in QGIS')
 
         return super(GetDataAsLayer, self).checkParameterValues(parameters, context)
@@ -118,7 +119,7 @@ class GetDataAsLayer(BaseProcessingAlgorithm):
 
     def processAlgorithm(self, parameters, context, feedback):
         # Database connection parameters
-        connection_name = QgsExpressionContextUtils.globalScope().variable('gobs_connection_name')
+        connection_name = QgsExpressionContextUtils.projectScope(context.project()).variable('gobs_connection_name')
 
         msg = ''
         status = 1
