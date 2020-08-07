@@ -15,10 +15,97 @@
  <article>
  <p><a href="../">Up</a></p>
 <p><a href="./index.html">Back</a></p><div class="toc"><span class="toctitle">Table of content</span><ul>
-<li><a href="#g-obs-user-guide">G-Obs user guide</a></li>
+<li><a href="#g-obs-user-guide">G-Obs user guide</a><ul>
+<li><a href="#introduction">Introduction</a></li>
+<li><a href="#g-obs-interface">G-Obs interface</a></li>
+<li><a href="#algorithms">Algorithms</a><ul>
+<li><a href="#configure-g-obs-plugin">Configure G-Obs plugin</a></li>
+<li><a href="#create-database-structure">Create database structure</a></li>
+<li><a href="#upgrade-database-structure">Upgrade database structure</a></li>
+<li><a href="#import-spatial-layer-data">Import spatial layer data</a></li>
+<li><a href="#get-spatial-layer-vector-data">Get spatial layer vector data</a></li>
+<li><a href="#get-series-data">Get series data</a></li>
+<li><a href="#get-aggregated-data">Get aggregated data</a></li>
+<li><a href="#remove-series-data">Remove series data</a></li>
+<li><a href="#remove-spatial-layer-data">Remove spatial layer data</a></li>
+</ul>
+</li>
+</ul>
+</li>
 </ul>
 </div>
 <h1 id="g-obs-user-guide">G-Obs user guide</h1>
+<h2 id="introduction">Introduction</h2>
+<h2 id="g-obs-interface">G-Obs interface</h2>
+<p><img alt="G-Obs dock panel" src="media/gobs_panel.jpg"></p>
+<h2 id="algorithms">Algorithms</h2>
+<h3 id="configure-g-obs-plugin">Configure G-Obs plugin</h3>
+<p>You must run this script before any other script.
+Every parameter will be used in the other algorithms, as default values for parameters.</p>
+<p><img alt="Configure plugin" src="media/gobs_configure_plugin.jpg"></p>
+<h3 id="create-database-structure">Create database structure</h3>
+<p>Install the G-Obs database structure with tables and function on the chosen database.</p>
+<p>This script will add a gobs schema with needed tables and functions</p>
+<p>Beware ! If you check the "override" checkboxes, you will loose all existing data in the existing gobs schema !</p>
+<p><img alt="Create database structure" src="media/gobs_create_database_structure.jpg"></p>
+<h3 id="upgrade-database-structure">Upgrade database structure</h3>
+<p>Upgrade the G-Obs tables and functions in the chosen database.</p>
+<p>If you have upgraded your QGIS G-Obs plugin, you can run this script to upgrade your database to the new plugin version.</p>
+<p><img alt="Upgrade database structyre" src="media/gobs_upgrade_database_structure.jpg"></p>
+<h3 id="import-spatial-layer-data">Import spatial layer data</h3>
+<p>This algorithm allows to import data from a QGIS spatial layer into the G-Obs database</p>
+<p>The G-Obs administrator must have created the needed spatial layer beforehand by addind the required items in the related database tables: gobs.actor_category, gobs.actor and gobs.spatial_layer.</p>
+<ul>
+<li>Target spatial layer: choose one of the spatial layers available in G-Obs database</li>
+<li>Source data layer: choose the QGIS vector layer containing the spatial data you want to import into the chosen spatial layer.</li>
+<li>Unique identifier: choose the field containing the unique ID. It can be an integer or a text field, but must be unique.</li>
+<li>Unique label: choose the text field containing the unique label of the layer feature. You could use the QGIS field calculator to create one if needed.</li>
+</ul>
+<p><img alt="Import spatial layer data" src="media/gobs_import_spatial_layer_data.jpg"></p>
+<h3 id="get-spatial-layer-vector-data">Get spatial layer vector data</h3>
+<p>This algorithm allows to add a vector layer in your QGIS project containing the spatial data from the chosen G-Obs spatial layer. Data are dynamically fetched from the database, meaning they are always up-to-date.</p>
+<ul>
+<li>Name of the output layer: choose the name of the QGIS layer to create. If not given, the label of the spatial layer will be used.</li>
+<li>Spatial layer: choose the G-Obs spatial layer you want to use as the data source.</li>
+</ul>
+<p><img alt="Get spatial layer vector data" src="media/gobs_get_spatial_layer_vector_data.jpg"></p>
+<h3 id="get-series-data">Get series data</h3>
+<p>This algorithm allows to add a table layer in your QGIS project containing the observation data from the chosen G-Obs series. Data are dynamically fetched from the database, meaning they are always up-to-date.</p>
+<ul>
+<li>Name of the output layer: choose the name of the QGIS table layer to create. If not given, the label of the series will be used, by concatening the label of the indicator, protocol, source actor and spatial layer defining the chosen series.</li>
+<li>Series of observations: choose the G-Obs series of observation you want to use as the data source.</li>
+<li>Add spatial object geometry ? If checked, the output layer will be a spatial QGIS vector layer, displayed in the map, and not a geometryless table layer. The result can show duplicated geometries, for observations defined by the same geometry at different dates or times.</li>
+</ul>
+<p><img alt="Get series data" src="media/gobs_get_series_data.jpg"></p>
+<h3 id="get-aggregated-data">Get aggregated data</h3>
+<p>This algorithm allows to add a table or vector layer in your QGIS project containing the aggregated observation data from the chosen G-Obs series. The aggregation is made depending of the user input. Data are dynamically fetched from the database, meaning they are always up-to-date.</p>
+<ul>
+<li>Names of the output layer: choose the name of the QGIS layer to create. If not given, the label of the series of observations, as written in the series combo box.</li>
+<li>Series of observations: the G-Obs series containing the observation data.</li>
+<li>Add spatial object ID and label ? If checked, the output layer will have two more columns with the spatial layer unique identifiers (ID and label).</li>
+<li>Add spatial object geometry ? If checked, the output layer will be a spatial QGIS vector layer, displayed in the map, and not a geometryless table layer. The result can show duplicated geometries, for observations defined by the same geometry at different dates or times.</li>
+<li>Timestamp extraction resolution: choose the desired temporal resolution of the output. Aggregates will be calculated (sum, average, etc.) by grouping the source data by this temporal resolution.</li>
+<li>Choose aggregate functions to use: you can choose between minimum (min), maximum (max), average (avg) and  sum.</li>
+<li>Minimum observation timestamp: if you enter a valid ISO timestamp in this field, only observations with a timestamp after this value will be processed.</li>
+<li>Maximum observation timestamp: if you enter a valid ISO timestamp in this field, only observations with a timestamp before this value will be processed.</li>
+</ul>
+<p><img alt="Get aggregated data" src="media/gobs_get_aggregated_data.jpg"></p>
+<h3 id="remove-series-data">Remove series data</h3>
+<p>This algorithms allows to completely delete observation data for a specific series</p>
+<ul>
+<li>Series of observations: the G-Obs series containing the observation data.</li>
+<li>Check this box to delete: this box must be checked in order to proceed. It is mainly here as a security. Please check the chosen series before proceeding !</li>
+<li>Also delete the series item: if you want to delete not only the observation data of the series, but also the series item in the table.</li>
+</ul>
+<p><img alt="Remove series data" src="media/gobs_remove_series_data.jpg"></p>
+<h3 id="remove-spatial-layer-data">Remove spatial layer data</h3>
+<p>This algorithms allows to completely delete spatial layer data (objects) for a specific spatial layer</p>
+<ul>
+<li>Spatial layer: choose the G-Obs spatial layer.</li>
+<li>Check this box to delete: this box must be checked in order to proceed. It is mainly here as a security. Please check the chosen spatial layer before proceeding !</li>
+<li>Also delete the spatial layer item: if you want to delete not only the spatial objects of the spatial layers, but also the spatial layer item in the table.</li>
+</ul>
+<p><img alt="Remove spatial layer data" src="media/gobs_remove_spatial_layer_data.jpg"></p>
   </article>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/8.1/highlight.min.js">
   </script>
