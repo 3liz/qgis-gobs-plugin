@@ -46,3 +46,7 @@ nosetests.xml
 
 *.zip
 *.bak
+
+# QGIS-Plugin-CI
+plugins.xml
+g_obs.*.zip

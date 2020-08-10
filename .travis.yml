@@ -35,14 +35,14 @@ jobs:
     - stage: Push translations to Transifex
       if: branch = master AND type != pull_request
       install:
-        - pip3 install git+https://github.com/Gustry/qgis-plugin-ci.git
+        - pip3 install qgis-plugin-ci==1.8.2
       script: qgis-plugin-ci push-translation ${TX_TOKEN}
 
     - stage: Deploy
       if: tag IS present
       name: Create release
       install:
-        - pip3 install git+https://github.com/Gustry/qgis-plugin-ci.git
+        - pip3 install qgis-plugin-ci==1.8.2
       before_deploy:
         - export RELEASE_TITLE="$TRAVIS_TAG"
         - qgis-plugin-ci changelog $TRAVIS_TAG > ../release.md
@@ -60,7 +60,13 @@ jobs:
             tags: true
 
         - provider: script
-          script: qgis-plugin-ci release ${TRAVIS_TAG} --github-token ${GH_TOKEN} --transifex-token ${TX_TOKEN} --create-plugin-repo --allow-uncommitted-changes
+          script: >
+            qgis-plugin-ci
+            release ${TRAVIS_TAG}
+            --github-token ${GH_TOKEN}
+            --transifex-token ${TX_TOKEN}
+            --create-plugin-repo
+            --allow-uncommitted-changes
           on:
             tags: true
 
