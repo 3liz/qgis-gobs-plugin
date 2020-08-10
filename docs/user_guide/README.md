@@ -1,65 +1,20 @@
 ---
-Title: G-Obs extension: user guide
+Title: G-Obs plugin - User guide
 Favicon: ../icon.png
 Sibling: yes
 ...
 
 [TOC]
 
-# G-Obs user guide
-
 ## Introduction
+
 
 
 ## G-Obs interface
 
-![G-Obs dock panel](media/gobs_panel.jpg)
+![G-Obs dock panel](../media/gobs_dock.jpg)
 
 ## Algorithms
-
-### Configure G-Obs plugin
-
-This algorithm will allow to configure G-Obs extension for the current QGIS project.
-
-You must run this script before any other script.
-
-* PostgreSQL connection to G-Obs database: name of the database connection you would like to use for the current QGIS project. This connection will be used for the other algorithms.
-
-![Configure plugin](media/gobs_configure_plugin.jpg)
-
-
-### Create database structure
-
-Install the G-Obs database structure with tables and function on the chosen database.
-
-This script will add a gobs schema with needed tables and functions
-
-* PostgreSQL connection to G-Obs database: name of the database connection you would like to use for the installation.
-
-![Create database structure](media/gobs_create_database_structure.jpg)
-
-
-### Upgrade database structure
-
-Upgrade the G-Obs tables and functions in the chosen database.
-
-If you have upgraded your QGIS G-Obs plugin, you can run this script to upgrade your database to the new plugin version.
-
-* PostgreSQL connection to G-Obs database: name of the database connection you would like to use for the upgrade.
-
-![Upgrade database structure](media/gobs_upgrade_database_structure.jpg)
-
-
-### Create administration project
-
-This algorithm will create a new QGIS project file for G-Obs administration purpose.
-
-The generated QGIS project must then be opened by the administrator to create the needed metadata by using QGIS editing capabilities (actors, spatial layers information, indicators, etc.)
-
-* PostgreSQL connection to G-Obs database: name of the database connection you would like to use for the new QGIS project.
-* QGIS project file to create: choose the output file destination.
-
-![Create administration project](media/gobs_create_administration_project_from_template.jpg)
 
 
 ### Import spatial layer data

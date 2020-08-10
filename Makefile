@@ -37,6 +37,7 @@ flake8:
 
 github-pages:
 	@docker run --rm -w /plugin -v $(shell pwd):/plugin etrimaille/pymarkdown:latest docs/README.md docs/index.html
+	@docker run --rm -w /plugin -v $(shell pwd):/plugin etrimaille/pymarkdown:latest docs/installation/README.md docs/installation/index.html
 	@docker run --rm -w /plugin -v $(shell pwd):/plugin etrimaille/pymarkdown:latest docs/admin_guide/README.md docs/admin_guide/index.html
 	@docker run --rm -w /plugin -v $(shell pwd):/plugin etrimaille/pymarkdown:latest docs/concepts/README.md docs/concepts/index.html
 	@docker run --rm -w /plugin -v $(shell pwd):/plugin etrimaille/pymarkdown:latest docs/user_guide/README.md docs/user_guide/index.html

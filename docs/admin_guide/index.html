@@ -3,22 +3,77 @@
 <html>
  <head>
   <meta charset="utf-8"/>
-  <title>G-Obs extension: admin guide</title>
+  <title>G-Obs plugin - Admin guide</title>
   <link href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/8.1/styles/github.min.css" rel="stylesheet"/>
   <link href="https://3liz.github.io/remarkable.css" rel="stylesheet"/>
   <link href="../icon.png" rel="icon" type="image/png" >
  </head>
  <body>
  <header class="header-container" style="">
-    <h1>G-Obs extension: admin guide</h1>
+    <h1>G-Obs plugin - Admin guide</h1>
  </header>
  <article>
  <p><a href="../">Up</a></p>
 <p><a href="./index.html">Back</a></p><div class="toc"><span class="toctitle">Table of content</span><ul>
-<li><a href="#g-obs-admin-guide">G-Obs admin guide</a></li>
+<li><a href="#introduction">Introduction</a></li>
+<li><a href="#create-your-administration-project">Create your administration project</a></li>
+<li><a href="#edit-the-g-obs-database-metadata">Edit the G-Obs database metadata</a><ul>
+<li><a href="#actor_category">actor_category</a></li>
+<li><a href="#actor">actor</a></li>
+<li><a href="#spatial_layer">spatial_layer</a></li>
+<li><a href="#indicator">indicator</a></li>
+<li><a href="#protocol">protocol</a></li>
+<li><a href="#series">series</a></li>
+</ul>
+</li>
 </ul>
 </div>
-<h1 id="g-obs-admin-guide">G-Obs admin guide</h1>
+<h2 id="introduction">Introduction</h2>
+<p>The <strong>administrator</strong> is in charge of describing the different data stored in the G-Obs database:</p>
+<ul>
+<li>actors,</li>
+<li>spatial layers,</li>
+<li>protocols,</li>
+<li>indicators,</li>
+<li>series of data.</li>
+</ul>
+<p>See the (documentation on these concepts)(../concepts/).</p>
+<p>To go on, you must first have installed and configured the G-Obs plugin for QGIS Desktop. See the doc <a href="../installation/">G-Obs installation and configuration</a></p>
+<h2 id="create-your-administration-project">Create your administration project</h2>
+<p>This algorithm will create a <strong>new QGIS project file</strong> for G-Obs administration purpose.</p>
+<p>The generated QGIS project must then be opened by the administrator to create the needed metadata by using QGIS editing capabilities (actors, spatial layers information, indicators, etc.)</p>
+<p>Parameters:</p>
+<ul>
+<li><code>PostgreSQL connection to G-Obs database</code>: name of the database connection you would like to use for the new QGIS project.</li>
+<li><code>QGIS project file to create</code>: choose the output file destination.</li>
+</ul>
+<p><img alt="Create administration project" src="../media/gobs_create_administration_project_from_template.jpg"></p>
+<h2 id="edit-the-g-obs-database-metadata">Edit the G-Obs database metadata</h2>
+<p>The <strong>administration project</strong> created beforehand will allow the administrator to <strong>create, modify and delete metadata</strong> in the G-Obs database. As an administrator, you must open this project with QGIS.</p>
+<p>Be sure you have a working connection between your computer and the database server.</p>
+<p>Once opened, the QGIS project is configured to allow the administrator to edit the data. In the QGIS <strong>Layers</strong> panel, you will see the following layers:</p>
+<p><img alt="G-Obs administration layers" src="../media/gobs_administration_layers.jpg"></p>
+<p>These layers represent the G-Obs PostgreSQL tables which are in charge of storing the metadata and data. In QGIS, you can edit the table data by toggling the <strong>editing mode</strong> for each layer:</p>
+<ul>
+<li>Select the layer in the panel by clicking on it: the layer is highlighted in blue</li>
+<li>Right-click on the layer name and select <code>Toggle Editing</code></li>
+</ul>
+<p>Before going on, please <strong>toggle editing</strong> for all the following layers:</p>
+<ul>
+<li>actor_category</li>
+<li>actor</li>
+<li>spatial_layer</li>
+<li>indicator</li>
+<li>protocol</li>
+<li>series</li>
+</ul>
+<p>We will illustrate the administration task with an example, by editing these layers in the same order as above. Please refer to the (documentation on G-Obs concepts)(../concepts/) to understand the procedure.</p>
+<h3 id="actor_category">actor_category</h3>
+<h3 id="actor">actor</h3>
+<h3 id="spatial_layer">spatial_layer</h3>
+<h3 id="indicator">indicator</h3>
+<h3 id="protocol">protocol</h3>
+<h3 id="series">series</h3>
   </article>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/8.1/highlight.min.js">
   </script>
