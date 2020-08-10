@@ -25,8 +25,8 @@
         <rect>
          <x>0</x>
          <y>0</y>
-         <width>391</width>
-         <height>761</height>
+         <width>377</width>
+         <height>786</height>
         </rect>
        </property>
        <layout class="QVBoxLayout" name="verticalLayout">
@@ -90,6 +90,22 @@
             <widget class="QPushButton" name="button_upgrade_database_structure">
              <property name="text">
               <string>Upgrade database structure</string>
+             </property>
+            </widget>
+           </item>
+          </layout>
+         </widget>
+        </item>
+        <item>
+         <widget class="QGroupBox" name="groupBox_7">
+          <property name="title">
+           <string>Manage metadata</string>
+          </property>
+          <layout class="QVBoxLayout" name="verticalLayout_8">
+           <item>
+            <widget class="QPushButton" name="button_create_manager_project_from_template">
+             <property name="text">
+              <string>Create manager project from template</string>
              </property>
             </widget>
            </item>
@@ -213,6 +229,7 @@
   <tabstop>button_configure_plugin</tabstop>
   <tabstop>button_create_database_structure</tabstop>
   <tabstop>button_upgrade_database_structure</tabstop>
+  <tabstop>button_create_manager_project_from_template</tabstop>
   <tabstop>button_import_spatial_layer_data</tabstop>
   <tabstop>button_import_observation_data</tabstop>
   <tabstop>button_get_spatial_layer_vector_data</tabstop>

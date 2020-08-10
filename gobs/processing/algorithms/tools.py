@@ -5,6 +5,7 @@ __revision__ = "$Format:%H$"
 
 from gobs.qgis_plugin_tools.tools.i18n import tr
 from qgis.core import QgsSettings
+from processing.tools.postgis import uri_from_name
 
 
 def getPostgisConnectionList():
@@ -18,9 +19,27 @@ def getPostgisConnectionList():
     # In QGIS 3.16, we will use
     # metadata = QgsProviderRegistry.instance().providerMetadata('postgres')
     # find a connection by name
-    # connection = metadata.findConnection(connection_name)
+    # postgres_connections = metadata.connections()
+    # connections = postgres_connections.keys()
 
     return connections
+
+
+def getPostgisConnectionUriFromName(connection_name):
+    """
+    Return a QgsDatasourceUri from a PostgreSQL connection name
+    """
+
+    uri = uri_from_name(connection_name)
+
+    # In QGIS 3.10, we will use
+    # metadata = QgsProviderRegistry.instance().providerMetadata('postgres')
+    # find a connection by name
+    # connection = metadata.findConnection(connection_name)
+    # uri_str = connection.uri()
+    # uri = QgsDataSourceUri(uri)
+
+    return uri
 
 
 def fetchDataFromSqlQuery(connection_name, sql):

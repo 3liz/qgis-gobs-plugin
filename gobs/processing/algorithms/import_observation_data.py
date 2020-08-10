@@ -43,10 +43,10 @@ class ImportObservationData(BaseProcessingAlgorithm):
         return tr('Import observation data')
 
     def group(self):
-        return tr('Manage')
+        return tr('Import')
 
     def groupId(self):
-        return 'gobs_manage'
+        return 'gobs_import'
 
     def shortHelpString(self):
         short_help = tr(

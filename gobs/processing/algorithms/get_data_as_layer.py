@@ -3,7 +3,6 @@ __license__ = "GPL version 3"
 __email__ = "info@3liz.org"
 __revision__ = "$Format:%H$"
 
-from processing.tools import postgis
 from qgis.core import (
     QgsVectorLayer,
     QgsProcessingContext,
@@ -20,6 +19,7 @@ from gobs.qgis_plugin_tools.tools.algorithm_processing import BaseProcessingAlgo
 
 from .tools import (
     getPostgisConnectionList,
+    getPostgisConnectionUriFromName,
 )
 
 
@@ -131,7 +131,7 @@ class GetDataAsLayer(BaseProcessingAlgorithm):
 
         # Buid QGIS uri to load layer
         id_field = 'id'
-        uri = postgis.uri_from_name(connection_name)
+        uri = getPostgisConnectionUriFromName(connection_name)
         uri.setDataSource("", "(" + self.SQL + ")", self.GEOM_FIELD, "", id_field)
         vlayer = QgsVectorLayer(uri.uri(), "layername", "postgres")
         if not vlayer.isValid():

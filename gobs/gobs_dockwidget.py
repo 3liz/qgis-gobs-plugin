@@ -55,6 +55,8 @@ class GobsDockWidget(QtWidgets.QDockWidget, FORM_CLASS):
             'create_database_structure',
             'upgrade_database_structure',
 
+            'create_manager_project_from_template',
+
             'import_spatial_layer_data',
 
             'get_spatial_layer_vector_data',
