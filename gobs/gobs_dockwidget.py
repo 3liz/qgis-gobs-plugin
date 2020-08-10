@@ -24,7 +24,6 @@ from qgis.core import (
 )
 
 from processing import execAlgorithmDialog
-
 from .processing.algorithms.import_observation_data import ImportObservationData
 from .processing.algorithms.tools import (
     getPostgisConnectionList,
@@ -32,7 +31,9 @@ from .processing.algorithms.tools import (
 )
 
 from gobs.qgis_plugin_tools.tools.i18n import tr
-from gobs.qgis_plugin_tools.tools.resources import load_ui, plugin_path
+from gobs.qgis_plugin_tools.tools.resources import load_ui
+
+import webbrowser
 
 FORM_CLASS = load_ui('gobs_dockwidget_base.ui')
 
@@ -77,15 +78,10 @@ class GobsDockWidget(QtWidgets.QDockWidget, FORM_CLASS):
         if button:
             button.clicked.connect(self.runImportObservationData)
 
-        # Help on concepts
-        button = self.findChild(QPushButton, 'button_help_concept')
+        # Open online help
+        button = self.findChild(QPushButton, 'button_online_help')
         if button:
-            button.clicked.connect(self.helpConcept)
-
-        # Help on database
-        button = self.findChild(QPushButton, 'button_help_database')
-        if button:
-            button.clicked.connect(self.helpDatabase)
+            button.clicked.connect(self.onLineHelp)
 
         # Connect on project load or new
         self.project = QgsProject.instance()
@@ -254,26 +250,18 @@ class GobsDockWidget(QtWidgets.QDockWidget, FORM_CLASS):
         event.accept()
 
     @staticmethod
-    def openFile(file_path):
+    def openExternalResource(uri, is_url=True):
         """
         Opens a file with default system app
         """
-        import webbrowser
-        webbrowser.open_new(r'file://%s' % file_path)
+        prefix = ''
+        if not is_url:
+            prefix = 'file://'
+        webbrowser.open_new(r'{}{}'.format(prefix, uri))
 
-    def helpConcept(self):
+    def onLineHelp(self):
         """
         Display the help on concepts
         """
-        help_file = plugin_path('doc', 'concepts.md')
-        self.openFile(help_file)
-
-    def helpDatabase(self):
-        """
-        Display the help on database structure
-        """
-        help_file = plugin_path(
-            'doc', 'database', 'schemaspy', 'html', 'gobs',
-            'diagrams', 'summary', 'relationships.real.large.png'
-        )
-        self.openFile(help_file)
+        url = 'https://3liz.github.io/qgis-gobs-plugin/'
+        self.openExternalResource(url)

@@ -179,16 +179,9 @@
           </property>
           <layout class="QVBoxLayout" name="verticalLayout_5">
            <item>
-            <widget class="QPushButton" name="button_help_concept">
+            <widget class="QPushButton" name="button_online_help">
              <property name="text">
-              <string>Concepts</string>
-             </property>
-            </widget>
-           </item>
-           <item>
-            <widget class="QPushButton" name="button_help_database">
-             <property name="text">
-              <string>Database model</string>
+              <string>Online help</string>
              </property>
             </widget>
            </item>
@@ -227,8 +220,7 @@
   <tabstop>button_get_aggregated_data</tabstop>
   <tabstop>button_remove_series_data</tabstop>
   <tabstop>button_remove_spatial_layer_data</tabstop>
-  <tabstop>button_help_concept</tabstop>
-  <tabstop>button_help_database</tabstop>
+  <tabstop>button_online_help</tabstop>
  </tabstops>
  <resources/>
  <connections/>
