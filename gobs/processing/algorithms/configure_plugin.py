@@ -36,9 +36,13 @@ class ConfigurePlugin(BaseProcessingAlgorithm):
 
     def shortHelpString(self):
         short_help = tr(
+            'This algorithm will allow to configure G-Obs extension for the current QGIS project'
+            '\n'
+            '\n'
             'You must run this script before any other script.'
             '\n'
-            'Every parameter will be used in the other algorithms, as default values for parameters.'
+            '\n'
+            '* PostgreSQL connection to G-Obs database: name of the database connection you would like to use for the current QGIS project. This connection will be used for the other algorithms.'
         )
         return short_help
 

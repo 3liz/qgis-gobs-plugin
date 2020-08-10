@@ -19,8 +19,11 @@ Sibling: yes
 
 ### Configure G-Obs plugin
 
+This algorithm will allow to configure G-Obs extension for the current QGIS project.
+
 You must run this script before any other script.
-Every parameter will be used in the other algorithms, as default values for parameters.
+
+* PostgreSQL connection to G-Obs database: name of the database connection you would like to use for the current QGIS project. This connection will be used for the other algorithms.
 
 ![Configure plugin](media/gobs_configure_plugin.jpg)
 
@@ -31,7 +34,7 @@ Install the G-Obs database structure with tables and function on the chosen data
 
 This script will add a gobs schema with needed tables and functions
 
-Beware ! If you check the "override" checkboxes, you will loose all existing data in the existing gobs schema !
+* PostgreSQL connection to G-Obs database: name of the database connection you would like to use for the installation.
 
 ![Create database structure](media/gobs_create_database_structure.jpg)
 
@@ -42,7 +45,21 @@ Upgrade the G-Obs tables and functions in the chosen database.
 
 If you have upgraded your QGIS G-Obs plugin, you can run this script to upgrade your database to the new plugin version.
 
-![Upgrade database structyre](media/gobs_upgrade_database_structure.jpg)
+* PostgreSQL connection to G-Obs database: name of the database connection you would like to use for the upgrade.
+
+![Upgrade database structure](media/gobs_upgrade_database_structure.jpg)
+
+
+### Create administration project
+
+This algorithm will create a new QGIS project file for G-Obs administration purpose.
+
+The generated QGIS project must then be opened by the administrator to create the needed metadata by using QGIS editing capabilities (actors, spatial layers information, indicators, etc.)
+
+* PostgreSQL connection to G-Obs database: name of the database connection you would like to use for the new QGIS project.
+* QGIS project file to create: choose the output file destination.
+
+![Create administration project](media/gobs_create_administration_project_from_template.jpg)
 
 
 ### Import spatial layer data

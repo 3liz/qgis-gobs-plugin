@@ -20,7 +20,7 @@ from .tools import (
 )
 
 
-class CreateManagerProjectFromTemplate(BaseProcessingAlgorithm):
+class CreateAdministrationProjectFromTemplate(BaseProcessingAlgorithm):
 
     CONNECTION_NAME = 'CONNECTION_NAME'
     PROJECT_FILE = 'PROJECT_FILE'
@@ -29,22 +29,28 @@ class CreateManagerProjectFromTemplate(BaseProcessingAlgorithm):
     OUTPUT_STRING = 'OUTPUT_STRING'
 
     def name(self):
-        return 'create_manager_project_from_template'
+        return 'create_administration_project_from_template'
 
     def displayName(self):
-        return tr('Create manager project from template')
+        return tr('Create administration project')
 
     def group(self):
-        return tr('Manage')
+        return tr('Administration')
 
     def groupId(self):
-        return 'gobs_manage'
+        return 'gobs_administration'
 
     def shortHelpString(self):
         short_help = tr(
-            'You must run this script before any other script.'
+            'This algorithm will create a new QGIS project file for G-Obs administration purpose.'
             '\n'
-            'Every parameter will be used in the other algorithms, as default values for parameters.'
+            '\n'
+            'The generated QGIS project must then be opened by the administrator to create the needed metadata by using QGIS editing capabilities (actors, spatial layers information, indicators, etc.)'
+            '\n'
+            '\n'
+            '* PostgreSQL connection to G-Obs database: name of the database connection you would like to use for the new QGIS project.'
+            '\n'
+            '* QGIS project file to create: choose the output file destination.'
         )
         return short_help
 
@@ -69,7 +75,7 @@ class CreateManagerProjectFromTemplate(BaseProcessingAlgorithm):
         self.addParameter(
             QgsProcessingParameterFileDestination(
                 self.PROJECT_FILE,
-                tr('QGIS project manager file to create'),
+                tr('QGIS project file to create'),
                 defaultValue='',
                 optional=False,
                 fileFilter='qgs'
@@ -103,7 +109,7 @@ class CreateManagerProjectFromTemplate(BaseProcessingAlgorithm):
         if connection_name not in getPostgisConnectionList():
             return False, tr('The configured connection name does not exists in QGIS')
 
-        return super(CreateManagerProjectFromTemplate, self).checkParameterValues(parameters, context)
+        return super(CreateAdministrationProjectFromTemplate, self).checkParameterValues(parameters, context)
 
     def processAlgorithm(self, parameters, context, feedback):
 
@@ -135,7 +141,7 @@ class CreateManagerProjectFromTemplate(BaseProcessingAlgorithm):
         with open(project_file, 'w') as fout:
             fout.write(filedata)
 
-        msg = tr('Manager project has been successfully created from database connection')
+        msg = tr('QGIS Administration project has been successfully created from database connection')
         msg+= ': {}'.format(connection_name)
         feedback.pushInfo(msg)
         status = 1

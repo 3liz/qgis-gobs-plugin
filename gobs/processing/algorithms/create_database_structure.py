@@ -61,6 +61,9 @@ class CreateDatabaseStructure(BaseProcessingAlgorithm):
             'This script will add a gobs schema with needed tables and functions'
             '\n'
             '\n'
+            '* PostgreSQL connection to G-Obs database: name of the database connection you would like to use for the installation.'
+            '\n'
+            '\n'
             'Beware ! If you check the "override" checkboxes, you will loose all existing data in the existing gobs schema !'
         )
         return short_help

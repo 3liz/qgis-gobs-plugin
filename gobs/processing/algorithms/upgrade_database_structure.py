@@ -55,6 +55,9 @@ class UpgradeDatabaseStructure(BaseProcessingAlgorithm):
             '\n'
             'If you have upgraded your QGIS G-Obs plugin, you can run this script'
             ' to upgrade your database to the new plugin version.'
+            '\n'
+            '\n'
+            '* PostgreSQL connection to G-Obs database: name of the database connection you would like to use for the upgrade.'
         )
         return short_help
 

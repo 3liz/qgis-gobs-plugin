@@ -99,13 +99,13 @@
         <item>
          <widget class="QGroupBox" name="groupBox_7">
           <property name="title">
-           <string>Manage metadata</string>
+           <string>Administration</string>
           </property>
           <layout class="QVBoxLayout" name="verticalLayout_8">
            <item>
-            <widget class="QPushButton" name="button_create_manager_project_from_template">
+            <widget class="QPushButton" name="button_create_administration_project_from_template">
              <property name="text">
-              <string>Create manager project from template</string>
+              <string>Create administration project from template</string>
              </property>
             </widget>
            </item>
@@ -229,7 +229,7 @@
   <tabstop>button_configure_plugin</tabstop>
   <tabstop>button_create_database_structure</tabstop>
   <tabstop>button_upgrade_database_structure</tabstop>
-  <tabstop>button_create_manager_project_from_template</tabstop>
+  <tabstop>button_create_administration_project_from_template</tabstop>
   <tabstop>button_import_spatial_layer_data</tabstop>
   <tabstop>button_import_observation_data</tabstop>
   <tabstop>button_get_spatial_layer_vector_data</tabstop>

@@ -3384,7 +3384,7 @@ def my_form_open(dialog, layer, feature):
     <WMSContactMail type="QString"></WMSContactMail>
     <WMSPrecision type="QString">8</WMSPrecision>
     <WMSFees type="QString">conditions unknown</WMSFees>
-    <WMSServiceTitle type="QString">gobs_manager</WMSServiceTitle>
+    <WMSServiceTitle type="QString">G-Obs administration</WMSServiceTitle>
     <WMSExtent type="QStringList">
       <value>763699.3042286554</value>
       <value>6275302.4538766</value>
