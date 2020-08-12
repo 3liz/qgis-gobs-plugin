@@ -1,5 +1,13 @@
 # CHANGELOG
 
+### 0.3.1 - 12/08/2020
+
+* Documentation - Publish documentation to https://3liz.github.io/qgis-gobs-plugin/ (installation, concepts, admin guide, user guide & database)
+* Algorithms - New algorithm to create a database local interface for admins as a QGIS project
+* Active PostgreSQL connection - Use a QGIS project variable instead of a QGIS global variable to store the connection name used
+* Dock - Reorganize buttons, display the chosen database connection on top
+* Dock - Replace helps buttons by single online help button
+
 ### 0.3.0 - 17/06/2020
 
 * Remove spatial layer data - new algorithm to proceed spatial layer data deletion
