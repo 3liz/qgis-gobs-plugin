@@ -55,7 +55,7 @@ class GobsDockWidget(QtWidgets.QDockWidget, FORM_CLASS):
             'create_database_structure',
             'upgrade_database_structure',
 
-            'create_administration_project_from_template',
+            'create_database_local_interface',
 
             'import_spatial_layer_data',
 
@@ -124,7 +124,7 @@ class GobsDockWidget(QtWidgets.QDockWidget, FORM_CLASS):
             'import_observation_data',
         ]
         for but in all_buttons:
-            if but in ('configure_plugin', 'create_administration_project_from_template'):
+            if but in ('configure_plugin', 'create_database_local_interface'):
                 continue
             button = self.findChild(QPushButton, 'button_{0}'.format(but))
             if not button:

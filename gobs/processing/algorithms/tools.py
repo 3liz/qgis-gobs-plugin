@@ -4,6 +4,7 @@ __email__ = "info@3liz.org"
 __revision__ = "$Format:%H$"
 
 from gobs.qgis_plugin_tools.tools.i18n import tr
+from gobs.qgis_plugin_tools.tools.resources import plugin_path
 from qgis.core import QgsSettings
 from processing.tools.postgis import uri_from_name
 
@@ -140,3 +141,33 @@ def getVersionInteger(f):
     and sorting the upgrade files
     """
     return ''.join([a.zfill(2) for a in f.strip().split('.')])
+
+
+def createAdministrationProjectFromTemplate(connection_name, project_file_path):
+    """
+    Creates a new administration project from template
+    for the given connection name
+    to the given target path
+    """
+    # Get connection information
+    uri = getPostgisConnectionUriFromName(connection_name)
+    connection_info = uri.connectionInfo()
+
+    # Read in the template file
+    template_file = plugin_path('qgis', 'gobs_administration.qgs')
+    with open(template_file, 'r') as fin:
+        filedata = fin.read()
+
+    # Replace the database connection information
+    filedata = filedata.replace(
+        "service='gobs'",
+        connection_info
+    )
+
+    # Replace also the QGIS project variable
+    filedata = filedata.replace(
+        "gobs_connection_name_value",
+        connection_name
+    )
+    with open(project_file_path, 'w') as fout:
+        fout.write(filedata)

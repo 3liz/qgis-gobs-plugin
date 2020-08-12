@@ -20,7 +20,7 @@ from .algorithms.import_spatial_layer_data import ImportSpatialLayerData
 from .algorithms.upgrade_database_structure import UpgradeDatabaseStructure
 from .algorithms.remove_series_data import RemoveSeriesData
 from .algorithms.remove_spatial_layer_data import RemoveSpatialLayerData
-from .algorithms.create_administration_project_from_template import CreateAdministrationProjectFromTemplate
+from .algorithms.create_database_local_interface import CreateDatabaseLocalInterface
 
 from gobs.qgis_plugin_tools.tools.i18n import tr
 from gobs.qgis_plugin_tools.tools.resources import resources_path
@@ -42,7 +42,7 @@ class GobsProvider(QgsProcessingProvider):
         self.addAlgorithm(CreateDatabaseStructure())
         self.addAlgorithm(UpgradeDatabaseStructure())
 
-        self.addAlgorithm(CreateAdministrationProjectFromTemplate())
+        self.addAlgorithm(CreateDatabaseLocalInterface())
 
         self.addAlgorithm(ImportSpatialLayerData())
         self.addAlgorithm(GetSpatialLayerVectorData())

@@ -21,7 +21,7 @@ See the (documentation on these concepts)(../concepts/).
 
 To go on, you must first have installed and configured the G-Obs plugin for QGIS Desktop. See the doc [G-Obs installation and configuration](../installation/)
 
-## Create your administration project
+## Create your database local interface
 
 This algorithm will create a **new QGIS project file** for G-Obs administration purpose.
 
@@ -32,7 +32,7 @@ Parameters:
 * `PostgreSQL connection to G-Obs database`: name of the database connection you would like to use for the new QGIS project.
 * `QGIS project file to create`: choose the output file destination.
 
-![Create administration project](../media/gobs_create_administration_project_from_template.jpg)
+![Create administration project](../media/gobs_create_database_local_interface.jpg)
 
 ## Edit the G-Obs database metadata
 

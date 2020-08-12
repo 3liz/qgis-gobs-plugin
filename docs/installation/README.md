@@ -30,7 +30,7 @@ At present, G-Obs is not yet in QGIS official plugin repository. To install the 
 * open QGIS **Plugin manager** (menu Plugins)
 * in the **Parameters** tab, add a new plugin repository name **G-Obs** with the URL: https://github.com/3liz/qgis-gobs-plugin/releases/latest/download/plugins.xml
 
-![G-Obs dock panel](../media/gobs_install_plugin_1.jpg)
+![G-Obs install plugin](../media/gobs_install_plugin.png)
 
 * In the **All** tab, search for the word `obs` and install the **G-Obs** plugin.
 

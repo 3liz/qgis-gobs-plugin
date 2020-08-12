@@ -440,9 +440,16 @@ class ImportObservationData(BaseProcessingAlgorithm):
                         field_timestamp,
                         caster
                     )
+
+            # We use the unique constraint to override or not the data
+            # "observation_data_unique" UNIQUE CONSTRAINT, btree (fk_id_series, fk_id_spatial_object, ob_timestamp)
+            # ob_validation is automatically set by the trigger gobs.trg_after_import_validation()
+            # to now() when the import is validated
             sql = '''
-                INSERT INTO gobs.observation AS o
-                (fk_id_series, fk_id_spatial_object, fk_id_import, ob_value, ob_timestamp)
+                INSERT INTO gobs.observation AS o (
+                    fk_id_series, fk_id_spatial_object, fk_id_import,
+                    ob_value, ob_timestamp
+                )
                 SELECT
                 -- id of the serie
                 {id_serie},

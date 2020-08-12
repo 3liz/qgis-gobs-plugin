@@ -3473,9 +3473,11 @@ def my_form_open(dialog, layer, feature):
     <Variables>
       <variableNames type="QStringList">
         <value>gobs_connection_name</value>
+        <value>gobs_is_admin_project</value>
       </variableNames>
       <variableValues type="QStringList">
         <value>gobs_connection_name_value</value>
+        <value>yes</value>
       </variableValues>
     </Variables>
     <WMSImageQuality type="int">90</WMSImageQuality>
