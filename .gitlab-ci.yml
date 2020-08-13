@@ -1,4 +1,5 @@
 variables:
+  PLUGIN_NAME: "g_obs"
   GIT_SUBMODULE_STRATEGY: recursive
 
 stages:
@@ -22,5 +23,6 @@ package:
   tags:
     - factory
   artifacts:
+    expose_as: 'QGIS package'
     paths:
-    - g-obs.${CI_COMMIT_REF_NAME}.zip
+      - ${PLUGIN_NAME}.${CI_COMMIT_REF_NAME}.zip

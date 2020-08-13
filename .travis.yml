@@ -1,3 +1,5 @@
+os: linux
+
 dist: bionic
 
 language: python
@@ -71,7 +73,6 @@ jobs:
             tags: true
 
         - provider: script
-          skip_cleanup: true
           script: .github/push_to_github.sh
           on:
             tags: true
