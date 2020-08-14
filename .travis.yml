@@ -62,7 +62,7 @@ jobs:
             tags: true
 
         - provider: script
-          script: >
+          script: >-
             qgis-plugin-ci
             release ${TRAVIS_TAG}
             --github-token ${GH_TOKEN}
