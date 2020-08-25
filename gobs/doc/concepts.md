@@ -149,8 +149,7 @@ Le gestionnaire de données peut ajouter des données. Il peut réimporter un je
 * Si l'observation existe déjà et a été validée : pas d'écrasement.
 * Si l'observaton n'existe pas, elle est ajoutée, a le statut par défaut (non validée)
 * Si l'observation existe et qu'elle n'est pas validée, elle est écrasée par la nouvelle.
-* Les données orphelines sont détectées et supprimées. C'est le cas par exemple d'une observation supprimée dans le nouveau jeu d'import. On détecte lorsqu'un import B écrase au moins partiellement un import A en laissant des données orphelines (présentes dans A, pas écrasées par B).
-
+* Pour pouvoir supprimer des données, il faut permettre de gérer un champ "a supprimer" ou une valeur "delete" ou "-1" qui permet de supprimer les données d'observation de manière contrôlée. Ajouter les UUID des observatoins supprmées dans une table de log.
 Le gestionnaire des données peut facilement connaître les données importées dans la base non validées, et ainsi contacter si besoin ou supprimer les données après accord.
 
 ### Création d'un service informationnel
