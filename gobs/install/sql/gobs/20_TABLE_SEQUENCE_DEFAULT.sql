@@ -72,6 +72,49 @@ CREATE SEQUENCE gobs.actor_id_seq
 ALTER SEQUENCE gobs.actor_id_seq OWNED BY gobs.actor.id;
 
 
+-- deleted
+CREATE TABLE gobs.deleted (
+    de_table text NOT NULL,
+    de_uid uuid NOT NULL,
+    de_timestamp timestamp without time zone DEFAULT now() NOT NULL
+);
+
+
+-- deleted
+COMMENT ON TABLE gobs.deleted IS 'Log of deleted objects from observation table. Use for synchronization purpose';
+
+
+-- document
+CREATE TABLE gobs.document (
+    id integer NOT NULL,
+    do_uid uuid DEFAULT public.uuid_generate_v4() NOT NULL,
+    do_label text NOT NULL,
+    do_description text,
+    do_type text NOT NULL,
+    do_path text NOT NULL,
+    fk_id_indicator integer,
+    created_at timestamp without time zone DEFAULT now() NOT NULL,
+    updated_at timestamp without time zone DEFAULT now() NOT NULL
+);
+
+
+-- document
+COMMENT ON TABLE gobs.document IS 'List of documents for describing indicators.';
+
+
+-- document_id_seq
+CREATE SEQUENCE gobs.document_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+-- document_id_seq
+ALTER SEQUENCE gobs.document_id_seq OWNED BY gobs.document.id;
+
+
 -- glossary
 CREATE TABLE gobs.glossary (
     id integer NOT NULL,
@@ -161,7 +204,9 @@ CREATE TABLE gobs.indicator (
     id_value_name text[] NOT NULL,
     id_value_type text[] NOT NULL,
     id_value_unit text[] NOT NULL,
-    id_paths text
+    id_paths text,
+    created_at timestamp without time zone DEFAULT now() NOT NULL,
+    updated_at timestamp without time zone DEFAULT now() NOT NULL
 );
 
 
@@ -216,7 +261,10 @@ CREATE TABLE gobs.observation (
     fk_id_import integer NOT NULL,
     ob_value jsonb NOT NULL,
     ob_timestamp timestamp without time zone NOT NULL,
-    ob_validation timestamp without time zone
+    ob_validation timestamp without time zone,
+    ob_uid uuid DEFAULT public.uuid_generate_v4() NOT NULL,
+    created_at timestamp without time zone DEFAULT now() NOT NULL,
+    updated_at timestamp without time zone DEFAULT now() NOT NULL
 );
 
 
@@ -347,7 +395,12 @@ CREATE TABLE gobs.spatial_object (
     so_unique_id text NOT NULL,
     so_unique_label text NOT NULL,
     geom public.geometry(Geometry,4326) NOT NULL,
-    fk_id_spatial_layer integer NOT NULL
+    fk_id_spatial_layer integer NOT NULL,
+    so_valid_from date DEFAULT (now())::date NOT NULL,
+    so_valid_to date,
+    so_uid uuid DEFAULT public.uuid_generate_v4() NOT NULL,
+    created_at timestamp without time zone DEFAULT now() NOT NULL,
+    updated_at timestamp without time zone DEFAULT now() NOT NULL
 );
 
 
@@ -374,6 +427,10 @@ ALTER TABLE ONLY gobs.actor ALTER COLUMN id SET DEFAULT nextval('gobs.actor_id_s
 
 -- actor_category id
 ALTER TABLE ONLY gobs.actor_category ALTER COLUMN id SET DEFAULT nextval('gobs.actor_category_id_seq'::regclass);
+
+
+-- document id
+ALTER TABLE ONLY gobs.document ALTER COLUMN id SET DEFAULT nextval('gobs.document_id_seq'::regclass);
 
 
 -- glossary id

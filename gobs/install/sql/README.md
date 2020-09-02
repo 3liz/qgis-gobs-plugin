@@ -5,9 +5,10 @@
 Generation of the `gobs` schema SQL files is made via
 
 ```bash
-
-cd install/sql
+cd gobs/install/sql
 ./export_database_structure_to_SQL.sh gobs gobs
+cd ../../..
+make reformat_sql
 ```
 
 This script will remove and regenerate the SQL files based on the `pg_dump` tool, by connecting to the database referenced by the PostgreSQL service `gobs`. You need to pass the parameter `gobs`, which is the name of the schema, and the name of the target folder (relative to `install/sql`)

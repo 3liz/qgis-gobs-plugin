@@ -16,6 +16,51 @@ SET xmloption = content;
 SET client_min_messages = warning;
 SET row_security = off;
 
+-- log_deleted_object()
+CREATE FUNCTION gobs.log_deleted_object() RETURNS trigger
+    LANGUAGE plpgsql
+    AS $$
+DECLARE
+    oid text;
+BEGIN
+    INSERT INTO gobs.deleted (
+        de_table,
+        de_uid,
+        de_timestamp
+    )
+    VALUES (
+        TG_TABLE_NAME::text,
+        OLD.ob_uid,
+        now()
+    )
+    ;
+    RETURN OLD;
+END;
+$$;
+
+
+-- manage_object_timestamps()
+CREATE FUNCTION gobs.manage_object_timestamps() RETURNS trigger
+    LANGUAGE plpgsql
+    AS $$
+DECLARE
+    nowtm timestamp;
+BEGIN
+    nowtm = now();
+    IF TG_OP = 'INSERT' THEN
+        NEW.created_at = nowtm;
+        NEW.updated_at = nowtm;
+    END IF;
+
+    IF TG_OP = 'UPDATE' THEN
+        NEW.updated_at = nowtm;
+    END IF;
+
+    RETURN NEW;
+END;
+$$;
+
+
 -- parse_indicator_paths(integer, text)
 CREATE FUNCTION gobs.parse_indicator_paths(i_id integer, i_path text) RETURNS integer
     LANGUAGE plpgsql

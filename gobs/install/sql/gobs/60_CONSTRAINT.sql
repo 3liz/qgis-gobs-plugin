@@ -28,6 +28,21 @@ ALTER TABLE ONLY gobs.actor
     ADD CONSTRAINT actor_pkey PRIMARY KEY (id);
 
 
+-- deleted deleted_pkey
+ALTER TABLE ONLY gobs.deleted
+    ADD CONSTRAINT deleted_pkey PRIMARY KEY (de_table, de_uid);
+
+
+-- document document_do_label_key
+ALTER TABLE ONLY gobs.document
+    ADD CONSTRAINT document_do_label_key UNIQUE (do_label);
+
+
+-- document document_pkey
+ALTER TABLE ONLY gobs.document
+    ADD CONSTRAINT document_pkey PRIMARY KEY (id);
+
+
 -- glossary glossary_pkey
 ALTER TABLE ONLY gobs.glossary
     ADD CONSTRAINT glossary_pkey PRIMARY KEY (id);
@@ -111,6 +126,11 @@ ALTER TABLE ONLY gobs.spatial_object
 -- actor actor_id_category_fkey
 ALTER TABLE ONLY gobs.actor
     ADD CONSTRAINT actor_id_category_fkey FOREIGN KEY (id_category) REFERENCES gobs.actor_category(id) ON DELETE RESTRICT;
+
+
+-- document document_fk_id_indicator_fkey
+ALTER TABLE ONLY gobs.document
+    ADD CONSTRAINT document_fk_id_indicator_fkey FOREIGN KEY (fk_id_indicator) REFERENCES gobs.indicator(id);
 
 
 -- import import_fk_id_series_fkey

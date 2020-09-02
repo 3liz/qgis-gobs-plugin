@@ -24,6 +24,22 @@ CREATE TRIGGER gobs_on_import_change AFTER UPDATE ON gobs.import FOR EACH ROW EX
 CREATE TRIGGER gobs_on_indicator_change AFTER INSERT OR UPDATE ON gobs.indicator FOR EACH ROW EXECUTE PROCEDURE gobs.trg_parse_indicator_paths();
 
 
+-- observation trg_log_deleted_object
+CREATE TRIGGER trg_log_deleted_object AFTER DELETE ON gobs.observation FOR EACH ROW EXECUTE PROCEDURE gobs.log_deleted_object();
+
+
+-- document trg_manage_object_timestamps
+CREATE TRIGGER trg_manage_object_timestamps BEFORE INSERT OR UPDATE ON gobs.document FOR EACH ROW EXECUTE PROCEDURE gobs.manage_object_timestamps();
+
+
+-- indicator trg_manage_object_timestamps
+CREATE TRIGGER trg_manage_object_timestamps BEFORE INSERT OR UPDATE ON gobs.indicator FOR EACH ROW EXECUTE PROCEDURE gobs.manage_object_timestamps();
+
+
+-- observation trg_manage_object_timestamps
+CREATE TRIGGER trg_manage_object_timestamps BEFORE INSERT OR UPDATE ON gobs.observation FOR EACH ROW EXECUTE PROCEDURE gobs.manage_object_timestamps();
+
+
 --
 -- PostgreSQL database dump complete
 --

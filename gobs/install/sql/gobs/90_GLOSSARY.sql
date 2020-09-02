@@ -40,13 +40,19 @@ INSERT INTO gobs.glossary (id, gl_field, gl_code, gl_label, gl_description, gl_o
 INSERT INTO gobs.glossary (id, gl_field, gl_code, gl_label, gl_description, gl_order) VALUES (18, 'sl_geometry_type', 'multipolygon', 'MultiPolygon', 'Multi Polygon geometry', 6);
 INSERT INTO gobs.glossary (id, gl_field, gl_code, gl_label, gl_description, gl_order) VALUES (19, 'im_status', 'P', 'Pending validation', 'Data has been imported but not yet validated by its owner', 1);
 INSERT INTO gobs.glossary (id, gl_field, gl_code, gl_label, gl_description, gl_order) VALUES (20, 'im_status', 'V', 'Validated data', 'Data has been validated and is visible to more users depending on their granted access', 2);
+INSERT INTO gobs.glossary (id, gl_field, gl_code, gl_label, gl_description, gl_order) VALUES (21, 'do_type', 'preview', 'Preview', 'Preview is an image defining the indicator', 1);
+INSERT INTO gobs.glossary (id, gl_field, gl_code, gl_label, gl_description, gl_order) VALUES (22, 'do_type', 'image', 'Image', 'Image', 2);
+INSERT INTO gobs.glossary (id, gl_field, gl_code, gl_label, gl_description, gl_order) VALUES (23, 'do_type', 'video', 'Video', 'Video', 3);
+INSERT INTO gobs.glossary (id, gl_field, gl_code, gl_label, gl_description, gl_order) VALUES (24, 'do_type', 'document', 'Document', 'Generic document like PDF, ODT, text files or archives', 4);
+INSERT INTO gobs.glossary (id, gl_field, gl_code, gl_label, gl_description, gl_order) VALUES (25, 'do_type', 'url', 'URL', 'URL pointing to the document', 5);
+INSERT INTO gobs.glossary (id, gl_field, gl_code, gl_label, gl_description, gl_order) VALUES (26, 'do_type', 'other', 'Other', 'Other type of document', 6);
 
 
 --
 -- Name: glossary_id_seq; Type: SEQUENCE SET; Schema: gobs; Owner: -
 --
 
-SELECT pg_catalog.setval('gobs.glossary_id_seq', 20, true);
+SELECT pg_catalog.setval('gobs.glossary_id_seq', 26, true);
 
 
 --
