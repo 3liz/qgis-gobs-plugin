@@ -1,8 +1,10 @@
 r_graph_edge
 metadata
 glossary
+deleted
 observation
 r_indicator_node
+document
 spatial_object
 import
 series
