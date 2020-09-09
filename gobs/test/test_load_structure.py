@@ -157,6 +157,8 @@ class TestProcessing(unittest.TestCase):
             'actor',
             'spatial_layer',
             'spatial_object',
+            'deleted',
+            'document',
         ]
         self.assertCountEqual(expected, result)
 
@@ -205,6 +207,8 @@ class TestProcessing(unittest.TestCase):
             'actor',
             'spatial_layer',
             'spatial_object',
+            'deleted',
+            'document',
         ]
         self.assertCountEqual(expected, result, result)
 
