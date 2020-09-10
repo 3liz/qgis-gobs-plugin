@@ -9,6 +9,7 @@ import processing
 from qgis.core import (
     QgsProcessingParameterVectorLayer,
     QgsProcessingParameterField,
+    QgsProcessingParameterString,
     QgsProcessingParameterEnum,
     QgsProcessingOutputString,
     QgsExpressionContextUtils,
@@ -21,6 +22,7 @@ from gobs.qgis_plugin_tools.tools.i18n import tr
 from gobs.qgis_plugin_tools.tools.algorithm_processing import BaseProcessingAlgorithm
 from .tools import (
     fetchDataFromSqlQuery,
+    validateTimestamp,
     getPostgisConnectionList,
 )
 
@@ -31,6 +33,10 @@ class ImportSpatialLayerData(BaseProcessingAlgorithm):
     SOURCELAYER = 'SOURCELAYER'
     UNIQUEID = 'UNIQUEID'
     UNIQUELABEL = 'UNIQUELABEL'
+    DATE_VALIDITY_MIN = 'DATE_VALIDITY_MIN'
+    MANUAL_DATE_VALIDITY_MIN = 'MANUAL_DATE_VALIDITY_MIN'
+    DATE_VALIDITY_MAX = 'DATE_VALIDITY_MAX'
+    MANUAL_DATE_VALIDITY_MAX = 'MANUAL_DATE_VALIDITY_MAX'
 
     OUTPUT_STATUS = 'OUTPUT_STATUS'
     OUTPUT_STRING = 'OUTPUT_STRING'
@@ -63,6 +69,22 @@ class ImportSpatialLayerData(BaseProcessingAlgorithm):
             '* Unique identifier: choose the field containing the unique ID. It can be an integer or a text field, but must be unique.'
             '\n'
             '* Unique label: choose the text field containing the unique label of the layer feature. You could use the QGIS field calculator to create one if needed.'
+            '\n'
+            '* Start of validity: choose the field with the start timestamp of validity for each feature.'
+            ' Leave empty if all the features share the same date/time and manually enter the value in the next input.'
+            ' This field content must respect the ISO format. For example 2020-05-01 10:50:30 or 2020-01-01'
+            '\n'
+            '* Start of validity for all features'
+            ' Specify the start timestamp of validity for all the objects in the spatial layer.'
+            ' This value must respect the ISO format. For example 2020-05-01 10:50:30 or 2020-01-01'
+            '\n'
+            '* End of validity: choose the field with the end timestamp of validity for each feature.'
+            ' Leave empty if all the features share the same date/time and manually enter the value in the next input.'
+            ' This field content must respect the ISO format. For example 2020-05-01 10:50:30 or 2020-01-01'
+            '\n'
+            '* End of validity for all features'
+            ' Specify the end timestamp of validity for all the objects in the spatial layer.'
+            ' This value must respect the ISO format. For example 2020-05-01 10:50:30 or 2020-01-01'
             '\n'
         )
         return short_help
@@ -116,6 +138,40 @@ class ImportSpatialLayerData(BaseProcessingAlgorithm):
                 type=QgsProcessingParameterField.String
             )
         )
+        # Min validity field
+        self.addParameter(
+            QgsProcessingParameterField(
+                self.DATE_VALIDITY_MIN,
+                tr('Start timestamp of validity. Field in ISO Format'),
+                optional=True,
+                parentLayerParameterName=self.SOURCELAYER
+            )
+        )
+        # Manual min validity
+        self.addParameter(
+            QgsProcessingParameterString(
+                self.MANUAL_DATE_VALIDITY_MIN,
+                tr('Manual start timestamp of validity (2019-01-06 or 2019-01-06 22:59:50)'),
+                optional=True
+            )
+        )
+        # Max validity field
+        self.addParameter(
+            QgsProcessingParameterField(
+                self.DATE_VALIDITY_MAX,
+                tr('End timestamp of validity. Field in ISO Format'),
+                optional=True,
+                parentLayerParameterName=self.SOURCELAYER
+            )
+        )
+        # Manual max validity
+        self.addParameter(
+            QgsProcessingParameterString(
+                self.MANUAL_DATE_VALIDITY_MAX,
+                tr('Manual end timestamp of validity (2019-01-31 or 2019-01-31 23:59:59)'),
+                optional=True
+            )
+        )
 
         # OUTPUTS
         # Add output for message
@@ -137,6 +193,39 @@ class ImportSpatialLayerData(BaseProcessingAlgorithm):
         if connection_name not in getPostgisConnectionList():
             return False, tr('The configured connection name does not exists in QGIS')
 
+        # Check correct validity timestamps have been given
+        date_fields = {
+            'Start of validity': {
+                'field': self.DATE_VALIDITY_MIN,
+                'manual': self.MANUAL_DATE_VALIDITY_MIN,
+                'optional': False
+            },
+            'End of validity': {
+                'field': self.DATE_VALIDITY_MAX,
+                'manual': self.MANUAL_DATE_VALIDITY_MAX,
+                'optional': True
+            }
+        }
+        for key in date_fields:
+            ok = True
+            item = date_fields[key]
+            field_timestamp = self.parameterAsString(parameters, item['field'], context)
+            manualdate = (self.parameterAsString(parameters, item['manual'], context)).strip().replace('/', '-')
+            if not field_timestamp and not manualdate and not item['optional']:
+                ok = False
+                msg = tr(key) + ' - '
+                msg += tr('You need to enter either a timestamp field or a manual timestamp')
+
+            # check validity of given manual date
+            if manualdate:
+                ok, msg = validateTimestamp(manualdate)
+                if not ok:
+                    return False, tr(key) + ' - ' + msg
+                ok = True
+
+            if not ok:
+                return False, msg
+
         return super(ImportSpatialLayerData, self).checkParameterValues(parameters, context)
 
     def processAlgorithm(self, parameters, context, feedback):
@@ -148,6 +237,10 @@ class ImportSpatialLayerData(BaseProcessingAlgorithm):
         sourcelayer = self.parameterAsVectorLayer(parameters, self.SOURCELAYER, context)
         uniqueid = self.parameterAsString(parameters, self.UNIQUEID, context)
         uniquelabel = self.parameterAsString(parameters, self.UNIQUELABEL, context)
+        date_validity_min = self.parameterAsString(parameters, self.DATE_VALIDITY_MIN, context)
+        manual_date_validity_min = self.parameterAsString(parameters, self.MANUAL_DATE_VALIDITY_MIN, context)
+        date_validity_max = self.parameterAsString(parameters, self.DATE_VALIDITY_MAX, context)
+        manual_date_validity_max = self.parameterAsString(parameters, self.MANUAL_DATE_VALIDITY_MAX, context)
 
         msg = ''
         status = 1
@@ -248,14 +341,60 @@ class ImportSpatialLayerData(BaseProcessingAlgorithm):
         if target_type.replace('multi', '') == 'polygon':
             geometry_type_integer = 3
 
+        # Format validity timestamp fields
+        if manual_date_validity_min.strip():
+            manualdate = manual_date_validity_min.strip().replace('/', '-')
+            casted_timestamp_min = '''
+                '{0}'::timestamp
+            '''.format(manualdate)
+        else:
+            casted_timestamp_min = '''
+                s."{0}"::timestamp
+            '''.format(date_validity_min)
+
+        has_max_validity = False
+        if manual_date_validity_max.strip() or date_validity_max:
+            has_max_validity = True
+            if manual_date_validity_max.strip():
+                manualdate = manual_date_validity_max.strip().replace('/', '-')
+                casted_timestamp_max = '''
+                    '{0}'::timestamp
+                '''.format(manualdate)
+            else:
+                casted_timestamp_max = '''
+                    s."{0}"::timestamp
+                '''.format(date_validity_max)
+
         # Copy data to spatial_object
         feedback.pushInfo(
             tr('COPY IMPORTED DATA TO spatial_object')
         )
         sql = '''
-            INSERT INTO gobs.spatial_object
-            (so_unique_id, so_unique_label, geom, fk_id_spatial_layer)
-            SELECT "{so_unique_id}", "{so_unique_label}", {st_multi_left}ST_Transform(ST_CollectionExtract(ST_MakeValid(geom),{geometry_type_integer}), 4326){st_multi_right} AS geom, {id_spatial_layer}
+            INSERT INTO gobs.spatial_object (
+                so_unique_id, so_unique_label,
+                geom, fk_id_spatial_layer,
+                so_valid_from
+            '''
+        if has_max_validity:
+            sql += ', so_valid_to'
+        sql += '''
+            )
+            SELECT "{so_unique_id}", "{so_unique_label}", {st_multi_left}ST_Transform(ST_CollectionExtract(ST_MakeValid(geom),{geometry_type_integer}), 4326){st_multi_right} AS geom, {id_spatial_layer},
+            {casted_timestamp_min}
+        '''.format(
+            so_unique_id=uniqueid,
+            so_unique_label=uniquelabel,
+            st_multi_left=st_multi_left,
+            geometry_type_integer=geometry_type_integer,
+            st_multi_right=st_multi_right,
+            id_spatial_layer=id_spatial_layer,
+            casted_timestamp_min=casted_timestamp_min
+        )
+        if has_max_validity:
+            sql += ', {casted_timestamp_max}'.format(
+                casted_timestamp_max=casted_timestamp_max
+            )
+        sql += '''
             FROM "{temp_schema}"."{temp_table}"
 
             -- Update line if data already exists
@@ -265,12 +404,6 @@ class ImportSpatialLayerData(BaseProcessingAlgorithm):
             WHERE True
             ;
         '''.format(
-            so_unique_id=uniqueid,
-            so_unique_label=uniquelabel,
-            st_multi_left=st_multi_left,
-            geometry_type_integer=geometry_type_integer,
-            st_multi_right=st_multi_right,
-            id_spatial_layer=id_spatial_layer,
             temp_schema=temp_schema,
             temp_table=temp_table
         )
