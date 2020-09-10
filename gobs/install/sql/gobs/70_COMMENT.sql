@@ -56,20 +56,20 @@ COMMENT ON COLUMN gobs.actor_category.ac_label IS 'Name of the actor category';
 COMMENT ON COLUMN gobs.actor_category.ac_description IS 'Description of the actor category';
 
 
--- deleted
-COMMENT ON TABLE gobs.deleted IS 'Log of deleted objects from observation table. Use for synchronization purpose';
+-- deleted_data_log
+COMMENT ON TABLE gobs.deleted_data_log IS 'Log of deleted objects from observation table. Use for synchronization purpose';
 
 
--- deleted.de_table
-COMMENT ON COLUMN gobs.deleted.de_table IS 'Source table of the deleted object: observation';
+-- deleted_data_log.de_table
+COMMENT ON COLUMN gobs.deleted_data_log.de_table IS 'Source table of the deleted object: observation';
 
 
--- deleted.de_uid
-COMMENT ON COLUMN gobs.deleted.de_uid IS 'Unique text identifier of the object. Observation: ob_uid';
+-- deleted_data_log.de_uid
+COMMENT ON COLUMN gobs.deleted_data_log.de_uid IS 'Unique text identifier of the object. Observation: ob_uid';
 
 
--- deleted.de_timestamp
-COMMENT ON COLUMN gobs.deleted.de_timestamp IS 'Timestamp of the deletion';
+-- deleted_data_log.de_timestamp
+COMMENT ON COLUMN gobs.deleted_data_log.de_timestamp IS 'Timestamp of the deletion';
 
 
 -- document
@@ -216,6 +216,10 @@ COMMENT ON COLUMN gobs.indicator.id_value_unit IS 'Unit ot the store values. ExÂ
 COMMENT ON COLUMN gobs.indicator.id_paths IS 'Paths given to help finding an indicator. They will be split up to fill the graph_node and r_indicator_node tables. If you need multiple paths, use | as a separator. Ex: Environment / Water resources | Measure / Physics / Water';
 
 
+-- indicator.id_category
+COMMENT ON COLUMN gobs.indicator.id_category IS 'Category of the indicator. Used to group several indicators by themes.';
+
+
 -- indicator.created_at
 COMMENT ON COLUMN gobs.indicator.created_at IS 'Creation timestamp';
 
@@ -268,12 +272,16 @@ COMMENT ON COLUMN gobs.observation.fk_id_import IS 'Import id';
 COMMENT ON COLUMN gobs.observation.ob_value IS 'Vector containing the measured or computed data values. ExÂ : [1543, 1637]';
 
 
--- observation.ob_timestamp
-COMMENT ON COLUMN gobs.observation.ob_timestamp IS 'Timestamp of the data';
+-- observation.ob_start_timestamp
+COMMENT ON COLUMN gobs.observation.ob_start_timestamp IS 'Start timestamp of the observation data';
 
 
 -- observation.ob_validation
 COMMENT ON COLUMN gobs.observation.ob_validation IS 'Date and time when the data has been validated (the corresponding import status has been changed from pending to validated). Can be used to find all observations not yet validated, with NULL values in this field.';
+
+
+-- observation.ob_end_timestamp
+COMMENT ON COLUMN gobs.observation.ob_end_timestamp IS 'End timestamp of the observation data (optional)';
 
 
 -- observation.ob_uid

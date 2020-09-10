@@ -161,6 +161,31 @@ CREATE TRIGGER trg_manage_object_timestamps
 BEFORE INSERT OR UPDATE ON gobs.indicator
 FOR EACH ROW EXECUTE PROCEDURE gobs.manage_object_timestamps();
 
+
+-- Update observation when corresponding spatial object geometry is modified
+-- Timestamp columns
+CREATE OR REPLACE FUNCTION gobs.update_observation_on_spatial_object_change()
+RETURNS trigger
+    LANGUAGE plpgsql
+    AS $$
+BEGIN
+    IF TG_OP = 'UPDATE' AND NOT ST_Equals(NEW.geom, OLD.geom) THEN
+        UPDATE gobs.observation
+        SET updated_at = now()
+        WHERE fk_id_spatial_object = NEW.id
+        ;
+    END IF;
+
+    RETURN NEW;
+END;
+$$;
+
+DROP TRIGGER IF EXISTS trg_update_observation_on_spatial_object_change ON gobs.observation;
+CREATE TRIGGER trg_update_observation_on_spatial_object_change
+AFTER UPDATE ON gobs.spatial_object
+FOR EACH ROW EXECUTE PROCEDURE gobs.update_observation_on_spatial_object_change();
+
+-- DATA
 -- Update observation timestamps
 UPDATE gobs.observation o
 SET
@@ -172,9 +197,9 @@ WHERE o.fk_id_import = i.id
 -- Update spatial_object timestamps
 UPDATE gobs.spatial_object so
 SET
-so_valid_from = ob_timestamp - '1 day'::interval,
-created_at = ob_timestamp - '1 day'::interval,
-updated_at = ob_timestamp - '1 day'::interval
+so_valid_from = ob_start_timestamp - '1 day'::interval,
+created_at = ob_start_timestamp - '1 day'::interval,
+updated_at = ob_start_timestamp - '1 day'::interval
 FROM gobs.observation o
 WHERE o.fk_id_spatial_object = so.id
 ;

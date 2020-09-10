@@ -23,7 +23,7 @@ CREATE FUNCTION gobs.log_deleted_object() RETURNS trigger
 DECLARE
     oid text;
 BEGIN
-    INSERT INTO gobs.deleted (
+    INSERT INTO gobs.deleted_data_log (
         de_table,
         de_uid,
         de_timestamp
@@ -179,6 +179,23 @@ BEGIN
     IF TG_OP = 'INSERT' OR NEW.id_paths != OLD.id_paths THEN
         SELECT gobs.parse_indicator_paths(NEW.id, NEW.id_paths)
         INTO _output;
+    END IF;
+
+    RETURN NEW;
+END;
+$$;
+
+
+-- update_observation_on_spatial_object_change()
+CREATE FUNCTION gobs.update_observation_on_spatial_object_change() RETURNS trigger
+    LANGUAGE plpgsql
+    AS $$
+BEGIN
+    IF TG_OP = 'UPDATE' AND NOT ST_Equals(NEW.geom, OLD.geom) THEN
+        UPDATE gobs.observation
+        SET updated_at = now()
+        WHERE fk_id_spatial_object = NEW.id
+        ;
     END IF;
 
     RETURN NEW;

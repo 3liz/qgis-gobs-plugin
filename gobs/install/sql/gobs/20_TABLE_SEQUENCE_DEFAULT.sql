@@ -72,16 +72,16 @@ CREATE SEQUENCE gobs.actor_id_seq
 ALTER SEQUENCE gobs.actor_id_seq OWNED BY gobs.actor.id;
 
 
--- deleted
-CREATE TABLE gobs.deleted (
+-- deleted_data_log
+CREATE TABLE gobs.deleted_data_log (
     de_table text NOT NULL,
     de_uid uuid NOT NULL,
     de_timestamp timestamp without time zone DEFAULT now() NOT NULL
 );
 
 
--- deleted
-COMMENT ON TABLE gobs.deleted IS 'Log of deleted objects from observation table. Use for synchronization purpose';
+-- deleted_data_log
+COMMENT ON TABLE gobs.deleted_data_log IS 'Log of deleted objects from observation table. Use for synchronization purpose';
 
 
 -- document
@@ -205,6 +205,7 @@ CREATE TABLE gobs.indicator (
     id_value_type text[] NOT NULL,
     id_value_unit text[] NOT NULL,
     id_paths text,
+    id_category text,
     created_at timestamp without time zone DEFAULT now() NOT NULL,
     updated_at timestamp without time zone DEFAULT now() NOT NULL
 );
@@ -260,8 +261,9 @@ CREATE TABLE gobs.observation (
     fk_id_spatial_object bigint NOT NULL,
     fk_id_import integer NOT NULL,
     ob_value jsonb NOT NULL,
-    ob_timestamp timestamp without time zone NOT NULL,
+    ob_start_timestamp timestamp without time zone NOT NULL,
     ob_validation timestamp without time zone,
+    ob_end_timestamp timestamp without time zone,
     ob_uid uuid DEFAULT public.uuid_generate_v4() NOT NULL,
     created_at timestamp without time zone DEFAULT now() NOT NULL,
     updated_at timestamp without time zone DEFAULT now() NOT NULL

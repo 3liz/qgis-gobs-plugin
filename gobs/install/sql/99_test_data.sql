@@ -1,3 +1,5 @@
+BEGIN;
+
 -- TABLES
 -- actor_category
 INSERT INTO gobs.actor_category (id, ac_label, ac_description) VALUES (1, 'Public organizations', 'Public organizations and stakeholders');
@@ -17,9 +19,9 @@ INSERT INTO gobs.actor (id, a_label, a_description, a_email, id_category) VALUES
 -- indicator
 INSERT INTO gobs.indicator (id, id_code, id_label, id_description, id_date_format, id_value_code, id_value_name, id_value_type, id_value_unit, id_paths, id_category)
 VALUES (1, 'pluviometry', 'Hourly pluviometry ', 'Hourly rainfall pluviometry in millimetre', 'hour', '{pluviometry}', '{Pluviometry}', '{real}', '{mm}', 'Environment / Water / Data | Physical and chemical conditions / Water ', 'Water');
-INSERT INTO gobs.indicator (id, id_code, id_label, id_description, id_date_format, id_value_code, id_value_name, id_value_type, id_value_unit, id_paths)
+INSERT INTO gobs.indicator (id, id_code, id_label, id_description, id_date_format, id_value_code, id_value_name, id_value_type, id_value_unit, id_paths, id_category)
 VALUES (2, 'population', 'Population ', 'Number of inhabitants for city', 'year', '{population}', '{Population}', '{integer}', '{people}', 'Socio-eco / Demography / Population ', 'Population');
-INSERT INTO gobs.indicator (id, id_code, id_label, id_description, id_date_format, id_value_code, id_value_name, id_value_type, id_value_unit, id_paths)
+INSERT INTO gobs.indicator (id, id_code, id_label, id_description, id_date_format, id_value_code, id_value_name, id_value_type, id_value_unit, id_paths, id_category)
 VALUES (3, 'hiker_position', 'Hikers position', 'Position and altitude of hikers', 'second', '{altitude}', '{Altitude}', '{integer}', '{m}', 'Hiking / Tracks', 'Tracks');
 
 -- protocol
@@ -51,3 +53,4 @@ SELECT pg_catalog.setval('gobs.protocol_id_seq', 3, true);
 SELECT pg_catalog.setval('gobs.spatial_layer_id_seq', 3, true);
 SELECT pg_catalog.setval('gobs.series_id_seq', 8, true);
 
+COMMIT;

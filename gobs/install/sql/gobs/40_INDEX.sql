@@ -51,7 +51,7 @@ CREATE INDEX observation_fk_id_spatial_object_idx ON gobs.observation USING btre
 
 
 -- observation_ob_timestamp_idx
-CREATE INDEX observation_ob_timestamp_idx ON gobs.observation USING btree (ob_timestamp);
+CREATE INDEX observation_ob_timestamp_idx ON gobs.observation USING btree (ob_start_timestamp);
 
 
 -- protocol_pr_code_idx

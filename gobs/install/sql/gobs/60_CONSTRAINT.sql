@@ -28,9 +28,9 @@ ALTER TABLE ONLY gobs.actor
     ADD CONSTRAINT actor_pkey PRIMARY KEY (id);
 
 
--- deleted deleted_pkey
-ALTER TABLE ONLY gobs.deleted
-    ADD CONSTRAINT deleted_pkey PRIMARY KEY (de_table, de_uid);
+-- deleted_data_log deleted_data_log_pkey
+ALTER TABLE ONLY gobs.deleted_data_log
+    ADD CONSTRAINT deleted_data_log_pkey PRIMARY KEY (de_table, de_uid);
 
 
 -- document document_do_label_key
@@ -80,7 +80,7 @@ ALTER TABLE ONLY gobs.metadata
 
 -- observation observation_data_unique
 ALTER TABLE ONLY gobs.observation
-    ADD CONSTRAINT observation_data_unique UNIQUE (fk_id_series, fk_id_spatial_object, ob_timestamp);
+    ADD CONSTRAINT observation_data_unique UNIQUE (fk_id_series, fk_id_spatial_object, ob_start_timestamp);
 
 
 -- observation observation_pkey
