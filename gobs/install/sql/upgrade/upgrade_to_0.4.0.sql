@@ -45,6 +45,19 @@ COMMENT ON COLUMN gobs.spatial_object.so_uid IS 'Spatial object uid: autogenerat
 COMMENT ON COLUMN gobs.spatial_object.created_at IS 'Creation timestamp';
 COMMENT ON COLUMN gobs.spatial_object.updated_at IS 'Last updated timestamp';
 
+-- Remove old constraint unique (so_unique_id, fk_id_spatial_layer)
+ALTER TABLE ONLY gobs.spatial_object
+DROP CONSTRAINT IF EXISTS spatial_object_so_unique_id_fk_id_spatial_layer_key
+;
+
+-- Replace by new constraint
+ALTER TABLE ONLY gobs.spatial_object
+DROP CONSTRAINT IF EXISTS spatial_object_unique_key;
+ALTER TABLE ONLY gobs.spatial_object
+ADD CONSTRAINT spatial_object_unique_key
+UNIQUE (so_unique_id, fk_id_spatial_layer, so_valid_from);
+
+
 DROP TABLE IF EXISTS gobs.document CASCADE;
 CREATE TABLE IF NOT EXISTS gobs.document (
     id serial primary key,
@@ -184,6 +197,59 @@ DROP TRIGGER IF EXISTS trg_update_observation_on_spatial_object_change ON gobs.o
 CREATE TRIGGER trg_update_observation_on_spatial_object_change
 AFTER UPDATE ON gobs.spatial_object
 FOR EACH ROW EXECUTE PROCEDURE gobs.update_observation_on_spatial_object_change();
+
+-- Update spatial_object end of validity date when new data is inserted
+CREATE OR REPLACE FUNCTION gobs.update_spatial_object_end_validity()
+RETURNS trigger
+    LANGUAGE plpgsql
+    AS $$
+DECLARE
+    nowtm timestamp;
+    last_id integer;
+BEGIN
+    last_id = 0;
+    IF TG_OP = 'INSERT' THEN
+
+        -- Get the last corresponding item
+        SELECT INTO last_id
+        so.id
+        FROM gobs.spatial_object so
+        WHERE TRUE
+        -- do not modify if there is already a value
+        AND so.so_valid_to IS NULL
+        -- only for same spatial layer
+        AND so.fk_id_spatial_layer = NEW.fk_id_spatial_layer
+        -- and same unique id ex: code insee
+        AND so.so_unique_id = NEW.so_unique_id
+        -- and not for the same object
+        AND so.so_uid != NEW.so_uid
+        -- only if the new object has a start validity date AFTER the existing one
+        AND so.so_valid_from < NEW.so_valid_from
+        -- only the preceding one
+        ORDER BY so_valid_from DESC
+        LIMIT 1
+        ;
+
+        -- Update it
+        IF last_id > 0 THEN
+            UPDATE gobs.spatial_object so
+            SET so_valid_to = NEW.so_valid_from
+            WHERE so.id = last_id
+            ;
+        END IF;
+
+    END IF;
+
+    RETURN NEW;
+END;
+$$;
+
+
+DROP TRIGGER IF EXISTS trg_update_spatial_object_end_validity ON gobs.spatial_object;
+CREATE TRIGGER trg_update_spatial_object_end_validity
+AFTER INSERT ON gobs.spatial_object
+FOR EACH ROW EXECUTE PROCEDURE gobs.update_spatial_object_end_validity();
+
 
 -- DATA
 -- Update observation timestamps

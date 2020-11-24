@@ -1,0 +1,13 @@
+{
+"type": "FeatureCollection",
+"name": "pluviometers_updated",
+"crs": { "type": "name", "properties": { "name": "urn:ogc:def:crs:EPSG::2154" } },
+"features": [
+{ "type": "Feature", "properties": { "id": "pluviometrie_stations_technique.fid-40202578_16bfab4dc81_46d4", "code_pluvio": "29275003", "lieu_dit_station": "(Aulne) Scrignac [Poulpry]", "pluviometrie_journaliere": 0, "batterie": 13.4, "date": "2019\/06\/01 00:00:00", "end_date": "2020\/11\/01 02:00:00" }, "geometry": { "type": "Point", "coordinates": [ 208735.55, 6837643.93 ] } },
+{ "type": "Feature", "properties": { "id": "pluviometrie_stations_technique.fid-40202578_16bfab4dc81_46e1", "code_pluvio": "29202002", "lieu_dit_station": "(Morlaix) Queffleuth [Le Plessis]", "pluviometrie_journaliere": 0, "batterie": 13.5, "date": "2020\/11\/24 02:00:00", "end_date": null }, "geometry": { "type": "Point", "coordinates": [ 199054.747055135085247, 6840890.864403784275055 ] } },
+{ "type": "Feature", "properties": { "id": "pluviometrie_stations_technique.fid-40202578_16bfab4dc81_46e3", "code_pluvio": "29191003", "lieu_dit_station": "(Morlaix) Plougonven [Toulivinen]", "pluviometrie_journaliere": 0, "batterie": 12.0, "date": "2019\/06\/01 00:00:00", "end_date": null }, "geometry": { "type": "Point", "coordinates": [ 206519.93, 6842445.41 ] } },
+{ "type": "Feature", "properties": { "id": "pluviometrie_stations_technique.fid-40202578_16bfab4dc81_46e8", "code_pluvio": "29163004", "lieu_dit_station": "(Morlaix) Pleyber-Christ [Gendarmerie]", "pluviometrie_journaliere": 0, "batterie": 13.8, "date": "2019\/06\/01 00:00:00", "end_date": null }, "geometry": { "type": "Point", "coordinates": [ 192928.45, 6844760.34 ] } },
+{ "type": "Feature", "properties": { "id": "pluviometrie_stations_technique.fid-40202578_16bfab4dc81_46ec", "code_pluvio": "29018003", "lieu_dit_station": "Ellez Brennilis", "pluviometrie_journaliere": 0, "batterie": 13.0, "date": "2019\/06\/01 00:00:00", "end_date": null }, "geometry": { "type": "Point", "coordinates": [ 191526.0, 6828130.0 ] } },
+{ "type": "Feature", "properties": { "id": "new_random_id.12345678", "code_pluvio": "12345678", "lieu_dit_station": "New pluviometer", "pluviometrie_journaliere": null, "batterie": 12.0, "date": "2020\/11\/24 00:00:00", "end_date": null }, "geometry": { "type": "Point", "coordinates": [ 189955.703731891437201, 6836246.954325946047902 ] } }
+]
+}

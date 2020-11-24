@@ -203,6 +203,52 @@ END;
 $$;
 
 
+-- update_spatial_object_end_validity()
+CREATE FUNCTION gobs.update_spatial_object_end_validity() RETURNS trigger
+    LANGUAGE plpgsql
+    AS $$
+DECLARE
+    nowtm timestamp;
+    last_id integer;
+BEGIN
+    last_id = 0;
+    IF TG_OP = 'INSERT' THEN
+
+        -- Get the last corresponding item
+        SELECT INTO last_id
+        so.id
+        FROM gobs.spatial_object so
+        WHERE TRUE
+        -- do not modify if there is already a value
+        AND so.so_valid_to IS NULL
+        -- only for same spatial layer
+        AND so.fk_id_spatial_layer = NEW.fk_id_spatial_layer
+        -- and same unique id ex: code insee
+        AND so.so_unique_id = NEW.so_unique_id
+        -- and not for the same object
+        AND so.so_uid != NEW.so_uid
+        -- only if the new object has a start validity date AFTER the existing one
+        AND so.so_valid_from < NEW.so_valid_from
+        -- only the preceding one
+        ORDER BY so_valid_from DESC
+        LIMIT 1
+        ;
+
+        -- Update it
+        IF last_id > 0 THEN
+            UPDATE gobs.spatial_object so
+            SET so_valid_to = NEW.so_valid_from
+            WHERE so.id = last_id
+            ;
+        END IF;
+
+    END IF;
+
+    RETURN NEW;
+END;
+$$;
+
+
 --
 -- PostgreSQL database dump complete
 --

@@ -3,12 +3,16 @@ __license__ = "GPL version 3"
 __email__ = "info@3liz.org"
 __revision__ = "$Format:%H$"
 
+
+import re
+
 from qgis.core import (
     QgsExpressionContextUtils,
     QgsProcessingException,
     QgsProcessingParameterEnum,
     QgsProcessingParameterNumber,
     QgsProcessingParameterDefinition,
+    QgsProcessingParameterString,
     QgsProject,
 )
 
@@ -16,6 +20,7 @@ from gobs.qgis_plugin_tools.tools.i18n import tr
 from .get_data_as_layer import GetDataAsLayer
 from .tools import (
     fetchDataFromSqlQuery,
+    validateTimestamp,
     getPostgisConnectionList,
 )
 
@@ -25,6 +30,7 @@ class GetSpatialLayerVectorData(GetDataAsLayer):
     SPATIALLAYER = 'SPATIALLAYER'
     SPATIALLAYER_ID = 'SPATIALLAYER_ID'
     GEOM_FIELD = 'geom'
+    VALIDITY_DATE = 'VALIDITY_DATE'
 
     def name(self):
         return 'get_spatial_layer_vector_data'
@@ -48,6 +54,8 @@ class GetSpatialLayerVectorData(GetDataAsLayer):
             'If not given, the label of the spatial layer will be used.'
             '\n'
             '* Spatial layer: choose the G-Obs spatial layer you want to use as the data source.'
+            '\n'
+            '* Date of validity: if you want to see the data for a specific date (default is today)'
         )
         return short_help
 
@@ -95,6 +103,15 @@ class GetSpatialLayerVectorData(GetDataAsLayer):
         p.setFlags(QgsProcessingParameterDefinition.FlagHidden)
         self.addParameter(p)
 
+        # Validity date
+        self.addParameter(
+            QgsProcessingParameterString(
+                self.VALIDITY_DATE,
+                tr('View data for a specific date'),
+                optional=True
+            )
+        )
+
     def checkParameterValues(self, parameters, context):
 
         # Check that the connection name has been configured
@@ -112,6 +129,14 @@ class GetSpatialLayerVectorData(GetDataAsLayer):
         if spatial_layer_id and spatial_layer_id > 0:
             if spatial_layer_id not in self.SPATIALLAYERS_DICT:
                 return False, tr('Spatial layer ID does not exists in the database')
+
+        # check validity of given manual date
+        validity_date = (self.parameterAsString(parameters, self.VALIDITY_DATE, context)).strip().replace('/', '-')
+        if validity_date:
+            ok, msg = validateTimestamp(validity_date)
+            if not ok:
+                return False, tr('View data for a specific date') + ': ' + msg
+            ok = True
 
         return super(GetSpatialLayerVectorData, self).checkParameterValues(parameters, context)
 
@@ -131,6 +156,9 @@ class GetSpatialLayerVectorData(GetDataAsLayer):
         spatial_layer_id = self.parameterAsInt(parameters, self.SPATIALLAYER_ID, context)
         if spatial_layer_id and spatial_layer_id in self.SPATIALLAYERS_DICT:
             id_spatial_layer = spatial_layer_id
+
+        # Get only data in validity date
+        spatial_layer_id = self.parameterAsInt(parameters, self.SPATIALLAYER_ID, context)
 
         feedback.pushInfo(
             tr('GET DATA FROM CHOSEN SPATIAL LAYER')
@@ -166,6 +194,27 @@ class GetSpatialLayerVectorData(GetDataAsLayer):
         '''.format(
             id_spatial_layer,
             geometry_type
+        )
+        # View the spatial object for a specific day. Default is today
+        validity_date = (self.parameterAsString(parameters, self.VALIDITY_DATE, context)).strip().replace('/', '-')
+        if not validity_date:
+            validity_date = 'today'
+        else:
+            validity_date = validity_date[0:10]
+            p = re.compile('^[0-9]{4}$')
+            if p.match(validity_date):
+                validity_date = '%s-01-01' % validity_date
+            p = re.compile('^[0-9]{4}-[0-9]{2}$')
+            if p.match(validity_date):
+                validity_date = '%s-01' % validity_date
+        sql += '''
+            AND (
+                (so_valid_from IS NULL OR so_valid_from <= '{0}'::date)
+                AND
+                (so_valid_to IS NULL OR so_valid_to > '{0}'::date)
+            )
+        '''.format(
+            validity_date
         )
         self.SQL = sql.replace('\n', ' ').rstrip(';')
 

@@ -44,6 +44,10 @@ CREATE TRIGGER trg_manage_object_timestamps BEFORE INSERT OR UPDATE ON gobs.obse
 CREATE TRIGGER trg_update_observation_on_spatial_object_change AFTER UPDATE ON gobs.spatial_object FOR EACH ROW EXECUTE PROCEDURE gobs.update_observation_on_spatial_object_change();
 
 
+-- spatial_object trg_update_spatial_object_end_validity
+CREATE TRIGGER trg_update_spatial_object_end_validity AFTER INSERT ON gobs.spatial_object FOR EACH ROW EXECUTE PROCEDURE gobs.update_spatial_object_end_validity();
+
+
 --
 -- PostgreSQL database dump complete
 --

@@ -443,13 +443,13 @@ class ImportObservationData(BaseProcessingAlgorithm):
                     )
 
             # We use the unique constraint to override or not the data
-            # "observation_data_unique" UNIQUE CONSTRAINT, btree (fk_id_series, fk_id_spatial_object, ob_timestamp)
+            # "observation_data_unique" UNIQUE CONSTRAINT, btree (fk_id_series, fk_id_spatial_object, ob_start_timestamp)
             # ob_validation is automatically set by the trigger gobs.trg_after_import_validation()
             # to now() when the import is validated
             sql = '''
                 INSERT INTO gobs.observation AS o (
                     fk_id_series, fk_id_spatial_object, fk_id_import,
-                    ob_value, ob_timestamp
+                    ob_value, ob_start_timestamp
                 )
                 SELECT
                 -- id of the serie
@@ -460,16 +460,22 @@ class ImportObservationData(BaseProcessingAlgorithm):
                 {id_import},
                 -- jsonb array value computed
                 {jsonb_array},
-                -- timestamp from the source
+                -- start timestamp from the source
                 {casted_timestamp}
                 FROM "{temp_schema}"."{temp_table}" AS s
-                JOIN gobs.spatial_object AS so ON so.so_unique_id = s."{field_spatial_object}"::text
+                JOIN gobs.spatial_object AS so
+                    ON so.so_unique_id = s."{field_spatial_object}"::text
+                    AND (
+                        (so.so_valid_from IS NULL OR so.so_valid_from <= {casted_timestamp}::date)
+                        AND
+                        (so.so_valid_to IS NULL OR so.so_valid_to > {casted_timestamp}::date)
+                    )
 
                 -- Update line if data already exists
                 -- AND data is not validated
                 ON CONFLICT ON CONSTRAINT observation_data_unique
                 DO UPDATE
-                SET (fk_id_import, ob_value) = (EXCLUDED.fk_id_import, EXCLUDED.ob_value)
+                SET (fk_id_import, ob_value, ob_end_timestamp) = (EXCLUDED.fk_id_import, EXCLUDED.ob_value, EXCLUDED.ob_end_timestamp)
                 WHERE o.ob_validation IS NULL
                 ;
             '''.format(
@@ -481,7 +487,7 @@ class ImportObservationData(BaseProcessingAlgorithm):
                 temp_table=temp_table,
                 field_spatial_object=field_spatial_object
             )
-            # print(sql)
+            feedback.pushInfo(sql)
             try:
                 [header, data, rowCount, ok, error_message] = fetchDataFromSqlQuery(
                     connection_name,
@@ -508,28 +514,30 @@ class ImportObservationData(BaseProcessingAlgorithm):
             finally:
 
                 # Remove temporary table
-                feedback.pushInfo(
-                    tr('DROP TEMPORARY DATA')
-                )
-                sql = '''
-                    DROP TABLE IF EXISTS "%s"."%s"
-                ;
-                ''' % (
-                    temp_schema,
-                    temp_table
-                )
-                [header, data, rowCount, ok, error_message] = fetchDataFromSqlQuery(
-                    connection_name,
-                    sql
-                )
-                if ok:
+                remove_temp = True
+                if remove_temp:
                     feedback.pushInfo(
-                        tr('* Temporary data has been deleted.')
+                        tr('DROP TEMPORARY DATA')
                     )
-                else:
-                    feedback.reportError(
-                        tr('* An error occured while droping temporary table') + ' "%s"."%s"' % (temp_schema, temp_table)
+                    sql = '''
+                        DROP TABLE IF EXISTS "%s"."%s"
+                    ;
+                    ''' % (
+                        temp_schema,
+                        temp_table
                     )
+                    [header, data, rowCount, ok, error_message] = fetchDataFromSqlQuery(
+                        connection_name,
+                        sql
+                    )
+                    if ok:
+                        feedback.pushInfo(
+                            tr('* Temporary data has been deleted.')
+                        )
+                    else:
+                        feedback.reportError(
+                            tr('* An error occured while droping temporary table') + ' "%s"."%s"' % (temp_schema, temp_table)
+                        )
 
             if not status and id_import:
                 [header, data, rowCount, ok, error_message] = fetchDataFromSqlQuery(

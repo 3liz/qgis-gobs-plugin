@@ -395,19 +395,23 @@ class ImportSpatialLayerData(BaseProcessingAlgorithm):
                 casted_timestamp_max=casted_timestamp_max
             )
         sql += '''
-            FROM "{temp_schema}"."{temp_table}"
+            FROM "{temp_schema}"."{temp_table}" AS s
 
             -- Update line if data already exists
-            ON CONFLICT ON CONSTRAINT spatial_object_so_unique_id_fk_id_spatial_layer_key
+            -- i.e. Same external ids for the same layer and the same start validity date
+            -- so_unique_id, fk_id_spatial_layer AND so_valid_from are the same
+            -- This is considered as the same object as the one already in database
+            -- We update the geometry, label, and end date of validity
+            ON CONFLICT
+                ON CONSTRAINT spatial_object_unique_key
             DO UPDATE
-            SET (geom, so_unique_label) = (EXCLUDED.geom, EXCLUDED.so_unique_label)
+            SET (geom, so_unique_label, so_valid_to) = (EXCLUDED.geom, EXCLUDED.so_unique_label, EXCLUDED.so_valid_to)
             WHERE True
             ;
         '''.format(
             temp_schema=temp_schema,
             temp_table=temp_table
         )
-        feedback.pushInfo(sql)
         try:
             [header, data, rowCount, ok, error_message] = fetchDataFromSqlQuery(
                 connection_name,
@@ -419,6 +423,7 @@ class ImportSpatialLayerData(BaseProcessingAlgorithm):
                 feedback.reportError(
                     msg
                 )
+                feedback.pushInfo(sql)
             else:
                 status = 1
                 msg = tr('* Source data has been successfully imported !')

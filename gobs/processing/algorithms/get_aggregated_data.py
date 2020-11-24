@@ -348,9 +348,9 @@ class GetAggregatedData(GetDataAsLayer):
 
         # Add temporal resolution if asked: second, minute, hour, day, week, month, year
         if temporal_resolution:
-            # (EXTRACT({temporal_resolution} FROM o.ob_timestamp))::integer AS temporal_resolution,
+            # (EXTRACT({temporal_resolution} FROM o.ob_start_timestamp))::integer AS temporal_resolution,
             sql += '''
-            date_trunc('{temporal_resolution}', o.ob_timestamp) AS timestamp_val,
+            date_trunc('{temporal_resolution}', o.ob_start_timestamp) AS timestamp_val,
             '''.format(
                 temporal_resolution=temporal_resolution
             )
@@ -380,8 +380,8 @@ class GetAggregatedData(GetDataAsLayer):
         # Add information about observation timestamps
         sql += '''
             count(o.id) as observation_count,
-            min(o.ob_timestamp) AS min_timestamp,
-            max(o.ob_timestamp) AS max_timestamp
+            min(o.ob_start_timestamp) AS min_timestamp,
+            max(Coalesce(o.ob_start_timestamp, ob_end_timestamp)) AS max_timestamp
         '''
 
         # FROM
@@ -411,14 +411,14 @@ class GetAggregatedData(GetDataAsLayer):
         # Filter by min and/or max timestamps
         if min_timestamp:
             sql += '''
-            AND ob_timestamp >= '{timestamp}'::timestamp
+            AND ob_start_timestamp >= '{timestamp}'::timestamp
             '''.format(
                 timestamp=min_timestamp
             )
 
         if max_timestamp:
             sql += '''
-            AND ob_timestamp <= '{timestamp}'::timestamp
+            AND ob_start_timestamp <= '{timestamp}'::timestamp
             '''.format(
                 timestamp=max_timestamp
             )
@@ -438,9 +438,9 @@ class GetAggregatedData(GetDataAsLayer):
             , so.geom
             '''
         if temporal_resolution:
-            # , EXTRACT({temporal_resolution} FROM o.ob_timestamp)
+            # , EXTRACT({temporal_resolution} FROM o.ob_start_timestamp)
             sql += '''
-            , date_trunc('{temporal_resolution}', o.ob_timestamp)
+            , date_trunc('{temporal_resolution}', o.ob_start_timestamp)
             '''.format(
                 temporal_resolution=temporal_resolution
             )

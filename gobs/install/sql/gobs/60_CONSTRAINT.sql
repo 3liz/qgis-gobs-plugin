@@ -118,9 +118,9 @@ ALTER TABLE ONLY gobs.spatial_object
     ADD CONSTRAINT spatial_object_pkey PRIMARY KEY (id);
 
 
--- spatial_object spatial_object_so_unique_id_fk_id_spatial_layer_key
+-- spatial_object spatial_object_unique_key
 ALTER TABLE ONLY gobs.spatial_object
-    ADD CONSTRAINT spatial_object_so_unique_id_fk_id_spatial_layer_key UNIQUE (so_unique_id, fk_id_spatial_layer);
+    ADD CONSTRAINT spatial_object_unique_key UNIQUE (so_unique_id, fk_id_spatial_layer, so_valid_from);
 
 
 -- actor actor_id_category_fkey
