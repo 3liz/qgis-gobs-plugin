@@ -55,7 +55,7 @@ class GetSpatialLayerVectorData(GetDataAsLayer):
             '\n'
             '* Spatial layer: choose the G-Obs spatial layer you want to use as the data source.'
             '\n'
-            '* Date of validity: if you want to see the data for a specific date (default is today)'
+            '* Date of validity: if you want to see the data for a specific date (ex: today or 2010-01-01)'
         )
         return short_help
 
@@ -107,7 +107,7 @@ class GetSpatialLayerVectorData(GetDataAsLayer):
         self.addParameter(
             QgsProcessingParameterString(
                 self.VALIDITY_DATE,
-                tr('View data for a specific date'),
+                tr('View data for a specific date (ex: today or 2010-01-01)'),
                 optional=True
             )
         )
@@ -134,7 +134,7 @@ class GetSpatialLayerVectorData(GetDataAsLayer):
         validity_date = (self.parameterAsString(parameters, self.VALIDITY_DATE, context)).strip().replace('/', '-')
         if validity_date:
             ok, msg = validateTimestamp(validity_date)
-            if not ok:
+            if not ok and validity_date != 'today':
                 return False, tr('View data for a specific date') + ': ' + msg
             ok = True
 
@@ -158,7 +158,7 @@ class GetSpatialLayerVectorData(GetDataAsLayer):
             id_spatial_layer = spatial_layer_id
 
         # Get only data in validity date
-        spatial_layer_id = self.parameterAsInt(parameters, self.SPATIALLAYER_ID, context)
+        validity_date = (self.parameterAsString(parameters, self.VALIDITY_DATE, context)).strip().replace('/', '-')
 
         feedback.pushInfo(
             tr('GET DATA FROM CHOSEN SPATIAL LAYER')
@@ -188,6 +188,8 @@ class GetSpatialLayerVectorData(GetDataAsLayer):
                 id,
                 so_unique_id AS code,
                 so_unique_label AS label,
+                so_valid_from AS valid_from,
+                so_valid_to AS valid_to,
                 geom::geometry({1}, 4326) AS geom
             FROM gobs.spatial_object
             WHERE fk_id_spatial_layer = {0}
@@ -195,27 +197,30 @@ class GetSpatialLayerVectorData(GetDataAsLayer):
             id_spatial_layer,
             geometry_type
         )
-        # View the spatial object for a specific day. Default is today
-        validity_date = (self.parameterAsString(parameters, self.VALIDITY_DATE, context)).strip().replace('/', '-')
-        if not validity_date:
-            validity_date = 'today'
-        else:
-            validity_date = validity_date[0:10]
-            p = re.compile('^[0-9]{4}$')
-            if p.match(validity_date):
-                validity_date = '%s-01-01' % validity_date
-            p = re.compile('^[0-9]{4}-[0-9]{2}$')
-            if p.match(validity_date):
-                validity_date = '%s-01' % validity_date
-        sql += '''
-            AND (
-                (so_valid_from IS NULL OR so_valid_from <= '{0}'::date)
-                AND
-                (so_valid_to IS NULL OR so_valid_to > '{0}'::date)
-            )
-        '''.format(
-            validity_date
-        )
+        # View the spatial object for a specific day.
+        # only if validity date is given
+        if validity_date:
+            if validity_date != 'today':
+                # keep only date (remove time)
+                validity_date = validity_date[0:10]
+                # test format and complete if necessary
+                p = re.compile('^[0-9]{4}$')
+                if p.match(validity_date):
+                    validity_date = '%s-01-01' % validity_date
+                p = re.compile('^[0-9]{4}-[0-9]{2}$')
+                if p.match(validity_date):
+                    validity_date = '%s-01' % validity_date
+            p = re.compile('^[0-9]{4}-[0-9]{2}-[0-9]{2}$')
+            if validity_date == 'today' or p.match(validity_date):
+                sql += '''
+                    AND (
+                        (so_valid_from IS NULL OR so_valid_from <= '{validity_date}'::date)
+                        AND
+                        (so_valid_to IS NULL OR so_valid_to > '{validity_date}'::date)
+                    )
+                '''.format(
+                    validity_date=validity_date
+                )
         self.SQL = sql.replace('\n', ' ').rstrip(';')
 
     def setLayerName(self, parameters, context, feedback):

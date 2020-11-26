@@ -28,13 +28,27 @@ from .tools import (
 
 class ImportObservationData(BaseProcessingAlgorithm):
     SOURCELAYER = 'SOURCELAYER'
-    MANUALDATE = 'MANUALDATE'
+    MANUAL_START_DATE = 'MANUAL_START_DATE'
     FIELD_TIMESTAMP = 'FIELD_TIMESTAMP'
+    MANUAL_END_DATE = 'MANUAL_END_DATE'
+    FIELD_START_TIMESTAMP = 'FIELD_START_TIMESTAMP'
+    FIELD_END_TIMESTAMP = 'FIELD_END_TIMESTAMP'
     FIELD_SPATIAL_OBJECT = 'FIELD_SPATIAL_OBJECT'
     FIELDS = 'FIELDS'
 
     OUTPUT_STATUS = 'OUTPUT_STATUS'
     OUTPUT_STRING = 'OUTPUT_STRING'
+
+    DATE_FIELDS = {
+        'Start': {
+            'field': FIELD_START_TIMESTAMP,
+            'manual': MANUAL_START_DATE
+        },
+        'End': {
+            'field': FIELD_END_TIMESTAMP,
+            'manual': MANUAL_END_DATE
+        }
+    }
 
     def name(self):
         return 'import_observation_data'
@@ -59,11 +73,11 @@ class ImportObservationData(BaseProcessingAlgorithm):
             '\n'
             'Each feature of this source layer is an observation, caracterized by a spatial object, a timestamp, a vector of values, and will be imported into the database table gobs.observation.'
             '\n'
-            '* Date time field: choose the field containing the exact date or date & time of each observation.'
+            '* Date time fields: choose the field containing the exact date or date & time of each observation: start and (optionnal) end timestamp'
             ' Leave empty if all the features share the same date/time.'
             ' This field must respect the ISO format. For example 2020-05-01 10:50:30 or 2020-01-01'
             '\n'
-            '* Manual date or timestamp: if all the data share the same timestamp, you can enter the exact value. For example, 2020 if all the observation concern the population of the cities in the year 2020.'
+            '* Manual dates or timestamps: if all the data share the same timestamp, you can enter the exact value. For example, 2020 if all the observation concern the population of the cities in the year 2020.'
             ' This field must respect the ISO format. For example 2020-05-01 10:50:30 or 2020-01-01'
             '\n'
             '* Field containing the spatial object id: choose the field contaning the unique identifier of the related spatial object in the spatial layer of this series.'
@@ -90,23 +104,25 @@ class ImportObservationData(BaseProcessingAlgorithm):
                 types=[QgsProcessing.TypeVector]
             )
         )
-        # Date field
-        self.addParameter(
-            QgsProcessingParameterField(
-                self.FIELD_TIMESTAMP,
-                tr('Date and time field. ISO Format'),
-                optional=True,
-                parentLayerParameterName=self.SOURCELAYER
+        for k, v in self.DATE_FIELDS.items():
+            # Date field
+            self.addParameter(
+                QgsProcessingParameterField(
+                    v['field'],
+                    tr(k) + ' ' + tr('date and time field. ISO Format'),
+                    optional=True,
+                    parentLayerParameterName=self.SOURCELAYER
+                )
             )
-        )
-        # Manual date field
-        self.addParameter(
-            QgsProcessingParameterString(
-                self.MANUALDATE,
-                tr('Manual date or timestamp, (2019-01-06 or 2019-01-06 22:59:50) Use when the data refers to only one date or time'),
-                optional=True
+            # Manual date field
+            self.addParameter(
+                QgsProcessingParameterString(
+                    v['manual'],
+                    tr(k) + ' ' + tr('manual date or timestamp, (2019-01-06 or 2019-01-06 22:59:50) Use when the data refers to only one date or time'),
+                    optional=True
+                )
             )
-        )
+
         # Spatial object id field
         self.addParameter(
             QgsProcessingParameterField(
@@ -154,21 +170,22 @@ class ImportObservationData(BaseProcessingAlgorithm):
 
         # Check date has been given
         ok = True
-        field_timestamp = self.parameterAsString(parameters, self.FIELD_TIMESTAMP, context)
-        manualdate = (self.parameterAsString(parameters, self.MANUALDATE, context)).strip().replace('/', '-')
-        if not field_timestamp and not manualdate:
-            ok = False
-            msg = tr('You need to enter either a date/time field or a manual date/time')
+        for k, v in self.DATE_FIELDS.items():
+            field_timestamp = self.parameterAsString(parameters, v['field'], context)
+            manualdate = (self.parameterAsString(parameters, v['manual'], context)).strip().replace('/', '-')
+            if k == 'Start' and not field_timestamp and not manualdate:
+                ok = False
+                msg = tr(k) + ' - ' + tr('You need to enter either a date/time field or a manual date/time')
 
-        # check validity of given manual date
-        if manualdate:
-            ok, msg = validateTimestamp(manualdate)
+            # check validity of given manual date
+            if manualdate:
+                ok, msg = validateTimestamp(manualdate)
+                if not ok:
+                    return ok, tr(k) + ' - ' + tr('Manual date or timestamp: ') + msg
+                ok = True
+
             if not ok:
-                return ok, tr('Manual date or timestamp: ') + msg
-            ok = True
-
-        if not ok:
-            return False, msg
+                return False, msg
         return super(ImportObservationData, self).checkParameterValues(parameters, context)
 
     def getAdditionnalParameters(self, project):
@@ -244,8 +261,6 @@ class ImportObservationData(BaseProcessingAlgorithm):
         # Database connection parameters
         connection_name = QgsExpressionContextUtils.projectScope(context.project()).variable('gobs_connection_name')
 
-        field_timestamp = self.parameterAsString(parameters, self.FIELD_TIMESTAMP, context)
-        manualdate = self.parameterAsString(parameters, self.MANUALDATE, context)
         field_spatial_object = self.parameterAsString(parameters, self.FIELD_SPATIAL_OBJECT, context)
         new_params_values = []
 
@@ -407,40 +422,48 @@ class ImportObservationData(BaseProcessingAlgorithm):
             caster = 'timestamp'
             if id_date_format in ('year', 'month', 'day'):
                 caster = 'date'
+            casted_timestamp = {}
+            for k, v in self.DATE_FIELDS.items():
+                field_timestamp = self.parameterAsString(parameters, v['field'], context)
+                manualdate = (self.parameterAsString(parameters, v['manual'], context)).strip().replace('/', '-')
 
-            if manualdate.strip():
-                manualdate = manualdate.strip().replace('/', '-')
-                if id_date_format == 'year':
-                    manualdate = manualdate[0:4] + '-01-01'
-                elif id_date_format == 'month':
-                    manualdate = manualdate[0:7] + '-01'
-                elif id_date_format == 'day':
-                    manualdate = manualdate[0:10]
-                else:
-                    manualdate = manualdate.strip()
-                casted_timestamp = '''
-                    '{0}'::{1}
-                '''.format(
-                    manualdate,
-                    caster
-                )
-            else:
-                casted_timestamp = ''
-                if id_date_format == 'year':
-                    casted_timestamp = '''
-                        concat( trim(s."{0}"::text), '-01-01')::{1}
+                if manualdate.strip():
+                    manualdate = manualdate.strip().replace('/', '-')
+                    if id_date_format == 'year':
+                        manualdate = manualdate[0:4] + '-01-01'
+                    elif id_date_format == 'month':
+                        manualdate = manualdate[0:7] + '-01'
+                    elif id_date_format == 'day':
+                        manualdate = manualdate[0:10]
+                    else:
+                        manualdate = manualdate.strip()
+                    casted_timestamp[k] = '''
+                        '{0}'::{1}
                     '''.format(
-                        field_timestamp,
+                        manualdate,
                         caster
                     )
                 else:
-                    casted_timestamp = '''
-                        date_trunc('{0}', s."{1}"::{2})
-                    '''.format(
-                        id_date_format,
-                        field_timestamp,
-                        caster
-                    )
+                    if field_timestamp:
+                        casted_timestamp_text = ''
+                        if id_date_format == 'year':
+                            casted_timestamp_text = '''
+                                concat( trim(s."{0}"::text), '-01-01')::{1}
+                            '''.format(
+                                field_timestamp,
+                                caster
+                            )
+                        else:
+                            casted_timestamp_text = '''
+                                date_trunc('{0}', s."{1}"::{2})
+                            '''.format(
+                                id_date_format,
+                                field_timestamp,
+                                caster
+                            )
+                        casted_timestamp[k] = casted_timestamp_text
+                    else:
+                        casted_timestamp[k] = 'NULL'
 
             # We use the unique constraint to override or not the data
             # "observation_data_unique" UNIQUE CONSTRAINT, btree (fk_id_series, fk_id_spatial_object, ob_start_timestamp)
@@ -449,7 +472,7 @@ class ImportObservationData(BaseProcessingAlgorithm):
             sql = '''
                 INSERT INTO gobs.observation AS o (
                     fk_id_series, fk_id_spatial_object, fk_id_import,
-                    ob_value, ob_start_timestamp
+                    ob_value, ob_start_timestamp, ob_end_timestamp
                 )
                 SELECT
                 -- id of the serie
@@ -461,32 +484,47 @@ class ImportObservationData(BaseProcessingAlgorithm):
                 -- jsonb array value computed
                 {jsonb_array},
                 -- start timestamp from the source
-                {casted_timestamp}
+                {casted_timestamp_start},
+                -- end timestamp from the source
+                {casted_timestamp_end}
                 FROM "{temp_schema}"."{temp_table}" AS s
                 JOIN gobs.spatial_object AS so
                     ON so.so_unique_id = s."{field_spatial_object}"::text
                     AND (
-                        (so.so_valid_from IS NULL OR so.so_valid_from <= {casted_timestamp}::date)
+                        (so.so_valid_from IS NULL OR so.so_valid_from <= {casted_timestamp_start}::date)
                         AND
-                        (so.so_valid_to IS NULL OR so.so_valid_to > {casted_timestamp}::date)
+                        (so.so_valid_to IS NULL OR so.so_valid_to > {casted_timestamp_start}::date)
                     )
-
+            '''.format(
+                id_serie=id_serie,
+                id_import=id_import,
+                jsonb_array=jsonb_array,
+                casted_timestamp_start=casted_timestamp['Start'],
+                casted_timestamp_end=casted_timestamp['End'],
+                temp_schema=temp_schema,
+                temp_table=temp_table,
+                field_spatial_object=field_spatial_object
+            )
+            # If end date field or manual date is given, use it in the JOIN too
+            if casted_timestamp['End'] != 'NULL':
+                sql += '''
+                    AND (
+                        (so.so_valid_from IS NULL OR so.so_valid_from <= {casted_timestamp_end}::date)
+                        AND
+                        (so.so_valid_to IS NULL OR so.so_valid_to > {casted_timestamp_end}::date)
+                    )
+                '''.format(
+                    casted_timestamp_end=casted_timestamp['End'],
+                )
+            # Manage INSERT conflicts
+            sql += '''
                 -- Update line if data already exists
                 -- AND data is not validated
                 ON CONFLICT ON CONSTRAINT observation_data_unique
                 DO UPDATE
                 SET (fk_id_import, ob_value, ob_end_timestamp) = (EXCLUDED.fk_id_import, EXCLUDED.ob_value, EXCLUDED.ob_end_timestamp)
                 WHERE o.ob_validation IS NULL
-                ;
-            '''.format(
-                id_serie=id_serie,
-                id_import=id_import,
-                jsonb_array=jsonb_array,
-                casted_timestamp=casted_timestamp,
-                temp_schema=temp_schema,
-                temp_table=temp_table,
-                field_spatial_object=field_spatial_object
-            )
+            '''
             feedback.pushInfo(sql)
             try:
                 [header, data, rowCount, ok, error_message] = fetchDataFromSqlQuery(

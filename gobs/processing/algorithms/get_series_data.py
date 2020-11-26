@@ -218,7 +218,8 @@ class GetSeriesData(GetDataAsLayer):
             so.geom,
             '''
         sql+= '''
-                ob_start_timestamp AS observation_timestamp,
+                ob_start_timestamp AS observation_start_timestamp,
+                ob_end_timestamp AS observation_end_timestamp,
                 {0}
             FROM gobs.observation AS o
             INNER JOIN gobs.spatial_object AS so

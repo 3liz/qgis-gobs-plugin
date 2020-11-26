@@ -317,7 +317,7 @@ class GetAggregatedData(GetDataAsLayer):
             '''
         if temporal_resolution:
             unique_id = '''
-            extract(epoch FROM timestamp_val) AS id,
+            extract(epoch FROM period_start) AS id,
             '''
         if add_spatial_object_data and temporal_resolution:
             unique_id = '''
@@ -350,7 +350,8 @@ class GetAggregatedData(GetDataAsLayer):
         if temporal_resolution:
             # (EXTRACT({temporal_resolution} FROM o.ob_start_timestamp))::integer AS temporal_resolution,
             sql += '''
-            date_trunc('{temporal_resolution}', o.ob_start_timestamp) AS timestamp_val,
+            date_trunc('{temporal_resolution}', o.ob_start_timestamp) AS period_start,
+            date_trunc('{temporal_resolution}', o.ob_start_timestamp) + '1 week'::interval - '1 second'::interval AS period_end,
             '''.format(
                 temporal_resolution=temporal_resolution
             )
@@ -411,7 +412,7 @@ class GetAggregatedData(GetDataAsLayer):
         # Filter by min and/or max timestamps
         if min_timestamp:
             sql += '''
-            AND ob_start_timestamp >= '{timestamp}'::timestamp
+            AND Coalesce(ob_start_timestamp, ob_end_timestamp) >= '{timestamp}'::timestamp
             '''.format(
                 timestamp=min_timestamp
             )
@@ -441,6 +442,7 @@ class GetAggregatedData(GetDataAsLayer):
             # , EXTRACT({temporal_resolution} FROM o.ob_start_timestamp)
             sql += '''
             , date_trunc('{temporal_resolution}', o.ob_start_timestamp)
+            , date_trunc('{temporal_resolution}', o.ob_start_timestamp) + '1 week'::interval - '1 second'::interval
             '''.format(
                 temporal_resolution=temporal_resolution
             )
