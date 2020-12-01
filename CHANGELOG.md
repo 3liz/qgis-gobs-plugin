@@ -1,5 +1,23 @@
 # CHANGELOG
 
+### 0.4.0 - 01/12/2020
+
+* Database structure - Add needed tables and fields for G-Event API:
+   - indicator: category, created_at and updated_at
+   - observation: end timestamp, uid, created_at and updated_at
+   - spatial object: start and end of validity dates, uid, created_at and updated_at
+   - new table document to store indicator documents
+   - new table deleted_data_log to store indicator documents
+   - new trigger to calculate created_at and updated_at, and auto-change validity date for spatial objects
+* Import - Observation data: manage new field end date (manual or from field)
+* Import - Spatial layer objects: allow multiple versions with validity dates
+* Test data - Add tracks data & update pluviometers and cities data
+* Tests - Add test for the import spatial layer data algorithm
+* Docs - Update database documentation
+* Continuous Integration - Move from CI to Github actions
+* Makefile - Add sql command to export & reformat SQL install scripts
+* Docs - Improve administration guide
+
 ### 0.3.1 - 12/08/2020
 
 * Documentation - Publish documentation to https://3liz.github.io/qgis-gobs-plugin/ (installation, concepts, admin guide, user guide & database)
@@ -39,7 +57,7 @@
 * Documenation - Add 2 button to see Concepts and Database schema
 
 ### 0.2.7 - 12/03/2020
- 
+
 * Rename name, title, label, code fields into normalized code label
 * Import observation data - Adapt alg inputs based on the indicator caracteristics
 
