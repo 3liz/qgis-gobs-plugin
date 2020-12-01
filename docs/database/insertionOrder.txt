@@ -10,7 +10,7 @@ spatial_object
 document
 r_indicator_node
 observation
-deleted
+deleted_data_log
 glossary
 metadata
 r_graph_edge

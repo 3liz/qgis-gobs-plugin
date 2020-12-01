@@ -73,7 +73,7 @@
             <div class="content-wrapper">
                 <!-- Content Header (Page header) -->
                 <section class="content-header">
-                    <h1>log_deleted_object</h1><br />
+                    <h1>update_observation_on_spatial_object_change</h1><br />
                 </section>
                 <!-- Main content -->
                 <section class="content">
@@ -110,7 +110,7 @@
                             </div>
                         </div>
                         <div class="box-body">
-                            <textarea id="sql-script-codemirror" name="sql-script-codemirror" rows="" style="display: none;">&#10;DECLARE&#10;    oid text;&#10;BEGIN&#10;    INSERT INTO gobs.deleted_data_log (&#10;        de_table,&#10;        de_uid,&#10;        de_timestamp&#10;    )&#10;    VALUES (&#10;        TG_TABLE_NAME::text,&#10;        OLD.ob_uid,&#10;        now()&#10;    )&#10;    ;&#10;    RETURN OLD;&#10;END;&#10;</textarea>
+                            <textarea id="sql-script-codemirror" name="sql-script-codemirror" rows="" style="display: none;">&#10;BEGIN&#10;    IF TG_OP = &#39;UPDATE&#39; AND NOT ST_Equals(NEW.geom, OLD.geom) THEN&#10;        UPDATE gobs.observation&#10;        SET updated_at = now()&#10;        WHERE fk_id_spatial_object = NEW.id&#10;        ;&#10;    END IF;&#10;&#10;    RETURN NEW;&#10;END;&#10;</textarea>
                         </div>
                     </div>
                 </section>

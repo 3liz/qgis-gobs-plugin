@@ -1,7 +1,7 @@
 r_graph_edge
 metadata
 glossary
-deleted
+deleted_data_log
 observation
 r_indicator_node
 document
