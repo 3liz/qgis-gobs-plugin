@@ -3,6 +3,7 @@ __license__ = "GPL version 3"
 __email__ = "info@3liz.org"
 __revision__ = "$Format:%H$"
 
+import os
 import time
 
 import processing
@@ -93,6 +94,8 @@ class ImportSpatialLayerData(BaseProcessingAlgorithm):
         # INPUTS
         project = QgsProject.instance()
         connection_name = QgsExpressionContextUtils.projectScope(project).variable('gobs_connection_name')
+        if not connection_name:
+            connection_name = os.environ.get("GOBS_CONNECTION_NAME")
         get_data = QgsExpressionContextUtils.globalScope().variable('gobs_get_database_data')
 
         # List of spatial_layer
@@ -186,12 +189,17 @@ class ImportSpatialLayerData(BaseProcessingAlgorithm):
 
         # Check that the connection name has been configured
         connection_name = QgsExpressionContextUtils.projectScope(context.project()).variable('gobs_connection_name')
-        if not connection_name:
+        connection_name_env = os.environ.get("GOBS_CONNECTION_NAME")
+        if not connection_name and not connection_name_env:
             return False, tr('You must use the "Configure G-obs plugin" alg to set the database connection name')
 
         # Check that it corresponds to an existing connection
-        if connection_name not in getPostgisConnectionList():
+        if connection_name and connection_name not in getPostgisConnectionList():
             return False, tr('The configured connection name does not exists in QGIS')
+
+        # replace connection_name by env variable
+        if not connection_name:
+            connection_name = connection_name_env
 
         # Check correct validity timestamps have been given
         date_fields = {
@@ -232,6 +240,8 @@ class ImportSpatialLayerData(BaseProcessingAlgorithm):
         # parameters
         # Database connection parameters
         connection_name = QgsExpressionContextUtils.projectScope(context.project()).variable('gobs_connection_name')
+        if not connection_name:
+            connection_name = os.environ.get("GOBS_CONNECTION_NAME")
 
         spatiallayer = self.SPATIALLAYERS[parameters[self.SPATIALLAYER]]
         sourcelayer = self.parameterAsVectorLayer(parameters, self.SOURCELAYER, context)

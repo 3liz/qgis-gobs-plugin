@@ -1,6 +1,6 @@
 {
 "type": "FeatureCollection",
-"name": "pluviometers_updated",
+"name": "pluviometers_v2",
 "crs": { "type": "name", "properties": { "name": "urn:ogc:def:crs:EPSG::2154" } },
 "features": [
 { "type": "Feature", "properties": { "id": "pluviometrie_stations_technique.fid-40202578_16bfab4dc81_46d4", "code_pluvio": "29275003", "lieu_dit_station": "(Aulne) Scrignac [Poulpry]", "pluviometrie_journaliere": 0, "batterie": 13.4, "date": "2019\/06\/01 00:00:00", "end_date": "2020\/11\/01 02:00:00" }, "geometry": { "type": "Point", "coordinates": [ 208735.55, 6837643.93 ] } },
