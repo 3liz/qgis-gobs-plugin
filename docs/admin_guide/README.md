@@ -1,7 +1,7 @@
 ---
 Title: G-Obs plugin - Admin guide
 Favicon: ../icon.png
-Sibling: yes
+Index: yes
 ...
 
 [TOC]

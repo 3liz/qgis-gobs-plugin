@@ -1,7 +1,7 @@
 ---
 Title: G-Obs plugin - Installation and configuration
 Favicon: ../icon.png
-Sibling: yes
+Index: yes
 ...
 
 [TOC]

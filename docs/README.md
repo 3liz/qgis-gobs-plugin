@@ -8,3 +8,4 @@ Favicon: icon.png
 * [Admin guide](./admin_guide/)
 * [User guide](./user_guide/)
 * [Database](./database/)
+* [Processing](./processing/)

@@ -1,0 +1,1077 @@
+
+<!DOCTYPE HTML>
+<html>
+ <head>
+  <meta charset="utf-8"/>
+  <title>G-Obs</title>
+  <link type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/8.1/styles/github.min.css" rel="stylesheet"/>
+  <link type="text/css" href="https://docs.3liz.org/remarkable.css" rel="stylesheet"/>
+  <link type="image/png" href="../icon.png" rel="icon" >
+ </head>
+ <body>
+ <header class="header-container" style="">
+    <h1>G-Obs</h1>
+ </header>
+ <article>
+<p><a href="./../">Up</a></p><div class="toc"><span class="toctitle">Table of content</span><ul>
+<li><a href="#g-obs">G-Obs</a><ul>
+<li><a href="#configuration">Configuration</a><ul>
+<li><a href="#configure-g-obs-plugin">Configure G-Obs plugin</a><ul>
+<li><a href="#parameters">Parameters</a></li>
+<li><a href="#outputs">Outputs</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a href="#administration">Administration</a><ul>
+<li><a href="#create-database-local-interface">Create database local interface</a><ul>
+<li><a href="#parameters_1">Parameters</a></li>
+<li><a href="#outputs_1">Outputs</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a href="#structure">Structure</a><ul>
+<li><a href="#create-database-structure">Create database structure</a><ul>
+<li><a href="#parameters_2">Parameters</a></li>
+<li><a href="#outputs_2">Outputs</a></li>
+</ul>
+</li>
+<li><a href="#upgrade-database-structure">Upgrade database structure</a><ul>
+<li><a href="#parameters_3">Parameters</a></li>
+<li><a href="#outputs_3">Outputs</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a href="#tools">Tools</a><ul>
+<li><a href="#get-aggregated-data">Get aggregated data</a><ul>
+<li><a href="#parameters_4">Parameters</a></li>
+<li><a href="#outputs_4">Outputs</a></li>
+</ul>
+</li>
+<li><a href="#get-series-data">Get series data</a><ul>
+<li><a href="#parameters_5">Parameters</a></li>
+<li><a href="#outputs_5">Outputs</a></li>
+</ul>
+</li>
+<li><a href="#get-the-list-of-series">Get the list of series</a><ul>
+<li><a href="#parameters_6">Parameters</a></li>
+<li><a href="#outputs_6">Outputs</a></li>
+</ul>
+</li>
+<li><a href="#get-spatial-layer-vector-data">Get spatial layer vector data</a><ul>
+<li><a href="#parameters_7">Parameters</a></li>
+<li><a href="#outputs_7">Outputs</a></li>
+</ul>
+</li>
+<li><a href="#remove-series-data">Remove series data</a><ul>
+<li><a href="#parameters_8">Parameters</a></li>
+<li><a href="#outputs_8">Outputs</a></li>
+</ul>
+</li>
+<li><a href="#remove-spatial-layer-data">Remove spatial layer data</a><ul>
+<li><a href="#parameters_9">Parameters</a></li>
+<li><a href="#outputs_9">Outputs</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a href="#import">Import</a><ul>
+<li><a href="#import-spatial-layer-data">Import spatial layer data</a><ul>
+<li><a href="#parameters_10">Parameters</a></li>
+<li><a href="#outputs_10">Outputs</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</div>
+<h1 id="g-obs">G-Obs</h1>
+<h2 id="configuration">Configuration</h2>
+<h3 id="configure-g-obs-plugin">Configure G-Obs plugin</h3>
+<p>This algorithm will allow to configure G-Obs extension for the current QGIS project</p>
+<p>You must run this script before any other script.</p>
+<ul>
+<li>PostgreSQL connection to G-Obs database: name of the database connection you would like to use for the current QGIS project. This connection will be used for the other algorithms.</li>
+</ul>
+<p><img alt="algo_id" src="./gobs-configure_plugin.png"></p>
+<h4 id="parameters">Parameters</h4>
+<table>
+<thead>
+<tr>
+<th align="center">ID</th>
+<th align="center">Description</th>
+<th align="center">Type</th>
+<th align="center">Info</th>
+<th align="center">Required</th>
+<th align="center">Advanced</th>
+<th align="center">Option</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="center">CONNECTION_NAME</td>
+<td align="center">PostgreSQL connection to G-Obs database</td>
+<td align="center">String</td>
+<td align="center"></td>
+<td align="center">✓</td>
+<td align="center"></td>
+<td align="center"></td>
+</tr>
+</tbody>
+</table>
+<h4 id="outputs">Outputs</h4>
+<table>
+<thead>
+<tr>
+<th align="center">ID</th>
+<th align="center">Description</th>
+<th align="center">Type</th>
+<th align="center">Info</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="center">OUTPUT_STATUS</td>
+<td align="center">Output status</td>
+<td align="center">Number</td>
+<td align="center"></td>
+</tr>
+<tr>
+<td align="center">OUTPUT_STRING</td>
+<td align="center">Output message</td>
+<td align="center">String</td>
+<td align="center"></td>
+</tr>
+</tbody>
+</table>
+<hr>
+<h2 id="administration">Administration</h2>
+<h3 id="create-database-local-interface">Create database local interface</h3>
+<p>This algorithm will create a new QGIS project file for G-Obs administration purpose.</p>
+<p>The generated QGIS project must then be opened by the administrator to create the needed metadata by using QGIS editing capabilities (actors, spatial layers information, indicators, etc.)</p>
+<ul>
+<li>PostgreSQL connection to G-Obs database: name of the database connection you would like to use for the new QGIS project.</li>
+<li>QGIS project file to create: choose the output file destination.</li>
+</ul>
+<p><img alt="algo_id" src="./gobs-create_database_local_interface.png"></p>
+<h4 id="parameters_1">Parameters</h4>
+<table>
+<thead>
+<tr>
+<th align="center">ID</th>
+<th align="center">Description</th>
+<th align="center">Type</th>
+<th align="center">Info</th>
+<th align="center">Required</th>
+<th align="center">Advanced</th>
+<th align="center">Option</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="center">CONNECTION_NAME</td>
+<td align="center">PostgreSQL connection to G-Obs database</td>
+<td align="center">String</td>
+<td align="center"></td>
+<td align="center">✓</td>
+<td align="center"></td>
+<td align="center"></td>
+</tr>
+<tr>
+<td align="center">PROJECT_FILE</td>
+<td align="center">QGIS project file to create</td>
+<td align="center">FileDestination</td>
+<td align="center"></td>
+<td align="center">✓</td>
+<td align="center"></td>
+<td align="center"></td>
+</tr>
+</tbody>
+</table>
+<h4 id="outputs_1">Outputs</h4>
+<table>
+<thead>
+<tr>
+<th align="center">ID</th>
+<th align="center">Description</th>
+<th align="center">Type</th>
+<th align="center">Info</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="center">PROJECT_FILE</td>
+<td align="center">QGIS project file to create</td>
+<td align="center">File</td>
+<td align="center"></td>
+</tr>
+<tr>
+<td align="center">OUTPUT_STATUS</td>
+<td align="center">Output status</td>
+<td align="center">Number</td>
+<td align="center"></td>
+</tr>
+<tr>
+<td align="center">OUTPUT_STRING</td>
+<td align="center">Output message</td>
+<td align="center">String</td>
+<td align="center"></td>
+</tr>
+</tbody>
+</table>
+<hr>
+<h2 id="structure">Structure</h2>
+<h3 id="create-database-structure">Create database structure</h3>
+<p>Install the G-Obs database structure with tables and function on the chosen database.</p>
+<p>This script will add a gobs schema with needed tables and functions</p>
+<ul>
+<li>PostgreSQL connection to G-Obs database: name of the database connection you would like to use for the installation.</li>
+</ul>
+<p>Beware ! If you check the "override" checkboxes, you will loose all existing data in the existing gobs schema !</p>
+<p><img alt="algo_id" src="./gobs-create_database_structure.png"></p>
+<h4 id="parameters_2">Parameters</h4>
+<table>
+<thead>
+<tr>
+<th align="center">ID</th>
+<th align="center">Description</th>
+<th align="center">Type</th>
+<th align="center">Info</th>
+<th align="center">Required</th>
+<th align="center">Advanced</th>
+<th align="center">Option</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="center">CONNECTION_NAME</td>
+<td align="center">PostgreSQL connection to G-Obs database</td>
+<td align="center">String</td>
+<td align="center"></td>
+<td align="center">✓</td>
+<td align="center"></td>
+<td align="center"></td>
+</tr>
+<tr>
+<td align="center">OVERRIDE</td>
+<td align="center">Overwrite schema gobs and all data ? <strong> CAUTION </strong> It will remove all existing data !</td>
+<td align="center">Boolean</td>
+<td align="center"></td>
+<td align="center">✓</td>
+<td align="center"></td>
+<td align="center"></td>
+</tr>
+<tr>
+<td align="center">ADD_TEST_DATA</td>
+<td align="center">Add test data ?</td>
+<td align="center">Boolean</td>
+<td align="center"></td>
+<td align="center">✓</td>
+<td align="center"></td>
+<td align="center"></td>
+</tr>
+</tbody>
+</table>
+<h4 id="outputs_2">Outputs</h4>
+<table>
+<thead>
+<tr>
+<th align="center">ID</th>
+<th align="center">Description</th>
+<th align="center">Type</th>
+<th align="center">Info</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="center">OUTPUT_STATUS</td>
+<td align="center">Output status</td>
+<td align="center">Number</td>
+<td align="center"></td>
+</tr>
+<tr>
+<td align="center">OUTPUT_STRING</td>
+<td align="center">Output message</td>
+<td align="center">String</td>
+<td align="center"></td>
+</tr>
+</tbody>
+</table>
+<hr>
+<h3 id="upgrade-database-structure">Upgrade database structure</h3>
+<p>Upgrade the G-Obs tables and functions in the chosen database.</p>
+<p>If you have upgraded your QGIS G-Obs plugin, you can run this script to upgrade your database to the new plugin version.</p>
+<ul>
+<li>PostgreSQL connection to G-Obs database: name of the database connection you would like to use for the upgrade.</li>
+</ul>
+<p><img alt="algo_id" src="./gobs-upgrade_database_structure.png"></p>
+<h4 id="parameters_3">Parameters</h4>
+<table>
+<thead>
+<tr>
+<th align="center">ID</th>
+<th align="center">Description</th>
+<th align="center">Type</th>
+<th align="center">Info</th>
+<th align="center">Required</th>
+<th align="center">Advanced</th>
+<th align="center">Option</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="center">CONNECTION_NAME</td>
+<td align="center">PostgreSQL connection to G-Obs database</td>
+<td align="center">String</td>
+<td align="center"></td>
+<td align="center">✓</td>
+<td align="center"></td>
+<td align="center"></td>
+</tr>
+<tr>
+<td align="center">RUN_MIGRATIONS</td>
+<td align="center">Check this box to upgrade. No action will be done otherwise</td>
+<td align="center">Boolean</td>
+<td align="center"></td>
+<td align="center">✓</td>
+<td align="center"></td>
+<td align="center"></td>
+</tr>
+</tbody>
+</table>
+<h4 id="outputs_3">Outputs</h4>
+<table>
+<thead>
+<tr>
+<th align="center">ID</th>
+<th align="center">Description</th>
+<th align="center">Type</th>
+<th align="center">Info</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="center">OUTPUT_STATUS</td>
+<td align="center">Output status</td>
+<td align="center">Number</td>
+<td align="center"></td>
+</tr>
+<tr>
+<td align="center">OUTPUT_STRING</td>
+<td align="center">Output message</td>
+<td align="center">String</td>
+<td align="center"></td>
+</tr>
+</tbody>
+</table>
+<hr>
+<h2 id="tools">Tools</h2>
+<h3 id="get-aggregated-data">Get aggregated data</h3>
+<p>This algorithm allows to add a table or vector layer in your QGIS project containing the aggregated observation data from the chosen G-Obs series. The aggregation is made depending of the user input. Data are dynamically fetched from the database, meaning they are always up-to-date.
+* Names of the output layer: choose the name of the QGIS layer to create. If not given, the label of the series of observations, as written in the series combo box.
+* Series of observations: the G-Obs series containing the observation data.
+* Add spatial object ID and label ? If checked, the output layer will have two more columns with the spatial layer unique identifiers (ID and label).
+* Add spatial object geometry ? If checked, the output layer will be a spatial QGIS vector layer, displayed in the map, and not a geometryless table layer. The result can show duplicated geometries, for observations defined by the same geometry at different dates or times.
+* Timestamp extraction resolution: choose the desired temporal resolution of the output. Aggregates will be calculated (sum, average, etc.) by grouping the source data by this temporal resolution.
+* Choose aggregate functions to use: you can choose between minimum (min), maximum (max), average (avg) and  sum.
+* Minimum observation timestamp: if you enter a valid ISO timestamp in this field, only observations with a timestamp after this value will be processed.
+* Maximum observation timestamp: if you enter a valid ISO timestamp in this field, only observations with a timestamp before this value will be processed.</p>
+<p><img alt="algo_id" src="./gobs-get_aggregated_data.png"></p>
+<h4 id="parameters_4">Parameters</h4>
+<table>
+<thead>
+<tr>
+<th align="center">ID</th>
+<th align="center">Description</th>
+<th align="center">Type</th>
+<th align="center">Info</th>
+<th align="center">Required</th>
+<th align="center">Advanced</th>
+<th align="center">Option</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="center">OUTPUT_LAYER_NAME</td>
+<td align="center">Name of the output layer</td>
+<td align="center">String</td>
+<td align="center"></td>
+<td align="center"></td>
+<td align="center"></td>
+<td align="center"></td>
+</tr>
+<tr>
+<td align="center">SERIE</td>
+<td align="center">Series of observations</td>
+<td align="center">Enum</td>
+<td align="center"></td>
+<td align="center">✓</td>
+<td align="center"></td>
+<td align="center">Values:  <br></td>
+</tr>
+<tr>
+<td align="center">SERIE_ID</td>
+<td align="center">Series ID. If given, it overrides previous choice</td>
+<td align="center">Number</td>
+<td align="center"></td>
+<td align="center">✓</td>
+<td align="center"></td>
+<td align="center">Default: -1 <br> Type: Integer<br> Min: -1.7976931348623157e+308, Max: 1.7976931348623157e+308 <br></td>
+</tr>
+<tr>
+<td align="center">ADD_SPATIAL_OBJECT_DATA</td>
+<td align="center">Add spatial object ID and label ?</td>
+<td align="center">Boolean</td>
+<td align="center"></td>
+<td align="center">✓</td>
+<td align="center"></td>
+<td align="center">Default: True <br></td>
+</tr>
+<tr>
+<td align="center">ADD_SPATIAL_OBJECT_GEOM</td>
+<td align="center">Add spatial object geometry ?</td>
+<td align="center">Boolean</td>
+<td align="center"></td>
+<td align="center">✓</td>
+<td align="center"></td>
+<td align="center"></td>
+</tr>
+<tr>
+<td align="center">TEMPORAL_RESOLUTION</td>
+<td align="center">Timestamp extraction resolution</td>
+<td align="center">Enum</td>
+<td align="center"></td>
+<td align="center">✓</td>
+<td align="center"></td>
+<td align="center">Values: original, second, minute, hour, day, week, month, year <br></td>
+</tr>
+<tr>
+<td align="center">AGGREGATE_FUNCTIONS</td>
+<td align="center">Choose aggregate functions to use</td>
+<td align="center">Enum</td>
+<td align="center"></td>
+<td align="center">✓</td>
+<td align="center"></td>
+<td align="center">Default: [0, 1, 2, 3] <br> Values: min, max, avg, sum <br></td>
+</tr>
+<tr>
+<td align="center">MIN_TIMESTAMP</td>
+<td align="center">Minimum observation timestamp, Ex: 2019-01-01 or 2019-01-06 00:00:00</td>
+<td align="center">String</td>
+<td align="center"></td>
+<td align="center"></td>
+<td align="center"></td>
+<td align="center"></td>
+</tr>
+<tr>
+<td align="center">MAX_TIMESTAMP</td>
+<td align="center">Maximum observation timestamp, Ex:2019-12-31 or 2019-12-31 23:59:53</td>
+<td align="center">String</td>
+<td align="center"></td>
+<td align="center"></td>
+<td align="center"></td>
+<td align="center"></td>
+</tr>
+</tbody>
+</table>
+<h4 id="outputs_4">Outputs</h4>
+<table>
+<thead>
+<tr>
+<th align="center">ID</th>
+<th align="center">Description</th>
+<th align="center">Type</th>
+<th align="center">Info</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="center">OUTPUT_STATUS</td>
+<td align="center">Output status</td>
+<td align="center">Number</td>
+<td align="center"></td>
+</tr>
+<tr>
+<td align="center">OUTPUT_STRING</td>
+<td align="center">Output message</td>
+<td align="center">String</td>
+<td align="center"></td>
+</tr>
+<tr>
+<td align="center">OUTPUT_LAYER</td>
+<td align="center">Output layer</td>
+<td align="center">VectorLayer</td>
+<td align="center"></td>
+</tr>
+<tr>
+<td align="center">OUTPUT_LAYER_RESULT_NAME</td>
+<td align="center">Output layer name</td>
+<td align="center">String</td>
+<td align="center"></td>
+</tr>
+</tbody>
+</table>
+<hr>
+<h3 id="get-series-data">Get series data</h3>
+<p>This algorithm allows to add a table layer in your QGIS project containing the observation data from the chosen G-Obs series. Data are dynamically fetched from the database, meaning they are always up-to-date.
+* Name of the output layer: choose the name of the QGIS table layer to create. If not given, the label of the series will be used, by concatening the label of the indicator, protocol, source actor and spatial layer defining the chosen series.
+* Series of observations: choose the G-Obs series of observation you want to use as the data source.
+* Add spatial object geometry ? If checked, the output layer will be a spatial QGIS vector layer, displayed in the map, and not a geometryless table layer. The result can show duplicated geometries, for observations defined by the same geometry at different dates or times.</p>
+<p><img alt="algo_id" src="./gobs-get_series_data.png"></p>
+<h4 id="parameters_5">Parameters</h4>
+<table>
+<thead>
+<tr>
+<th align="center">ID</th>
+<th align="center">Description</th>
+<th align="center">Type</th>
+<th align="center">Info</th>
+<th align="center">Required</th>
+<th align="center">Advanced</th>
+<th align="center">Option</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="center">OUTPUT_LAYER_NAME</td>
+<td align="center">Name of the output layer</td>
+<td align="center">String</td>
+<td align="center"></td>
+<td align="center"></td>
+<td align="center"></td>
+<td align="center"></td>
+</tr>
+<tr>
+<td align="center">SERIE</td>
+<td align="center">Series of observations</td>
+<td align="center">Enum</td>
+<td align="center"></td>
+<td align="center">✓</td>
+<td align="center"></td>
+<td align="center">Values:  <br></td>
+</tr>
+<tr>
+<td align="center">SERIE_ID</td>
+<td align="center">Series ID. If given, it overrides previous choice</td>
+<td align="center">Number</td>
+<td align="center"></td>
+<td align="center">✓</td>
+<td align="center"></td>
+<td align="center">Default: -1 <br> Type: Integer<br> Min: -1.7976931348623157e+308, Max: 1.7976931348623157e+308 <br></td>
+</tr>
+<tr>
+<td align="center">ADD_SPATIAL_OBJECT_GEOM</td>
+<td align="center">Add spatial object geometry ?</td>
+<td align="center">Boolean</td>
+<td align="center"></td>
+<td align="center">✓</td>
+<td align="center"></td>
+<td align="center"></td>
+</tr>
+</tbody>
+</table>
+<h4 id="outputs_5">Outputs</h4>
+<table>
+<thead>
+<tr>
+<th align="center">ID</th>
+<th align="center">Description</th>
+<th align="center">Type</th>
+<th align="center">Info</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="center">OUTPUT_STATUS</td>
+<td align="center">Output status</td>
+<td align="center">Number</td>
+<td align="center"></td>
+</tr>
+<tr>
+<td align="center">OUTPUT_STRING</td>
+<td align="center">Output message</td>
+<td align="center">String</td>
+<td align="center"></td>
+</tr>
+<tr>
+<td align="center">OUTPUT_LAYER</td>
+<td align="center">Output layer</td>
+<td align="center">VectorLayer</td>
+<td align="center"></td>
+</tr>
+<tr>
+<td align="center">OUTPUT_LAYER_RESULT_NAME</td>
+<td align="center">Output layer name</td>
+<td align="center">String</td>
+<td align="center"></td>
+</tr>
+</tbody>
+</table>
+<hr>
+<h3 id="get-the-list-of-series">Get the list of series</h3>
+<p><img alt="algo_id" src="./gobs-get_series_list.png"></p>
+<h4 id="parameters_6">Parameters</h4>
+<table>
+<thead>
+<tr>
+<th align="center">ID</th>
+<th align="center">Description</th>
+<th align="center">Type</th>
+<th align="center">Info</th>
+<th align="center">Required</th>
+<th align="center">Advanced</th>
+<th align="center">Option</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="center">No parameter</td>
+<td align="center"></td>
+<td align="center"></td>
+<td align="center"></td>
+<td align="center"></td>
+<td align="center"></td>
+<td align="center"></td>
+</tr>
+</tbody>
+</table>
+<h4 id="outputs_6">Outputs</h4>
+<table>
+<thead>
+<tr>
+<th align="center">ID</th>
+<th align="center">Description</th>
+<th align="center">Type</th>
+<th align="center">Info</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="center">OUTPUT_STATUS</td>
+<td align="center">Output status</td>
+<td align="center">Number</td>
+<td align="center"></td>
+</tr>
+<tr>
+<td align="center">OUTPUT_STRING</td>
+<td align="center">Output message</td>
+<td align="center">String</td>
+<td align="center"></td>
+</tr>
+<tr>
+<td align="center">OUTPUT_LAYER</td>
+<td align="center">Output layer</td>
+<td align="center">VectorLayer</td>
+<td align="center"></td>
+</tr>
+<tr>
+<td align="center">OUTPUT_LAYER_RESULT_NAME</td>
+<td align="center">Output layer name</td>
+<td align="center">String</td>
+<td align="center"></td>
+</tr>
+</tbody>
+</table>
+<hr>
+<h3 id="get-spatial-layer-vector-data">Get spatial layer vector data</h3>
+<p>This algorithm allows to add a vector layer in your QGIS project containing the spatial data from the chosen G-Obs spatial layer. Data are dynamically fetched from the database, meaning they are always up-to-date.
+* Name of the output layer: choose the name of the QGIS layer to create. If not given, the label of the spatial layer will be used.
+* Spatial layer: choose the G-Obs spatial layer you want to use as the data source.
+* Date of validity: if you want to see the data for a specific date (ex: today or 2010-01-01)</p>
+<p><img alt="algo_id" src="./gobs-get_spatial_layer_vector_data.png"></p>
+<h4 id="parameters_7">Parameters</h4>
+<table>
+<thead>
+<tr>
+<th align="center">ID</th>
+<th align="center">Description</th>
+<th align="center">Type</th>
+<th align="center">Info</th>
+<th align="center">Required</th>
+<th align="center">Advanced</th>
+<th align="center">Option</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="center">OUTPUT_LAYER_NAME</td>
+<td align="center">Name of the output layer</td>
+<td align="center">String</td>
+<td align="center"></td>
+<td align="center"></td>
+<td align="center"></td>
+<td align="center"></td>
+</tr>
+<tr>
+<td align="center">SPATIALLAYER</td>
+<td align="center">Spatial layer</td>
+<td align="center">Enum</td>
+<td align="center"></td>
+<td align="center">✓</td>
+<td align="center"></td>
+<td align="center">Values:  <br></td>
+</tr>
+<tr>
+<td align="center">SPATIALLAYER_ID</td>
+<td align="center">Spatial layer ID. If given, it overrides previous choice</td>
+<td align="center">Number</td>
+<td align="center"></td>
+<td align="center">✓</td>
+<td align="center"></td>
+<td align="center">Default: -1 <br> Type: Integer<br> Min: -1.7976931348623157e+308, Max: 1.7976931348623157e+308 <br></td>
+</tr>
+<tr>
+<td align="center">VALIDITY_DATE</td>
+<td align="center">View data for a specific date (ex: today or 2010-01-01)</td>
+<td align="center">String</td>
+<td align="center"></td>
+<td align="center"></td>
+<td align="center"></td>
+<td align="center"></td>
+</tr>
+</tbody>
+</table>
+<h4 id="outputs_7">Outputs</h4>
+<table>
+<thead>
+<tr>
+<th align="center">ID</th>
+<th align="center">Description</th>
+<th align="center">Type</th>
+<th align="center">Info</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="center">OUTPUT_STATUS</td>
+<td align="center">Output status</td>
+<td align="center">Number</td>
+<td align="center"></td>
+</tr>
+<tr>
+<td align="center">OUTPUT_STRING</td>
+<td align="center">Output message</td>
+<td align="center">String</td>
+<td align="center"></td>
+</tr>
+<tr>
+<td align="center">OUTPUT_LAYER</td>
+<td align="center">Output layer</td>
+<td align="center">VectorLayer</td>
+<td align="center"></td>
+</tr>
+<tr>
+<td align="center">OUTPUT_LAYER_RESULT_NAME</td>
+<td align="center">Output layer name</td>
+<td align="center">String</td>
+<td align="center"></td>
+</tr>
+</tbody>
+</table>
+<hr>
+<h3 id="remove-series-data">Remove series data</h3>
+<p>This algorithms allows to completely delete observation data for a specific series
+* Series of observations: the G-Obs series containing the observation data.
+* Check this box to delete: this box must be checked in order to proceed. It is mainly here as a security. Please check the chosen series before proceeding !
+* Also delete the series item: if you want to delete not only the observation data of the series, but also the series item in the table.</p>
+<p><img alt="algo_id" src="./gobs-remove_series_data.png"></p>
+<h4 id="parameters_8">Parameters</h4>
+<table>
+<thead>
+<tr>
+<th align="center">ID</th>
+<th align="center">Description</th>
+<th align="center">Type</th>
+<th align="center">Info</th>
+<th align="center">Required</th>
+<th align="center">Advanced</th>
+<th align="center">Option</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="center">SERIE</td>
+<td align="center">Series of observations</td>
+<td align="center">Enum</td>
+<td align="center"></td>
+<td align="center">✓</td>
+<td align="center"></td>
+<td align="center">Values:  <br></td>
+</tr>
+<tr>
+<td align="center">SERIE_ID</td>
+<td align="center">Series ID. If given, it overrides previous choice</td>
+<td align="center">Number</td>
+<td align="center"></td>
+<td align="center">✓</td>
+<td align="center"></td>
+<td align="center">Default: -1 <br> Type: Integer<br> Min: -1.7976931348623157e+308, Max: 1.7976931348623157e+308 <br></td>
+</tr>
+<tr>
+<td align="center">RUN_DELETE</td>
+<td align="center">Check this box to delete. No action will be done otherwise</td>
+<td align="center">Boolean</td>
+<td align="center"></td>
+<td align="center">✓</td>
+<td align="center"></td>
+<td align="center"></td>
+</tr>
+<tr>
+<td align="center">DELETE_SERIES</td>
+<td align="center">Also delete the series item</td>
+<td align="center">Boolean</td>
+<td align="center"></td>
+<td align="center">✓</td>
+<td align="center"></td>
+<td align="center"></td>
+</tr>
+</tbody>
+</table>
+<h4 id="outputs_8">Outputs</h4>
+<table>
+<thead>
+<tr>
+<th align="center">ID</th>
+<th align="center">Description</th>
+<th align="center">Type</th>
+<th align="center">Info</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="center">OUTPUT_STATUS</td>
+<td align="center">Output status</td>
+<td align="center">Number</td>
+<td align="center"></td>
+</tr>
+<tr>
+<td align="center">OUTPUT_STRING</td>
+<td align="center">Output message</td>
+<td align="center">String</td>
+<td align="center"></td>
+</tr>
+</tbody>
+</table>
+<hr>
+<h3 id="remove-spatial-layer-data">Remove spatial layer data</h3>
+<p>This algorithms allows to completely delete spatial layer data (objects) for a specific spatial layer
+* Spatial layer: choose the G-Obs spatial layer.
+* Check this box to delete: this box must be checked in order to proceed. It is mainly here as a security. Please check the chosen spatial layer before proceeding !
+* Also delete the spatial layer item: if you want to delete not only the spatial objects of the spatial layers, but also the spatial layer item in the table.</p>
+<p><img alt="algo_id" src="./gobs-remove_spatial_layer_data.png"></p>
+<h4 id="parameters_9">Parameters</h4>
+<table>
+<thead>
+<tr>
+<th align="center">ID</th>
+<th align="center">Description</th>
+<th align="center">Type</th>
+<th align="center">Info</th>
+<th align="center">Required</th>
+<th align="center">Advanced</th>
+<th align="center">Option</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="center">SPATIALLAYER</td>
+<td align="center">Spatial layer</td>
+<td align="center">Enum</td>
+<td align="center"></td>
+<td align="center">✓</td>
+<td align="center"></td>
+<td align="center">Values:  <br></td>
+</tr>
+<tr>
+<td align="center">SPATIALLAYER_ID</td>
+<td align="center">Spatial layer ID. If given, it overrides previous choice</td>
+<td align="center">Number</td>
+<td align="center"></td>
+<td align="center">✓</td>
+<td align="center"></td>
+<td align="center">Default: -1 <br> Type: Integer<br> Min: -1.7976931348623157e+308, Max: 1.7976931348623157e+308 <br></td>
+</tr>
+<tr>
+<td align="center">RUN_DELETE</td>
+<td align="center">Check this box to delete. No action will be done otherwise</td>
+<td align="center">Boolean</td>
+<td align="center"></td>
+<td align="center">✓</td>
+<td align="center"></td>
+<td align="center"></td>
+</tr>
+<tr>
+<td align="center">DELETE_SPATIAL_LAYER</td>
+<td align="center">Also delete the spatial layer item</td>
+<td align="center">Boolean</td>
+<td align="center"></td>
+<td align="center">✓</td>
+<td align="center"></td>
+<td align="center"></td>
+</tr>
+</tbody>
+</table>
+<h4 id="outputs_9">Outputs</h4>
+<table>
+<thead>
+<tr>
+<th align="center">ID</th>
+<th align="center">Description</th>
+<th align="center">Type</th>
+<th align="center">Info</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="center">OUTPUT_STATUS</td>
+<td align="center">Output status</td>
+<td align="center">Number</td>
+<td align="center"></td>
+</tr>
+<tr>
+<td align="center">OUTPUT_STRING</td>
+<td align="center">Output message</td>
+<td align="center">String</td>
+<td align="center"></td>
+</tr>
+</tbody>
+</table>
+<hr>
+<h2 id="import">Import</h2>
+<h3 id="import-spatial-layer-data">Import spatial layer data</h3>
+<p>This algorithm allows to import data from a QGIS spatial layer into the G-Obs database</p>
+<p>The G-Obs administrator must have created the needed spatial layer beforehand by addind the required items in the related database tables: gobs.actor_category, gobs.actor and gobs.spatial_layer.
+* Target spatial layer: choose one of the spatial layers available in G-Obs database
+* Source data layer: choose the QGIS vector layer containing the spatial data you want to import into the chosen spatial layer.
+* Unique identifier: choose the field containing the unique ID. It can be an integer or a text field, but must be unique.
+* Unique label: choose the text field containing the unique label of the layer feature. You could use the QGIS field calculator to create one if needed.
+* Start of validity: choose the field with the start timestamp of validity for each feature. Leave empty if all the features share the same date/time and manually enter the value in the next input. This field content must respect the ISO format. For example 2020-05-01 10:50:30 or 2020-01-01
+* Start of validity for all features Specify the start timestamp of validity for all the objects in the spatial layer. This value must respect the ISO format. For example 2020-05-01 10:50:30 or 2020-01-01
+* End of validity: choose the field with the end timestamp of validity for each feature. Leave empty if all the features share the same date/time and manually enter the value in the next input. This field content must respect the ISO format. For example 2020-05-01 10:50:30 or 2020-01-01
+* End of validity for all features Specify the end timestamp of validity for all the objects in the spatial layer. This value must respect the ISO format. For example 2020-05-01 10:50:30 or 2020-01-01</p>
+<p><img alt="algo_id" src="./gobs-import_spatial_layer_data.png"></p>
+<h4 id="parameters_10">Parameters</h4>
+<table>
+<thead>
+<tr>
+<th align="center">ID</th>
+<th align="center">Description</th>
+<th align="center">Type</th>
+<th align="center">Info</th>
+<th align="center">Required</th>
+<th align="center">Advanced</th>
+<th align="center">Option</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="center">SPATIALLAYER</td>
+<td align="center">Target spatial layer</td>
+<td align="center">Enum</td>
+<td align="center"></td>
+<td align="center">✓</td>
+<td align="center"></td>
+<td align="center">Values:  <br></td>
+</tr>
+<tr>
+<td align="center">SOURCELAYER</td>
+<td align="center">Source data layer</td>
+<td align="center">VectorLayer</td>
+<td align="center"></td>
+<td align="center">✓</td>
+<td align="center"></td>
+<td align="center">Type:  <br></td>
+</tr>
+<tr>
+<td align="center">UNIQUEID</td>
+<td align="center">Unique identifier</td>
+<td align="center">Field</td>
+<td align="center"></td>
+<td align="center">✓</td>
+<td align="center"></td>
+<td align="center"></td>
+</tr>
+<tr>
+<td align="center">UNIQUELABEL</td>
+<td align="center">Unique label</td>
+<td align="center">Field</td>
+<td align="center"></td>
+<td align="center">✓</td>
+<td align="center"></td>
+<td align="center"></td>
+</tr>
+<tr>
+<td align="center">DATE_VALIDITY_MIN</td>
+<td align="center">Start timestamp of validity. Field in ISO Format</td>
+<td align="center">Field</td>
+<td align="center"></td>
+<td align="center"></td>
+<td align="center"></td>
+<td align="center"></td>
+</tr>
+<tr>
+<td align="center">MANUAL_DATE_VALIDITY_MIN</td>
+<td align="center">Manual start timestamp of validity (2019-01-06 or 2019-01-06 22:59:50)</td>
+<td align="center">String</td>
+<td align="center"></td>
+<td align="center"></td>
+<td align="center"></td>
+<td align="center"></td>
+</tr>
+<tr>
+<td align="center">DATE_VALIDITY_MAX</td>
+<td align="center">End timestamp of validity. Field in ISO Format</td>
+<td align="center">Field</td>
+<td align="center"></td>
+<td align="center"></td>
+<td align="center"></td>
+<td align="center"></td>
+</tr>
+<tr>
+<td align="center">MANUAL_DATE_VALIDITY_MAX</td>
+<td align="center">Manual end timestamp of validity (2019-01-31 or 2019-01-31 23:59:59)</td>
+<td align="center">String</td>
+<td align="center"></td>
+<td align="center"></td>
+<td align="center"></td>
+<td align="center"></td>
+</tr>
+</tbody>
+</table>
+<h4 id="outputs_10">Outputs</h4>
+<table>
+<thead>
+<tr>
+<th align="center">ID</th>
+<th align="center">Description</th>
+<th align="center">Type</th>
+<th align="center">Info</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="center">OUTPUT_STRING</td>
+<td align="center">Output message</td>
+<td align="center">String</td>
+<td align="center"></td>
+</tr>
+</tbody>
+</table>
+<hr>
+  </article>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/8.1/highlight.min.js">
+  </script>
+  <script>
+   hljs.initHighlightingOnLoad();
+  </script>
+  <script src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML" type="text/javascript">
+  </script>
+  <script type="text/javascript">
+   MathJax.Hub.Config({"showProcessingMessages" : false,"messageStyle" : "none","tex2jax": { inlineMath: [ [ "$", "$" ] ] }});
+  </script>
+ </body>
+</html>

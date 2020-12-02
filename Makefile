@@ -38,6 +38,10 @@ reformat_sql:
 
 sql: generate_sql reformat_sql
 
+processing-doc:
+	cd .docker && ./processing_doc.sh
+	@docker run --rm -w /plugin -v $(shell pwd):/plugin 3liz/pymarkdown:latest docs/processing/README.md docs/processing/index.html
+
 flake8:
 	@docker run --rm -w /plugin -v $(shell pwd):/plugin etrimaille/flake8:3.8.2
 
