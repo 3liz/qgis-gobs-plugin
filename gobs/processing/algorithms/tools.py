@@ -154,7 +154,7 @@ def createAdministrationProjectFromTemplate(connection_name, project_file_path):
     connection_info = uri.connectionInfo()
 
     # Read in the template file
-    template_file = plugin_path('qgis', 'gobs_administration.qgs')
+    template_file = plugin_path('resources', 'qgis', 'gobs_administration.qgs')
     with open(template_file, 'r') as fin:
         filedata = fin.read()
 

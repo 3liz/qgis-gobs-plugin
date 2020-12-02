@@ -40,7 +40,7 @@ class GetSeriesList(GetDataAsLayer):
 
     def setSql(self, parameters, context, feedback):
 
-        get_data = QgsExpressionContextUtils.projectScope(context.project()).variable('gobs_get_database_data')
+        get_data = QgsExpressionContextUtils.globalScope().variable('gobs_get_database_data')
         if get_data != 'yes':
             return
 
@@ -55,7 +55,7 @@ class GetSeriesList(GetDataAsLayer):
                 pr_label AS protocol,
                 count(o.id) AS nb_observation,
                 min(o.ob_start_timestamp) AS min_date,
-                max(Coalesce(o.ob_start_timestamp, o.ob_end_timestamp) AS max_date
+                max(Coalesce(o.ob_start_timestamp, o.ob_end_timestamp)) AS max_date
 
             FROM gobs.series s
             INNER JOIN gobs.observation o ON o.fk_id_series = s.id
