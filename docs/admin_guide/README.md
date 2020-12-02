@@ -152,6 +152,7 @@ Notes:
 * **Code** is the unique text identifier of the indicator. **Please do not use spaces, accentuated characters or punctuation symbol**.
 * **Label** is the display name
 * **Date** format is the temporal resolution of the data which will be imported for this indicator. Please choose with care, depending on the source data and the information you would like to create from it.
+* **Category** The optionnal category of the indicator. You can type some letters to search among the existing values. If you need to enter a new category, write it down.
 * The fields **Codes, Names, Types and Units** allow to define one or many **dimensions** for this indicator. You can add one item in each field with the plus `+` button, or delete the selected one with the minus `-` button. The order of the data entered for each field **must be respected**. For example, if the indicator has two dimensions to store weather data: temperature & hygrometry, you could use:
 
     - **Codes**: Code of the dimension. **Please do not use spaces, accentuated characters or punctuation symbol**
