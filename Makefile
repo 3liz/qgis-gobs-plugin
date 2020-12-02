@@ -51,4 +51,5 @@ github-pages:
 	@docker run --rm -w /plugin -v $(shell pwd):/plugin 3liz/pymarkdown:latest docs/admin_guide/README.md docs/admin_guide/index.html
 	@docker run --rm -w /plugin -v $(shell pwd):/plugin 3liz/pymarkdown:latest docs/concepts/README.md docs/concepts/index.html
 	@docker run --rm -w /plugin -v $(shell pwd):/plugin 3liz/pymarkdown:latest docs/user_guide/README.md docs/user_guide/index.html
+	@docker run --rm -w /plugin -v $(shell pwd):/plugin 3liz/pymarkdown:latest docs/concepts/old_french_doc/README.md docs/concepts/old_french_doc/index.html
 

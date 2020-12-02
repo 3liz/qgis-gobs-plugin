@@ -1,3 +1,11 @@
+---
+Title: G-Obs plugin - Main concepts
+Favicon: ../icon.png
+Sibling: yes
+...
+
+[TOC]
+
 # Documentation
 
 ## Introduction
@@ -104,9 +112,9 @@ Un outil d'importation est aussi un service informationnel, car il répond aux b
 
 La construction d'un service informationnel (par exemple un projet QGIS) est aussi un service informationnel, à destination des géomaticiens.
 
-## Modèle conceptuel de données
+## Modèle physique des données
 
-![](media/modele_conceptuel.png)
+[Voir la documentation de la base](https://docs.3liz.org/qgis-gobs-plugin/database/relationships.html)
 
 
 ## Scénarios d'utilisation

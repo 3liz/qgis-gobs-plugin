@@ -9,3 +9,4 @@ Favicon: icon.png
 * [User guide](./user_guide/)
 * [Database](./database/)
 * [Processing](./processing/)
+* [Old french concepts doc](./concepts/old_french_doc/)
