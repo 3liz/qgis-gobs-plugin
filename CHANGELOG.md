@@ -1,5 +1,15 @@
 # CHANGELOG
 
+### 0.4.1 - 02/12/2020
+
+Admin - Update administration project template
+Docs - Update admin guide
+Docs - Add Processing documentation
+Docs - Update SchemaSpy database structure documentation: https://docs.3liz.org/qgis-gobs-plugin/database/
+Docs - Database doc generation: improve compatibility with PG13
+e Fix some packaging issues about Transifex
+
+
 ### 0.4.0 - 02/12/2020
 
 * Database structure - Add needed tables and fields for G-Event API:
