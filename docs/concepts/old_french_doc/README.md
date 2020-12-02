@@ -1,7 +1,7 @@
 ---
 Title: G-Obs plugin - Main concepts
 Favicon: ../icon.png
-Sibling: yes
+Index: yes
 ...
 
 [TOC]

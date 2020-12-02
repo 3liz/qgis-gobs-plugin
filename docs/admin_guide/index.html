@@ -218,6 +218,9 @@
 <th>id_value_type</th>
 <th>id_value_unit</th>
 <th>id_paths</th>
+<th>id_category</th>
+<th>created_at</th>
+<th>updated_at</th>
 </tr>
 </thead>
 <tbody>
@@ -227,11 +230,14 @@
 <td>Hourly pluviometry</td>
 <td>Hourly rainfall pluviometry in millimetre</td>
 <td>hour</td>
-<td>pluviometry</td>
-<td>Pluviometry</td>
-<td>real</td>
-<td>mm</td>
-<td>Environment / Water / Data | Physical and chemical conditions / Water</td>
+<td>{pluviometry}</td>
+<td>{Pluviometry}</td>
+<td>{real}</td>
+<td>{mm}</td>
+<td>Environment / Water / Data, Physical and chemical conditions / Water</td>
+<td>Water</td>
+<td>2020-12-02 15:06:29.11064</td>
+<td>2020-12-02 15:06:29.11064</td>
 </tr>
 <tr>
 <td>2</td>
@@ -239,11 +245,29 @@
 <td>Population</td>
 <td>Number of inhabitants for city</td>
 <td>year</td>
-<td>population</td>
-<td>Population</td>
-<td>integer</td>
-<td>people</td>
+<td>{population}</td>
+<td>{Population}</td>
+<td>{integer}</td>
+<td>{people}</td>
 <td>Socio-eco / Demography / Population</td>
+<td>Population</td>
+<td>2020-12-02 15:06:29.11064</td>
+<td>2020-12-02 15:06:29.11064</td>
+</tr>
+<tr>
+<td>3</td>
+<td>hiker_position</td>
+<td>Hikers position</td>
+<td>Position and altitude of hikers</td>
+<td>second</td>
+<td>{altitude}</td>
+<td>{Altitude}</td>
+<td>{integer}</td>
+<td>{m}</td>
+<td>Hiking / Tracks</td>
+<td>Tracks</td>
+<td>2020-12-02 15:06:29.11064</td>
+<td>2020-12-02 15:06:29.11064</td>
 </tr>
 </tbody>
 </table>
@@ -253,6 +277,7 @@
 <li><strong>Code</strong> is the unique text identifier of the indicator. <strong>Please do not use spaces, accentuated characters or punctuation symbol</strong>.</li>
 <li><strong>Label</strong> is the display name</li>
 <li><strong>Date</strong> format is the temporal resolution of the data which will be imported for this indicator. Please choose with care, depending on the source data and the information you would like to create from it.</li>
+<li><strong>Category</strong> The optionnal category of the indicator. You can type some letters to search among the existing values. If you need to enter a new category, write it down.</li>
 <li>
 <p>The fields <strong>Codes, Names, Types and Units</strong> allow to define one or many <strong>dimensions</strong> for this indicator. You can add one item in each field with the plus <code>+</code> button, or delete the selected one with the minus <code>-</code> button. The order of the data entered for each field <strong>must be respected</strong>. For example, if the indicator has two dimensions to store weather data: temperature &amp; hygrometry, you could use:</p>
 <ul>
@@ -336,6 +361,9 @@
 <li>You can combine them, for example <code>Environment / Water / Analyses, Environment / Water / Resources, Agriculture / Resources</code> will lead to the following graph:</li>
 </ul>
 <p><img alt="Indicator graph example" src="../media/gobs_indicator_graph_example.png"></p>
+</li>
+<li>
+<p>The <strong>creation &amp; update timestamps</strong> are automatically calculated when data is saved.</p>
 </li>
 </ul>
 <h4 id="protocol">protocol</h4>

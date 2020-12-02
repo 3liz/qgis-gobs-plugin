@@ -141,10 +141,14 @@ Notes:
 
 Example content
 
-| id | id_code     | id_label            | id_description                            | id_date_format | id_value_code | id_value_name | id_value_type | id_value_unit | id_paths                                                                |
-|----|-------------|---------------------|-------------------------------------------|----------------|---------------|---------------|---------------|---------------|-------------------------------------------------------------------------|
-| 1  | pluviometry | Hourly pluviometry  | Hourly rainfall pluviometry in millimetre | hour           | pluviometry   | Pluviometry   | real          | mm            | Environment / Water / Data \| Physical and chemical conditions / Water  |
-| 2  | population  | Population          | Number of inhabitants for city            | year           | population    | Population    | integer       | people        | Socio-eco / Demography / Population                                     |
+
+
+| id |    id_code     |      id_label       |              id_description               | id_date_format | id_value_code | id_value_name | id_value_type | id_value_unit |                                id_paths                                | id_category |        created_at         |        updated_at         |
+|----|----------------|---------------------|-------------------------------------------|----------------|---------------|---------------|---------------|---------------|------------------------------------------------------------------------|-------------|---------------------------|---------------------------|
+| 1  | pluviometry    | Hourly pluviometry  | Hourly rainfall pluviometry in millimetre | hour           | {pluviometry} | {Pluviometry} | {real}        | {mm}          | Environment / Water / Data, Physical and chemical conditions / Water   | Water       | 2020-12-02 15:06:29.11064 | 2020-12-02 15:06:29.11064 |
+| 2  | population     | Population          | Number of inhabitants for city            | year           | {population}  | {Population}  | {integer}     | {people}      | Socio-eco / Demography / Population                                    | Population  | 2020-12-02 15:06:29.11064 | 2020-12-02 15:06:29.11064 |
+| 3  | hiker_position | Hikers position     | Position and altitude of hikers           | second         | {altitude}    | {Altitude}    | {integer}     | {m}           | Hiking / Tracks                                                        | Tracks      | 2020-12-02 15:06:29.11064 | 2020-12-02 15:06:29.11064 |
+
 
 Notes:
 
@@ -190,6 +194,8 @@ Notes:
     - You can combine them, for example `Environment / Water / Analyses, Environment / Water / Resources, Agriculture / Resources` will lead to the following graph:
 
     ![Indicator graph example](../media/gobs_indicator_graph_example.png)
+
+* The **creation & update timestamps** are automatically calculated when data is saved.
 
 #### protocol
 
