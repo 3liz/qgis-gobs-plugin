@@ -2,11 +2,11 @@ name: Lint 🎳
 
 on:
   push:
-    paths:
-      - '**.py'
+#    paths:
+#      - '**.py'
   pull_request:
-    paths:
-      - '**.py'
+#    paths:
+#      - '**.py'
 
 jobs:
   test-flake8:

@@ -1,6 +1,6 @@
 # CHANGELOG
 
-### 0.4.0 - 01/12/2020
+### 0.4.0 - 02/12/2020
 
 * Database structure - Add needed tables and fields for G-Event API:
    - indicator: category, created_at and updated_at
