@@ -45,6 +45,9 @@
       <layer-tree-layer checked="Qt::Checked" expanded="1" id="indicator_18ba18bf_0390_45a3_8edd_1cc049e8a251" legend_exp="" name="indicator" providerKey="postgres" source="service='gobs' sslmode=disable key='id' estimatedmetadata=true checkPrimaryKeyUnicity='0' table=&quot;gobs&quot;.&quot;indicator&quot; sql=">
         <customproperties></customproperties>
       </layer-tree-layer>
+      <layer-tree-layer checked="Qt::Checked" expanded="1" id="document_3f322924_735f_4bef_b903_9521d2f25444" legend_exp="" name="document" providerKey="postgres" source="service='gobs' sslmode=disable key='id' estimatedmetadata=true checkPrimaryKeyUnicity='1' table=&quot;gobs&quot;.&quot;document&quot; sql=">
+        <customproperties></customproperties>
+      </layer-tree-layer>
       <layer-tree-layer checked="Qt::Checked" expanded="1" id="protocol_5507f1c8_1802_4df0_a273_8e9b7f52c352" legend_exp="" name="protocol" providerKey="postgres" source="service='gobs' sslmode=disable key='id' estimatedmetadata=true checkPrimaryKeyUnicity='0' table=&quot;gobs&quot;.&quot;protocol&quot; sql=">
         <customproperties></customproperties>
       </layer-tree-layer>
@@ -78,7 +81,7 @@
     </layer-tree-layer>
     <custom-order enabled="0">
       <item>osm_mapnik_73cc9876_fa44_4742_bc09_afe572b57bbe</item>
-      <item>layername_1b984aea_510b_4f33_b961_7b83868d7ee3</item>
+      <item>document_3f322924_735f_4bef_b903_9521d2f25444</item>
     </custom-order>
   </layer-tree-group>
   <snapping-settings enabled="0" intersection-snapping="0" mode="2" tolerance="0" type="1" unit="2">
@@ -87,6 +90,9 @@
   <relations>
     <relation id="actor_5f01a6e5_8205_462f_af40_0ffd7ff0a44f_id_category_actor_category_8a7edcf8_cb34_4689_b22b_7a8a6a2ab610_id" name="actor_id_category_fkey" referencedLayer="actor_category_8a7edcf8_cb34_4689_b22b_7a8a6a2ab610" referencingLayer="actor_5f01a6e5_8205_462f_af40_0ffd7ff0a44f" strength="Association">
       <fieldRef referencedField="id" referencingField="id_category"></fieldRef>
+    </relation>
+    <relation id="document_3f322924_735f_4bef_b903_9521d2f25444_fk_id_indicator_indicator_18ba18bf_0390_45a3_8edd_1cc049e8a251_id" name="document_fk_id_indicator_fkey" referencedLayer="indicator_18ba18bf_0390_45a3_8edd_1cc049e8a251" referencingLayer="document_3f322924_735f_4bef_b903_9521d2f25444" strength="Association">
+      <fieldRef referencedField="id" referencingField="fk_id_indicator"></fieldRef>
     </relation>
     <relation id="import_0343eb12_592e_4fd0_8380_51f4d62b6a56_fk_id_series_series_04a7414a_ab6d_4611_8a60_bcd22071dc22_id" name="import_fk_id_series_fkey" referencedLayer="series_04a7414a_ab6d_4611_8a60_bcd22071dc22" referencingLayer="import_0343eb12_592e_4fd0_8380_51f4d62b6a56" strength="Association">
       <fieldRef referencedField="id" referencingField="fk_id_series"></fieldRef>
@@ -192,7 +198,7 @@
         <Option name="color_scale_data_defined_in_check" type="bool" value="false"></Option>
         <Option name="color_scale_data_defined_in_invert_check" type="bool" value="false"></Option>
         <Option name="cont_type" type="QString" value="fill"></Option>
-        <Option name="contour_type_combo" type="QString" value="Fill"></Option>
+        <Option name="contour_type_combo" type="QString" value="Plein"></Option>
         <Option name="cumulative" type="bool" value="false"></Option>
         <Option name="custom" type="List">
           <Option type="QString" value=""></Option>
@@ -203,7 +209,7 @@
         <Option name="in_color" type="QString" value="#8ebad9"></Option>
         <Option name="invert_color_scale" type="bool" value="false"></Option>
         <Option name="invert_hist" type="QString" value="increasing"></Option>
-        <Option name="line_combo" type="QString" value="Solid Line"></Option>
+        <Option name="line_combo" type="QString" value="ligne pleine"></Option>
         <Option name="line_dash" type="QString" value="solid"></Option>
         <Option name="marker" type="QString" value="markers"></Option>
         <Option name="marker_size" type="double" value="10"></Option>
@@ -263,6 +269,11 @@
           <legendlayerfile isInOverview="0" layerid="indicator_18ba18bf_0390_45a3_8edd_1cc049e8a251" visible="1"></legendlayerfile>
         </filegroup>
       </legendlayer>
+      <legendlayer checked="Qt::Checked" drawingOrder="-1" name="document" open="true" showFeatureCount="0">
+        <filegroup hidden="false" open="true">
+          <legendlayerfile isInOverview="0" layerid="document_3f322924_735f_4bef_b903_9521d2f25444" visible="1"></legendlayerfile>
+        </filegroup>
+      </legendlayer>
       <legendlayer checked="Qt::Checked" drawingOrder="-1" name="protocol" open="true" showFeatureCount="0">
         <filegroup hidden="false" open="true">
           <legendlayerfile isInOverview="0" layerid="protocol_5507f1c8_1802_4df0_a273_8e9b7f52c352" visible="1"></legendlayerfile>
@@ -314,6 +325,81 @@
   </legend>
   <mapViewDocks></mapViewDocks>
   <mapViewDocks3D></mapViewDocks3D>
+  <mapcanvas annotationsVisible="1" name="mAreaCanvas">
+    <units>degrees</units>
+    <extent>
+      <xmin>0</xmin>
+      <ymin>0</ymin>
+      <xmax>0</xmax>
+      <ymax>0</ymax>
+    </extent>
+    <rotation>0</rotation>
+    <destinationsrs>
+      <spatialrefsys>
+        <wkt>GEOGCRS["WGS 84",DATUM["World Geodetic System 1984",ELLIPSOID["WGS 84",6378137,298.257223563,LENGTHUNIT["metre",1]]],PRIMEM["Greenwich",0,ANGLEUNIT["degree",0.0174532925199433]],CS[ellipsoidal,2],AXIS["geodetic latitude (Lat)",north,ORDER[1],ANGLEUNIT["degree",0.0174532925199433]],AXIS["geodetic longitude (Lon)",east,ORDER[2],ANGLEUNIT["degree",0.0174532925199433]],USAGE[SCOPE["unknown"],AREA["World"],BBOX[-90,-180,90,180]],ID["EPSG",4326]]</wkt>
+        <proj4>+proj=longlat +datum=WGS84 +no_defs</proj4>
+        <srsid>3452</srsid>
+        <srid>4326</srid>
+        <authid>EPSG:4326</authid>
+        <description>WGS 84</description>
+        <projectionacronym>longlat</projectionacronym>
+        <ellipsoidacronym>EPSG:7030</ellipsoidacronym>
+        <geographicflag>true</geographicflag>
+      </spatialrefsys>
+    </destinationsrs>
+    <rendermaptile>0</rendermaptile>
+    <expressionContextScope></expressionContextScope>
+  </mapcanvas>
+  <mapcanvas annotationsVisible="1" name="mAreaCanvas">
+    <units>degrees</units>
+    <extent>
+      <xmin>0</xmin>
+      <ymin>0</ymin>
+      <xmax>0</xmax>
+      <ymax>0</ymax>
+    </extent>
+    <rotation>0</rotation>
+    <destinationsrs>
+      <spatialrefsys>
+        <wkt>GEOGCRS["WGS 84",DATUM["World Geodetic System 1984",ELLIPSOID["WGS 84",6378137,298.257223563,LENGTHUNIT["metre",1]]],PRIMEM["Greenwich",0,ANGLEUNIT["degree",0.0174532925199433]],CS[ellipsoidal,2],AXIS["geodetic latitude (Lat)",north,ORDER[1],ANGLEUNIT["degree",0.0174532925199433]],AXIS["geodetic longitude (Lon)",east,ORDER[2],ANGLEUNIT["degree",0.0174532925199433]],USAGE[SCOPE["unknown"],AREA["World"],BBOX[-90,-180,90,180]],ID["EPSG",4326]]</wkt>
+        <proj4>+proj=longlat +datum=WGS84 +no_defs</proj4>
+        <srsid>3452</srsid>
+        <srid>4326</srid>
+        <authid>EPSG:4326</authid>
+        <description>WGS 84</description>
+        <projectionacronym>longlat</projectionacronym>
+        <ellipsoidacronym>EPSG:7030</ellipsoidacronym>
+        <geographicflag>true</geographicflag>
+      </spatialrefsys>
+    </destinationsrs>
+    <rendermaptile>0</rendermaptile>
+    <expressionContextScope></expressionContextScope>
+  </mapcanvas>
+  <mapcanvas annotationsVisible="1" name="mAreaCanvas">
+    <units>degrees</units>
+    <extent>
+      <xmin>0</xmin>
+      <ymin>0</ymin>
+      <xmax>0</xmax>
+      <ymax>0</ymax>
+    </extent>
+    <rotation>0</rotation>
+    <destinationsrs>
+      <spatialrefsys>
+        <wkt>GEOGCRS["WGS 84",DATUM["World Geodetic System 1984",ELLIPSOID["WGS 84",6378137,298.257223563,LENGTHUNIT["metre",1]]],PRIMEM["Greenwich",0,ANGLEUNIT["degree",0.0174532925199433]],CS[ellipsoidal,2],AXIS["geodetic latitude (Lat)",north,ORDER[1],ANGLEUNIT["degree",0.0174532925199433]],AXIS["geodetic longitude (Lon)",east,ORDER[2],ANGLEUNIT["degree",0.0174532925199433]],USAGE[SCOPE["unknown"],AREA["World"],BBOX[-90,-180,90,180]],ID["EPSG",4326]]</wkt>
+        <proj4>+proj=longlat +datum=WGS84 +no_defs</proj4>
+        <srsid>3452</srsid>
+        <srid>4326</srid>
+        <authid>EPSG:4326</authid>
+        <description>WGS 84</description>
+        <projectionacronym>longlat</projectionacronym>
+        <ellipsoidacronym>EPSG:7030</ellipsoidacronym>
+        <geographicflag>true</geographicflag>
+      </spatialrefsys>
+    </destinationsrs>
+    <rendermaptile>0</rendermaptile>
+    <expressionContextScope></expressionContextScope>
+  </mapcanvas>
   <projectlayers>
     <maplayer autoRefreshEnabled="0" autoRefreshTime="0" geometry="No geometry" hasScaleBasedVisibilityFlag="0" maxScale="0" minScale="1e+08" readOnly="0" refreshOnNotifyEnabled="0" refreshOnNotifyMessage="" styleCategories="AllStyleCategories" type="vector" wkbType="NoGeometry">
       <id>actor_5f01a6e5_8205_462f_af40_0ffd7ff0a44f</id>
@@ -332,7 +418,7 @@
           <description></description>
           <projectionacronym></projectionacronym>
           <ellipsoidacronym></ellipsoidacronym>
-          <geographicflag>false</geographicflag>
+          <geographicflag>true</geographicflag>
         </spatialrefsys>
       </srs>
       <resourceMetadata>
@@ -364,7 +450,7 @@
             <description></description>
             <projectionacronym></projectionacronym>
             <ellipsoidacronym></ellipsoidacronym>
-            <geographicflag>true</geographicflag>
+            <geographicflag>false</geographicflag>
           </spatialrefsys>
         </crs>
         <extent>
@@ -584,7 +670,7 @@ def my_form_open(dialog, layer, feature):
           <description></description>
           <projectionacronym></projectionacronym>
           <ellipsoidacronym></ellipsoidacronym>
-          <geographicflag>true</geographicflag>
+          <geographicflag>false</geographicflag>
         </spatialrefsys>
       </srs>
       <resourceMetadata>
@@ -616,7 +702,7 @@ def my_form_open(dialog, layer, feature):
             <description></description>
             <projectionacronym></projectionacronym>
             <ellipsoidacronym></ellipsoidacronym>
-            <geographicflag>true</geographicflag>
+            <geographicflag>false</geographicflag>
           </spatialrefsys>
         </crs>
         <extent>
@@ -766,6 +852,331 @@ def my_form_open(dialog, layer, feature):
       <mapTip></mapTip>
     </maplayer>
     <maplayer autoRefreshEnabled="0" autoRefreshTime="0" geometry="No geometry" hasScaleBasedVisibilityFlag="0" maxScale="0" minScale="1e+08" readOnly="0" refreshOnNotifyEnabled="0" refreshOnNotifyMessage="" styleCategories="AllStyleCategories" type="vector" wkbType="NoGeometry">
+      <id>document_3f322924_735f_4bef_b903_9521d2f25444</id>
+      <datasource>service='gobs' sslmode=disable key='id' estimatedmetadata=true checkPrimaryKeyUnicity='1' table="gobs"."document" sql=</datasource>
+      <keywordList>
+        <value></value>
+      </keywordList>
+      <layername>document</layername>
+      <srs>
+        <spatialrefsys>
+          <wkt></wkt>
+          <proj4></proj4>
+          <srsid>0</srsid>
+          <srid>0</srid>
+          <authid></authid>
+          <description></description>
+          <projectionacronym></projectionacronym>
+          <ellipsoidacronym></ellipsoidacronym>
+          <geographicflag>false</geographicflag>
+        </spatialrefsys>
+      </srs>
+      <resourceMetadata>
+        <identifier></identifier>
+        <parentidentifier></parentidentifier>
+        <language></language>
+        <type>dataset</type>
+        <title></title>
+        <abstract>List of documents for describing indicators.</abstract>
+        <contact>
+          <name></name>
+          <organization></organization>
+          <position></position>
+          <voice></voice>
+          <fax></fax>
+          <email></email>
+          <role></role>
+        </contact>
+        <links></links>
+        <fees></fees>
+        <encoding></encoding>
+        <crs>
+          <spatialrefsys>
+            <wkt></wkt>
+            <proj4></proj4>
+            <srsid>0</srsid>
+            <srid>0</srid>
+            <authid></authid>
+            <description></description>
+            <projectionacronym></projectionacronym>
+            <ellipsoidacronym></ellipsoidacronym>
+            <geographicflag>false</geographicflag>
+          </spatialrefsys>
+        </crs>
+        <extent>
+          <spatial crs="" dimensions="2" maxx="0" maxy="0" maxz="0" minx="0" miny="0" minz="0"></spatial>
+          <temporal>
+            <period>
+              <start></start>
+              <end></end>
+            </period>
+          </temporal>
+        </extent>
+      </resourceMetadata>
+      <provider encoding="">postgres</provider>
+      <vectorjoins></vectorjoins>
+      <layerDependencies></layerDependencies>
+      <dataDependencies></dataDependencies>
+      <legend type="default-vector"></legend>
+      <expressionfields></expressionfields>
+      <map-layer-style-manager current="défaut">
+        <map-layer-style name="défaut"></map-layer-style>
+      </map-layer-style-manager>
+      <auxiliaryLayer></auxiliaryLayer>
+      <flags>
+        <Identifiable>1</Identifiable>
+        <Removable>1</Removable>
+        <Searchable>1</Searchable>
+      </flags>
+      <customproperties>
+        <property key="dualview/previewExpressions">
+          <value>"do_description"</value>
+        </property>
+        <property key="embeddedWidgets/count" value="0"></property>
+        <property key="variableNames"></property>
+        <property key="variableValues"></property>
+      </customproperties>
+      <geometryOptions geometryPrecision="0" removeDuplicateNodes="0">
+        <activeChecks></activeChecks>
+        <checkConfiguration></checkConfiguration>
+      </geometryOptions>
+      <fieldConfiguration>
+        <field name="id">
+          <editWidget type="TextEdit">
+            <config>
+              <Option type="Map">
+                <Option name="IsMultiline" type="bool" value="false"></Option>
+                <Option name="UseHtml" type="bool" value="false"></Option>
+              </Option>
+            </config>
+          </editWidget>
+        </field>
+        <field name="do_uid">
+          <editWidget type="TextEdit">
+            <config>
+              <Option type="Map">
+                <Option name="IsMultiline" type="bool" value="false"></Option>
+                <Option name="UseHtml" type="bool" value="false"></Option>
+              </Option>
+            </config>
+          </editWidget>
+        </field>
+        <field name="do_label">
+          <editWidget type="TextEdit">
+            <config>
+              <Option type="Map">
+                <Option name="IsMultiline" type="bool" value="false"></Option>
+                <Option name="UseHtml" type="bool" value="false"></Option>
+              </Option>
+            </config>
+          </editWidget>
+        </field>
+        <field name="do_description">
+          <editWidget type="TextEdit">
+            <config>
+              <Option type="Map">
+                <Option name="IsMultiline" type="bool" value="true"></Option>
+                <Option name="UseHtml" type="bool" value="false"></Option>
+              </Option>
+            </config>
+          </editWidget>
+        </field>
+        <field name="do_type">
+          <editWidget type="ValueMap">
+            <config>
+              <Option type="Map">
+                <Option name="map" type="List">
+                  <Option type="Map">
+                    <Option name="A document (PDF, DOC, ODT, etc.)" type="QString" value="document"></Option>
+                  </Option>
+                  <Option type="Map">
+                    <Option name="The indicator icon path" type="QString" value="icon"></Option>
+                  </Option>
+                  <Option type="Map">
+                    <Option name="An image or photo" type="QString" value="image"></Option>
+                  </Option>
+                  <Option type="Map">
+                    <Option name="Other" type="QString" value="other"></Option>
+                  </Option>
+                  <Option type="Map">
+                    <Option name="The indicator main illustration (image)" type="QString" value="preview"></Option>
+                  </Option>
+                  <Option type="Map">
+                    <Option name="Video" type="QString" value="video"></Option>
+                  </Option>
+                  <Option type="Map">
+                    <Option name="URL" type="QString" value="url"></Option>
+                  </Option>
+                </Option>
+              </Option>
+            </config>
+          </editWidget>
+        </field>
+        <field name="do_path">
+          <editWidget type="TextEdit">
+            <config>
+              <Option type="Map">
+                <Option name="IsMultiline" type="bool" value="false"></Option>
+                <Option name="UseHtml" type="bool" value="false"></Option>
+              </Option>
+            </config>
+          </editWidget>
+        </field>
+        <field name="fk_id_indicator">
+          <editWidget type="RelationReference">
+            <config>
+              <Option type="Map">
+                <Option name="AllowAddFeatures" type="bool" value="false"></Option>
+                <Option name="AllowNULL" type="bool" value="false"></Option>
+                <Option name="MapIdentification" type="bool" value="false"></Option>
+                <Option name="OrderByValue" type="bool" value="true"></Option>
+                <Option name="ReadOnly" type="bool" value="false"></Option>
+                <Option name="Relation" type="QString" value="document_3f322924_735f_4bef_b903_9521d2f25444_fk_id_indicator_indicator_18ba18bf_0390_45a3_8edd_1cc049e8a251_id"></Option>
+                <Option name="ShowForm" type="bool" value="false"></Option>
+                <Option name="ShowOpenFormButton" type="bool" value="false"></Option>
+              </Option>
+            </config>
+          </editWidget>
+        </field>
+        <field name="created_at">
+          <editWidget type="TextEdit">
+            <config>
+              <Option type="Map">
+                <Option name="IsMultiline" type="bool" value="false"></Option>
+                <Option name="UseHtml" type="bool" value="false"></Option>
+              </Option>
+            </config>
+          </editWidget>
+        </field>
+        <field name="updated_at">
+          <editWidget type="TextEdit">
+            <config>
+              <Option type="Map">
+                <Option name="IsMultiline" type="bool" value="false"></Option>
+                <Option name="UseHtml" type="bool" value="false"></Option>
+              </Option>
+            </config>
+          </editWidget>
+        </field>
+      </fieldConfiguration>
+      <aliases>
+        <alias field="id" index="0" name="ID"></alias>
+        <alias field="do_uid" index="1" name="Document unique ID (UUID)"></alias>
+        <alias field="do_label" index="2" name="Label"></alias>
+        <alias field="do_description" index="3" name="Description"></alias>
+        <alias field="do_type" index="4" name="Type"></alias>
+        <alias field="do_path" index="5" name="Relative path of the document INDICATOR_CODE/TYPE/filename.ext"></alias>
+        <alias field="fk_id_indicator" index="6" name=""></alias>
+        <alias field="created_at" index="7" name=""></alias>
+        <alias field="updated_at" index="8" name=""></alias>
+      </aliases>
+      <excludeAttributesWMS></excludeAttributesWMS>
+      <excludeAttributesWFS></excludeAttributesWFS>
+      <defaults>
+        <default applyOnUpdate="0" expression="" field="id"></default>
+        <default applyOnUpdate="0" expression="" field="do_uid"></default>
+        <default applyOnUpdate="0" expression="" field="do_label"></default>
+        <default applyOnUpdate="0" expression="" field="do_description"></default>
+        <default applyOnUpdate="0" expression="" field="do_type"></default>
+        <default applyOnUpdate="0" expression="" field="do_path"></default>
+        <default applyOnUpdate="0" expression="" field="fk_id_indicator"></default>
+        <default applyOnUpdate="0" expression="" field="created_at"></default>
+        <default applyOnUpdate="0" expression="" field="updated_at"></default>
+      </defaults>
+      <constraints>
+        <constraint constraints="3" exp_strength="0" field="id" notnull_strength="1" unique_strength="1"></constraint>
+        <constraint constraints="1" exp_strength="0" field="do_uid" notnull_strength="2" unique_strength="0"></constraint>
+        <constraint constraints="3" exp_strength="0" field="do_label" notnull_strength="1" unique_strength="1"></constraint>
+        <constraint constraints="0" exp_strength="0" field="do_description" notnull_strength="0" unique_strength="0"></constraint>
+        <constraint constraints="1" exp_strength="0" field="do_type" notnull_strength="1" unique_strength="0"></constraint>
+        <constraint constraints="1" exp_strength="0" field="do_path" notnull_strength="1" unique_strength="0"></constraint>
+        <constraint constraints="1" exp_strength="0" field="fk_id_indicator" notnull_strength="1" unique_strength="0"></constraint>
+        <constraint constraints="1" exp_strength="0" field="created_at" notnull_strength="1" unique_strength="0"></constraint>
+        <constraint constraints="1" exp_strength="0" field="updated_at" notnull_strength="1" unique_strength="0"></constraint>
+      </constraints>
+      <constraintExpressions>
+        <constraint desc="" exp="" field="id"></constraint>
+        <constraint desc="" exp="" field="do_uid"></constraint>
+        <constraint desc="" exp="" field="do_label"></constraint>
+        <constraint desc="" exp="" field="do_description"></constraint>
+        <constraint desc="" exp="" field="do_type"></constraint>
+        <constraint desc="" exp="" field="do_path"></constraint>
+        <constraint desc="" exp="" field="fk_id_indicator"></constraint>
+        <constraint desc="" exp="" field="created_at"></constraint>
+        <constraint desc="" exp="" field="updated_at"></constraint>
+      </constraintExpressions>
+      <expressionfields></expressionfields>
+      <attributeactions>
+        <defaultAction key="Canvas" value="{00000000-0000-0000-0000-000000000000}"></defaultAction>
+      </attributeactions>
+      <attributetableconfig actionWidgetStyle="dropDown" sortExpression="" sortOrder="0">
+        <columns>
+          <column hidden="0" name="id" type="field" width="-1"></column>
+          <column hidden="0" name="do_uid" type="field" width="-1"></column>
+          <column hidden="0" name="do_label" type="field" width="-1"></column>
+          <column hidden="0" name="do_description" type="field" width="-1"></column>
+          <column hidden="0" name="do_type" type="field" width="-1"></column>
+          <column hidden="0" name="do_path" type="field" width="-1"></column>
+          <column hidden="0" name="fk_id_indicator" type="field" width="-1"></column>
+          <column hidden="0" name="created_at" type="field" width="-1"></column>
+          <column hidden="0" name="updated_at" type="field" width="-1"></column>
+          <column hidden="1" type="actions" width="-1"></column>
+        </columns>
+      </attributetableconfig>
+      <conditionalstyles>
+        <rowstyles></rowstyles>
+        <fieldstyles></fieldstyles>
+      </conditionalstyles>
+      <storedexpressions></storedexpressions>
+      <editform tolerant="1"></editform>
+      <editforminit></editforminit>
+      <editforminitcodesource>0</editforminitcodesource>
+      <editforminitfilepath></editforminitfilepath>
+      <editforminitcode># -*- coding: utf-8 -*-
+"""
+Les formulaires QGIS peuvent avoir une fonction Python qui sera appelée à l'ouverture du formulaire.
+
+Utilisez cette fonction pour ajouter plus de fonctionnalités à vos formulaires.
+
+Entrez le nom de la fonction dans le champ "Fonction d'initialisation Python".
+Voici un exemple à suivre:
+"""
+from qgis.PyQt.QtWidgets import QWidget
+
+def my_form_open(dialog, layer, feature):
+    geom = feature.geometry()
+    control = dialog.findChild(QWidget, "MyLineEdit")
+
+</editforminitcode>
+      <featformsuppress>0</featformsuppress>
+      <editorlayout>generatedlayout</editorlayout>
+      <editable>
+        <field editable="0" name="created_at"></field>
+        <field editable="1" name="do_description"></field>
+        <field editable="1" name="do_label"></field>
+        <field editable="1" name="do_path"></field>
+        <field editable="1" name="do_type"></field>
+        <field editable="0" name="do_uid"></field>
+        <field editable="1" name="fk_id_indicator"></field>
+        <field editable="0" name="id"></field>
+        <field editable="0" name="updated_at"></field>
+      </editable>
+      <labelOnTop>
+        <field labelOnTop="0" name="created_at"></field>
+        <field labelOnTop="0" name="do_description"></field>
+        <field labelOnTop="0" name="do_label"></field>
+        <field labelOnTop="0" name="do_path"></field>
+        <field labelOnTop="0" name="do_type"></field>
+        <field labelOnTop="0" name="do_uid"></field>
+        <field labelOnTop="0" name="fk_id_indicator"></field>
+        <field labelOnTop="0" name="id"></field>
+        <field labelOnTop="0" name="updated_at"></field>
+      </labelOnTop>
+      <widgets></widgets>
+      <previewExpression>"do_description"</previewExpression>
+      <mapTip></mapTip>
+    </maplayer>
+    <maplayer autoRefreshEnabled="0" autoRefreshTime="0" geometry="No geometry" hasScaleBasedVisibilityFlag="0" maxScale="0" minScale="1e+08" readOnly="0" refreshOnNotifyEnabled="0" refreshOnNotifyMessage="" styleCategories="AllStyleCategories" type="vector" wkbType="NoGeometry">
       <id>glossary_cee356e0_5be5_4d87_ac2b_e8e8967c4032</id>
       <datasource>service='gobs' sslmode=disable key='id' estimatedmetadata=true checkPrimaryKeyUnicity='0' table="gobs"."glossary" sql=</datasource>
       <keywordList>
@@ -782,7 +1193,7 @@ def my_form_open(dialog, layer, feature):
           <description></description>
           <projectionacronym></projectionacronym>
           <ellipsoidacronym></ellipsoidacronym>
-          <geographicflag>true</geographicflag>
+          <geographicflag>false</geographicflag>
         </spatialrefsys>
       </srs>
       <resourceMetadata>
@@ -814,7 +1225,7 @@ def my_form_open(dialog, layer, feature):
             <description></description>
             <projectionacronym></projectionacronym>
             <ellipsoidacronym></ellipsoidacronym>
-            <geographicflag>true</geographicflag>
+            <geographicflag>false</geographicflag>
           </spatialrefsys>
         </crs>
         <extent>
@@ -1027,7 +1438,7 @@ def my_form_open(dialog, layer, feature):
           <description></description>
           <projectionacronym></projectionacronym>
           <ellipsoidacronym></ellipsoidacronym>
-          <geographicflag>true</geographicflag>
+          <geographicflag>false</geographicflag>
         </spatialrefsys>
       </srs>
       <resourceMetadata>
@@ -1059,7 +1470,7 @@ def my_form_open(dialog, layer, feature):
             <description></description>
             <projectionacronym></projectionacronym>
             <ellipsoidacronym></ellipsoidacronym>
-            <geographicflag>true</geographicflag>
+            <geographicflag>false</geographicflag>
           </spatialrefsys>
         </crs>
         <extent>
@@ -1206,7 +1617,7 @@ def my_form_open(dialog, layer, feature):
           <description></description>
           <projectionacronym></projectionacronym>
           <ellipsoidacronym></ellipsoidacronym>
-          <geographicflag>true</geographicflag>
+          <geographicflag>false</geographicflag>
         </spatialrefsys>
       </srs>
       <resourceMetadata>
@@ -1229,7 +1640,7 @@ def my_form_open(dialog, layer, feature):
             <description></description>
             <projectionacronym></projectionacronym>
             <ellipsoidacronym></ellipsoidacronym>
-            <geographicflag>true</geographicflag>
+            <geographicflag>false</geographicflag>
           </spatialrefsys>
         </crs>
         <extent></extent>
@@ -1356,7 +1767,7 @@ def my_form_open(dialog, layer, feature):
           <description></description>
           <projectionacronym></projectionacronym>
           <ellipsoidacronym></ellipsoidacronym>
-          <geographicflag>true</geographicflag>
+          <geographicflag>false</geographicflag>
         </spatialrefsys>
       </srs>
       <resourceMetadata>
@@ -1388,7 +1799,7 @@ def my_form_open(dialog, layer, feature):
             <description></description>
             <projectionacronym></projectionacronym>
             <ellipsoidacronym></ellipsoidacronym>
-            <geographicflag>true</geographicflag>
+            <geographicflag>false</geographicflag>
           </spatialrefsys>
         </crs>
         <extent>
@@ -1417,7 +1828,10 @@ def my_form_open(dialog, layer, feature):
         <Searchable>1</Searchable>
       </flags>
       <customproperties>
-        <property key="dualview/previewExpressions" value="id_code"></property>
+        <property key="dualview/previewExpressions">
+          <value>id_label</value>
+          <value>"id_code"</value>
+        </property>
         <property key="embeddedWidgets/count" value="0"></property>
         <property key="variableNames"></property>
         <property key="variableValues"></property>
@@ -1664,19 +2078,24 @@ def my_form_open(dialog, layer, feature):
       <featformsuppress>0</featformsuppress>
       <editorlayout>tablayout</editorlayout>
       <attributeEditorForm>
-        <attributeEditorField index="0" name="id" showLabel="1"></attributeEditorField>
-        <attributeEditorField index="1" name="id_code" showLabel="1"></attributeEditorField>
-        <attributeEditorField index="2" name="id_label" showLabel="1"></attributeEditorField>
-        <attributeEditorField index="3" name="id_description" showLabel="1"></attributeEditorField>
-        <attributeEditorField index="4" name="id_date_format" showLabel="1"></attributeEditorField>
-        <attributeEditorField index="10" name="id_category" showLabel="1"></attributeEditorField>
-        <attributeEditorField index="5" name="id_value_code" showLabel="1"></attributeEditorField>
-        <attributeEditorField index="6" name="id_value_name" showLabel="1"></attributeEditorField>
-        <attributeEditorField index="7" name="id_value_type" showLabel="1"></attributeEditorField>
-        <attributeEditorField index="8" name="id_value_unit" showLabel="1"></attributeEditorField>
-        <attributeEditorField index="9" name="id_paths" showLabel="1"></attributeEditorField>
-        <attributeEditorField index="12" name="updated_at" showLabel="1"></attributeEditorField>
-        <attributeEditorField index="11" name="created_at" showLabel="1"></attributeEditorField>
+        <attributeEditorContainer columnCount="1" groupBox="0" name="Indicator" showLabel="1" visibilityExpression="" visibilityExpressionEnabled="0">
+          <attributeEditorField index="0" name="id" showLabel="1"></attributeEditorField>
+          <attributeEditorField index="1" name="id_code" showLabel="1"></attributeEditorField>
+          <attributeEditorField index="2" name="id_label" showLabel="1"></attributeEditorField>
+          <attributeEditorField index="3" name="id_description" showLabel="1"></attributeEditorField>
+          <attributeEditorField index="4" name="id_date_format" showLabel="1"></attributeEditorField>
+          <attributeEditorField index="10" name="id_category" showLabel="1"></attributeEditorField>
+          <attributeEditorField index="5" name="id_value_code" showLabel="1"></attributeEditorField>
+          <attributeEditorField index="6" name="id_value_name" showLabel="1"></attributeEditorField>
+          <attributeEditorField index="7" name="id_value_type" showLabel="1"></attributeEditorField>
+          <attributeEditorField index="8" name="id_value_unit" showLabel="1"></attributeEditorField>
+          <attributeEditorField index="9" name="id_paths" showLabel="1"></attributeEditorField>
+          <attributeEditorField index="12" name="updated_at" showLabel="1"></attributeEditorField>
+          <attributeEditorField index="11" name="created_at" showLabel="1"></attributeEditorField>
+        </attributeEditorContainer>
+        <attributeEditorContainer columnCount="1" groupBox="0" name="Documents" showLabel="1" visibilityExpression="" visibilityExpressionEnabled="0">
+          <attributeEditorRelation name="document_3f322924_735f_4bef_b903_9521d2f25444_fk_id_indicator_indicator_18ba18bf_0390_45a3_8edd_1cc049e8a251_id" relation="document_3f322924_735f_4bef_b903_9521d2f25444_fk_id_indicator_indicator_18ba18bf_0390_45a3_8edd_1cc049e8a251_id" showLabel="1" showLinkButton="1" showUnlinkButton="1"></attributeEditorRelation>
+        </attributeEditorContainer>
       </attributeEditorForm>
       <editable>
         <field editable="0" name="created_at"></field>
@@ -1709,6 +2128,11 @@ def my_form_open(dialog, layer, feature):
         <field labelOnTop="0" name="updated_at"></field>
       </labelOnTop>
       <widgets>
+        <widget name="document_3f322924_735f_4bef_b903_9521d2f25444_fk_id_indicator_indicator_18ba18bf_0390_45a3_8edd_1cc049e8a251_id">
+          <config type="Map">
+            <Option name="nm-rel" type="QString" value=""></Option>
+          </config>
+        </widget>
         <widget name="r_indicator_node_2ca83116_e69f_4dcb_abcb_de5bdf44b2be_fk_id_indicator_indicator_18ba18bf_0390_45a3_8edd_1cc049e8a251_id">
           <config type="Map">
             <Option name="nm-rel" type="QString" value=""></Option>
@@ -1720,7 +2144,7 @@ def my_form_open(dialog, layer, feature):
           </config>
         </widget>
       </widgets>
-      <previewExpression>"id_code"</previewExpression>
+      <previewExpression>id_label</previewExpression>
       <mapTip></mapTip>
     </maplayer>
     <maplayer autoRefreshEnabled="0" autoRefreshTime="0" geometry="No geometry" hasScaleBasedVisibilityFlag="0" maxScale="0" minScale="1e+08" readOnly="0" refreshOnNotifyEnabled="0" refreshOnNotifyMessage="" styleCategories="AllStyleCategories" type="vector" wkbType="NoGeometry">
@@ -1740,7 +2164,7 @@ def my_form_open(dialog, layer, feature):
           <description></description>
           <projectionacronym></projectionacronym>
           <ellipsoidacronym></ellipsoidacronym>
-          <geographicflag>false</geographicflag>
+          <geographicflag>true</geographicflag>
         </spatialrefsys>
       </srs>
       <resourceMetadata>
@@ -1763,7 +2187,7 @@ def my_form_open(dialog, layer, feature):
             <description></description>
             <projectionacronym></projectionacronym>
             <ellipsoidacronym></ellipsoidacronym>
-            <geographicflag>false</geographicflag>
+            <geographicflag>true</geographicflag>
           </spatialrefsys>
         </crs>
         <extent></extent>
@@ -1784,9 +2208,7 @@ def my_form_open(dialog, layer, feature):
         <Searchable>1</Searchable>
       </flags>
       <customproperties>
-        <property key="dualview/previewExpressions">
-          <value>"id"</value>
-        </property>
+        <property key="dualview/previewExpressions" value="&quot;id&quot;"></property>
       </customproperties>
       <geometryOptions geometryPrecision="0" removeDuplicateNodes="0">
         <activeChecks type="StringList">
@@ -1958,7 +2380,7 @@ def my_form_open(dialog, layer, feature):
           <description></description>
           <projectionacronym></projectionacronym>
           <ellipsoidacronym></ellipsoidacronym>
-          <geographicflag>true</geographicflag>
+          <geographicflag>false</geographicflag>
         </spatialrefsys>
       </srs>
       <resourceMetadata>
@@ -1990,7 +2412,7 @@ def my_form_open(dialog, layer, feature):
             <description></description>
             <projectionacronym></projectionacronym>
             <ellipsoidacronym></ellipsoidacronym>
-            <geographicflag>true</geographicflag>
+            <geographicflag>false</geographicflag>
           </spatialrefsys>
         </crs>
         <extent>
@@ -2291,7 +2713,7 @@ def my_form_open(dialog, layer, feature):
             <description></description>
             <projectionacronym></projectionacronym>
             <ellipsoidacronym></ellipsoidacronym>
-            <geographicflag>true</geographicflag>
+            <geographicflag>false</geographicflag>
           </spatialrefsys>
         </crs>
         <extent></extent>
@@ -2346,7 +2768,7 @@ def my_form_open(dialog, layer, feature):
           <description></description>
           <projectionacronym></projectionacronym>
           <ellipsoidacronym></ellipsoidacronym>
-          <geographicflag>true</geographicflag>
+          <geographicflag>false</geographicflag>
         </spatialrefsys>
       </srs>
       <resourceMetadata>
@@ -2378,7 +2800,7 @@ def my_form_open(dialog, layer, feature):
             <description></description>
             <projectionacronym></projectionacronym>
             <ellipsoidacronym></ellipsoidacronym>
-            <geographicflag>true</geographicflag>
+            <geographicflag>false</geographicflag>
           </spatialrefsys>
         </crs>
         <extent>
@@ -2569,7 +2991,7 @@ def my_form_open(dialog, layer, feature):
           <description></description>
           <projectionacronym></projectionacronym>
           <ellipsoidacronym></ellipsoidacronym>
-          <geographicflag>true</geographicflag>
+          <geographicflag>false</geographicflag>
         </spatialrefsys>
       </srs>
       <resourceMetadata>
@@ -2592,7 +3014,7 @@ def my_form_open(dialog, layer, feature):
             <description></description>
             <projectionacronym></projectionacronym>
             <ellipsoidacronym></ellipsoidacronym>
-            <geographicflag>true</geographicflag>
+            <geographicflag>false</geographicflag>
           </spatialrefsys>
         </crs>
         <extent></extent>
@@ -2695,7 +3117,7 @@ def my_form_open(dialog, layer, feature):
           <description></description>
           <projectionacronym></projectionacronym>
           <ellipsoidacronym></ellipsoidacronym>
-          <geographicflag>true</geographicflag>
+          <geographicflag>false</geographicflag>
         </spatialrefsys>
       </srs>
       <resourceMetadata>
@@ -2718,7 +3140,7 @@ def my_form_open(dialog, layer, feature):
             <description></description>
             <projectionacronym></projectionacronym>
             <ellipsoidacronym></ellipsoidacronym>
-            <geographicflag>true</geographicflag>
+            <geographicflag>false</geographicflag>
           </spatialrefsys>
         </crs>
         <extent></extent>
@@ -2823,7 +3245,7 @@ def my_form_open(dialog, layer, feature):
           <description></description>
           <projectionacronym></projectionacronym>
           <ellipsoidacronym></ellipsoidacronym>
-          <geographicflag>true</geographicflag>
+          <geographicflag>false</geographicflag>
         </spatialrefsys>
       </srs>
       <resourceMetadata>
@@ -2855,7 +3277,7 @@ def my_form_open(dialog, layer, feature):
             <description></description>
             <projectionacronym></projectionacronym>
             <ellipsoidacronym></ellipsoidacronym>
-            <geographicflag>true</geographicflag>
+            <geographicflag>false</geographicflag>
           </spatialrefsys>
         </crs>
         <extent>
@@ -3093,7 +3515,7 @@ def my_form_open(dialog, layer, feature):
           <description></description>
           <projectionacronym></projectionacronym>
           <ellipsoidacronym></ellipsoidacronym>
-          <geographicflag>true</geographicflag>
+          <geographicflag>false</geographicflag>
         </spatialrefsys>
       </srs>
       <resourceMetadata>
@@ -3125,7 +3547,7 @@ def my_form_open(dialog, layer, feature):
             <description></description>
             <projectionacronym></projectionacronym>
             <ellipsoidacronym></ellipsoidacronym>
-            <geographicflag>true</geographicflag>
+            <geographicflag>false</geographicflag>
           </spatialrefsys>
         </crs>
         <extent>
@@ -3376,7 +3798,7 @@ def my_form_open(dialog, layer, feature):
   </projectlayers>
   <layerorder>
     <layer id="osm_mapnik_73cc9876_fa44_4742_bc09_afe572b57bbe"></layer>
-    <layer id="layername_1b984aea_510b_4f33_b961_7b83868d7ee3"></layer>
+    <layer id="document_3f322924_735f_4bef_b903_9521d2f25444"></layer>
   </layerorder>
   <properties>
     <DefaultStyles>
@@ -3403,7 +3825,7 @@ def my_form_open(dialog, layer, feature):
       <pythonCode type="QString"></pythonCode>
     </Macros>
     <Measure>
-      <Ellipsoid type="QString">WGS84</Ellipsoid>
+      <Ellipsoid type="QString">NONE</Ellipsoid>
     </Measure>
     <Measurement>
       <AreaUnits type="QString">m2</AreaUnits>
@@ -3452,14 +3874,12 @@ def my_form_open(dialog, layer, feature):
       <value>graph_node_2cd9eee8_46e2_401c_87f7_8b40d9d6260e</value>
       <value>import_0343eb12_592e_4fd0_8380_51f4d62b6a56</value>
       <value>indicator_18ba18bf_0390_45a3_8edd_1cc049e8a251</value>
-      <value>layername_92aa619b_5987_4160_8e22_c72475d3a9b4</value>
       <value>observation_bcc90162_47c8_4097_bc24_a31af92d2708</value>
       <value>protocol_5507f1c8_1802_4df0_a273_8e9b7f52c352</value>
       <value>r_graph_edge_f2eb47e9_728b_4c85_a839_3b488e132e06</value>
       <value>r_indicator_node_2ca83116_e69f_4dcb_abcb_de5bdf44b2be</value>
       <value>series_04a7414a_ab6d_4611_8a60_bcd22071dc22</value>
       <value>spatial_layer_18215d6d_1f4c_40d2_ba83_f2c9a9694e84</value>
-      <value>spatial_object_c4852341_be7f_490c_b115_26d47b3e38f8</value>
     </WFSLayers>
     <WFSLayersPrecision>
       <actor_5f01a6e5_8205_462f_af40_0ffd7ff0a44f type="int">8</actor_5f01a6e5_8205_462f_af40_0ffd7ff0a44f>
@@ -3507,6 +3927,7 @@ def my_form_open(dialog, layer, feature):
     <WMSKeywordList type="QStringList">
       <value></value>
     </WMSKeywordList>
+    <WMSMaxAtlasFeatures type="int">1</WMSMaxAtlasFeatures>
     <WMSOnlineResource type="QString"></WMSOnlineResource>
     <WMSPrecision type="QString">8</WMSPrecision>
     <WMSRequestDefinedDataSources type="bool">false</WMSRequestDefinedDataSources>
@@ -3517,8 +3938,13 @@ def my_form_open(dialog, layer, feature):
     <WMSServiceAbstract type="QString"></WMSServiceAbstract>
     <WMSServiceCapabilities type="bool">false</WMSServiceCapabilities>
     <WMSServiceTitle type="QString">G-Obs administration</WMSServiceTitle>
+    <WMSTileBuffer type="int">0</WMSTileBuffer>
     <WMSUrl type="QString"></WMSUrl>
     <WMSUseLayerIDs type="bool">false</WMSUseLayerIDs>
+    <WMTSGrids>
+      <CRS type="QStringList"></CRS>
+      <Config type="QStringList"></Config>
+    </WMTSGrids>
     <WMTSJpegLayers>
       <Group type="QStringList"></Group>
       <Layer type="QStringList"></Layer>
