@@ -125,5 +125,5 @@ class TestImportData(DatabaseTestCase):
             " WHERE so_unique_id = '29202002' AND so_valid_from = '2019-06-01'"
         )
         self.cursor.execute(sql)
-        expected = '2020-11-24'
+        expected = '2019-07-01'
         self.assertEqual((expected,), self.cursor.fetchone())

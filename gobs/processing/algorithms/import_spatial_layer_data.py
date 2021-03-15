@@ -447,7 +447,6 @@ class ImportSpatialLayerData(BaseProcessingAlgorithm):
             msg = tr('* An unknown error occured while adding features to spatial_object table')
             msg+= ' ' + str(e)
 
-
         # Check there is no issues with related observation data
         # For each series related to the chosen spatial layer
         # SELECT gobs.find_observation_with_wrong_spatial_object({fk_id_series})

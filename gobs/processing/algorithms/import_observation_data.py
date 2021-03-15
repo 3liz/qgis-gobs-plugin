@@ -489,7 +489,11 @@ class ImportObservationData(BaseProcessingAlgorithm):
                 {casted_timestamp_end}
                 FROM "{temp_schema}"."{temp_table}" AS s
                 JOIN gobs.spatial_object AS so
-                    ON so.so_unique_id = s."{field_spatial_object}"::text
+                    ON True
+                    AND so.fk_id_spatial_layer = (
+                        SELECT fk_id_spatial_layer FROM gobs.series WHERE id = {id_serie}
+                    )
+                    AND so.so_unique_id = s."{field_spatial_object}"::text
                     AND (
                         (so.so_valid_from IS NULL OR so.so_valid_from <= {casted_timestamp_start}::date)
                         AND
@@ -517,6 +521,9 @@ class ImportObservationData(BaseProcessingAlgorithm):
                     casted_timestamp_end=casted_timestamp['End'],
                 )
             # Manage INSERT conflicts
+            # If the observation has the same id_series, same start timestamp and same spatial object
+            # The observation is modified with the new end timestamp and ob_value
+            # This means a new observation is created when the start timestamp is different for the same series id and spatial object
             sql += '''
                 -- Update line if data already exists
                 -- AND data is not validated
@@ -525,7 +532,7 @@ class ImportObservationData(BaseProcessingAlgorithm):
                 SET (fk_id_import, ob_value, ob_end_timestamp) = (EXCLUDED.fk_id_import, EXCLUDED.ob_value, EXCLUDED.ob_end_timestamp)
                 WHERE o.ob_validation IS NULL
             '''
-            feedback.pushInfo(sql)
+            # feedback.pushInfo(sql)
             try:
                 [header, data, rowCount, ok, error_message] = fetchDataFromSqlQuery(
                     connection_name,
