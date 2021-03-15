@@ -1,5 +1,12 @@
 # CHANGELOG
 
+### 0.4.2 - 15/03/2021
+
+* Import observations - specify the series spatial layer id to match spatial objects: fix some bugs if spatial objects shared the same codes for different spatial layers.
+* Import - Spatial layer: add new SQL functions to check related observations
+* Admin - Update the QGIS administration project template with the new document layer
+* Doc - Update Schemaspy database documentation
+
 ### 0.4.1 - 02/12/2020
 
 Admin - Update administration project template
