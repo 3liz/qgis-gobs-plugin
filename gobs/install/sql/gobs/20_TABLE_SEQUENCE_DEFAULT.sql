@@ -170,7 +170,7 @@ ALTER SEQUENCE gobs.graph_node_id_seq OWNED BY gobs.graph_node.id;
 -- import
 CREATE TABLE gobs.import (
     id integer NOT NULL,
-    im_timestamp timestamp without time zone DEFAULT '2018-06-28 12:15:46.635568'::timestamp without time zone NOT NULL,
+    im_timestamp timestamp without time zone DEFAULT now() NOT NULL,
     fk_id_series integer NOT NULL,
     im_status text DEFAULT 'p'::text
 );

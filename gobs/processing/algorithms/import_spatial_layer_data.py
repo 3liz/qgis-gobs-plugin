@@ -418,10 +418,12 @@ class ImportSpatialLayerData(BaseProcessingAlgorithm):
             SET (geom, so_unique_label, so_valid_to) = (EXCLUDED.geom, EXCLUDED.so_unique_label, EXCLUDED.so_valid_to)
             WHERE True
             ;
+
         '''.format(
             temp_schema=temp_schema,
             temp_table=temp_table
         )
+
         try:
             [header, data, rowCount, ok, error_message] = fetchDataFromSqlQuery(
                 connection_name,
@@ -444,31 +446,38 @@ class ImportSpatialLayerData(BaseProcessingAlgorithm):
             status = 0
             msg = tr('* An unknown error occured while adding features to spatial_object table')
             msg+= ' ' + str(e)
-        finally:
 
-            # Remove temporary table
+
+        # Check there is no issues with related observation data
+        # For each series related to the chosen spatial layer
+        # SELECT gobs.find_observation_with_wrong_spatial_object({fk_id_series})
+        # v1/ Only check and display warning
+        # v2/ Check and try to update with gobs.update_observations_with_wrong_spatial_objects
+        # v3/ Find orphans
+
+        # Remove temporary table
+        feedback.pushInfo(
+            tr('DROP TEMPORARY DATA')
+        )
+        sql = '''
+            DROP TABLE IF EXISTS "%s"."%s"
+        ;
+        ''' % (
+            temp_schema,
+            temp_table
+        )
+        [header, data, rowCount, ok, error_message] = fetchDataFromSqlQuery(
+            connection_name,
+            sql
+        )
+        if ok:
             feedback.pushInfo(
-                tr('DROP TEMPORARY DATA')
+                tr('* Temporary data has been deleted.')
             )
-            sql = '''
-                DROP TABLE IF EXISTS "%s"."%s"
-            ;
-            ''' % (
-                temp_schema,
-                temp_table
+        else:
+            feedback.reportError(
+                tr('* An error occured while droping temporary table') + ' "%s"."%s"' % (temp_schema, temp_table)
             )
-            [header, data, rowCount, ok, error_message] = fetchDataFromSqlQuery(
-                connection_name,
-                sql
-            )
-            if ok:
-                feedback.pushInfo(
-                    tr('* Temporary data has been deleted.')
-                )
-            else:
-                feedback.reportError(
-                    tr('* An error occured while droping temporary table') + ' "%s"."%s"' % (temp_schema, temp_table)
-                )
 
         msg = tr('SPATIAL LAYER HAS BEEN SUCCESSFULLY IMPORTED !')
 
