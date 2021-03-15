@@ -97,6 +97,15 @@
                                 </thead>
                                 <tbody>
                                     <tr>
+                                        <td><a href="routines/find_observation_with_wrong_spatial_object.html">find_observation_with_wrong_spatial_object</a></td>
+                                        <td>FUNCTION</td>
+                                        <td>PLPGSQL</td>
+                                        <td>false</td>
+                                        <td>SETOF record</td>
+                                        <td>INVOKER</td>
+                                        <td><p>Find the observations with having incompatible start and end timestamp with related spatial objects validity dates</p></td>
+                                    </tr>
+                                    <tr>
                                         <td><a href="routines/log_deleted_object.html">log_deleted_object</a></td>
                                         <td>FUNCTION</td>
                                         <td>PLPGSQL</td>
@@ -124,20 +133,20 @@
                                         <td></td>
                                     </tr>
                                     <tr>
-                                        <td><a href="routines/parse_indicator_paths.html">parse_indicator_paths</a></td>
-                                        <td>FUNCTION</td>
-                                        <td>PLPGSQL</td>
-                                        <td>false</td>
-                                        <td>integer</td>
-                                        <td>INVOKER</td>
-                                        <td></td>
-                                    </tr>
-                                    <tr>
                                         <td><a href="routines/manage_object_timestamps.html">manage_object_timestamps</a></td>
                                         <td>FUNCTION</td>
                                         <td>PLPGSQL</td>
                                         <td>false</td>
                                         <td>trigger</td>
+                                        <td>INVOKER</td>
+                                        <td></td>
+                                    </tr>
+                                    <tr>
+                                        <td><a href="routines/parse_indicator_paths.html">parse_indicator_paths</a></td>
+                                        <td>FUNCTION</td>
+                                        <td>PLPGSQL</td>
+                                        <td>false</td>
+                                        <td>integer</td>
                                         <td>INVOKER</td>
                                         <td></td>
                                     </tr>
@@ -158,6 +167,15 @@
                                         <td>trigger</td>
                                         <td>INVOKER</td>
                                         <td></td>
+                                    </tr>
+                                    <tr>
+                                        <td><a href="routines/update_observations_with_wrong_spatial_objects.html">update_observations_with_wrong_spatial_objects</a></td>
+                                        <td>FUNCTION</td>
+                                        <td>PLPGSQL</td>
+                                        <td>false</td>
+                                        <td>SETOF record</td>
+                                        <td>INVOKER</td>
+                                        <td><p>Update observations with wrong spatial objects: it search the observation for which the start and end timestamp does not match anymore the related spatial objects validity dates. It gets the correct one if possible and perform an UPDATE for these observations. It returns a line with 2 integer columns: modified_obs_count (number of modified observations) and remaining_obs_count (number of observations still with wrong observations</p></td>
                                     </tr>
                                 </tbody>
                             </table>
