@@ -39,6 +39,7 @@ CREATE TRIGGER trg_manage_object_timestamps BEFORE INSERT OR UPDATE ON gobs.indi
 -- observation trg_manage_object_timestamps
 CREATE TRIGGER trg_manage_object_timestamps BEFORE INSERT OR UPDATE ON gobs.observation FOR EACH ROW EXECUTE PROCEDURE gobs.manage_object_timestamps();
 
+
 -- spatial_object trg_manage_object_timestamps
 CREATE TRIGGER trg_manage_object_timestamps BEFORE INSERT OR UPDATE ON gobs.spatial_object FOR EACH ROW EXECUTE PROCEDURE gobs.manage_object_timestamps();
 

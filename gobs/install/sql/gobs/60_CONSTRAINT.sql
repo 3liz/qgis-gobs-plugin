@@ -35,7 +35,7 @@ ALTER TABLE ONLY gobs.deleted_data_log
 
 -- document document_do_label_key
 ALTER TABLE ONLY gobs.document
-    ADD CONSTRAINT document_do_label_key UNIQUE (do_label);
+    ADD CONSTRAINT document_do_label_key UNIQUE (do_label, fk_id_indicator);
 
 
 -- document document_pkey
