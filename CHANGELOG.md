@@ -1,5 +1,11 @@
 # CHANGELOG
 
+### 0.4.3 - 07/04/2021
+
+* Actor - Add a new "a_login" column with unique constraint
+* Administration - Update QGIS admin project template
+* Docs - Update Schemaspy
+
 ### 0.4.2 - 15/03/2021
 
 * Import observations - specify the series spatial layer id to match spatial objects: fix some bugs if spatial objects shared the same codes for different spatial layers.
