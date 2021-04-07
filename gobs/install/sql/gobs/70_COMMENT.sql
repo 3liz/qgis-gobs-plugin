@@ -48,6 +48,10 @@ COMMENT ON COLUMN gobs.actor.a_email IS 'Email of the actor';
 COMMENT ON COLUMN gobs.actor.id_category IS 'Category of actor';
 
 
+-- actor.a_login
+COMMENT ON COLUMN gobs.actor.a_login IS 'Login of the actor. It is the unique identifier of the actor.';
+
+
 -- actor_category
 COMMENT ON TABLE gobs.actor_category IS 'Actors categories';
 

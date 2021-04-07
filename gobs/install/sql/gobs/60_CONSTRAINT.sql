@@ -18,6 +18,16 @@ SET row_security = off;
 
 SET default_tablespace = '';
 
+-- actor actor_a_login_key
+ALTER TABLE ONLY gobs.actor
+    ADD CONSTRAINT actor_a_login_key UNIQUE (a_login);
+
+
+-- actor_category actor_category_ac_label_key
+ALTER TABLE ONLY gobs.actor_category
+    ADD CONSTRAINT actor_category_ac_label_key UNIQUE (ac_label);
+
+
 -- actor_category actor_category_pkey
 ALTER TABLE ONLY gobs.actor_category
     ADD CONSTRAINT actor_category_pkey PRIMARY KEY (id);

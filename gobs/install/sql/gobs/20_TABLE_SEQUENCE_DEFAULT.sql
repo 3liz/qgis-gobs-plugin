@@ -26,7 +26,8 @@ CREATE TABLE gobs.actor (
     a_label text NOT NULL,
     a_description text NOT NULL,
     a_email text NOT NULL,
-    id_category integer NOT NULL
+    id_category integer NOT NULL,
+    a_login text NOT NULL
 );
 
 
