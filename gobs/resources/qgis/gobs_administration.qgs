@@ -1,4 +1,4 @@
-<qgis projectname="" version="3.10.11-A Coruña">
+<qgis projectname="" version="3.10.13-A Coruña">
   <homePath path=""></homePath>
   <title></title>
   <autotransaction active="0"></autotransaction>
@@ -81,7 +81,6 @@
     </layer-tree-layer>
     <custom-order enabled="0">
       <item>osm_mapnik_73cc9876_fa44_4742_bc09_afe572b57bbe</item>
-      <item>document_3f322924_735f_4bef_b903_9521d2f25444</item>
     </custom-order>
   </layer-tree-group>
   <snapping-settings enabled="0" intersection-snapping="0" mode="2" tolerance="0" type="1" unit="2">
@@ -325,6 +324,31 @@
   </legend>
   <mapViewDocks></mapViewDocks>
   <mapViewDocks3D></mapViewDocks3D>
+  <mapcanvas annotationsVisible="1" name="">
+    <units>meters</units>
+    <extent>
+      <xmin>-15135581.69066273234784603</xmin>
+      <ymin>-11791599.2056454811245203</ymin>
+      <xmax>15051997.36657100357115269</xmax>
+      <ymax>14164351.24726354517042637</ymax>
+    </extent>
+    <rotation>0</rotation>
+    <destinationsrs>
+      <spatialrefsys>
+        <wkt>PROJCRS["WGS 84 / Pseudo-Mercator",BASEGEOGCRS["WGS 84",DATUM["World Geodetic System 1984",ELLIPSOID["WGS 84",6378137,298.257223563,LENGTHUNIT["metre",1]]],PRIMEM["Greenwich",0,ANGLEUNIT["degree",0.0174532925199433]],ID["EPSG",4326]],CONVERSION["Popular Visualisation Pseudo-Mercator",METHOD["Popular Visualisation Pseudo Mercator",ID["EPSG",1024]],PARAMETER["Latitude of natural origin",0,ANGLEUNIT["degree",0.0174532925199433],ID["EPSG",8801]],PARAMETER["Longitude of natural origin",0,ANGLEUNIT["degree",0.0174532925199433],ID["EPSG",8802]],PARAMETER["False easting",0,LENGTHUNIT["metre",1],ID["EPSG",8806]],PARAMETER["False northing",0,LENGTHUNIT["metre",1],ID["EPSG",8807]]],CS[Cartesian,2],AXIS["easting (X)",east,ORDER[1],LENGTHUNIT["metre",1]],AXIS["northing (Y)",north,ORDER[2],LENGTHUNIT["metre",1]],USAGE[SCOPE["unknown"],AREA["World - 85°S to 85°N"],BBOX[-85.06,-180,85.06,180]],ID["EPSG",3857]]</wkt>
+        <proj4>+proj=merc +a=6378137 +b=6378137 +lat_ts=0 +lon_0=0 +x_0=0 +y_0=0 +k=1 +units=m +nadgrids=@null +wktext +no_defs</proj4>
+        <srsid>3857</srsid>
+        <srid>3857</srid>
+        <authid>EPSG:3857</authid>
+        <description>WGS 84 / Pseudo-Mercator</description>
+        <projectionacronym>merc</projectionacronym>
+        <ellipsoidacronym>EPSG:7030</ellipsoidacronym>
+        <geographicflag>false</geographicflag>
+      </spatialrefsys>
+    </destinationsrs>
+    <rendermaptile>0</rendermaptile>
+    <expressionContextScope></expressionContextScope>
+  </mapcanvas>
   <mapcanvas annotationsVisible="1" name="mAreaCanvas">
     <units>degrees</units>
     <extent>
@@ -418,7 +442,7 @@
           <description></description>
           <projectionacronym></projectionacronym>
           <ellipsoidacronym></ellipsoidacronym>
-          <geographicflag>true</geographicflag>
+          <geographicflag>false</geographicflag>
         </spatialrefsys>
       </srs>
       <resourceMetadata>
@@ -450,7 +474,7 @@
             <description></description>
             <projectionacronym></projectionacronym>
             <ellipsoidacronym></ellipsoidacronym>
-            <geographicflag>false</geographicflag>
+            <geographicflag>true</geographicflag>
           </spatialrefsys>
         </crs>
         <extent>
@@ -479,7 +503,9 @@
         <Searchable>1</Searchable>
       </flags>
       <customproperties>
-        <property key="dualview/previewExpressions" value="a_label"></property>
+        <property key="dualview/previewExpressions">
+          <value>"a_label"</value>
+        </property>
         <property key="embeddedWidgets/count" value="0"></property>
         <property key="variableNames"></property>
         <property key="variableValues"></property>
@@ -545,6 +571,13 @@
             </config>
           </editWidget>
         </field>
+        <field name="a_login">
+          <editWidget type="TextEdit">
+            <config>
+              <Option></Option>
+            </config>
+          </editWidget>
+        </field>
       </fieldConfiguration>
       <aliases>
         <alias field="id" index="0" name="Identifiant"></alias>
@@ -552,6 +585,7 @@
         <alias field="a_description" index="2" name="Description"></alias>
         <alias field="a_email" index="3" name="Email"></alias>
         <alias field="id_category" index="4" name=""></alias>
+        <alias field="a_login" index="5" name="Login"></alias>
       </aliases>
       <excludeAttributesWMS></excludeAttributesWMS>
       <excludeAttributesWFS></excludeAttributesWFS>
@@ -561,13 +595,15 @@
         <default applyOnUpdate="0" expression="" field="a_description"></default>
         <default applyOnUpdate="0" expression="" field="a_email"></default>
         <default applyOnUpdate="0" expression="" field="id_category"></default>
+        <default applyOnUpdate="0" expression="" field="a_login"></default>
       </defaults>
       <constraints>
-        <constraint constraints="3" exp_strength="0" field="id" notnull_strength="1" unique_strength="1"></constraint>
+        <constraint constraints="3" exp_strength="0" field="id" notnull_strength="2" unique_strength="1"></constraint>
         <constraint constraints="1" exp_strength="0" field="a_label" notnull_strength="1" unique_strength="0"></constraint>
         <constraint constraints="1" exp_strength="0" field="a_description" notnull_strength="1" unique_strength="0"></constraint>
         <constraint constraints="1" exp_strength="0" field="a_email" notnull_strength="1" unique_strength="0"></constraint>
         <constraint constraints="1" exp_strength="0" field="id_category" notnull_strength="1" unique_strength="0"></constraint>
+        <constraint constraints="7" exp_strength="1" field="a_login" notnull_strength="1" unique_strength="1"></constraint>
       </constraints>
       <constraintExpressions>
         <constraint desc="" exp="" field="id"></constraint>
@@ -575,6 +611,7 @@
         <constraint desc="" exp="" field="a_description"></constraint>
         <constraint desc="" exp="" field="a_email"></constraint>
         <constraint desc="" exp="" field="id_category"></constraint>
+        <constraint desc="Login must not have spaces nor accentuated characters" exp="a_login  ~  '^[a-zA-Z0-9_]+'" field="a_login"></constraint>
       </constraintExpressions>
       <expressionfields></expressionfields>
       <attributeactions>
@@ -583,9 +620,10 @@
       <attributetableconfig actionWidgetStyle="dropDown" sortExpression="&quot;id&quot;" sortOrder="0">
         <columns>
           <column hidden="0" name="id" type="field" width="-1"></column>
+          <column hidden="0" name="a_login" type="field" width="100"></column>
           <column hidden="0" name="a_label" type="field" width="244"></column>
           <column hidden="0" name="a_description" type="field" width="225"></column>
-          <column hidden="0" name="a_email" type="field" width="-1"></column>
+          <column hidden="0" name="a_email" type="field" width="100"></column>
           <column hidden="0" name="id_category" type="field" width="180"></column>
           <column hidden="1" type="actions" width="-1"></column>
         </columns>
@@ -618,6 +656,7 @@ def my_form_open(dialog, layer, feature):
       <attributeEditorForm>
         <attributeEditorContainer columnCount="1" groupBox="0" name="General" showLabel="1" visibilityExpression="" visibilityExpressionEnabled="0">
           <attributeEditorField index="0" name="id" showLabel="1"></attributeEditorField>
+          <attributeEditorField index="5" name="a_login" showLabel="1"></attributeEditorField>
           <attributeEditorField index="1" name="a_label" showLabel="1"></attributeEditorField>
           <attributeEditorField index="3" name="a_email" showLabel="1"></attributeEditorField>
           <attributeEditorField index="2" name="a_description" showLabel="1"></attributeEditorField>
@@ -628,6 +667,7 @@ def my_form_open(dialog, layer, feature):
         <field editable="1" name="a_description"></field>
         <field editable="1" name="a_email"></field>
         <field editable="1" name="a_label"></field>
+        <field editable="1" name="a_login"></field>
         <field editable="0" name="id"></field>
         <field editable="1" name="id_category"></field>
       </editable>
@@ -635,6 +675,7 @@ def my_form_open(dialog, layer, feature):
         <field labelOnTop="0" name="a_description"></field>
         <field labelOnTop="0" name="a_email"></field>
         <field labelOnTop="0" name="a_label"></field>
+        <field labelOnTop="0" name="a_login"></field>
         <field labelOnTop="0" name="id"></field>
         <field labelOnTop="0" name="id_category"></field>
       </labelOnTop>
@@ -650,7 +691,7 @@ def my_form_open(dialog, layer, feature):
           </config>
         </widget>
       </widgets>
-      <previewExpression>a_label</previewExpression>
+      <previewExpression>"a_label"</previewExpression>
       <mapTip></mapTip>
     </maplayer>
     <maplayer autoRefreshEnabled="0" autoRefreshTime="0" geometry="No geometry" hasScaleBasedVisibilityFlag="0" maxScale="0" minScale="1e+08" readOnly="0" refreshOnNotifyEnabled="0" refreshOnNotifyMessage="" styleCategories="AllStyleCategories" type="vector" wkbType="NoGeometry">
@@ -670,7 +711,7 @@ def my_form_open(dialog, layer, feature):
           <description></description>
           <projectionacronym></projectionacronym>
           <ellipsoidacronym></ellipsoidacronym>
-          <geographicflag>false</geographicflag>
+          <geographicflag>true</geographicflag>
         </spatialrefsys>
       </srs>
       <resourceMetadata>
@@ -702,7 +743,7 @@ def my_form_open(dialog, layer, feature):
             <description></description>
             <projectionacronym></projectionacronym>
             <ellipsoidacronym></ellipsoidacronym>
-            <geographicflag>false</geographicflag>
+            <geographicflag>true</geographicflag>
           </spatialrefsys>
         </crs>
         <extent>
@@ -773,7 +814,7 @@ def my_form_open(dialog, layer, feature):
         </field>
       </fieldConfiguration>
       <aliases>
-        <alias field="id" index="0" name=""></alias>
+        <alias field="id" index="0" name="ID"></alias>
         <alias field="ac_label" index="1" name="Label"></alias>
         <alias field="ac_description" index="2" name="Description"></alias>
       </aliases>
@@ -785,8 +826,8 @@ def my_form_open(dialog, layer, feature):
         <default applyOnUpdate="0" expression="" field="ac_description"></default>
       </defaults>
       <constraints>
-        <constraint constraints="3" exp_strength="0" field="id" notnull_strength="1" unique_strength="1"></constraint>
-        <constraint constraints="1" exp_strength="0" field="ac_label" notnull_strength="1" unique_strength="0"></constraint>
+        <constraint constraints="3" exp_strength="0" field="id" notnull_strength="2" unique_strength="1"></constraint>
+        <constraint constraints="3" exp_strength="0" field="ac_label" notnull_strength="1" unique_strength="1"></constraint>
         <constraint constraints="1" exp_strength="0" field="ac_description" notnull_strength="1" unique_strength="0"></constraint>
       </constraints>
       <constraintExpressions>
@@ -834,7 +875,7 @@ def my_form_open(dialog, layer, feature):
       <editable>
         <field editable="1" name="ac_description"></field>
         <field editable="1" name="ac_label"></field>
-        <field editable="1" name="id"></field>
+        <field editable="0" name="id"></field>
       </editable>
       <labelOnTop>
         <field labelOnTop="0" name="ac_description"></field>
@@ -848,7 +889,7 @@ def my_form_open(dialog, layer, feature):
           </config>
         </widget>
       </widgets>
-      <previewExpression>ac_label</previewExpression>
+      <previewExpression>"ac_label"</previewExpression>
       <mapTip></mapTip>
     </maplayer>
     <maplayer autoRefreshEnabled="0" autoRefreshTime="0" geometry="No geometry" hasScaleBasedVisibilityFlag="0" maxScale="0" minScale="1e+08" readOnly="0" refreshOnNotifyEnabled="0" refreshOnNotifyMessage="" styleCategories="AllStyleCategories" type="vector" wkbType="NoGeometry">
@@ -868,7 +909,7 @@ def my_form_open(dialog, layer, feature):
           <description></description>
           <projectionacronym></projectionacronym>
           <ellipsoidacronym></ellipsoidacronym>
-          <geographicflag>false</geographicflag>
+          <geographicflag>true</geographicflag>
         </spatialrefsys>
       </srs>
       <resourceMetadata>
@@ -900,7 +941,7 @@ def my_form_open(dialog, layer, feature):
             <description></description>
             <projectionacronym></projectionacronym>
             <ellipsoidacronym></ellipsoidacronym>
-            <geographicflag>false</geographicflag>
+            <geographicflag>true</geographicflag>
           </spatialrefsys>
         </crs>
         <extent>
@@ -929,9 +970,7 @@ def my_form_open(dialog, layer, feature):
         <Searchable>1</Searchable>
       </flags>
       <customproperties>
-        <property key="dualview/previewExpressions">
-          <value>"do_description"</value>
-        </property>
+        <property key="dualview/previewExpressions" value="&quot;do_description&quot;"></property>
         <property key="embeddedWidgets/count" value="0"></property>
         <property key="variableNames"></property>
         <property key="variableValues"></property>
@@ -1084,7 +1123,7 @@ def my_form_open(dialog, layer, feature):
         <default applyOnUpdate="0" expression="" field="updated_at"></default>
       </defaults>
       <constraints>
-        <constraint constraints="3" exp_strength="0" field="id" notnull_strength="1" unique_strength="1"></constraint>
+        <constraint constraints="3" exp_strength="0" field="id" notnull_strength="2" unique_strength="1"></constraint>
         <constraint constraints="1" exp_strength="0" field="do_uid" notnull_strength="2" unique_strength="0"></constraint>
         <constraint constraints="3" exp_strength="0" field="do_label" notnull_strength="1" unique_strength="1"></constraint>
         <constraint constraints="0" exp_strength="0" field="do_description" notnull_strength="0" unique_strength="0"></constraint>
@@ -1193,7 +1232,7 @@ def my_form_open(dialog, layer, feature):
           <description></description>
           <projectionacronym></projectionacronym>
           <ellipsoidacronym></ellipsoidacronym>
-          <geographicflag>false</geographicflag>
+          <geographicflag>true</geographicflag>
         </spatialrefsys>
       </srs>
       <resourceMetadata>
@@ -1225,7 +1264,7 @@ def my_form_open(dialog, layer, feature):
             <description></description>
             <projectionacronym></projectionacronym>
             <ellipsoidacronym></ellipsoidacronym>
-            <geographicflag>false</geographicflag>
+            <geographicflag>true</geographicflag>
           </spatialrefsys>
         </crs>
         <extent>
@@ -1438,7 +1477,7 @@ def my_form_open(dialog, layer, feature):
           <description></description>
           <projectionacronym></projectionacronym>
           <ellipsoidacronym></ellipsoidacronym>
-          <geographicflag>false</geographicflag>
+          <geographicflag>true</geographicflag>
         </spatialrefsys>
       </srs>
       <resourceMetadata>
@@ -1470,7 +1509,7 @@ def my_form_open(dialog, layer, feature):
             <description></description>
             <projectionacronym></projectionacronym>
             <ellipsoidacronym></ellipsoidacronym>
-            <geographicflag>false</geographicflag>
+            <geographicflag>true</geographicflag>
           </spatialrefsys>
         </crs>
         <extent>
@@ -1617,7 +1656,7 @@ def my_form_open(dialog, layer, feature):
           <description></description>
           <projectionacronym></projectionacronym>
           <ellipsoidacronym></ellipsoidacronym>
-          <geographicflag>false</geographicflag>
+          <geographicflag>true</geographicflag>
         </spatialrefsys>
       </srs>
       <resourceMetadata>
@@ -1627,6 +1666,15 @@ def my_form_open(dialog, layer, feature):
         <type>dataset</type>
         <title></title>
         <abstract>Journal des imports</abstract>
+        <contact>
+          <name></name>
+          <organization></organization>
+          <position></position>
+          <voice></voice>
+          <fax></fax>
+          <email></email>
+          <role></role>
+        </contact>
         <links></links>
         <fees></fees>
         <encoding></encoding>
@@ -1640,10 +1688,18 @@ def my_form_open(dialog, layer, feature):
             <description></description>
             <projectionacronym></projectionacronym>
             <ellipsoidacronym></ellipsoidacronym>
-            <geographicflag>false</geographicflag>
+            <geographicflag>true</geographicflag>
           </spatialrefsys>
         </crs>
-        <extent></extent>
+        <extent>
+          <spatial crs="" dimensions="2" maxx="0" maxy="0" maxz="0" minx="0" miny="0" minz="0"></spatial>
+          <temporal>
+            <period>
+              <start></start>
+              <end></end>
+            </period>
+          </temporal>
+        </extent>
       </resourceMetadata>
       <provider encoding="UTF-8">postgres</provider>
       <vectorjoins></vectorjoins>
@@ -1662,37 +1718,41 @@ def my_form_open(dialog, layer, feature):
       </flags>
       <customproperties>
         <property key="dualview/previewExpressions" value="&quot;id&quot;"></property>
+        <property key="embeddedWidgets/count" value="0"></property>
+        <property key="variableNames"></property>
+        <property key="variableValues"></property>
       </customproperties>
       <geometryOptions geometryPrecision="0" removeDuplicateNodes="0">
-        <activeChecks type="StringList">
-          <Option type="QString" value=""></Option>
-        </activeChecks>
+        <activeChecks></activeChecks>
         <checkConfiguration></checkConfiguration>
       </geometryOptions>
       <fieldConfiguration>
         <field name="id">
-          <editWidget type="">
+          <editWidget type="TextEdit">
             <config>
-              <Option></Option>
+              <Option type="Map">
+                <Option name="IsMultiline" type="bool" value="false"></Option>
+                <Option name="UseHtml" type="bool" value="false"></Option>
+              </Option>
             </config>
           </editWidget>
         </field>
         <field name="im_timestamp">
-          <editWidget type="">
+          <editWidget type="TextEdit">
             <config>
               <Option></Option>
             </config>
           </editWidget>
         </field>
         <field name="fk_id_series">
-          <editWidget type="">
+          <editWidget type="RelationReference">
             <config>
               <Option></Option>
             </config>
           </editWidget>
         </field>
         <field name="im_status">
-          <editWidget type="">
+          <editWidget type="TextEdit">
             <config>
               <Option></Option>
             </config>
@@ -1700,7 +1760,7 @@ def my_form_open(dialog, layer, feature):
         </field>
       </fieldConfiguration>
       <aliases>
-        <alias field="id" index="0" name=""></alias>
+        <alias field="id" index="0" name="ID"></alias>
         <alias field="im_timestamp" index="1" name=""></alias>
         <alias field="fk_id_series" index="2" name=""></alias>
         <alias field="im_status" index="3" name=""></alias>
@@ -1714,7 +1774,7 @@ def my_form_open(dialog, layer, feature):
         <default applyOnUpdate="0" expression="" field="im_status"></default>
       </defaults>
       <constraints>
-        <constraint constraints="3" exp_strength="0" field="id" notnull_strength="1" unique_strength="1"></constraint>
+        <constraint constraints="3" exp_strength="0" field="id" notnull_strength="2" unique_strength="1"></constraint>
         <constraint constraints="1" exp_strength="0" field="im_timestamp" notnull_strength="1" unique_strength="0"></constraint>
         <constraint constraints="1" exp_strength="0" field="fk_id_series" notnull_strength="1" unique_strength="0"></constraint>
         <constraint constraints="0" exp_strength="0" field="im_status" notnull_strength="0" unique_strength="0"></constraint>
@@ -1730,7 +1790,13 @@ def my_form_open(dialog, layer, feature):
         <defaultAction key="Canvas" value="{00000000-0000-0000-0000-000000000000}"></defaultAction>
       </attributeactions>
       <attributetableconfig actionWidgetStyle="dropDown" sortExpression="" sortOrder="0">
-        <columns></columns>
+        <columns>
+          <column hidden="0" name="id" type="field" width="-1"></column>
+          <column hidden="0" name="im_timestamp" type="field" width="-1"></column>
+          <column hidden="0" name="fk_id_series" type="field" width="-1"></column>
+          <column hidden="0" name="im_status" type="field" width="-1"></column>
+          <column hidden="1" type="actions" width="-1"></column>
+        </columns>
       </attributetableconfig>
       <conditionalstyles>
         <rowstyles></rowstyles>
@@ -1741,13 +1807,44 @@ def my_form_open(dialog, layer, feature):
       <editforminit></editforminit>
       <editforminitcodesource>0</editforminitcodesource>
       <editforminitfilepath></editforminitfilepath>
-      <editforminitcode></editforminitcode>
+      <editforminitcode># -*- coding: utf-8 -*-
+"""
+Les formulaires QGIS peuvent avoir une fonction Python qui sera appelée à l'ouverture du formulaire.
+
+Utilisez cette fonction pour ajouter plus de fonctionnalités à vos formulaires.
+
+Entrez le nom de la fonction dans le champ "Fonction d'initialisation Python".
+Voici un exemple à suivre:
+"""
+from qgis.PyQt.QtWidgets import QWidget
+
+def my_form_open(dialog, layer, feature):
+    geom = feature.geometry()
+    control = dialog.findChild(QWidget, "MyLineEdit")
+
+</editforminitcode>
       <featformsuppress>0</featformsuppress>
       <editorlayout>generatedlayout</editorlayout>
-      <editable></editable>
-      <labelOnTop></labelOnTop>
-      <widgets></widgets>
-      <previewExpression>id</previewExpression>
+      <editable>
+        <field editable="1" name="fk_id_series"></field>
+        <field editable="0" name="id"></field>
+        <field editable="1" name="im_status"></field>
+        <field editable="1" name="im_timestamp"></field>
+      </editable>
+      <labelOnTop>
+        <field labelOnTop="0" name="fk_id_series"></field>
+        <field labelOnTop="0" name="id"></field>
+        <field labelOnTop="0" name="im_status"></field>
+        <field labelOnTop="0" name="im_timestamp"></field>
+      </labelOnTop>
+      <widgets>
+        <widget name="observation_bcc90162_47c8_4097_bc24_a31af92d2708_fk_id_import_import_0343eb12_592e_4fd0_8380_51f4d62b6a56_id">
+          <config type="Map">
+            <Option name="nm-rel" type="QString" value=""></Option>
+          </config>
+        </widget>
+      </widgets>
+      <previewExpression>"id"</previewExpression>
       <mapTip></mapTip>
     </maplayer>
     <maplayer autoRefreshEnabled="0" autoRefreshTime="0" geometry="No geometry" hasScaleBasedVisibilityFlag="0" maxScale="0" minScale="1e+08" readOnly="0" refreshOnNotifyEnabled="0" refreshOnNotifyMessage="" styleCategories="AllStyleCategories" type="vector" wkbType="NoGeometry">
@@ -1767,7 +1864,7 @@ def my_form_open(dialog, layer, feature):
           <description></description>
           <projectionacronym></projectionacronym>
           <ellipsoidacronym></ellipsoidacronym>
-          <geographicflag>false</geographicflag>
+          <geographicflag>true</geographicflag>
         </spatialrefsys>
       </srs>
       <resourceMetadata>
@@ -1799,7 +1896,7 @@ def my_form_open(dialog, layer, feature):
             <description></description>
             <projectionacronym></projectionacronym>
             <ellipsoidacronym></ellipsoidacronym>
-            <geographicflag>false</geographicflag>
+            <geographicflag>true</geographicflag>
           </spatialrefsys>
         </crs>
         <extent>
@@ -1999,7 +2096,7 @@ def my_form_open(dialog, layer, feature):
         <default applyOnUpdate="0" expression="" field="updated_at"></default>
       </defaults>
       <constraints>
-        <constraint constraints="3" exp_strength="0" field="id" notnull_strength="1" unique_strength="1"></constraint>
+        <constraint constraints="3" exp_strength="0" field="id" notnull_strength="2" unique_strength="1"></constraint>
         <constraint constraints="1" exp_strength="0" field="id_code" notnull_strength="1" unique_strength="0"></constraint>
         <constraint constraints="1" exp_strength="0" field="id_label" notnull_strength="1" unique_strength="0"></constraint>
         <constraint constraints="1" exp_strength="0" field="id_description" notnull_strength="1" unique_strength="0"></constraint>
@@ -2099,7 +2196,7 @@ def my_form_open(dialog, layer, feature):
       </attributeEditorForm>
       <editable>
         <field editable="0" name="created_at"></field>
-        <field editable="1" name="id"></field>
+        <field editable="0" name="id"></field>
         <field editable="1" name="id_category"></field>
         <field editable="1" name="id_code"></field>
         <field editable="1" name="id_date_format"></field>
@@ -2144,7 +2241,7 @@ def my_form_open(dialog, layer, feature):
           </config>
         </widget>
       </widgets>
-      <previewExpression>id_label</previewExpression>
+      <previewExpression>"id_label"</previewExpression>
       <mapTip></mapTip>
     </maplayer>
     <maplayer autoRefreshEnabled="0" autoRefreshTime="0" geometry="No geometry" hasScaleBasedVisibilityFlag="0" maxScale="0" minScale="1e+08" readOnly="0" refreshOnNotifyEnabled="0" refreshOnNotifyMessage="" styleCategories="AllStyleCategories" type="vector" wkbType="NoGeometry">
@@ -2164,7 +2261,7 @@ def my_form_open(dialog, layer, feature):
           <description></description>
           <projectionacronym></projectionacronym>
           <ellipsoidacronym></ellipsoidacronym>
-          <geographicflag>true</geographicflag>
+          <geographicflag>false</geographicflag>
         </spatialrefsys>
       </srs>
       <resourceMetadata>
@@ -2187,7 +2284,7 @@ def my_form_open(dialog, layer, feature):
             <description></description>
             <projectionacronym></projectionacronym>
             <ellipsoidacronym></ellipsoidacronym>
-            <geographicflag>true</geographicflag>
+            <geographicflag>false</geographicflag>
           </spatialrefsys>
         </crs>
         <extent></extent>
@@ -2380,7 +2477,7 @@ def my_form_open(dialog, layer, feature):
           <description></description>
           <projectionacronym></projectionacronym>
           <ellipsoidacronym></ellipsoidacronym>
-          <geographicflag>false</geographicflag>
+          <geographicflag>true</geographicflag>
         </spatialrefsys>
       </srs>
       <resourceMetadata>
@@ -2412,7 +2509,7 @@ def my_form_open(dialog, layer, feature):
             <description></description>
             <projectionacronym></projectionacronym>
             <ellipsoidacronym></ellipsoidacronym>
-            <geographicflag>false</geographicflag>
+            <geographicflag>true</geographicflag>
           </spatialrefsys>
         </crs>
         <extent>
@@ -2511,42 +2608,42 @@ def my_form_open(dialog, layer, feature):
           </editWidget>
         </field>
         <field name="ob_start_timestamp">
-          <editWidget type="">
+          <editWidget type="DateTime">
             <config>
               <Option></Option>
             </config>
           </editWidget>
         </field>
         <field name="ob_validation">
-          <editWidget type="">
+          <editWidget type="DateTime">
             <config>
               <Option></Option>
             </config>
           </editWidget>
         </field>
         <field name="ob_end_timestamp">
-          <editWidget type="">
+          <editWidget type="DateTime">
             <config>
               <Option></Option>
             </config>
           </editWidget>
         </field>
         <field name="ob_uid">
-          <editWidget type="">
+          <editWidget type="TextEdit">
             <config>
               <Option></Option>
             </config>
           </editWidget>
         </field>
         <field name="created_at">
-          <editWidget type="">
+          <editWidget type="TextEdit">
             <config>
               <Option></Option>
             </config>
           </editWidget>
         </field>
         <field name="updated_at">
-          <editWidget type="">
+          <editWidget type="TextEdit">
             <config>
               <Option></Option>
             </config>
@@ -2554,7 +2651,7 @@ def my_form_open(dialog, layer, feature):
         </field>
       </fieldConfiguration>
       <aliases>
-        <alias field="id" index="0" name=""></alias>
+        <alias field="id" index="0" name="ID"></alias>
         <alias field="fk_id_series" index="1" name="Serie"></alias>
         <alias field="fk_id_spatial_object" index="2" name="Spatial object"></alias>
         <alias field="fk_id_import" index="3" name="Import"></alias>
@@ -2582,7 +2679,7 @@ def my_form_open(dialog, layer, feature):
         <default applyOnUpdate="0" expression="" field="updated_at"></default>
       </defaults>
       <constraints>
-        <constraint constraints="3" exp_strength="0" field="id" notnull_strength="1" unique_strength="1"></constraint>
+        <constraint constraints="3" exp_strength="0" field="id" notnull_strength="2" unique_strength="1"></constraint>
         <constraint constraints="1" exp_strength="0" field="fk_id_series" notnull_strength="1" unique_strength="0"></constraint>
         <constraint constraints="1" exp_strength="0" field="fk_id_spatial_object" notnull_strength="1" unique_strength="0"></constraint>
         <constraint constraints="1" exp_strength="0" field="fk_id_import" notnull_strength="1" unique_strength="0"></constraint>
@@ -2618,8 +2715,13 @@ def my_form_open(dialog, layer, feature):
           <column hidden="0" name="fk_id_spatial_object" type="field" width="-1"></column>
           <column hidden="0" name="fk_id_import" type="field" width="-1"></column>
           <column hidden="0" name="ob_value" type="field" width="-1"></column>
-          <column hidden="0" name="ob_timestamp" type="field" width="302"></column>
           <column hidden="1" type="actions" width="-1"></column>
+          <column hidden="0" name="ob_start_timestamp" type="field" width="-1"></column>
+          <column hidden="0" name="ob_validation" type="field" width="-1"></column>
+          <column hidden="0" name="ob_end_timestamp" type="field" width="-1"></column>
+          <column hidden="0" name="ob_uid" type="field" width="-1"></column>
+          <column hidden="0" name="created_at" type="field" width="-1"></column>
+          <column hidden="0" name="updated_at" type="field" width="-1"></column>
         </columns>
       </attributetableconfig>
       <conditionalstyles>
@@ -2648,23 +2750,35 @@ def my_form_open(dialog, layer, feature):
       <featformsuppress>0</featformsuppress>
       <editorlayout>generatedlayout</editorlayout>
       <editable>
+        <field editable="1" name="created_at"></field>
         <field editable="1" name="fk_id_import"></field>
         <field editable="1" name="fk_id_series"></field>
         <field editable="1" name="fk_id_spatial_object"></field>
         <field editable="0" name="id"></field>
+        <field editable="1" name="ob_end_timestamp"></field>
+        <field editable="1" name="ob_start_timestamp"></field>
         <field editable="1" name="ob_timestamp"></field>
+        <field editable="1" name="ob_uid"></field>
+        <field editable="1" name="ob_validation"></field>
         <field editable="1" name="ob_value"></field>
+        <field editable="1" name="updated_at"></field>
       </editable>
       <labelOnTop>
+        <field labelOnTop="0" name="created_at"></field>
         <field labelOnTop="0" name="fk_id_import"></field>
         <field labelOnTop="0" name="fk_id_series"></field>
         <field labelOnTop="0" name="fk_id_spatial_object"></field>
         <field labelOnTop="0" name="id"></field>
+        <field labelOnTop="0" name="ob_end_timestamp"></field>
+        <field labelOnTop="0" name="ob_start_timestamp"></field>
         <field labelOnTop="0" name="ob_timestamp"></field>
+        <field labelOnTop="0" name="ob_uid"></field>
+        <field labelOnTop="0" name="ob_validation"></field>
         <field labelOnTop="0" name="ob_value"></field>
+        <field labelOnTop="0" name="updated_at"></field>
       </labelOnTop>
       <widgets></widgets>
-      <previewExpression>id</previewExpression>
+      <previewExpression>"id"</previewExpression>
       <mapTip></mapTip>
     </maplayer>
     <maplayer autoRefreshEnabled="0" autoRefreshTime="0" hasScaleBasedVisibilityFlag="0" maxScale="0" minScale="1e+08" refreshOnNotifyEnabled="0" refreshOnNotifyMessage="" styleCategories="AllStyleCategories" type="raster">
@@ -2713,7 +2827,7 @@ def my_form_open(dialog, layer, feature):
             <description></description>
             <projectionacronym></projectionacronym>
             <ellipsoidacronym></ellipsoidacronym>
-            <geographicflag>false</geographicflag>
+            <geographicflag>true</geographicflag>
           </spatialrefsys>
         </crs>
         <extent></extent>
@@ -2768,7 +2882,7 @@ def my_form_open(dialog, layer, feature):
           <description></description>
           <projectionacronym></projectionacronym>
           <ellipsoidacronym></ellipsoidacronym>
-          <geographicflag>false</geographicflag>
+          <geographicflag>true</geographicflag>
         </spatialrefsys>
       </srs>
       <resourceMetadata>
@@ -2800,7 +2914,7 @@ def my_form_open(dialog, layer, feature):
             <description></description>
             <projectionacronym></projectionacronym>
             <ellipsoidacronym></ellipsoidacronym>
-            <geographicflag>false</geographicflag>
+            <geographicflag>true</geographicflag>
           </spatialrefsys>
         </crs>
         <extent>
@@ -2895,7 +3009,7 @@ def my_form_open(dialog, layer, feature):
         <default applyOnUpdate="0" expression="" field="pr_description"></default>
       </defaults>
       <constraints>
-        <constraint constraints="3" exp_strength="0" field="id" notnull_strength="1" unique_strength="1"></constraint>
+        <constraint constraints="3" exp_strength="0" field="id" notnull_strength="2" unique_strength="1"></constraint>
         <constraint constraints="1" exp_strength="0" field="pr_code" notnull_strength="1" unique_strength="0"></constraint>
         <constraint constraints="1" exp_strength="0" field="pr_label" notnull_strength="1" unique_strength="0"></constraint>
         <constraint constraints="1" exp_strength="0" field="pr_description" notnull_strength="1" unique_strength="0"></constraint>
@@ -2971,7 +3085,7 @@ def my_form_open(dialog, layer, feature):
           </config>
         </widget>
       </widgets>
-      <previewExpression>pr_label</previewExpression>
+      <previewExpression>"pr_label"</previewExpression>
       <mapTip></mapTip>
     </maplayer>
     <maplayer autoRefreshEnabled="0" autoRefreshTime="0" geometry="No geometry" hasScaleBasedVisibilityFlag="0" maxScale="0" minScale="1e+08" readOnly="0" refreshOnNotifyEnabled="0" refreshOnNotifyMessage="" styleCategories="AllStyleCategories" type="vector" wkbType="NoGeometry">
@@ -2991,7 +3105,7 @@ def my_form_open(dialog, layer, feature):
           <description></description>
           <projectionacronym></projectionacronym>
           <ellipsoidacronym></ellipsoidacronym>
-          <geographicflag>false</geographicflag>
+          <geographicflag>true</geographicflag>
         </spatialrefsys>
       </srs>
       <resourceMetadata>
@@ -3014,7 +3128,7 @@ def my_form_open(dialog, layer, feature):
             <description></description>
             <projectionacronym></projectionacronym>
             <ellipsoidacronym></ellipsoidacronym>
-            <geographicflag>false</geographicflag>
+            <geographicflag>true</geographicflag>
           </spatialrefsys>
         </crs>
         <extent></extent>
@@ -3117,7 +3231,7 @@ def my_form_open(dialog, layer, feature):
           <description></description>
           <projectionacronym></projectionacronym>
           <ellipsoidacronym></ellipsoidacronym>
-          <geographicflag>false</geographicflag>
+          <geographicflag>true</geographicflag>
         </spatialrefsys>
       </srs>
       <resourceMetadata>
@@ -3140,7 +3254,7 @@ def my_form_open(dialog, layer, feature):
             <description></description>
             <projectionacronym></projectionacronym>
             <ellipsoidacronym></ellipsoidacronym>
-            <geographicflag>false</geographicflag>
+            <geographicflag>true</geographicflag>
           </spatialrefsys>
         </crs>
         <extent></extent>
@@ -3245,7 +3359,7 @@ def my_form_open(dialog, layer, feature):
           <description></description>
           <projectionacronym></projectionacronym>
           <ellipsoidacronym></ellipsoidacronym>
-          <geographicflag>false</geographicflag>
+          <geographicflag>true</geographicflag>
         </spatialrefsys>
       </srs>
       <resourceMetadata>
@@ -3277,7 +3391,7 @@ def my_form_open(dialog, layer, feature):
             <description></description>
             <projectionacronym></projectionacronym>
             <ellipsoidacronym></ellipsoidacronym>
-            <geographicflag>false</geographicflag>
+            <geographicflag>true</geographicflag>
           </spatialrefsys>
         </crs>
         <extent>
@@ -3408,7 +3522,7 @@ def my_form_open(dialog, layer, feature):
         <default applyOnUpdate="0" expression="" field="fk_id_spatial_layer"></default>
       </defaults>
       <constraints>
-        <constraint constraints="3" exp_strength="0" field="id" notnull_strength="1" unique_strength="1"></constraint>
+        <constraint constraints="3" exp_strength="0" field="id" notnull_strength="2" unique_strength="1"></constraint>
         <constraint constraints="1" exp_strength="0" field="fk_id_protocol" notnull_strength="1" unique_strength="0"></constraint>
         <constraint constraints="1" exp_strength="0" field="fk_id_actor" notnull_strength="1" unique_strength="0"></constraint>
         <constraint constraints="1" exp_strength="0" field="fk_id_indicator" notnull_strength="1" unique_strength="0"></constraint>
@@ -3515,7 +3629,7 @@ def my_form_open(dialog, layer, feature):
           <description></description>
           <projectionacronym></projectionacronym>
           <ellipsoidacronym></ellipsoidacronym>
-          <geographicflag>false</geographicflag>
+          <geographicflag>true</geographicflag>
         </spatialrefsys>
       </srs>
       <resourceMetadata>
@@ -3547,7 +3661,7 @@ def my_form_open(dialog, layer, feature):
             <description></description>
             <projectionacronym></projectionacronym>
             <ellipsoidacronym></ellipsoidacronym>
-            <geographicflag>false</geographicflag>
+            <geographicflag>true</geographicflag>
           </spatialrefsys>
         </crs>
         <extent>
@@ -3694,7 +3808,7 @@ def my_form_open(dialog, layer, feature):
         <default applyOnUpdate="0" expression="" field="sl_geometry_type"></default>
       </defaults>
       <constraints>
-        <constraint constraints="3" exp_strength="0" field="id" notnull_strength="1" unique_strength="1"></constraint>
+        <constraint constraints="3" exp_strength="0" field="id" notnull_strength="2" unique_strength="1"></constraint>
         <constraint constraints="1" exp_strength="0" field="sl_code" notnull_strength="1" unique_strength="0"></constraint>
         <constraint constraints="1" exp_strength="0" field="sl_label" notnull_strength="1" unique_strength="0"></constraint>
         <constraint constraints="1" exp_strength="0" field="sl_description" notnull_strength="1" unique_strength="0"></constraint>
@@ -3714,7 +3828,7 @@ def my_form_open(dialog, layer, feature):
       <expressionfields></expressionfields>
       <attributeactions>
         <defaultAction key="Canvas" value="{00000000-0000-0000-0000-000000000000}"></defaultAction>
-        <actionsetting action="project = QgsProject.instance()&#xA;layer = QgsProject.instance().mapLayer('[% @layer_id %]')&#xA;feat = layer.getFeature( [% $id %] )&#xA;if feat:&#xA;    import processing&#xA;    res = processing.run(&#xA;        &quot;gobs:get_spatial_layer_vector_data&quot;, &#xA;        {&#xA;            'CONNECTION_NAME':'gobs',&#xA;            'OUTPUT_LAYER_NAME':'',&#xA;            'SPATIALLAYER': 0, &#xA;            'SPATIALLAYER_ID': feat['id']&#xA;        }&#xA;    )&#xA;    layer = res['OUTPUT_LAYER']&#xA;    layer.setName(res['OUTPUT_LAYER_RESULT_NAME'])&#xA;    QgsProject.instance().addMapLayer(layer)&#xA;    qgis.utils.iface.messageBar().pushMessage(&#xA;        'Layer &quot;{layer}&quot; has been added !'.format(&#xA;            layer=res['OUTPUT_LAYER_RESULT_NAME']&#xA;        ) &#xA;    )" capture="0" icon="" id="{558fe197-4a5e-407a-83c8-9c94dd086442}" isEnabledOnlyWhenEditable="0" name="Load spatial layer into QGIS" notificationMessage="" shortTitle="Load spatial layer into QGIS" type="1">
+        <actionsetting action="project = QgsProject.instance()&#xA;layer = QgsProject.instance().mapLayer('[% @layer_id %]')&#xA;feat = layer.getFeature( [% $id %] )&#xA;if feat:&#xA;    import processing&#xA;    res = processing.run(&#xA;        &quot;gobs:get_spatial_layer_vector_data&quot;, &#xA;        {&#xA;            'CONNECTION_NAME':'gobs',&#xA;            'OUTPUT_LAYER_NAME':'',&#xA;            'SPATIALLAYER': 0, &#xA;            'SPATIALLAYER_ID': feat['id']&#xA;        }&#xA;    )&#xA;    layer = res['OUTPUT_LAYER']&#xA;    layer.setName(res['OUTPUT_LAYER_RESULT_NAME'])&#xA;    QgsProject.instance().addMapLayer(layer)&#xA;    qgis.utils.iface.messageBar().pushMessage(&#xA;        'Layer &quot;{layer}&quot; has been added !'.format(&#xA;            layer=res['OUTPUT_LAYER_RESULT_NAME']&#xA;        ) &#xA;    )" capture="0" icon="" id="{78d3d4c3-134b-46b5-8637-8f3613dbf805}" isEnabledOnlyWhenEditable="0" name="Load spatial layer into QGIS" notificationMessage="" shortTitle="Load spatial layer into QGIS" type="1">
           <actionScope id="Feature"></actionScope>
         </actionsetting>
       </attributeactions>
@@ -3792,13 +3906,12 @@ def my_form_open(dialog, layer, feature):
           </config>
         </widget>
       </widgets>
-      <previewExpression>sl_label</previewExpression>
+      <previewExpression>"sl_label"</previewExpression>
       <mapTip></mapTip>
     </maplayer>
   </projectlayers>
   <layerorder>
     <layer id="osm_mapnik_73cc9876_fa44_4742_bc09_afe572b57bbe"></layer>
-    <layer id="document_3f322924_735f_4bef_b903_9521d2f25444"></layer>
   </layerorder>
   <properties>
     <DefaultStyles>
