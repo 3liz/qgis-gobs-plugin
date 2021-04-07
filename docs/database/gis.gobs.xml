@@ -27,9 +27,13 @@
          <column autoUpdated="false" defaultValue="null" digits="0" id="4" name="id_category" nullable="false" remarks="Category of actor" size="10" type="int4" typeCode="4">
             <parent column="id" foreignKey="actor_id_category_fkey" implied="false" onDeleteCascade="false" schema="gobs" table="actor_category"/>
          </column>
+         <column autoUpdated="false" defaultValue="null" digits="0" id="5" name="a_login" nullable="false" remarks="Login of the actor. It is the unique identifier of the actor." size="2147483647" type="text" typeCode="12"/>
          <primaryKey column="id" sequenceNumberInPK="1"/>
          <index name="actor_pkey" unique="true">
             <column ascending="true" name="id"/>
+         </index>
+         <index name="actor_a_login_key" unique="true">
+            <column ascending="true" name="a_login"/>
          </index>
          <index name="actor_a_name_idx" unique="false">
             <column ascending="true" name="a_label"/>
@@ -44,6 +48,9 @@
          <primaryKey column="id" sequenceNumberInPK="1"/>
          <index name="actor_category_pkey" unique="true">
             <column ascending="true" name="id"/>
+         </index>
+         <index name="actor_category_ac_label_key" unique="true">
+            <column ascending="true" name="ac_label"/>
          </index>
       </table>
       <table name="deleted_data_log" numRows="0" remarks="Log of deleted objects from observation table. Use for synchronization purpose" schema="gobs" type="TABLE">
