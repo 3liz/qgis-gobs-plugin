@@ -2,8 +2,8 @@
 -- PostgreSQL database dump
 --
 
--- Dumped from database version 9.6.22
--- Dumped by pg_dump version 9.6.22
+-- Dumped from database version 13.5 (Ubuntu 13.5-2.pgdg20.04+1)
+-- Dumped by pg_dump version 13.5 (Ubuntu 13.5-2.pgdg20.04+1)
 
 SET statement_timeout = 0;
 SET lock_timeout = 0;
@@ -18,7 +18,7 @@ SET row_security = off;
 
 SET default_tablespace = '';
 
-SET default_with_oids = false;
+;
 
 -- actor
 CREATE TABLE gobs.actor (
@@ -105,6 +105,7 @@ COMMENT ON TABLE gobs.document IS 'List of documents for describing indicators.'
 
 -- document_id_seq
 CREATE SEQUENCE gobs.document_id_seq
+
     START WITH 1
     INCREMENT BY 1
     NO MINVALUE
