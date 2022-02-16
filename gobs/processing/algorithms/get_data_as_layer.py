@@ -19,7 +19,10 @@ from gobs.qgis_plugin_tools.tools.algorithm_processing import (
 )
 from gobs.qgis_plugin_tools.tools.i18n import tr
 
-from .tools import get_postgis_connection_list, getPostgisConnectionUriFromName
+from .tools import (
+    get_postgis_connection_list,
+    get_postgis_connection_uri_from_name,
+)
 
 
 class GetDataAsLayer(BaseProcessingAlgorithm):
@@ -130,7 +133,7 @@ class GetDataAsLayer(BaseProcessingAlgorithm):
 
         # Buid QGIS uri to load layer
         id_field = 'id'
-        uri = getPostgisConnectionUriFromName(connection_name)
+        uri = get_postgis_connection_uri_from_name(connection_name)
         uri.setDataSource("", "(" + self.SQL + ")", self.GEOM_FIELD, "", id_field)
         vlayer = QgsVectorLayer(uri.uri(), "layername", "postgres")
         if not vlayer.isValid():

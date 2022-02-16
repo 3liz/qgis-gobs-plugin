@@ -3,8 +3,7 @@ __license__ = "GPL version 3"
 __email__ = "info@3liz.org"
 __revision__ = "$Format:%H$"
 
-from processing.tools.postgis import uri_from_name
-from qgis.core import QgsProviderRegistry
+from qgis.core import QgsDataSourceUri, QgsProviderRegistry
 
 from gobs.qgis_plugin_tools.tools.i18n import tr
 from gobs.qgis_plugin_tools.tools.resources import plugin_path
@@ -18,21 +17,13 @@ def get_postgis_connection_list():
     return connections
 
 
-def getPostgisConnectionUriFromName(connection_name):
+def get_postgis_connection_uri_from_name(connection_name: str) -> QgsDataSourceUri:
     """
     Return a QgsDatasourceUri from a PostgreSQL connection name
     """
-
-    uri = uri_from_name(connection_name)
-
-    # In QGIS 3.10, we will use
-    # metadata = QgsProviderRegistry.instance().providerMetadata('postgres')
-    # find a connection by name
-    # connection = metadata.findConnection(connection_name)
-    # uri_str = connection.uri()
-    # uri = QgsDataSourceUri(uri)
-
-    return uri
+    metadata = QgsProviderRegistry.instance().providerMetadata('postgres')
+    connection = metadata.findConnection(connection_name)
+    return QgsDataSourceUri(connection.uri())
 
 
 def fetchDataFromSqlQuery(connection_name, sql):
@@ -142,7 +133,7 @@ def createAdministrationProjectFromTemplate(connection_name, project_file_path):
     to the given target path
     """
     # Get connection information
-    uri = getPostgisConnectionUriFromName(connection_name)
+    uri = get_postgis_connection_uri_from_name(connection_name)
     connection_info = uri.connectionInfo()
 
     # Read in the template file
