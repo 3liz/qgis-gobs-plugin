@@ -1,5 +1,10 @@
+# IDE
 .idea/
+
+# Python
 *.py[cod]
+.venv
+venv
 
 # C extensions
 *.so
