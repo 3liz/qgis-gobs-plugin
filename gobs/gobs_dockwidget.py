@@ -32,7 +32,7 @@ from .processing.algorithms.import_observation_data import (
 )
 from .processing.algorithms.tools import (
     fetchDataFromSqlQuery,
-    getPostgisConnectionList,
+    get_postgis_connection_list,
 )
 
 FORM_CLASS = load_ui('gobs_dockwidget_base.ui')
@@ -103,7 +103,7 @@ class GobsDockWidget(QtWidgets.QDockWidget, FORM_CLASS):
         enable = False
 
         if connection_name:
-            if connection_name in getPostgisConnectionList():
+            if connection_name in get_postgis_connection_list():
                 connection_info = connection_name
                 stylesheet += "color: green;"
                 enable = True
@@ -173,7 +173,7 @@ class GobsDockWidget(QtWidgets.QDockWidget, FORM_CLASS):
         get_data = QgsExpressionContextUtils.globalScope().variable('gobs_get_database_data')
 
         series = []
-        if get_data == 'yes' and connection_name in getPostgisConnectionList():
+        if get_data == 'yes' and connection_name in get_postgis_connection_list():
             [header, data, rowCount, ok, error_message] = fetchDataFromSqlQuery(
                 connection_name,
                 sql

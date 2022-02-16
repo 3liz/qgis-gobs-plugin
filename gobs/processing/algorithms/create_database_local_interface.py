@@ -18,7 +18,7 @@ from gobs.qgis_plugin_tools.tools.i18n import tr
 
 from .tools import (
     createAdministrationProjectFromTemplate,
-    getPostgisConnectionList,
+    get_postgis_connection_list,
 )
 
 
@@ -110,7 +110,7 @@ class CreateDatabaseLocalInterface(BaseProcessingAlgorithm):
             )
 
         # Check that it corresponds to an existing connection
-        if connection_name not in getPostgisConnectionList():
+        if connection_name not in get_postgis_connection_list():
             return False, tr('The configured connection name does not exists in QGIS')
 
         # Check if the target project file ends with qgs

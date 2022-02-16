@@ -4,26 +4,17 @@ __email__ = "info@3liz.org"
 __revision__ = "$Format:%H$"
 
 from processing.tools.postgis import uri_from_name
-from qgis.core import QgsSettings
+from qgis.core import QgsProviderRegistry
 
 from gobs.qgis_plugin_tools.tools.i18n import tr
 from gobs.qgis_plugin_tools.tools.resources import plugin_path
 
 
-def getPostgisConnectionList():
+def get_postgis_connection_list():
     """Get a list of the PostGIS connection names"""
-
-    s = QgsSettings()
-    s.beginGroup("PostgreSQL/connections")
-    connections = list(set([a.split('/')[0] for a in s.allKeys()]))
-    s.endGroup()
-
-    # In QGIS 3.16, we will use
-    # metadata = QgsProviderRegistry.instance().providerMetadata('postgres')
-    # find a connection by name
-    # postgres_connections = metadata.connections()
-    # connections = postgres_connections.keys()
-
+    metadata = QgsProviderRegistry.instance().providerMetadata('postgres')
+    postgres_connections = metadata.connections()
+    connections = postgres_connections.keys()
     return connections
 
 

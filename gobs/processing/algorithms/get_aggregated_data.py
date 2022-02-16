@@ -19,7 +19,7 @@ from gobs.qgis_plugin_tools.tools.i18n import tr
 from .get_data_as_layer import GetDataAsLayer
 from .tools import (
     fetchDataFromSqlQuery,
-    getPostgisConnectionList,
+    get_postgis_connection_list,
     validateTimestamp,
 )
 
@@ -99,7 +99,7 @@ class GetAggregatedData(GetDataAsLayer):
             ORDER BY label
         '''
         data = []
-        if get_data == 'yes' and connection_name in getPostgisConnectionList():
+        if get_data == 'yes' and connection_name in get_postgis_connection_list():
             [header, data, rowCount, ok, error_message] = fetchDataFromSqlQuery(
                 connection_name,
                 sql
@@ -212,7 +212,7 @@ class GetAggregatedData(GetDataAsLayer):
             return False, tr('You must use the "Configure G-obs plugin" alg to set the database connection name')
 
         # Check that it corresponds to an existing connection
-        if connection_name not in getPostgisConnectionList():
+        if connection_name not in get_postgis_connection_list():
             return False, tr('The configured connection name does not exists in QGIS')
 
         serie_id = self.parameterAsInt(parameters, self.SERIE_ID, context)

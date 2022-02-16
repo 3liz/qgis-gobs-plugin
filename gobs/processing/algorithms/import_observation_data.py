@@ -24,7 +24,7 @@ from gobs.qgis_plugin_tools.tools.i18n import tr
 
 from .tools import (
     fetchDataFromSqlQuery,
-    getPostgisConnectionList,
+    get_postgis_connection_list,
     validateTimestamp,
 )
 
@@ -168,7 +168,7 @@ class ImportObservationData(BaseProcessingAlgorithm):
             return False, tr('You must use the "Configure G-obs plugin" alg to set the database connection name')
 
         # Check that it corresponds to an existing connection
-        if connection_name not in getPostgisConnectionList():
+        if connection_name not in get_postgis_connection_list():
             return False, tr('The configured connection name does not exists in QGIS')
 
         # Check date has been given

@@ -29,7 +29,7 @@ from ...qgis_plugin_tools.tools.database import (
     available_migrations,
     fetch_data_from_sql_query,
 )
-from .tools import getPostgisConnectionList
+from .tools import get_postgis_connection_list
 
 SCHEMA = "gobs"
 
@@ -126,7 +126,7 @@ class CreateDatabaseStructure(BaseProcessingAlgorithm):
             return False, tr('You must use the "Configure G-obs plugin" alg to set the database connection name')
 
         # Check that it corresponds to an existing connection
-        if connection_name not in getPostgisConnectionList():
+        if connection_name not in get_postgis_connection_list():
             return False, tr('The configured connection name does not exists in QGIS')
 
         # Check database content
