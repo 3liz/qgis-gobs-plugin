@@ -3,8 +3,9 @@
 ##layer=vector
 ##Name_primaryKey_id_or_label=string QUARTMNO (id or field with the name you want)
 
-from qgis.core import *
 import processing
+
+from qgis.core import *
 
 geoms = QgsGeometry.fromWkt('GEOMETRYCOLLECTION()')
 layer = processing.getObject(layer)

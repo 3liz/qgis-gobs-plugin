@@ -1,13 +1,11 @@
 """Base class for tests using a database."""
 
 import os
-import psycopg2
 import time
 
-from qgis.core import (
-    QgsApplication,
-    Qgis,
-)
+import psycopg2
+
+from qgis.core import Qgis, QgsApplication
 from qgis.testing import unittest
 
 if Qgis.QGIS_VERSION_INT >= 30800:
@@ -15,8 +13,10 @@ if Qgis.QGIS_VERSION_INT >= 30800:
 else:
     import processing
 
-from ..qgis_plugin_tools.tools.logger_processing import LoggerProcessingFeedBack
 from ..processing.provider import GobsProvider as ProcessingProvider
+from ..qgis_plugin_tools.tools.logger_processing import (
+    LoggerProcessingFeedBack,
+)
 
 __copyright__ = "Copyright 2020, 3Liz"
 __license__ = "GPL version 3"

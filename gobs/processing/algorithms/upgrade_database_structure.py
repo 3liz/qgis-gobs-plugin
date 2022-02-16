@@ -6,26 +6,31 @@ __revision__ = "$Format:%H$"
 import os
 
 from qgis.core import (
+    QgsExpressionContextUtils,
     QgsProcessingException,
-    QgsProcessingParameterString,
-    QgsProcessingParameterBoolean,
     QgsProcessingOutputNumber,
     QgsProcessingOutputString,
-    QgsExpressionContextUtils,
+    QgsProcessingParameterBoolean,
+    QgsProcessingParameterString,
     QgsProject,
 )
 
-from gobs.qgis_plugin_tools.tools.i18n import tr
-from gobs.qgis_plugin_tools.tools.resources import plugin_path
-from gobs.qgis_plugin_tools.tools.version import version, format_version_integer
-from gobs.qgis_plugin_tools.tools.algorithm_processing import BaseProcessingAlgorithm
+from gobs.qgis_plugin_tools.tools.algorithm_processing import (
+    BaseProcessingAlgorithm,
+)
 from gobs.qgis_plugin_tools.tools.database import (
     available_migrations,
     fetch_data_from_sql_query,
 )
-from .tools import (
-    getPostgisConnectionList,
+from gobs.qgis_plugin_tools.tools.i18n import tr
+from gobs.qgis_plugin_tools.tools.resources import plugin_path
+from gobs.qgis_plugin_tools.tools.version import (
+    format_version_integer,
+    version,
 )
+
+from .tools import getPostgisConnectionList
+
 SCHEMA = "gobs"
 
 

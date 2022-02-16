@@ -4,23 +4,22 @@ __email__ = "info@3liz.org"
 __revision__ = "$Format:%H$"
 
 from qgis.core import (
-    QgsVectorLayer,
+    QgsExpressionContextUtils,
     QgsProcessingContext,
     QgsProcessingException,
-    QgsProcessingParameterString,
-    QgsProcessingOutputString,
     QgsProcessingOutputNumber,
+    QgsProcessingOutputString,
     QgsProcessingOutputVectorLayer,
-    QgsExpressionContextUtils,
+    QgsProcessingParameterString,
+    QgsVectorLayer,
 )
 
+from gobs.qgis_plugin_tools.tools.algorithm_processing import (
+    BaseProcessingAlgorithm,
+)
 from gobs.qgis_plugin_tools.tools.i18n import tr
-from gobs.qgis_plugin_tools.tools.algorithm_processing import BaseProcessingAlgorithm
 
-from .tools import (
-    getPostgisConnectionList,
-    getPostgisConnectionUriFromName,
-)
+from .tools import getPostgisConnectionList, getPostgisConnectionUriFromName
 
 
 class GetDataAsLayer(BaseProcessingAlgorithm):

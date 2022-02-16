@@ -4,23 +4,23 @@ __email__ = "info@3liz.org"
 __revision__ = "$Format:%H$"
 
 from qgis.core import (
-    QgsProcessingException,
-    QgsProcessingParameterEnum,
-    QgsProcessingParameterBoolean,
-    QgsProcessingParameterNumber,
-    QgsProcessingParameterDefinition,
-    QgsProcessingOutputString,
-    QgsProcessingOutputNumber,
     QgsExpressionContextUtils,
+    QgsProcessingException,
+    QgsProcessingOutputNumber,
+    QgsProcessingOutputString,
+    QgsProcessingParameterBoolean,
+    QgsProcessingParameterDefinition,
+    QgsProcessingParameterEnum,
+    QgsProcessingParameterNumber,
     QgsProject,
 )
 
-from gobs.qgis_plugin_tools.tools.i18n import tr
-from gobs.qgis_plugin_tools.tools.algorithm_processing import BaseProcessingAlgorithm
-from .tools import (
-    fetchDataFromSqlQuery,
-    getPostgisConnectionList,
+from gobs.qgis_plugin_tools.tools.algorithm_processing import (
+    BaseProcessingAlgorithm,
 )
+from gobs.qgis_plugin_tools.tools.i18n import tr
+
+from .tools import fetchDataFromSqlQuery, getPostgisConnectionList
 
 
 class RemoveSpatialLayerData(BaseProcessingAlgorithm):

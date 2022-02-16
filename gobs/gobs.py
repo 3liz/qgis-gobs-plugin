@@ -7,17 +7,11 @@ import inspect
 import os
 import sys
 
-from qgis.PyQt.QtCore import (
-    Qt,
-    QTranslator,
-    QCoreApplication,
-)
-from qgis.core import (
-    QgsApplication,
-    QgsSettings,
-)
+from qgis.core import QgsApplication, QgsSettings
+from qgis.PyQt.QtCore import QCoreApplication, Qt, QTranslator
 
 from gobs.qgis_plugin_tools.tools.resources import resources_path
+
 from .gobs_dockwidget import GobsDockWidget
 from .processing.provider import GobsProvider
 

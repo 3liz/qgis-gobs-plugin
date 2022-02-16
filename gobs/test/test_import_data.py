@@ -1,10 +1,10 @@
 """Tests for the import of data into the database."""
 
 from qgis.core import (
-    QgsApplication,
-    QgsVectorLayer,
-    QgsProcessingException,
     Qgis,
+    QgsApplication,
+    QgsProcessingException,
+    QgsVectorLayer,
 )
 
 if Qgis.QGIS_VERSION_INT >= 30800:
@@ -13,7 +13,9 @@ else:
     import processing
 
 from ..processing.provider import GobsProvider as ProcessingProvider
-from ..qgis_plugin_tools.tools.logger_processing import LoggerProcessingFeedBack
+from ..qgis_plugin_tools.tools.logger_processing import (
+    LoggerProcessingFeedBack,
+)
 from ..qgis_plugin_tools.tools.resources import plugin_path
 from .base_test_database import DatabaseTestCase
 

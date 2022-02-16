@@ -7,24 +7,28 @@ import os
 import time
 
 import processing
+
 from qgis.core import (
-    QgsProcessingParameterVectorLayer,
-    QgsProcessingParameterField,
-    QgsProcessingParameterString,
-    QgsProcessingParameterEnum,
-    QgsProcessingOutputString,
     QgsExpressionContextUtils,
     QgsProcessingException,
-    QgsWkbTypes,
+    QgsProcessingOutputString,
+    QgsProcessingParameterEnum,
+    QgsProcessingParameterField,
+    QgsProcessingParameterString,
+    QgsProcessingParameterVectorLayer,
     QgsProject,
+    QgsWkbTypes,
 )
 
+from gobs.qgis_plugin_tools.tools.algorithm_processing import (
+    BaseProcessingAlgorithm,
+)
 from gobs.qgis_plugin_tools.tools.i18n import tr
-from gobs.qgis_plugin_tools.tools.algorithm_processing import BaseProcessingAlgorithm
+
 from .tools import (
     fetchDataFromSqlQuery,
-    validateTimestamp,
     getPostgisConnectionList,
+    validateTimestamp,
 )
 
 

@@ -1,14 +1,11 @@
 """Tests for Processing algorithms."""
 
 import os
-import psycopg2
 import time
 
-from qgis.core import (
-    QgsApplication,
-    QgsProcessingException,
-    Qgis,
-)
+import psycopg2
+
+from qgis.core import Qgis, QgsApplication, QgsProcessingException
 from qgis.testing import unittest
 
 if Qgis.QGIS_VERSION_INT >= 30800:
@@ -17,8 +14,10 @@ else:
     import processing
 
 from ..processing.provider import GobsProvider as ProcessingProvider
-from ..qgis_plugin_tools.tools.logger_processing import LoggerProcessingFeedBack
 from ..qgis_plugin_tools.tools.database import available_migrations
+from ..qgis_plugin_tools.tools.logger_processing import (
+    LoggerProcessingFeedBack,
+)
 
 __copyright__ = "Copyright 2020, 3Liz"
 __license__ = "GPL version 3"

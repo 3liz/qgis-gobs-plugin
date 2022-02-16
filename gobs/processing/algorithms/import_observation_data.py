@@ -6,23 +6,26 @@ __revision__ = "$Format:%H$"
 import time
 
 import processing
+
 from qgis.core import (
+    QgsExpressionContextUtils,
     QgsProcessing,
+    QgsProcessingOutputString,
+    QgsProcessingParameterField,
     QgsProcessingParameterString,
     QgsProcessingParameterVectorLayer,
-    QgsProcessingParameterField,
-    QgsProcessingOutputString,
-    QgsExpressionContextUtils,
     QgsProject,
 )
 
+from gobs.qgis_plugin_tools.tools.algorithm_processing import (
+    BaseProcessingAlgorithm,
+)
 from gobs.qgis_plugin_tools.tools.i18n import tr
-from gobs.qgis_plugin_tools.tools.algorithm_processing import BaseProcessingAlgorithm
 
 from .tools import (
     fetchDataFromSqlQuery,
-    validateTimestamp,
     getPostgisConnectionList,
+    validateTimestamp,
 )
 
 

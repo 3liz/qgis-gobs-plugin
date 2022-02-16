@@ -4,19 +4,21 @@ __email__ = "info@3liz.org"
 __revision__ = "$Format:%H$"
 
 from qgis.core import (
-    QgsProcessingParameterString,
-    QgsProcessingParameterFileDestination,
-    QgsProcessingOutputString,
-    QgsProcessingOutputNumber,
     QgsExpressionContextUtils,
+    QgsProcessingOutputNumber,
+    QgsProcessingOutputString,
+    QgsProcessingParameterFileDestination,
+    QgsProcessingParameterString,
 )
 
+from gobs.qgis_plugin_tools.tools.algorithm_processing import (
+    BaseProcessingAlgorithm,
+)
 from gobs.qgis_plugin_tools.tools.i18n import tr
-from gobs.qgis_plugin_tools.tools.algorithm_processing import BaseProcessingAlgorithm
 
 from .tools import (
-    getPostgisConnectionList,
     createAdministrationProjectFromTemplate,
+    getPostgisConnectionList,
 )
 
 

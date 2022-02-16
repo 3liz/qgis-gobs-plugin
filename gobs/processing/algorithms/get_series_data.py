@@ -6,20 +6,17 @@ __revision__ = "$Format:%H$"
 from qgis.core import (
     QgsExpressionContextUtils,
     QgsProcessingException,
-    QgsProcessingParameterEnum,
     QgsProcessingParameterBoolean,
-    QgsProcessingParameterNumber,
     QgsProcessingParameterDefinition,
+    QgsProcessingParameterEnum,
+    QgsProcessingParameterNumber,
     QgsProject,
 )
 
 from gobs.qgis_plugin_tools.tools.i18n import tr
-from .get_data_as_layer import GetDataAsLayer
 
-from .tools import (
-    fetchDataFromSqlQuery,
-    getPostgisConnectionList,
-)
+from .get_data_as_layer import GetDataAsLayer
+from .tools import fetchDataFromSqlQuery, getPostgisConnectionList
 
 
 class GetSeriesData(GetDataAsLayer):

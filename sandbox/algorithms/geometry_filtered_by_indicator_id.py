@@ -7,14 +7,14 @@
 ##layer_name=string Choose_name
 
 import psycopg2
-from PyQt4.QtSql import *
-from qgis.PyQt.QtCore import *
-from qgis.core import *
-from qgis.utils import *
 
-from db_manager.db_plugins.plugin import DBPlugin, Schema, Table, BaseError
 from db_manager.db_plugins import createDbPlugin
+from db_manager.db_plugins.plugin import BaseError, DBPlugin, Schema, Table
 from db_manager.dlg_db_error import DlgDbError
+from PyQt4.QtSql import *
+from qgis.core import *
+from qgis.PyQt.QtCore import *
+from qgis.utils import *
 
 dbTypeMap = { 0: 'postgis', 1: 'spatialite' }
 

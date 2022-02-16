@@ -3,37 +3,37 @@ __license__ = "GPL version 3"
 __email__ = "info@3liz.org"
 __revision__ = "$Format:%H$"
 
+import webbrowser
+
 from functools import partial
 
-from qgis.PyQt import (
-    QtWidgets,
-)
-from qgis.PyQt.QtCore import pyqtSignal
-from qgis.PyQt.QtWidgets import (
-    QPushButton,
-    QComboBox,
-    QDialog,
-    QVBoxLayout,
-    QDialogButtonBox,
-)
+from processing import execAlgorithmDialog
 from qgis.core import (
     Qgis,
     QgsApplication,
     QgsExpressionContextUtils,
     QgsProject,
 )
-
-from processing import execAlgorithmDialog
-from .processing.algorithms.import_observation_data import ImportObservationData
-from .processing.algorithms.tools import (
-    getPostgisConnectionList,
-    fetchDataFromSqlQuery,
+from qgis.PyQt import QtWidgets
+from qgis.PyQt.QtCore import pyqtSignal
+from qgis.PyQt.QtWidgets import (
+    QComboBox,
+    QDialog,
+    QDialogButtonBox,
+    QPushButton,
+    QVBoxLayout,
 )
 
 from gobs.qgis_plugin_tools.tools.i18n import tr
 from gobs.qgis_plugin_tools.tools.resources import load_ui
 
-import webbrowser
+from .processing.algorithms.import_observation_data import (
+    ImportObservationData,
+)
+from .processing.algorithms.tools import (
+    fetchDataFromSqlQuery,
+    getPostgisConnectionList,
+)
 
 FORM_CLASS = load_ui('gobs_dockwidget_base.ui')
 

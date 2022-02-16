@@ -6,20 +6,21 @@ __revision__ = "$Format:%H$"
 from qgis.core import (
     QgsExpressionContextUtils,
     QgsProcessingException,
-    QgsProcessingParameterEnum,
-    QgsProcessingParameterNumber,
     QgsProcessingParameterBoolean,
     QgsProcessingParameterDefinition,
+    QgsProcessingParameterEnum,
+    QgsProcessingParameterNumber,
     QgsProcessingParameterString,
     QgsProject,
 )
 
 from gobs.qgis_plugin_tools.tools.i18n import tr
+
 from .get_data_as_layer import GetDataAsLayer
 from .tools import (
     fetchDataFromSqlQuery,
-    validateTimestamp,
     getPostgisConnectionList,
+    validateTimestamp,
 )
 
 

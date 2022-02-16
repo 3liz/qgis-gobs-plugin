@@ -3,10 +3,11 @@ __license__ = "GPL version 3"
 __email__ = "info@3liz.org"
 __revision__ = "$Format:%H$"
 
+from processing.tools.postgis import uri_from_name
+from qgis.core import QgsSettings
+
 from gobs.qgis_plugin_tools.tools.i18n import tr
 from gobs.qgis_plugin_tools.tools.resources import plugin_path
-from qgis.core import QgsSettings
-from processing.tools.postgis import uri_from_name
 
 
 def getPostgisConnectionList():
@@ -45,8 +46,8 @@ def getPostgisConnectionUriFromName(connection_name):
 
 def fetchDataFromSqlQuery(connection_name, sql):
 
-    from db_manager.db_plugins.plugin import BaseError
     from db_manager.db_plugins import createDbPlugin
+    from db_manager.db_plugins.plugin import BaseError
     from db_manager.db_plugins.postgis.connector import PostGisDBConnector
 
     header = None
