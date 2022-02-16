@@ -7,7 +7,7 @@ CREATE EXTENSION IF NOT EXISTS "uuid-ossp";
 ALTER TABLE gobs.observation RENAME COLUMN ob_timestamp TO ob_start_timestamp;
 COMMENT ON COLUMN gobs.observation.ob_start_timestamp IS 'Start timestamp of the observation data';
 ALTER TABLE gobs.observation ADD COLUMN IF NOT EXISTS ob_end_timestamp timestamp;
-ALTER TABLE gobs.observation ADD COLUMN IF NOT EXISTS ob_uid uuid DEFAULT uuid_generate_v4();
+ALTER TABLE gobs.observation ADD COLUMN IF NOT EXISTS ob_uid uuid DEFAULT public.uuid_generate_v4();
 ALTER TABLE gobs.observation ADD COLUMN IF NOT EXISTS created_at timestamp DEFAULT now();
 ALTER TABLE gobs.observation ADD COLUMN IF NOT EXISTS updated_at timestamp DEFAULT now();
 ALTER TABLE gobs.observation ALTER COLUMN ob_uid SET NOT NULL;
@@ -32,7 +32,7 @@ COMMENT ON COLUMN gobs.indicator.updated_at IS 'Last updated timestamp';
 -- spatial_object
 ALTER TABLE gobs.spatial_object ADD COLUMN IF NOT EXISTS so_valid_from date DEFAULT now()::date;
 ALTER TABLE gobs.spatial_object ADD COLUMN IF NOT EXISTS so_valid_to date ;
-ALTER TABLE gobs.spatial_object ADD COLUMN IF NOT EXISTS so_uid uuid DEFAULT uuid_generate_v4();
+ALTER TABLE gobs.spatial_object ADD COLUMN IF NOT EXISTS so_uid uuid DEFAULT public.uuid_generate_v4();
 ALTER TABLE gobs.spatial_object ADD COLUMN IF NOT EXISTS created_at timestamp DEFAULT now();
 ALTER TABLE gobs.spatial_object ADD COLUMN IF NOT EXISTS updated_at timestamp DEFAULT now();
 ALTER TABLE gobs.spatial_object ALTER COLUMN so_valid_from SET NOT NULL;
@@ -61,7 +61,7 @@ UNIQUE (so_unique_id, fk_id_spatial_layer, so_valid_from);
 DROP TABLE IF EXISTS gobs.document CASCADE;
 CREATE TABLE IF NOT EXISTS gobs.document (
     id serial primary key,
-    do_uid uuid not null default uuid_generate_v4(),
+    do_uid uuid not null default public.uuid_generate_v4(),
     do_label text not null unique,
     do_description text,
     do_type text not null,

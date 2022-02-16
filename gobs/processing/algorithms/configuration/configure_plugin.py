@@ -1,13 +1,13 @@
 __copyright__ = "Copyright 2020, 3Liz"
 __license__ = "GPL version 3"
 __email__ = "info@3liz.org"
-__revision__ = "$Format:%H$"
 
 from qgis.core import (
     QgsExpressionContextUtils,
     QgsProcessingOutputNumber,
     QgsProcessingOutputString,
     QgsProcessingParameterString,
+    QgsProcessingParameterProviderConnection,
     QgsProject,
 )
 
@@ -49,22 +49,17 @@ class ConfigurePlugin(BaseProcessingAlgorithm):
         return short_help
 
     def initAlgorithm(self, config):
-        # INPUTS
-        # Database connection parameters
         project = QgsProject.instance()
         connection_name = QgsExpressionContextUtils.projectScope(project).variable('gobs_connection_name')
-        db_param = QgsProcessingParameterString(
+        param = QgsProcessingParameterProviderConnection(
             self.CONNECTION_NAME,
             tr('PostgreSQL connection to G-Obs database'),
+            "postgres",
             defaultValue=connection_name,
-            optional=False
+            optional=False,
         )
-        db_param.setMetadata({
-            'widget_wrapper': {
-                'class': 'processing.gui.wrappers_postgis.ConnectionWidgetWrapper'
-            }
-        })
-        self.addParameter(db_param)
+        param.setHelp(tr("The database where the schema 'gobs' will be installed."))
+        self.addParameter(param)
 
         # OUTPUTS
         # Add output for status (integer)
@@ -83,7 +78,9 @@ class ConfigurePlugin(BaseProcessingAlgorithm):
         )
 
     def processAlgorithm(self, parameters, context, feedback):
-        connection_name = parameters[self.CONNECTION_NAME]
+        connection_name = self.parameterAsConnectionName(
+            parameters, self.CONNECTION_NAME, context
+        )
 
         # Set project variable
         QgsExpressionContextUtils.setProjectVariable(context.project(), 'gobs_connection_name', connection_name)

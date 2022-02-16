@@ -14,7 +14,7 @@ else:
     import processing
 
 from ..processing.provider import GobsProvider as ProcessingProvider
-from ..qgis_plugin_tools.tools.database import available_migrations
+from ..plugin_tools import available_migrations
 from ..qgis_plugin_tools.tools.logger_processing import (
     LoggerProcessingFeedBack,
 )
@@ -42,8 +42,10 @@ class TestProcessing(unittest.TestCase):
 
     def test_load_structure_with_migration(self):
         """Test we can load the PostGIS structure with migrations."""
+        registry = QgsApplication.processingRegistry()
         provider = ProcessingProvider()
-        QgsApplication.processingRegistry().addProvider(provider)
+        if not registry.providerById(provider.id()):
+            registry.addProvider(provider)
 
         feedback = LoggerProcessingFeedBack()
         params = {
@@ -52,13 +54,10 @@ class TestProcessing(unittest.TestCase):
             'ADD_TEST_DATA': True,
         }
 
-        os.environ["TEST_DATABASE_INSTALL_{}".format(SCHEMA.capitalize())] = VERSION
+        os.environ["TEST_DATABASE_INSTALL_{}".format(SCHEMA.upper())] = VERSION
         alg = "{}:create_database_structure".format(provider.id())
-        try:
-            processing_output = processing.run(alg, params, feedback=feedback)
-        except QgsProcessingException as e:
-            self.assertTrue(False, e)
-        del os.environ["TEST_DATABASE_INSTALL_{}".format(SCHEMA.capitalize())]
+        processing_output = processing.run(alg, params, feedback=feedback)
+        del os.environ["TEST_DATABASE_INSTALL_{}".format(SCHEMA.upper())]
 
         self.cursor.execute(
             "SELECT table_name FROM information_schema.tables WHERE table_schema = '{}'".format(
@@ -163,8 +162,10 @@ class TestProcessing(unittest.TestCase):
 
     def test_load_structure_without_migrations(self):
         """Test we can load the PostGIS structure without migrations."""
+        registry = QgsApplication.processingRegistry()
         provider = ProcessingProvider()
-        QgsApplication.processingRegistry().addProvider(provider)
+        if not registry.providerById(provider.id()):
+            registry.addProvider(provider)
 
         feedback = LoggerProcessingFeedBack()
         self.cursor.execute("SELECT version();")

@@ -1,40 +1,34 @@
 __copyright__ = "Copyright 2020, 3Liz"
 __license__ = "GPL version 3"
 __email__ = "info@3liz.org"
-__revision__ = "$Format:%H$"
 
 import os
 
 from qgis.core import (
+    QgsProviderRegistry,
     QgsExpressionContextUtils,
     QgsProcessingException,
     QgsProcessingOutputNumber,
     QgsProcessingOutputString,
     QgsProcessingParameterBoolean,
-    QgsProcessingParameterString,
+    QgsProcessingParameterProviderConnection,
+    QgsProviderConnectionException,
     QgsProject,
 )
 
-from gobs.qgis_plugin_tools.tools.algorithm_processing import (
-    BaseProcessingAlgorithm,
-)
-from gobs.qgis_plugin_tools.tools.database import (
+from gobs.plugin_tools import (
     available_migrations,
-    fetch_data_from_sql_query,
-)
-from gobs.qgis_plugin_tools.tools.i18n import tr
-from gobs.qgis_plugin_tools.tools.resources import plugin_path
-from gobs.qgis_plugin_tools.tools.version import (
     format_version_integer,
-    version,
+    plugin_path,
 )
-
-from .tools import get_postgis_connection_list
+from gobs.processing.algorithms.database.base import BaseDatabaseAlgorithm
+from gobs.qgis_plugin_tools.tools.i18n import tr
+from gobs.qgis_plugin_tools.tools.version import version
 
 SCHEMA = "gobs"
 
 
-class UpgradeDatabaseStructure(BaseProcessingAlgorithm):
+class UpgradeDatabaseStructure(BaseDatabaseAlgorithm):
 
     CONNECTION_NAME = 'CONNECTION_NAME'
     RUN_MIGRATIONS = 'RUN_MIGRATIONS'
@@ -46,12 +40,6 @@ class UpgradeDatabaseStructure(BaseProcessingAlgorithm):
 
     def displayName(self):
         return tr('Upgrade database structure')
-
-    def group(self):
-        return tr('Structure')
-
-    def groupId(self):
-        return 'gobs_structure'
 
     def shortHelpString(self):
         short_help = tr(
@@ -67,21 +55,18 @@ class UpgradeDatabaseStructure(BaseProcessingAlgorithm):
         return short_help
 
     def initAlgorithm(self, config):
-        # INPUTS
+
         project = QgsProject.instance()
         connection_name = QgsExpressionContextUtils.projectScope(project).variable('gobs_connection_name')
-        db_param = QgsProcessingParameterString(
+        param = QgsProcessingParameterProviderConnection(
             self.CONNECTION_NAME,
-            tr('PostgreSQL connection to G-Obs database'),
+            tr("Connection to the PostgreSQL database"),
+            "postgres",
             defaultValue=connection_name,
-            optional=False
+            optional=False,
         )
-        db_param.setMetadata({
-            'widget_wrapper': {
-                'class': 'processing.gui.wrappers_postgis.ConnectionWidgetWrapper'
-            }
-        })
-        self.addParameter(db_param)
+        param.setHelp(tr("The database where the schema '{}' will be installed.").format(SCHEMA))
+        self.addParameter(param)
 
         self.addParameter(
             QgsProcessingParameterBoolean(
@@ -110,56 +95,41 @@ class UpgradeDatabaseStructure(BaseProcessingAlgorithm):
         run_migrations = self.parameterAsBool(parameters, self.RUN_MIGRATIONS, context)
         if not run_migrations:
             msg = tr('You must check the box to run the upgrade !')
-            ok = False
-            return ok, msg
+            return False, msg
 
         # Check that the connection name has been configured
-        connection_name = parameters[self.CONNECTION_NAME]
+        metadata = QgsProviderRegistry.instance().providerMetadata("postgres")
+        connection_name = self.parameterAsConnectionName(
+            parameters, self.CONNECTION_NAME, context
+        )
         if not connection_name:
             return False, tr('You must use the "Configure G-obs plugin" alg to set the database connection name')
 
-        # Check that it corresponds to an existing connection
-        if connection_name not in get_postgis_connection_list():
-            return False, tr('The configured connection name does not exists in QGIS')
+        connection = metadata.findConnection(connection_name)
 
-        # Check database content
-        ok, msg = self.checkSchema(parameters, context)
-        if not ok:
+        # # Check that it corresponds to an existing connection
+        # if connection_name not in get_postgis_connection_list():
+        #     return False, tr('The configured connection name does not exists in QGIS')
+
+        if 'gobs' in connection.schemas() and not run_migrations:
+            msg = tr("Schema gobs already exists in database ! If you REALLY want to drop and recreate it (and loose all data), check the *Overwrite* checkbox")
             return False, msg
 
         return super(UpgradeDatabaseStructure, self).checkParameterValues(parameters, context)
 
-    def checkSchema(self, parameters, context):
-        sql = '''
-            SELECT schema_name
-            FROM information_schema.schemata
-            WHERE schema_name = 'gobs';
-        '''
-        connection_name = parameters[self.CONNECTION_NAME]
-        [header, data, rowCount, ok, error_message] = fetch_data_from_sql_query(
-            connection_name,
-            sql
-        )
-        if not ok:
-            return ok, error_message
-        ok = False
-        msg = tr("Schema gobs does not exist in database !")
-        for a in data:
-            schema = a[0]
-            if schema == 'gobs':
-                ok = True
-                msg = ''
-        return ok, msg
-
     def processAlgorithm(self, parameters, context, feedback):
 
-        connection_name = parameters[self.CONNECTION_NAME]
-
-        # Drop schema if needed
+        # Run migration
         run_migrations = self.parameterAsBool(parameters, self.RUN_MIGRATIONS, context)
         if not run_migrations:
             msg = tr("Vous devez cocher cette case pour réaliser la mise à jour !")
             raise QgsProcessingException(msg)
+
+        metadata = QgsProviderRegistry.instance().providerMetadata("postgres")
+        connection_name = self.parameterAsConnectionName(
+            parameters, self.CONNECTION_NAME, context
+        )
+        connection = metadata.findConnection(connection_name)
 
         # Get database version
         sql = """
@@ -171,9 +141,10 @@ class UpgradeDatabaseStructure(BaseProcessingAlgorithm):
         """.format(
             SCHEMA
         )
-        _, data, _, ok, error_message = fetch_data_from_sql_query(connection_name, sql)
-        if not ok:
-            raise QgsProcessingException(error_message)
+        try:
+            data = connection.executeSql(sql)
+        except QgsProviderConnectionException as e:
+            raise QgsProcessingException(str(e))
 
         db_version = None
         for a in data:
@@ -237,11 +208,12 @@ class UpgradeDatabaseStructure(BaseProcessingAlgorithm):
                     SCHEMA, new_db_version
                 )
 
-                _, _, _, ok, error_message = fetch_data_from_sql_query(
-                    connection_name, sql
-                )
-                if not ok:
-                    raise QgsProcessingException(error_message)
+                try:
+                    connection.executeSql(sql)
+                except QgsProviderConnectionException as e:
+                    feedback.reportError("Error when executing file {}".format(sf))
+                    connection.executeSql('ROLLBACK;')
+                    raise QgsProcessingException(str(e))
 
                 feedback.pushInfo("* " + sf + " -- OK !")
 
@@ -254,9 +226,10 @@ class UpgradeDatabaseStructure(BaseProcessingAlgorithm):
             SCHEMA, plugin_version
         )
 
-        _, _, _, ok, error_message = fetch_data_from_sql_query(connection_name, sql)
-        if not ok:
-            raise QgsProcessingException(error_message)
+        try:
+            connection.executeSql(sql)
+        except QgsProviderConnectionException as e:
+            raise QgsProcessingException(str(e))
 
         msg = tr("*** THE DATABASE STRUCTURE HAS BEEN UPDATED ***")
         feedback.pushInfo(msg)

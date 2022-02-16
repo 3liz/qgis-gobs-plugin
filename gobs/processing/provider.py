@@ -6,14 +6,15 @@ __revision__ = "$Format:%H$"
 from qgis.core import QgsExpressionContextUtils, QgsProcessingProvider
 from qgis.PyQt.QtGui import QIcon
 
+from gobs.plugin_tools import resources_path
 from gobs.qgis_plugin_tools.tools.i18n import tr
-from gobs.qgis_plugin_tools.tools.resources import resources_path
 
-from .algorithms.configure_plugin import ConfigurePlugin
+from gobs.processing.algorithms.configuration.configure_plugin import ConfigurePlugin
 from .algorithms.create_database_local_interface import (
     CreateDatabaseLocalInterface,
 )
-from .algorithms.create_database_structure import CreateDatabaseStructure
+from .algorithms.database.create import CreateDatabaseStructure
+from .algorithms.database.upgrade import UpgradeDatabaseStructure
 from .algorithms.get_aggregated_data import GetAggregatedData
 from .algorithms.get_series_data import GetSeriesData
 from .algorithms.get_series_list import GetSeriesList
@@ -23,7 +24,6 @@ from .algorithms.get_spatial_layer_vector_data import GetSpatialLayerVectorData
 from .algorithms.import_spatial_layer_data import ImportSpatialLayerData
 from .algorithms.remove_series_data import RemoveSeriesData
 from .algorithms.remove_spatial_layer_data import RemoveSpatialLayerData
-from .algorithms.upgrade_database_structure import UpgradeDatabaseStructure
 
 
 class GobsProvider(QgsProcessingProvider):
@@ -39,6 +39,7 @@ class GobsProvider(QgsProcessingProvider):
 
         self.addAlgorithm(ConfigurePlugin())
 
+        # Database
         self.addAlgorithm(CreateDatabaseStructure())
         self.addAlgorithm(UpgradeDatabaseStructure())
 
@@ -66,4 +67,4 @@ class GobsProvider(QgsProcessingProvider):
         return self.name()
 
     def icon(self):
-        return QIcon(resources_path('icons', 'icon.png'))
+        return QIcon(str(resources_path('icons', 'icon.png')))
