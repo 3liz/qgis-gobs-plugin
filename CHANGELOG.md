@@ -4,20 +4,20 @@
 
 * Raise the QGIS minimum version to 3.16
 
-## 0.4.3 - 2021/04/07
+## 0.4.3 - 2021-04-07
 
 * Actor - Add a new "a_login" column with unique constraint
 * Administration - Update QGIS admin project template
 * Docs - Update Schemaspy
 
-## 0.4.2 - 2021/03/15
+## 0.4.2 - 2021-03-15
 
 * Import observations - specify the series spatial layer id to match spatial objects: fix some bugs if spatial objects shared the same codes for different spatial layers.
 * Import - Spatial layer: add new SQL functions to check related observations
 * Admin - Update the QGIS administration project template with the new document layer
 * Doc - Update Schemaspy database documentation
 
-## 0.4.1 - 2020/12/02
+## 0.4.1 - 2020-12-02
 
 Admin - Update administration project template
 Docs - Update admin guide
@@ -26,7 +26,7 @@ Docs - Update SchemaSpy database structure documentation: https://docs.3liz.org/
 Docs - Database doc generation: improve compatibility with PG13
 Fix some packaging issues about Transifex
 
-## 0.4.0 - 2020/12/02
+## 0.4.0 - 2020-12-02
 
 * Database structure - Add needed tables and fields for G-Event API:
    - indicator: category, created_at and updated_at
@@ -44,7 +44,7 @@ Fix some packaging issues about Transifex
 * Makefile - Add sql command to export & reformat SQL install scripts
 * Docs - Improve administration guide
 
-## 0.3.1 - 2020/08/12
+## 0.3.1 - 2020-08-12
 
 * Documentation - Publish documentation to https://3liz.github.io/qgis-gobs-plugin/ (installation, concepts, admin guide, user guide & database)
 * Algorithms - New algorithm to create a database local interface for admins as a QGIS project
@@ -52,7 +52,7 @@ Fix some packaging issues about Transifex
 * Dock - Reorganize buttons, display the chosen database connection on top
 * Dock - Replace helps buttons by single online help button
 
-## 0.3.0 - 2020/06/17
+## 0.3.0 - 2020-06-17
 
 * Remove spatial layer data - new algorithm to proceed spatial layer data deletion
 * Remove series data - new algorithm to proceed observation data deletion
@@ -60,39 +60,39 @@ Fix some packaging issues about Transifex
 * Get observation data - Add option to also get the corresponding geometry
 * Publish on GitHub: https://github.com/3liz/qgis-gobs-plugin
 
-## 0.2.11 - 2020/06/05
+## 0.2.11 - 2020-06-05
 
 * Import scripts - Fix bugs related to old use of self.tr instead of tr
 
-## 0.2.10 - 2020/05/28
+## 0.2.10 - 2020-05-28
 
 * Import spatial layer - Fix bug with points & linestrings
 
-## 0.2.9 - 2020/05/27
+## 0.2.9 - 2020-05-27
 
 * Import observation data - Explicitly convert source value to target format and remove useless spaces from source data
 * Import spatial layer - Check geometry types compatibility between QGIS layer and target spatial layer
 * Demo data - fix encoding for sub-districts layer
 * Continuous integration & test - many fixes and improvements
 
-## 0.2.8 - 2020/05/05
+## 0.2.8 - 2020-05-05
 
 * Import spatial layer data - Use ST_Buffer(geom, 0) to remove invalid geometries
 * Import spatial layer data - Fix bug when opening form
 * Documentation - Describe each algorithm usage and parameters.
 * Documentation - Add 2 button to see Concepts and Database schema
 
-## 0.2.7 - 2020/03/12
+## 0.2.7 - 2020-03-12
 
 * Rename name, title, label, code fields into normalized code label
 * Import observation data - Adapt alg inputs based on the indicator characteristics
 
-## 0.2.6 - 2020/03/06
+## 0.2.6 - 2020-03-06
 
 * Create db structure - Fix bug when adding test data
 * Move comments in specific SQL script file
 
-## 0.2.5 - 2020/02/24
+## 0.2.5 - 2020-02-24
 
 * Database - Update installation scripts & documentation
 * QGIS - Fix bug with indicator type values (remove default value)
