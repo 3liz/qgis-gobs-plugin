@@ -3,9 +3,10 @@ __license__ = "GPL version 3"
 __email__ = "info@3liz.org"
 __revision__ = "$Format:%H$"
 
-from qgis.core import QgsDataSourceUri, QgsProviderRegistry
+from typing import List, Union, Tuple, Any
 
-from gobs.qgis_plugin_tools.tools.i18n import tr
+from qgis.core import QgsDataSourceUri, QgsProviderRegistry, QgsProviderConnectionException
+
 from gobs.qgis_plugin_tools.tools.resources import plugin_path
 
 
@@ -26,82 +27,16 @@ def get_postgis_connection_uri_from_name(connection_name: str) -> QgsDataSourceU
     return QgsDataSourceUri(connection.uri())
 
 
-def fetchDataFromSqlQuery(connection_name, sql):
+def fetch_data_from_sql_query(connection_name: str, sql: str) -> Union[Tuple[Any, None], Tuple[List[Any], str]]:
+    """Execute SQL and return the result."""
+    metadata = QgsProviderRegistry.instance().providerMetadata('postgres')
+    connection = metadata.findConnection(connection_name)
 
-    from db_manager.db_plugins import createDbPlugin
-    from db_manager.db_plugins.plugin import BaseError
-    from db_manager.db_plugins.postgis.connector import PostGisDBConnector
-
-    header = None
-    data = []
-    header = []
-    rowCount = 0
-    error_message = None
-    connection = None
-
-    # Create plugin class and try to connect
-    ok = True
     try:
-        dbpluginclass = createDbPlugin('postgis', connection_name)
-        connection = dbpluginclass.connect()
-    except BaseError as e:
-        # DlgDbError.showError(e, self.dialog)
-        ok = False
-        error_message = e.msg
-    except Exception:
-        ok = False
-        error_message = 'Cannot connect to database'
-
-    if not connection:
-        return [header, data, rowCount, ok, error_message]
-
-    db = dbpluginclass.database()
-    if not db:
-        ok = False
-        error_message = 'Unable to get database from connection'
-        return [header, data, rowCount, ok, error_message]
-
-    # Get URI
-    uri = db.uri()
-    try:
-        connector = PostGisDBConnector(uri)
-    except Exception:
-        error_message = tr('Cannot connect to database')
-        ok = False
-        return [header, data, rowCount, ok, error_message]
-
-    c = None
-    ok = True
-    # print "run query"
-    try:
-        c = connector._execute(None, str(sql))
-        data = []
-        header = connector._get_cursor_columns(c)
-        if header is None:
-            header = []
-        if len(header) > 0:
-            data = connector._fetchall(c)
-        rowCount = c.rowcount
-        if rowCount == -1:
-            rowCount = len(data)
-
-    except BaseError as e:
-        ok = False
-        error_message = e.msg
-        return [header, data, rowCount, ok, error_message]
-    finally:
-        if c:
-            c.close()
-            del c
-
-    # Log errors
-    if not ok:
-        error_message = tr('Unknown error occured while fetching data')
-        return [header, data, rowCount, ok, error_message]
-        print(error_message)
-        print(sql)
-
-    return [header, data, rowCount, ok, error_message]
+        result = connection.executeSql(sql)
+        return result, None
+    except QgsProviderConnectionException as e:
+        return [], str(e)
 
 
 def validateTimestamp(timestamp_text):

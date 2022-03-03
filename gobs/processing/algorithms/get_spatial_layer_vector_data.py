@@ -20,7 +20,7 @@ from gobs.qgis_plugin_tools.tools.i18n import tr
 
 from .get_data_as_layer import GetDataAsLayer
 from .tools import (
-    fetchDataFromSqlQuery,
+    fetch_data_from_sql_query,
     get_postgis_connection_list,
     validateTimestamp,
 )
@@ -78,10 +78,7 @@ class GetSpatialLayerVectorData(GetDataAsLayer):
         '''
         data = []
         if get_data == 'yes' and connection_name in get_postgis_connection_list():
-            [header, data, rowCount, ok, error_message] = fetchDataFromSqlQuery(
-                connection_name,
-                sql
-            )
+            data, _ = fetch_data_from_sql_query(connection_name, sql)
         self.SPATIALLAYERS = ['%s - %s' % (a[1], a[0]) for a in data]
         self.SPATIALLAYERS_DICT = {a[0]: a[1] for a in data}
         self.addParameter(
@@ -165,11 +162,8 @@ class GetSpatialLayerVectorData(GetDataAsLayer):
             tr('GET DATA FROM CHOSEN SPATIAL LAYER')
         )
         sql = "SELECT id, sl_label, sl_geometry_type FROM gobs.spatial_layer WHERE id = %s" % id_spatial_layer
-        [header, data, rowCount, ok, message] = fetchDataFromSqlQuery(
-            connection_name,
-            sql
-        )
-        if ok:
+        data, error = fetch_data_from_sql_query(connection_name, sql)
+        if not error:
             label = data[0][1]
             message = tr('* Data has been fetched for spatial layer')
             message += ' %s !' % label
@@ -177,7 +171,7 @@ class GetSpatialLayerVectorData(GetDataAsLayer):
                 message
             )
         else:
-            raise QgsProcessingException(message)
+            raise QgsProcessingException(error)
 
         # Retrieve needed data
         id_spatial_layer = data[0][0]

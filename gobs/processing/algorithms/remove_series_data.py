@@ -20,7 +20,7 @@ from gobs.qgis_plugin_tools.tools.algorithm_processing import (
 )
 from gobs.qgis_plugin_tools.tools.i18n import tr
 
-from .tools import fetchDataFromSqlQuery, get_postgis_connection_list
+from .tools import fetch_data_from_sql_query, get_postgis_connection_list
 
 
 class RemoveSeriesData(BaseProcessingAlgorithm):
@@ -83,10 +83,7 @@ class RemoveSeriesData(BaseProcessingAlgorithm):
         '''
         data = []
         if get_data == 'yes' and connection_name in get_postgis_connection_list():
-            [header, data, rowCount, ok, error_message] = fetchDataFromSqlQuery(
-                connection_name,
-                sql
-            )
+            data, _ = fetch_data_from_sql_query(connection_name, sql)
 
         self.SERIES = ['%s' % a[1] for a in data]
         self.SERIES_DICT = {a[1]: a[0] for a in data}
@@ -213,11 +210,8 @@ class RemoveSeriesData(BaseProcessingAlgorithm):
                 id_serie
             )
 
-        [header, data, rowCount, ok, message] = fetchDataFromSqlQuery(
-            connection_name,
-            sql
-        )
-        if ok:
+        _, error = fetch_data_from_sql_query(connection_name, sql)
+        if not error:
             message = tr('Data has been deleted for the chosen series')
             if delete_series:
                 message+= '. '+ tr('The series has also been deleted')
@@ -225,7 +219,7 @@ class RemoveSeriesData(BaseProcessingAlgorithm):
                 message
             )
         else:
-            raise QgsProcessingException(message)
+            raise QgsProcessingException(error)
 
         status = 1
         return {

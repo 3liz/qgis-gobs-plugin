@@ -31,7 +31,7 @@ from .processing.algorithms.import_observation_data import (
     ImportObservationData,
 )
 from .processing.algorithms.tools import (
-    fetchDataFromSqlQuery,
+    fetch_data_from_sql_query,
     get_postgis_connection_list,
 )
 
@@ -172,15 +172,11 @@ class GobsDockWidget(QtWidgets.QDockWidget, FORM_CLASS):
         connection_name = QgsExpressionContextUtils.projectScope(project).variable('gobs_connection_name')
         get_data = QgsExpressionContextUtils.globalScope().variable('gobs_get_database_data')
 
-        series = []
         if get_data == 'yes' and connection_name in get_postgis_connection_list():
-            [header, data, rowCount, ok, error_message] = fetchDataFromSqlQuery(
-                connection_name,
-                sql
-            )
-            series = data
+            result, _ = fetch_data_from_sql_query(connection_name, sql)
+            return result
 
-        return series
+        return []
 
     def runImportObservationData(self):
 

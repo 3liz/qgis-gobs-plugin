@@ -23,7 +23,7 @@ from gobs.qgis_plugin_tools.tools.algorithm_processing import (
 from gobs.qgis_plugin_tools.tools.i18n import tr
 
 from .tools import (
-    fetchDataFromSqlQuery,
+    fetch_data_from_sql_query,
     get_postgis_connection_list,
     validateTimestamp,
 )
@@ -243,11 +243,8 @@ class ImportObservationData(BaseProcessingAlgorithm):
         )
 
         try:
-            [header, data, rowCount, ok, error_message] = fetchDataFromSqlQuery(
-                connection_name,
-                sql
-            )
-            if not ok:
+            data, error = fetch_data_from_sql_query(connection_name, sql)
+            if error:
                 return None
             else:
                 id_value_code = data[0][0]
@@ -324,12 +321,9 @@ class ImportObservationData(BaseProcessingAlgorithm):
         id_import = None
 
         try:
-            [header, data, rowCount, ok, error_message] = fetchDataFromSqlQuery(
-                connection_name,
-                sql
-            )
-            if not ok:
-                msg = tr('* The following error has been raised') + '  %s' % error_message
+            data, error = fetch_data_from_sql_query(connection_name, sql)
+            if error:
+                msg = tr('* The following error has been raised') + '  %s' % error
                 feedback.reportError(
                     msg
                 )
@@ -366,13 +360,10 @@ class ImportObservationData(BaseProcessingAlgorithm):
         id_date_format = None
         id_value_types = None
         try:
-            [header, data, rowCount, ok, error_message] = fetchDataFromSqlQuery(
-                connection_name,
-                sql
-            )
-            if not ok:
+            data, error = fetch_data_from_sql_query(connection_name, sql)
+            if error:
                 status = 0
-                msg = tr('* The following error has been raised') + '  %s' % error_message
+                msg = tr('* The following error has been raised') + '  %s' % error
                 feedback.reportError(
                     msg
                 )
@@ -537,13 +528,10 @@ class ImportObservationData(BaseProcessingAlgorithm):
             '''
             # feedback.pushInfo(sql)
             try:
-                [header, data, rowCount, ok, error_message] = fetchDataFromSqlQuery(
-                    connection_name,
-                    sql
-                )
-                if not ok:
+                _, error = fetch_data_from_sql_query(connection_name, sql)
+                if error:
                     status = 0
-                    msg = tr('* The following error has been raised') + '  %s' % error_message
+                    msg = tr('* The following error has been raised') + '  %s' % error
                     feedback.reportError(
                         msg + ' \n' + sql
                     )
@@ -555,7 +543,7 @@ class ImportObservationData(BaseProcessingAlgorithm):
                     )
             except Exception:
                 status = 0
-                msg = tr('* An unknown error occured while adding features to spatial_object table')
+                msg = tr('* An unknown error occurred while adding features to spatial_object table')
                 feedback.reportError(
                     msg
                 )
@@ -574,21 +562,18 @@ class ImportObservationData(BaseProcessingAlgorithm):
                         temp_schema,
                         temp_table
                     )
-                    [header, data, rowCount, ok, error_message] = fetchDataFromSqlQuery(
-                        connection_name,
-                        sql
-                    )
-                    if ok:
+                    _, error = fetch_data_from_sql_query(connection_name, sql)
+                    if not error:
                         feedback.pushInfo(
                             tr('* Temporary data has been deleted.')
                         )
                     else:
                         feedback.reportError(
-                            tr('* An error occured while droping temporary table') + ' "%s"."%s"' % (temp_schema, temp_table)
+                            tr('* An error occurred while dropping temporary table') + ' "%s"."%s"' % (temp_schema, temp_table)
                         )
 
             if not status and id_import:
-                [header, data, rowCount, ok, error_message] = fetchDataFromSqlQuery(
+                fetch_data_from_sql_query(
                     connection_name,
                     'DELETE FROM gobs.import WHERE id = %s ' % id_import
                 )

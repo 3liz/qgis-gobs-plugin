@@ -6,7 +6,6 @@ from qgis.core import (
     QgsExpressionContextUtils,
     QgsProcessingOutputNumber,
     QgsProcessingOutputString,
-    QgsProcessingParameterString,
     QgsProcessingParameterProviderConnection,
     QgsProject,
 )

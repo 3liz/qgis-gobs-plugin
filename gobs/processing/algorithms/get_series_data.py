@@ -16,7 +16,7 @@ from qgis.core import (
 from gobs.qgis_plugin_tools.tools.i18n import tr
 
 from .get_data_as_layer import GetDataAsLayer
-from .tools import fetchDataFromSqlQuery, get_postgis_connection_list
+from .tools import get_postgis_connection_list, fetch_data_from_sql_query
 
 
 class GetSeriesData(GetDataAsLayer):
@@ -77,10 +77,7 @@ class GetSeriesData(GetDataAsLayer):
         '''
         data = []
         if get_data == 'yes' and connection_name in get_postgis_connection_list():
-            [header, data, rowCount, ok, error_message] = fetchDataFromSqlQuery(
-                connection_name,
-                sql
-            )
+            data, _ = fetch_data_from_sql_query(connection_name, sql)
 
         self.SERIES = ['%s' % a[1] for a in data]
         self.SERIES_DICT = {a[1]: a[0] for a in data}
@@ -173,11 +170,8 @@ class GetSeriesData(GetDataAsLayer):
         '''.format(
             id_serie
         )
-        [header, data, rowCount, ok, message] = fetchDataFromSqlQuery(
-            connection_name,
-            sql
-        )
-        if ok:
+        data, error = fetch_data_from_sql_query(connection_name, sql)
+        if not error:
             id_label = data[0][0]
             message = tr('* Data has been fetched for chosen series and related indicator')
             message += ' %s !' % id_label
@@ -185,7 +179,7 @@ class GetSeriesData(GetDataAsLayer):
                 message
             )
         else:
-            raise QgsProcessingException(message)
+            raise QgsProcessingException(error)
 
         # Retrieve needed data
         # id_label = data[0][0]

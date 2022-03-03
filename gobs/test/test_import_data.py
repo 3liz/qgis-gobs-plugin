@@ -1,10 +1,8 @@
 """Tests for the import of data into the database."""
-import unittest
 
 from qgis.core import (
     Qgis,
     QgsApplication,
-    QgsProcessingException,
     QgsVectorLayer,
 )
 
@@ -20,15 +18,13 @@ from ..qgis_plugin_tools.tools.logger_processing import (
 from ..qgis_plugin_tools.tools.resources import plugin_path
 from .base_test_database import DatabaseTestCase
 
-__copyright__ = "Copyright 2019, 3Liz"
+__copyright__ = "Copyright 2022, 3Liz"
 __license__ = "GPL version 3"
 __email__ = "info@3liz.org"
-__revision__ = "$Format:%H$"
 
 
 class TestImportData(DatabaseTestCase):
 
-    @unittest.skip
     def test_schema_tables(self):
         """Test the list of tables from the gobs schema"""
 
@@ -57,7 +53,6 @@ class TestImportData(DatabaseTestCase):
         ]
         self.assertCountEqual(expected, result)
 
-    @unittest.skip
     def test_import_spatial_layer_pluviometer(self):
         """ Test the import of spatial layer data"""
         # setup provider
@@ -84,10 +79,7 @@ class TestImportData(DatabaseTestCase):
             'DATE_VALIDITY_MAX': '',
             'MANUAL_DATE_VALIDITY_MAX': ''
         }
-        try:
-            processing_output = processing.run(alg, params, feedback=feedback)
-        except QgsProcessingException as e:
-            self.assertTrue(False, e)
+        processing_output = processing.run(alg, params, feedback=feedback)
 
         self.assertEqual(1, processing_output["OUTPUT_STATUS"])
 
@@ -109,10 +101,7 @@ class TestImportData(DatabaseTestCase):
         )
         params['SOURCELAYER'] = layer_v2
         params['DATE_VALIDITY_MAX'] = 'end_date'
-        try:
-            processing_output = processing.run(alg, params, feedback=feedback)
-        except QgsProcessingException as e:
-            self.assertTrue(False, e)
+        processing_output = processing.run(alg, params, feedback=feedback)
 
         self.assertEqual(1, processing_output["OUTPUT_STATUS"])
 

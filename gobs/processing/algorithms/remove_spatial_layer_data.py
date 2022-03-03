@@ -20,7 +20,7 @@ from gobs.qgis_plugin_tools.tools.algorithm_processing import (
 )
 from gobs.qgis_plugin_tools.tools.i18n import tr
 
-from .tools import fetchDataFromSqlQuery, get_postgis_connection_list
+from .tools import get_postgis_connection_list, fetch_data_from_sql_query
 
 
 class RemoveSpatialLayerData(BaseProcessingAlgorithm):
@@ -73,10 +73,7 @@ class RemoveSpatialLayerData(BaseProcessingAlgorithm):
         '''
         data = []
         if get_data == 'yes' and connection_name in get_postgis_connection_list():
-            [header, data, rowCount, ok, error_message] = fetchDataFromSqlQuery(
-                connection_name,
-                sql
-            )
+            data, _ = fetch_data_from_sql_query(connection_name, sql)
         self.SPATIALLAYERS = ['%s - %s' % (a[1], a[0]) for a in data]
         self.SPATIALLAYERS_DICT = {a[0]: a[1] for a in data}
         self.addParameter(
@@ -196,11 +193,8 @@ class RemoveSpatialLayerData(BaseProcessingAlgorithm):
                 id_spatial_layer
             )
 
-        [header, data, rowCount, ok, message] = fetchDataFromSqlQuery(
-            connection_name,
-            sql
-        )
-        if ok:
+        _, error = fetch_data_from_sql_query(connection_name, sql)
+        if not error:
             message = tr('Spatial objects has been deleted for the chosen spatial layer')
             if delete_spatial_layer:
                 message+= '. '+ tr('The spatial layer has also been deleted')
@@ -208,7 +202,7 @@ class RemoveSpatialLayerData(BaseProcessingAlgorithm):
                 message
             )
         else:
-            raise QgsProcessingException(message)
+            raise QgsProcessingException(error)
 
         status = 1
         return {

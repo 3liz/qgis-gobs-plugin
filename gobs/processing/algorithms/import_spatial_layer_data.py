@@ -26,7 +26,7 @@ from gobs.qgis_plugin_tools.tools.algorithm_processing import (
 from gobs.qgis_plugin_tools.tools.i18n import tr
 
 from .tools import (
-    fetchDataFromSqlQuery,
+    fetch_data_from_sql_query,
     get_postgis_connection_list,
     validateTimestamp,
 )
@@ -110,10 +110,7 @@ class ImportSpatialLayerData(BaseProcessingAlgorithm):
         '''
         data = []
         if get_data == 'yes' and connection_name in get_postgis_connection_list():
-            [header, data, rowCount, ok, error_message] = fetchDataFromSqlQuery(
-                connection_name,
-                sql
-            )
+            data, _ = fetch_data_from_sql_query(connection_name, sql)
         self.SPATIALLAYERS = ['%s - %s' % (a[1], a[0]) for a in data]
         self.addParameter(
             QgsProcessingParameterEnum(
@@ -274,13 +271,9 @@ class ImportSpatialLayerData(BaseProcessingAlgorithm):
             id_spatial_layer
         )
         target_type = None
-        [header, data, rowCount, ok, error_message] = fetchDataFromSqlQuery(
-            connection_name,
-            sql
-        )
-        if not ok:
-            status = 0
-            msg = tr('* The following error has been raised') + '  %s' % error_message
+        data, error = fetch_data_from_sql_query(connection_name, sql)
+        if error:
+            msg = tr('* The following error has been raised') + '  %s' % error
             feedback.reportError(
                 msg
             )
@@ -296,9 +289,7 @@ class ImportSpatialLayerData(BaseProcessingAlgorithm):
         # And compare it with the spatial_layer type
         source_type = QgsWkbTypes.geometryDisplayString(int(sourcelayer.geometryType())).lower()
         source_wtype = QgsWkbTypes.displayString(int(sourcelayer.wkbType())).lower()
-        ok = True
         if not target_type.endswith(source_type):
-            ok = False
             msg = tr('Source vector layer and target spatial layer do not have compatible geometry types')
             msg+= ' - SOURCE: {}, TARGET: {}'.format(
                 source_type, target_type
@@ -310,7 +301,6 @@ class ImportSpatialLayerData(BaseProcessingAlgorithm):
 
         # Cannot import multi type into single type target spatial layer
         if source_is_multi and not target_is_multi:
-            ok = False
             msg = tr('Cannot import a vector layer with multi geometries into a target spatial layer with a simple geometry type defined')
             msg+= ' - SOURCE: {}, TARGET: {}'.format(
                 source_wtype, target_type
@@ -429,13 +419,10 @@ class ImportSpatialLayerData(BaseProcessingAlgorithm):
         )
 
         try:
-            [header, data, rowCount, ok, error_message] = fetchDataFromSqlQuery(
-                connection_name,
-                sql
-            )
-            if not ok:
+            _, error = fetch_data_from_sql_query(connection_name, sql)
+            if error:
                 status = 0
-                msg = tr('* The following error has been raised') + '  %s' % error_message
+                msg = tr('* The following error has been raised') + '  %s' % error
                 feedback.reportError(
                     msg
                 )
@@ -469,17 +456,14 @@ class ImportSpatialLayerData(BaseProcessingAlgorithm):
             temp_schema,
             temp_table
         )
-        [header, data, rowCount, ok, error_message] = fetchDataFromSqlQuery(
-            connection_name,
-            sql
-        )
-        if ok:
+        _, error = fetch_data_from_sql_query(connection_name, sql)
+        if not error:
             feedback.pushInfo(
                 tr('* Temporary data has been deleted.')
             )
         else:
             feedback.reportError(
-                tr('* An error occured while droping temporary table') + ' "%s"."%s"' % (temp_schema, temp_table)
+                tr('* An error occurred while dropping temporary table') + ' "%s"."%s"' % (temp_schema, temp_table)
             )
 
         msg = tr('SPATIAL LAYER HAS BEEN SUCCESSFULLY IMPORTED !')
