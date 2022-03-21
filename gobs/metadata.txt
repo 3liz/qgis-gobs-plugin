@@ -2,7 +2,14 @@
 name=G-Obs
 qgisMinimumVersion=3.16
 description=This plugin provides tools to store and manage spatial and time data in a standardized way
+
+# Done by qgis-plugin-ci
 version=master
+changelog=
+commitNumber=
+commitSha1=
+dateTime=
+
 author=3Liz
 email=info@3liz.com
 tags=time,observation,stats
@@ -14,4 +21,3 @@ repository=https://github.com/3liz/qgis-gobs-plugin
 homepage=https://github.com/3liz/qgis-gobs-plugin
 experimental=True
 deprecated=False
-changelog=changelog
