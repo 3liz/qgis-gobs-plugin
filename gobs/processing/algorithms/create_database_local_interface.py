@@ -8,7 +8,7 @@ from qgis.core import (
     QgsProcessingOutputNumber,
     QgsProcessingOutputString,
     QgsProcessingParameterFileDestination,
-    QgsProcessingParameterString,
+    QgsProcessingParameterProviderConnection,
 )
 
 from gobs.qgis_plugin_tools.tools.algorithm_processing import (
@@ -57,21 +57,17 @@ class CreateDatabaseLocalInterface(BaseProcessingAlgorithm):
         return short_help
 
     def initAlgorithm(self, config):
-        # INPUTS
+        _ = config
 
-        # connection name
-        db_param = QgsProcessingParameterString(
+        param = QgsProcessingParameterProviderConnection(
             self.CONNECTION_NAME,
-            tr('PostgreSQL connection to G-Obs database'),
+            tr("Connection to the PostgreSQL database"),
+            "postgres",
             defaultValue='',
             optional=False
         )
-        db_param.setMetadata({
-            'widget_wrapper': {
-                'class': 'processing.gui.wrappers_postgis.ConnectionWidgetWrapper'
-            }
-        })
-        self.addParameter(db_param)
+        param.setHelp(tr("The database where the schema GObs has been installed."))
+        self.addParameter(param)
 
         # target project file
         self.addParameter(
