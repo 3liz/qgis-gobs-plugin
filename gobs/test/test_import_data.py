@@ -1,10 +1,6 @@
 """Tests for the import of data into the database."""
 
-from qgis.core import (
-    Qgis,
-    QgsApplication,
-    QgsVectorLayer,
-)
+from qgis.core import Qgis, QgsApplication, QgsVectorLayer
 
 if Qgis.QGIS_VERSION_INT >= 30800:
     from qgis import processing

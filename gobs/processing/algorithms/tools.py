@@ -3,9 +3,13 @@ __license__ = "GPL version 3"
 __email__ = "info@3liz.org"
 __revision__ = "$Format:%H$"
 
-from typing import List, Union, Tuple, Any
+from typing import Any, List, Tuple, Union
 
-from qgis.core import QgsDataSourceUri, QgsProviderRegistry, QgsProviderConnectionException
+from qgis.core import (
+    QgsDataSourceUri,
+    QgsProviderConnectionException,
+    QgsProviderRegistry,
+)
 
 from gobs.qgis_plugin_tools.tools.resources import plugin_path
 

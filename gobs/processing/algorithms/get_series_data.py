@@ -16,7 +16,7 @@ from qgis.core import (
 from gobs.qgis_plugin_tools.tools.i18n import tr
 
 from .get_data_as_layer import GetDataAsLayer
-from .tools import get_postgis_connection_list, fetch_data_from_sql_query
+from .tools import fetch_data_from_sql_query, get_postgis_connection_list
 
 
 class GetSeriesData(GetDataAsLayer):

@@ -5,15 +5,15 @@ __email__ = "info@3liz.org"
 import os
 
 from qgis.core import (
-    QgsProviderRegistry,
     QgsExpressionContextUtils,
     QgsProcessingException,
     QgsProcessingOutputNumber,
     QgsProcessingOutputString,
     QgsProcessingParameterBoolean,
     QgsProcessingParameterProviderConnection,
-    QgsProviderConnectionException,
     QgsProject,
+    QgsProviderConnectionException,
+    QgsProviderRegistry,
 )
 
 from gobs.plugin_tools import (

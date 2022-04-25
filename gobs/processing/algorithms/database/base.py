@@ -2,13 +2,13 @@ __copyright__ = "Copyright 2022, 3Liz"
 __license__ = "GPL version 3"
 __email__ = "info@3liz.org"
 
-from gobs.processing.base_algorithm import BaseProcessingAlgorithm
 from qgis.core import (
     QgsAbstractDatabaseProviderConnection,
     QgsProcessingFeedback,
     QgsProviderConnectionException,
 )
 
+from gobs.processing.base_algorithm import BaseProcessingAlgorithm
 from gobs.qgis_plugin_tools.tools.i18n import tr
 
 SCHEMA = "gobs"

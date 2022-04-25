@@ -7,9 +7,11 @@ from qgis.core import QgsExpressionContextUtils, QgsProcessingProvider
 from qgis.PyQt.QtGui import QIcon
 
 from gobs.plugin_tools import resources_path
+from gobs.processing.algorithms.configuration.configure_plugin import (
+    ConfigurePlugin,
+)
 from gobs.qgis_plugin_tools.tools.i18n import tr
 
-from gobs.processing.algorithms.configuration.configure_plugin import ConfigurePlugin
 from .algorithms.create_database_local_interface import (
     CreateDatabaseLocalInterface,
 )
