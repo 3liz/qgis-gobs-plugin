@@ -1,0 +1,16 @@
+r_graph_edge
+metadata
+glossary
+deleted_data_log
+observation
+r_indicator_node
+document
+spatial_object
+import
+series
+spatial_layer
+actor
+protocol
+graph_node
+actor_category
+indicator

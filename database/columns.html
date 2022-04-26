@@ -1,0 +1,1344 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <title>gis Database</title>
+        <!-- Tell the browser to be responsive to screen width -->
+        <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
+        <link rel="icon" type="image/png" sizes="16x16" href="favicon.png">
+        <!-- Bootstrap 3.3.5 -->
+        <link rel="stylesheet" href="bower/admin-lte/bootstrap/css/bootstrap.min.css">
+        <!-- Font Awesome -->
+        <link rel="stylesheet" href="bower/font-awesome/css/font-awesome.min.css">
+        <!-- Ionicons -->
+        <link rel="stylesheet" href="bower/ionicons/css/ionicons.min.css">
+        <!-- DataTables -->
+        <link rel="stylesheet" href="bower/datatables.net-bs/css/dataTables.bootstrap.min.css">
+        <link rel="stylesheet" href="bower/datatables.net-buttons-bs/css/buttons.bootstrap.min.css">
+        <!-- Code Mirror -->
+        <link rel="stylesheet" href="bower/codemirror/codemirror.css">
+        <!-- Fonts -->
+        <link href='fonts/indieflower/indie-flower.css' rel='stylesheet' type='text/css'>
+        <link href='fonts/source-sans-pro/source-sans-pro.css' rel='stylesheet' type='text/css'>
+
+        <!-- Theme style -->
+        <link rel="stylesheet" href="bower/admin-lte/dist/css/AdminLTE.min.css">
+        <!-- Salvattore -->
+        <link rel="stylesheet" href="bower/salvattore/salvattore.css">
+        <!-- AdminLTE Skins. Choose a skin from the css/skins
+           folder instead of downloading all of them to reduce the load. -->
+        <link rel="stylesheet" href="bower/admin-lte/dist/css/skins/_all-skins.min.css">
+        <!-- SchemaSpy -->
+        <link rel="stylesheet" href="schemaSpy.css">
+
+        <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+        <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+        <!--[if lt IE 9]>
+        <script src="bower/html5shiv/html5shiv.min.js"></script>
+        <script src="bower/respond/respond.min.js"></script>
+        <![endif]-->
+    </head>
+    <!-- ADD THE CLASS layout-top-nav TO REMOVE THE SIDEBAR. -->
+    <body class="hold-transition skin-blue layout-top-nav">
+        <div class="wrapper">
+            <header class="main-header">
+                <nav class="navbar navbar-static-top">
+                    <div class="container">
+                        <div class="navbar-header">
+                            <a href="index.html" class="navbar-brand"><b>gis</b> Database</a>
+                            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar-collapse"><i class="fa fa-bars"></i></button>
+                        </div>
+
+                        <!-- Collect the nav links, forms, and other content for toggling -->
+                        <div class="collapse navbar-collapse pull-left" id="navbar-collapse">
+                            <ul class="nav navbar-nav">
+                                <li><a href="index.html">Tables <span class="sr-only">(current)</span></a></li>
+                                <li><a href="columns.html" title="All of the columns in the schema">Columns</a></li>
+                                <li><a href="constraints.html" title="Useful for diagnosing error messages that just give constraint name or number">Constraints</a></li>
+                                <li><a href="relationships.html" title="Diagram of table relationships">Relationships</a></li>
+                                <li><a href="orphans.html" title="View of tables with neither parents nor children">Orphan&nbsp;Tables</a></li>
+                                <li><a href="anomalies.html" title="Things that might not be quite right">Anomalies</a></li>
+                                <li><a href="routines.html" title="Procedures and functions">Routines</a></li>
+                            </ul>
+                        </div>
+                        <!-- /.navbar-collapse -->
+                        <!-- Navbar Right Menu -->
+                    </div>
+                    <!-- /.container-fluid -->
+                </nav>
+            </header>
+            <!-- Main content -->
+            <!-- Full Width Column -->
+            <div class="content-wrapper">
+                <!-- Content Header (Page header) -->
+                <section class="content-header">
+                    <h1>Columns</h1>
+                </section>
+                <!-- Main content -->
+                <section class="content">
+                    <div class="box box-primary">
+                        <div class="box-header with-border">
+                            <span class="glyphicon glyphicon-list-alt" aria-hidden="true"></span>
+                            <h3 class="box-title">Columns</h3>
+                        </div>
+                        <div class="box-body">
+                            <table id="column_table" class="table table-bordered table-striped dataTable" role="grid">
+                                <thead align='left'>
+                                    <tr>
+                                        <th>Table</th>
+                                        <th>Type</th>
+                                        <th>Column</th>
+                                        <th>Type</th>
+                                        <th>Size</th>
+                                        <th title='Are nulls allowed?'>Nullable</th>
+                                        <th title='Is column automatically updated?'>Auto</th>
+                                        <th title='Default value'>Default</th>
+                                        <th title='Comments' class="toggle"><span>Comments</span></th>
+                                    </tr>
+                                </thead>
+                                <tbody></tbody>
+                            </table>
+                        </div>
+                    </div>
+                </section>
+                <script>
+                    var tableData = [
+    {
+        "tableName": "series",
+        "tableType": "Table",
+        "keyClass": "foreignKey",
+        "keyTitle": "Foreign Key",
+        "name": "<i class='icon ion-key iconkey' style='padding-left: 5px;'><\/i>fk_id_actor",
+        "type": "int4",
+        "length": 10,
+        "nullable": "",
+        "autoUpdated": "",
+        "defaultValue": "null",
+        "comments": "<p>Actor, source of the observation data.<\/p>"
+    },
+    {
+        "tableName": "series",
+        "tableType": "Table",
+        "keyClass": "foreignKey",
+        "keyTitle": "Foreign Key",
+        "name": "<i class='icon ion-key iconkey' style='padding-left: 5px;'><\/i>fk_id_indicator",
+        "type": "int4",
+        "length": 10,
+        "nullable": "",
+        "autoUpdated": "",
+        "defaultValue": "null",
+        "comments": "<p>Indicator. The series is named after the indicator.<\/p>"
+    },
+    {
+        "tableName": "series",
+        "tableType": "Table",
+        "keyClass": "foreignKey",
+        "keyTitle": "Foreign Key",
+        "name": "<i class='icon ion-key iconkey' style='padding-left: 5px;'><\/i>fk_id_protocol",
+        "type": "int4",
+        "length": 10,
+        "nullable": "",
+        "autoUpdated": "",
+        "defaultValue": "null",
+        "comments": "<p>Protocol<\/p>"
+    },
+    {
+        "tableName": "actor",
+        "tableType": "Table",
+        "keyClass": "indexedColumn",
+        "keyTitle": "Indexed",
+        "name": "<i class='fa fa-sitemap fa-rotate-120' style='padding-right: 5px;'><\/i>a_login",
+        "type": "text",
+        "length": 2147483647,
+        "nullable": "",
+        "autoUpdated": "",
+        "defaultValue": "null",
+        "comments": "<p>Login of the actor. It is the unique identifier of the actor.<\/p>"
+    },
+    {
+        "tableName": "glossary",
+        "tableType": "Table",
+        "keyClass": "",
+        "keyTitle": "",
+        "name": "gl_label",
+        "type": "text",
+        "length": 2147483647,
+        "nullable": "",
+        "autoUpdated": "",
+        "defaultValue": "null",
+        "comments": "<p>Item label to show for users<\/p>"
+    },
+    {
+        "tableName": "metadata",
+        "tableType": "Table",
+        "keyClass": "",
+        "keyTitle": "",
+        "name": "me_status",
+        "type": "int2",
+        "length": 5,
+        "nullable": "",
+        "autoUpdated": "",
+        "defaultValue": "null",
+        "comments": "<p>Status of the version. 1 means active version, 0 means older version<\/p>"
+    },
+    {
+        "tableName": "spatial_object",
+        "tableType": "Table",
+        "keyClass": "",
+        "keyTitle": "",
+        "name": "so_unique_label",
+        "type": "text",
+        "length": 2147483647,
+        "nullable": "",
+        "autoUpdated": "",
+        "defaultValue": "null",
+        "comments": "<p>Label of each spatial object. Ex : name of the city.<\/p>"
+    },
+    {
+        "tableName": "spatial_object",
+        "tableType": "Table",
+        "keyClass": "indexedColumn",
+        "keyTitle": "Indexed",
+        "name": "<i class='fa fa-sitemap fa-rotate-120' style='padding-right: 5px;'><\/i>geom",
+        "type": "geometry",
+        "length": 2147483647,
+        "nullable": "",
+        "autoUpdated": "",
+        "defaultValue": "null",
+        "comments": "<p>Geometry of the spatial object. Alway in EPSG:4326<\/p>"
+    },
+    {
+        "tableName": "observation",
+        "tableType": "Table",
+        "keyClass": "",
+        "keyTitle": "",
+        "name": "ob_validation",
+        "type": "timestamp",
+        "length": 29,
+        "nullable": "√",
+        "autoUpdated": "",
+        "defaultValue": "null",
+        "comments": "<p>Date and time when the data has been validated (the corresponding import status has been changed from pending to validated). Can be used to find all observations not yet validated, with NULL values in this field.<\/p>"
+    },
+    {
+        "tableName": "import",
+        "tableType": "Table",
+        "keyClass": "primaryKey",
+        "keyTitle": "Primary Key",
+        "name": "<i class='icon ion-key iconkey' style='padding-left: 5px;'><\/i>id",
+        "type": "serial",
+        "length": 10,
+        "nullable": "",
+        "autoUpdated": "√",
+        "defaultValue": "nextval('gobs.import_id_seq'::regclass)",
+        "comments": "<p>Id<\/p>"
+    },
+    {
+        "tableName": "actor",
+        "tableType": "Table",
+        "keyClass": "primaryKey",
+        "keyTitle": "Primary Key",
+        "name": "<i class='icon ion-key iconkey' style='padding-left: 5px;'><\/i>id",
+        "type": "serial",
+        "length": 10,
+        "nullable": "",
+        "autoUpdated": "√",
+        "defaultValue": "nextval('gobs.actor_id_seq'::regclass)",
+        "comments": "<p>ID<\/p>"
+    },
+    {
+        "tableName": "metadata",
+        "tableType": "Table",
+        "keyClass": "primaryKey",
+        "keyTitle": "Primary Key",
+        "name": "<i class='icon ion-key iconkey' style='padding-left: 5px;'><\/i>id",
+        "type": "serial",
+        "length": 10,
+        "nullable": "",
+        "autoUpdated": "√",
+        "defaultValue": "nextval('gobs.metadata_id_seq'::regclass)",
+        "comments": "<p>Id of the version<\/p>"
+    },
+    {
+        "tableName": "graph_node",
+        "tableType": "Table",
+        "keyClass": "indexedColumn",
+        "keyTitle": "Indexed",
+        "name": "<i class='fa fa-sitemap fa-rotate-120' style='padding-right: 5px;'><\/i>gn_label",
+        "type": "text",
+        "length": 2147483647,
+        "nullable": "",
+        "autoUpdated": "",
+        "defaultValue": "null",
+        "comments": "<p>Name of the node<\/p>"
+    },
+    {
+        "tableName": "document",
+        "tableType": "Table",
+        "keyClass": "foreignKey",
+        "keyTitle": "Foreign Key",
+        "name": "<i class='icon ion-key iconkey' style='padding-left: 5px;'><\/i>fk_id_indicator",
+        "type": "int4",
+        "length": 10,
+        "nullable": "√",
+        "autoUpdated": "",
+        "defaultValue": "null",
+        "comments": "<p>Indicator id<\/p>"
+    },
+    {
+        "tableName": "r_indicator_node",
+        "tableType": "Table",
+        "keyClass": "primaryKey",
+        "keyTitle": "Primary Key",
+        "name": "<i class='icon ion-key iconkey' style='padding-left: 5px;'><\/i>fk_id_indicator",
+        "type": "int4",
+        "length": 10,
+        "nullable": "",
+        "autoUpdated": "",
+        "defaultValue": "null",
+        "comments": "<p>Parent indicator<\/p>"
+    },
+    {
+        "tableName": "spatial_object",
+        "tableType": "Table",
+        "keyClass": "primaryKey",
+        "keyTitle": "Primary Key",
+        "name": "<i class='icon ion-key iconkey' style='padding-left: 5px;'><\/i>id",
+        "type": "bigserial",
+        "length": 19,
+        "nullable": "",
+        "autoUpdated": "√",
+        "defaultValue": "nextval('gobs.spatial_object_id_seq'::regclass)",
+        "comments": "<p>ID<\/p>"
+    },
+    {
+        "tableName": "spatial_layer",
+        "tableType": "Table",
+        "keyClass": "foreignKey",
+        "keyTitle": "Foreign Key",
+        "name": "<i class='icon ion-key iconkey' style='padding-left: 5px;'><\/i>fk_id_actor",
+        "type": "int4",
+        "length": 10,
+        "nullable": "",
+        "autoUpdated": "",
+        "defaultValue": "null",
+        "comments": "<p>Source actor.<\/p>"
+    },
+    {
+        "tableName": "graph_node",
+        "tableType": "Table",
+        "keyClass": "primaryKey",
+        "keyTitle": "Primary Key",
+        "name": "<i class='icon ion-key iconkey' style='padding-left: 5px;'><\/i>id",
+        "type": "serial",
+        "length": 10,
+        "nullable": "",
+        "autoUpdated": "√",
+        "defaultValue": "nextval('gobs.graph_node_id_seq'::regclass)",
+        "comments": "<p>ID<\/p>"
+    },
+    {
+        "tableName": "observation",
+        "tableType": "Table",
+        "keyClass": "",
+        "keyTitle": "",
+        "name": "created_at",
+        "type": "timestamp",
+        "length": 29,
+        "nullable": "",
+        "autoUpdated": "",
+        "defaultValue": "now()",
+        "comments": "<p>Creation timestamp<\/p>"
+    },
+    {
+        "tableName": "indicator",
+        "tableType": "Table",
+        "keyClass": "primaryKey",
+        "keyTitle": "Primary Key",
+        "name": "<i class='icon ion-key iconkey' style='padding-left: 5px;'><\/i>id",
+        "type": "serial",
+        "length": 10,
+        "nullable": "",
+        "autoUpdated": "√",
+        "defaultValue": "nextval('gobs.indicator_id_seq'::regclass)",
+        "comments": "<p>ID<\/p>"
+    },
+    {
+        "tableName": "observation",
+        "tableType": "Table",
+        "keyClass": "",
+        "keyTitle": "",
+        "name": "ob_end_timestamp",
+        "type": "timestamp",
+        "length": 29,
+        "nullable": "√",
+        "autoUpdated": "",
+        "defaultValue": "null",
+        "comments": "<p>End timestamp of the observation data (optional)<\/p>"
+    },
+    {
+        "tableName": "actor",
+        "tableType": "Table",
+        "keyClass": "foreignKey",
+        "keyTitle": "Foreign Key",
+        "name": "<i class='icon ion-key iconkey' style='padding-left: 5px;'><\/i>id_category",
+        "type": "int4",
+        "length": 10,
+        "nullable": "",
+        "autoUpdated": "",
+        "defaultValue": "null",
+        "comments": "<p>Category of actor<\/p>"
+    },
+    {
+        "tableName": "spatial_object",
+        "tableType": "Table",
+        "keyClass": "",
+        "keyTitle": "",
+        "name": "updated_at",
+        "type": "timestamp",
+        "length": 29,
+        "nullable": "",
+        "autoUpdated": "",
+        "defaultValue": "now()",
+        "comments": "<p>Last updated timestamp<\/p>"
+    },
+    {
+        "tableName": "observation",
+        "tableType": "Table",
+        "keyClass": "",
+        "keyTitle": "",
+        "name": "updated_at",
+        "type": "timestamp",
+        "length": 29,
+        "nullable": "",
+        "autoUpdated": "",
+        "defaultValue": "now()",
+        "comments": "<p>Last updated timestamp<\/p>"
+    },
+    {
+        "tableName": "r_indicator_node",
+        "tableType": "Table",
+        "keyClass": "primaryKey",
+        "keyTitle": "Primary Key",
+        "name": "<i class='icon ion-key iconkey' style='padding-left: 5px;'><\/i>fk_id_node",
+        "type": "int4",
+        "length": 10,
+        "nullable": "",
+        "autoUpdated": "",
+        "defaultValue": "null",
+        "comments": "<p>Parent node<\/p>"
+    },
+    {
+        "tableName": "protocol",
+        "tableType": "Table",
+        "keyClass": "",
+        "keyTitle": "",
+        "name": "pr_description",
+        "type": "text",
+        "length": 2147483647,
+        "nullable": "",
+        "autoUpdated": "",
+        "defaultValue": "null",
+        "comments": "<p>Description, including URLs to references and authors.<\/p>"
+    },
+    {
+        "tableName": "indicator",
+        "tableType": "Table",
+        "keyClass": "",
+        "keyTitle": "",
+        "name": "id_paths",
+        "type": "text",
+        "length": 2147483647,
+        "nullable": "√",
+        "autoUpdated": "",
+        "defaultValue": "null",
+        "comments": "<p>Paths given to help finding an indicator. They will be split up to fill the graph_node and r_indicator_node tables. If you need multiple paths, use | as a separator. Ex: Environment / Water resources | Measure / Physics / Water<\/p>"
+    },
+    {
+        "tableName": "document",
+        "tableType": "Table",
+        "keyClass": "primaryKey",
+        "keyTitle": "Primary Key",
+        "name": "<i class='icon ion-key iconkey' style='padding-left: 5px;'><\/i>id",
+        "type": "serial",
+        "length": 10,
+        "nullable": "",
+        "autoUpdated": "√",
+        "defaultValue": "nextval('gobs.document_id_seq'::regclass)",
+        "comments": "<p>ID<\/p>"
+    },
+    {
+        "tableName": "glossary",
+        "tableType": "Table",
+        "keyClass": "indexedColumn",
+        "keyTitle": "Indexed",
+        "name": "<i class='fa fa-sitemap fa-rotate-120' style='padding-right: 5px;'><\/i>gl_field",
+        "type": "text",
+        "length": 2147483647,
+        "nullable": "",
+        "autoUpdated": "",
+        "defaultValue": "null",
+        "comments": "<p>Target field for this glossary item<\/p>"
+    },
+    {
+        "tableName": "glossary",
+        "tableType": "Table",
+        "keyClass": "",
+        "keyTitle": "",
+        "name": "gl_code",
+        "type": "text",
+        "length": 2147483647,
+        "nullable": "",
+        "autoUpdated": "",
+        "defaultValue": "null",
+        "comments": "<p>Item code to store in tables<\/p>"
+    },
+    {
+        "tableName": "spatial_layer",
+        "tableType": "Table",
+        "keyClass": "",
+        "keyTitle": "",
+        "name": "sl_description",
+        "type": "text",
+        "length": 2147483647,
+        "nullable": "",
+        "autoUpdated": "",
+        "defaultValue": "null",
+        "comments": "<p>Description<\/p>"
+    },
+    {
+        "tableName": "spatial_layer",
+        "tableType": "Table",
+        "keyClass": "",
+        "keyTitle": "",
+        "name": "sl_geometry_type",
+        "type": "text",
+        "length": 2147483647,
+        "nullable": "",
+        "autoUpdated": "",
+        "defaultValue": "null",
+        "comments": "<p>Type of geometry (POINT, POLYGON, MULTIPOLYGON, etc.)<\/p>"
+    },
+    {
+        "tableName": "import",
+        "tableType": "Table",
+        "keyClass": "foreignKey",
+        "keyTitle": "Foreign Key",
+        "name": "<i class='icon ion-key iconkey' style='padding-left: 5px;'><\/i>fk_id_series",
+        "type": "int4",
+        "length": 10,
+        "nullable": "",
+        "autoUpdated": "",
+        "defaultValue": "null",
+        "comments": "<p>Series ID<\/p>"
+    },
+    {
+        "tableName": "document",
+        "tableType": "Table",
+        "keyClass": "",
+        "keyTitle": "",
+        "name": "do_description",
+        "type": "text",
+        "length": 2147483647,
+        "nullable": "√",
+        "autoUpdated": "",
+        "defaultValue": "null",
+        "comments": "<p>Description of the document<\/p>"
+    },
+    {
+        "tableName": "actor_category",
+        "tableType": "Table",
+        "keyClass": "indexedColumn",
+        "keyTitle": "Indexed",
+        "name": "<i class='fa fa-sitemap fa-rotate-120' style='padding-right: 5px;'><\/i>ac_label",
+        "type": "text",
+        "length": 2147483647,
+        "nullable": "",
+        "autoUpdated": "",
+        "defaultValue": "null",
+        "comments": "<p>Name of the actor category<\/p>"
+    },
+    {
+        "tableName": "import",
+        "tableType": "Table",
+        "keyClass": "",
+        "keyTitle": "",
+        "name": "im_status",
+        "type": "text",
+        "length": 2147483647,
+        "nullable": "√",
+        "autoUpdated": "",
+        "defaultValue": "'p'::text",
+        "comments": "<p>Status of import : pending, validated<\/p>"
+    },
+    {
+        "tableName": "actor",
+        "tableType": "Table",
+        "keyClass": "",
+        "keyTitle": "",
+        "name": "a_description",
+        "type": "text",
+        "length": 2147483647,
+        "nullable": "",
+        "autoUpdated": "",
+        "defaultValue": "null",
+        "comments": "<p>Description of the actor<\/p>"
+    },
+    {
+        "tableName": "actor",
+        "tableType": "Table",
+        "keyClass": "",
+        "keyTitle": "",
+        "name": "a_email",
+        "type": "text",
+        "length": 2147483647,
+        "nullable": "",
+        "autoUpdated": "",
+        "defaultValue": "null",
+        "comments": "<p>Email of the actor<\/p>"
+    },
+    {
+        "tableName": "r_graph_edge",
+        "tableType": "Table",
+        "keyClass": "primaryKey",
+        "keyTitle": "Primary Key",
+        "name": "<i class='icon ion-key iconkey' style='padding-left: 5px;'><\/i>ge_parent_node",
+        "type": "int4",
+        "length": 10,
+        "nullable": "",
+        "autoUpdated": "",
+        "defaultValue": "null",
+        "comments": "<p>Parent node<\/p>"
+    },
+    {
+        "tableName": "indicator",
+        "tableType": "Table",
+        "keyClass": "",
+        "keyTitle": "",
+        "name": "id_value_code",
+        "type": "_text",
+        "length": 2147483647,
+        "nullable": "",
+        "autoUpdated": "",
+        "defaultValue": "null",
+        "comments": "<p>List of the codes of the vector dimensions. Ex : <a href=\"./null\">\u2018pop_h\u2019, \u2018pop_f\u2019<\/a><\/p>"
+    },
+    {
+        "tableName": "spatial_object",
+        "tableType": "Table",
+        "keyClass": "foreignKey",
+        "keyTitle": "Foreign Key",
+        "name": "<i class='icon ion-key iconkey' style='padding-left: 5px;'><\/i>fk_id_spatial_layer",
+        "type": "int4",
+        "length": 10,
+        "nullable": "",
+        "autoUpdated": "",
+        "defaultValue": "null",
+        "comments": "<p>Spatial layer<\/p>"
+    },
+    {
+        "tableName": "glossary",
+        "tableType": "Table",
+        "keyClass": "primaryKey",
+        "keyTitle": "Primary Key",
+        "name": "<i class='icon ion-key iconkey' style='padding-left: 5px;'><\/i>id",
+        "type": "serial",
+        "length": 10,
+        "nullable": "",
+        "autoUpdated": "√",
+        "defaultValue": "nextval('gobs.glossary_id_seq'::regclass)",
+        "comments": "<p>ID<\/p>"
+    },
+    {
+        "tableName": "spatial_object",
+        "tableType": "Table",
+        "keyClass": "",
+        "keyTitle": "",
+        "name": "so_uid",
+        "type": "uuid",
+        "length": 2147483647,
+        "nullable": "",
+        "autoUpdated": "",
+        "defaultValue": "uuid_generate_v4()",
+        "comments": "<p>Spatial object uid: autogenerated unique identifier<\/p>"
+    },
+    {
+        "tableName": "indicator",
+        "tableType": "Table",
+        "keyClass": "",
+        "keyTitle": "",
+        "name": "created_at",
+        "type": "timestamp",
+        "length": 29,
+        "nullable": "",
+        "autoUpdated": "",
+        "defaultValue": "now()",
+        "comments": "<p>Creation timestamp<\/p>"
+    },
+    {
+        "tableName": "deleted_data_log",
+        "tableType": "Table",
+        "keyClass": "primaryKey",
+        "keyTitle": "Primary Key",
+        "name": "<i class='icon ion-key iconkey' style='padding-left: 5px;'><\/i>de_uid",
+        "type": "uuid",
+        "length": 2147483647,
+        "nullable": "",
+        "autoUpdated": "",
+        "defaultValue": "null",
+        "comments": "<p>Unique text identifier of the object. Observation: ob_uid<\/p>"
+    },
+    {
+        "tableName": "actor",
+        "tableType": "Table",
+        "keyClass": "indexedColumn",
+        "keyTitle": "Indexed",
+        "name": "<i class='fa fa-sitemap fa-rotate-120' style='padding-right: 5px;'><\/i>a_label",
+        "type": "text",
+        "length": 2147483647,
+        "nullable": "",
+        "autoUpdated": "",
+        "defaultValue": "null",
+        "comments": "<p>Name of the actor (can be a person or an entity)<\/p>"
+    },
+    {
+        "tableName": "glossary",
+        "tableType": "Table",
+        "keyClass": "",
+        "keyTitle": "",
+        "name": "gl_order",
+        "type": "int2",
+        "length": 5,
+        "nullable": "√",
+        "autoUpdated": "",
+        "defaultValue": "null",
+        "comments": "<p>Display order among the field items<\/p>"
+    },
+    {
+        "tableName": "metadata",
+        "tableType": "Table",
+        "keyClass": "",
+        "keyTitle": "",
+        "name": "me_version_date",
+        "type": "date",
+        "length": 13,
+        "nullable": "",
+        "autoUpdated": "",
+        "defaultValue": "null",
+        "comments": "<p>Date of the version. Ex: 2019-06-01<\/p>"
+    },
+    {
+        "tableName": "observation",
+        "tableType": "Table",
+        "keyClass": "foreignKey",
+        "keyTitle": "Foreign Key",
+        "name": "<i class='icon ion-key iconkey' style='padding-left: 5px;'><\/i>fk_id_series",
+        "type": "int4",
+        "length": 10,
+        "nullable": "",
+        "autoUpdated": "",
+        "defaultValue": "null",
+        "comments": "<p>Series ID<\/p>"
+    },
+    {
+        "tableName": "indicator",
+        "tableType": "Table",
+        "keyClass": "",
+        "keyTitle": "",
+        "name": "id_category",
+        "type": "text",
+        "length": 2147483647,
+        "nullable": "√",
+        "autoUpdated": "",
+        "defaultValue": "null",
+        "comments": "<p>Category of the indicator. Used to group several indicators by themes.<\/p>"
+    },
+    {
+        "tableName": "protocol",
+        "tableType": "Table",
+        "keyClass": "primaryKey",
+        "keyTitle": "Primary Key",
+        "name": "<i class='icon ion-key iconkey' style='padding-left: 5px;'><\/i>id",
+        "type": "serial",
+        "length": 10,
+        "nullable": "",
+        "autoUpdated": "√",
+        "defaultValue": "nextval('gobs.protocol_id_seq'::regclass)",
+        "comments": "<p>ID<\/p>"
+    },
+    {
+        "tableName": "protocol",
+        "tableType": "Table",
+        "keyClass": "indexedColumn",
+        "keyTitle": "Indexed",
+        "name": "<i class='fa fa-sitemap fa-rotate-120' style='padding-right: 5px;'><\/i>pr_code",
+        "type": "text",
+        "length": 2147483647,
+        "nullable": "",
+        "autoUpdated": "",
+        "defaultValue": "null",
+        "comments": "<p>Code<\/p>"
+    },
+    {
+        "tableName": "deleted_data_log",
+        "tableType": "Table",
+        "keyClass": "primaryKey",
+        "keyTitle": "Primary Key",
+        "name": "<i class='icon ion-key iconkey' style='padding-left: 5px;'><\/i>de_table",
+        "type": "text",
+        "length": 2147483647,
+        "nullable": "",
+        "autoUpdated": "",
+        "defaultValue": "null",
+        "comments": "<p>Source table of the deleted object: observation<\/p>"
+    },
+    {
+        "tableName": "series",
+        "tableType": "Table",
+        "keyClass": "primaryKey",
+        "keyTitle": "Primary Key",
+        "name": "<i class='icon ion-key iconkey' style='padding-left: 5px;'><\/i>id",
+        "type": "serial",
+        "length": 10,
+        "nullable": "",
+        "autoUpdated": "√",
+        "defaultValue": "nextval('gobs.series_id_seq'::regclass)",
+        "comments": "<p>Id<\/p>"
+    },
+    {
+        "tableName": "indicator",
+        "tableType": "Table",
+        "keyClass": "",
+        "keyTitle": "",
+        "name": "id_value_unit",
+        "type": "_text",
+        "length": 2147483647,
+        "nullable": "",
+        "autoUpdated": "",
+        "defaultValue": "null",
+        "comments": "<p>Unit ot the store values. Ex : \u2018inhabitants\u2019 or \u2018°C\u2019<\/p>"
+    },
+    {
+        "tableName": "observation",
+        "tableType": "Table",
+        "keyClass": "primaryKey",
+        "keyTitle": "Primary Key",
+        "name": "<i class='icon ion-key iconkey' style='padding-left: 5px;'><\/i>id",
+        "type": "bigserial",
+        "length": 19,
+        "nullable": "",
+        "autoUpdated": "√",
+        "defaultValue": "nextval('gobs.observation_id_seq'::regclass)",
+        "comments": "<p>ID<\/p>"
+    },
+    {
+        "tableName": "actor_category",
+        "tableType": "Table",
+        "keyClass": "",
+        "keyTitle": "",
+        "name": "ac_description",
+        "type": "text",
+        "length": 2147483647,
+        "nullable": "",
+        "autoUpdated": "",
+        "defaultValue": "null",
+        "comments": "<p>Description of the actor category<\/p>"
+    },
+    {
+        "tableName": "protocol",
+        "tableType": "Table",
+        "keyClass": "",
+        "keyTitle": "",
+        "name": "pr_label",
+        "type": "text",
+        "length": 2147483647,
+        "nullable": "",
+        "autoUpdated": "",
+        "defaultValue": "null",
+        "comments": "<p>Name of the indicator<\/p>"
+    },
+    {
+        "tableName": "indicator",
+        "tableType": "Table",
+        "keyClass": "",
+        "keyTitle": "",
+        "name": "id_value_type",
+        "type": "_text",
+        "length": 2147483647,
+        "nullable": "",
+        "autoUpdated": "",
+        "defaultValue": "null",
+        "comments": "<p>Type of the stored values. Ex : \u2018integer\u2019 or \u2018real\u2019<\/p>"
+    },
+    {
+        "tableName": "observation",
+        "tableType": "Table",
+        "keyClass": "foreignKey",
+        "keyTitle": "Foreign Key",
+        "name": "<i class='icon ion-key iconkey' style='padding-left: 5px;'><\/i>fk_id_spatial_object",
+        "type": "int8",
+        "length": 19,
+        "nullable": "",
+        "autoUpdated": "",
+        "defaultValue": "null",
+        "comments": "<p>ID of the object in the spatial object table<\/p>"
+    },
+    {
+        "tableName": "indicator",
+        "tableType": "Table",
+        "keyClass": "indexedColumn",
+        "keyTitle": "Indexed",
+        "name": "<i class='fa fa-sitemap fa-rotate-120' style='padding-right: 5px;'><\/i>id_code",
+        "type": "text",
+        "length": 2147483647,
+        "nullable": "",
+        "autoUpdated": "",
+        "defaultValue": "null",
+        "comments": "<p>Short name<\/p>"
+    },
+    {
+        "tableName": "indicator",
+        "tableType": "Table",
+        "keyClass": "",
+        "keyTitle": "",
+        "name": "id_date_format",
+        "type": "text",
+        "length": 2147483647,
+        "nullable": "",
+        "autoUpdated": "",
+        "defaultValue": "'day'::text",
+        "comments": "<p>Help to know what is the format for the date. Example : \u2018year\u2019<\/p>"
+    },
+    {
+        "tableName": "series",
+        "tableType": "Table",
+        "keyClass": "foreignKey",
+        "keyTitle": "Foreign Key",
+        "name": "<i class='icon ion-key iconkey' style='padding-left: 5px;'><\/i>fk_id_spatial_layer",
+        "type": "int4",
+        "length": 10,
+        "nullable": "",
+        "autoUpdated": "",
+        "defaultValue": "null",
+        "comments": "<p>Spatial layer, mandatory. If needed, use a global spatial layer with only 1 object representing the global area.<\/p>"
+    },
+    {
+        "tableName": "deleted_data_log",
+        "tableType": "Table",
+        "keyClass": "",
+        "keyTitle": "",
+        "name": "de_timestamp",
+        "type": "timestamp",
+        "length": 29,
+        "nullable": "",
+        "autoUpdated": "",
+        "defaultValue": "now()",
+        "comments": "<p>Timestamp of the deletion<\/p>"
+    },
+    {
+        "tableName": "observation",
+        "tableType": "Table",
+        "keyClass": "",
+        "keyTitle": "",
+        "name": "ob_uid",
+        "type": "uuid",
+        "length": 2147483647,
+        "nullable": "",
+        "autoUpdated": "",
+        "defaultValue": "uuid_generate_v4()",
+        "comments": "<p>Observation uid: autogenerated unique identifier<\/p>"
+    },
+    {
+        "tableName": "document",
+        "tableType": "Table",
+        "keyClass": "",
+        "keyTitle": "",
+        "name": "do_path",
+        "type": "text",
+        "length": 2147483647,
+        "nullable": "",
+        "autoUpdated": "",
+        "defaultValue": "null",
+        "comments": "<p>Relative path of the document to the project storage. Ex: media/indicator/documents/indicator_weather_status_description.pdf<\/p>"
+    },
+    {
+        "tableName": "r_graph_edge",
+        "tableType": "Table",
+        "keyClass": "primaryKey",
+        "keyTitle": "Primary Key",
+        "name": "<i class='icon ion-key iconkey' style='padding-left: 5px;'><\/i>ge_child_node",
+        "type": "int4",
+        "length": 10,
+        "nullable": "",
+        "autoUpdated": "",
+        "defaultValue": "null",
+        "comments": "<p>Child node<\/p>"
+    },
+    {
+        "tableName": "document",
+        "tableType": "Table",
+        "keyClass": "",
+        "keyTitle": "",
+        "name": "do_type",
+        "type": "text",
+        "length": 2147483647,
+        "nullable": "",
+        "autoUpdated": "",
+        "defaultValue": "null",
+        "comments": "<p>Type of the document<\/p>"
+    },
+    {
+        "tableName": "observation",
+        "tableType": "Table",
+        "keyClass": "",
+        "keyTitle": "",
+        "name": "ob_value",
+        "type": "jsonb",
+        "length": 2147483647,
+        "nullable": "",
+        "autoUpdated": "",
+        "defaultValue": "null",
+        "comments": "<p>Vector containing the measured or computed data values. Ex : <a href=\"./null\">1543, 1637<\/a><\/p>"
+    },
+    {
+        "tableName": "indicator",
+        "tableType": "Table",
+        "keyClass": "",
+        "keyTitle": "",
+        "name": "id_value_name",
+        "type": "_text",
+        "length": 2147483647,
+        "nullable": "",
+        "autoUpdated": "",
+        "defaultValue": "null",
+        "comments": "<p>List of the names of the vector dimensions. Ex : <a href=\"./null\">\u2018population homme\u2019, \u2018population femme\u2019<\/a><\/p>"
+    },
+    {
+        "tableName": "metadata",
+        "tableType": "Table",
+        "keyClass": "indexedColumn",
+        "keyTitle": "Indexed",
+        "name": "<i class='fa fa-sitemap fa-rotate-120' style='padding-right: 5px;'><\/i>me_version",
+        "type": "text",
+        "length": 2147483647,
+        "nullable": "",
+        "autoUpdated": "",
+        "defaultValue": "null",
+        "comments": "<p>Version. Ex: 1.0.2<\/p>"
+    },
+    {
+        "tableName": "spatial_layer",
+        "tableType": "Table",
+        "keyClass": "",
+        "keyTitle": "",
+        "name": "sl_label",
+        "type": "text",
+        "length": 2147483647,
+        "nullable": "",
+        "autoUpdated": "",
+        "defaultValue": "null",
+        "comments": "<p>Label of the spatial layer<\/p>"
+    },
+    {
+        "tableName": "import",
+        "tableType": "Table",
+        "keyClass": "",
+        "keyTitle": "",
+        "name": "im_timestamp",
+        "type": "timestamp",
+        "length": 29,
+        "nullable": "",
+        "autoUpdated": "",
+        "defaultValue": "now()",
+        "comments": "<p>Import date<\/p>"
+    },
+    {
+        "tableName": "observation",
+        "tableType": "Table",
+        "keyClass": "indexedColumn",
+        "keyTitle": "Indexed",
+        "name": "<i class='fa fa-sitemap fa-rotate-120' style='padding-right: 5px;'><\/i>ob_start_timestamp",
+        "type": "timestamp",
+        "length": 29,
+        "nullable": "",
+        "autoUpdated": "",
+        "defaultValue": "null",
+        "comments": "<p>Start timestamp of the observation data<\/p>"
+    },
+    {
+        "tableName": "indicator",
+        "tableType": "Table",
+        "keyClass": "",
+        "keyTitle": "",
+        "name": "id_label",
+        "type": "text",
+        "length": 2147483647,
+        "nullable": "",
+        "autoUpdated": "",
+        "defaultValue": "null",
+        "comments": "<p>Title<\/p>"
+    },
+    {
+        "tableName": "document",
+        "tableType": "Table",
+        "keyClass": "",
+        "keyTitle": "",
+        "name": "updated_at",
+        "type": "timestamp",
+        "length": 29,
+        "nullable": "",
+        "autoUpdated": "",
+        "defaultValue": "now()",
+        "comments": "<p>Last updated timestamp<\/p>"
+    },
+    {
+        "tableName": "document",
+        "tableType": "Table",
+        "keyClass": "",
+        "keyTitle": "",
+        "name": "do_uid",
+        "type": "uuid",
+        "length": 2147483647,
+        "nullable": "",
+        "autoUpdated": "",
+        "defaultValue": "uuid_generate_v4()",
+        "comments": "<p>Document uid: autogenerated unique identifier<\/p>"
+    },
+    {
+        "tableName": "indicator",
+        "tableType": "Table",
+        "keyClass": "",
+        "keyTitle": "",
+        "name": "id_description",
+        "type": "text",
+        "length": 2147483647,
+        "nullable": "",
+        "autoUpdated": "",
+        "defaultValue": "null",
+        "comments": "<p>Describes the indicator regarding its rôle inside the project.<\/p>"
+    },
+    {
+        "tableName": "spatial_layer",
+        "tableType": "Table",
+        "keyClass": "indexedColumn",
+        "keyTitle": "Indexed",
+        "name": "<i class='fa fa-sitemap fa-rotate-120' style='padding-right: 5px;'><\/i>sl_code",
+        "type": "text",
+        "length": 2147483647,
+        "nullable": "",
+        "autoUpdated": "",
+        "defaultValue": "null",
+        "comments": "<p>Unique short code for the spatial layer<\/p>"
+    },
+    {
+        "tableName": "document",
+        "tableType": "Table",
+        "keyClass": "",
+        "keyTitle": "",
+        "name": "created_at",
+        "type": "timestamp",
+        "length": 29,
+        "nullable": "",
+        "autoUpdated": "",
+        "defaultValue": "now()",
+        "comments": "<p>Creation timestamp<\/p>"
+    },
+    {
+        "tableName": "spatial_layer",
+        "tableType": "Table",
+        "keyClass": "",
+        "keyTitle": "",
+        "name": "sl_creation_date",
+        "type": "date",
+        "length": 13,
+        "nullable": "",
+        "autoUpdated": "",
+        "defaultValue": "'2018-06-28'::date",
+        "comments": "<p>Creation date<\/p>"
+    },
+    {
+        "tableName": "indicator",
+        "tableType": "Table",
+        "keyClass": "",
+        "keyTitle": "",
+        "name": "updated_at",
+        "type": "timestamp",
+        "length": 29,
+        "nullable": "",
+        "autoUpdated": "",
+        "defaultValue": "now()",
+        "comments": "<p>Last updated timestamp<\/p>"
+    },
+    {
+        "tableName": "spatial_object",
+        "tableType": "Table",
+        "keyClass": "indexedColumn",
+        "keyTitle": "Indexed",
+        "name": "<i class='fa fa-sitemap fa-rotate-120' style='padding-right: 5px;'><\/i>so_valid_from",
+        "type": "date",
+        "length": 13,
+        "nullable": "",
+        "autoUpdated": "",
+        "defaultValue": "(now())::date",
+        "comments": "<p>Date from which the spatial object is valid.<\/p>"
+    },
+    {
+        "tableName": "spatial_object",
+        "tableType": "Table",
+        "keyClass": "",
+        "keyTitle": "",
+        "name": "created_at",
+        "type": "timestamp",
+        "length": 29,
+        "nullable": "",
+        "autoUpdated": "",
+        "defaultValue": "now()",
+        "comments": "<p>Creation timestamp<\/p>"
+    },
+    {
+        "tableName": "document",
+        "tableType": "Table",
+        "keyClass": "indexedColumn",
+        "keyTitle": "Indexed",
+        "name": "<i class='fa fa-sitemap fa-rotate-120' style='padding-right: 5px;'><\/i>do_label",
+        "type": "text",
+        "length": 2147483647,
+        "nullable": "",
+        "autoUpdated": "",
+        "defaultValue": "null",
+        "comments": "<p>Label of the document, used for display. Must be unique<\/p>"
+    },
+    {
+        "tableName": "glossary",
+        "tableType": "Table",
+        "keyClass": "",
+        "keyTitle": "",
+        "name": "gl_description",
+        "type": "text",
+        "length": 2147483647,
+        "nullable": "",
+        "autoUpdated": "",
+        "defaultValue": "null",
+        "comments": "<p>Description of the item<\/p>"
+    },
+    {
+        "tableName": "spatial_object",
+        "tableType": "Table",
+        "keyClass": "",
+        "keyTitle": "",
+        "name": "so_valid_to",
+        "type": "date",
+        "length": 13,
+        "nullable": "√",
+        "autoUpdated": "",
+        "defaultValue": "null",
+        "comments": "<p>Date from which the spatial object is not valid. Optional: if not given, the spatial object is always valid<\/p>"
+    },
+    {
+        "tableName": "actor_category",
+        "tableType": "Table",
+        "keyClass": "primaryKey",
+        "keyTitle": "Primary Key",
+        "name": "<i class='icon ion-key iconkey' style='padding-left: 5px;'><\/i>id",
+        "type": "serial",
+        "length": 10,
+        "nullable": "",
+        "autoUpdated": "√",
+        "defaultValue": "nextval('gobs.actor_category_id_seq'::regclass)",
+        "comments": "<p>ID<\/p>"
+    },
+    {
+        "tableName": "spatial_layer",
+        "tableType": "Table",
+        "keyClass": "primaryKey",
+        "keyTitle": "Primary Key",
+        "name": "<i class='icon ion-key iconkey' style='padding-left: 5px;'><\/i>id",
+        "type": "serial",
+        "length": 10,
+        "nullable": "",
+        "autoUpdated": "√",
+        "defaultValue": "nextval('gobs.spatial_layer_id_seq'::regclass)",
+        "comments": ""
+    },
+    {
+        "tableName": "observation",
+        "tableType": "Table",
+        "keyClass": "foreignKey",
+        "keyTitle": "Foreign Key",
+        "name": "<i class='icon ion-key iconkey' style='padding-left: 5px;'><\/i>fk_id_import",
+        "type": "int4",
+        "length": 10,
+        "nullable": "",
+        "autoUpdated": "",
+        "defaultValue": "null",
+        "comments": "<p>Import id<\/p>"
+    },
+    {
+        "tableName": "spatial_object",
+        "tableType": "Table",
+        "keyClass": "indexedColumn",
+        "keyTitle": "Indexed",
+        "name": "<i class='fa fa-sitemap fa-rotate-120' style='padding-right: 5px;'><\/i>so_unique_id",
+        "type": "text",
+        "length": 2147483647,
+        "nullable": "",
+        "autoUpdated": "",
+        "defaultValue": "null",
+        "comments": "<p>Unique code of each object in the spatial layer ( INSEE, tag, etc.)<\/p>"
+    }
+];
+                    var config = {
+                        pagination: true
+                    };
+                </script>
+            </div>
+            <!-- /.content-wrapper -->
+            <footer class="main-footer">
+                <div>
+                    <div class="pull-right hidden-xs">
+                        <a href="https://github.com/schemaspy/schemaspy" title="GitHub for SchemaSpy"><i class="fa fa-github-square fa-2x"></i></a>
+                        <a href="http://stackoverflow.com/questions/tagged/schemaspy" title="StackOverflow for SchemaSpy"><i class="fa fa-stack-overflow fa-2x"></i></a>
+                    </div>
+                    <strong>Generated by <a href="http://schemaspy.org/" class="logo-text"><i class="fa fa-database"></i> SchemaSpy 6.1.0</a></strong>
+                </div>
+                <!-- /.container -->
+            </footer>
+        </div>
+        <!-- ./wrapper -->
+
+        <!-- jQuery 2.2.3 -->
+        <script src="bower/admin-lte/plugins/jQuery/jquery-2.2.3.min.js"></script>
+        <script src="bower/admin-lte/plugins/jQueryUI/jquery-ui.min.js"></script>
+        <!-- Bootstrap 3.3.5 -->
+        <script src="bower/admin-lte/bootstrap/js/bootstrap.min.js"></script>
+        <!-- DataTables -->
+        <script src="bower/datatables.net/jquery.dataTables.min.js"></script>
+        <script src="bower/datatables.net-bs/js/dataTables.bootstrap.min.js"></script>
+        <script src="bower/datatables.net-buttons/dataTables.buttons.min.js"></script>
+        <script src="bower/datatables.net-buttons-bs/js/buttons.bootstrap.min.js"></script>
+        <script src="bower/datatables.net-buttons/buttons.html5.min.js"></script>
+        <script src="bower/datatables.net-buttons/buttons.print.min.js"></script>
+        <script src="bower/datatables.net-buttons/buttons.colVis.min.js"></script>
+        <!-- SheetJS -->
+        <script src="bower/js-xlsx/xlsx.full.min.js"></script>
+        <!-- pdfmake -->
+        <script src="bower/pdfmake/pdfmake.min.js"></script>
+        <script src="bower/pdfmake/vfs_fonts.js"></script>
+        <!-- SlimScroll -->
+        <script src="bower/admin-lte/plugins/slimScroll/jquery.slimscroll.min.js"></script>
+        <!-- FastClick -->
+        <script src="bower/admin-lte/plugins/fastclick/fastclick.js"></script>
+        <!-- Salvattore -->
+        <script src="bower/salvattore/salvattore.min.js"></script>
+        <!-- AnchorJS -->
+        <script src="bower/anchor-js/anchor.min.js"></script>
+        <!-- CodeMirror -->
+        <script src="bower/codemirror/codemirror.js"></script>
+        <script src="bower/codemirror/sql.js"></script>
+        <!-- AdminLTE App -->
+        <script src="bower/admin-lte/dist/js/app.min.js"></script>
+        <script src="column.js"></script>
+        <script src="schemaSpy.js"></script>
+    </body>
+</html>
