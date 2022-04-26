@@ -7,7 +7,7 @@
 
 ![G-Obs](gobs/resources/icons/icon.png)
 
-![Preview](demo.png)
+![Preview](docs/media/gobs_dock.jpg)
 
 ## Contributors
 

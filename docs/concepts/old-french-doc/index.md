@@ -1,11 +1,3 @@
----
-Title: G-Obs plugin - Main concepts
-Favicon: ../icon.png
-Index: yes
-...
-
-[TOC]
-
 # Documentation
 
 ## Introduction

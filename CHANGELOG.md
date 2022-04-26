@@ -4,6 +4,7 @@
 
 * Add button in the help menu to open the online webpage
 * Raise the QGIS minimum version to 3.16
+* Update the website using MkDocs
 
 ## 0.4.3 - 2021-04-07
 

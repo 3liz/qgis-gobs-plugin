@@ -1,13 +1,4 @@
----
-Title: G-Obs plugin - Admin guide
-Favicon: ../icon.png
-Index: yes
-...
-
-[TOC]
-
-
-## Introduction
+# Introduction
 
 The **administrator** is in charge of describing the different data stored in the G-Obs database:
 

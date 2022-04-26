@@ -1,12 +1,4 @@
----
-Title: G-Obs plugin - Installation and configuration
-Favicon: ../icon.png
-Index: yes
-...
-
-[TOC]
-
-## Introduction
+# Introduction
 
 **G-Obs** is a set of tools to store and manage spatial and time data in a standardized way.
 

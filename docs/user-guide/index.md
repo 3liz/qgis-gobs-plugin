@@ -1,14 +1,4 @@
----
-Title: G-Obs plugin - User guide
-Favicon: ../icon.png
-Index: yes
-...
-
-[TOC]
-
-## Introduction
-
-
+# Introduction
 
 ## G-Obs interface
 

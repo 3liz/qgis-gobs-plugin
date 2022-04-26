@@ -1,14 +1,6 @@
----
-Title: G-Obs plugin - Main concepts
-Favicon: ../icon.png
-Index: yes
-...
+# G-Obs presentation
 
-[TOC]
-
-## G-Obs presentation
-
-todo
+[Old concept in French](./old_french_doc)
 
 ## Glossary
 
