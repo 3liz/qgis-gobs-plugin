@@ -9,6 +9,7 @@ changelog=
 commitNumber=
 commitSha1=
 dateTime=
+# End of qgis-plugin-ci
 
 author=3Liz
 email=info@3liz.com
