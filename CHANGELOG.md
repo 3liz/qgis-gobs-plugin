@@ -4,9 +4,9 @@
 
 ## 5.0.0 - 2021-04-07
 
-* Add button in the help menu to open the online webpage
+* Add button in the help menu to open the online webpage https://docs.3liz.org/qgis-gobs-plugin
 * Raise the QGIS minimum version to 3.16
-* Update the website using MkDocs
+* Update the documentation website with MkDocs 
 
 ## 0.4.3 - 2021-04-07
 
