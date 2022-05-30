@@ -5,6 +5,7 @@ __revision__ = "$Format:%H$"
 
 from qgis.core import (
     QgsExpressionContextUtils,
+    QgsProcessingException,
     QgsProcessingOutputNumber,
     QgsProcessingOutputString,
     QgsProcessingParameterFileDestination,
@@ -133,10 +134,11 @@ class CreateDatabaseLocalInterface(BaseProcessingAlgorithm):
 
         # Write the file out again
         project_file = self.parameterAsString(parameters, self.PROJECT_FILE, context)
-        createAdministrationProjectFromTemplate(
+        if not createAdministrationProjectFromTemplate(
             connection_name,
             project_file
-        )
+        ):
+            raise QgsProcessingException(f"Connection {connection_name} not found")
 
         msg = tr('QGIS Administration project has been successfully created from database connection')
         msg+= ': {}'.format(connection_name)
