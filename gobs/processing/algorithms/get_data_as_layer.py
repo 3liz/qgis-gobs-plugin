@@ -131,9 +131,12 @@ class GetDataAsLayer(BaseProcessingAlgorithm):
         # Set output layer name
         self.setLayerName(parameters, context, feedback)
 
-        # Buid QGIS uri to load layer
+        # Build QGIS uri to load layer
         id_field = 'id'
         uri = get_postgis_connection_uri_from_name(connection_name)
+        if not uri:
+            raise QgsProcessingException(f"Connection {connection_name} not found")
+
         uri.setDataSource("", "(" + self.SQL + ")", self.GEOM_FIELD, "", id_field)
         vlayer = QgsVectorLayer(uri.uri(), "layername", "postgres")
         if not vlayer.isValid():

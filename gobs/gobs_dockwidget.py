@@ -185,7 +185,7 @@ class GobsDockWidget(QtWidgets.QDockWidget, FORM_CLASS):
         if not series:
             return
 
-        # Create dialog to let the user choose the serie
+        # Create dialog to let the user choose the series
         dialog = QDialog()
         dialog.setWindowTitle(tr('Import observation data'))
         layout = QVBoxLayout()

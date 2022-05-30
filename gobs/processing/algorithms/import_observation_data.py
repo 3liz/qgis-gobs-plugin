@@ -4,6 +4,7 @@ __email__ = "info@3liz.org"
 __revision__ = "$Format:%H$"
 
 import time
+from typing import Optional, Tuple
 
 import processing
 
@@ -138,7 +139,7 @@ class ImportObservationData(BaseProcessingAlgorithm):
 
         # Parse new parameters
         project = QgsProject.instance()
-        new_params = self.getAdditionnalParameters(project)
+        new_params = self.get_additional_parameters(project)
         if new_params:
             for param in new_params:
                 self.addParameter(
@@ -191,66 +192,72 @@ class ImportObservationData(BaseProcessingAlgorithm):
                 return False, msg
         return super(ImportObservationData, self).checkParameterValues(parameters, context)
 
-    def getAdditionnalParameters(self, project):
+    def get_additional_parameters(self, project):
         """
         Returns a dictionary of parameters to add dynamically
         Source is the dimensions of the indicator vector field.
         """
-        new_params = []
 
-        # Get serie id
-        passed_serie = self.getSerieId()
-        if not passed_serie or passed_serie <= 0:
-            return new_params
+        # Get series id
+        passed_series = self.getSerieId()
+        if not passed_series or passed_series <= 0:
+            return []
 
         # Get indicator fields data
         connection_name = QgsExpressionContextUtils.projectScope(project).variable('gobs_connection_name')
-        id_value_code, id_value_name, id_value_type, id_value_unit = self.getIndicatorFields(connection_name, passed_serie)
+        id_value_code, id_value_name, id_value_type, id_value_unit = self.get_indicator_fields(
+            connection_name, passed_series)
 
+        if not id_value_code:
+            return []
+
+        new_params = []
         # Create dynamic parameters
         for i, code in enumerate(id_value_code):
-            ptype = QgsProcessingParameterField.Any
             new_params.append(
                 {
                     'widget': QgsProcessingParameterField,
                     'name': code,
                     'label': id_value_name[i],
                     'optional': False,
-                    'type': ptype,
+                    'type': QgsProcessingParameterField.Any,
                     'parentLayerParameterName': self.SOURCELAYER
                 }
             )
         return new_params
 
     @staticmethod
-    def getIndicatorFields(connection_name, given_serie):
+    def get_indicator_fields(connection_name, given_series) -> Optional[Tuple[str, str, str, str]]:
         """
-        Get indicator data for the given serie id
+        Get indicator data for the given series id
         """
         # GET INFORMATION of indicator
-        sql = '''
-            SELECT id_value_code, id_value_name, id_value_type, id_value_unit
+        separator = '#!#'
+        sql = f'''
+            SELECT
+                ARRAY_TO_STRING(id_value_code, '{separator}'),
+                ARRAY_TO_STRING(id_value_name, '{separator}'),
+                ARRAY_TO_STRING(id_value_type, '{separator}'),
+                ARRAY_TO_STRING(id_value_unit, '{separator}')
             FROM gobs.indicator AS i
             WHERE id = (
                 SELECT s.fk_id_indicator
                 FROM gobs.series AS s
-                WHERE s.id = {0}
+                WHERE s.id = {given_series}
                 LIMIT 1
             )
             ;
-        '''.format(
-            given_serie
-        )
+        '''
 
+        # noinspection PyBroadException
         try:
             data, error = fetch_data_from_sql_query(connection_name, sql)
             if error:
                 return None
-            else:
-                id_value_code = data[0][0]
-                id_value_name = data[0][1]
-                id_value_type = data[0][2]
-                id_value_unit = data[0][3]
+            id_value_code = data[0][0].split(separator)
+            id_value_name = data[0][1].split(separator)
+            id_value_type = data[0][2].split(separator)
+            id_value_unit = data[0][3].split(separator)
         except Exception:
             return None
 
@@ -265,8 +272,8 @@ class ImportObservationData(BaseProcessingAlgorithm):
         new_params_values = []
 
         # Parse new parameters
-        # Add add values in the correct order
-        new_params = self.getAdditionnalParameters(context.project())
+        # Add values in the correct order
+        new_params = self.get_additional_parameters(context.project())
         if new_params:
             for param in new_params:
                 new_params_values.append(self.parameterAsString(parameters, param['name'], context))

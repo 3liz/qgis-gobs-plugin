@@ -3,7 +3,7 @@ __license__ = "GPL version 3"
 __email__ = "info@3liz.org"
 __revision__ = "$Format:%H$"
 
-from typing import Any, List, Tuple, Union
+from typing import Any, List, Tuple, Union, Optional
 
 from qgis.core import (
     QgsDataSourceUri,
@@ -22,12 +22,15 @@ def get_postgis_connection_list():
     return connections
 
 
-def get_postgis_connection_uri_from_name(connection_name: str) -> QgsDataSourceUri:
+def get_postgis_connection_uri_from_name(connection_name: str) -> Optional[QgsDataSourceUri]:
     """
     Return a QgsDatasourceUri from a PostgreSQL connection name
     """
     metadata = QgsProviderRegistry.instance().providerMetadata('postgres')
     connection = metadata.findConnection(connection_name)
+    if not connection:
+        return None
+
     return QgsDataSourceUri(connection.uri())
 
 
@@ -65,7 +68,7 @@ def getVersionInteger(f):
     return ''.join([a.zfill(2) for a in f.strip().split('.')])
 
 
-def createAdministrationProjectFromTemplate(connection_name, project_file_path):
+def createAdministrationProjectFromTemplate(connection_name, project_file_path) -> bool:
     """
     Creates a new administration project from template
     for the given connection name
@@ -73,6 +76,9 @@ def createAdministrationProjectFromTemplate(connection_name, project_file_path):
     """
     # Get connection information
     uri = get_postgis_connection_uri_from_name(connection_name)
+    if not uri:
+        return False
+
     connection_info = uri.connectionInfo()
 
     # Read in the template file
@@ -93,3 +99,5 @@ def createAdministrationProjectFromTemplate(connection_name, project_file_path):
     )
     with open(project_file_path, 'w') as fout:
         fout.write(filedata)
+
+    return True
