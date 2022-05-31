@@ -2,6 +2,8 @@
 
 ## Unreleased
 
+## 5.0.1 - 2021-05-31
+
 * Fix some migrations about the API in QGIS 3.16
 
 ## 5.0.0 - 2021-04-07
