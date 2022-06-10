@@ -23,7 +23,7 @@ jobs:
         with:
           submodules: 'true'
 
-      - name: Launching docker-compose
+      - name: Launching docker compose
         run: ./start.sh with-qgis
 
       - name: Running tests
