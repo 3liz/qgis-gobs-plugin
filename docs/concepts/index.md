@@ -75,6 +75,21 @@ It **aggregates and transforms** heterogeneous data series.
 
 It is the role of the informational service **administrator** to administrate information services.
 
+
+### Projects
+
+A project allows grouping some indicators for a dedicated purpose.
+It is defined by a code, a label, a description.
+It may contain a list of spatial layers as a support for the data.
+
+### Project views
+
+A project can be accessed differently depending on the user rights. For example, the same indicator data
+can be edited and visible only in specific areas.
+
+A project view is basically a way to filter the project data for a user based on its restricted access
+to a subset of a spatial layer objects (polygons).
+
 ### Software function
 
 Part of a software in charge of a **numeric transformation**.
@@ -97,7 +112,7 @@ According to these roles, an actor has **access to informational services** and/
 
 Source data:
 
-* **pluviometers**: sites equiped with pluviometers to measure rainfalls, defined by a code, a name and a position (point)
+* **pluviometers**: sites equipped with pluviometers to measure rainfalls, defined by a code, a name and a position (point)
 * **pluviometry**: hourly rainfall pluviometry in millimetre, obtained by measuring the height of water in the pluviometers every hour.
 
 ### Population of cities

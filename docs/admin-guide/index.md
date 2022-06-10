@@ -10,18 +10,23 @@ The **administrator** is in charge of describing the different data stored in th
 
 See the [documentation on these concepts](../concepts/).
 
-To go on, you must first have installed and configured the G-Obs plugin for QGIS Desktop. See the doc [G-Obs installation and configuration](../installation/)
+To go on, you must first have installed and configured the G-Obs plugin for QGIS Desktop.
+See the doc [G-Obs installation and configuration](../installation/)
 
 ## Create your database local interface
 
 This algorithm will create a **new QGIS project file** for G-Obs administration purpose.
 
-The generated QGIS project must then be opened by the administrator to create the needed metadata by using QGIS editing capabilities (actors, spatial layers information, indicators, etc.)
+The generated QGIS project must then be opened by the administrator
+to create the needed metadata by using QGIS editing capabilities
+(actors, spatial layers information, indicators, etc.)
 
 Parameters:
 
-* `PostgreSQL connection to G-Obs database`: name of the database connection you would like to use for the new QGIS project.
-* `QGIS project file to create`: choose the output file destination. We advise you to choose a name reflecting the G-Obs database name.
+* `PostgreSQL connection to G-Obs database`: name of the database connection
+  you would like to use for the new QGIS project.
+* `QGIS project file to create`: choose the output file destination.
+  We advise you to choose a name reflecting the G-Obs database name.
 
 ![Create administration project](../media/gobs_create_database_local_interface.jpg)
 
@@ -29,15 +34,19 @@ Parameters:
 
 ### The administration project
 
-The **administration project** created beforehand will allow the administrator to **create, modify and delete metadata** in the G-Obs database. As an administrator, you must open this project with QGIS.
+The **administration project** created beforehand will allow the administrator
+to **create, modify and delete metadata** in the G-Obs database. As an administrator,
+you must open this project with QGIS.
 
 Before going on, be sure you have a working connection between your computer and the database server.
 
-Once opened, the QGIS project is configured to allow the administrator to edit the data. In the QGIS **Layers** panel, you will see the following layers:
+Once opened, the QGIS project is configured to allow the administrator to edit the data.
+In the QGIS **Layers** panel, you will see the following layers:
 
 ![G-Obs administration layers](../media/gobs_administration_layers.jpg)
 
-These layers represent the G-Obs PostgreSQL tables which are in charge of storing the metadata and data. They are organized in two groups in the Layers panel:
+These layers represent the G-Obs PostgreSQL tables which are in charge of storing the metadata and data.
+They are organized in two groups in the Layers panel:
 
 * `Metadata`: group containing the layers you need to edit to add metadata on actors, protocols, series, etc.
 * `Data`: group containing the data stored in the database. **Do no edit these layers**
@@ -57,24 +66,35 @@ Before going on, please **toggle editing** for all the following layers:
 * indicator
 * protocol
 * series
+* project
+* project_view
 
 Please refer to the [documentation on G-Obs concepts](../concepts/) to understand the meaning of each layer.
 
-To **add a new record**, select the layer in the `Layers` panel, then use the menu `Edit / Add record` (or `CTRL+.`). It will open a form wich lets you enter the needed data. Once every required fields have been filled, validate with the `OK` button on the bottom-right.
+To **add a new record**, select the layer in the `Layers` panel,
+then use the menu `Edit / Add record` (or `CTRL+.`). It will open a form wich lets you enter the needed data.
+Once every required fields have been filled, validate with the `OK` button on the bottom-right.
 
 ![G-Obs edit form](media/gobs_edit_actor_form.jpg)
 
-To **view all the records** of a layer, select the layer in the `Layers` panel, then open the attribute table with the menu `Layers / Open attribute table` (or `F6`)
+To **view all the records** of a layer, select the layer in the `Layers` panel,
+then open the attribute table with the menu `Layers / Open attribute table` (or `F6`)
 
 You can **undo previous modifications** with the menu `Edit / Undo` (or `CTRL+Z`).
 
-To permanently **save the changed data** in the layer, you need to use the menu `Layer / Saver layer edits`. After saving the data, you will not be able to undo your changes (but you can always reopen the data and changed the values).
+To permanently **save the changed data** in the layer, you need to use the menu `Layer / Saver layer edits`.
+After saving the data, you will not be able to undo your changes
+(but you can always reopen the data and changed the values).
 
-To **edit a record**, open the layer attribute table, and then click on the small button `Switch to form view` on the bottom-right of the dialog (the first one). Then select a record in the left panel, and use the displayed form to edit the data.
+To **edit a record**, open the layer attribute table, and then click on the small button `Switch to form view`
+on the bottom-right of the dialog (the first one). Then select a record in the left panel,
+and use the displayed form to edit the data.
 
 ![G-Obs attribute table form](media/gobs_edit_actor_attribute_table.jpg)
 
-To **delete a record**, select the record in the attribute table by clicking on the line number on the left: the line must be highlighted in blue. Then use the trash icon `Delete selected features` (or `Del`). *You can undo the deletion if you have not yet saved layer edits*.
+To **delete a record**, select the record in the attribute table by clicking on the line number on the left:
+the line must be highlighted in blue. Then use the trash icon `Delete selected features` (or `Del`).
+*You can undo the deletion if you have not yet saved layer edits*.
 
 ### Example data
 
@@ -107,7 +127,8 @@ Notes:
 
 * **Id** will be automatically given after saving layer edits. Do not modify.
 * **All fields** are mandatory
-* The **list of categories** is taken from the `actor_category` table. You should add new entry in this table beforehand if needed.
+* The **list of categories** is taken from the `actor_category` table.
+  You should add new entry in this table beforehand if needed.
 
 #### spatial_layer
 
@@ -123,8 +144,11 @@ Notes:
 * **Id** will be automatically given after saving layer edits. Do not modify.
 * **All fields** are mandatory
 * **Label** will be used as the display name
-* **Code** will be used as a unique text identifier for the spatial layer. **Please do not use spaces, accentuated characters or punctuation symbol**.
-* **Geometry type** must be chosen with care and must reflect the data type of the source vector layer to import for these spatial layer. Usually, for polygon layers, it is safer to use MultiPolygon (to be able to represent islands or holes)
+* **Code** will be used as a unique text identifier for the spatial layer.
+  **Please do not use spaces, accentuated characters or punctuation symbol**.
+* **Geometry type** must be chosen with care and must reflect the data type
+  of the source vector layer to import for these spatial layer.
+  Usually, for polygon layers, it is safer to use MultiPolygon (to be able to represent islands or holes)
 * **Actors** combobox comes from the data of the `actor` layer
 * **Creation date** is automatically set with the current date, but you can change it if needed.
 
@@ -146,9 +170,14 @@ Notes:
 * **Id** will be automatically given after saving layer edits. Do not modify.
 * **Code** is the unique text identifier of the indicator. **Please do not use spaces, accentuated characters or punctuation symbol**.
 * **Label** is the display name
-* **Date** format is the temporal resolution of the data which will be imported for this indicator. Please choose with care, depending on the source data and the information you would like to create from it.
-* **Category** The optionnal category of the indicator. You can type some letters to search among the existing values. If you need to enter a new category, write it down.
-* The fields **Codes, Names, Types and Units** allow to define one or many **dimensions** for this indicator. You can add one item in each field with the plus `+` button, or delete the selected one with the minus `-` button. The order of the data entered for each field **must be respected**. For example, if the indicator has two dimensions to store weather data: temperature & hygrometry, you could use:
+* **Date** format is the temporal resolution of the data which will be imported for this indicator.
+  Please choose with care, depending on the source data and the information you would like to create from it.
+* **Category** The optionnal category of the indicator. You can type some letters to search among the existing values.
+  If you need to enter a new category, write it down.
+* The fields **Codes, Names, Types and Units** allow to define one or many **dimensions** for this indicator.
+  You can add one item in each field with the plus `+` button, or delete the selected one with the minus `-` button.
+  The order of the data entered for each field **must be respected**.
+  For example, if the indicator has two dimensions to store weather data: temperature & hygrometry, you could use:
 
     - **Codes**: Code of the dimension. **Please do not use spaces, accentuated characters or punctuation symbol**
 
@@ -178,11 +207,17 @@ Notes:
     | °C          |
     | %           |
 
-* The **Paths** can be used to define an **oriented graph** which will help the future users to find the indicator among many.
+* The **Paths** can be used to define an **oriented graph** which will help the future users
+  to find the indicator among many.
 
-    - separated words or expressions **with a coma** `,` will define a list of nodes. For example, `Environment, Agriculture` will define two independant nodes `Environment` and `Agriculture`
-    - separated keywords **with a  slash** `/` will also define nodes, but also parent to child relations. For example, `Environment / Water / Analyses` will create 3 nodes `Environment`, `Water` and `Analyses`. `Environment` is the parent of `Water`, which is the parent of `Analyses`
-    - You can combine them, for example `Environment / Water / Analyses, Environment / Water / Resources, Agriculture / Resources` will lead to the following graph:
+    - separated words or expressions **with a coma** `,` will define a list of nodes.
+      For example, `Environment, Agriculture` will define two independant nodes `Environment` and `Agriculture`
+    - separated keywords **with a  slash** `/` will also define nodes, but also parent to child relations.
+      For example, `Environment / Water / Analyses` will create 3 nodes `Environment`, `Water` and `Analyses`.
+      `Environment` is the parent of `Water`, which is the parent of `Analyses`
+    - You can combine them, for example
+      `Environment / Water / Analyses, Environment / Water / Resources, Agriculture / Resources`
+      will lead to the following graph:
 
     ![Indicator graph example](../media/gobs_indicator_graph_example.png)
 
@@ -202,7 +237,8 @@ Notes:
 * **Id** will be automatically given after saving layer edits. Do not modify.
 *  **All fields** are mandatory
 * **Label** will be used as the display name.
-* **Code** is a unique text identifier for the protocol. **Please do not use spaces, accentuated characters or punctuation symbol**
+* **Code** is a unique text identifier for the protocol.
+  **Please do not use spaces, accentuated characters or punctuation symbol**
 * **Description** allows to enter multiple lines to describe the protocol.
 
 #### series
@@ -219,4 +255,28 @@ Notes:
 
 * **Id** will be automatically given after saving layer edits. Do not modify.
 * **All fields** are mandatory
-* A series is caracterized by **a protocol, an actor, an indicator and a spatial layer**. You must have created needed items beforehand in the corresponding layers (and save those layers edits) before creating the series.
+* A series is caracterized by **a protocol, an actor, an indicator and a spatial layer**.
+  You must have created needed items beforehand in the corresponding layers
+  (and save those layers edits) before creating the series.
+
+#### project
+
+Example content
+
+**TODO**
+
+Notes:
+
+* **Id** will be automatically given after saving layer edits. Do not modify.
+* **TODO**
+
+#### project_view
+
+Example content
+
+**TODO**
+
+Notes:
+
+* **Id** will be automatically given after saving layer edits. Do not modify.
+* **TODO**
