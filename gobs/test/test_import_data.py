@@ -41,6 +41,8 @@ class TestImportData(DatabaseTestCase):
             "metadata",
             "observation",
             "protocol",
+            "project",
+            "project_view",
             "r_graph_edge",
             "r_indicator_node",
             "series",

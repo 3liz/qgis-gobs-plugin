@@ -3,7 +3,7 @@
     <head>
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <title>series - gis Database</title>
+        <title>project_view - gis Database</title>
         <!-- Tell the browser to be responsive to screen width -->
         <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
         <link rel="icon" type="image/png" sizes="16x16" href="../favicon.png">
@@ -73,7 +73,7 @@
             <div class="content-wrapper">
                 <!-- Content Header (Page header) -->
                 <section class="content-header">
-                    <h1>series</h1><p><span id="recordNumber">0</span> rows</p><br />
+                    <h1>project_view</h1><p><span id="recordNumber">0</span> rows</p><br />
                     <div class="box box-primary">
                         <div class="box-header with-border">
                             <i class="fa fa-file-text-o"></i>
@@ -84,7 +84,7 @@
                             </div>
                         </div><!-- /.box-header -->
                         <div class="box-body clearfix">
-                            <p>Series of data</p>
+                            <p>Allow to filter the access on projects and relative data (indicators, observations, etc.) with a spatial object for a given list of user groups</p>
                         </div><!-- /.box-body -->
                     </div>
                 </section>
@@ -121,27 +121,36 @@
                                     <td>10</td>
                                     <td title=''></td>
                                     <td title='Automatically updated by the database'>√</td>
-                                    <td>nextval(&#39;gobs.series_id_seq&#39;::regclass)</td>
+                                    <td>nextval(&#39;gobs.project_view_id_seq&#39;::regclass)</td>
                                     <td>
                                         <table border='0' cellspacing='0' cellpadding='0'>
-                                            <tr>
-                                                <td title="import.fk_id_series references series.id via import_fk_id_series_fkey"><a href='import.html'>import</a><span class='relatedKey'>.fk_id_series</span></td>
-                                                <td class="constraint detail">import_fk_id_series_fkey<span title='Restrict delete:&#10;Parent cannot be deleted if children exist'>R</span></td>
-                                            </tr>
-                                            <tr>
-                                                <td title="observation.fk_id_series references series.id via observation_fk_id_series_fkey"><a href='observation.html'>observation</a><span class='relatedKey'>.fk_id_series</span></td>
-                                                <td class="constraint detail">observation_fk_id_series_fkey<span title='Restrict delete:&#10;Parent cannot be deleted if children exist'>R</span></td>
-                                            </tr>
                                         </table>
                                     </td>
                                     <td>
                                         <table border='0' cellspacing='0' cellpadding='0'>
                                         </table>
                                     </td>
-                                    <td><p>Id</p></td>
+                                    <td><p>Unique identifier</p></td>
                                 </tr>
                                 <tr>
-                                    <td class='foreignKey' title='Foreign Key'><i class='icon ion-key iconkey' style='padding-left: 5px;'></i><span id="fk_id_protocol">fk_id_protocol</span></td>
+                                    <td><span id="pv_label">pv_label</span></td>
+                                    <td>text</td>
+                                    <td>2147483647</td>
+                                    <td title=''></td>
+                                    <td title=''></td>
+                                    <td>null</td>
+                                    <td>
+                                        <table border='0' cellspacing='0' cellpadding='0'>
+                                        </table>
+                                    </td>
+                                    <td>
+                                        <table border='0' cellspacing='0' cellpadding='0'>
+                                        </table>
+                                    </td>
+                                    <td><p>Label of the project view</p></td>
+                                </tr>
+                                <tr>
+                                    <td class='foreignKey' title='Foreign Key'><i class='icon ion-key iconkey' style='padding-left: 5px;'></i><span id="fk_id_project">fk_id_project</span></td>
                                     <td>int4</td>
                                     <td>10</td>
                                     <td title=''></td>
@@ -154,18 +163,18 @@
                                     <td>
                                         <table border='0' cellspacing='0' cellpadding='0'>
                                             <tr>
-                                                <td title="series.fk_id_protocol references protocol.id via series_fk_id_protocol_fkey"><a href='protocol.html'>protocol</a><span class='relatedKey'>.id</span></td>
-                                                <td class="constraint detail">series_fk_id_protocol_fkey<span title='Restrict delete:&#10;Parent cannot be deleted if children exist'>R</span></td>
+                                                <td title="project_view.fk_id_project references project.id via project_view_fk_id_project_fkey"><a href='project.html'>project</a><span class='relatedKey'>.id</span></td>
+                                                <td class="constraint detail">project_view_fk_id_project_fkey<span title='Cascade on delete:&#10;Deletion of parent deletes child'>C</span></td>
                                             </tr>
                                         </table>
                                     </td>
-                                    <td><p>Protocol</p></td>
+                                    <td><p>Project id (foreign key)</p></td>
                                 </tr>
                                 <tr>
-                                    <td class='foreignKey' title='Foreign Key'><i class='icon ion-key iconkey' style='padding-left: 5px;'></i><span id="fk_id_actor">fk_id_actor</span></td>
-                                    <td>int4</td>
-                                    <td>10</td>
-                                    <td title=''></td>
+                                    <td><span id="pv_groups">pv_groups</span></td>
+                                    <td>text</td>
+                                    <td>2147483647</td>
+                                    <td title='nullable'>√</td>
                                     <td title=''></td>
                                     <td>null</td>
                                     <td>
@@ -174,40 +183,15 @@
                                     </td>
                                     <td>
                                         <table border='0' cellspacing='0' cellpadding='0'>
-                                            <tr>
-                                                <td title="series.fk_id_actor references actor.id via series_fk_id_actor_fkey"><a href='actor.html'>actor</a><span class='relatedKey'>.id</span></td>
-                                                <td class="constraint detail">series_fk_id_actor_fkey<span title='Restrict delete:&#10;Parent cannot be deleted if children exist'>R</span></td>
-                                            </tr>
                                         </table>
                                     </td>
-                                    <td><p>Actor, source of the observation data.</p></td>
-                                </tr>
-                                <tr>
-                                    <td class='foreignKey' title='Foreign Key'><i class='icon ion-key iconkey' style='padding-left: 5px;'></i><span id="fk_id_indicator">fk_id_indicator</span></td>
-                                    <td>int4</td>
-                                    <td>10</td>
-                                    <td title=''></td>
-                                    <td title=''></td>
-                                    <td>null</td>
-                                    <td>
-                                        <table border='0' cellspacing='0' cellpadding='0'>
-                                        </table>
-                                    </td>
-                                    <td>
-                                        <table border='0' cellspacing='0' cellpadding='0'>
-                                            <tr>
-                                                <td title="series.fk_id_indicator references indicator.id via series_fk_id_indicator_fkey"><a href='indicator.html'>indicator</a><span class='relatedKey'>.id</span></td>
-                                                <td class="constraint detail">series_fk_id_indicator_fkey<span title='Restrict delete:&#10;Parent cannot be deleted if children exist'>R</span></td>
-                                            </tr>
-                                        </table>
-                                    </td>
-                                    <td><p>Indicator. The series is named after the indicator.</p></td>
+                                    <td><p>List of user groups allowed to see observation data inside this project view spatial layer object. Use a coma separated value. Ex: &ldquo;group_a, group_b&rdquo;</p></td>
                                 </tr>
                                 <tr>
                                     <td class='foreignKey' title='Foreign Key'><i class='icon ion-key iconkey' style='padding-left: 5px;'></i><span id="fk_id_spatial_layer">fk_id_spatial_layer</span></td>
                                     <td>int4</td>
                                     <td>10</td>
-                                    <td title=''></td>
+                                    <td title='nullable'>√</td>
                                     <td title=''></td>
                                     <td>null</td>
                                     <td>
@@ -217,12 +201,29 @@
                                     <td>
                                         <table border='0' cellspacing='0' cellpadding='0'>
                                             <tr>
-                                                <td title="series.fk_id_spatial_layer references spatial_layer.id via series_fk_id_spatial_layer_fkey"><a href='spatial_layer.html'>spatial_layer</a><span class='relatedKey'>.id</span></td>
-                                                <td class="constraint detail">series_fk_id_spatial_layer_fkey<span title='Restrict delete:&#10;Parent cannot be deleted if children exist'>R</span></td>
+                                                <td title="project_view.fk_id_spatial_layer references spatial_layer.id via project_view_fk_id_spatial_layer_fkey"><a href='spatial_layer.html'>spatial_layer</a><span class='relatedKey'>.id</span></td>
+                                                <td class="constraint detail">project_view_fk_id_spatial_layer_fkey<span title='Null on delete:&#10;Foreign key to parent set to NULL when parent deleted'>N</span></td>
                                             </tr>
                                         </table>
                                     </td>
-                                    <td><p>Spatial layer, mandatory. If needed, use a global spatial layer with only 1 object representing the global area.</p></td>
+                                    <td><p>Spatial layer id (foreign key)</p></td>
+                                </tr>
+                                <tr>
+                                    <td class='indexedColumn' title='Indexed'><i class='fa fa-sitemap fa-rotate-120' style='padding-right: 5px;'></i><span id="fk_so_unique_id">fk_so_unique_id</span></td>
+                                    <td>text</td>
+                                    <td>2147483647</td>
+                                    <td title='nullable'>√</td>
+                                    <td title=''></td>
+                                    <td>null</td>
+                                    <td>
+                                        <table border='0' cellspacing='0' cellpadding='0'>
+                                        </table>
+                                    </td>
+                                    <td>
+                                        <table border='0' cellspacing='0' cellpadding='0'>
+                                        </table>
+                                    </td>
+                                    <td><p>Spatial object unique id (foreign key). Ex: AB1234. This references the object unique code, not the object integer id field</p></td>
                                 </tr>
                                 </tbody>
                             </table>
@@ -249,34 +250,16 @@
                                 </thead>
                                 <tbody>
                                 <tr>
-                                    <td class='primaryKey' title='Primary Key'><i class='icon ion-key iconkey'></i> series_pkey</td>
+                                    <td class='primaryKey' title='Primary Key'><i class='icon ion-key iconkey'></i> project_view_pkey</td>
                                     <td>Primary key</td>
                                     <td><span title='Ascending'>Asc</span></td>
                                     <td>id</td>
                                 </tr>
                                 <tr>
-                                    <td title='Indexed'>series_fk_id_actor_idx</td>
-                                    <td>Performance</td>
-                                    <td><span title='Ascending'>Asc</span></td>
-                                    <td>fk_id_actor</td>
-                                </tr>
-                                <tr>
-                                    <td title='Indexed'>series_fk_id_indicator_idx</td>
-                                    <td>Performance</td>
-                                    <td><span title='Ascending'>Asc</span></td>
-                                    <td>fk_id_indicator</td>
-                                </tr>
-                                <tr>
-                                    <td title='Indexed'>series_fk_id_protocol_idx</td>
-                                    <td>Performance</td>
-                                    <td><span title='Ascending'>Asc</span></td>
-                                    <td>fk_id_protocol</td>
-                                </tr>
-                                <tr>
-                                    <td title='Indexed'>series_fk_id_spatial_layer_idx</td>
-                                    <td>Performance</td>
-                                    <td><span title='Ascending'>Asc</span></td>
-                                    <td>fk_id_spatial_layer</td>
+                                    <td class='uniqueKey' title='Unique Key'><i class='icon ion-key iconkey'></i> project_view_fk_id_project_fk_id_spatial_layer_fk_so_unique_key</td>
+                                    <td>Must be unique</td>
+                                    <td><span title='Ascending'>Asc</span>/<span title='Ascending'>Asc</span>/<span title='Ascending'>Asc</span></td>
+                                    <td>fk_id_project + fk_id_spatial_layer + fk_so_unique_id</td>
                                 </tr>
                                 </tbody>
                             </table>
@@ -301,32 +284,22 @@
                                 <div class="tab-content no-padding">
                                     <div class="chart tab-pane active" id="oneDegreeImg-chart" style="position: relative; overflow-x:auto;">
                                         <map id="oneDegreeRelationshipsDiagram" name="oneDegreeRelationshipsDiagram">
-<area shape="rect" id="node1" href="import.html" target="_top" title="import" alt="" coords="752,119,915,265">
-<area shape="rect" id="node2" href="series.html" target="_top" title="series" alt="" coords="435,92,708,308">
-<area shape="rect" id="node4" href="actor.html" target="_top" title="actor" alt="" coords="5,279,160,484">
-<area shape="rect" id="node5" href="indicator.html" target="_top" title="indicator" alt="" coords="213,205,382,352">
-<area shape="rect" id="node6" href="protocol.html" target="_top" title="protocol" alt="" coords="216,5,379,152">
-<area shape="rect" id="node7" href="spatial_layer.html" target="_top" title="spatial_layer" alt="" coords="204,369,391,545">
-<area shape="rect" id="node3" href="observation.html" target="_top" title="observation" alt="" coords="959,23,1167,257">
+<area shape="rect" id="node1" href="project_view.html" target="_top" title="project_view" alt="" coords="273,12,608,257">
+<area shape="rect" id="node2" href="project.html" target="_top" title="project" alt="" coords="5,5,229,181">
+<area shape="rect" id="node3" href="spatial_layer.html" target="_top" title="spatial_layer" alt="" coords="24,199,211,375">
 </map>
-                                        <a name='diagram'><img id="oneDegreeImg" src="../diagrams/tables/series.1degree.png" usemap="#oneDegreeRelationshipsDiagram" class="diagram" border="0" align="left"></a>
+                                        <a name='diagram'><img id="oneDegreeImg" src="../diagrams/tables/project_view.1degree.png" usemap="#oneDegreeRelationshipsDiagram" class="diagram" border="0" align="left"></a>
                                     </div>
                                     <div class="chart tab-pane " id="twodegreesDegreeImg-chart" style="position: relative; overflow-x:auto;">
                                         <map id="twoDegreesRelationshipsDiagram" name="twoDegreesRelationshipsDiagram">
-<area shape="rect" id="node1" href="actor.html" target="_top" title="actor" alt="" coords="248,452,403,657">
-<area shape="rect" id="node2" href="actor_category.html" target="_top" title="actor_category" alt="" coords="5,513,204,601">
-<area shape="rect" id="node3" href="document.html" target="_top" title="document" alt="" coords="732,111,896,199">
-<area shape="rect" id="node4" href="indicator.html" target="_top" title="indicator" alt="" coords="455,96,625,243">
-<area shape="rect" id="node5" href="import.html" target="_top" title="import" alt="" coords="1009,307,1172,453">
-<area shape="rect" id="node6" href="series.html" target="_top" title="series" alt="" coords="677,228,951,444">
-<area shape="rect" id="node10" href="spatial_layer.html" target="_top" title="spatial_layer" alt="" coords="447,460,633,636">
-<area shape="rect" id="node12" href="protocol.html" target="_top" title="protocol" alt="" coords="459,260,621,407">
-<area shape="rect" id="node7" href="observation.html" target="_top" title="observation" alt="" coords="1231,219,1439,453">
-<area shape="rect" id="node8" href="spatial_object.html" target="_top" title="spatial_object" alt="" coords="995,500,1187,588">
-<area shape="rect" id="node9" href="project_view.html" target="_top" title="project_view" alt="" coords="723,461,905,549">
-<area shape="rect" id="node11" href="r_indicator_node.html" target="_top" title="r_indicator_node" alt="" coords="707,5,921,93">
+<area shape="rect" id="node1" href="project_view.html" target="_top" title="project_view" alt="" coords="456,5,791,251">
+<area shape="rect" id="node2" href="project.html" target="_top" title="project" alt="" coords="188,67,412,243">
+<area shape="rect" id="node3" href="spatial_layer.html" target="_top" title="spatial_layer" alt="" coords="207,263,393,439">
+<area shape="rect" id="node5" href="actor.html" target="_top" title="actor" alt="" coords="5,372,144,460">
+<area shape="rect" id="node4" href="series.html" target="_top" title="series" alt="" coords="554,397,693,485">
+<area shape="rect" id="node6" href="spatial_object.html" target="_top" title="spatial_object" alt="" coords="527,268,719,356">
 </map>
-                                        <a name='diagram'><img id="twodegreesDegreeImg" src="../diagrams/tables/series.2degrees.png" usemap="#twoDegreesRelationshipsDiagram" class="diagram" border="0" align="left"></a>
+                                        <a name='diagram'><img id="twodegreesDegreeImg" src="../diagrams/tables/project_view.2degrees.png" usemap="#twoDegreesRelationshipsDiagram" class="diagram" border="0" align="left"></a>
                                     </div>
                                 </div>
                             </div>

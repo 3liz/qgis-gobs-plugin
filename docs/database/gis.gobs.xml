@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<database name="gis" schema="gobs" type="PostgreSQL - 9.6.17">
+<database name="gis" schema="gobs" type="PostgreSQL - 13.7 (Ubuntu 13.7-1.pgdg20.04+1)">
    <sequences>
       <sequence increment="1" name="actor_category_id_seq" startValue="1"/>
       <sequence increment="1" name="actor_id_seq" startValue="1"/>
@@ -10,6 +10,8 @@
       <sequence increment="1" name="indicator_id_seq" startValue="1"/>
       <sequence increment="1" name="metadata_id_seq" startValue="1"/>
       <sequence increment="1" name="observation_id_seq" startValue="1"/>
+      <sequence increment="1" name="project_id_seq" startValue="1"/>
+      <sequence increment="1" name="project_view_id_seq" startValue="1"/>
       <sequence increment="1" name="protocol_id_seq" startValue="1"/>
       <sequence increment="1" name="series_id_seq" startValue="1"/>
       <sequence increment="1" name="spatial_layer_id_seq" startValue="1"/>
@@ -212,6 +214,52 @@
             <column ascending="true" name="ob_start_timestamp"/>
          </index>
       </table>
+      <table name="project" numRows="0" remarks="List of projects, which represents a group of indicators" schema="gobs" type="TABLE">
+         <column autoUpdated="true" defaultValue="nextval('gobs.project_id_seq'::regclass)" digits="0" id="0" name="id" nullable="false" remarks="Unique identifier" size="10" type="serial" typeCode="4">
+            <child column="fk_id_project" foreignKey="project_view_fk_id_project_fkey" implied="false" onDeleteCascade="true" schema="gobs" table="project_view"/>
+         </column>
+         <column autoUpdated="false" defaultValue="null" digits="0" id="1" name="pt_code" nullable="false" remarks="Project code. Ex: weather_data" size="2147483647" type="text" typeCode="12"/>
+         <column autoUpdated="false" defaultValue="null" digits="0" id="2" name="pt_lizmap_project_key" nullable="true" remarks="Lizmap project unique identifier (optional): repository_code~project_file_name. Ex: environment~weather" size="2147483647" type="text" typeCode="12"/>
+         <column autoUpdated="false" defaultValue="null" digits="0" id="3" name="pt_label" nullable="false" remarks="Human readable label of the project. Ex: Weather data publication" size="2147483647" type="text" typeCode="12"/>
+         <column autoUpdated="false" defaultValue="null" digits="0" id="4" name="pt_description" nullable="true" remarks="Description of the project." size="2147483647" type="text" typeCode="12"/>
+         <column autoUpdated="false" defaultValue="null" digits="0" id="5" name="pt_indicator_codes" nullable="true" remarks="List of indicator codes available for this project" size="2147483647" type="_text" typeCode="2003"/>
+         <column autoUpdated="false" defaultValue="null" digits="0" id="6" name="pt_groups" nullable="true" remarks="List of groups of users which have access to the project and its indicators, separated by coma." size="2147483647" type="text" typeCode="12"/>
+         <column autoUpdated="false" defaultValue="null" digits="8" id="7" name="pt_xmin" nullable="true" remarks="Minimum longitude (X min) in EPSG:4326" size="8" type="float4" typeCode="7"/>
+         <column autoUpdated="false" defaultValue="null" digits="8" id="8" name="pt_ymin" nullable="true" remarks="Minimum latitude (Y min) in EPSG:4326" size="8" type="float4" typeCode="7"/>
+         <column autoUpdated="false" defaultValue="null" digits="8" id="9" name="pt_xmax" nullable="true" remarks="Maximum longitude (X max) in EPSG:4326" size="8" type="float4" typeCode="7"/>
+         <column autoUpdated="false" defaultValue="null" digits="8" id="10" name="pt_ymax" nullable="true" remarks="Maximum latitude (Y max) in EPSG:4326" size="8" type="float4" typeCode="7"/>
+         <primaryKey column="id" sequenceNumberInPK="1"/>
+         <index name="project_pkey" unique="true">
+            <column ascending="true" name="id"/>
+         </index>
+         <index name="project_pt_code_key" unique="true">
+            <column ascending="true" name="pt_code"/>
+         </index>
+         <index name="project_pt_label_key" unique="true">
+            <column ascending="true" name="pt_label"/>
+         </index>
+      </table>
+      <table name="project_view" numRows="0" remarks="Allow to filter the access on projects and relative data (indicators, observations, etc.) with a spatial object for a given list of user groups" schema="gobs" type="TABLE">
+         <column autoUpdated="true" defaultValue="nextval('gobs.project_view_id_seq'::regclass)" digits="0" id="0" name="id" nullable="false" remarks="Unique identifier" size="10" type="serial" typeCode="4"/>
+         <column autoUpdated="false" defaultValue="null" digits="0" id="1" name="pv_label" nullable="false" remarks="Label of the project view" size="2147483647" type="text" typeCode="12"/>
+         <column autoUpdated="false" defaultValue="null" digits="0" id="2" name="fk_id_project" nullable="false" remarks="Project id (foreign key)" size="10" type="int4" typeCode="4">
+            <parent column="id" foreignKey="project_view_fk_id_project_fkey" implied="false" onDeleteCascade="true" schema="gobs" table="project"/>
+         </column>
+         <column autoUpdated="false" defaultValue="null" digits="0" id="3" name="pv_groups" nullable="true" remarks="List of user groups allowed to see observation data inside this project view spatial layer object. Use a coma separated value. Ex: &quot;group_a, group_b&quot;" size="2147483647" type="text" typeCode="12"/>
+         <column autoUpdated="false" defaultValue="null" digits="0" id="4" name="fk_id_spatial_layer" nullable="true" remarks="Spatial layer id (foreign key)" size="10" type="int4" typeCode="4">
+            <parent column="id" foreignKey="project_view_fk_id_spatial_layer_fkey" implied="false" onDeleteCascade="false" schema="gobs" table="spatial_layer"/>
+         </column>
+         <column autoUpdated="false" defaultValue="null" digits="0" id="5" name="fk_so_unique_id" nullable="true" remarks="Spatial object unique id (foreign key). Ex: AB1234. This references the object unique code, not the object integer id field" size="2147483647" type="text" typeCode="12"/>
+         <primaryKey column="id" sequenceNumberInPK="1"/>
+         <index name="project_view_pkey" unique="true">
+            <column ascending="true" name="id"/>
+         </index>
+         <index name="project_view_fk_id_project_fk_id_spatial_layer_fk_so_unique_key" unique="true">
+            <column ascending="true" name="fk_id_project"/>
+            <column ascending="true" name="fk_id_spatial_layer"/>
+            <column ascending="true" name="fk_so_unique_id"/>
+         </index>
+      </table>
       <table name="protocol" numRows="0" remarks="List of protocols" schema="gobs" type="TABLE">
          <column autoUpdated="true" defaultValue="nextval('gobs.protocol_id_seq'::regclass)" digits="0" id="0" name="id" nullable="false" remarks="ID" size="10" type="serial" typeCode="4">
             <child column="fk_id_protocol" foreignKey="series_fk_id_protocol_fkey" implied="false" onDeleteCascade="false" schema="gobs" table="series"/>
@@ -287,6 +335,7 @@
       </table>
       <table name="spatial_layer" numRows="0" remarks="List the spatial layers, used to regroup the spatial data. Ex : cities, rivers, stations" schema="gobs" type="TABLE">
          <column autoUpdated="true" defaultValue="nextval('gobs.spatial_layer_id_seq'::regclass)" digits="0" id="0" name="id" nullable="false" remarks="" size="10" type="serial" typeCode="4">
+            <child column="fk_id_spatial_layer" foreignKey="project_view_fk_id_spatial_layer_fkey" implied="false" onDeleteCascade="false" schema="gobs" table="project_view"/>
             <child column="fk_id_spatial_layer" foreignKey="series_fk_id_spatial_layer_fkey" implied="false" onDeleteCascade="false" schema="gobs" table="series"/>
             <child column="fk_id_spatial_layer" foreignKey="spatial_object_fk_id_spatial_layer_fkey" implied="false" onDeleteCascade="false" schema="gobs" table="spatial_object"/>
          </column>
@@ -338,320 +387,4 @@
          </index>
       </table>
    </tables>
-   <routines>
-      <routine dataAccess="MODIFIES" deterministic="false" name="find_observation_with_wrong_spatial_object" returnType="SETOF record" securityType="INVOKER" type="FUNCTION">
-         <comment><![CDATA[Find the observations with having incompatible start and end timestamp with related spatial objects validity dates]]></comment>
-         <definition language="PLPGSQL"><![CDATA[
-BEGIN
-    RETURN QUERY
-    SELECT
-    o.ob_uid, s.so_unique_id
-    FROM gobs.observation AS o
-    INNER JOIN gobs.spatial_object AS s
-        ON s.id = o.fk_id_spatial_object
-    WHERE True
-    -- the same series
-    AND o.fk_id_series = _id_series
-    -- wrong start (and optional end) dates compared to validity dates of linked spatial object
-    AND (
-            ob_start_timestamp
-            NOT BETWEEN Coalesce('-infinity'::timestamp, so_valid_from) AND Coalesce(so_valid_to, 'infinity'::timestamp)
-        OR
-        (    ob_end_timestamp IS NOT NULL
-            AND ob_end_timestamp
-            NOT BETWEEN Coalesce('-infinity'::timestamp, so_valid_from) AND Coalesce(so_valid_to, 'infinity'::timestamp)
-        )
-    )
-    ;
-
-END;
-]]></definition>
-      </routine>
-      <routine dataAccess="MODIFIES" deterministic="false" name="log_deleted_object" returnType="trigger" securityType="INVOKER" type="FUNCTION">
-         <comment/>
-         <definition language="PLPGSQL"><![CDATA[
-DECLARE
-    oid text;
-BEGIN
-    INSERT INTO gobs.deleted_data_log (
-        de_table,
-        de_uid,
-        de_timestamp
-    )
-    VALUES (
-        TG_TABLE_NAME::text,
-        OLD.ob_uid,
-        now()
-    )
-    ;
-    RETURN OLD;
-END;
-]]></definition>
-      </routine>
-      <routine dataAccess="MODIFIES" deterministic="false" name="manage_object_timestamps" returnType="trigger" securityType="INVOKER" type="FUNCTION">
-         <comment/>
-         <definition language="PLPGSQL"><![CDATA[
-DECLARE
-    nowtm timestamp;
-BEGIN
-    nowtm = now();
-    IF TG_OP = 'INSERT' THEN
-        NEW.created_at = nowtm;
-        NEW.updated_at = nowtm;
-    END IF;
-
-    IF TG_OP = 'UPDATE' THEN
-        NEW.updated_at = nowtm;
-    END IF;
-
-    RETURN NEW;
-END;
-]]></definition>
-      </routine>
-      <routine dataAccess="MODIFIES" deterministic="false" name="parse_indicator_paths" returnType="integer" securityType="INVOKER" type="FUNCTION">
-         <comment/>
-         <definition language="PLPGSQL"><![CDATA[
-DECLARE
-    _path text;
-    _group text;
-    _word text;
-    _parent text;
-    _gid integer;
-    _leaf text;
-    _leaves text[];
-BEGIN
-    _parent = NULL;
-
-    -- PARSE PATHS
-    -- Insert root
-    INSERT INTO gobs.graph_node (gn_label)
-    VALUES ('ROOT')
-    ON CONFLICT DO NOTHING;
-
-    -- Explode path
-    FOR _group IN
-        SELECT trim(g)
-        FROM regexp_split_to_table(i_path, ',') AS g
-    LOOP
-        RAISE NOTICE 'groupe = "%" ', _group;
-        -- Explode group
-        FOR _word IN
-            SELECT trim(w) AS w
-            FROM regexp_split_to_table(_group, '/') AS w
-        LOOP
-            RAISE NOTICE '  * word = "%", parent = "%" ', _word, _parent;
-
-            -- gobs.graph_node
-            INSERT INTO gobs.graph_node (gn_label)
-            VALUES (_word)
-            ON CONFLICT (gn_label)
-            DO NOTHING
-            RETURNING id
-            INTO _gid;
-            IF _gid IS NULL THEN
-                SELECT id INTO _gid
-                FROM gobs.graph_node
-                WHERE gn_label = _word;
-            END IF;
-
-            -- gobs.r_graph_edge
-            INSERT INTO gobs.r_graph_edge (ge_parent_node, ge_child_node)
-            VALUES (
-                (SELECT id FROM gobs.graph_node WHERE gn_label = coalesce(_parent, 'ROOT') LIMIT 1),
-                _gid
-            )
-            ON CONFLICT DO NOTHING;
-
-            -- Change parent with current word -> Next will have it as parent
-            _parent =  _word;
-
-            -- store leaf
-            _leaf = _word;
-
-        END LOOP;
-        -- Put back parent to NULL -> next will start with ROOT
-        _parent =  NULL;
-
-        -- Add leaf to leaves
-        _leaves = _leaves || _leaf ;
-        _leaf = NULL;
-    END LOOP;
-
-    -- Add leaves to r_indicator_node
-    RAISE NOTICE '  leaves % ', _leaves;
-
-    INSERT INTO gobs.r_indicator_node
-    (fk_id_indicator, fk_id_node)
-    SELECT i_id, (
-        SELECT id FROM gobs.graph_node WHERE gn_label = leaf LIMIT 1
-    )
-    FROM (
-        SELECT unnest(_leaves) AS leaf
-    ) AS source
-    ON CONFLICT DO NOTHING;
-
-    RETURN 1;
-END;
-]]></definition>
-      </routine>
-      <routine dataAccess="MODIFIES" deterministic="false" name="trg_after_import_validation" returnType="trigger" securityType="INVOKER" type="FUNCTION">
-         <comment/>
-         <definition language="PLPGSQL"><![CDATA[
-DECLARE
-    _output integer;
-BEGIN
-    IF TG_OP = 'UPDATE' AND NEW.im_status = 'V' AND NEW.im_status != OLD.im_status THEN
-        UPDATE gobs.observation
-        SET ob_validation = now()
-        WHERE TRUE
-        AND fk_id_import = NEW.id
-        ;
-    END IF;
-
-    RETURN NEW;
-END;
-]]></definition>
-      </routine>
-      <routine dataAccess="MODIFIES" deterministic="false" name="trg_parse_indicator_paths" returnType="trigger" securityType="INVOKER" type="FUNCTION">
-         <comment/>
-         <definition language="PLPGSQL"><![CDATA[
-DECLARE
-    _output integer;
-BEGIN
-    IF TG_OP = 'INSERT' OR NEW.id_paths != OLD.id_paths THEN
-        SELECT gobs.parse_indicator_paths(NEW.id, NEW.id_paths)
-        INTO _output;
-    END IF;
-
-    RETURN NEW;
-END;
-]]></definition>
-      </routine>
-      <routine dataAccess="MODIFIES" deterministic="false" name="update_observation_on_spatial_object_change" returnType="trigger" securityType="INVOKER" type="FUNCTION">
-         <comment/>
-         <definition language="PLPGSQL"><![CDATA[
-BEGIN
-    IF TG_OP = 'UPDATE' AND NOT ST_Equals(NEW.geom, OLD.geom) THEN
-        UPDATE gobs.observation
-        SET updated_at = now()
-        WHERE fk_id_spatial_object = NEW.id
-        ;
-    END IF;
-
-    RETURN NEW;
-END;
-]]></definition>
-      </routine>
-      <routine dataAccess="MODIFIES" deterministic="false" name="update_observations_with_wrong_spatial_objects" returnType="SETOF record" securityType="INVOKER" type="FUNCTION">
-         <comment><![CDATA[Update observations with wrong spatial objects: it search the observation for which the start and end timestamp does not match anymore the related spatial objects validity dates. It gets the correct one if possible and perform an UPDATE for these observations. It returns a line with 2 integer columns: modified_obs_count (number of modified observations) and remaining_obs_count (number of observations still with wrong observations]]></comment>
-         <definition language="PLPGSQL"><![CDATA[
-DECLARE
-    modified_count integer;
-    remaining_count integer;
-BEGIN
-
--- Update the observations
-WITH problem AS (
-    SELECT *
-    FROM gobs.find_observation_with_wrong_spatial_object(_id_series)
-), solution AS (
-    SELECT
-    o.ob_uid, so.id AS new_id
-    FROM
-        gobs.observation AS o,
-        problem AS p,
-        gobs.spatial_object AS so
-    WHERE True
-    -- same unique id as problematic
-    AND p.so_unique_id = so.so_unique_id
-    -- not itself
-    AND True
-    -- problematic only
-    AND p.ob_uid = o.ob_uid
-    -- same series
-    AND o.fk_id_series = _id_series
-    -- same spatial layer
-    AND so.fk_id_spatial_layer IN (
-        SELECT fk_id_spatial_layer
-        FROM gobs.series
-        WHERE id = _id_series
-    )
-    -- compatible dates
-    AND
-        ob_start_timestamp
-        BETWEEN Coalesce(so.so_valid_from, '-infinity'::timestamp) AND Coalesce(so.so_valid_to, 'infinity'::timestamp)
-    AND (
-        ob_end_timestamp IS NULL
-        OR
-        (    ob_end_timestamp IS NOT NULL
-            AND ob_end_timestamp
-            BETWEEN Coalesce(so_valid_from, '-infinity'::timestamp) AND Coalesce(so_valid_to, 'infinity'::timestamp)
-        )
-    )
-)
-UPDATE gobs.observation oo
-SET fk_id_spatial_object = s.new_id
-FROM solution AS s
-WHERE oo.ob_uid = s.ob_uid
-;
-
--- Get the number of rows updated
-GET DIAGNOSTICS modified_count = ROW_COUNT;
-
--- Check if there is anything remaining
--- for example if no new id have been found to replace the wrong ones
-SELECT count(*)
-FROM gobs.find_observation_with_wrong_spatial_object(_id_series)
-INTO remaining_count;
-
-RETURN QUERY SELECT modified_count, remaining_count;
-
-END;
-]]></definition>
-      </routine>
-      <routine dataAccess="MODIFIES" deterministic="false" name="update_spatial_object_end_validity" returnType="trigger" securityType="INVOKER" type="FUNCTION">
-         <comment/>
-         <definition language="PLPGSQL"><![CDATA[
-DECLARE
-    nowtm timestamp;
-    last_id integer;
-BEGIN
-    last_id = 0;
-    IF TG_OP = 'INSERT' THEN
-
-        -- Get the last corresponding item
-        SELECT INTO last_id
-        so.id
-        FROM gobs.spatial_object so
-        WHERE TRUE
-        -- do not modify if there is already a value
-        AND so.so_valid_to IS NULL
-        -- only for same spatial layer
-        AND so.fk_id_spatial_layer = NEW.fk_id_spatial_layer
-        -- and same unique id ex: code insee
-        AND so.so_unique_id = NEW.so_unique_id
-        -- and not for the same object
-        AND so.so_uid != NEW.so_uid
-        -- only if the new object has a start validity date AFTER the existing one
-        AND so.so_valid_from < NEW.so_valid_from
-        -- only the preceding one
-        ORDER BY so_valid_from DESC
-        LIMIT 1
-        ;
-
-        -- Update it
-        IF last_id > 0 THEN
-            UPDATE gobs.spatial_object so
-            SET so_valid_to = NEW.so_valid_from
-            WHERE so.id = last_id
-            ;
-        END IF;
-
-    END IF;
-
-    RETURN NEW;
-END;
-]]></definition>
-      </routine>
-   </routines>
 </database>

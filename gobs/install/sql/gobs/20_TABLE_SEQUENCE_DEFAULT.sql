@@ -289,6 +289,69 @@ CREATE SEQUENCE gobs.observation_id_seq
 ALTER SEQUENCE gobs.observation_id_seq OWNED BY gobs.observation.id;
 
 
+-- project
+CREATE TABLE gobs.project (
+    id integer NOT NULL,
+    pt_code text NOT NULL,
+    pt_lizmap_project_key text,
+    pt_label text NOT NULL,
+    pt_description text,
+    pt_indicator_codes text[],
+    pt_groups text,
+    pt_xmin real,
+    pt_ymin real,
+    pt_xmax real,
+    pt_ymax real
+);
+
+
+-- project
+COMMENT ON TABLE gobs.project IS 'List of projects, which represents a group of indicators';
+
+
+-- project_id_seq
+CREATE SEQUENCE gobs.project_id_seq
+
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+-- project_id_seq
+ALTER SEQUENCE gobs.project_id_seq OWNED BY gobs.project.id;
+
+
+-- project_view
+CREATE TABLE gobs.project_view (
+    id integer NOT NULL,
+    pv_label text NOT NULL,
+    fk_id_project integer NOT NULL,
+    pv_groups text,
+    fk_id_spatial_layer integer,
+    fk_so_unique_id text
+);
+
+
+-- project_view
+COMMENT ON TABLE gobs.project_view IS 'Allow to filter the access on projects and relative data (indicators, observations, etc.) with a spatial object for a given list of user groups';
+
+
+-- project_view_id_seq
+CREATE SEQUENCE gobs.project_view_id_seq
+
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+-- project_view_id_seq
+ALTER SEQUENCE gobs.project_view_id_seq OWNED BY gobs.project_view.id;
+
+
 -- protocol
 CREATE TABLE gobs.protocol (
     id integer NOT NULL,
@@ -459,6 +522,14 @@ ALTER TABLE ONLY gobs.metadata ALTER COLUMN id SET DEFAULT nextval('gobs.metadat
 
 -- observation id
 ALTER TABLE ONLY gobs.observation ALTER COLUMN id SET DEFAULT nextval('gobs.observation_id_seq'::regclass);
+
+
+-- project id
+ALTER TABLE ONLY gobs.project ALTER COLUMN id SET DEFAULT nextval('gobs.project_id_seq'::regclass);
+
+
+-- project_view id
+ALTER TABLE ONLY gobs.project_view ALTER COLUMN id SET DEFAULT nextval('gobs.project_view_id_seq'::regclass);
 
 
 -- protocol id

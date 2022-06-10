@@ -1,6 +1,7 @@
 indicator
 actor_category
 graph_node
+project
 protocol
 actor
 spatial_layer
@@ -8,6 +9,7 @@ series
 import
 spatial_object
 document
+project_view
 r_indicator_node
 observation
 deleted_data_log
