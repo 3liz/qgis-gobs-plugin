@@ -12,10 +12,9 @@ from qgis.PyQt.QtCore import QCoreApplication, Qt, QTranslator, QUrl
 from qgis.PyQt.QtGui import QDesktopServices, QIcon
 from qgis.PyQt.QtWidgets import QAction
 
+from gobs.gobs_dockwidget import GobsDockWidget
+from gobs.processing.provider import GobsProvider
 from gobs.qgis_plugin_tools.tools.resources import resources_path
-
-from .gobs_dockwidget import GobsDockWidget
-from .processing.provider import GobsProvider
 
 cmd_folder = os.path.split(inspect.getfile(inspect.currentframe()))[0]
 

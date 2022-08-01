@@ -13,9 +13,9 @@ if Qgis.QGIS_VERSION_INT >= 30800:
 else:
     import processing
 
-from ..plugin_tools import available_migrations
-from ..processing.provider import GobsProvider as ProcessingProvider
-from ..qgis_plugin_tools.tools.logger_processing import (
+from gobs.plugin_tools import available_migrations
+from gobs.processing.provider import GobsProvider as ProcessingProvider
+from gobs.qgis_plugin_tools.tools.logger_processing import (
     LoggerProcessingFeedBack,
 )
 

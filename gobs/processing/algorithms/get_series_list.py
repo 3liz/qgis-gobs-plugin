@@ -5,9 +5,8 @@ __revision__ = "$Format:%H$"
 
 from qgis.core import QgsExpressionContextUtils
 
+from gobs.processing.algorithms.get_data_as_layer import GetDataAsLayer
 from gobs.qgis_plugin_tools.tools.i18n import tr
-
-from .get_data_as_layer import GetDataAsLayer
 
 
 class GetSeriesList(GetDataAsLayer):

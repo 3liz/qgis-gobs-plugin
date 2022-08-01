@@ -15,12 +15,14 @@ from qgis.core import (
     QgsProject,
 )
 
+from gobs.processing.algorithms.tools import (
+    fetch_data_from_sql_query,
+    get_postgis_connection_list,
+)
 from gobs.qgis_plugin_tools.tools.algorithm_processing import (
     BaseProcessingAlgorithm,
 )
 from gobs.qgis_plugin_tools.tools.i18n import tr
-
-from .tools import fetch_data_from_sql_query, get_postgis_connection_list
 
 
 class RemoveSeriesData(BaseProcessingAlgorithm):
