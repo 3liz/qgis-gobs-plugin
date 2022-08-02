@@ -71,22 +71,28 @@ class ImportObservationData(BaseProcessingAlgorithm):
             'This algorithm allows to import observation data from a QGIS vector or table layer into the G-Obs database'
             '\n'
             '\n'
-            'The G-Obs administrator must have created needed series beforehand by addind the required items in the related database tables: gobs.protocol, gobs.indicator, gobs.actor and gobs.spatial_layer.'
+            'The G-Obs administrator must have created needed series beforehand by adding the required items '
+            'in the related database tables: gobs.protocol, gobs.indicator, gobs.actor and gobs.spatial_layer.'
             '\n'
             'Source data layer: choose the QGIS vector or table layer containing the observation data you want to import into the chosen series.'
             '\n'
-            'Each feature of this source layer is an observation, caracterized by a spatial object, a timestamp, a vector of values, and will be imported into the database table gobs.observation.'
+            'Each feature of this source layer is an observation, characterized by a spatial object, a timestamp, a vector of values, '
+            'and will be imported into the database table gobs.observation.'
             '\n'
-            '* Date time fields: choose the field containing the exact date or date & time of each observation: start and (optionnal) end timestamp'
+            '* Date time fields: choose the field containing the exact date or date & time of each observation: '
+            'start and (optional) end timestamp'
             ' Leave empty if all the features share the same date/time.'
             ' This field must respect the ISO format. For example 2020-05-01 10:50:30 or 2020-01-01'
             '\n'
-            '* Manual dates or timestamps: if all the data share the same timestamp, you can enter the exact value. For example, 2020 if all the observation concern the population of the cities in the year 2020.'
+            '* Manual dates or timestamps: if all the data share the same timestamp, you can enter the exact value. '
+            'For example, 2020 if all the observation concern the population of the cities in the year 2020.'
             ' This field must respect the ISO format. For example 2020-05-01 10:50:30 or 2020-01-01'
             '\n'
-            '* Field containing the spatial object id: choose the field contaning the unique identifier of the related spatial object in the spatial layer of this series.'
+            '* Field containing the spatial object id: choose the field containing '
+            'the unique identifier of the related spatial object in the spatial layer of this series.'
             '\n'
-            '* Depending of the chose series, you will need to choose the fields containing the data of each dimension of the observation vector of values.'
+            '* Depending of the chose series, you will need to choose the fields containing '
+            'the data of each dimension of the observation vector of values.'
         )
         return short_help
 
@@ -533,7 +539,7 @@ class ImportObservationData(BaseProcessingAlgorithm):
                 SET (fk_id_import, ob_value, ob_end_timestamp) = (EXCLUDED.fk_id_import, EXCLUDED.ob_value, EXCLUDED.ob_end_timestamp)
                 WHERE o.ob_validation IS NULL
             '''
-            # feedback.pushInfo(sql)
+            feedback.pushInfo(sql)
             try:
                 _, error = fetch_data_from_sql_query(connection_name, sql)
                 if error:
