@@ -179,12 +179,12 @@ class GetSpatialLayerVectorData(GetDataAsLayer):
         # Build SQL
         sql = '''
             SELECT
-                id,
-                so_unique_id AS code,
-                so_unique_label AS label,
-                so_valid_from AS valid_from,
-                so_valid_to AS valid_to,
-                geom::geometry({1}, 4326) AS geom
+            id,
+            so_unique_id AS code,
+            so_unique_label AS label,
+            so_valid_from AS valid_from,
+            so_valid_to AS valid_to,
+            geom::geometry({1}, 4326) AS geom
             FROM gobs.spatial_object
             WHERE fk_id_spatial_layer = {0}
         '''.format(
@@ -207,15 +207,23 @@ class GetSpatialLayerVectorData(GetDataAsLayer):
             p = re.compile('^[0-9]{4}-[0-9]{2}-[0-9]{2}$')
             if validity_date == 'today' or p.match(validity_date):
                 sql += '''
-                    AND (
-                        (so_valid_from IS NULL OR so_valid_from <= '{validity_date}'::date)
-                        AND
-                        (so_valid_to IS NULL OR so_valid_to > '{validity_date}'::date)
-                    )
+            AND (
+                (so_valid_from IS NULL OR so_valid_from <= '{validity_date}'::date)
+                AND
+                (so_valid_to IS NULL OR so_valid_to > '{validity_date}'::date)
+            )
                 '''.format(
                     validity_date=validity_date
                 )
-        self.SQL = sql.replace('\n', ' ').rstrip(';')
+
+        # Format SQL
+        line_break = '''
+'''
+        spaces = 12 * ' '
+        sql_log = sql.replace(spaces, '').replace(line_break + line_break, line_break)
+        feedback.pushInfo('SQL = \n' + sql_log)
+
+        self.SQL = sql_log.replace('\n', ' ').replace(line_break, ' ').rstrip(';')
 
     def setLayerName(self, parameters, context, feedback):
 

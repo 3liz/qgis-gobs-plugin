@@ -306,7 +306,6 @@ class GetAggregatedData(GetDataAsLayer):
 
         # SELECT
         sql = '''
-
             SELECT
         '''
         # We need a unique id
@@ -483,12 +482,14 @@ class GetAggregatedData(GetDataAsLayer):
         sql += '''
             ) AS s
         '''
+        # Format SQL
+        line_break = '''
+'''
+        spaces = 12 * ' '
+        sql_log = sql.replace(spaces, '').replace(line_break + line_break, line_break)
+        feedback.pushInfo('SQL = \n' + sql_log)
 
-        feedback.pushInfo(
-            tr('SQL = \n' + sql.replace('            ', '''
-'''))
-        )
-        self.SQL = sql.replace('\n', ' ').rstrip(';')
+        self.SQL = sql_log.replace('\n', ' ').replace(line_break, ' ').rstrip(';')
 
         # Set GEOM_FIELD depending on parameter
         if add_spatial_object_geom:

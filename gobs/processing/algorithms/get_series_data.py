@@ -202,8 +202,8 @@ class GetSeriesData(GetDataAsLayer):
         values = ", ".join(get_values)
         sql = '''
             SELECT
-                o.id,
-                so_unique_id AS spatial_object_code,
+            o.id,
+            so_unique_id AS spatial_object_code,
             '''
         # Add spatial object geom
         if add_spatial_object_geom:
@@ -211,18 +211,26 @@ class GetSeriesData(GetDataAsLayer):
             so.geom,
             '''
         sql+= '''
-                ob_start_timestamp AS observation_start_timestamp,
-                ob_end_timestamp AS observation_end_timestamp,
-                {0}
+            ob_start_timestamp AS observation_start_timestamp,
+            ob_end_timestamp AS observation_end_timestamp,
+            {0}
             FROM gobs.observation AS o
             INNER JOIN gobs.spatial_object AS so
-                ON so.id = o.fk_id_spatial_object
+            ON so.id = o.fk_id_spatial_object
             WHERE fk_id_series = {1}
         '''.format(
             values,
             id_serie
         )
-        self.SQL = sql.replace('\n', ' ').rstrip(';')
+
+        # Format SQL
+        line_break = '''
+'''
+        spaces = 12 * ' '
+        sql_log = sql.replace(spaces, '').replace(line_break + line_break, line_break)
+        feedback.pushInfo('SQL = \n' + sql_log)
+
+        self.SQL = sql_log.replace('\n', ' ').replace(line_break, ' ').rstrip(';')
 
         # Set GEOM_FIELD depending on parameter
         if add_spatial_object_geom:
