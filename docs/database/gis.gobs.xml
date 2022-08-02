@@ -1,8 +1,9 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<database name="gis" schema="gobs" type="PostgreSQL - 13.7 (Ubuntu 13.7-1.pgdg20.04+1)">
+<database name="gis" schema="gobs" type="PostgreSQL - 13.7 (Debian 13.7-1.pgdg110+1)">
    <sequences>
       <sequence increment="1" name="actor_category_id_seq" startValue="1"/>
       <sequence increment="1" name="actor_id_seq" startValue="1"/>
+      <sequence increment="1" name="application_id_seq" startValue="1"/>
       <sequence increment="1" name="document_id_seq" startValue="1"/>
       <sequence increment="1" name="glossary_id_seq" startValue="1"/>
       <sequence increment="1" name="graph_node_id_seq" startValue="1"/>
@@ -53,6 +54,17 @@
          </index>
          <index name="actor_category_ac_label_key" unique="true">
             <column ascending="true" name="ac_label"/>
+         </index>
+      </table>
+      <table name="application" numRows="0" remarks="List the external applications interacting with G-Obs database with the web API.&#10;This will help storing application specific data such as the default values when creating automatically series, protocols, users, etc." schema="gobs" type="TABLE">
+         <column autoUpdated="true" defaultValue="nextval('gobs.application_id_seq'::regclass)" digits="0" id="0" name="id" nullable="false" remarks="Unique identifier" size="10" type="serial" typeCode="4"/>
+         <column autoUpdated="false" defaultValue="null" digits="0" id="1" name="ap_code" nullable="false" remarks="Code of the application. Ex: kobo_toolbox" size="2147483647" type="text" typeCode="12"/>
+         <column autoUpdated="false" defaultValue="null" digits="0" id="2" name="ap_label" nullable="false" remarks="Label of the application. Ex: Kobo Toolbox" size="2147483647" type="text" typeCode="12"/>
+         <column autoUpdated="false" defaultValue="null" digits="0" id="3" name="ap_description" nullable="false" remarks="Description of the application." size="2147483647" type="text" typeCode="12"/>
+         <column autoUpdated="false" defaultValue="null" digits="0" id="4" name="ap_default_values" nullable="false" remarks="Default values for the different API need. JSONB to allow to easily add more data when necessary" size="2147483647" type="jsonb" typeCode="1111"/>
+         <primaryKey column="id" sequenceNumberInPK="1"/>
+         <index name="application_pkey" unique="true">
+            <column ascending="true" name="id"/>
          </index>
       </table>
       <table name="deleted_data_log" numRows="0" remarks="Log of deleted objects from observation table. Use for synchronization purpose" schema="gobs" type="TABLE">
