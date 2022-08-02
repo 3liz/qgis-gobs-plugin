@@ -68,6 +68,31 @@ COMMENT ON COLUMN gobs.actor_category.ac_label IS 'Name of the actor category';
 COMMENT ON COLUMN gobs.actor_category.ac_description IS 'Description of the actor category';
 
 
+-- application
+COMMENT ON TABLE gobs.application IS 'List the external applications interacting with G-Obs database with the web API.
+This will help storing application specific data such as the default values when creating automatically series, protocols, users, etc.';
+
+
+-- application.id
+COMMENT ON COLUMN gobs.application.id IS 'Unique identifier';
+
+
+-- application.ap_code
+COMMENT ON COLUMN gobs.application.ap_code IS 'Code of the application. Ex: kobo_toolbox';
+
+
+-- application.ap_label
+COMMENT ON COLUMN gobs.application.ap_label IS 'Label of the application. Ex: Kobo Toolbox';
+
+
+-- application.ap_description
+COMMENT ON COLUMN gobs.application.ap_description IS 'Description of the application.';
+
+
+-- application.ap_default_values
+COMMENT ON COLUMN gobs.application.ap_default_values IS 'Default values for the different API need. JSONB to allow to easily add more data when necessary';
+
+
 -- deleted_data_log
 COMMENT ON TABLE gobs.deleted_data_log IS 'Log of deleted objects from observation table. Use for synchronization purpose';
 

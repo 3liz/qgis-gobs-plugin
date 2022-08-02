@@ -56,4 +56,25 @@ COMMENT ON COLUMN gobs.project_view.fk_id_spatial_layer IS 'Spatial layer id (fo
 COMMENT ON COLUMN gobs.project_view.fk_so_unique_id IS 'Spatial object unique id (foreign key). Ex: AB1234. This references the object unique code, not the object integer id field';
 
 
+-- Table application
+DROP TABLE IF EXISTS gobs.application;
+CREATE TABLE gobs.application (
+    id serial NOT NULL PRIMARY KEY,
+    ap_code text NOT NULL,
+    ap_label text NOT NULL,
+    ap_description text NOT NULL,
+    ap_default_values jsonb NOT NULL
+)
+;
+
+COMMENT ON TABLE gobs.application
+IS 'List the external applications interacting with G-Obs database with the web API.
+This will help storing application specific data such as the default values when creating automatically series, protocols, users, etc.'
+;
+
+COMMENT ON COLUMN gobs.application.id IS 'Unique identifier';
+COMMENT ON COLUMN gobs.application.ap_code IS 'Code of the application. Ex: kobo_toolbox';
+COMMENT ON COLUMN gobs.application.ap_label IS 'Label of the application. Ex: Kobo Toolbox';
+COMMENT ON COLUMN gobs.application.ap_description IS 'Description of the application.';
+COMMENT ON COLUMN gobs.application.ap_default_values IS 'Default values for the different API need. JSONB to allow to easily add more data when necessary';
 COMMIT;

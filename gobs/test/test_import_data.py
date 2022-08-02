@@ -32,6 +32,7 @@ class TestImportData(DatabaseTestCase):
         expected = [
             "actor",
             "actor_category",
+            "application",
             "deleted_data_log",
             "document",
             "glossary",

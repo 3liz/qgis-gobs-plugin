@@ -1,4 +1,4 @@
-<qgis projectname="" saveDateTime="2022-06-10T14:24:53" saveUser="" saveUserFull="" version="3.16.16-Hannover">
+<qgis projectname="" saveDateTime="2022-08-02T13:19:01" saveUser="" saveUserFull="" version="3.16.16-Hannover">
   <homePath path=""></homePath>
   <title></title>
   <autotransaction active="0"></autotransaction>
@@ -33,52 +33,55 @@
     </layer-tree-group>
     <layer-tree-group checked="Qt::Checked" expanded="1" name="Metadata (administrator can edit)">
       <customproperties></customproperties>
-      <layer-tree-layer checked="Qt::Checked" expanded="1" id="actor_category_8a7edcf8_cb34_4689_b22b_7a8a6a2ab610" legend_exp="" legend_split_behavior="0" name="actor_category" patch_size="0,0" providerKey="postgres" source="service='gobs' sslmode=prefer key='id' estimatedmetadata=true checkPrimaryKeyUnicity='0' table=&quot;gobs&quot;.&quot;actor_category&quot;">
+      <layer-tree-layer checked="Qt::Checked" expanded="1" id="actor_category_8a7edcf8_cb34_4689_b22b_7a8a6a2ab610" legend_exp="" legend_split_behavior="0" name="actor_category" patch_size="0,0" providerKey="postgres" source="service='gobs' key='id' estimatedmetadata=true checkPrimaryKeyUnicity='0' table=&quot;gobs&quot;.&quot;actor_category&quot;">
         <customproperties></customproperties>
       </layer-tree-layer>
-      <layer-tree-layer checked="Qt::Checked" expanded="1" id="actor_5f01a6e5_8205_462f_af40_0ffd7ff0a44f" legend_exp="" legend_split_behavior="0" name="actor" patch_size="0,0" providerKey="postgres" source="service='gobs' sslmode=prefer key='id' estimatedmetadata=true checkPrimaryKeyUnicity='0' table=&quot;gobs&quot;.&quot;actor&quot;">
+      <layer-tree-layer checked="Qt::Checked" expanded="1" id="actor_5f01a6e5_8205_462f_af40_0ffd7ff0a44f" legend_exp="" legend_split_behavior="0" name="actor" patch_size="0,0" providerKey="postgres" source="service='gobs' key='id' estimatedmetadata=true checkPrimaryKeyUnicity='0' table=&quot;gobs&quot;.&quot;actor&quot;">
         <customproperties></customproperties>
       </layer-tree-layer>
-      <layer-tree-layer checked="Qt::Checked" expanded="1" id="spatial_layer_18215d6d_1f4c_40d2_ba83_f2c9a9694e84" legend_exp="" legend_split_behavior="0" name="spatial_layer" patch_size="0,0" providerKey="postgres" source="service='gobs' sslmode=prefer key='id' estimatedmetadata=true checkPrimaryKeyUnicity='0' table=&quot;gobs&quot;.&quot;spatial_layer&quot;">
+      <layer-tree-layer checked="Qt::Checked" expanded="1" id="spatial_layer_18215d6d_1f4c_40d2_ba83_f2c9a9694e84" legend_exp="" legend_split_behavior="0" name="spatial_layer" patch_size="0,0" providerKey="postgres" source="service='gobs' key='id' estimatedmetadata=true checkPrimaryKeyUnicity='0' table=&quot;gobs&quot;.&quot;spatial_layer&quot;">
         <customproperties></customproperties>
       </layer-tree-layer>
-      <layer-tree-layer checked="Qt::Checked" expanded="1" id="indicator_18ba18bf_0390_45a3_8edd_1cc049e8a251" legend_exp="" legend_split_behavior="0" name="indicator" patch_size="0,0" providerKey="postgres" source="service='gobs' sslmode=prefer key='id' estimatedmetadata=true checkPrimaryKeyUnicity='0' table=&quot;gobs&quot;.&quot;indicator&quot;">
+      <layer-tree-layer checked="Qt::Checked" expanded="1" id="indicator_18ba18bf_0390_45a3_8edd_1cc049e8a251" legend_exp="" legend_split_behavior="0" name="indicator" patch_size="0,0" providerKey="postgres" source="service='gobs' key='id' estimatedmetadata=true checkPrimaryKeyUnicity='0' table=&quot;gobs&quot;.&quot;indicator&quot;">
         <customproperties></customproperties>
       </layer-tree-layer>
-      <layer-tree-layer checked="Qt::Checked" expanded="1" id="document_3f322924_735f_4bef_b903_9521d2f25444" legend_exp="" legend_split_behavior="0" name="document" patch_size="0,0" providerKey="postgres" source="service='gobs' sslmode=prefer key='id' estimatedmetadata=true checkPrimaryKeyUnicity='1' table=&quot;gobs&quot;.&quot;document&quot;">
+      <layer-tree-layer checked="Qt::Checked" expanded="1" id="document_3f322924_735f_4bef_b903_9521d2f25444" legend_exp="" legend_split_behavior="0" name="document" patch_size="0,0" providerKey="postgres" source="service='gobs' key='id' estimatedmetadata=true checkPrimaryKeyUnicity='1' table=&quot;gobs&quot;.&quot;document&quot;">
         <customproperties></customproperties>
       </layer-tree-layer>
-      <layer-tree-layer checked="Qt::Checked" expanded="1" id="protocol_5507f1c8_1802_4df0_a273_8e9b7f52c352" legend_exp="" legend_split_behavior="0" name="protocol" patch_size="0,0" providerKey="postgres" source="service='gobs' sslmode=prefer key='id' estimatedmetadata=true checkPrimaryKeyUnicity='0' table=&quot;gobs&quot;.&quot;protocol&quot;">
+      <layer-tree-layer checked="Qt::Checked" expanded="1" id="protocol_5507f1c8_1802_4df0_a273_8e9b7f52c352" legend_exp="" legend_split_behavior="0" name="protocol" patch_size="0,0" providerKey="postgres" source="service='gobs' key='id' estimatedmetadata=true checkPrimaryKeyUnicity='0' table=&quot;gobs&quot;.&quot;protocol&quot;">
         <customproperties></customproperties>
       </layer-tree-layer>
-      <layer-tree-layer checked="Qt::Checked" expanded="1" id="series_04a7414a_ab6d_4611_8a60_bcd22071dc22" legend_exp="" legend_split_behavior="0" name="series" patch_size="0,0" providerKey="postgres" source="service='gobs' sslmode=prefer key='id' estimatedmetadata=true checkPrimaryKeyUnicity='0' table=&quot;gobs&quot;.&quot;series&quot;">
+      <layer-tree-layer checked="Qt::Checked" expanded="1" id="series_04a7414a_ab6d_4611_8a60_bcd22071dc22" legend_exp="" legend_split_behavior="0" name="series" patch_size="0,0" providerKey="postgres" source="service='gobs' key='id' estimatedmetadata=true checkPrimaryKeyUnicity='0' table=&quot;gobs&quot;.&quot;series&quot;">
         <customproperties></customproperties>
       </layer-tree-layer>
-      <layer-tree-layer checked="Qt::Checked" expanded="1" id="project_f42a5660_8aba_49f5_a9e7_92abb64e339e" legend_exp="" legend_split_behavior="0" name="project" patch_size="-1,-1" providerKey="postgres" source="service='gobs' sslmode=prefer key='id' estimatedmetadata=true checkPrimaryKeyUnicity='1' table=&quot;gobs&quot;.&quot;project&quot;">
+      <layer-tree-layer checked="Qt::Checked" expanded="1" id="application_a455f2b7_b92d_413b_bb50_b9777b274f84" legend_exp="" legend_split_behavior="0" name="application" patch_size="-1,-1" providerKey="postgres" source="service='gobs' sslmode=disable key='id' estimatedmetadata=true checkPrimaryKeyUnicity='1' table=&quot;gobs&quot;.&quot;application&quot;">
         <customproperties></customproperties>
       </layer-tree-layer>
-      <layer-tree-layer checked="Qt::Checked" expanded="1" id="project_view_c10ae5f5_e011_4223_a08c_903108ad41d2" legend_exp="" legend_split_behavior="0" name="project_view" patch_size="-1,-1" providerKey="postgres" source="service='gobs' sslmode=prefer key='id' estimatedmetadata=true checkPrimaryKeyUnicity='1' table=&quot;gobs&quot;.&quot;project_view&quot;">
+      <layer-tree-layer checked="Qt::Checked" expanded="1" id="project_f42a5660_8aba_49f5_a9e7_92abb64e339e" legend_exp="" legend_split_behavior="0" name="project" patch_size="-1,-1" providerKey="postgres" source="service='gobs' key='id' estimatedmetadata=true checkPrimaryKeyUnicity='1' table=&quot;gobs&quot;.&quot;project&quot;">
+        <customproperties></customproperties>
+      </layer-tree-layer>
+      <layer-tree-layer checked="Qt::Checked" expanded="1" id="project_view_c10ae5f5_e011_4223_a08c_903108ad41d2" legend_exp="" legend_split_behavior="0" name="project_view" patch_size="-1,-1" providerKey="postgres" source="service='gobs' key='id' estimatedmetadata=true checkPrimaryKeyUnicity='1' table=&quot;gobs&quot;.&quot;project_view&quot;">
         <customproperties></customproperties>
       </layer-tree-layer>
     </layer-tree-group>
     <layer-tree-group checked="Qt::Checked" expanded="1" name="Data (do not edit)">
       <customproperties></customproperties>
-      <layer-tree-layer checked="Qt::Checked" expanded="1" id="observation_bcc90162_47c8_4097_bc24_a31af92d2708" legend_exp="" legend_split_behavior="0" name="observation" patch_size="0,0" providerKey="postgres" source="service='gobs' sslmode=prefer key='id' estimatedmetadata=true checkPrimaryKeyUnicity='0' table=&quot;gobs&quot;.&quot;observation&quot;">
+      <layer-tree-layer checked="Qt::Checked" expanded="1" id="observation_bcc90162_47c8_4097_bc24_a31af92d2708" legend_exp="" legend_split_behavior="0" name="observation" patch_size="0,0" providerKey="postgres" source="service='gobs' key='id' estimatedmetadata=true checkPrimaryKeyUnicity='0' table=&quot;gobs&quot;.&quot;observation&quot;">
         <customproperties></customproperties>
       </layer-tree-layer>
-      <layer-tree-layer checked="Qt::Checked" expanded="1" id="r_indicator_node_2ca83116_e69f_4dcb_abcb_de5bdf44b2be" legend_exp="" legend_split_behavior="0" name="r_indicator_node" patch_size="0,0" providerKey="postgres" source="service='gobs' sslmode=prefer key='fk_id_indicator,fk_id_node' estimatedmetadata=true checkPrimaryKeyUnicity='0' table=&quot;gobs&quot;.&quot;r_indicator_node&quot;">
+      <layer-tree-layer checked="Qt::Checked" expanded="1" id="r_indicator_node_2ca83116_e69f_4dcb_abcb_de5bdf44b2be" legend_exp="" legend_split_behavior="0" name="r_indicator_node" patch_size="0,0" providerKey="postgres" source="service='gobs' key='fk_id_indicator,fk_id_node' estimatedmetadata=true checkPrimaryKeyUnicity='0' table=&quot;gobs&quot;.&quot;r_indicator_node&quot;">
         <customproperties></customproperties>
       </layer-tree-layer>
-      <layer-tree-layer checked="Qt::Checked" expanded="1" id="r_graph_edge_f2eb47e9_728b_4c85_a839_3b488e132e06" legend_exp="" legend_split_behavior="0" name="r_graph_edge" patch_size="0,0" providerKey="postgres" source="service='gobs' sslmode=prefer key='ge_parent_node,ge_child_node' estimatedmetadata=true checkPrimaryKeyUnicity='0' table=&quot;gobs&quot;.&quot;r_graph_edge&quot;">
+      <layer-tree-layer checked="Qt::Checked" expanded="1" id="r_graph_edge_f2eb47e9_728b_4c85_a839_3b488e132e06" legend_exp="" legend_split_behavior="0" name="r_graph_edge" patch_size="0,0" providerKey="postgres" source="service='gobs' key='ge_parent_node,ge_child_node' estimatedmetadata=true checkPrimaryKeyUnicity='0' table=&quot;gobs&quot;.&quot;r_graph_edge&quot;">
         <customproperties></customproperties>
       </layer-tree-layer>
-      <layer-tree-layer checked="Qt::Checked" expanded="1" id="import_0343eb12_592e_4fd0_8380_51f4d62b6a56" legend_exp="" legend_split_behavior="0" name="import" patch_size="0,0" providerKey="postgres" source="service='gobs' sslmode=prefer key='id' estimatedmetadata=true checkPrimaryKeyUnicity='0' table=&quot;gobs&quot;.&quot;import&quot;">
+      <layer-tree-layer checked="Qt::Checked" expanded="1" id="import_0343eb12_592e_4fd0_8380_51f4d62b6a56" legend_exp="" legend_split_behavior="0" name="import" patch_size="0,0" providerKey="postgres" source="service='gobs' key='id' estimatedmetadata=true checkPrimaryKeyUnicity='0' table=&quot;gobs&quot;.&quot;import&quot;">
         <customproperties></customproperties>
       </layer-tree-layer>
-      <layer-tree-layer checked="Qt::Checked" expanded="1" id="graph_node_2cd9eee8_46e2_401c_87f7_8b40d9d6260e" legend_exp="" legend_split_behavior="0" name="graph_node" patch_size="0,0" providerKey="postgres" source="service='gobs' sslmode=prefer key='id' estimatedmetadata=true checkPrimaryKeyUnicity='0' table=&quot;gobs&quot;.&quot;graph_node&quot;">
+      <layer-tree-layer checked="Qt::Checked" expanded="1" id="graph_node_2cd9eee8_46e2_401c_87f7_8b40d9d6260e" legend_exp="" legend_split_behavior="0" name="graph_node" patch_size="0,0" providerKey="postgres" source="service='gobs' key='id' estimatedmetadata=true checkPrimaryKeyUnicity='0' table=&quot;gobs&quot;.&quot;graph_node&quot;">
         <customproperties></customproperties>
       </layer-tree-layer>
-      <layer-tree-layer checked="Qt::Checked" expanded="0" id="glossary_cee356e0_5be5_4d87_ac2b_e8e8967c4032" legend_exp="" legend_split_behavior="0" name="glossary" patch_size="0,0" providerKey="postgres" source="service='gobs' sslmode=prefer key='id' estimatedmetadata=true checkPrimaryKeyUnicity='0' table=&quot;gobs&quot;.&quot;glossary&quot;">
+      <layer-tree-layer checked="Qt::Checked" expanded="0" id="glossary_cee356e0_5be5_4d87_ac2b_e8e8967c4032" legend_exp="" legend_split_behavior="0" name="glossary" patch_size="0,0" providerKey="postgres" source="service='gobs' key='id' estimatedmetadata=true checkPrimaryKeyUnicity='0' table=&quot;gobs&quot;.&quot;glossary&quot;">
         <customproperties></customproperties>
       </layer-tree-layer>
     </layer-tree-group>
@@ -87,6 +90,7 @@
     </layer-tree-layer>
     <custom-order enabled="0">
       <item>osm_mapnik_73cc9876_fa44_4742_bc09_afe572b57bbe</item>
+      <item>application_a455f2b7_b92d_413b_bb50_b9777b274f84</item>
     </custom-order>
   </layer-tree-group>
   <snapping-settings enabled="0" intersection-snapping="0" maxScale="0" minScale="0" mode="2" scaleDependencyMode="0" self-snapping="0" tolerance="0" type="1" unit="2">
@@ -205,6 +209,11 @@
           <legendlayerfile isInOverview="0" layerid="series_04a7414a_ab6d_4611_8a60_bcd22071dc22" visible="1"></legendlayerfile>
         </filegroup>
       </legendlayer>
+      <legendlayer checked="Qt::Checked" drawingOrder="-1" name="application" open="true" showFeatureCount="0">
+        <filegroup hidden="false" open="true">
+          <legendlayerfile isInOverview="0" layerid="application_a455f2b7_b92d_413b_bb50_b9777b274f84" visible="1"></legendlayerfile>
+        </filegroup>
+      </legendlayer>
       <legendlayer checked="Qt::Checked" drawingOrder="-1" name="project" open="true" showFeatureCount="0">
         <filegroup hidden="false" open="true">
           <legendlayerfile isInOverview="0" layerid="project_f42a5660_8aba_49f5_a9e7_92abb64e339e" visible="1"></legendlayerfile>
@@ -256,81 +265,6 @@
   </legend>
   <mapViewDocks></mapViewDocks>
   <mapViewDocks3D></mapViewDocks3D>
-  <mapcanvas annotationsVisible="1" name="mAreaCanvas">
-    <units>degrees</units>
-    <extent>
-      <xmin>0</xmin>
-      <ymin>0</ymin>
-      <xmax>0</xmax>
-      <ymax>0</ymax>
-    </extent>
-    <rotation>0</rotation>
-    <destinationsrs>
-      <spatialrefsys>
-        <wkt>GEOGCRS["WGS 84",DATUM["World Geodetic System 1984",ELLIPSOID["WGS 84",6378137,298.257223563,LENGTHUNIT["metre",1]]],PRIMEM["Greenwich",0,ANGLEUNIT["degree",0.0174532925199433]],CS[ellipsoidal,2],AXIS["geodetic latitude (Lat)",north,ORDER[1],ANGLEUNIT["degree",0.0174532925199433]],AXIS["geodetic longitude (Lon)",east,ORDER[2],ANGLEUNIT["degree",0.0174532925199433]],USAGE[SCOPE["unknown"],AREA["World"],BBOX[-90,-180,90,180]],ID["EPSG",4326]]</wkt>
-        <proj4>+proj=longlat +datum=WGS84 +no_defs</proj4>
-        <srsid>3452</srsid>
-        <srid>4326</srid>
-        <authid>EPSG:4326</authid>
-        <description>WGS 84</description>
-        <projectionacronym>longlat</projectionacronym>
-        <ellipsoidacronym>EPSG:7030</ellipsoidacronym>
-        <geographicflag>true</geographicflag>
-      </spatialrefsys>
-    </destinationsrs>
-    <rendermaptile>0</rendermaptile>
-    <expressionContextScope></expressionContextScope>
-  </mapcanvas>
-  <mapcanvas annotationsVisible="1" name="mAreaCanvas">
-    <units>degrees</units>
-    <extent>
-      <xmin>0</xmin>
-      <ymin>0</ymin>
-      <xmax>0</xmax>
-      <ymax>0</ymax>
-    </extent>
-    <rotation>0</rotation>
-    <destinationsrs>
-      <spatialrefsys>
-        <wkt>GEOGCRS["WGS 84",DATUM["World Geodetic System 1984",ELLIPSOID["WGS 84",6378137,298.257223563,LENGTHUNIT["metre",1]]],PRIMEM["Greenwich",0,ANGLEUNIT["degree",0.0174532925199433]],CS[ellipsoidal,2],AXIS["geodetic latitude (Lat)",north,ORDER[1],ANGLEUNIT["degree",0.0174532925199433]],AXIS["geodetic longitude (Lon)",east,ORDER[2],ANGLEUNIT["degree",0.0174532925199433]],USAGE[SCOPE["unknown"],AREA["World"],BBOX[-90,-180,90,180]],ID["EPSG",4326]]</wkt>
-        <proj4>+proj=longlat +datum=WGS84 +no_defs</proj4>
-        <srsid>3452</srsid>
-        <srid>4326</srid>
-        <authid>EPSG:4326</authid>
-        <description>WGS 84</description>
-        <projectionacronym>longlat</projectionacronym>
-        <ellipsoidacronym>EPSG:7030</ellipsoidacronym>
-        <geographicflag>true</geographicflag>
-      </spatialrefsys>
-    </destinationsrs>
-    <rendermaptile>0</rendermaptile>
-    <expressionContextScope></expressionContextScope>
-  </mapcanvas>
-  <mapcanvas annotationsVisible="1" name="mAreaCanvas">
-    <units>degrees</units>
-    <extent>
-      <xmin>0</xmin>
-      <ymin>0</ymin>
-      <xmax>0</xmax>
-      <ymax>0</ymax>
-    </extent>
-    <rotation>0</rotation>
-    <destinationsrs>
-      <spatialrefsys>
-        <wkt>GEOGCRS["WGS 84",DATUM["World Geodetic System 1984",ELLIPSOID["WGS 84",6378137,298.257223563,LENGTHUNIT["metre",1]]],PRIMEM["Greenwich",0,ANGLEUNIT["degree",0.0174532925199433]],CS[ellipsoidal,2],AXIS["geodetic latitude (Lat)",north,ORDER[1],ANGLEUNIT["degree",0.0174532925199433]],AXIS["geodetic longitude (Lon)",east,ORDER[2],ANGLEUNIT["degree",0.0174532925199433]],USAGE[SCOPE["unknown"],AREA["World"],BBOX[-90,-180,90,180]],ID["EPSG",4326]]</wkt>
-        <proj4>+proj=longlat +datum=WGS84 +no_defs</proj4>
-        <srsid>3452</srsid>
-        <srid>4326</srid>
-        <authid>EPSG:4326</authid>
-        <description>WGS 84</description>
-        <projectionacronym>longlat</projectionacronym>
-        <ellipsoidacronym>EPSG:7030</ellipsoidacronym>
-        <geographicflag>true</geographicflag>
-      </spatialrefsys>
-    </destinationsrs>
-    <rendermaptile>0</rendermaptile>
-    <expressionContextScope></expressionContextScope>
-  </mapcanvas>
   <main-annotation-layer autoRefreshEnabled="0" autoRefreshTime="0" refreshOnNotifyEnabled="0" refreshOnNotifyMessage="" type="annotation">
     <id>Annotations_239d7cb0_01a6_4a7a_9e12_6651dbd7ecd7</id>
     <datasource></datasource>
@@ -382,7 +316,7 @@
   <projectlayers>
     <maplayer autoRefreshEnabled="0" autoRefreshTime="0" geometry="No geometry" hasScaleBasedVisibilityFlag="0" maxScale="0" minScale="1e+08" readOnly="0" refreshOnNotifyEnabled="0" refreshOnNotifyMessage="" styleCategories="AllStyleCategories" type="vector" wkbType="NoGeometry">
       <id>actor_5f01a6e5_8205_462f_af40_0ffd7ff0a44f</id>
-      <datasource>service='gobs' sslmode=prefer key='id' estimatedmetadata=true checkPrimaryKeyUnicity='0' table="gobs"."actor"</datasource>
+      <datasource>service='gobs' key='id' estimatedmetadata=true checkPrimaryKeyUnicity='0' table="gobs"."actor"</datasource>
       <keywordList>
         <value></value>
       </keywordList>
@@ -477,7 +411,7 @@
       </geometryOptions>
       <legend type="default-vector"></legend>
       <referencedLayers>
-        <relation dataSource="service='gobs' sslmode=prefer key='id' estimatedmetadata=true checkPrimaryKeyUnicity='0' table=&quot;gobs&quot;.&quot;actor_category&quot;" id="actor_5f01a6e5_8205_462f_af40_0ffd7ff0a44f_id_category_actor_category_8a7edcf8_cb34_4689_b22b_7a8a6a2ab610_id" layerId="actor_category_8a7edcf8_cb34_4689_b22b_7a8a6a2ab610" layerName="actor_category" name="actor_id_category_fkey" providerKey="postgres" referencedLayer="actor_category_8a7edcf8_cb34_4689_b22b_7a8a6a2ab610" referencingLayer="actor_5f01a6e5_8205_462f_af40_0ffd7ff0a44f" strength="Association">
+        <relation dataSource="service='gobs' key='id' estimatedmetadata=true checkPrimaryKeyUnicity='0' table=&quot;gobs&quot;.&quot;actor_category&quot;" id="actor_5f01a6e5_8205_462f_af40_0ffd7ff0a44f_id_category_actor_category_8a7edcf8_cb34_4689_b22b_7a8a6a2ab610_id" layerId="actor_category_8a7edcf8_cb34_4689_b22b_7a8a6a2ab610" layerName="actor_category" name="actor_id_category_fkey" providerKey="postgres" referencedLayer="actor_category_8a7edcf8_cb34_4689_b22b_7a8a6a2ab610" referencingLayer="actor_5f01a6e5_8205_462f_af40_0ffd7ff0a44f" strength="Association">
           <fieldRef referencedField="id" referencingField="id_category"></fieldRef>
         </relation>
       </referencedLayers>
@@ -662,7 +596,7 @@ def my_form_open(dialog, layer, feature):
     </maplayer>
     <maplayer autoRefreshEnabled="0" autoRefreshTime="0" geometry="No geometry" hasScaleBasedVisibilityFlag="0" maxScale="0" minScale="1e+08" readOnly="0" refreshOnNotifyEnabled="0" refreshOnNotifyMessage="" styleCategories="AllStyleCategories" type="vector" wkbType="NoGeometry">
       <id>actor_category_8a7edcf8_cb34_4689_b22b_7a8a6a2ab610</id>
-      <datasource>service='gobs' sslmode=prefer key='id' estimatedmetadata=true checkPrimaryKeyUnicity='0' table="gobs"."actor_category"</datasource>
+      <datasource>service='gobs' key='id' estimatedmetadata=true checkPrimaryKeyUnicity='0' table="gobs"."actor_category"</datasource>
       <keywordList>
         <value></value>
       </keywordList>
@@ -868,8 +802,242 @@ def my_form_open(dialog, layer, feature):
       <mapTip></mapTip>
     </maplayer>
     <maplayer autoRefreshEnabled="0" autoRefreshTime="0" geometry="No geometry" hasScaleBasedVisibilityFlag="0" maxScale="0" minScale="1e+08" readOnly="0" refreshOnNotifyEnabled="0" refreshOnNotifyMessage="" styleCategories="AllStyleCategories" type="vector" wkbType="NoGeometry">
+      <id>application_a455f2b7_b92d_413b_bb50_b9777b274f84</id>
+      <datasource>service='gobs' sslmode=disable key='id' estimatedmetadata=true checkPrimaryKeyUnicity='1' table="gobs"."application"</datasource>
+      <keywordList>
+        <value></value>
+      </keywordList>
+      <layername>application</layername>
+      <srs>
+        <spatialrefsys>
+          <wkt></wkt>
+          <proj4></proj4>
+          <srsid>0</srsid>
+          <srid>0</srid>
+          <authid></authid>
+          <description></description>
+          <projectionacronym></projectionacronym>
+          <ellipsoidacronym></ellipsoidacronym>
+          <geographicflag>false</geographicflag>
+        </spatialrefsys>
+      </srs>
+      <resourceMetadata>
+        <identifier></identifier>
+        <parentidentifier></parentidentifier>
+        <language></language>
+        <type>dataset</type>
+        <title></title>
+        <abstract>List the external applications interacting with G-Obs database with the web API.
+This will help storing application specific data such as the default values when creating automatically series, protocols, users, etc.</abstract>
+        <contact>
+          <name></name>
+          <organization></organization>
+          <position></position>
+          <voice></voice>
+          <fax></fax>
+          <email></email>
+          <role></role>
+        </contact>
+        <links></links>
+        <fees></fees>
+        <encoding></encoding>
+        <crs>
+          <spatialrefsys>
+            <wkt></wkt>
+            <proj4></proj4>
+            <srsid>0</srsid>
+            <srid>0</srid>
+            <authid></authid>
+            <description></description>
+            <projectionacronym></projectionacronym>
+            <ellipsoidacronym></ellipsoidacronym>
+            <geographicflag>false</geographicflag>
+          </spatialrefsys>
+        </crs>
+        <extent>
+          <spatial crs="" dimensions="2" maxx="0" maxy="0" maxz="0" minx="0" miny="0" minz="0"></spatial>
+          <temporal>
+            <period>
+              <start></start>
+              <end></end>
+            </period>
+          </temporal>
+        </extent>
+      </resourceMetadata>
+      <provider encoding="">postgres</provider>
+      <vectorjoins></vectorjoins>
+      <layerDependencies></layerDependencies>
+      <dataDependencies></dataDependencies>
+      <expressionfields></expressionfields>
+      <map-layer-style-manager current="défaut">
+        <map-layer-style name="défaut"></map-layer-style>
+      </map-layer-style-manager>
+      <auxiliaryLayer></auxiliaryLayer>
+      <flags>
+        <Identifiable>1</Identifiable>
+        <Removable>1</Removable>
+        <Searchable>1</Searchable>
+      </flags>
+      <temporal accumulate="0" durationField="" durationUnit="min" enabled="0" endExpression="" endField="" fixedDuration="0" mode="0" startExpression="" startField="">
+        <fixedRange>
+          <start></start>
+          <end></end>
+        </fixedRange>
+      </temporal>
+      <customproperties>
+        <property key="dualview/previewExpressions">
+          <value>"ap_description"</value>
+        </property>
+        <property key="embeddedWidgets/count" value="0"></property>
+        <property key="variableNames"></property>
+        <property key="variableValues"></property>
+      </customproperties>
+      <geometryOptions geometryPrecision="0" removeDuplicateNodes="0">
+        <activeChecks></activeChecks>
+        <checkConfiguration></checkConfiguration>
+      </geometryOptions>
+      <legend type="default-vector"></legend>
+      <referencedLayers></referencedLayers>
+      <fieldConfiguration>
+        <field configurationFlags="None" name="id">
+          <editWidget type="TextEdit">
+            <config>
+              <Option type="Map">
+                <Option name="IsMultiline" type="bool" value="false"></Option>
+                <Option name="UseHtml" type="bool" value="false"></Option>
+              </Option>
+            </config>
+          </editWidget>
+        </field>
+        <field configurationFlags="None" name="ap_code">
+          <editWidget type="TextEdit">
+            <config>
+              <Option type="Map">
+                <Option name="IsMultiline" type="bool" value="false"></Option>
+                <Option name="UseHtml" type="bool" value="false"></Option>
+              </Option>
+            </config>
+          </editWidget>
+        </field>
+        <field configurationFlags="None" name="ap_label">
+          <editWidget type="TextEdit">
+            <config>
+              <Option type="Map">
+                <Option name="IsMultiline" type="bool" value="false"></Option>
+                <Option name="UseHtml" type="bool" value="false"></Option>
+              </Option>
+            </config>
+          </editWidget>
+        </field>
+        <field configurationFlags="None" name="ap_description">
+          <editWidget type="TextEdit">
+            <config>
+              <Option type="Map">
+                <Option name="IsMultiline" type="bool" value="true"></Option>
+                <Option name="UseHtml" type="bool" value="false"></Option>
+              </Option>
+            </config>
+          </editWidget>
+        </field>
+        <field configurationFlags="None" name="ap_default_values">
+          <editWidget type="KeyValue">
+            <config>
+              <Option></Option>
+            </config>
+          </editWidget>
+        </field>
+      </fieldConfiguration>
+      <aliases>
+        <alias field="id" index="0" name="Unique identifier"></alias>
+        <alias field="ap_code" index="1" name="Application code"></alias>
+        <alias field="ap_label" index="2" name="Label"></alias>
+        <alias field="ap_description" index="3" name="Description"></alias>
+        <alias field="ap_default_values" index="4" name="Default values for item creation by API"></alias>
+      </aliases>
+      <defaults>
+        <default applyOnUpdate="0" expression="" field="id"></default>
+        <default applyOnUpdate="0" expression="" field="ap_code"></default>
+        <default applyOnUpdate="0" expression="" field="ap_label"></default>
+        <default applyOnUpdate="0" expression="" field="ap_description"></default>
+        <default applyOnUpdate="0" expression="" field="ap_default_values"></default>
+      </defaults>
+      <constraints>
+        <constraint constraints="3" exp_strength="0" field="id" notnull_strength="1" unique_strength="1"></constraint>
+        <constraint constraints="3" exp_strength="0" field="ap_code" notnull_strength="1" unique_strength="1"></constraint>
+        <constraint constraints="3" exp_strength="0" field="ap_label" notnull_strength="1" unique_strength="1"></constraint>
+        <constraint constraints="1" exp_strength="0" field="ap_description" notnull_strength="1" unique_strength="0"></constraint>
+        <constraint constraints="1" exp_strength="0" field="ap_default_values" notnull_strength="1" unique_strength="0"></constraint>
+      </constraints>
+      <constraintExpressions>
+        <constraint desc="" exp="" field="id"></constraint>
+        <constraint desc="" exp="" field="ap_code"></constraint>
+        <constraint desc="" exp="" field="ap_label"></constraint>
+        <constraint desc="" exp="" field="ap_description"></constraint>
+        <constraint desc="" exp="" field="ap_default_values"></constraint>
+      </constraintExpressions>
+      <expressionfields></expressionfields>
+      <attributeactions>
+        <defaultAction key="Canvas" value="{00000000-0000-0000-0000-000000000000}"></defaultAction>
+      </attributeactions>
+      <attributetableconfig actionWidgetStyle="dropDown" sortExpression="" sortOrder="0">
+        <columns>
+          <column hidden="0" name="id" type="field" width="-1"></column>
+          <column hidden="0" name="ap_code" type="field" width="-1"></column>
+          <column hidden="0" name="ap_label" type="field" width="-1"></column>
+          <column hidden="0" name="ap_description" type="field" width="-1"></column>
+          <column hidden="0" name="ap_default_values" type="field" width="-1"></column>
+          <column hidden="1" type="actions" width="-1"></column>
+        </columns>
+      </attributetableconfig>
+      <conditionalstyles>
+        <rowstyles></rowstyles>
+        <fieldstyles></fieldstyles>
+      </conditionalstyles>
+      <storedexpressions></storedexpressions>
+      <editform tolerant="1"></editform>
+      <editforminit></editforminit>
+      <editforminitcodesource>0</editforminitcodesource>
+      <editforminitfilepath></editforminitfilepath>
+      <editforminitcode># -*- coding: utf-8 -*-
+"""
+Les formulaires QGIS peuvent avoir une fonction Python qui sera appelée à l'ouverture du formulaire.
+
+Utilisez cette fonction pour ajouter plus de fonctionnalités à vos formulaires.
+
+Entrez le nom de la fonction dans le champ "Fonction d'initialisation Python".
+Voici un exemple à suivre:
+"""
+from qgis.PyQt.QtWidgets import QWidget
+
+def my_form_open(dialog, layer, feature):
+	geom = feature.geometry()
+	control = dialog.findChild(QWidget, "MyLineEdit")
+
+</editforminitcode>
+      <featformsuppress>0</featformsuppress>
+      <editorlayout>generatedlayout</editorlayout>
+      <editable>
+        <field editable="1" name="ap_code"></field>
+        <field editable="1" name="ap_default_values"></field>
+        <field editable="1" name="ap_description"></field>
+        <field editable="1" name="ap_label"></field>
+        <field editable="0" name="id"></field>
+      </editable>
+      <labelOnTop>
+        <field labelOnTop="0" name="ap_code"></field>
+        <field labelOnTop="0" name="ap_default_values"></field>
+        <field labelOnTop="0" name="ap_description"></field>
+        <field labelOnTop="0" name="ap_label"></field>
+        <field labelOnTop="0" name="id"></field>
+      </labelOnTop>
+      <dataDefinedFieldProperties></dataDefinedFieldProperties>
+      <widgets></widgets>
+      <previewExpression>"ap_description"</previewExpression>
+      <mapTip></mapTip>
+    </maplayer>
+    <maplayer autoRefreshEnabled="0" autoRefreshTime="0" geometry="No geometry" hasScaleBasedVisibilityFlag="0" maxScale="0" minScale="1e+08" readOnly="0" refreshOnNotifyEnabled="0" refreshOnNotifyMessage="" styleCategories="AllStyleCategories" type="vector" wkbType="NoGeometry">
       <id>document_3f322924_735f_4bef_b903_9521d2f25444</id>
-      <datasource>service='gobs' sslmode=prefer key='id' estimatedmetadata=true checkPrimaryKeyUnicity='1' table="gobs"."document"</datasource>
+      <datasource>service='gobs' key='id' estimatedmetadata=true checkPrimaryKeyUnicity='1' table="gobs"."document"</datasource>
       <keywordList>
         <value></value>
       </keywordList>
@@ -964,7 +1132,7 @@ def my_form_open(dialog, layer, feature):
       </geometryOptions>
       <legend type="default-vector"></legend>
       <referencedLayers>
-        <relation dataSource="service='gobs' sslmode=prefer key='id' estimatedmetadata=true checkPrimaryKeyUnicity='0' table=&quot;gobs&quot;.&quot;indicator&quot;" id="document_3f322924_735f_4bef_b903_9521d2f25444_fk_id_indicator_indicator_18ba18bf_0390_45a3_8edd_1cc049e8a251_id" layerId="indicator_18ba18bf_0390_45a3_8edd_1cc049e8a251" layerName="indicator" name="document_fk_id_indicator_fkey" providerKey="postgres" referencedLayer="indicator_18ba18bf_0390_45a3_8edd_1cc049e8a251" referencingLayer="document_3f322924_735f_4bef_b903_9521d2f25444" strength="Association">
+        <relation dataSource="service='gobs' key='id' estimatedmetadata=true checkPrimaryKeyUnicity='0' table=&quot;gobs&quot;.&quot;indicator&quot;" id="document_3f322924_735f_4bef_b903_9521d2f25444_fk_id_indicator_indicator_18ba18bf_0390_45a3_8edd_1cc049e8a251_id" layerId="indicator_18ba18bf_0390_45a3_8edd_1cc049e8a251" layerName="indicator" name="document_fk_id_indicator_fkey" providerKey="postgres" referencedLayer="indicator_18ba18bf_0390_45a3_8edd_1cc049e8a251" referencingLayer="document_3f322924_735f_4bef_b903_9521d2f25444" strength="Association">
           <fieldRef referencedField="id" referencingField="fk_id_indicator"></fieldRef>
         </relation>
       </referencedLayers>
@@ -1205,7 +1373,7 @@ def my_form_open(dialog, layer, feature):
     </maplayer>
     <maplayer autoRefreshEnabled="0" autoRefreshTime="0" geometry="No geometry" hasScaleBasedVisibilityFlag="0" maxScale="0" minScale="1e+08" readOnly="0" refreshOnNotifyEnabled="0" refreshOnNotifyMessage="" styleCategories="AllStyleCategories" type="vector" wkbType="NoGeometry">
       <id>glossary_cee356e0_5be5_4d87_ac2b_e8e8967c4032</id>
-      <datasource>service='gobs' sslmode=prefer key='id' estimatedmetadata=true checkPrimaryKeyUnicity='0' table="gobs"."glossary"</datasource>
+      <datasource>service='gobs' key='id' estimatedmetadata=true checkPrimaryKeyUnicity='0' table="gobs"."glossary"</datasource>
       <keywordList>
         <value></value>
       </keywordList>
@@ -1459,7 +1627,7 @@ def my_form_open(dialog, layer, feature):
     </maplayer>
     <maplayer autoRefreshEnabled="0" autoRefreshTime="0" geometry="No geometry" hasScaleBasedVisibilityFlag="0" maxScale="0" minScale="1e+08" readOnly="0" refreshOnNotifyEnabled="0" refreshOnNotifyMessage="" styleCategories="AllStyleCategories" type="vector" wkbType="NoGeometry">
       <id>graph_node_2cd9eee8_46e2_401c_87f7_8b40d9d6260e</id>
-      <datasource>service='gobs' sslmode=prefer key='id' estimatedmetadata=true checkPrimaryKeyUnicity='0' table="gobs"."graph_node"</datasource>
+      <datasource>service='gobs' key='id' estimatedmetadata=true checkPrimaryKeyUnicity='0' table="gobs"."graph_node"</datasource>
       <keywordList>
         <value></value>
       </keywordList>
@@ -1647,7 +1815,7 @@ def my_form_open(dialog, layer, feature):
     </maplayer>
     <maplayer autoRefreshEnabled="0" autoRefreshTime="0" geometry="No geometry" hasScaleBasedVisibilityFlag="0" maxScale="0" minScale="1e+08" readOnly="0" refreshOnNotifyEnabled="0" refreshOnNotifyMessage="" styleCategories="AllStyleCategories" type="vector" wkbType="NoGeometry">
       <id>import_0343eb12_592e_4fd0_8380_51f4d62b6a56</id>
-      <datasource>service='gobs' sslmode=prefer key='id' estimatedmetadata=true checkPrimaryKeyUnicity='0' table="gobs"."import"</datasource>
+      <datasource>service='gobs' key='id' estimatedmetadata=true checkPrimaryKeyUnicity='0' table="gobs"."import"</datasource>
       <keywordList>
         <value></value>
       </keywordList>
@@ -1742,7 +1910,7 @@ def my_form_open(dialog, layer, feature):
       </geometryOptions>
       <legend type="default-vector"></legend>
       <referencedLayers>
-        <relation dataSource="service='gobs' sslmode=prefer key='id' estimatedmetadata=true checkPrimaryKeyUnicity='0' table=&quot;gobs&quot;.&quot;series&quot;" id="import_0343eb12_592e_4fd0_8380_51f4d62b6a56_fk_id_series_series_04a7414a_ab6d_4611_8a60_bcd22071dc22_id" layerId="series_04a7414a_ab6d_4611_8a60_bcd22071dc22" layerName="series" name="import_fk_id_series_fkey" providerKey="postgres" referencedLayer="series_04a7414a_ab6d_4611_8a60_bcd22071dc22" referencingLayer="import_0343eb12_592e_4fd0_8380_51f4d62b6a56" strength="Association">
+        <relation dataSource="service='gobs' key='id' estimatedmetadata=true checkPrimaryKeyUnicity='0' table=&quot;gobs&quot;.&quot;series&quot;" id="import_0343eb12_592e_4fd0_8380_51f4d62b6a56_fk_id_series_series_04a7414a_ab6d_4611_8a60_bcd22071dc22_id" layerId="series_04a7414a_ab6d_4611_8a60_bcd22071dc22" layerName="series" name="import_fk_id_series_fkey" providerKey="postgres" referencedLayer="series_04a7414a_ab6d_4611_8a60_bcd22071dc22" referencingLayer="import_0343eb12_592e_4fd0_8380_51f4d62b6a56" strength="Association">
           <fieldRef referencedField="id" referencingField="fk_id_series"></fieldRef>
         </relation>
       </referencedLayers>
@@ -1868,7 +2036,7 @@ def my_form_open(dialog, layer, feature):
     </maplayer>
     <maplayer autoRefreshEnabled="0" autoRefreshTime="0" geometry="No geometry" hasScaleBasedVisibilityFlag="0" maxScale="0" minScale="1e+08" readOnly="0" refreshOnNotifyEnabled="0" refreshOnNotifyMessage="" styleCategories="AllStyleCategories" type="vector" wkbType="NoGeometry">
       <id>indicator_18ba18bf_0390_45a3_8edd_1cc049e8a251</id>
-      <datasource>service='gobs' sslmode=prefer key='id' estimatedmetadata=true checkPrimaryKeyUnicity='0' table="gobs"."indicator"</datasource>
+      <datasource>service='gobs' key='id' estimatedmetadata=true checkPrimaryKeyUnicity='0' table="gobs"."indicator"</datasource>
       <keywordList>
         <value></value>
       </keywordList>
@@ -2341,7 +2509,9 @@ def my_form_open(dialog, layer, feature):
         <property key="QFieldSync/action" value="offline"></property>
         <property key="QFieldSync/cloud_action" value="offline"></property>
         <property key="QFieldSync/photo_naming" value="{}"></property>
-        <property key="dualview/previewExpressions" value="&quot;id&quot;"></property>
+        <property key="dualview/previewExpressions">
+          <value>"id"</value>
+        </property>
       </customproperties>
       <geometryOptions geometryPrecision="0" removeDuplicateNodes="0">
         <activeChecks type="StringList">
@@ -2499,7 +2669,7 @@ def my_form_open(dialog, layer, feature):
     </maplayer>
     <maplayer autoRefreshEnabled="0" autoRefreshTime="0" geometry="No geometry" hasScaleBasedVisibilityFlag="0" maxScale="0" minScale="1e+08" readOnly="0" refreshOnNotifyEnabled="0" refreshOnNotifyMessage="" styleCategories="AllStyleCategories" type="vector" wkbType="NoGeometry">
       <id>observation_bcc90162_47c8_4097_bc24_a31af92d2708</id>
-      <datasource>service='gobs' sslmode=prefer key='id' estimatedmetadata=true checkPrimaryKeyUnicity='0' table="gobs"."observation"</datasource>
+      <datasource>service='gobs' key='id' estimatedmetadata=true checkPrimaryKeyUnicity='0' table="gobs"."observation"</datasource>
       <keywordList>
         <value></value>
       </keywordList>
@@ -2594,10 +2764,10 @@ def my_form_open(dialog, layer, feature):
       </geometryOptions>
       <legend type="default-vector"></legend>
       <referencedLayers>
-        <relation dataSource="service='gobs' sslmode=prefer key='id' estimatedmetadata=true checkPrimaryKeyUnicity='0' table=&quot;gobs&quot;.&quot;import&quot;" id="observation_bcc90162_47c8_4097_bc24_a31af92d2708_fk_id_import_import_0343eb12_592e_4fd0_8380_51f4d62b6a56_id" layerId="import_0343eb12_592e_4fd0_8380_51f4d62b6a56" layerName="import" name="observation_fk_id_import_fkey" providerKey="postgres" referencedLayer="import_0343eb12_592e_4fd0_8380_51f4d62b6a56" referencingLayer="observation_bcc90162_47c8_4097_bc24_a31af92d2708" strength="Association">
+        <relation dataSource="service='gobs' key='id' estimatedmetadata=true checkPrimaryKeyUnicity='0' table=&quot;gobs&quot;.&quot;import&quot;" id="observation_bcc90162_47c8_4097_bc24_a31af92d2708_fk_id_import_import_0343eb12_592e_4fd0_8380_51f4d62b6a56_id" layerId="import_0343eb12_592e_4fd0_8380_51f4d62b6a56" layerName="import" name="observation_fk_id_import_fkey" providerKey="postgres" referencedLayer="import_0343eb12_592e_4fd0_8380_51f4d62b6a56" referencingLayer="observation_bcc90162_47c8_4097_bc24_a31af92d2708" strength="Association">
           <fieldRef referencedField="id" referencingField="fk_id_import"></fieldRef>
         </relation>
-        <relation dataSource="service='gobs' sslmode=prefer key='id' estimatedmetadata=true checkPrimaryKeyUnicity='0' table=&quot;gobs&quot;.&quot;series&quot;" id="observation_bcc90162_47c8_4097_bc24_a31af92d2708_fk_id_series_series_04a7414a_ab6d_4611_8a60_bcd22071dc22_id" layerId="series_04a7414a_ab6d_4611_8a60_bcd22071dc22" layerName="series" name="observation_fk_id_series_fkey" providerKey="postgres" referencedLayer="series_04a7414a_ab6d_4611_8a60_bcd22071dc22" referencingLayer="observation_bcc90162_47c8_4097_bc24_a31af92d2708" strength="Association">
+        <relation dataSource="service='gobs' key='id' estimatedmetadata=true checkPrimaryKeyUnicity='0' table=&quot;gobs&quot;.&quot;series&quot;" id="observation_bcc90162_47c8_4097_bc24_a31af92d2708_fk_id_series_series_04a7414a_ab6d_4611_8a60_bcd22071dc22_id" layerId="series_04a7414a_ab6d_4611_8a60_bcd22071dc22" layerName="series" name="observation_fk_id_series_fkey" providerKey="postgres" referencedLayer="series_04a7414a_ab6d_4611_8a60_bcd22071dc22" referencingLayer="observation_bcc90162_47c8_4097_bc24_a31af92d2708" strength="Association">
           <fieldRef referencedField="id" referencingField="fk_id_series"></fieldRef>
         </relation>
       </referencedLayers>
@@ -2933,7 +3103,7 @@ def my_form_open(dialog, layer, feature):
     </maplayer>
     <maplayer autoRefreshEnabled="0" autoRefreshTime="0" geometry="No geometry" hasScaleBasedVisibilityFlag="0" maxScale="0" minScale="1e+08" readOnly="0" refreshOnNotifyEnabled="0" refreshOnNotifyMessage="" styleCategories="AllStyleCategories" type="vector" wkbType="NoGeometry">
       <id>project_f42a5660_8aba_49f5_a9e7_92abb64e339e</id>
-      <datasource>service='gobs' sslmode=prefer key='id' estimatedmetadata=true checkPrimaryKeyUnicity='1' table="gobs"."project"</datasource>
+      <datasource>service='gobs' key='id' estimatedmetadata=true checkPrimaryKeyUnicity='1' table="gobs"."project"</datasource>
       <keywordList>
         <value></value>
       </keywordList>
@@ -3090,7 +3260,7 @@ def my_form_open(dialog, layer, feature):
                 <Option name="Layer" type="QString" value="indicator_18ba18bf_0390_45a3_8edd_1cc049e8a251"></Option>
                 <Option name="LayerName" type="QString" value="indicator"></Option>
                 <Option name="LayerProviderName" type="QString" value="postgres"></Option>
-                <Option name="LayerSource" type="QString" value="service='gobs' sslmode=prefer key='id' estimatedmetadata=true checkPrimaryKeyUnicity='0' table=&quot;gobs&quot;.&quot;indicator&quot;"></Option>
+                <Option name="LayerSource" type="QString" value="service='gobs' key='id' estimatedmetadata=true checkPrimaryKeyUnicity='0' table=&quot;gobs&quot;.&quot;indicator&quot;"></Option>
                 <Option name="NofColumns" type="int" value="1"></Option>
                 <Option name="OrderByValue" type="bool" value="false"></Option>
                 <Option name="UseCompleter" type="bool" value="false"></Option>
@@ -3248,7 +3418,26 @@ def my_form_open(dialog, layer, feature):
 
 </editforminitcode>
       <featformsuppress>0</featformsuppress>
-      <editorlayout>generatedlayout</editorlayout>
+      <editorlayout>tablayout</editorlayout>
+      <attributeEditorForm>
+        <attributeEditorContainer columnCount="1" groupBox="0" name="Project" showLabel="1" visibilityExpression="" visibilityExpressionEnabled="0">
+          <attributeEditorContainer columnCount="1" groupBox="1" name="General" showLabel="1" visibilityExpression="" visibilityExpressionEnabled="0">
+            <attributeEditorField index="0" name="id" showLabel="1"></attributeEditorField>
+            <attributeEditorField index="1" name="pt_code" showLabel="1"></attributeEditorField>
+            <attributeEditorField index="3" name="pt_label" showLabel="1"></attributeEditorField>
+            <attributeEditorField index="4" name="pt_description" showLabel="1"></attributeEditorField>
+            <attributeEditorField index="6" name="pt_groups" showLabel="1"></attributeEditorField>
+            <attributeEditorField index="5" name="pt_indicator_codes" showLabel="1"></attributeEditorField>
+            <attributeEditorField index="2" name="pt_lizmap_project_key" showLabel="1"></attributeEditorField>
+          </attributeEditorContainer>
+          <attributeEditorContainer columnCount="1" groupBox="1" name="Extent" showLabel="1" visibilityExpression="" visibilityExpressionEnabled="0">
+            <attributeEditorField index="7" name="pt_xmin" showLabel="1"></attributeEditorField>
+            <attributeEditorField index="8" name="pt_ymin" showLabel="1"></attributeEditorField>
+            <attributeEditorField index="9" name="pt_xmax" showLabel="1"></attributeEditorField>
+            <attributeEditorField index="10" name="pt_ymax" showLabel="1"></attributeEditorField>
+          </attributeEditorContainer>
+        </attributeEditorContainer>
+      </attributeEditorForm>
       <editable>
         <field editable="0" name="id"></field>
         <field editable="1" name="pt_code"></field>
@@ -3282,7 +3471,7 @@ def my_form_open(dialog, layer, feature):
     </maplayer>
     <maplayer autoRefreshEnabled="0" autoRefreshTime="0" geometry="No geometry" hasScaleBasedVisibilityFlag="0" maxScale="0" minScale="1e+08" readOnly="0" refreshOnNotifyEnabled="0" refreshOnNotifyMessage="" styleCategories="AllStyleCategories" type="vector" wkbType="NoGeometry">
       <id>project_view_c10ae5f5_e011_4223_a08c_903108ad41d2</id>
-      <datasource>service='gobs' sslmode=prefer key='id' estimatedmetadata=true checkPrimaryKeyUnicity='1' table="gobs"."project_view"</datasource>
+      <datasource>service='gobs' key='id' estimatedmetadata=true checkPrimaryKeyUnicity='1' table="gobs"."project_view"</datasource>
       <keywordList>
         <value></value>
       </keywordList>
@@ -3376,7 +3565,7 @@ def my_form_open(dialog, layer, feature):
       </geometryOptions>
       <legend type="default-vector"></legend>
       <referencedLayers>
-        <relation dataSource="service='gobs' sslmode=prefer key='id' estimatedmetadata=true checkPrimaryKeyUnicity='1' table=&quot;gobs&quot;.&quot;project&quot;" id="project_view_c10ae5f5_e011_4223_a08c_903108ad41d2_fk_id_project_project_f42a5660_8aba_49f5_a9e7_92abb64e339e_id" layerId="project_f42a5660_8aba_49f5_a9e7_92abb64e339e" layerName="project" name="project_view_fk_id_project_fkey" providerKey="postgres" referencedLayer="project_f42a5660_8aba_49f5_a9e7_92abb64e339e" referencingLayer="project_view_c10ae5f5_e011_4223_a08c_903108ad41d2" strength="Association">
+        <relation dataSource="service='gobs' key='id' estimatedmetadata=true checkPrimaryKeyUnicity='1' table=&quot;gobs&quot;.&quot;project&quot;" id="project_view_c10ae5f5_e011_4223_a08c_903108ad41d2_fk_id_project_project_f42a5660_8aba_49f5_a9e7_92abb64e339e_id" layerId="project_f42a5660_8aba_49f5_a9e7_92abb64e339e" layerName="project" name="project_view_fk_id_project_fkey" providerKey="postgres" referencedLayer="project_f42a5660_8aba_49f5_a9e7_92abb64e339e" referencingLayer="project_view_c10ae5f5_e011_4223_a08c_903108ad41d2" strength="Association">
           <fieldRef referencedField="id" referencingField="fk_id_project"></fieldRef>
         </relation>
       </referencedLayers>
@@ -3563,7 +3752,7 @@ def my_form_open(dialog, layer, feature):
     </maplayer>
     <maplayer autoRefreshEnabled="0" autoRefreshTime="0" geometry="No geometry" hasScaleBasedVisibilityFlag="0" maxScale="0" minScale="1e+08" readOnly="0" refreshOnNotifyEnabled="0" refreshOnNotifyMessage="" styleCategories="AllStyleCategories" type="vector" wkbType="NoGeometry">
       <id>protocol_5507f1c8_1802_4df0_a273_8e9b7f52c352</id>
-      <datasource>service='gobs' sslmode=prefer key='id' estimatedmetadata=true checkPrimaryKeyUnicity='0' table="gobs"."protocol"</datasource>
+      <datasource>service='gobs' key='id' estimatedmetadata=true checkPrimaryKeyUnicity='0' table="gobs"."protocol"</datasource>
       <keywordList>
         <value></value>
       </keywordList>
@@ -3795,7 +3984,7 @@ def my_form_open(dialog, layer, feature):
     </maplayer>
     <maplayer autoRefreshEnabled="0" autoRefreshTime="0" geometry="No geometry" hasScaleBasedVisibilityFlag="0" maxScale="0" minScale="1e+08" readOnly="0" refreshOnNotifyEnabled="0" refreshOnNotifyMessage="" styleCategories="AllStyleCategories" type="vector" wkbType="NoGeometry">
       <id>r_graph_edge_f2eb47e9_728b_4c85_a839_3b488e132e06</id>
-      <datasource>service='gobs' sslmode=prefer key='ge_parent_node,ge_child_node' estimatedmetadata=true checkPrimaryKeyUnicity='0' table="gobs"."r_graph_edge"</datasource>
+      <datasource>service='gobs' key='ge_parent_node,ge_child_node' estimatedmetadata=true checkPrimaryKeyUnicity='0' table="gobs"."r_graph_edge"</datasource>
       <keywordList>
         <value></value>
       </keywordList>
@@ -3931,7 +4120,7 @@ def my_form_open(dialog, layer, feature):
     </maplayer>
     <maplayer autoRefreshEnabled="0" autoRefreshTime="0" geometry="No geometry" hasScaleBasedVisibilityFlag="0" maxScale="0" minScale="1e+08" readOnly="0" refreshOnNotifyEnabled="0" refreshOnNotifyMessage="" styleCategories="AllStyleCategories" type="vector" wkbType="NoGeometry">
       <id>r_indicator_node_2ca83116_e69f_4dcb_abcb_de5bdf44b2be</id>
-      <datasource>service='gobs' sslmode=prefer key='fk_id_indicator,fk_id_node' estimatedmetadata=true checkPrimaryKeyUnicity='0' table="gobs"."r_indicator_node"</datasource>
+      <datasource>service='gobs' key='fk_id_indicator,fk_id_node' estimatedmetadata=true checkPrimaryKeyUnicity='0' table="gobs"."r_indicator_node"</datasource>
       <keywordList>
         <value></value>
       </keywordList>
@@ -4008,10 +4197,10 @@ def my_form_open(dialog, layer, feature):
       </geometryOptions>
       <legend type="default-vector"></legend>
       <referencedLayers>
-        <relation dataSource="service='gobs' sslmode=prefer key='id' estimatedmetadata=true checkPrimaryKeyUnicity='0' table=&quot;gobs&quot;.&quot;indicator&quot;" id="r_indicator_node_2ca83116_e69f_4dcb_abcb_de5bdf44b2be_fk_id_indicator_indicator_18ba18bf_0390_45a3_8edd_1cc049e8a251_id" layerId="indicator_18ba18bf_0390_45a3_8edd_1cc049e8a251" layerName="indicator" name="r_indicator_node_fk_id_indicator_fkey" providerKey="postgres" referencedLayer="indicator_18ba18bf_0390_45a3_8edd_1cc049e8a251" referencingLayer="r_indicator_node_2ca83116_e69f_4dcb_abcb_de5bdf44b2be" strength="Association">
+        <relation dataSource="service='gobs' key='id' estimatedmetadata=true checkPrimaryKeyUnicity='0' table=&quot;gobs&quot;.&quot;indicator&quot;" id="r_indicator_node_2ca83116_e69f_4dcb_abcb_de5bdf44b2be_fk_id_indicator_indicator_18ba18bf_0390_45a3_8edd_1cc049e8a251_id" layerId="indicator_18ba18bf_0390_45a3_8edd_1cc049e8a251" layerName="indicator" name="r_indicator_node_fk_id_indicator_fkey" providerKey="postgres" referencedLayer="indicator_18ba18bf_0390_45a3_8edd_1cc049e8a251" referencingLayer="r_indicator_node_2ca83116_e69f_4dcb_abcb_de5bdf44b2be" strength="Association">
           <fieldRef referencedField="id" referencingField="fk_id_indicator"></fieldRef>
         </relation>
-        <relation dataSource="service='gobs' sslmode=prefer key='id' estimatedmetadata=true checkPrimaryKeyUnicity='0' table=&quot;gobs&quot;.&quot;graph_node&quot;" id="r_indicator_node_2ca83116_e69f_4dcb_abcb_de5bdf44b2be_fk_id_node_graph_node_2cd9eee8_46e2_401c_87f7_8b40d9d6260e_id" layerId="graph_node_2cd9eee8_46e2_401c_87f7_8b40d9d6260e" layerName="graph_node" name="r_indicator_node_fk_id_node_fkey" providerKey="postgres" referencedLayer="graph_node_2cd9eee8_46e2_401c_87f7_8b40d9d6260e" referencingLayer="r_indicator_node_2ca83116_e69f_4dcb_abcb_de5bdf44b2be" strength="Association">
+        <relation dataSource="service='gobs' key='id' estimatedmetadata=true checkPrimaryKeyUnicity='0' table=&quot;gobs&quot;.&quot;graph_node&quot;" id="r_indicator_node_2ca83116_e69f_4dcb_abcb_de5bdf44b2be_fk_id_node_graph_node_2cd9eee8_46e2_401c_87f7_8b40d9d6260e_id" layerId="graph_node_2cd9eee8_46e2_401c_87f7_8b40d9d6260e" layerName="graph_node" name="r_indicator_node_fk_id_node_fkey" providerKey="postgres" referencedLayer="graph_node_2cd9eee8_46e2_401c_87f7_8b40d9d6260e" referencingLayer="r_indicator_node_2ca83116_e69f_4dcb_abcb_de5bdf44b2be" strength="Association">
           <fieldRef referencedField="id" referencingField="fk_id_node"></fieldRef>
         </relation>
       </referencedLayers>
@@ -4075,7 +4264,7 @@ def my_form_open(dialog, layer, feature):
     </maplayer>
     <maplayer autoRefreshEnabled="0" autoRefreshTime="0" geometry="No geometry" hasScaleBasedVisibilityFlag="0" maxScale="0" minScale="1e+08" readOnly="0" refreshOnNotifyEnabled="0" refreshOnNotifyMessage="" styleCategories="AllStyleCategories" type="vector" wkbType="NoGeometry">
       <id>series_04a7414a_ab6d_4611_8a60_bcd22071dc22</id>
-      <datasource>service='gobs' sslmode=prefer key='id' estimatedmetadata=true checkPrimaryKeyUnicity='0' table="gobs"."series"</datasource>
+      <datasource>service='gobs' key='id' estimatedmetadata=true checkPrimaryKeyUnicity='0' table="gobs"."series"</datasource>
       <keywordList>
         <value></value>
       </keywordList>
@@ -4170,16 +4359,16 @@ def my_form_open(dialog, layer, feature):
       </geometryOptions>
       <legend type="default-vector"></legend>
       <referencedLayers>
-        <relation dataSource="service='gobs' sslmode=prefer key='id' estimatedmetadata=true checkPrimaryKeyUnicity='0' table=&quot;gobs&quot;.&quot;actor&quot;" id="series_04a7414a_ab6d_4611_8a60_bcd22071dc22_fk_id_actor_actor_5f01a6e5_8205_462f_af40_0ffd7ff0a44f_id" layerId="actor_5f01a6e5_8205_462f_af40_0ffd7ff0a44f" layerName="actor" name="series_fk_id_actor_fkey" providerKey="postgres" referencedLayer="actor_5f01a6e5_8205_462f_af40_0ffd7ff0a44f" referencingLayer="series_04a7414a_ab6d_4611_8a60_bcd22071dc22" strength="Association">
+        <relation dataSource="service='gobs' key='id' estimatedmetadata=true checkPrimaryKeyUnicity='0' table=&quot;gobs&quot;.&quot;actor&quot;" id="series_04a7414a_ab6d_4611_8a60_bcd22071dc22_fk_id_actor_actor_5f01a6e5_8205_462f_af40_0ffd7ff0a44f_id" layerId="actor_5f01a6e5_8205_462f_af40_0ffd7ff0a44f" layerName="actor" name="series_fk_id_actor_fkey" providerKey="postgres" referencedLayer="actor_5f01a6e5_8205_462f_af40_0ffd7ff0a44f" referencingLayer="series_04a7414a_ab6d_4611_8a60_bcd22071dc22" strength="Association">
           <fieldRef referencedField="id" referencingField="fk_id_actor"></fieldRef>
         </relation>
-        <relation dataSource="service='gobs' sslmode=prefer key='id' estimatedmetadata=true checkPrimaryKeyUnicity='0' table=&quot;gobs&quot;.&quot;indicator&quot;" id="series_04a7414a_ab6d_4611_8a60_bcd22071dc22_fk_id_indicator_indicator_18ba18bf_0390_45a3_8edd_1cc049e8a251_id" layerId="indicator_18ba18bf_0390_45a3_8edd_1cc049e8a251" layerName="indicator" name="series_fk_id_indicator_fkey" providerKey="postgres" referencedLayer="indicator_18ba18bf_0390_45a3_8edd_1cc049e8a251" referencingLayer="series_04a7414a_ab6d_4611_8a60_bcd22071dc22" strength="Association">
+        <relation dataSource="service='gobs' key='id' estimatedmetadata=true checkPrimaryKeyUnicity='0' table=&quot;gobs&quot;.&quot;indicator&quot;" id="series_04a7414a_ab6d_4611_8a60_bcd22071dc22_fk_id_indicator_indicator_18ba18bf_0390_45a3_8edd_1cc049e8a251_id" layerId="indicator_18ba18bf_0390_45a3_8edd_1cc049e8a251" layerName="indicator" name="series_fk_id_indicator_fkey" providerKey="postgres" referencedLayer="indicator_18ba18bf_0390_45a3_8edd_1cc049e8a251" referencingLayer="series_04a7414a_ab6d_4611_8a60_bcd22071dc22" strength="Association">
           <fieldRef referencedField="id" referencingField="fk_id_indicator"></fieldRef>
         </relation>
-        <relation dataSource="service='gobs' sslmode=prefer key='id' estimatedmetadata=true checkPrimaryKeyUnicity='0' table=&quot;gobs&quot;.&quot;protocol&quot;" id="series_04a7414a_ab6d_4611_8a60_bcd22071dc22_fk_id_protocol_protocol_5507f1c8_1802_4df0_a273_8e9b7f52c352_id" layerId="protocol_5507f1c8_1802_4df0_a273_8e9b7f52c352" layerName="protocol" name="series_fk_id_protocol_fkey" providerKey="postgres" referencedLayer="protocol_5507f1c8_1802_4df0_a273_8e9b7f52c352" referencingLayer="series_04a7414a_ab6d_4611_8a60_bcd22071dc22" strength="Association">
+        <relation dataSource="service='gobs' key='id' estimatedmetadata=true checkPrimaryKeyUnicity='0' table=&quot;gobs&quot;.&quot;protocol&quot;" id="series_04a7414a_ab6d_4611_8a60_bcd22071dc22_fk_id_protocol_protocol_5507f1c8_1802_4df0_a273_8e9b7f52c352_id" layerId="protocol_5507f1c8_1802_4df0_a273_8e9b7f52c352" layerName="protocol" name="series_fk_id_protocol_fkey" providerKey="postgres" referencedLayer="protocol_5507f1c8_1802_4df0_a273_8e9b7f52c352" referencingLayer="series_04a7414a_ab6d_4611_8a60_bcd22071dc22" strength="Association">
           <fieldRef referencedField="id" referencingField="fk_id_protocol"></fieldRef>
         </relation>
-        <relation dataSource="service='gobs' sslmode=prefer key='id' estimatedmetadata=true checkPrimaryKeyUnicity='0' table=&quot;gobs&quot;.&quot;spatial_layer&quot;" id="series_04a7414a_ab6d_4611_8a60_bcd22071dc22_fk_id_spatial_layer_spatial_layer_18215d6d_1f4c_40d2_ba83_f2c9a9694e84_id" layerId="spatial_layer_18215d6d_1f4c_40d2_ba83_f2c9a9694e84" layerName="spatial_layer" name="series_fk_id_spatial_layer_fkey" providerKey="postgres" referencedLayer="spatial_layer_18215d6d_1f4c_40d2_ba83_f2c9a9694e84" referencingLayer="series_04a7414a_ab6d_4611_8a60_bcd22071dc22" strength="Association">
+        <relation dataSource="service='gobs' key='id' estimatedmetadata=true checkPrimaryKeyUnicity='0' table=&quot;gobs&quot;.&quot;spatial_layer&quot;" id="series_04a7414a_ab6d_4611_8a60_bcd22071dc22_fk_id_spatial_layer_spatial_layer_18215d6d_1f4c_40d2_ba83_f2c9a9694e84_id" layerId="spatial_layer_18215d6d_1f4c_40d2_ba83_f2c9a9694e84" layerName="spatial_layer" name="series_fk_id_spatial_layer_fkey" providerKey="postgres" referencedLayer="spatial_layer_18215d6d_1f4c_40d2_ba83_f2c9a9694e84" referencingLayer="series_04a7414a_ab6d_4611_8a60_bcd22071dc22" strength="Association">
           <fieldRef referencedField="id" referencingField="fk_id_spatial_layer"></fieldRef>
         </relation>
       </referencedLayers>
@@ -4367,7 +4556,7 @@ def my_form_open(dialog, layer, feature):
     </maplayer>
     <maplayer autoRefreshEnabled="0" autoRefreshTime="0" geometry="No geometry" hasScaleBasedVisibilityFlag="0" maxScale="0" minScale="1e+08" readOnly="0" refreshOnNotifyEnabled="0" refreshOnNotifyMessage="" styleCategories="AllStyleCategories" type="vector" wkbType="NoGeometry">
       <id>spatial_layer_18215d6d_1f4c_40d2_ba83_f2c9a9694e84</id>
-      <datasource>service='gobs' sslmode=prefer key='id' estimatedmetadata=true checkPrimaryKeyUnicity='0' table="gobs"."spatial_layer"</datasource>
+      <datasource>service='gobs' key='id' estimatedmetadata=true checkPrimaryKeyUnicity='0' table="gobs"."spatial_layer"</datasource>
       <keywordList>
         <value></value>
       </keywordList>
@@ -4462,7 +4651,7 @@ def my_form_open(dialog, layer, feature):
       </geometryOptions>
       <legend type="default-vector"></legend>
       <referencedLayers>
-        <relation dataSource="service='gobs' sslmode=prefer key='id' estimatedmetadata=true checkPrimaryKeyUnicity='0' table=&quot;gobs&quot;.&quot;actor&quot;" id="spatial_layer_18215d6d_1f4c_40d2_ba83_f2c9a9694e84_fk_id_actor_actor_5f01a6e5_8205_462f_af40_0ffd7ff0a44f_id" layerId="actor_5f01a6e5_8205_462f_af40_0ffd7ff0a44f" layerName="actor" name="spatial_layer_fk_id_actor_fkey" providerKey="postgres" referencedLayer="actor_5f01a6e5_8205_462f_af40_0ffd7ff0a44f" referencingLayer="spatial_layer_18215d6d_1f4c_40d2_ba83_f2c9a9694e84" strength="Association">
+        <relation dataSource="service='gobs' key='id' estimatedmetadata=true checkPrimaryKeyUnicity='0' table=&quot;gobs&quot;.&quot;actor&quot;" id="spatial_layer_18215d6d_1f4c_40d2_ba83_f2c9a9694e84_fk_id_actor_actor_5f01a6e5_8205_462f_af40_0ffd7ff0a44f_id" layerId="actor_5f01a6e5_8205_462f_af40_0ffd7ff0a44f" layerName="actor" name="spatial_layer_fk_id_actor_fkey" providerKey="postgres" referencedLayer="actor_5f01a6e5_8205_462f_af40_0ffd7ff0a44f" referencingLayer="spatial_layer_18215d6d_1f4c_40d2_ba83_f2c9a9694e84" strength="Association">
           <fieldRef referencedField="id" referencingField="fk_id_actor"></fieldRef>
         </relation>
       </referencedLayers>
@@ -4678,6 +4867,7 @@ def my_form_open(dialog, layer, feature):
   </projectlayers>
   <layerorder>
     <layer id="osm_mapnik_73cc9876_fa44_4742_bc09_afe572b57bbe"></layer>
+    <layer id="application_a455f2b7_b92d_413b_bb50_b9777b274f84"></layer>
   </layerorder>
   <properties>
     <DefaultStyles>
@@ -4917,7 +5107,7 @@ def my_form_open(dialog, layer, feature):
   <Bookmarks></Bookmarks>
   <ProjectViewSettings UseProjectScales="0">
     <Scales></Scales>
-    <DefaultViewExtent xmax="15051997.36657100357115269" xmin="-15135581.69066273234784603" ymax="15303079.65723524428904057" ymin="-12930327.6156171802431345">
+    <DefaultViewExtent xmax="15323640.77116207219660282" xmin="-15407225.09525380097329617" ymax="14164351.24726354517042637" ymin="-11791599.2056454811245203">
       <spatialrefsys>
         <wkt>PROJCRS["WGS 84 / Pseudo-Mercator",BASEGEOGCRS["WGS 84",DATUM["World Geodetic System 1984",ELLIPSOID["WGS 84",6378137,298.257223563,LENGTHUNIT["metre",1]]],PRIMEM["Greenwich",0,ANGLEUNIT["degree",0.0174532925199433]],ID["EPSG",4326]],CONVERSION["Popular Visualisation Pseudo-Mercator",METHOD["Popular Visualisation Pseudo Mercator",ID["EPSG",1024]],PARAMETER["Latitude of natural origin",0,ANGLEUNIT["degree",0.0174532925199433],ID["EPSG",8801]],PARAMETER["Longitude of natural origin",0,ANGLEUNIT["degree",0.0174532925199433],ID["EPSG",8802]],PARAMETER["False easting",0,LENGTHUNIT["metre",1],ID["EPSG",8806]],PARAMETER["False northing",0,LENGTHUNIT["metre",1],ID["EPSG",8807]]],CS[Cartesian,2],AXIS["easting (X)",east,ORDER[1],LENGTHUNIT["metre",1]],AXIS["northing (Y)",north,ORDER[2],LENGTHUNIT["metre",1]],USAGE[SCOPE["unknown"],AREA["World - 85°S to 85°N"],BBOX[-85.06,-180,85.06,180]],ID["EPSG",3857]]</wkt>
         <proj4>+proj=merc +a=6378137 +b=6378137 +lat_ts=0 +lon_0=0 +x_0=0 +y_0=0 +k=1 +units=m +nadgrids=@null +wktext +no_defs</proj4>
