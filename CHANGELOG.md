@@ -2,6 +2,14 @@
 
 ## Unreleased
 
+* Get aggregated data
+  * Fix wrong use of aggregate functions on incompatible data types
+  * Add `count`, `count_distinct` and `string_agg` aggregates
+* Database - Add project and project_view tables & update doc
+* Admin QGIS project: upgrade project to 3.16 & use SSL prefer mode for PostgreSQL connection
+* Code style - Fix Python PEP8 issues
+* CI & tests -Use docker compose plugin instead of docker-compose
+
 ## 5.0.1 - 2021-05-31
 
 * Fix some migrations about the API in QGIS 3.16
