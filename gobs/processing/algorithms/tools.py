@@ -3,7 +3,7 @@ __license__ = "GPL version 3"
 __email__ = "info@3liz.org"
 __revision__ = "$Format:%H$"
 
-from typing import Any, List, Tuple, Union, Optional
+from typing import Any, List, Optional, Tuple, Union
 
 from qgis.core import (
     QgsDataSourceUri,

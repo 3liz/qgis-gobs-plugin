@@ -6,8 +6,6 @@ __revision__ = "$Format:%H$"
 import os
 import time
 
-import processing
-
 from qgis.core import (
     QgsExpressionContextUtils,
     QgsProcessingException,
@@ -20,16 +18,17 @@ from qgis.core import (
     QgsWkbTypes,
 )
 
-from gobs.qgis_plugin_tools.tools.algorithm_processing import (
-    BaseProcessingAlgorithm,
-)
-from gobs.qgis_plugin_tools.tools.i18n import tr
+import processing
 
-from .tools import (
+from gobs.processing.algorithms.tools import (
     fetch_data_from_sql_query,
     get_postgis_connection_list,
     validateTimestamp,
 )
+from gobs.qgis_plugin_tools.tools.algorithm_processing import (
+    BaseProcessingAlgorithm,
+)
+from gobs.qgis_plugin_tools.tools.i18n import tr
 
 
 class ImportSpatialLayerData(BaseProcessingAlgorithm):

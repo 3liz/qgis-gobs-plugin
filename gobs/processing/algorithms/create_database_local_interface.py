@@ -12,15 +12,14 @@ from qgis.core import (
     QgsProcessingParameterProviderConnection,
 )
 
+from gobs.processing.algorithms.tools import (
+    createAdministrationProjectFromTemplate,
+    get_postgis_connection_list,
+)
 from gobs.qgis_plugin_tools.tools.algorithm_processing import (
     BaseProcessingAlgorithm,
 )
 from gobs.qgis_plugin_tools.tools.i18n import tr
-
-from .tools import (
-    createAdministrationProjectFromTemplate,
-    get_postgis_connection_list,
-)
 
 
 class CreateDatabaseLocalInterface(BaseProcessingAlgorithm):

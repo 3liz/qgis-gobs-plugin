@@ -10,22 +10,29 @@ from gobs.plugin_tools import resources_path
 from gobs.processing.algorithms.configuration.configure_plugin import (
     ConfigurePlugin,
 )
-from gobs.qgis_plugin_tools.tools.i18n import tr
-
-from .algorithms.create_database_local_interface import (
+from gobs.processing.algorithms.create_database_local_interface import (
     CreateDatabaseLocalInterface,
 )
-from .algorithms.database.create import CreateDatabaseStructure
-from .algorithms.database.upgrade import UpgradeDatabaseStructure
-from .algorithms.get_aggregated_data import GetAggregatedData
-from .algorithms.get_series_data import GetSeriesData
-from .algorithms.get_series_list import GetSeriesList
+from gobs.processing.algorithms.database.create import CreateDatabaseStructure
+from gobs.processing.algorithms.database.upgrade import (
+    UpgradeDatabaseStructure,
+)
+from gobs.processing.algorithms.get_aggregated_data import GetAggregatedData
+from gobs.processing.algorithms.get_series_data import GetSeriesData
+from gobs.processing.algorithms.get_series_list import GetSeriesList
 
 # from .algorithms.import_observation_data import ImportObservationData
-from .algorithms.get_spatial_layer_vector_data import GetSpatialLayerVectorData
-from .algorithms.import_spatial_layer_data import ImportSpatialLayerData
-from .algorithms.remove_series_data import RemoveSeriesData
-from .algorithms.remove_spatial_layer_data import RemoveSpatialLayerData
+from gobs.processing.algorithms.get_spatial_layer_vector_data import (
+    GetSpatialLayerVectorData,
+)
+from gobs.processing.algorithms.import_spatial_layer_data import (
+    ImportSpatialLayerData,
+)
+from gobs.processing.algorithms.remove_series_data import RemoveSeriesData
+from gobs.processing.algorithms.remove_spatial_layer_data import (
+    RemoveSpatialLayerData,
+)
+from gobs.qgis_plugin_tools.tools.i18n import tr
 
 
 class GobsProvider(QgsProcessingProvider):
@@ -59,7 +66,7 @@ class GobsProvider(QgsProcessingProvider):
         # Put the flag back to yes
         QgsExpressionContextUtils.setGlobalVariable('gobs_get_database_data', 'yes')
 
-    def id(self):
+    def id(self):  # NOQA: A003
         return 'gobs'
 
     def name(self):

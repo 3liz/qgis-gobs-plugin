@@ -4,9 +4,8 @@ __email__ = "info@3liz.org"
 __revision__ = "$Format:%H$"
 
 import time
-from typing import Optional, Tuple
 
-import processing
+from typing import Optional, Tuple
 
 from qgis.core import (
     QgsExpressionContextUtils,
@@ -18,16 +17,17 @@ from qgis.core import (
     QgsProject,
 )
 
-from gobs.qgis_plugin_tools.tools.algorithm_processing import (
-    BaseProcessingAlgorithm,
-)
-from gobs.qgis_plugin_tools.tools.i18n import tr
+import processing
 
-from .tools import (
+from gobs.processing.algorithms.tools import (
     fetch_data_from_sql_query,
     get_postgis_connection_list,
     validateTimestamp,
 )
+from gobs.qgis_plugin_tools.tools.algorithm_processing import (
+    BaseProcessingAlgorithm,
+)
+from gobs.qgis_plugin_tools.tools.i18n import tr
 
 
 class ImportObservationData(BaseProcessingAlgorithm):

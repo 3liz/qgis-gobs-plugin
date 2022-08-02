@@ -14,14 +14,13 @@ from qgis.core import (
     QgsProject,
 )
 
-from gobs.qgis_plugin_tools.tools.i18n import tr
-
-from .get_data_as_layer import GetDataAsLayer
-from .tools import (
+from gobs.processing.algorithms.get_data_as_layer import GetDataAsLayer
+from gobs.processing.algorithms.tools import (
     fetch_data_from_sql_query,
     get_postgis_connection_list,
     validateTimestamp,
 )
+from gobs.qgis_plugin_tools.tools.i18n import tr
 
 
 class GetAggregatedData(GetDataAsLayer):
@@ -30,13 +29,20 @@ class GetAggregatedData(GetDataAsLayer):
     SERIE = 'SERIE'
     SERIE_ID = 'SERIE_ID'
     SERIES_DICT = {}
-    AGGREGATE_FUNCTIONS_LIST = ('min', 'max', 'avg', 'sum')
+    AGGREGATE_FUNCTIONS_LIST = ('min', 'max', 'avg', 'sum', 'count', 'count_distinct', 'string_agg')
+    AGGREGATE_FUNCTION_COMPATIBILITY = {
+        'integer': ('min', 'max', 'avg', 'sum', 'count', 'count_distinct'),
+        'real': ('min', 'max', 'avg', 'sum'),
+        'text': ('count', 'string_agg', 'count_distinct'),
+        'date': ('min', 'max', 'count_distinct'),
+        'timestamp': ('min', 'max', 'count_distinct'),
+        'boolean': (),
+    }
 
     ADD_SPATIAL_OBJECT_DATA = 'ADD_SPATIAL_OBJECT_DATA'
     ADD_SPATIAL_OBJECT_GEOM = 'ADD_SPATIAL_OBJECT_GEOM'
     TEMPORAL_RESOLUTION = 'TEMPORAL_RESOLUTION'
     AGGREGATE_FUNCTIONS = 'AGGREGATE_FUNCTIONS'
-    GROUP_BY_DISTINCT_VALUES = 'GROUP_BY_DISTINCT_VALUES'
     MIN_TIMESTAMP = 'MIN_TIMESTAMP'
     MAX_TIMESTAMP = 'MAX_TIMESTAMP'
 
@@ -54,23 +60,34 @@ class GetAggregatedData(GetDataAsLayer):
 
     def shortHelpString(self):
         short_help = tr(
-            'This algorithm allows to add a table or vector layer in your QGIS project containing the aggregated observation data from the chosen G-Obs series. The aggregation is made depending of the user input. Data are dynamically fetched from the database, meaning they are always up-to-date.'
+            'This algorithm allows to add a table or vector layer in your QGIS project '
+            'containing the aggregated observation data from the chosen G-Obs series. '
+            'The aggregation is made depending of the user input. '
+            'Data are dynamically fetched from the database, meaning they are always up-to-date.'
             '\n'
-            '* Names of the output layer: choose the name of the QGIS layer to create. If not given, the label of the series of observations, as written in the series combo box.'
+            '* Names of the output layer: choose the name of the QGIS layer to create. '
+            'If not given, the label of the series of observations, as written in the series combo box.'
             '\n'
             '* Series of observations: the G-Obs series containing the observation data.'
             '\n'
-            '* Add spatial object ID and label ? If checked, the output layer will have two more columns with the spatial layer unique identifiers (ID and label).'
+            '* Add spatial object ID and label ? If checked, the output layer will have '
+            'two more columns with the spatial layer unique identifiers (ID and label).'
             '\n'
-            '* Add spatial object geometry ? If checked, the output layer will be a spatial QGIS vector layer, displayed in the map, and not a geometryless table layer. The result can show duplicated geometries, for observations defined by the same geometry at different dates or times.'
+            '* Add spatial object geometry ? If checked, the output layer will be a spatial QGIS vector layer, '
+            'displayed in the map, and not a geometryless table layer. The result can show duplicated geometries, '
+            'for observations defined by the same geometry at different dates or times.'
             '\n'
-            '* Timestamp extraction resolution: choose the desired temporal resolution of the output. Aggregates will be calculated (sum, average, etc.) by grouping the source data by this temporal resolution.'
+            '* Timestamp extraction resolution: choose the desired temporal resolution of the output. '
+            'Aggregates will be calculated (sum, average, etc.) by grouping the source data by this temporal resolution.'
             '\n'
-            '* Choose aggregate functions to use: you can choose between minimum (min), maximum (max), average (avg) and  sum.'
+            '* Choose aggregate functions to use: you can choose between the proposed functions.'
+            ' The function will only be used for the compatible field types (ex: "avg" will not be used with text)'
             '\n'
-            '* Minimum observation timestamp: if you enter a valid ISO timestamp in this field, only observations with a timestamp after this value will be processed.'
+            '* Minimum observation timestamp: if you enter a valid ISO timestamp in this field, '
+            'only observations with a timestamp after this value will be processed.'
             '\n'
-            '* Maximum observation timestamp: if you enter a valid ISO timestamp in this field, only observations with a timestamp before this value will be processed.'
+            '* Maximum observation timestamp: if you enter a valid ISO timestamp in this field, '
+            'only observations with a timestamp before this value will be processed.'
         )
         return short_help
 
@@ -153,7 +170,7 @@ class GetAggregatedData(GetDataAsLayer):
         self.addParameter(
             QgsProcessingParameterEnum(
                 self.TEMPORAL_RESOLUTION,
-                tr('Timestamp extraction resolution'),
+                tr('Timestamp extraction resolution (aggregate values against this resolution)'),
                 options=self.TEMPORAL_RESOLUTIONS,
                 optional=False
             )
@@ -163,23 +180,13 @@ class GetAggregatedData(GetDataAsLayer):
         self.addParameter(
             QgsProcessingParameterEnum(
                 self.AGGREGATE_FUNCTIONS,
-                tr('Choose aggregate functions to use'),
+                tr('Choose the aggregate functions to use'),
                 options=self.AGGREGATE_FUNCTIONS_LIST,
                 optional=False,
                 allowMultiple=True,
                 defaultValue=[a for a in range(len(self.AGGREGATE_FUNCTIONS_LIST))]
             )
         )
-
-        # Aggregate with a value
-        # self.addParameter(
-        #   QgsProcessingParameterBoolean(
-        #       self.GROUP_BY_DISTINCT_VALUES,
-        #       tr('Group by the distinct values'),
-        #       defaultValue=False,
-        #       optional=False
-        #   )
-        # )
 
         # Min timestamp
         self.addParameter(
@@ -346,7 +353,7 @@ class GetAggregatedData(GetDataAsLayer):
             # (EXTRACT({temporal_resolution} FROM o.ob_start_timestamp))::integer AS temporal_resolution,
             sql += '''
             date_trunc('{temporal_resolution}', o.ob_start_timestamp) AS period_start,
-            date_trunc('{temporal_resolution}', o.ob_start_timestamp) + '1 week'::interval - '1 second'::interval AS period_end,
+            date_trunc('{temporal_resolution}', o.ob_start_timestamp) + '1 {temporal_resolution}'::interval - '1 second'::interval AS period_end,
             '''.format(
                 temporal_resolution=temporal_resolution
             )
@@ -354,16 +361,32 @@ class GetAggregatedData(GetDataAsLayer):
         # Add fields with chosen aggregate functions
         values_ls = []
         aggregate_functions = parameters[self.AGGREGATE_FUNCTIONS]
-        for idx, s in enumerate(id_value_code):
+        for idx, fieldname in enumerate(id_value_code):
             for a, agg in enumerate(self.AGGREGATE_FUNCTIONS_LIST):
+                # Avoid non user selected aggregate function
                 if a not in aggregate_functions:
                     continue
+
+                # Avoid incompatible aggregation function
+                value_type = id_value_type[idx]
+                if agg not in self.AGGREGATE_FUNCTION_COMPATIBILITY[value_type]:
+                    continue
+
+                # Adapt aggregation functions and parameters
+                distinct = 'DISTINCT' if agg in ('count_distinct', 'string_agg') else ''
+                agg_function = agg if agg != 'count_distinct' else 'count'
+                agg_params = '' if agg != 'string_agg' else ", ', '"
+
+                # Build aggregate
                 values_ls.append(
-                    '{agg}( (ob_value->>{idx})::{id_value_type} ) AS "{agg}_{fieldname}"'.format(
-                        agg=agg,
+                    '{agg_function}({distinct} (ob_value->>{idx})::{value_type} {agg_params}) AS "{agg}_{fieldname}"'.format(
+                        agg_function=agg_function,
+                        distinct=distinct,
                         idx=idx,
-                        id_value_type=id_value_type[idx],
-                        fieldname=s
+                        value_type=value_type,
+                        agg_params=agg_params,
+                        agg=agg,
+                        fieldname=fieldname,
                     )
                 )
         values = ", ".join(values_ls)
@@ -437,7 +460,7 @@ class GetAggregatedData(GetDataAsLayer):
             # , EXTRACT({temporal_resolution} FROM o.ob_start_timestamp)
             sql += '''
             , date_trunc('{temporal_resolution}', o.ob_start_timestamp)
-            , date_trunc('{temporal_resolution}', o.ob_start_timestamp) + '1 week'::interval - '1 second'::interval
+            , date_trunc('{temporal_resolution}', o.ob_start_timestamp) + '1 {temporal_resolution}'::interval - '1 second'::interval
             '''.format(
                 temporal_resolution=temporal_resolution
             )
@@ -462,7 +485,7 @@ class GetAggregatedData(GetDataAsLayer):
         '''
 
         feedback.pushInfo(
-            tr('SQL = \n' + self.SQL.replace('            ', '''
+            tr('SQL = \n' + sql.replace('            ', '''
 '''))
         )
         self.SQL = sql.replace('\n', ' ').rstrip(';')

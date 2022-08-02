@@ -16,14 +16,13 @@ from qgis.core import (
     QgsProject,
 )
 
-from gobs.qgis_plugin_tools.tools.i18n import tr
-
-from .get_data_as_layer import GetDataAsLayer
-from .tools import (
+from gobs.processing.algorithms.get_data_as_layer import GetDataAsLayer
+from gobs.processing.algorithms.tools import (
     fetch_data_from_sql_query,
     get_postgis_connection_list,
     validateTimestamp,
 )
+from gobs.qgis_plugin_tools.tools.i18n import tr
 
 
 class GetSpatialLayerVectorData(GetDataAsLayer):

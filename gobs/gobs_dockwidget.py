@@ -7,7 +7,6 @@ import webbrowser
 
 from functools import partial
 
-from processing import execAlgorithmDialog
 from qgis.core import (
     Qgis,
     QgsApplication,
@@ -24,16 +23,16 @@ from qgis.PyQt.QtWidgets import (
     QVBoxLayout,
 )
 
-from gobs.qgis_plugin_tools.tools.i18n import tr
-from gobs.qgis_plugin_tools.tools.resources import load_ui
-
-from .processing.algorithms.import_observation_data import (
+from gobs.processing.algorithms.import_observation_data import (
     ImportObservationData,
 )
-from .processing.algorithms.tools import (
+from gobs.processing.algorithms.tools import (
     fetch_data_from_sql_query,
     get_postgis_connection_list,
 )
+from gobs.qgis_plugin_tools.tools.i18n import tr
+from gobs.qgis_plugin_tools.tools.resources import load_ui
+from processing import execAlgorithmDialog
 
 FORM_CLASS = load_ui('gobs_dockwidget_base.ui')
 

@@ -7,12 +7,12 @@ if Qgis.QGIS_VERSION_INT >= 30800:
 else:
     import processing
 
-from ..processing.provider import GobsProvider as ProcessingProvider
-from ..qgis_plugin_tools.tools.logger_processing import (
+from gobs.processing.provider import GobsProvider as ProcessingProvider
+from gobs.qgis_plugin_tools.tools.logger_processing import (
     LoggerProcessingFeedBack,
 )
-from ..qgis_plugin_tools.tools.resources import plugin_path
-from .base_test_database import DatabaseTestCase
+from gobs.qgis_plugin_tools.tools.resources import plugin_path
+from gobs.test.base_test_database import DatabaseTestCase
 
 __copyright__ = "Copyright 2022, 3Liz"
 __license__ = "GPL version 3"

@@ -14,15 +14,14 @@ from qgis.core import (
     QgsVectorLayer,
 )
 
+from gobs.processing.algorithms.tools import (
+    get_postgis_connection_list,
+    get_postgis_connection_uri_from_name,
+)
 from gobs.qgis_plugin_tools.tools.algorithm_processing import (
     BaseProcessingAlgorithm,
 )
 from gobs.qgis_plugin_tools.tools.i18n import tr
-
-from .tools import (
-    get_postgis_connection_list,
-    get_postgis_connection_uri_from_name,
-)
 
 
 class GetDataAsLayer(BaseProcessingAlgorithm):
