@@ -36,6 +36,7 @@ class CreateDatabaseStructure(BaseDatabaseAlgorithm):
     CONNECTION_NAME = 'CONNECTION_NAME'
     OVERRIDE = 'OVERRIDE'
     ADD_TEST_DATA = 'ADD_TEST_DATA'
+    ADD_OBSERVATION_DATA = 'ADD_OBSERVATION_DATA'
 
     OUTPUT_STATUS = 'OUTPUT_STATUS'
     OUTPUT_STRING = 'OUTPUT_STRING'
@@ -86,6 +87,13 @@ class CreateDatabaseStructure(BaseDatabaseAlgorithm):
             QgsProcessingParameterBoolean(
                 self.ADD_TEST_DATA,
                 tr('Add test data ?'),
+                defaultValue=False,
+            )
+        )
+        self.addParameter(
+            QgsProcessingParameterBoolean(
+                self.ADD_OBSERVATION_DATA,
+                tr('Add observation test data ?'),
                 defaultValue=False,
             )
         )
@@ -164,6 +172,11 @@ class CreateDatabaseStructure(BaseDatabaseAlgorithm):
         add_test_data = self.parameterAsBool(parameters, self.ADD_TEST_DATA, context)
         if add_test_data:
             sql_files.append("99_test_data.sql")
+
+        # Add observation data
+        add_observation_data = self.parameterAsBool(parameters, self.ADD_OBSERVATION_DATA, context)
+        if add_observation_data:
+            sql_files.append("100_observation_data.sql")
 
         plugin_dir = plugin_path()
         plugin_version = version()

@@ -34,6 +34,7 @@ class DatabaseTestCase(unittest.TestCase):
         self.connection = None
         self.provider = None
         self.add_data = True
+        self.add_observation_data = False
 
     def setUp(self) -> None:
         self.connection = psycopg2.connect(
@@ -52,6 +53,7 @@ class DatabaseTestCase(unittest.TestCase):
             "CONNECTION_NAME": "test",
             "OVERRIDE": True,
             "ADD_TEST_DATA": self.add_data,
+            "ADD_OBSERVATION_DATA": self.add_observation_data,
         }
         processing.run(
             "{}:create_database_structure".format(self.provider.id()),

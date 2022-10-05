@@ -52,6 +52,7 @@ class TestProcessing(unittest.TestCase):
             'CONNECTION_NAME': 'test',
             'OVERRIDE': True,
             'ADD_TEST_DATA': True,
+            "ADD_OBSERVATION_DATA": False,
         }
 
         os.environ["TEST_DATABASE_INSTALL_{}".format(SCHEMA.upper())] = VERSION
@@ -183,6 +184,7 @@ class TestProcessing(unittest.TestCase):
             'CONNECTION_NAME': 'test',
             "OVERRIDE": True,  # Must be true, for the time in the test.
             "ADD_TEST_DATA": True,
+            "ADD_OBSERVATION_DATA": False,
         }
 
         alg = "{}:create_database_structure".format(provider.id())
