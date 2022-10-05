@@ -30,7 +30,8 @@ INSERT INTO gobs.indicator
 VALUES
 (1, 'pluviometry', 'Hourly pluviometry ', 'Hourly rainfall pluviometry in millimetre', 'hour', '{pluviometry}', '{Pluviometry}', '{real}', '{mm}', 'Environment / Water / Data | Physical and chemical conditions / Water ', 'Water'),
 (2, 'population', 'Population ', 'Number of inhabitants for city', 'year', '{population}', '{Population}', '{integer}', '{people}', 'Socio-eco / Demography / Population ', 'Population'),
-(3, 'hiker_position', 'Hikers position', 'Position and altitude of hikers', 'second', '{altitude}', '{Altitude}', '{integer}', '{m}', 'Hiking / Tracks', 'Tracks')
+(3, 'hiker_position', 'Hikers position', 'Position and altitude of hikers', 'second', '{altitude}', '{Altitude}', '{integer}', '{m}', 'Hiking / Tracks', 'Tracks'),
+(4, 'observation', 'Observations', 'Faunal observations in the field', 'second', '{number,species}', '{"Number of individuals","Observed species"}', '{integer,text}', '{ind,sp}', 'Environment / Fauna / Species', 'Species')
 ;
 
 -- protocol
@@ -39,7 +40,8 @@ INSERT INTO gobs.protocol
 VALUES
 (1, 'pluviometry', 'Pluviometry', 'Measure of rainfall in mm'),
 (2, 'population', 'Population', 'Number of inhabitants obtained from census.'),
-(3, 'gps-tracking', 'GPS tracking', 'GPS position recorded by a smartphone containing timestamp at second resolution, position and altitude in meters.')
+(3, 'gps-tracking', 'GPS tracking', 'GPS position recorded by a smartphone containing timestamp at second resolution, position and altitude in meters.'),
+(4, 'field_observations', 'Field observations on species', 'Go to the field, recognize the observed species and give the number of individuals.')
 ;
 
 -- spatial_layer
@@ -48,7 +50,8 @@ INSERT INTO gobs.spatial_layer
 VALUES
 (1, 'pluviometers', 'Pluviometers', 'Sites equiped with pluviometers to measure rainfalls', '2019-06-26', 3, 'point'),
 (2, 'brittany-cities', 'Cities of Brittany , France', 'Cities of Brittany, France', '2019-07-05', 1, 'multipolygon'),
-(3, 'gpsposition', 'GPS position', 'Position of GPS trackers', '2020-09-10', 2, 'point')
+(3, 'gpsposition', 'GPS position', 'Position of GPS trackers', '2020-09-10', 2, 'point'),
+(4, 'faunal_observation', 'Position of faunal observations', 'Observations on species (lions, girafes, etc.)', '2022-09-10', 4, 'point')
 ;
 
 -- series
@@ -58,19 +61,19 @@ VALUES
 (1, 1, 2, 1, 1),
 (2, 2, 2, 2, 2),
 (3, 3, 4, 3, 3),
-(4, 3, 4, 3, 3),
-(5, 3, 5, 3, 3),
-(6, 3, 6, 3, 3),
-(7, 3, 7, 3, 3),
-(8, 3, 8, 3, 3)
+(4, 3, 5, 3, 3),
+(5, 3, 6, 3, 3),
+(6, 3, 7, 3, 3),
+(7, 3, 8, 3, 3),
+(8, 4, 4, 4, 4)
 ;
 
 -- SEQUENCES
 SELECT pg_catalog.setval('gobs.actor_category_id_seq', 3, true);
 SELECT pg_catalog.setval('gobs.actor_id_seq', 8, true);
-SELECT pg_catalog.setval('gobs.indicator_id_seq', 3, true);
-SELECT pg_catalog.setval('gobs.protocol_id_seq', 3, true);
-SELECT pg_catalog.setval('gobs.spatial_layer_id_seq', 3, true);
+SELECT pg_catalog.setval('gobs.indicator_id_seq', 4, true);
+SELECT pg_catalog.setval('gobs.protocol_id_seq', 4, true);
+SELECT pg_catalog.setval('gobs.spatial_layer_id_seq', 4, true);
 SELECT pg_catalog.setval('gobs.series_id_seq', 8, true);
 
 COMMIT;
