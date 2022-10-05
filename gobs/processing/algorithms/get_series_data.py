@@ -185,10 +185,23 @@ class GetSeriesData(GetDataAsLayer):
 
         # Retrieve needed data
         # id_label = data[0][0]
-        # id_date_format = data[0][1]
+        id_date_format = data[0][1]
         id_value_code = data[0][2].split('|')
         id_value_type = data[0][3].split('|')
         # id_value_unit = data[0][4].split('|')
+
+        # Compute "Date format" caster
+        date_formater = 'YYYY-MM-DD HH24:MI:SS'
+        date_format_rules = {
+            'second': 'YYYY-MM-DD HH24:MI:SS',
+            'minute': 'YYYY-MM-DD HH24:MI',
+            'hour': 'YYYY-MM-DD HH24',
+            'day': 'YYYY-MM-DD',
+            'month': 'YYYY-MM',
+            'year': 'YYYY',
+        }
+        if id_date_format in date_format_rules:
+            date_formater = date_format_rules[id_date_format]
 
         # Build SQL
         get_values = [
@@ -210,7 +223,10 @@ class GetSeriesData(GetDataAsLayer):
             sql += '''
             so.geom,
             '''
+
         sql+= '''
+            to_char(ob_start_timestamp, '{2}') AS observation_start,
+            to_char(ob_end_timestamp, '{2}') AS observation_end,
             ob_start_timestamp AS observation_start_timestamp,
             ob_end_timestamp AS observation_end_timestamp,
             {0}
@@ -220,7 +236,8 @@ class GetSeriesData(GetDataAsLayer):
             WHERE fk_id_series = {1}
         '''.format(
             values,
-            id_serie
+            id_serie,
+            date_formater
         )
 
         # Format SQL
