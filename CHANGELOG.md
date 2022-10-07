@@ -2,16 +2,28 @@
 
 ## Unreleased
 
+
+## 5.1.0 - 2022-10-07
+
 * Get aggregated data
   * Fix wrong use of aggregate functions on incompatible data types
   * Add `count`, `count_distinct` and `string_agg` aggregates
-* Database - Add project and project_view tables & update doc
-* Admin QGIS project: upgrade project to 3.16 & use SSL prefer mode for PostgreSQL connection
-* Get observation data - Add 2 columns `observation_start` & `observation_end` 
-  with the start and end timestamp of the observation, formated in respect of the indicator 
+* Database
+  * Add project and project_view tables
+  * Add new table gobs.application
+  * Update documentation
+* Admin QGIS project:
+  * upgrade project to 3.16
+  * use SSL prefer mode for PostgreSQL connection
+* Get observation data - Add 2 columns `observation_start` & `observation_end`
+  with the start and end timestamp of the observation, formated in respect of the indicator
   specified date format
+* Create database structure - New option to add observation and spatial object data
 * Code style - Fix Python PEP8 issues
+* Tests - Add new SQL file containing observation and spatial_object data
+* Docs - Update concepts and admin guide WIP
 * CI & tests -Use docker compose plugin instead of docker-compose
+
 
 ## 5.0.1 - 2021-05-31
 
