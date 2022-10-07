@@ -596,6 +596,13 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#510-2022-10-07" class="md-nav__link">
+    5.1.0 - 2022-10-07
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#501-2021-05-31" class="md-nav__link">
     5.0.1 - 2021-05-31
   </a>
@@ -719,16 +726,25 @@
                 
                 <h1 id="changelog">Changelog<a class="headerlink" href="#changelog" title="Permanent link">#</a></h1>
 <h2 id="unreleased">Unreleased<a class="headerlink" href="#unreleased" title="Permanent link">#</a></h2>
+<h2 id="510-2022-10-07">5.1.0 - 2022-10-07<a class="headerlink" href="#510-2022-10-07" title="Permanent link">#</a></h2>
 <ul>
 <li>Get aggregated data</li>
 <li>Fix wrong use of aggregate functions on incompatible data types</li>
 <li>Add <code>count</code>, <code>count_distinct</code> and <code>string_agg</code> aggregates</li>
-<li>Database - Add project and project_view tables &amp; update doc</li>
-<li>Admin QGIS project: upgrade project to 3.16 &amp; use SSL prefer mode for PostgreSQL connection</li>
-<li>Get observation data - Add 2 columns <code>observation_start</code> &amp; <code>observation_end</code> 
-  with the start and end timestamp of the observation, formated in respect of the indicator 
+<li>Database</li>
+<li>Add project and project_view tables</li>
+<li>Add new table gobs.application</li>
+<li>Update documentation</li>
+<li>Admin QGIS project:</li>
+<li>upgrade project to 3.16</li>
+<li>use SSL prefer mode for PostgreSQL connection</li>
+<li>Get observation data - Add 2 columns <code>observation_start</code> &amp; <code>observation_end</code>
+  with the start and end timestamp of the observation, formated in respect of the indicator
   specified date format</li>
+<li>Create database structure - New option to add observation and spatial object data</li>
 <li>Code style - Fix Python PEP8 issues</li>
+<li>Tests - Add new SQL file containing observation and spatial_object data</li>
+<li>Docs - Update concepts and admin guide WIP</li>
 <li>CI &amp; tests -Use docker compose plugin instead of docker-compose</li>
 </ul>
 <h2 id="501-2021-05-31">5.0.1 - 2021-05-31<a class="headerlink" href="#501-2021-05-31" title="Permanent link">#</a></h2>
