@@ -26,7 +26,7 @@ At present, G-Obs is not yet in QGIS official plugin repository. To install the 
 
 * In the **All** tab, search for the word `obs` and install the **G-Obs** plugin.
 
-After a successfull installation, you should see a new dock called **G-Obs**
+After a successful installation, you should see a new dock called **G-Obs**
 
 ![G-Obs dock panel](../media/gobs_dock.jpg)
 
@@ -88,6 +88,3 @@ Parameters:
 * `PostgreSQL connection to G-Obs database`: name of the database connection you would like to use for the upgrade.
 
 ![Upgrade database structure](../media/gobs_upgrade_database_structure.jpg)
-
-
-

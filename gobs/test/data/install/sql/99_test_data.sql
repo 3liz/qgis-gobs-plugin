@@ -53,4 +53,3 @@ SELECT pg_catalog.setval('gobs.indicator_id_seq', 2, true);
 SELECT pg_catalog.setval('gobs.protocol_id_seq', 2, true);
 SELECT pg_catalog.setval('gobs.spatial_layer_id_seq', 2, true);
 SELECT pg_catalog.setval('gobs.series_id_seq', 2, true);
-

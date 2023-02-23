@@ -34,6 +34,12 @@ VALUES
 (4, 'observation', 'Observations', 'Faunal observations in the field', 'second', '{number,species}', '{"Number of individuals","Observed species"}', '{integer,text}', '{ind,sp}', 'Environment / Fauna / Species', 'Species')
 ;
 
+-- document
+INSERT INTO gobs.document VALUES
+(1, '542aa72f-d1de-4810-97bb-208f2388698b', 'Illustration', 'Picture to use as the indicator illustration.', 'preview', 'hiker_position/preview/hiking.jpg', 3, '2022-10-11 08:30:18.012801', '2022-10-11 08:50:01.248526'),
+(2, '1a7f7323-6b18-46ed-a9fe-9efbe1f006a2', 'Hiking presentation', 'Presentation of hiking.', 'document', 'hiker_position/document/hiking_doc.txt', 3, '2022-10-11 08:30:18.012801', '2022-10-11 08:50:01.248526')
+;
+
 -- protocol
 INSERT INTO gobs.protocol
 (id, pr_code, pr_label, pr_description)
@@ -72,6 +78,7 @@ VALUES
 SELECT pg_catalog.setval('gobs.actor_category_id_seq', 3, true);
 SELECT pg_catalog.setval('gobs.actor_id_seq', 8, true);
 SELECT pg_catalog.setval('gobs.indicator_id_seq', 4, true);
+SELECT pg_catalog.setval('gobs.document_id_seq', 2, true);
 SELECT pg_catalog.setval('gobs.protocol_id_seq', 4, true);
 SELECT pg_catalog.setval('gobs.spatial_layer_id_seq', 4, true);
 SELECT pg_catalog.setval('gobs.series_id_seq', 8, true);
