@@ -122,6 +122,7 @@ class GobsDockWidget(QtWidgets.QDockWidget, FORM_CLASS):
         all_buttons = self.algorithms + [
             'import_observation_data',
         ]
+        gobs_is_admin = QgsExpressionContextUtils.projectScope(self.project).variable('gobs_is_admin')
         for but in all_buttons:
             if but in ('configure_plugin', 'create_database_local_interface'):
                 continue
@@ -129,6 +130,16 @@ class GobsDockWidget(QtWidgets.QDockWidget, FORM_CLASS):
             if not button:
                 continue
             button.setEnabled(enable)
+
+            # Disable and hide button if QGIS variable gobs_is_admin is not correctly set
+            # We enable the structure button only if gobs_is_admin equals 'yes'
+            if but not in ('create_database_structure', 'upgrade_database_structure'):
+                continue
+            button.setEnabled(enable and gobs_is_admin == 'yes')
+            if gobs_is_admin != 'yes':
+                button.hide()
+            else:
+                button.show()
 
         # Set project connection name and stylesheet
         self.database_connection_name.setText(connection_info)

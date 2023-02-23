@@ -2,6 +2,9 @@
 
 ## Unreleased
 
+* G-Obs right panel - Show the buttons "Create database structure" 
+  and "Upgrade database structure" only when the project variable
+  `gobs_is_admin` has the value `yes`
 
 ## 5.1.0 - 2022-10-07
 
