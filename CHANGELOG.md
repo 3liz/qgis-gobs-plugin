@@ -2,6 +2,8 @@
 
 ## Unreleased
 
+## 5.2.0 - 2023-02-24
+
 ### Modified
 
 * G-Obs right panel 

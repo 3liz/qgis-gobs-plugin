@@ -99,10 +99,7 @@ class GobsDockWidget(QtWidgets.QDockWidget, FORM_CLASS):
     @staticmethod
     def getDatabaseVersion():
         """ Get the database G-Obs version"""
-
-        # Get plugin version
-        plugin_version = version()
-
+        # Query the database
         sql = '''
             SELECT me_version
             FROM gobs.metadata
@@ -124,7 +121,7 @@ class GobsDockWidget(QtWidgets.QDockWidget, FORM_CLASS):
         return db_version
 
     def setInformationFromProject(self):
-        """Set project based information such as database connection name"""
+        """ Set project based information such as database connection name """
 
         # Active connection
         connection_name = QgsExpressionContextUtils.projectScope(self.project).variable('gobs_connection_name')
@@ -132,7 +129,6 @@ class GobsDockWidget(QtWidgets.QDockWidget, FORM_CLASS):
         connection_stylesheet = stylesheet
         connection_exists = False
 
-        # Connection name definition
         connection_info = '-'
         if connection_name:
             if connection_name in get_postgis_connection_list():
@@ -195,7 +191,6 @@ class GobsDockWidget(QtWidgets.QDockWidget, FORM_CLASS):
 
         self.version_comment.setText(version_comment)
         self.version_comment.setStyleSheet(version_stylesheet)
-
 
         # Set project connection name and stylesheet
         self.database_connection_name.setText(connection_info)
