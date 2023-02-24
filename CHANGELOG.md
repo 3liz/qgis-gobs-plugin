@@ -4,14 +4,13 @@
 
 ## 5.2.0 - 2023-02-24
 
-### Modified
-
 * G-Obs right panel 
     - Show the buttons "Create database structure" 
       and "Upgrade database structure" only when the project variable
       `gobs_is_admin` has the value `yes` in the project properties.
     - Display the plugin version and the database structure version
       at the top of the panel and add messages depending on these versions.
+* Temporary disabling translations, this version is only available in English
 
 ## 5.1.0 - 2022-10-07
 
@@ -20,13 +19,13 @@
   * Add `count`, `count_distinct` and `string_agg` aggregates
 * Database
   * Add project and project_view tables
-  * Add new table gobs.application
+  * Add new table `gobs.application`
   * Update documentation
 * Admin QGIS project:
   * upgrade project to 3.16
   * use SSL prefer mode for PostgreSQL connection
 * Get observation data - Add 2 columns `observation_start` & `observation_end`
-  with the start and end timestamp of the observation, formated in respect of the indicator
+  with the start and end timestamp of the observation, formatted in respect of the indicator
   specified date format
 * Create database structure - New option to add observation and spatial object data
 * Code style - Fix Python PEP8 issues
@@ -103,7 +102,7 @@ Fix some packaging issues about Transifex
 
 ## 0.2.11 - 2020-06-05
 
-* Import scripts - Fix bugs related to old use of self.tr instead of tr
+* Import scripts - Fix bugs related to old use of `self.tr` instead of `tr`
 
 ## 0.2.10 - 2020-05-28
 
