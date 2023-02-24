@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<database name="gis" schema="gobs" type="PostgreSQL - 13.7 (Debian 13.7-1.pgdg110+1)">
+<database name="gis" schema="gobs" type="PostgreSQL - 13.9 (Debian 13.9-1.pgdg110+1)">
    <sequences>
       <sequence increment="1" name="actor_category_id_seq" startValue="1"/>
       <sequence increment="1" name="actor_id_seq" startValue="1"/>
