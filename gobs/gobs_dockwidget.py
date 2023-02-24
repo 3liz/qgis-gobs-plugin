@@ -22,7 +22,9 @@ from qgis.PyQt.QtWidgets import (
     QPushButton,
     QVBoxLayout,
 )
-
+from gobs.plugin_tools import (
+    format_version_integer,
+)
 from gobs.processing.algorithms.import_observation_data import (
     ImportObservationData,
 )
@@ -32,6 +34,7 @@ from gobs.processing.algorithms.tools import (
 )
 from gobs.qgis_plugin_tools.tools.i18n import tr
 from gobs.qgis_plugin_tools.tools.resources import load_ui
+from gobs.qgis_plugin_tools.tools.version import version
 from processing import execAlgorithmDialog
 
 FORM_CLASS = load_ui('gobs_dockwidget_base.ui')
@@ -93,30 +96,110 @@ class GobsDockWidget(QtWidgets.QDockWidget, FORM_CLASS):
         # Set information from project
         self.setInformationFromProject()
 
+    @staticmethod
+    def getDatabaseVersion():
+        """ Get the database G-Obs version"""
+
+        # Get plugin version
+        plugin_version = version()
+
+        sql = '''
+            SELECT me_version
+            FROM gobs.metadata
+            WHERE me_status = 1
+            ORDER BY me_version_date DESC
+            LIMIT 1;
+        '''
+        project = QgsProject.instance()
+        connection_name = QgsExpressionContextUtils.projectScope(project).variable('gobs_connection_name')
+        get_data = QgsExpressionContextUtils.globalScope().variable('gobs_get_database_data')
+        db_version = None
+        if get_data == 'yes' and connection_name in get_postgis_connection_list():
+            result, _ = fetch_data_from_sql_query(connection_name, sql)
+            if result:
+                for a in result:
+                    db_version = a[0]
+                    break
+
+        return db_version
+
     def setInformationFromProject(self):
         """Set project based information such as database connection name"""
 
         # Active connection
         connection_name = QgsExpressionContextUtils.projectScope(self.project).variable('gobs_connection_name')
-        stylesheet = 'padding:5px; font-weight: bold;'
-        enable = False
+        stylesheet = 'padding: 3px;'
+        connection_stylesheet = stylesheet
+        connection_exists = False
 
+        # Connection name definition
+        connection_info = '-'
         if connection_name:
             if connection_name in get_postgis_connection_list():
                 connection_info = connection_name
-                stylesheet += "color: green;"
-                enable = True
+                connection_stylesheet += "color: green;"
+                connection_exists = True
             else:
                 connection_info = tr(
                     'The connection "{}" does not exist'.format(connection_name)
                 )
-                stylesheet += "color: red;"
+                connection_stylesheet += "color: red;"
         else:
             connection_info = tr(
                 'No connection set for this project. '
                 'Use the "Configure plugin" algorithm'
             )
-            stylesheet += "color: red;"
+            connection_stylesheet += "color: red;"
+
+        # Check database version against plugin version
+        plugin_version = version()
+        self.plugin_version.setText(plugin_version)
+        version_comment = ''
+        version_stylesheet = ''
+        if connection_exists:
+            db_version = self.getDatabaseVersion()
+
+            if db_version:
+                self.database_version.setText(db_version)
+                db_version_integer = format_version_integer(db_version)
+                plugin_version_integer = format_version_integer(plugin_version)
+                if db_version_integer == plugin_version_integer:
+                    version_comment = tr(
+                        'The version of the database structure and QGIS G-Obs plugin match.'
+                    )
+                    version_stylesheet = "font-weight: bold; color: green;"
+                else:
+                    if plugin_version_integer != 999999:
+                        if db_version_integer > plugin_version_integer:
+                            version_comment = tr(
+                                'The G-Obs plugin version is older than the database G-Obs version.'
+                                ' You need to upgrade your G-Obs QGIS plugin.'
+                            )
+                            version_stylesheet = "font-weight: bold; color: orange;"
+                        else:
+                            version_comment = tr(
+                                'The database G-Obs version is older than your plugin version.'
+                                ' You need to run the algorithm "Upgrade database structure".'
+                            )
+                            version_stylesheet = "font-weight: bold; color: orange;"
+                    else:
+                        version_comment = tr(
+                            'The G-Obs plugin version is either "master" or "dev".'
+                        )
+                        version_stylesheet = "font-weight: bold; color: green;"
+            else:
+                version_comment = tr(
+                    'The database G-Obs version cannot be fetched from the given connection.'
+                )
+                version_stylesheet = "font-weight: bold; color: orange;"
+
+        self.version_comment.setText(version_comment)
+        self.version_comment.setStyleSheet(version_stylesheet)
+
+
+        # Set project connection name and stylesheet
+        self.database_connection_name.setText(connection_info)
+        self.database_connection_name.setStyleSheet(connection_stylesheet)
 
         # Toggle activation for buttons
         all_buttons = self.algorithms + [
@@ -129,21 +212,17 @@ class GobsDockWidget(QtWidgets.QDockWidget, FORM_CLASS):
             button = self.findChild(QPushButton, 'button_{0}'.format(but))
             if not button:
                 continue
-            button.setEnabled(enable)
+            button.setEnabled(connection_exists)
 
             # Disable and hide button if QGIS variable gobs_is_admin is not correctly set
             # We enable the structure button only if gobs_is_admin equals 'yes'
             if but not in ('create_database_structure', 'upgrade_database_structure'):
                 continue
-            button.setEnabled(enable and gobs_is_admin == 'yes')
+            button.setEnabled(connection_exists and gobs_is_admin == 'yes')
             if gobs_is_admin != 'yes':
                 button.hide()
             else:
                 button.show()
-
-        # Set project connection name and stylesheet
-        self.database_connection_name.setText(connection_info)
-        self.database_connection_name.setStyleSheet(stylesheet)
 
     def runAlgorithm(self, name):
 

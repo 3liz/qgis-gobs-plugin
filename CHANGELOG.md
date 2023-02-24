@@ -2,9 +2,14 @@
 
 ## Unreleased
 
-* G-Obs right panel - Show the buttons "Create database structure" 
-  and "Upgrade database structure" only when the project variable
-  `gobs_is_admin` has the value `yes`
+### Modified
+
+* G-Obs right panel 
+    - Show the buttons "Create database structure" 
+      and "Upgrade database structure" only when the project variable
+      `gobs_is_admin` has the value `yes` in the project properties.
+    - Display the plugin version and the database structure version
+      at the top of the panel and add messages depending on these versions.
 
 ## 5.1.0 - 2022-10-07
 

@@ -25,8 +25,8 @@
         <rect>
          <x>0</x>
          <y>0</y>
-         <width>391</width>
-         <height>761</height>
+         <width>377</width>
+         <height>842</height>
         </rect>
        </property>
        <layout class="QVBoxLayout" name="verticalLayout">
@@ -38,6 +38,54 @@
           <layout class="QVBoxLayout" name="verticalLayout_7">
            <item>
             <layout class="QGridLayout" name="gridLayout_2">
+             <item row="1" column="0">
+              <widget class="QLabel" name="database_connection_name">
+               <property name="text">
+                <string/>
+               </property>
+               <property name="wordWrap">
+                <bool>true</bool>
+               </property>
+              </widget>
+             </item>
+             <item row="4" column="0">
+              <layout class="QFormLayout" name="formLayout">
+               <item row="1" column="0">
+                <widget class="QLabel" name="label">
+                 <property name="text">
+                  <string>Plugin</string>
+                 </property>
+                </widget>
+               </item>
+               <item row="1" column="1">
+                <widget class="QLabel" name="plugin_version">
+                 <property name="text">
+                  <string/>
+                 </property>
+                 <property name="wordWrap">
+                  <bool>true</bool>
+                 </property>
+                </widget>
+               </item>
+               <item row="2" column="0">
+                <widget class="QLabel" name="label_4">
+                 <property name="text">
+                  <string>Database</string>
+                 </property>
+                </widget>
+               </item>
+               <item row="2" column="1">
+                <widget class="QLabel" name="database_version">
+                 <property name="text">
+                  <string/>
+                 </property>
+                 <property name="wordWrap">
+                  <bool>true</bool>
+                 </property>
+                </widget>
+               </item>
+              </layout>
+             </item>
              <item row="0" column="0">
               <widget class="QLabel" name="label_2">
                <property name="font">
@@ -51,10 +99,23 @@
                </property>
               </widget>
              </item>
-             <item row="1" column="0">
-              <widget class="QLabel" name="database_connection_name">
+             <item row="2" column="0">
+              <widget class="QLabel" name="label_6">
+               <property name="font">
+                <font>
+                 <weight>75</weight>
+                 <bold>true</bold>
+                </font>
+               </property>
                <property name="text">
-                <string>None</string>
+                <string>Versions</string>
+               </property>
+              </widget>
+             </item>
+             <item row="5" column="0">
+              <widget class="QLabel" name="version_comment">
+               <property name="text">
+                <string/>
                </property>
                <property name="wordWrap">
                 <bool>true</bool>
