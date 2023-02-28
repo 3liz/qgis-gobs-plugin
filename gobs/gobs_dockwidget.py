@@ -73,31 +73,31 @@ class GobsDockWidget(QtWidgets.QDockWidget, FORM_CLASS):
             button = self.findChild(QPushButton, 'button_{0}'.format(alg))
             if not button:
                 continue
-            button.clicked.connect(partial(self.runAlgorithm, alg))
+            button.clicked.connect(partial(self.run_algorithm, alg))
 
         # Buttons not linked to algs
         #
         # Import observation data: need to dynamically instantiate the alg
         button = self.findChild(QPushButton, 'button_import_observation_data')
         if button:
-            button.clicked.connect(self.runImportObservationData)
+            button.clicked.connect(self.run_import_observation_data)
 
         # Open online help
         button = self.findChild(QPushButton, 'button_online_help')
         if button:
-            button.clicked.connect(self.onLineHelp)
+            button.clicked.connect(self.on_line_help)
 
         # Connect on project load or new
         self.project = QgsProject.instance()
-        self.iface.projectRead.connect(self.setInformationFromProject)
-        self.iface.newProjectCreated.connect(self.setInformationFromProject)
-        self.project.customVariablesChanged.connect(self.setInformationFromProject)
+        self.iface.projectRead.connect(self.set_information_from_project)
+        self.iface.newProjectCreated.connect(self.set_information_from_project)
+        self.project.customVariablesChanged.connect(self.set_information_from_project)
 
         # Set information from project
-        self.setInformationFromProject()
+        self.set_information_from_project()
 
     @staticmethod
-    def getDatabaseVersion():
+    def database_version():
         """ Get the database G-Obs version"""
         # Query the database
         sql = '''
@@ -120,7 +120,7 @@ class GobsDockWidget(QtWidgets.QDockWidget, FORM_CLASS):
 
         return db_version
 
-    def setInformationFromProject(self):
+    def set_information_from_project(self):
         """ Set project based information such as database connection name """
 
         # Active connection
@@ -153,7 +153,7 @@ class GobsDockWidget(QtWidgets.QDockWidget, FORM_CLASS):
         version_comment = ''
         version_stylesheet = ''
         if connection_exists:
-            db_version = self.getDatabaseVersion()
+            db_version = self.database_version()
 
             if db_version:
                 self.database_version.setText(db_version)
@@ -219,7 +219,7 @@ class GobsDockWidget(QtWidgets.QDockWidget, FORM_CLASS):
             else:
                 button.show()
 
-    def runAlgorithm(self, name):
+    def run_algorithm(self, name):
 
         if name not in self.algorithms:
             self.iface.messageBar().pushMessage(
@@ -235,7 +235,7 @@ class GobsDockWidget(QtWidgets.QDockWidget, FORM_CLASS):
         execAlgorithmDialog(alg_name, param)
 
     @staticmethod
-    def getSeries():
+    def get_series():
         # List of series
         sql = '''
             SELECT s.id,
@@ -262,10 +262,10 @@ class GobsDockWidget(QtWidgets.QDockWidget, FORM_CLASS):
 
         return []
 
-    def runImportObservationData(self):
+    def run_import_observation_data(self):
 
         # Get the list of series
-        series = self.getSeries()
+        series = self.get_series()
         if not series:
             return
 
@@ -292,9 +292,9 @@ class GobsDockWidget(QtWidgets.QDockWidget, FORM_CLASS):
         if dialog.exec_() == QDialog.Accepted:
             idx = combo_box.currentIndex()
             val = combo_box.itemData(idx)
-            self.openImportObservationData(val)
+            self.open_import_observation_data(val)
 
-    def openImportObservationData(self, serie_id):
+    def open_import_observation_data(self, serie_id):
         """
         Opens the processing alg ImportObservationData
         with dynamic inputs based on given serie id
@@ -332,7 +332,7 @@ class GobsDockWidget(QtWidgets.QDockWidget, FORM_CLASS):
         event.accept()
 
     @staticmethod
-    def openExternalResource(uri, is_url=True):
+    def open_external_resource(uri, is_url=True):
         """
         Opens a file with default system app
         """
@@ -341,9 +341,9 @@ class GobsDockWidget(QtWidgets.QDockWidget, FORM_CLASS):
             prefix = 'file://'
         webbrowser.open_new(r'{}{}'.format(prefix, uri))
 
-    def onLineHelp(self):
+    def on_line_help(self):
         """
         Display the help on concepts
         """
-        url = 'https://3liz.github.io/qgis-gobs-plugin/'
-        self.openExternalResource(url)
+        url = 'https://docs.3liz.org/qgis-gobs-plugin/'
+        self.open_external_resource(url)
