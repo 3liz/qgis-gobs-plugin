@@ -6,6 +6,7 @@ __revision__ = "$Format:%H$"
 import webbrowser
 
 from functools import partial
+from typing import Tuple
 
 from qgis.core import (
     Qgis,
@@ -24,6 +25,7 @@ from qgis.PyQt.QtWidgets import (
 )
 from gobs.plugin_tools import (
     format_version_integer,
+    available_migrations,
 )
 from gobs.processing.algorithms.import_observation_data import (
     ImportObservationData,
@@ -97,7 +99,7 @@ class GobsDockWidget(QtWidgets.QDockWidget, FORM_CLASS):
         self.set_information_from_project()
 
     @staticmethod
-    def database_version():
+    def check_database_version():
         """ Get the database G-Obs version"""
         # Query the database
         sql = '''
@@ -125,11 +127,9 @@ class GobsDockWidget(QtWidgets.QDockWidget, FORM_CLASS):
 
         # Active connection
         connection_name = QgsExpressionContextUtils.projectScope(self.project).variable('gobs_connection_name')
-        stylesheet = 'padding: 3px;'
-        connection_stylesheet = stylesheet
+        connection_stylesheet = 'padding: 3px;'
         connection_exists = False
 
-        connection_info = '-'
         if connection_name:
             if connection_name in get_postgis_connection_list():
                 connection_info = connection_name
@@ -150,44 +150,7 @@ class GobsDockWidget(QtWidgets.QDockWidget, FORM_CLASS):
         # Check database version against plugin version
         plugin_version = version()
         self.plugin_version.setText(plugin_version)
-        version_comment = ''
-        version_stylesheet = ''
-        if connection_exists:
-            db_version = self.database_version()
-
-            if db_version:
-                self.database_version.setText(db_version)
-                db_version_integer = format_version_integer(db_version)
-                plugin_version_integer = format_version_integer(plugin_version)
-                if db_version_integer == plugin_version_integer:
-                    version_comment = tr(
-                        'The version of the database structure and QGIS G-Obs plugin match.'
-                    )
-                    version_stylesheet = "font-weight: bold; color: green;"
-                else:
-                    if plugin_version_integer != 999999:
-                        if db_version_integer > plugin_version_integer:
-                            version_comment = tr(
-                                'The G-Obs plugin version is older than the database G-Obs version.'
-                                ' You need to upgrade your G-Obs QGIS plugin.'
-                            )
-                            version_stylesheet = "font-weight: bold; color: orange;"
-                        else:
-                            version_comment = tr(
-                                'The database G-Obs version is older than your plugin version.'
-                                ' You need to run the algorithm "Upgrade database structure".'
-                            )
-                            version_stylesheet = "font-weight: bold; color: orange;"
-                    else:
-                        version_comment = tr(
-                            'The G-Obs plugin version is either "master" or "dev".'
-                        )
-                        version_stylesheet = "font-weight: bold; color: green;"
-            else:
-                version_comment = tr(
-                    'The database G-Obs version cannot be fetched from the given connection.'
-                )
-                version_stylesheet = "font-weight: bold; color: orange;"
+        version_comment, version_stylesheet = self.check_database_status(connection_exists)
 
         self.version_comment.setText(version_comment)
         self.version_comment.setStyleSheet(version_stylesheet)
@@ -219,6 +182,53 @@ class GobsDockWidget(QtWidgets.QDockWidget, FORM_CLASS):
             else:
                 button.show()
 
+    def check_database_status(self, connection_exists) -> Tuple[str, str]:
+        """ Compare the plugin version versus the database version. """
+        # First check, if there isn't any connection set.
+        if not connection_exists:
+            version_comment = tr('Unknown database version')
+            version_stylesheet = "font-weight: bold; color: orange;"
+            return version_comment, version_stylesheet
+
+        db_version = self.check_database_version()
+
+        # Second check, if no metadata table has been found.
+        if not db_version:
+            version_comment = tr(
+                'The database G-Obs version cannot be fetched from the given connection.'
+            )
+            version_stylesheet = "font-weight: bold; color: orange;"
+            return version_comment, version_stylesheet
+
+        self.database_version.setText(db_version)
+        db_version_integer = format_version_integer(db_version)
+        plugin_version_integer = format_version_integer(version())
+
+        # Third check, if the database is in front of the plugin for their versions.
+        if db_version_integer > plugin_version_integer:
+            version_comment = tr(
+                'The G-Obs plugin version is older than the database G-Obs version.'
+                ' You need to upgrade your G-Obs QGIS plugin.'
+            )
+            version_stylesheet = "font-weight: bold; color: orange;"
+            return version_comment, version_stylesheet
+
+        has_migrations = len(available_migrations(plugin_version_integer)) >= 1
+        # Fourth check, if there is a migration to run
+        if has_migrations:
+            # db_version_integer < plugin_version_integer
+            version_comment = tr(
+                'The database G-Obs version is older than your plugin version.'
+                ' You need to run the algorithm "Upgrade database structure".'
+            )
+            version_stylesheet = "font-weight: bold; color: orange;"
+            return version_comment, version_stylesheet
+
+        # Finally, everything is alright
+        version_comment = tr('The database is OK')
+        version_stylesheet = "font-weight: bold; color: green;"
+        return version_comment, version_stylesheet
+
     def run_algorithm(self, name):
 
         if name not in self.algorithms:
@@ -231,8 +241,10 @@ class GobsDockWidget(QtWidgets.QDockWidget, FORM_CLASS):
 
         # Run alg
         param = {}
-        alg_name = 'gobs:{0}'.format(name)
+        alg_name = 'gobs:{}'.format(name)
         execAlgorithmDialog(alg_name, param)
+        if name in ('create_database_structure', 'upgrade_database_structure'):
+            self.set_information_from_project()
 
     @staticmethod
     def get_series():

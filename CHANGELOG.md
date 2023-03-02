@@ -2,6 +2,11 @@
 
 ## Unreleased
 
+## 5.2.1 - 2023-03-02
+
+* Improved the message about the database version and if migrations are available
+* Temporary disabling translations, this version is only available in English
+
 ## 5.2.0 - 2023-02-24
 
 * G-Obs right panel 
