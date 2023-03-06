@@ -20,7 +20,7 @@ jobs:
         python-version: "3.10"
 
     - name: Install qgis-plugin-ci
-      run: pip3 install qgis-plugin-ci
+      run: pip install -r requirements/packaging.txt
 
     - name: Push to Transifex
       run: qgis-plugin-ci push-translation ${{ secrets.TRANSIFEX_TOKEN }}
