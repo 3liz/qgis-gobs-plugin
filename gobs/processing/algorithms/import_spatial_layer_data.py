@@ -6,6 +6,8 @@ __revision__ = "$Format:%H$"
 import os
 import time
 
+import processing
+
 from qgis.core import (
     QgsExpressionContextUtils,
     QgsProcessingException,
@@ -17,8 +19,6 @@ from qgis.core import (
     QgsProject,
     QgsWkbTypes,
 )
-
-import processing
 
 from gobs.processing.algorithms.tools import (
     fetch_data_from_sql_query,

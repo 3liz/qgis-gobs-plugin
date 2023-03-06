@@ -45,6 +45,7 @@ jobs:
           qgis-plugin-ci
           release ${{ env.RELEASE_VERSION }}
           --github-token ${{ secrets.BOT_HUB_TOKEN }}
+          --transifex-token ${{ secrets.TRANSIFEX_TOKEN }}
           --create-plugin-repo
 
 #      - name: Tweet

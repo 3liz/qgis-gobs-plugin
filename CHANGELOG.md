@@ -2,6 +2,10 @@
 
 ## Unreleased
 
+## 5.2.2 - 2023-03-06
+
+* Re-enable all languages in the plugin
+
 ## 5.2.1 - 2023-03-02
 
 * Improved the message about the database version and if migrations are available

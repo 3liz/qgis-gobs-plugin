@@ -56,3 +56,4 @@ nosetests.xml
 # QGIS-Plugin-CI
 plugins.xml
 g_obs.*.zip
+gobs/i18n/

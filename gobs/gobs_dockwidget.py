@@ -8,6 +8,7 @@ import webbrowser
 from functools import partial
 from typing import Tuple
 
+from processing import execAlgorithmDialog
 from qgis.core import (
     Qgis,
     QgsApplication,
@@ -23,10 +24,8 @@ from qgis.PyQt.QtWidgets import (
     QPushButton,
     QVBoxLayout,
 )
-from gobs.plugin_tools import (
-    format_version_integer,
-    available_migrations,
-)
+
+from gobs.plugin_tools import available_migrations, format_version_integer
 from gobs.processing.algorithms.import_observation_data import (
     ImportObservationData,
 )
@@ -37,7 +36,6 @@ from gobs.processing.algorithms.tools import (
 from gobs.qgis_plugin_tools.tools.i18n import tr
 from gobs.qgis_plugin_tools.tools.resources import load_ui
 from gobs.qgis_plugin_tools.tools.version import version
-from processing import execAlgorithmDialog
 
 FORM_CLASS = load_ui('gobs_dockwidget_base.ui')
 

@@ -1,7 +1,6 @@
-__copyright__ = "Copyright 2020, 3Liz"
+__copyright__ = "Copyright 2023, 3Liz"
 __license__ = "GPL version 3"
 __email__ = "info@3liz.org"
-__revision__ = "$Format:%H$"
 
 import inspect
 import os
@@ -14,7 +13,7 @@ from qgis.PyQt.QtWidgets import QAction
 
 from gobs.gobs_dockwidget import GobsDockWidget
 from gobs.processing.provider import GobsProvider
-from gobs.qgis_plugin_tools.tools.resources import resources_path
+from gobs.qgis_plugin_tools.tools.resources import plugin_path, resources_path
 
 cmd_folder = os.path.split(inspect.getfile(inspect.currentframe()))[0]
 
@@ -34,7 +33,7 @@ class GobsPlugin(object):
             locale = QgsSettings().value('locale/userLocale', 'en')[0:2]
         except AttributeError:
             locale = 'en'
-        locale_path = resources_path('i18n', '{}.qm'.format(locale))
+        locale_path = plugin_path('i18n', 'g-obs_{}.qm'.format(locale))
 
         if os.path.exists(locale_path):
             self.translator = QTranslator()

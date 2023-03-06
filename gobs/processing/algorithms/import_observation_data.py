@@ -7,6 +7,8 @@ import time
 
 from typing import Optional, Tuple
 
+import processing
+
 from qgis.core import (
     QgsExpressionContextUtils,
     QgsProcessing,
@@ -16,8 +18,6 @@ from qgis.core import (
     QgsProcessingParameterVectorLayer,
     QgsProject,
 )
-
-import processing
 
 from gobs.processing.algorithms.tools import (
     fetch_data_from_sql_query,
