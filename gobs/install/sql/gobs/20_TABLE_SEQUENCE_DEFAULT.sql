@@ -114,6 +114,35 @@ CREATE TABLE gobs.deleted_data_log (
 COMMENT ON TABLE gobs.deleted_data_log IS 'Log of deleted objects from observation table. Use for synchronization purpose';
 
 
+-- dimension
+CREATE TABLE gobs.dimension (
+    id integer NOT NULL,
+    fk_id_indicator integer NOT NULL,
+    di_code text NOT NULL,
+    di_label text NOT NULL,
+    di_type text NOT NULL,
+    di_unit text
+);
+
+
+-- dimension
+COMMENT ON TABLE gobs.dimension IS 'Stores the different dimensions characteristics of an indicator';
+
+
+-- dimension_id_seq
+CREATE SEQUENCE gobs.dimension_id_seq
+
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+-- dimension_id_seq
+ALTER SEQUENCE gobs.dimension_id_seq OWNED BY gobs.dimension.id;
+
+
 -- document
 CREATE TABLE gobs.document (
     id integer NOT NULL,
@@ -231,10 +260,6 @@ CREATE TABLE gobs.indicator (
     id_label text NOT NULL,
     id_description text NOT NULL,
     id_date_format text DEFAULT 'day'::text NOT NULL,
-    id_value_code text[] NOT NULL,
-    id_value_name text[] NOT NULL,
-    id_value_type text[] NOT NULL,
-    id_value_unit text[] NOT NULL,
     id_paths text,
     id_category text,
     created_at timestamp without time zone DEFAULT now() NOT NULL,
@@ -527,6 +552,10 @@ ALTER TABLE ONLY gobs.actor_category ALTER COLUMN id SET DEFAULT nextval('gobs.a
 
 -- application id
 ALTER TABLE ONLY gobs.application ALTER COLUMN id SET DEFAULT nextval('gobs.application_id_seq'::regclass);
+
+
+-- dimension id
+ALTER TABLE ONLY gobs.dimension ALTER COLUMN id SET DEFAULT nextval('gobs.dimension_id_seq'::regclass);
 
 
 -- document id

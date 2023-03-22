@@ -8,6 +8,7 @@ spatial_layer
 series
 import
 spatial_object
+dimension
 document
 project_view
 r_indicator_node

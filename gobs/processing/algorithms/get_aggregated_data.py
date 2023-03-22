@@ -274,13 +274,16 @@ class GetAggregatedData(GetDataAsLayer):
             SELECT
                 id_label,
                 id_date_format,
-                array_to_string(id_value_code, '|') AS id_value_code,
-                array_to_string(id_value_type, '|') AS id_value_type,
-                array_to_string(id_value_unit, '|') AS id_value_unit
+                array_to_string(array_agg(d.di_code ORDER BY d.id), '|') AS id_value_code,
+                array_to_string(array_agg(d.di_type ORDER BY d.id), '|') AS id_value_type,
+                array_to_string(array_agg(d.di_unit ORDER BY d.id), '|') AS id_value_unit
             FROM gobs.indicator AS i
+            INNER JOIN gobs.dimension AS d
+                ON d.fk_id_indicator = i.id
             INNER JOIN gobs.series AS s
                 ON s.fk_id_indicator = i.id
             WHERE s.id = {id_serie}
+            GROUP BY id_label, id_date_format
         '''.format(
             id_serie=id_serie
         )

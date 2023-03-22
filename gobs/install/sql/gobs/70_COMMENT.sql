@@ -109,6 +109,30 @@ COMMENT ON COLUMN gobs.deleted_data_log.de_uid IS 'Unique text identifier of the
 COMMENT ON COLUMN gobs.deleted_data_log.de_timestamp IS 'Timestamp of the deletion';
 
 
+-- dimension
+COMMENT ON TABLE gobs.dimension IS 'Stores the different dimensions characteristics of an indicator';
+
+
+-- dimension.fk_id_indicator
+COMMENT ON COLUMN gobs.dimension.fk_id_indicator IS 'Id of the corresponding indicator.';
+
+
+-- dimension.di_code
+COMMENT ON COLUMN gobs.dimension.di_code IS 'Code of the vector dimension. Ex: ''pop_h'' or ''pop_f''';
+
+
+-- dimension.di_label
+COMMENT ON COLUMN gobs.dimension.di_label IS 'Label of the vector dimensions. Ex: ''population homme'' or ''population femme''';
+
+
+-- dimension.di_type
+COMMENT ON COLUMN gobs.dimension.di_type IS 'Type of the stored values. Ex: ''integer'' or ''real''';
+
+
+-- dimension.di_unit
+COMMENT ON COLUMN gobs.dimension.di_unit IS 'Unit ot the store values. Ex: ''inhabitants'' or ''°C''';
+
+
 -- document
 COMMENT ON TABLE gobs.document IS 'List of documents for describing indicators.';
 
@@ -231,22 +255,6 @@ COMMENT ON COLUMN gobs.indicator.id_description IS 'Describes the indicator rega
 
 -- indicator.id_date_format
 COMMENT ON COLUMN gobs.indicator.id_date_format IS 'Help to know what is the format for the date. Example : ‘year’';
-
-
--- indicator.id_value_code
-COMMENT ON COLUMN gobs.indicator.id_value_code IS 'List of the codes of the vector dimensions. Ex : [‘pop_h’, ‘pop_f’]';
-
-
--- indicator.id_value_name
-COMMENT ON COLUMN gobs.indicator.id_value_name IS 'List of the names of the vector dimensions. Ex : [‘population homme’, ‘population femme’]';
-
-
--- indicator.id_value_type
-COMMENT ON COLUMN gobs.indicator.id_value_type IS 'Type of the stored values. Ex : ‘integer’ or ‘real’';
-
-
--- indicator.id_value_unit
-COMMENT ON COLUMN gobs.indicator.id_value_unit IS 'Unit ot the store values. Ex : ‘inhabitants’ or ‘°C’';
 
 
 -- indicator.id_paths

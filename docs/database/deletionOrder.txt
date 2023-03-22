@@ -7,6 +7,7 @@ observation
 r_indicator_node
 project_view
 document
+dimension
 spatial_object
 import
 series

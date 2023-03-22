@@ -26,12 +26,23 @@ VALUES
 
 -- indicator
 INSERT INTO gobs.indicator
-(id, id_code, id_label, id_description, id_date_format, id_value_code, id_value_name, id_value_type, id_value_unit, id_paths, id_category)
+(id, id_code, id_label, id_description, id_date_format, id_paths, id_category)
 VALUES
-(1, 'pluviometry', 'Hourly pluviometry ', 'Hourly rainfall pluviometry in millimetre', 'hour', '{pluviometry}', '{Pluviometry}', '{real}', '{mm}', 'Environment / Water / Data | Physical and chemical conditions / Water ', 'Water'),
-(2, 'population', 'Population ', 'Number of inhabitants for city', 'year', '{population}', '{Population}', '{integer}', '{people}', 'Socio-eco / Demography / Population ', 'Population'),
-(3, 'hiker_position', 'Hikers position', 'Position and altitude of hikers', 'second', '{altitude}', '{Altitude}', '{integer}', '{m}', 'Hiking / Tracks', 'Tracks'),
-(4, 'observation', 'Observations', 'Faunal observations in the field', 'second', '{number,species}', '{"Number of individuals","Observed species"}', '{integer,text}', '{ind,sp}', 'Environment / Fauna / Species', 'Species')
+(1, 'pluviometry', 'Hourly pluviometry ', 'Hourly rainfall pluviometry in millimetre', 'hour', 'Environment / Water / Data | Physical and chemical conditions / Water ', 'Water'),
+(2, 'population', 'Population ', 'Number of inhabitants for city', 'year', 'Socio-eco / Demography / Population ', 'Population'),
+(3, 'hiker_position', 'Hikers position', 'Position and altitude of hikers', 'second', 'Hiking / Tracks', 'Tracks'),
+(4, 'observation', 'Observations', 'Faunal observations in the field', 'second', 'Environment / Fauna / Species', 'Species')
+;
+
+-- dimension
+INSERT INTO gobs.dimension
+(id, fk_id_indicator, di_code, di_label, di_type, di_unit)
+VALUES
+(1, 1, 'pluviometry', 'Pluviometry', 'real', 'mm'),
+(2, 2, 'population', 'Population', 'integer', 'people'),
+(3, 3, 'altitude', 'Altitude', 'integer', 'm'),
+(4, 4, 'number', 'Number of individuals', 'integer', 'ind'),
+(5, 4, 'species', 'Observed species', 'text', 'sp')
 ;
 
 -- document
@@ -78,6 +89,7 @@ VALUES
 SELECT pg_catalog.setval('gobs.actor_category_id_seq', 3, true);
 SELECT pg_catalog.setval('gobs.actor_id_seq', 8, true);
 SELECT pg_catalog.setval('gobs.indicator_id_seq', 4, true);
+SELECT pg_catalog.setval('gobs.dimension_id_seq', 5, true);
 SELECT pg_catalog.setval('gobs.document_id_seq', 2, true);
 SELECT pg_catalog.setval('gobs.protocol_id_seq', 4, true);
 SELECT pg_catalog.setval('gobs.spatial_layer_id_seq', 4, true);
