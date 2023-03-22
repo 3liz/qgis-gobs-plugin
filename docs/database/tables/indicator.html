@@ -125,6 +125,10 @@
                                     <td>
                                         <table border='0' cellspacing='0' cellpadding='0'>
                                             <tr>
+                                                <td title="dimension.fk_id_indicator references indicator.id via dimension_fk_id_indicator_fkey"><a href='dimension.html'>dimension</a><span class='relatedKey'>.fk_id_indicator</span></td>
+                                                <td class="constraint detail">dimension_fk_id_indicator_fkey<span title='Restrict delete:&#10;Parent cannot be deleted if children exist'>R</span></td>
+                                            </tr>
+                                            <tr>
                                                 <td title="document.fk_id_indicator references indicator.id via document_fk_id_indicator_fkey"><a href='document.html'>document</a><span class='relatedKey'>.fk_id_indicator</span></td>
                                                 <td class="constraint detail">document_fk_id_indicator_fkey<span title='Restrict delete:&#10;Parent cannot be deleted if children exist'>R</span></td>
                                             </tr>
@@ -211,74 +215,6 @@
                                         </table>
                                     </td>
                                     <td><p>Help to know what is the format for the date. Example : ‘year’</p></td>
-                                </tr>
-                                <tr>
-                                    <td><span id="id_value_code">id_value_code</span></td>
-                                    <td>_text</td>
-                                    <td>2147483647</td>
-                                    <td title=''></td>
-                                    <td title=''></td>
-                                    <td>null</td>
-                                    <td>
-                                        <table border='0' cellspacing='0' cellpadding='0'>
-                                        </table>
-                                    </td>
-                                    <td>
-                                        <table border='0' cellspacing='0' cellpadding='0'>
-                                        </table>
-                                    </td>
-                                    <td><p>List of the codes of the vector dimensions. Ex : <a href="./../null">‘pop_h’, ‘pop_f’</a></p></td>
-                                </tr>
-                                <tr>
-                                    <td><span id="id_value_name">id_value_name</span></td>
-                                    <td>_text</td>
-                                    <td>2147483647</td>
-                                    <td title=''></td>
-                                    <td title=''></td>
-                                    <td>null</td>
-                                    <td>
-                                        <table border='0' cellspacing='0' cellpadding='0'>
-                                        </table>
-                                    </td>
-                                    <td>
-                                        <table border='0' cellspacing='0' cellpadding='0'>
-                                        </table>
-                                    </td>
-                                    <td><p>List of the names of the vector dimensions. Ex : <a href="./../null">‘population homme’, ‘population femme’</a></p></td>
-                                </tr>
-                                <tr>
-                                    <td><span id="id_value_type">id_value_type</span></td>
-                                    <td>_text</td>
-                                    <td>2147483647</td>
-                                    <td title=''></td>
-                                    <td title=''></td>
-                                    <td>null</td>
-                                    <td>
-                                        <table border='0' cellspacing='0' cellpadding='0'>
-                                        </table>
-                                    </td>
-                                    <td>
-                                        <table border='0' cellspacing='0' cellpadding='0'>
-                                        </table>
-                                    </td>
-                                    <td><p>Type of the stored values. Ex : ‘integer’ or ‘real’</p></td>
-                                </tr>
-                                <tr>
-                                    <td><span id="id_value_unit">id_value_unit</span></td>
-                                    <td>_text</td>
-                                    <td>2147483647</td>
-                                    <td title=''></td>
-                                    <td title=''></td>
-                                    <td>null</td>
-                                    <td>
-                                        <table border='0' cellspacing='0' cellpadding='0'>
-                                        </table>
-                                    </td>
-                                    <td>
-                                        <table border='0' cellspacing='0' cellpadding='0'>
-                                        </table>
-                                    </td>
-                                    <td><p>Unit ot the store values. Ex : ‘inhabitants’ or ‘°C’</p></td>
                                 </tr>
                                 <tr>
                                     <td><span id="id_paths">id_paths</span></td>
@@ -407,25 +343,27 @@
                                 <div class="tab-content no-padding">
                                     <div class="chart tab-pane active" id="oneDegreeImg-chart" style="position: relative; overflow-x:auto;">
                                         <map id="oneDegreeRelationshipsDiagram" name="oneDegreeRelationshipsDiagram">
-<area shape="rect" id="node1" href="document.html" target="_top" title="document" alt="" coords="389,5,555,181">
-<area shape="rect" id="node2" href="indicator.html" target="_top" title="indicator" alt="" coords="5,196,321,647">
-<area shape="rect" id="node3" href="r_indicator_node.html" target="_top" title="r_indicator_node" alt="" coords="365,199,579,321">
-<area shape="rect" id="node4" href="series.html" target="_top" title="series" alt="" coords="375,339,569,549">
+<area shape="rect" id="node1" href="dimension.html" target="_top" title="dimension" alt="" coords="382,5,549,181">
+<area shape="rect" id="node2" href="indicator.html" target="_top" title="indicator" alt="" coords="5,323,315,656">
+<area shape="rect" id="node3" href="document.html" target="_top" title="document" alt="" coords="383,199,548,375">
+<area shape="rect" id="node4" href="r_indicator_node.html" target="_top" title="r_indicator_node" alt="" coords="359,392,572,515">
+<area shape="rect" id="node5" href="series.html" target="_top" title="series" alt="" coords="368,532,563,743">
 </map>
                                         <a name='diagram'><img id="oneDegreeImg" src="../diagrams/tables/indicator.1degree.png" usemap="#oneDegreeRelationshipsDiagram" class="diagram" border="0" align="left"></a>
                                     </div>
                                     <div class="chart tab-pane " id="twodegreesDegreeImg-chart" style="position: relative; overflow-x:auto;">
                                         <map id="twoDegreesRelationshipsDiagram" name="twoDegreesRelationshipsDiagram">
-<area shape="rect" id="node1" href="document.html" target="_top" title="document" alt="" coords="572,265,737,441">
-<area shape="rect" id="node2" href="indicator.html" target="_top" title="indicator" alt="" coords="188,299,504,749">
-<area shape="rect" id="node3" href="import.html" target="_top" title="import" alt="" coords="805,5,944,93">
-<area shape="rect" id="node4" href="series.html" target="_top" title="series" alt="" coords="557,37,752,248">
-<area shape="rect" id="node8" href="actor.html" target="_top" title="actor" alt="" coords="5,136,144,224">
-<area shape="rect" id="node9" href="protocol.html" target="_top" title="protocol" alt="" coords="271,31,421,119">
-<area shape="rect" id="node10" href="spatial_layer.html" target="_top" title="spatial_layer" alt="" coords="255,172,437,260">
-<area shape="rect" id="node5" href="observation.html" target="_top" title="observation" alt="" coords="988,40,1165,128">
-<area shape="rect" id="node6" href="r_indicator_node.html" target="_top" title="r_indicator_node" alt="" coords="548,585,761,708">
-<area shape="rect" id="node7" href="graph_node.html" target="_top" title="graph_node" alt="" coords="259,767,433,855">
+<area shape="rect" id="node1" href="dimension.html" target="_top" title="dimension" alt="" coords="565,264,731,440">
+<area shape="rect" id="node2" href="indicator.html" target="_top" title="indicator" alt="" coords="188,312,497,645">
+<area shape="rect" id="node3" href="document.html" target="_top" title="document" alt="" coords="565,457,731,633">
+<area shape="rect" id="node4" href="import.html" target="_top" title="import" alt="" coords="799,5,937,93">
+<area shape="rect" id="node5" href="series.html" target="_top" title="series" alt="" coords="551,36,745,247">
+<area shape="rect" id="node9" href="actor.html" target="_top" title="actor" alt="" coords="5,135,144,223">
+<area shape="rect" id="node10" href="protocol.html" target="_top" title="protocol" alt="" coords="267,29,418,117">
+<area shape="rect" id="node11" href="spatial_layer.html" target="_top" title="spatial_layer" alt="" coords="251,171,434,259">
+<area shape="rect" id="node6" href="observation.html" target="_top" title="observation" alt="" coords="981,40,1159,128">
+<area shape="rect" id="node7" href="r_indicator_node.html" target="_top" title="r_indicator_node" alt="" coords="541,651,755,773">
+<area shape="rect" id="node8" href="graph_node.html" target="_top" title="graph_node" alt="" coords="255,683,430,771">
 </map>
                                         <a name='diagram'><img id="twodegreesDegreeImg" src="../diagrams/tables/indicator.2degrees.png" usemap="#twoDegreesRelationshipsDiagram" class="diagram" border="0" align="left"></a>
                                     </div>

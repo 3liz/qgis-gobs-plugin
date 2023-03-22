@@ -6,6 +6,7 @@ The **administrator** is in charge of describing the different data stored in th
 * spatial layers,
 * protocols,
 * indicators,
+* dimensions,
 * series of data.
 
 See the [documentation on these concepts](../concepts/).
@@ -156,13 +157,11 @@ Notes:
 
 Example content
 
-
-
-| id |    id_code     |      id_label       |              id_description               | id_date_format | id_value_code | id_value_name | id_value_type | id_value_unit |                                id_paths                                | id_category |        created_at         |        updated_at         |
-|----|----------------|---------------------|-------------------------------------------|----------------|---------------|---------------|---------------|---------------|------------------------------------------------------------------------|-------------|---------------------------|---------------------------|
-| 1  | pluviometry    | Hourly pluviometry  | Hourly rainfall pluviometry in millimetre | hour           | {pluviometry} | {Pluviometry} | {real}        | {mm}          | Environment / Water / Data, Physical and chemical conditions / Water   | Water       | 2020-12-02 15:06:29.11064 | 2020-12-02 15:06:29.11064 |
-| 2  | population     | Population          | Number of inhabitants for city            | year           | {population}  | {Population}  | {integer}     | {people}      | Socio-eco / Demography / Population                                    | Population  | 2020-12-02 15:06:29.11064 | 2020-12-02 15:06:29.11064 |
-| 3  | hiker_position | Hikers position     | Position and altitude of hikers           | second         | {altitude}    | {Altitude}    | {integer}     | {m}           | Hiking / Tracks                                                        | Tracks      | 2020-12-02 15:06:29.11064 | 2020-12-02 15:06:29.11064 |
+| id |    id_code     |      id_label       |              id_description               | id_date_format |                                id_paths                                | id_category |        created_at         |        updated_at         |
+|----|----------------|---------------------|-------------------------------------------|----------------|------------------------------------------------------------------------|-------------|---------------------------|---------------------------|
+| 1  | pluviometry    | Hourly pluviometry  | Hourly rainfall pluviometry in millimetre | hour           | Environment / Water / Data, Physical and chemical conditions / Water   | Water       | 2020-12-02 15:06:29.11064 | 2020-12-02 15:06:29.11064 |
+| 2  | population     | Population          | Number of inhabitants for city            | year           | Socio-eco / Demography / Population                                    | Population  | 2020-12-02 15:06:29.11064 | 2020-12-02 15:06:29.11064 |
+| 3  | hiker_position | Hikers position     | Position and altitude of hikers           | second         | Hiking / Tracks                                                        | Tracks      | 2020-12-02 15:06:29.11064 | 2020-12-02 15:06:29.11064 |
 
 
 Notes:
@@ -174,39 +173,6 @@ Notes:
   Please choose with care, depending on the source data and the information you would like to create from it.
 * **Category** The optionnal category of the indicator. You can type some letters to search among the existing values.
   If you need to enter a new category, write it down.
-* The fields **Codes, Names, Types and Units** allow to define one or many **dimensions** for this indicator.
-  You can add one item in each field with the plus `+` button, or delete the selected one with the minus `-` button.
-  The order of the data entered for each field **must be respected**.
-  For example, if the indicator has two dimensions to store weather data: temperature & hygrometry, you could use:
-
-    - **Codes**: Code of the dimension. **Please do not use spaces, accentuated characters or punctuation symbol**
-
-    | Value       |
-    |-------------|
-    | temperature |
-    | hygrometry  |
-
-    - **Names**: Label of the dimension. You can use any necessary characters
-
-    | Value       |
-    |-------------|
-    | Température |
-    | Hygrométrie |
-
-    - **Types**: data type. You **must** choose among: `text`, `integer`, `real`, `date`, `timestamp`, `boolean`
-
-    | Value       |
-    |-------------|
-    | real        |
-    | integer     |
-
-    - **Units**: Unit of the dimension. You can use any text.
-
-    | Value       |
-    |-------------|
-    | °C          |
-    | %           |
-
 * The **Paths** can be used to define an **oriented graph** which will help the future users
   to find the indicator among many.
 
@@ -222,6 +188,51 @@ Notes:
     ![Indicator graph example](../media/gobs_indicator_graph_example.png)
 
 * The **creation & update timestamps** are automatically calculated when data is saved.
+
+#### dimension
+
+Each indicator can have one or more **dimensions**.
+You can add one item in the table `dimension` linked to the chosen indicator.
+
+Example content
+
+| id | fk_id_indicator |    di_code     |      di_label       |  di_type | di_unit |
+|----|-----------------|----------------|---------------------|----------|---------|
+| 1  |               1 | pluviometry    | Hourly pluviometry  | real     | mm      |
+| 2  |               2 | population_m   | Population (men)    | integer  | ind     |
+| 2  |               2 | population_w   | Population  (women) | integer  | ind     |
+
+
+
+For example, if the indicator has two dimensions to store weather data: temperature & hygrometry, you could use:
+
+- **Code**: Code of the dimension. **Please do not use spaces, accentuated characters or punctuation symbol**
+
+| Value       |
+|-------------|
+| temperature |
+| hygrometry  |
+
+- **Label**: Label of the dimension. You can use any necessary characters
+
+| Value       |
+|-------------|
+| Température |
+| Hygrométrie |
+
+- **Type**: data type. You **must** choose among: `text`, `integer`, `real`, `date`, `timestamp`, `boolean`
+
+| Value       |
+|-------------|
+| real        |
+| integer     |
+
+- **Unit**: Unit of the dimension. You can use any text.
+
+| Value       |
+|-------------|
+| °C          |
+| %           |
 
 #### protocol
 

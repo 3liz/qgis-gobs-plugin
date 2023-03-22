@@ -241,12 +241,14 @@ class ImportObservationData(BaseProcessingAlgorithm):
         separator = '#!#'
         sql = f'''
             SELECT
-                ARRAY_TO_STRING(id_value_code, '{separator}'),
-                ARRAY_TO_STRING(id_value_name, '{separator}'),
-                ARRAY_TO_STRING(id_value_type, '{separator}'),
-                ARRAY_TO_STRING(id_value_unit, '{separator}')
+                array_to_string(array_agg(d.di_code), '{separator}'),
+                array_to_string(array_agg(d.di_label), '{separator}'),
+                array_to_string(array_agg(d.di_type), '{separator}'),
+                array_to_string(array_agg(d.di_unit), '{separator}')
             FROM gobs.indicator AS i
-            WHERE id = (
+            INNER JOIN gobs.dimension AS d
+                ON d.fk_id_indicator = i.id
+            WHERE i.id = (
                 SELECT s.fk_id_indicator
                 FROM gobs.series AS s
                 WHERE s.id = {given_series}
@@ -358,14 +360,17 @@ class ImportObservationData(BaseProcessingAlgorithm):
             tr('GET DATA OF RELATED indicator')
         )
         sql = '''
-            SELECT id_date_format, array_to_string(id_value_type, ',')
+            SELECT id_date_format, array_to_string(array_agg(d.di_type), ',')
             FROM gobs.indicator AS i
+            INNER JOIN gobs.dimension AS d
+                ON d.fk_id_indicator = i.id
             WHERE id = (
                 SELECT s.fk_id_indicator
                 FROM gobs.series AS s
                 WHERE s.id = {0}
                 LIMIT 1
             )
+            GROUP BY id_date_format
             ;
         '''.format(
             id_serie

@@ -48,6 +48,16 @@ ALTER TABLE ONLY gobs.deleted_data_log
     ADD CONSTRAINT deleted_data_log_pkey PRIMARY KEY (de_table, de_uid);
 
 
+-- dimension dimension_fk_id_indicator_di_code_key
+ALTER TABLE ONLY gobs.dimension
+    ADD CONSTRAINT dimension_fk_id_indicator_di_code_key UNIQUE (fk_id_indicator, di_code);
+
+
+-- dimension dimension_pkey
+ALTER TABLE ONLY gobs.dimension
+    ADD CONSTRAINT dimension_pkey PRIMARY KEY (id);
+
+
 -- document document_do_label_key
 ALTER TABLE ONLY gobs.document
     ADD CONSTRAINT document_do_label_key UNIQUE (do_label, fk_id_indicator);
@@ -166,6 +176,11 @@ ALTER TABLE ONLY gobs.spatial_object
 -- actor actor_id_category_fkey
 ALTER TABLE ONLY gobs.actor
     ADD CONSTRAINT actor_id_category_fkey FOREIGN KEY (id_category) REFERENCES gobs.actor_category(id) ON DELETE RESTRICT;
+
+
+-- dimension dimension_fk_id_indicator_fkey
+ALTER TABLE ONLY gobs.dimension
+    ADD CONSTRAINT dimension_fk_id_indicator_fkey FOREIGN KEY (fk_id_indicator) REFERENCES gobs.indicator(id);
 
 
 -- document document_fk_id_indicator_fkey

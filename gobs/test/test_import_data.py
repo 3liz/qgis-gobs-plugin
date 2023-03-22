@@ -39,6 +39,7 @@ class TestImportData(DatabaseTestCase):
             "graph_node",
             "import",
             "indicator",
+            "dimension",
             "metadata",
             "observation",
             "protocol",
