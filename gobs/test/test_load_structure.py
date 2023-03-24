@@ -52,7 +52,7 @@ class TestProcessing(unittest.TestCase):
             'CONNECTION_NAME': 'test',
             'OVERRIDE': True,
             'ADD_TEST_DATA': True,
-            "ADD_OBSERVATION_DATA": False,
+            "ADD_OBSERVATION_DATA": False,  # This data does not exist in test data 0.2.2
         }
 
         os.environ["TEST_DATABASE_INSTALL_{}".format(SCHEMA.upper())] = VERSION

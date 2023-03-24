@@ -13,7 +13,7 @@ dateTime=
 
 author=3Liz
 email=info@3liz.com
-tags=time,observation,stats
+tags=time,observation,stats,gobs
 about=This plugin provides tools to store and manage spatial and time data in a standardized way
 icon=resources/icons/icon.png
 category=Analysis
