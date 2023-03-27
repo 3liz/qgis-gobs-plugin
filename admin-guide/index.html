@@ -21,7 +21,7 @@
         <link rel="next" href="../concepts/">
       
       <link rel="icon" href="../icon.png">
-      <meta name="generator" content="mkdocs-1.4.2, mkdocs-material-9.1.1">
+      <meta name="generator" content="mkdocs-1.4.2, mkdocs-material-9.1.4">
     
     
       
@@ -29,7 +29,7 @@
       
     
     
-      <link rel="stylesheet" href="../assets/stylesheets/main.402914a4.min.css">
+      <link rel="stylesheet" href="../assets/stylesheets/main.240905d7.min.css">
       
         
         <link rel="stylesheet" href="../assets/stylesheets/palette.a0c5b2b5.min.css">
@@ -533,6 +533,13 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#dimension" class="md-nav__link">
+    dimension
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#protocol" class="md-nav__link">
     protocol
   </a>
@@ -793,6 +800,13 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#dimension" class="md-nav__link">
+    dimension
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#protocol" class="md-nav__link">
     protocol
   </a>
@@ -855,6 +869,7 @@
 <li>spatial layers,</li>
 <li>protocols,</li>
 <li>indicators,</li>
+<li>dimensions,</li>
 <li>series of data.</li>
 </ul>
 <p>See the <a href="../concepts/">documentation on these concepts</a>.</p>
@@ -1053,10 +1068,6 @@ the line must be highlighted in blue. Then use the trash icon <code>Delete selec
 <th>id_label</th>
 <th>id_description</th>
 <th>id_date_format</th>
-<th>id_value_code</th>
-<th>id_value_name</th>
-<th>id_value_type</th>
-<th>id_value_unit</th>
 <th>id_paths</th>
 <th>id_category</th>
 <th>created_at</th>
@@ -1070,10 +1081,6 @@ the line must be highlighted in blue. Then use the trash icon <code>Delete selec
 <td>Hourly pluviometry</td>
 <td>Hourly rainfall pluviometry in millimetre</td>
 <td>hour</td>
-<td>{pluviometry}</td>
-<td>{Pluviometry}</td>
-<td>{real}</td>
-<td>{mm}</td>
 <td>Environment / Water / Data, Physical and chemical conditions / Water</td>
 <td>Water</td>
 <td>2020-12-02 15:06:29.11064</td>
@@ -1085,10 +1092,6 @@ the line must be highlighted in blue. Then use the trash icon <code>Delete selec
 <td>Population</td>
 <td>Number of inhabitants for city</td>
 <td>year</td>
-<td>{population}</td>
-<td>{Population}</td>
-<td>{integer}</td>
-<td>{people}</td>
 <td>Socio-eco / Demography / Population</td>
 <td>Population</td>
 <td>2020-12-02 15:06:29.11064</td>
@@ -1100,10 +1103,6 @@ the line must be highlighted in blue. Then use the trash icon <code>Delete selec
 <td>Hikers position</td>
 <td>Position and altitude of hikers</td>
 <td>second</td>
-<td>{altitude}</td>
-<td>{Altitude}</td>
-<td>{integer}</td>
-<td>{m}</td>
 <td>Hiking / Tracks</td>
 <td>Tracks</td>
 <td>2020-12-02 15:06:29.11064</td>
@@ -1120,84 +1119,6 @@ the line must be highlighted in blue. Then use the trash icon <code>Delete selec
   Please choose with care, depending on the source data and the information you would like to create from it.</li>
 <li><strong>Category</strong> The optionnal category of the indicator. You can type some letters to search among the existing values.
   If you need to enter a new category, write it down.</li>
-<li>
-<p>The fields <strong>Codes, Names, Types and Units</strong> allow to define one or many <strong>dimensions</strong> for this indicator.
-  You can add one item in each field with the plus <code>+</code> button, or delete the selected one with the minus <code>-</code> button.
-  The order of the data entered for each field <strong>must be respected</strong>.
-  For example, if the indicator has two dimensions to store weather data: temperature &amp; hygrometry, you could use:</p>
-<ul>
-<li><strong>Codes</strong>: Code of the dimension. <strong>Please do not use spaces, accentuated characters or punctuation symbol</strong></li>
-</ul>
-<table>
-<thead>
-<tr>
-<th>Value</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>temperature</td>
-</tr>
-<tr>
-<td>hygrometry</td>
-</tr>
-</tbody>
-</table>
-<ul>
-<li><strong>Names</strong>: Label of the dimension. You can use any necessary characters</li>
-</ul>
-<table>
-<thead>
-<tr>
-<th>Value</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>Température</td>
-</tr>
-<tr>
-<td>Hygrométrie</td>
-</tr>
-</tbody>
-</table>
-<ul>
-<li><strong>Types</strong>: data type. You <strong>must</strong> choose among: <code>text</code>, <code>integer</code>, <code>real</code>, <code>date</code>, <code>timestamp</code>, <code>boolean</code></li>
-</ul>
-<table>
-<thead>
-<tr>
-<th>Value</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>real</td>
-</tr>
-<tr>
-<td>integer</td>
-</tr>
-</tbody>
-</table>
-<ul>
-<li><strong>Units</strong>: Unit of the dimension. You can use any text.</li>
-</ul>
-<table>
-<thead>
-<tr>
-<th>Value</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>°C</td>
-</tr>
-<tr>
-<td>%</td>
-</tr>
-</tbody>
-</table>
-</li>
 <li>
 <p>The <strong>Paths</strong> can be used to define an <strong>oriented graph</strong> which will help the future users
   to find the indicator among many.</p>
@@ -1217,6 +1138,121 @@ the line must be highlighted in blue. Then use the trash icon <code>Delete selec
 <p>The <strong>creation &amp; update timestamps</strong> are automatically calculated when data is saved.</p>
 </li>
 </ul>
+<h4 id="dimension">dimension<a class="headerlink" href="#dimension" title="Permanent link">#</a></h4>
+<p>Each indicator can have one or more <strong>dimensions</strong>.
+You can add one item in the table <code>dimension</code> linked to the chosen indicator.</p>
+<p>Example content</p>
+<table>
+<thead>
+<tr>
+<th>id</th>
+<th>fk_id_indicator</th>
+<th>di_code</th>
+<th>di_label</th>
+<th>di_type</th>
+<th>di_unit</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td>1</td>
+<td>pluviometry</td>
+<td>Hourly pluviometry</td>
+<td>real</td>
+<td>mm</td>
+</tr>
+<tr>
+<td>2</td>
+<td>2</td>
+<td>population_m</td>
+<td>Population (men)</td>
+<td>integer</td>
+<td>ind</td>
+</tr>
+<tr>
+<td>2</td>
+<td>2</td>
+<td>population_w</td>
+<td>Population  (women)</td>
+<td>integer</td>
+<td>ind</td>
+</tr>
+</tbody>
+</table>
+<p>For example, if the indicator has two dimensions to store weather data: temperature &amp; hygrometry, you could use:</p>
+<ul>
+<li><strong>Code</strong>: Code of the dimension. <strong>Please do not use spaces, accentuated characters or punctuation symbol</strong></li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>Value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>temperature</td>
+</tr>
+<tr>
+<td>hygrometry</td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li><strong>Label</strong>: Label of the dimension. You can use any necessary characters</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>Value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Température</td>
+</tr>
+<tr>
+<td>Hygrométrie</td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li><strong>Type</strong>: data type. You <strong>must</strong> choose among: <code>text</code>, <code>integer</code>, <code>real</code>, <code>date</code>, <code>timestamp</code>, <code>boolean</code></li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>Value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>real</td>
+</tr>
+<tr>
+<td>integer</td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li><strong>Unit</strong>: Unit of the dimension. You can use any text.</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>Value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>°C</td>
+</tr>
+<tr>
+<td>%</td>
+</tr>
+</tbody>
+</table>
 <h4 id="protocol">protocol<a class="headerlink" href="#protocol" title="Permanent link">#</a></h4>
 <p>Example content</p>
 <table>
@@ -1317,10 +1353,10 @@ the line must be highlighted in blue. Then use the trash icon <code>Delete selec
           
         </div>
         
-          <a href="#" class="md-top md-icon" data-md-component="top" hidden>
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8v12Z"/></svg>
             Back to top
-          </a>
+          </button>
         
       </main>
       
@@ -1413,7 +1449,7 @@ the line must be highlighted in blue. Then use the trash icon <code>Delete selec
     <script id="__config" type="application/json">{"base": "..", "features": ["navigation.tabs", "navigation.tabs.sticky", "navigation.top"], "search": "../assets/javascripts/workers/search.208ed371.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}}</script>
     
     
-      <script src="../assets/javascripts/bundle.b78d2936.min.js"></script>
+      <script src="../assets/javascripts/bundle.19047be9.min.js"></script>
       
         <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.1.1/highlight.min.js"></script>
       
