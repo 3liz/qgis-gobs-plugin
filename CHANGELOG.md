@@ -2,6 +2,10 @@
 
 ## Unreleased
 
+## 6.0.0 - 2023-03-27
+
+* Indicator - Move the dimensions characteristics into a new dedicated table
+
 ## 5.2.2 - 2023-03-06
 
 * Re-enable all languages in the plugin
