@@ -211,7 +211,7 @@ class GobsDockWidget(QtWidgets.QDockWidget, FORM_CLASS):
             version_stylesheet = "font-weight: bold; color: orange;"
             return version_comment, version_stylesheet
 
-        has_migrations = len(available_migrations(plugin_version_integer)) >= 1
+        has_migrations = len(available_migrations(db_version_integer)) >= 1
         # Fourth check, if there is a migration to run
         if has_migrations:
             # db_version_integer < plugin_version_integer
