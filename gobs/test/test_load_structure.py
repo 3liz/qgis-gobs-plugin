@@ -25,7 +25,7 @@ __email__ = "info@3liz.org"
 __revision__ = "$Format:%H$"
 
 SCHEMA = "gobs"
-VERSION = "0.2.2"
+VERSION = "0.2.1"
 
 
 class TestProcessing(unittest.TestCase):

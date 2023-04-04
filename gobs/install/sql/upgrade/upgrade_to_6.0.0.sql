@@ -41,10 +41,10 @@ WITH source AS (
 )
 SELECT
 	id AS fk_id_indicator,
-	id_value_code[idx] AS di_code,
-	id_value_name[idx] AS di_label,
-	id_value_type AS di_type,
-	id_value_unit AS di_unit
+	Coalesce(id_value_code[idx], '-') AS di_code,
+	Coalesce(id_value_name[idx], '-') AS di_label,
+	Coalesce(id_value_type[idx], 'text') AS di_type,
+	Coalesce(id_value_unit[idx], '') AS di_unit
 FROM source
 WHERE TRUE
 ON CONFLICT ON CONSTRAINT dimension_fk_id_indicator_di_code_key

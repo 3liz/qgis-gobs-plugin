@@ -6,6 +6,7 @@
 
 * Version check - Get the available migrations from the database
   version instead of from the plugin version
+* Migration - Fix a bug preventing to upgrade do 6.0.0 from old databases
 
 ## 6.0.0 - 2023-03-27
 
