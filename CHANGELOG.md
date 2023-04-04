@@ -6,7 +6,6 @@
 
 * Version check - Get the available migrations from the database
   version instead of from the plugin version
-* Migrations - do not avoid migrations for dev/master branches
 
 ## 6.0.0 - 2023-03-27
 

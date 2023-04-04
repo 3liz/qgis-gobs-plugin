@@ -58,4 +58,7 @@ def format_version_integer(version_string: str) -> int:
     Transform "0.1.2" into "000102"
     Transform "10.9.12" into "100912"
     """
-    return int("".join([a.zfill(2) for a in version_string.strip().split(".")]))
+    if version_string in ('dev', 'master'):
+        return 999999
+    else:
+        return int("".join([a.zfill(2) for a in version_string.strip().split(".")]))
