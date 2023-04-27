@@ -2,6 +2,11 @@
 
 ## Unreleased
 
+## 6.0.2 - 2023-04-27
+
+* Import observation data - Fix missing table prefix
+* Administration QGIS project - user sslmode=prefer instead of disable
+
 ## 6.0.1 - 2023-04-04
 
 * Version check - Get the available migrations from the database
