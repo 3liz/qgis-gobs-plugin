@@ -364,7 +364,7 @@ class ImportObservationData(BaseProcessingAlgorithm):
             FROM gobs.indicator AS i
             INNER JOIN gobs.dimension AS d
                 ON d.fk_id_indicator = i.id
-            WHERE id = (
+            WHERE i.id = (
                 SELECT s.fk_id_indicator
                 FROM gobs.series AS s
                 WHERE s.id = {0}
