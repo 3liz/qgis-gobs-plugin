@@ -418,7 +418,7 @@ class ImportObservationData(BaseProcessingAlgorithm):
                 if id_value_type in ('integer', 'real'):
                     # remove useless spaces if data is supposed to be integer or real
                     convertor_a = "regexp_replace("
-                    convertor_b = ", '[^0-9,\.]', '', 'g')"  # NOQA
+                    convertor_b = ", '[^0-9,\.\-]', '', 'g')"  # NOQA
                 vector_value = '{a}trim(s."{fieldname}"::text){b}::{value_type}'.format(
                     a=convertor_a,
                     fieldname=fieldname,
