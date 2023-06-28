@@ -128,11 +128,6 @@ ALTER TABLE ONLY gobs.project
     ADD CONSTRAINT project_pt_label_key UNIQUE (pt_label);
 
 
--- project_view project_view_fk_id_project_fk_id_spatial_layer_fk_so_unique_key
-ALTER TABLE ONLY gobs.project_view
-    ADD CONSTRAINT project_view_fk_id_project_fk_id_spatial_layer_fk_so_unique_key UNIQUE (fk_id_project, fk_id_spatial_layer, fk_so_unique_id);
-
-
 -- project_view project_view_pkey
 ALTER TABLE ONLY gobs.project_view
     ADD CONSTRAINT project_view_pkey PRIMARY KEY (id);
@@ -211,11 +206,6 @@ ALTER TABLE ONLY gobs.observation
 -- project_view project_view_fk_id_project_fkey
 ALTER TABLE ONLY gobs.project_view
     ADD CONSTRAINT project_view_fk_id_project_fkey FOREIGN KEY (fk_id_project) REFERENCES gobs.project(id) ON DELETE CASCADE;
-
-
--- project_view project_view_fk_id_spatial_layer_fkey
-ALTER TABLE ONLY gobs.project_view
-    ADD CONSTRAINT project_view_fk_id_spatial_layer_fkey FOREIGN KEY (fk_id_spatial_layer) REFERENCES gobs.spatial_layer(id) ON DELETE SET NULL;
 
 
 -- r_indicator_node r_indicator_node_fk_id_indicator_fkey

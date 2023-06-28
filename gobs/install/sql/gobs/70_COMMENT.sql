@@ -369,28 +369,9 @@ COMMENT ON COLUMN gobs.project.pt_description IS 'Description of the project.';
 COMMENT ON COLUMN gobs.project.pt_indicator_codes IS 'List of indicator codes available for this project';
 
 
--- project.pt_groups
-COMMENT ON COLUMN gobs.project.pt_groups IS 'List of groups of users which have access to the project and its indicators, separated by coma.';
-
-
--- project.pt_xmin
-COMMENT ON COLUMN gobs.project.pt_xmin IS 'Minimum longitude (X min) in EPSG:4326';
-
-
--- project.pt_ymin
-COMMENT ON COLUMN gobs.project.pt_ymin IS 'Minimum latitude (Y min) in EPSG:4326';
-
-
--- project.pt_xmax
-COMMENT ON COLUMN gobs.project.pt_xmax IS 'Maximum longitude (X max) in EPSG:4326';
-
-
--- project.pt_ymax
-COMMENT ON COLUMN gobs.project.pt_ymax IS 'Maximum latitude (Y max) in EPSG:4326';
-
-
 -- project_view
-COMMENT ON TABLE gobs.project_view IS 'Allow to filter the access on projects and relative data (indicators, observations, etc.) with a spatial object for a given list of user groups';
+COMMENT ON TABLE gobs.project_view IS 'Allow to filter the access on projects and relative data (indicators, observations, etc.) with a spatial object for a given list of user groups.
+There must be at least one project view for the project, of type global. The other views must be of type filter.';
 
 
 -- project_view.id
@@ -409,12 +390,12 @@ COMMENT ON COLUMN gobs.project_view.fk_id_project IS 'Project id (foreign key)';
 COMMENT ON COLUMN gobs.project_view.pv_groups IS 'List of user groups allowed to see observation data inside this project view spatial layer object. Use a coma separated value. Ex: "group_a, group_b"';
 
 
--- project_view.fk_id_spatial_layer
-COMMENT ON COLUMN gobs.project_view.fk_id_spatial_layer IS 'Spatial layer id (foreign key)';
+-- project_view.pv_type
+COMMENT ON COLUMN gobs.project_view.pv_type IS 'Type of the project view : "global" for the unique global view, and "filter" for the view made for spatial filter purpose';
 
 
--- project_view.fk_so_unique_id
-COMMENT ON COLUMN gobs.project_view.fk_so_unique_id IS 'Spatial object unique id (foreign key). Ex: AB1234. This references the object unique code, not the object integer id field';
+-- project_view.geom
+COMMENT ON COLUMN gobs.project_view.geom IS 'Geometry of the project view: no observation can be created outside the project views geometries accessible from the authenticated user.';
 
 
 -- protocol

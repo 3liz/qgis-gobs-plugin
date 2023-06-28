@@ -312,9 +312,9 @@ ALTER SEQUENCE gobs.metadata_id_seq OWNED BY gobs.metadata.id;
 
 -- observation
 CREATE TABLE gobs.observation (
-    id bigint NOT NULL,
+    id integer NOT NULL,
     fk_id_series integer NOT NULL,
-    fk_id_spatial_object bigint NOT NULL,
+    fk_id_spatial_object integer NOT NULL,
     fk_id_import integer NOT NULL,
     ob_value jsonb NOT NULL,
     ob_start_timestamp timestamp without time zone NOT NULL,
@@ -350,12 +350,7 @@ CREATE TABLE gobs.project (
     pt_lizmap_project_key text,
     pt_label text NOT NULL,
     pt_description text,
-    pt_indicator_codes text[],
-    pt_groups text,
-    pt_xmin real,
-    pt_ymin real,
-    pt_xmax real,
-    pt_ymax real
+    pt_indicator_codes text[]
 );
 
 
@@ -383,13 +378,14 @@ CREATE TABLE gobs.project_view (
     pv_label text NOT NULL,
     fk_id_project integer NOT NULL,
     pv_groups text,
-    fk_id_spatial_layer integer,
-    fk_so_unique_id text
+    pv_type text DEFAULT 'global'::text NOT NULL,
+    geom public.geometry(MultiPolygon,4326) NOT NULL
 );
 
 
 -- project_view
-COMMENT ON TABLE gobs.project_view IS 'Allow to filter the access on projects and relative data (indicators, observations, etc.) with a spatial object for a given list of user groups';
+COMMENT ON TABLE gobs.project_view IS 'Allow to filter the access on projects and relative data (indicators, observations, etc.) with a spatial object for a given list of user groups.
+There must be at least one project view for the project, of type global. The other views must be of type filter.';
 
 
 -- project_view_id_seq
@@ -512,7 +508,7 @@ ALTER SEQUENCE gobs.spatial_layer_id_seq OWNED BY gobs.spatial_layer.id;
 
 -- spatial_object
 CREATE TABLE gobs.spatial_object (
-    id bigint NOT NULL,
+    id integer NOT NULL,
     so_unique_id text NOT NULL,
     so_unique_label text NOT NULL,
     geom public.geometry(Geometry,4326) NOT NULL,

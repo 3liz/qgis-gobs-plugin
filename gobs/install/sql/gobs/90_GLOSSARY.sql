@@ -46,13 +46,15 @@ INSERT INTO gobs.glossary (id, gl_field, gl_code, gl_label, gl_description, gl_o
 INSERT INTO gobs.glossary (id, gl_field, gl_code, gl_label, gl_description, gl_order) VALUES (24, 'do_type', 'document', 'Document', 'Generic document like PDF, ODT, text files or archives', 4);
 INSERT INTO gobs.glossary (id, gl_field, gl_code, gl_label, gl_description, gl_order) VALUES (25, 'do_type', 'url', 'URL', 'URL pointing to the document', 5);
 INSERT INTO gobs.glossary (id, gl_field, gl_code, gl_label, gl_description, gl_order) VALUES (26, 'do_type', 'other', 'Other', 'Other type of document', 6);
+INSERT INTO gobs.glossary (id, gl_field, gl_code, gl_label, gl_description, gl_order) VALUES (27, 'pv_type', 'global', 'Global', 'Global project view (only one per project)', 1);
+INSERT INTO gobs.glossary (id, gl_field, gl_code, gl_label, gl_description, gl_order) VALUES (28, 'pv_type', 'filter', 'Filter', 'Filter view (to restrict access to some observations)', 2);
 
 
 --
 -- Name: glossary_id_seq; Type: SEQUENCE SET; Schema: gobs; Owner: -
 --
 
-SELECT pg_catalog.setval('gobs.glossary_id_seq', 26, true);
+SELECT pg_catalog.setval('gobs.glossary_id_seq', 28, true);
 
 
 --
