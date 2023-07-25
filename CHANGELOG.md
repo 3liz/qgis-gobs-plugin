@@ -2,6 +2,11 @@
 
 ## Unreleased
 
+## 6.1.0 - 2023-07-25
+
+* Database structure - Improve the tables project and project_view
+* Import observation data - Allow negative values for integer and real
+
 ## 6.0.2 - 2023-04-27
 
 * Import observation data - Fix missing table prefix
@@ -28,8 +33,8 @@
 
 ## 5.2.0 - 2023-02-24
 
-* G-Obs right panel 
-    - Show the buttons "Create database structure" 
+* G-Obs right panel
+    - Show the buttons "Create database structure"
       and "Upgrade database structure" only when the project variable
       `gobs_is_admin` has the value `yes` in the project properties.
     - Display the plugin version and the database structure version
