@@ -22,7 +22,7 @@ ALTER TABLE gobs.project_view ADD COLUMN IF NOT EXISTS "pv_type" text NOT NULL D
 COMMENT ON COLUMN gobs.project_view.pv_type
 IS 'Type of the project view : "global" for the unique global view, and "filter" for the view made for spatial filter purpose';
 
-ALTER TABLE gobs.project_view ADD COLUMN IF NOT EXISTS "geom" geometry(MULTIPOLYGON, 4326) NOT NULL;
+ALTER TABLE gobs.project_view ADD COLUMN IF NOT EXISTS "geom" public.geometry(MULTIPOLYGON, 4326) NOT NULL;
 COMMENT ON COLUMN gobs.project_view.geom
 IS 'Geometry of the project view: no observation can be created outside the project views geometries accessible from the authenticated user.';
 
