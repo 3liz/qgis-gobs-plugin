@@ -51,9 +51,11 @@ it may be associated to an _icon_ and a _category_, for the benefit of external 
 
 It is possible to produce a data series by combining several data series; the protocol of the new series embeds the combination formula.
 
+
 ### Observation / Data
 
 **Element of a data series** characterized by the **observation context** (spatial object, date) and the **observed values** for a set of dimensions in the case of a series attached to a multidimensional indicator.
+
 
 ### Indicator's dimensions
 
@@ -69,17 +71,20 @@ It has a _code_.
 
 Its structure must match the structure of the target data series.
 
+
 ### Information service
 
 **A representation usable by actors** for information or decision-making purposes. As a service, its access is administrated, i.e. : a user must have the propers rights to access a given service.
 
 The information displayed results from requests upon one or several data series, possibly linked to distinct indicators. The representtaion is usually co-designed with the client of the service.
 
+
 ### Project
 
 A **project** is defined by management purpose (example : Human Wildlife Conflicts mitigation) and is characterized by a group of indicators (example : presence of lions, presence of elephants, presence of crocodiles, presence of a crocodile barrier ...).
 It is defined by a code, a label, a description.
 It contains a list of spatial layers associated to the data series that will feed the indicators or supporting the display of the data.
+
 
 ### Project view
 
@@ -88,9 +93,11 @@ The data series associated to a **project** can be accessed within the whole geo
 A project view is a set of spatial objects (polygons).
 Each project has at least one project view (the maximal spatial extent of the project), and possibly many partial project views.
 
+
 ### Software function
 
 Part of a software in charge of a numeric transformation.
+
 
 ### Roles in the observation/action loop
 
