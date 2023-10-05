@@ -29,13 +29,11 @@ A group of **spatial objects** produced by a given **actor** and sharing the sam
 
 It has a _code_, a _name_, a _description_.
 
-
 ### Protocol
 
 **Observation or computation method** for scientific purpose. It can be a scientific protocol in the case of measures, instructions for investigators in the case of a survey, or a mathematical formula in the case of secondary data.
 
 It has a _code_, a _name_, a _description_, and _bibliographic references_.
-
 
 ### Indicator
 
@@ -46,18 +44,15 @@ It may correspond to several data series obeying different protocols only if the
 It has a _label_, a _description_ ; it may be either monodimensonal (one value) or multidimensional (a vector of values)
 it may be associated to an _icon_ and a _category_, for the benefit of external applications : in the case of the collection of observations through G-events, the icon will appear in the left/top/right panel according to the A/B/C category.
 
-
 ### Data series
 
 **Set of observations/data** ruled by the **same protocol**, linked to the **same indicator** and the **same spatial layer**, and produced by the **same actor**.
 
 It is possible to produce a data series by combining several data series; the protocol of the new series embeds the combination formula.
 
-
 ### Observation / Data
 
 **Element of a data series** characterized by the **observation context** (spatial object, date) and the **observed values** for a set of dimensions in the case of a series attached to a multidimensional indicator.
-
 
 ### Indicator's dimensions
 
