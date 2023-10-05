@@ -27,13 +27,13 @@ A **geo-referenced entity** characterized by a _type of geometry_ (point, line, 
 
 A group of **spatial objects** produced by a given **actor** and sharing the same coordinate system.
 
-It has a **code**, a **name**, a **description**.
+It has a _code_, a _name_, a _description_.
 
 ### Protocol
 
 **Observation or computation method** for scientific purpose. It can be a scientific protocol in the case of measures, instructions for investigators in the case of a survey, or a mathematical formula in the case of secondary data.
 
-It has a **code**, a **name**, a **description**, and **bibliographic references**.
+It has a _code_, a _name_, a _description_, and _bibliographic references_.
 
 ### Indicator
 
@@ -90,18 +90,18 @@ Each project has at least one project view (the maximal spatial extent of the pr
 
 ### Software function
 
-Part of a software in charge of a **numeric transformation**.
+Part of a software in charge of a numeric transformation.
 
 ### Roles in the observation/action loop
 
 An actor may play several roles, among:
 
 * Data producer,
-* informational service producer,
-* informational service administrator,
-* informational service receiver/consumer.
+* information service producer,
+* information service administrator,
+* information service receiver/consumer.
 
-According to these roles, an actor has **access to informational services** and/or **software functions**.
+According to these roles, an actor has access to **information services** and/or **software functions**.
 
 
 ## Examples
