@@ -6,17 +6,17 @@
 
 ### Actor
 
-**Person or legal person** belonging to one **actor category** and allowed to take on several roles in the observation/action loop.
+**Person or legal person** belonging to one **actor category** and allowed to take on several roles in the observation/action loop. Actors can access services or not, according to their roles. Actors are responsible for the quality of the data they provide when feeding G-Obs.
 
-It has a **name**, an **email address**, a **contact person**.
+It has a _name_, an _email address_, a _contact person_.
 
 ### Actor category
 
-A **group of actors** sharing the **same social status** (ex: administrations, NGO, etc.)
+A **group of actors** sharing the same social status (ex: administrations, NGO, etc.)
 
 ### Spatial object
 
-A **geo-referenced entity** characterized by a **type of geometry** (point, line, polygon) and a **coordinate system**, and which coincides with a geometry at each time stamp.
+A **geo-referenced entity** characterized by a _type of geometry_ (point, line, polygon) and a _coordinate system_, and which coincides with a geometry at each time stamp.
 
 * In the case of fixed spatial objects, the geometry remains unchanged (ex: village boundaries are fixed multi polygon)
 * Otherwise it varies along time
@@ -25,33 +25,35 @@ A **geo-referenced entity** characterized by a **type of geometry** (point, line
 
 ### Spatial layer
 
-A group of **spatial objects** produced by a **given actor** and sharing the same coordinate system.
+A group of **spatial objects** produced by a given **actor** and sharing the same coordinate system.
 
 It has a **code**, a **name**, a **description**.
 
 ### Protocol
 
-**Observation method** for scientific purpose.
+**Observation or computation method** for scientific purpose. It can be a scientific protocol in the case of measures, instructions for investigators in the case of a survey, or a mathematical formula in the case of secondary data.
 
 It has a **code**, a **name**, a **description**, and **bibliographic references**.
 
 ### Indicator
 
-**Abstraction of observation series** for decision-making purposes.
+Abstraction of **data series** for decision-making purposes.
 
-It has a **name**, a **definition**, a **type of geometry**, a **granularity** and a **frequency**.
+It may correspond to several data series obeying different protocols only if these protocols are close enough to keep the semantics of the indicator with respect to decision. For example, a more precise temperature sensor replaces an old one, with the same spatial granularity and acquisition frequencies.
 
-It may correspond to several series obeying different protocols only if these protocols are close enough to keep the semantics of the indicator with respect to decision. For example, a more precise temperature sensor replaces an old one, with the same spatial granularity and acquisition frequencies.
+It has a _label_, a _description_.
+it may be associated to an _icon_ and a _category_, for the benefit of external applications : in the case of the collection of observations through G-events, the icon will appear in the left/top/right panel according to the A/B/C category.
+
 
 ### Data series
 
-**Set of observations** ruled by the **same protocol**, linked to the **same indicator** and the **same spatial layer**, and produced by the **same actor**.
+**Set of observations/data** ruled by the **same protocol**, linked to the **same indicator** and the **same spatial layer**, and produced by the **same actor**.
 
-It is possible to produce a data series by combining several data series: the protocol of the new series embeds the combination formula.
+It is possible to produce a data series by combining several data series; the protocol of the new series embeds the combination formula.
 
 ### Observation / Data
 
-**Element of a series** characterized by the observation **context** (spatial object, date) and the **observed values** for a set of observation dimensions.
+**Element of a data series** characterized by the **observation context** (spatial object, date) and the **observed values** for a set of observation dimensions.
 
 ### Observation dimensions
 
