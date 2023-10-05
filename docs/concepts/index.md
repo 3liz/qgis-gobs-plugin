@@ -29,11 +29,13 @@ A group of **spatial objects** produced by a given **actor** and sharing the sam
 
 It has a _code_, a _name_, a _description_.
 
+
 ### Protocol
 
 **Observation or computation method** for scientific purpose. It can be a scientific protocol in the case of measures, instructions for investigators in the case of a survey, or a mathematical formula in the case of secondary data.
 
 It has a _code_, a _name_, a _description_, and _bibliographic references_.
+
 
 ### Indicator
 
