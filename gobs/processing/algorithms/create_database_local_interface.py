@@ -76,7 +76,7 @@ class CreateDatabaseLocalInterface(BaseProcessingAlgorithm):
                 tr('QGIS project file to create'),
                 defaultValue='',
                 optional=False,
-                fileFilter='qgs'
+                fileFilter='QGIS project (*.qgs)'
             )
         )
 
