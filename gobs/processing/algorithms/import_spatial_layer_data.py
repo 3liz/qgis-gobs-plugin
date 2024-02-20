@@ -68,7 +68,7 @@ class ImportSpatialLayerData(BaseProcessingAlgorithm):
             '\n'
             '* Target spatial layer: choose one of the spatial layers available in G-Obs database'
             '\n'
-            '* Source data layer: choose the QGIS vector layer containing the spatial data you want to import into the chosen spatial layer.'
+            '* Source data: choose the QGIS vector layer containing the spatial data you want to import into the chosen spatial layer.'
             '\n'
             '* Unique identifier: choose the field containing the unique ID. It can be an integer or a text field, but must be unique.'
             '\n'
@@ -122,7 +122,7 @@ class ImportSpatialLayerData(BaseProcessingAlgorithm):
         self.addParameter(
             QgsProcessingParameterVectorLayer(
                 self.SOURCELAYER,
-                tr('Source data layer'),
+                tr('Source data'),
                 optional=False
             )
         )

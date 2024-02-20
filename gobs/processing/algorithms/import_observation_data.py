@@ -74,7 +74,7 @@ class ImportObservationData(BaseProcessingAlgorithm):
             'The G-Obs administrator must have created needed series beforehand by adding the required items '
             'in the related database tables: gobs.protocol, gobs.indicator, gobs.actor and gobs.spatial_layer.'
             '\n'
-            'Source data layer: choose the QGIS vector or table layer containing the observation data you want to import into the chosen series.'
+            'Source data: choose the QGIS vector or table layer containing the observation data you want to import into the chosen series.'
             '\n'
             'Each feature of this source layer is an observation, characterized by a spatial object, a timestamp, a vector of values, '
             'and will be imported into the database table gobs.observation.'
@@ -88,8 +88,9 @@ class ImportObservationData(BaseProcessingAlgorithm):
             'For example, 2020 if all the observation concern the population of the cities in the year 2020.'
             ' This field must respect the ISO format. For example 2020-05-01 10:50:30 or 2020-01-01'
             '\n'
-            '* Field containing the spatial object id: choose the field containing '
-            'the unique identifier of the related spatial object in the spatial layer of this series.'
+            '* Field containing the spatial object id: '
+            'choose the field containing the unique identifier of the related spatial object in the spatial layer of this series. '
+            ' (its value will be stored in the column "so_unique_id" in the "spatial_object" table)'
             '\n'
             '* Depending of the chose series, you will need to choose the fields containing '
             'the data of each dimension of the observation vector of values.'
@@ -109,7 +110,7 @@ class ImportObservationData(BaseProcessingAlgorithm):
         self.addParameter(
             QgsProcessingParameterVectorLayer(
                 self.SOURCELAYER,
-                tr('Source data layer'),
+                tr('Source data'),
                 optional=False,
                 types=[QgsProcessing.TypeVector]
             )
@@ -137,7 +138,7 @@ class ImportObservationData(BaseProcessingAlgorithm):
         self.addParameter(
             QgsProcessingParameterField(
                 self.FIELD_SPATIAL_OBJECT,
-                tr('Field containing the spatial object id'),
+                tr('Field containing the spatial object id (its value will be stored in the column "so_unique_id" in the "spatial_object" table)'),
                 optional=False,
                 parentLayerParameterName=self.SOURCELAYER
             )
