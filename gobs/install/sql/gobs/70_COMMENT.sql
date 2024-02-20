@@ -418,6 +418,12 @@ COMMENT ON COLUMN gobs.protocol.pr_label IS 'Name of the indicator';
 COMMENT ON COLUMN gobs.protocol.pr_description IS 'Description, including URLs to references and authors.';
 
 
+-- protocol.pr_days_editable
+COMMENT ON COLUMN gobs.protocol.pr_days_editable IS 'Number of days the observations from series related to the protocol are editable (delete & update) after creation.
+Use a very long value such as 10000 if the editing can occur at any time.
+The control is made based on the observation created_at column';
+
+
 -- r_graph_edge
 COMMENT ON TABLE gobs.r_graph_edge IS 'Graph edges: relations between nodes';
 

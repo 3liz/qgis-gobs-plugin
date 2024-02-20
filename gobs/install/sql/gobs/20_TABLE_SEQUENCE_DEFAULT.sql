@@ -407,7 +407,8 @@ CREATE TABLE gobs.protocol (
     id integer NOT NULL,
     pr_code text NOT NULL,
     pr_label text NOT NULL,
-    pr_description text NOT NULL
+    pr_description text NOT NULL,
+    pr_days_editable integer DEFAULT 30 NOT NULL
 );
 
 
@@ -483,7 +484,7 @@ CREATE TABLE gobs.spatial_layer (
     sl_code text NOT NULL,
     sl_label text NOT NULL,
     sl_description text NOT NULL,
-    sl_creation_date date DEFAULT '2018-06-28'::date NOT NULL,
+    sl_creation_date date DEFAULT (now())::date NOT NULL,
     fk_id_actor integer NOT NULL,
     sl_geometry_type text NOT NULL
 );

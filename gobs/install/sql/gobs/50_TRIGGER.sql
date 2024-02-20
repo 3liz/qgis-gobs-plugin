@@ -24,6 +24,10 @@ CREATE TRIGGER gobs_on_import_change AFTER UPDATE ON gobs.import FOR EACH ROW EX
 CREATE TRIGGER gobs_on_indicator_change AFTER INSERT OR UPDATE ON gobs.indicator FOR EACH ROW EXECUTE PROCEDURE gobs.trg_parse_indicator_paths();
 
 
+-- observation trg_control_observation_editing_capability
+CREATE TRIGGER trg_control_observation_editing_capability BEFORE DELETE OR UPDATE ON gobs.observation FOR EACH ROW EXECUTE PROCEDURE gobs.control_observation_editing_capability();
+
+
 -- observation trg_log_deleted_object
 CREATE TRIGGER trg_log_deleted_object AFTER DELETE ON gobs.observation FOR EACH ROW EXECUTE PROCEDURE gobs.log_deleted_object();
 
