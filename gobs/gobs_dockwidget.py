@@ -3,6 +3,8 @@ __license__ = "GPL version 3"
 __email__ = "info@3liz.org"
 __revision__ = "$Format:%H$"
 
+import json
+
 import webbrowser
 
 from functools import partial
@@ -14,6 +16,7 @@ from qgis.core import (
     QgsApplication,
     QgsExpressionContextUtils,
     QgsProject,
+    QgsSettings,
 )
 from qgis.PyQt import QtWidgets
 from qgis.PyQt.QtCore import pyqtSignal
@@ -300,11 +303,23 @@ class GobsDockWidget(QtWidgets.QDockWidget, FORM_CLASS):
         layout.addWidget(button_box)
 
         if dialog.exec_() == QDialog.Accepted:
+            # Get the chosen series id
             idx = combo_box.currentIndex()
-            val = combo_box.itemData(idx)
-            self.open_import_observation_data(val)
+            series_id = combo_box.itemData(idx)
 
-    def open_import_observation_data(self, serie_id):
+            # Get the chosen series default values (last stored)
+            s = QgsSettings()
+            last_indicator_fields = s.value("gobs/last_indicator_fields", "{}")
+            series_default_values = {}
+            if last_indicator_fields != '{}':
+                fields = json.loads(last_indicator_fields)
+                if str(series_id) in fields:
+                    series_default_values = fields[str(series_id)]
+
+            # Open the algorithm dialog
+            self.open_import_observation_data(series_id, series_default_values)
+
+    def open_import_observation_data(self, series_id, series_default_values):
         """
         Opens the processing alg ImportObservationData
         with dynamic inputs based on given serie id
@@ -324,8 +339,11 @@ class GobsDockWidget(QtWidgets.QDockWidget, FORM_CLASS):
             def groupId(self):
                 return 'gobs_manage'
 
-            def getSerieId(self):
-                return serie_id
+            def getSeriesId(self):
+                return series_id
+
+            def getSeriesDefaultValues(self):
+                return series_default_values
 
             def initAlgorithm(self, config):
 
@@ -334,8 +352,7 @@ class GobsDockWidget(QtWidgets.QDockWidget, FORM_CLASS):
 
         alg = DynamicImportObservationData()
         alg.setProvider(QgsApplication.processingRegistry().providerById("gobs"))
-        param = {}
-        execAlgorithmDialog(alg, param)
+        execAlgorithmDialog(alg, series_default_values)
 
     def closeEvent(self, event):
         self.closingPlugin.emit()

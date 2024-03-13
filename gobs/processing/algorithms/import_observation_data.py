@@ -7,6 +7,8 @@ import time
 
 from typing import Optional, Tuple
 
+import json
+
 import processing
 
 from qgis.core import (
@@ -17,6 +19,7 @@ from qgis.core import (
     QgsProcessingParameterString,
     QgsProcessingParameterVectorLayer,
     QgsProject,
+    QgsSettings,
 )
 
 from gobs.processing.algorithms.tools import (
@@ -33,7 +36,6 @@ from gobs.qgis_plugin_tools.tools.i18n import tr
 class ImportObservationData(BaseProcessingAlgorithm):
     SOURCELAYER = 'SOURCELAYER'
     MANUAL_START_DATE = 'MANUAL_START_DATE'
-    FIELD_TIMESTAMP = 'FIELD_TIMESTAMP'
     MANUAL_END_DATE = 'MANUAL_END_DATE'
     FIELD_START_TIMESTAMP = 'FIELD_START_TIMESTAMP'
     FIELD_END_TIMESTAMP = 'FIELD_END_TIMESTAMP'
@@ -97,12 +99,18 @@ class ImportObservationData(BaseProcessingAlgorithm):
         )
         return short_help
 
-    def getSerieId(self):
+    def getSeriesId(self):
         """
         Get the serie ID
         To be overriden by child instances
         """
         return 0
+
+    def getSeriesDefaultValues(self):
+        """
+        Get the dictionary of default values to apply to the fields
+        """
+        return {}
 
     def initAlgorithm(self, config):
         # INPUTS
@@ -197,6 +205,11 @@ class ImportObservationData(BaseProcessingAlgorithm):
 
             if not ok:
                 return False, msg
+
+
+        # Additionnal checks
+        # TODO
+
         return super(ImportObservationData, self).checkParameterValues(parameters, context)
 
     def get_additional_parameters(self, project):
@@ -206,7 +219,7 @@ class ImportObservationData(BaseProcessingAlgorithm):
         """
 
         # Get series id
-        passed_series = self.getSerieId()
+        passed_series = self.getSeriesId()
         if not passed_series or passed_series <= 0:
             return []
 
@@ -219,18 +232,20 @@ class ImportObservationData(BaseProcessingAlgorithm):
             return []
 
         new_params = []
+
         # Create dynamic parameters
         for i, code in enumerate(id_value_code):
-            new_params.append(
-                {
-                    'widget': QgsProcessingParameterField,
-                    'name': code,
-                    'label': id_value_name[i],
-                    'optional': False,
-                    'type': QgsProcessingParameterField.Any,
-                    'parentLayerParameterName': self.SOURCELAYER
-                }
-            )
+            field_params = {
+                'widget': QgsProcessingParameterField,
+                'name': code,
+                'label': id_value_name[i],
+                'optional': False,
+                'type': QgsProcessingParameterField.Any,
+                'parentLayerParameterName': self.SOURCELAYER
+            }
+
+            new_params.append(field_params)
+
         return new_params
 
     @staticmethod
@@ -283,15 +298,36 @@ class ImportObservationData(BaseProcessingAlgorithm):
         # Parse new parameters
         # Add values in the correct order
         new_params = self.get_additional_parameters(context.project())
+
+        # Get series id from first combo box
+        id_series = self.getSeriesId()
+
+        # Store values for indicator dimension fields
+        s = QgsSettings()
+        last_indicator_fields = s.value("gobs/last_indicator_fields", "{}")
+        series_default_values = {}
+        if last_indicator_fields != '{}':
+            default_values = json.loads(last_indicator_fields)
+
+        input_fields = (
+            self.SOURCELAYER, self.MANUAL_START_DATE, self.MANUAL_END_DATE,
+            self.FIELD_START_TIMESTAMP, self.FIELD_END_TIMESTAMP, self.FIELD_SPATIAL_OBJECT
+        )
+        for field in input_fields:
+            series_default_values[field] = self.parameterAsString(parameters, field, context)
+
         if new_params:
             for param in new_params:
-                new_params_values.append(self.parameterAsString(parameters, param['name'], context))
+                param_value = self.parameterAsString(parameters, param['name'], context)
+                new_params_values.append(param_value)
+                series_default_values[param['name']] = param_value
+
+        # Set default values
+        default_values[id_series] = series_default_values
+        s.setValue("gobs/last_indicator_fields", json.dumps(default_values))
 
         msg = ''
         status = 1
-
-        # Get series id from first combo box
-        id_serie = self.getSerieId()
 
         # Import data to temporary table
         feedback.pushInfo(
@@ -333,7 +369,7 @@ class ImportObservationData(BaseProcessingAlgorithm):
             'P'
             RETURNING id
             ;
-        ''' % id_serie
+        ''' % id_series
         id_import = None
 
         try:
@@ -351,7 +387,7 @@ class ImportObservationData(BaseProcessingAlgorithm):
                     msg
                 )
         except Exception:
-            msg = tr('* An unknown error occured while adding import log item')
+            msg = tr('* An unknown error occurred while adding import log item')
             feedback.reportError(
                 msg
             )
@@ -374,7 +410,7 @@ class ImportObservationData(BaseProcessingAlgorithm):
             GROUP BY id_date_format
             ;
         '''.format(
-            id_serie
+            id_series
         )
         id_date_format = None
         id_value_types = None
@@ -489,7 +525,7 @@ class ImportObservationData(BaseProcessingAlgorithm):
                 )
                 SELECT
                 -- id of the serie
-                {id_serie},
+                {id_series},
                 -- id of the spatial object
                 so.id,
                 -- id of the import log
@@ -504,7 +540,7 @@ class ImportObservationData(BaseProcessingAlgorithm):
                 JOIN gobs.spatial_object AS so
                     ON True
                     AND so.fk_id_spatial_layer = (
-                        SELECT fk_id_spatial_layer FROM gobs.series WHERE id = {id_serie}
+                        SELECT fk_id_spatial_layer FROM gobs.series WHERE id = {id_series}
                     )
                     AND so.so_unique_id = s."{field_spatial_object}"::text
                     AND (
@@ -513,7 +549,7 @@ class ImportObservationData(BaseProcessingAlgorithm):
                         (so.so_valid_to IS NULL OR so.so_valid_to > {casted_timestamp_start}::date)
                     )
             '''.format(
-                id_serie=id_serie,
+                id_series=id_series,
                 id_import=id_import,
                 jsonb_array=jsonb_array,
                 casted_timestamp_start=casted_timestamp['Start'],
