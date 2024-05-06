@@ -2,6 +2,17 @@
 
 ## Unreleased
 
+## 6.2.0 - 2024-05-06
+
+* QGIS Administration project
+  * Move back PostgreSQL connection to sslmode=prefer
+  * Set the file type of the target file to QGIS project
+  * Add a Lizmap Web Client configuration file
+  * Do not allow special chars on the indicators dimension code values
+* Import observation data - change titles of the algorithm input values `Source data & Field containing the spatial object id`
+* Observation & protocol - Add a trigger function which prevents from editing an observation older than the protocol duration
+* Test - Docker : change QGIS version to 3.28
+
 ## 6.1.0 - 2023-07-25
 
 * Database structure - Improve the tables project and project_view
