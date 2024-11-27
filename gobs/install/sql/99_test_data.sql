@@ -5,23 +5,22 @@ BEGIN;
 INSERT INTO gobs.actor_category
 (id, ac_label, ac_description)
 VALUES
-(1, 'Public organizations', 'Public organizations and stakeholders'),
-(2, 'Research centers', 'Public or private research centers'),
-(3, 'Individuals', 'Persons acting as a single individual')
+(1, 'other', 'Other actors'),
+(2, 'platform_user', 'Platform users')
 ;
 
 -- actor
 INSERT INTO gobs.actor
-(id, a_label, a_description, a_email, id_category, a_login)
+(id, a_label, a_description, a_email, id_category)
 VALUES
-(1, 'IGN', 'French national geographical institute.', 'contact@ign.fr', 1, 'ign'),
-(2, 'CIRAD', 'The French agricultural research and international cooperation organization', 'contact@cirad.fr', 2, 'cirad'),
-(3, 'DREAL Bretagne', 'Direction régionale de l''environnement, de l''aménagement et du logement.', 'email@dreal.fr', 1, 'dreal'),
-(4, 'Al', 'Al A.', 'al@al.al', 3, 'al'),
-(5, 'Bob', 'Bob B.', 'bob@bob.bob', 3, 'bob'),
-(6, 'John', 'John J.', 'jon@jon.jon', 3, 'john'),
-(7, 'Mike', 'Mike M.', 'mik@mik.mik', 3, 'mike'),
-(8, 'Phil', 'Phil P.', 'phi@phi.phi', 3, 'phil')
+(1, 'IGN', 'French national geographical institute.', 'contact@ign.fr', 1),
+(2, 'CIRAD', 'The French agricultural research and international cooperation organization', 'contact@cirad.fr', 1),
+(3, 'DREAL Bretagne', 'Direction régionale de l''environnement, de l''aménagement et du logement.', 'email@dreal.fr', 1),
+(4, 'Al', 'Al A.', 'al@al.al', 1),
+(5, 'Bob', 'Bob B.', 'bob@bob.bob', 1),
+(6, 'John', 'John J.', 'jon@jon.jon', 1),
+(7, 'Mike', 'Mike M.', 'mik@mik.mik', 1),
+(8, 'Phil', 'Phil P.', 'phi@phi.phi', 1)
 ;
 
 -- indicator
@@ -86,7 +85,7 @@ VALUES
 ;
 
 -- SEQUENCES
-SELECT pg_catalog.setval('gobs.actor_category_id_seq', 3, true);
+SELECT pg_catalog.setval('gobs.actor_category_id_seq', 2, true);
 SELECT pg_catalog.setval('gobs.actor_id_seq', 8, true);
 SELECT pg_catalog.setval('gobs.indicator_id_seq', 4, true);
 SELECT pg_catalog.setval('gobs.dimension_id_seq', 5, true);
