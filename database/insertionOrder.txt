@@ -13,7 +13,6 @@ document
 project_view
 r_indicator_node
 observation
-application
 deleted_data_log
 glossary
 metadata

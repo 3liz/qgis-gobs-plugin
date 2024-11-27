@@ -3,7 +3,7 @@
     <head>
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <title>import - gis Database</title>
+        <title>import - gis.gobs</title>
         <!-- Tell the browser to be responsive to screen width -->
         <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
         <link rel="icon" type="image/png" sizes="16x16" href="../favicon.png">
@@ -46,7 +46,7 @@
                 <nav class="navbar navbar-static-top">
                     <div class="container">
                         <div class="navbar-header">
-                            <a href="../index.html" class="navbar-brand"><b>gis</b> Database</a>
+                            <a href="../index.html" class="navbar-brand"><b>gis</b></a><span class="navbar-brand" style="padding-left: 0">.gobs</span>
                             <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar-collapse"><i class="fa fa-bars"></i></button>
                         </div>
 
@@ -100,7 +100,13 @@
                             </div>
                         </div>
                         <div class="box-body">
-                            <table id="standard_table" class="table table-bordered table-striped dataTable" role="grid">
+                            <table
+                                    id="standard_table"
+                                    class="table table-bordered table-striped dataTable"
+                                    role="grid"
+                                    data-paging="false"
+                                    data-page-length="10"
+                                    data-length-change="false">
                                 <thead align='left'>
                                 <tr>
                                     <th>Column</th>
@@ -126,7 +132,8 @@
                                         <table border='0' cellspacing='0' cellpadding='0'>
                                             <tr>
                                                 <td title="observation.fk_id_import references import.id via observation_fk_id_import_fkey"><a href='observation.html'>observation</a><span class='relatedKey'>.fk_id_import</span></td>
-                                                <td class="constraint detail">observation_fk_id_import_fkey<span title='Restrict delete:&#10;Parent cannot be deleted if children exist'>R</span></td>
+                                                <td class="constraint detail">observation_fk_id_import_fkey</td>
+                                                <td class="constraint detail"><span title='Restrict delete:&#10;Parent cannot be deleted if children exist'>R</span></td>
                                             </tr>
                                         </table>
                                     </td>
@@ -168,7 +175,8 @@
                                         <table border='0' cellspacing='0' cellpadding='0'>
                                             <tr>
                                                 <td title="import.fk_id_series references series.id via import_fk_id_series_fkey"><a href='series.html'>series</a><span class='relatedKey'>.id</span></td>
-                                                <td class="constraint detail">import_fk_id_series_fkey<span title='Restrict delete:&#10;Parent cannot be deleted if children exist'>R</span></td>
+                                                <td class="constraint detail">import_fk_id_series_fkey</td>
+                                                <td class="constraint detail"><span title='Restrict delete:&#10;Parent cannot be deleted if children exist'>R</span></td>
                                             </tr>
                                         </table>
                                     </td>
@@ -205,7 +213,13 @@
                             </div>
                         </div>
                         <div class="box-body">
-                            <table id="indexes_table" class="table table-bordered table-striped dataTable" role="grid">
+                            <table
+                                    id="indexes_table"
+                                    class="table table-bordered table-striped dataTable"
+                                    role="grid"
+                                    data-paging="false"
+                                    data-page-length="10"
+                                    data-length-change="false">
                                 <thead>
                                 <tr>
                                     <th>Constraint Name</th>
@@ -250,22 +264,22 @@
                                 <div class="tab-content no-padding">
                                     <div class="chart tab-pane active" id="oneDegreeImg-chart" style="position: relative; overflow-x:auto;">
                                         <map id="oneDegreeRelationshipsDiagram" name="oneDegreeRelationshipsDiagram">
-<area shape="rect" id="node1" href="import.html" target="_top" title="import" alt="" coords="244,100,547,287">
+<area shape="rect" id="node1" href="import.html" target="_top" title="import" alt="" coords="244,100,537,287">
 <area shape="rect" id="node2" href="series.html" target="_top" title="series" alt="" coords="5,92,200,303">
-<area shape="rect" id="node3" href="observation.html" target="_top" title="observation" alt="" coords="591,5,799,240">
+<area shape="rect" id="node3" href="observation.html" target="_top" title="observation" alt="" coords="581,5,789,240">
 </map>
                                         <a name='diagram'><img id="oneDegreeImg" src="../diagrams/tables/import.1degree.png" usemap="#oneDegreeRelationshipsDiagram" class="diagram" border="0" align="left"></a>
                                     </div>
                                     <div class="chart tab-pane " id="twodegreesDegreeImg-chart" style="position: relative; overflow-x:auto;">
                                         <map id="twoDegreesRelationshipsDiagram" name="twoDegreesRelationshipsDiagram">
-<area shape="rect" id="node1" href="import.html" target="_top" title="import" alt="" coords="653,140,956,327">
-<area shape="rect" id="node2" href="series.html" target="_top" title="series" alt="" coords="415,28,609,239">
-<area shape="rect" id="node5" href="actor.html" target="_top" title="actor" alt="" coords="5,167,144,255">
-<area shape="rect" id="node6" href="indicator.html" target="_top" title="indicator" alt="" coords="201,151,357,239">
-<area shape="rect" id="node7" href="protocol.html" target="_top" title="protocol" alt="" coords="204,9,355,97">
-<area shape="rect" id="node8" href="spatial_layer.html" target="_top" title="spatial_layer" alt="" coords="188,256,371,344">
-<area shape="rect" id="node3" href="observation.html" target="_top" title="observation" alt="" coords="1000,5,1208,240">
-<area shape="rect" id="node4" href="spatial_object.html" target="_top" title="spatial_object" alt="" coords="416,256,608,344">
+<area shape="rect" id="node1" href="import.html" target="_top" title="import" alt="" coords="640,51,933,238">
+<area shape="rect" id="node2" href="series.html" target="_top" title="series" alt="" coords="435,134,568,222">
+<area shape="rect" id="node5" href="actor.html" target="_top" title="actor" alt="" coords="5,113,139,201">
+<area shape="rect" id="node6" href="indicator.html" target="_top" title="indicator" alt="" coords="197,43,349,131">
+<area shape="rect" id="node7" href="protocol.html" target="_top" title="protocol" alt="" coords="199,149,346,237">
+<area shape="rect" id="node8" href="spatial_layer.html" target="_top" title="spatial_layer" alt="" coords="183,254,363,342">
+<area shape="rect" id="node3" href="observation.html" target="_top" title="observation" alt="" coords="977,221,1152,309">
+<area shape="rect" id="node4" href="spatial_object.html" target="_top" title="spatial_object" alt="" coords="407,254,596,342">
 </map>
                                         <a name='diagram'><img id="twodegreesDegreeImg" src="../diagrams/tables/import.2degrees.png" usemap="#twoDegreesRelationshipsDiagram" class="diagram" border="0" align="left"></a>
                                     </div>
@@ -276,7 +290,7 @@
                 </section>
                 <script>
                     var config = {
-                        pagination: true
+                        pagination: false
                     }
                 </script>
             </div>
@@ -287,7 +301,7 @@
                         <a href="https://github.com/schemaspy/schemaspy" title="GitHub for SchemaSpy"><i class="fa fa-github-square fa-2x"></i></a>
                         <a href="http://stackoverflow.com/questions/tagged/schemaspy" title="StackOverflow for SchemaSpy"><i class="fa fa-stack-overflow fa-2x"></i></a>
                     </div>
-                    <strong>Generated by <a href="http://schemaspy.org/" class="logo-text"><i class="fa fa-database"></i> SchemaSpy 6.1.0</a></strong>
+                    <strong>Generated by <a href="http://schemaspy.org/" class="logo-text"><i class="fa fa-database"></i> SchemaSpy 6.2.4</a></strong>
                 </div>
                 <!-- /.container -->
             </footer>

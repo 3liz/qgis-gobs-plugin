@@ -2,7 +2,6 @@ r_graph_edge
 metadata
 glossary
 deleted_data_log
-application
 observation
 r_indicator_node
 project_view

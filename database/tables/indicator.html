@@ -3,7 +3,7 @@
     <head>
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <title>indicator - gis Database</title>
+        <title>indicator - gis.gobs</title>
         <!-- Tell the browser to be responsive to screen width -->
         <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
         <link rel="icon" type="image/png" sizes="16x16" href="../favicon.png">
@@ -46,7 +46,7 @@
                 <nav class="navbar navbar-static-top">
                     <div class="container">
                         <div class="navbar-header">
-                            <a href="../index.html" class="navbar-brand"><b>gis</b> Database</a>
+                            <a href="../index.html" class="navbar-brand"><b>gis</b></a><span class="navbar-brand" style="padding-left: 0">.gobs</span>
                             <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar-collapse"><i class="fa fa-bars"></i></button>
                         </div>
 
@@ -100,7 +100,13 @@
                             </div>
                         </div>
                         <div class="box-body">
-                            <table id="standard_table" class="table table-bordered table-striped dataTable" role="grid">
+                            <table
+                                    id="standard_table"
+                                    class="table table-bordered table-striped dataTable"
+                                    role="grid"
+                                    data-paging="false"
+                                    data-page-length="10"
+                                    data-length-change="false">
                                 <thead align='left'>
                                 <tr>
                                     <th>Column</th>
@@ -126,19 +132,23 @@
                                         <table border='0' cellspacing='0' cellpadding='0'>
                                             <tr>
                                                 <td title="dimension.fk_id_indicator references indicator.id via dimension_fk_id_indicator_fkey"><a href='dimension.html'>dimension</a><span class='relatedKey'>.fk_id_indicator</span></td>
-                                                <td class="constraint detail">dimension_fk_id_indicator_fkey<span title='Restrict delete:&#10;Parent cannot be deleted if children exist'>R</span></td>
+                                                <td class="constraint detail">dimension_fk_id_indicator_fkey</td>
+                                                <td class="constraint detail"><span title='Restrict delete:&#10;Parent cannot be deleted if children exist'>R</span></td>
                                             </tr>
                                             <tr>
                                                 <td title="document.fk_id_indicator references indicator.id via document_fk_id_indicator_fkey"><a href='document.html'>document</a><span class='relatedKey'>.fk_id_indicator</span></td>
-                                                <td class="constraint detail">document_fk_id_indicator_fkey<span title='Restrict delete:&#10;Parent cannot be deleted if children exist'>R</span></td>
+                                                <td class="constraint detail">document_fk_id_indicator_fkey</td>
+                                                <td class="constraint detail"><span title='Restrict delete:&#10;Parent cannot be deleted if children exist'>R</span></td>
                                             </tr>
                                             <tr>
                                                 <td title="r_indicator_node.fk_id_indicator references indicator.id via r_indicator_node_fk_id_indicator_fkey"><a href='r_indicator_node.html'>r_indicator_node</a><span class='relatedKey'>.fk_id_indicator</span></td>
-                                                <td class="constraint detail">r_indicator_node_fk_id_indicator_fkey<span title='Cascade on delete:&#10;Deletion of parent deletes child'>C</span></td>
+                                                <td class="constraint detail">r_indicator_node_fk_id_indicator_fkey</td>
+                                                <td class="constraint detail"><span title='Cascade on delete:&#10;Deletion of parent deletes child'>C</span></td>
                                             </tr>
                                             <tr>
                                                 <td title="series.fk_id_indicator references indicator.id via series_fk_id_indicator_fkey"><a href='series.html'>series</a><span class='relatedKey'>.fk_id_indicator</span></td>
-                                                <td class="constraint detail">series_fk_id_indicator_fkey<span title='Restrict delete:&#10;Parent cannot be deleted if children exist'>R</span></td>
+                                                <td class="constraint detail">series_fk_id_indicator_fkey</td>
+                                                <td class="constraint detail"><span title='Restrict delete:&#10;Parent cannot be deleted if children exist'>R</span></td>
                                             </tr>
                                         </table>
                                     </td>
@@ -298,7 +308,13 @@
                             </div>
                         </div>
                         <div class="box-body">
-                            <table id="indexes_table" class="table table-bordered table-striped dataTable" role="grid">
+                            <table
+                                    id="indexes_table"
+                                    class="table table-bordered table-striped dataTable"
+                                    role="grid"
+                                    data-paging="false"
+                                    data-page-length="10"
+                                    data-length-change="false">
                                 <thead>
                                 <tr>
                                     <th>Constraint Name</th>
@@ -343,27 +359,27 @@
                                 <div class="tab-content no-padding">
                                     <div class="chart tab-pane active" id="oneDegreeImg-chart" style="position: relative; overflow-x:auto;">
                                         <map id="oneDegreeRelationshipsDiagram" name="oneDegreeRelationshipsDiagram">
-<area shape="rect" id="node1" href="dimension.html" target="_top" title="dimension" alt="" coords="382,5,549,181">
-<area shape="rect" id="node2" href="indicator.html" target="_top" title="indicator" alt="" coords="5,323,315,656">
-<area shape="rect" id="node3" href="document.html" target="_top" title="document" alt="" coords="383,199,548,375">
-<area shape="rect" id="node4" href="r_indicator_node.html" target="_top" title="r_indicator_node" alt="" coords="359,392,572,515">
-<area shape="rect" id="node5" href="series.html" target="_top" title="series" alt="" coords="368,532,563,743">
+<area shape="rect" id="node1" href="dimension.html" target="_top" title="dimension" alt="" coords="373,5,538,181">
+<area shape="rect" id="node2" href="indicator.html" target="_top" title="indicator" alt="" coords="5,323,305,656">
+<area shape="rect" id="node3" href="document.html" target="_top" title="document" alt="" coords="373,199,538,375">
+<area shape="rect" id="node4" href="r_indicator_node.html" target="_top" title="r_indicator_node" alt="" coords="349,392,561,515">
+<area shape="rect" id="node5" href="series.html" target="_top" title="series" alt="" coords="358,532,553,743">
 </map>
                                         <a name='diagram'><img id="oneDegreeImg" src="../diagrams/tables/indicator.1degree.png" usemap="#oneDegreeRelationshipsDiagram" class="diagram" border="0" align="left"></a>
                                     </div>
                                     <div class="chart tab-pane " id="twodegreesDegreeImg-chart" style="position: relative; overflow-x:auto;">
                                         <map id="twoDegreesRelationshipsDiagram" name="twoDegreesRelationshipsDiagram">
-<area shape="rect" id="node1" href="dimension.html" target="_top" title="dimension" alt="" coords="565,264,731,440">
-<area shape="rect" id="node2" href="indicator.html" target="_top" title="indicator" alt="" coords="188,312,497,645">
-<area shape="rect" id="node3" href="document.html" target="_top" title="document" alt="" coords="565,457,731,633">
-<area shape="rect" id="node4" href="import.html" target="_top" title="import" alt="" coords="799,5,937,93">
-<area shape="rect" id="node5" href="series.html" target="_top" title="series" alt="" coords="551,36,745,247">
-<area shape="rect" id="node9" href="actor.html" target="_top" title="actor" alt="" coords="5,135,144,223">
-<area shape="rect" id="node10" href="protocol.html" target="_top" title="protocol" alt="" coords="267,29,418,117">
-<area shape="rect" id="node11" href="spatial_layer.html" target="_top" title="spatial_layer" alt="" coords="251,171,434,259">
-<area shape="rect" id="node6" href="observation.html" target="_top" title="observation" alt="" coords="981,40,1159,128">
-<area shape="rect" id="node7" href="r_indicator_node.html" target="_top" title="r_indicator_node" alt="" coords="541,651,755,773">
-<area shape="rect" id="node8" href="graph_node.html" target="_top" title="graph_node" alt="" coords="255,683,430,771">
+<area shape="rect" id="node1" href="dimension.html" target="_top" title="dimension" alt="" coords="550,264,715,440">
+<area shape="rect" id="node2" href="indicator.html" target="_top" title="indicator" alt="" coords="183,312,483,645">
+<area shape="rect" id="node3" href="document.html" target="_top" title="document" alt="" coords="550,457,715,633">
+<area shape="rect" id="node4" href="import.html" target="_top" title="import" alt="" coords="783,5,917,93">
+<area shape="rect" id="node5" href="series.html" target="_top" title="series" alt="" coords="535,36,730,247">
+<area shape="rect" id="node9" href="actor.html" target="_top" title="actor" alt="" coords="5,135,139,223">
+<area shape="rect" id="node10" href="protocol.html" target="_top" title="protocol" alt="" coords="259,29,406,117">
+<area shape="rect" id="node11" href="spatial_layer.html" target="_top" title="spatial_layer" alt="" coords="243,171,423,259">
+<area shape="rect" id="node6" href="observation.html" target="_top" title="observation" alt="" coords="961,40,1136,128">
+<area shape="rect" id="node7" href="r_indicator_node.html" target="_top" title="r_indicator_node" alt="" coords="527,651,739,773">
+<area shape="rect" id="node8" href="graph_node.html" target="_top" title="graph_node" alt="" coords="247,683,419,771">
 </map>
                                         <a name='diagram'><img id="twodegreesDegreeImg" src="../diagrams/tables/indicator.2degrees.png" usemap="#twoDegreesRelationshipsDiagram" class="diagram" border="0" align="left"></a>
                                     </div>
@@ -374,7 +390,7 @@
                 </section>
                 <script>
                     var config = {
-                        pagination: true
+                        pagination: false
                     }
                 </script>
             </div>
@@ -385,7 +401,7 @@
                         <a href="https://github.com/schemaspy/schemaspy" title="GitHub for SchemaSpy"><i class="fa fa-github-square fa-2x"></i></a>
                         <a href="http://stackoverflow.com/questions/tagged/schemaspy" title="StackOverflow for SchemaSpy"><i class="fa fa-stack-overflow fa-2x"></i></a>
                     </div>
-                    <strong>Generated by <a href="http://schemaspy.org/" class="logo-text"><i class="fa fa-database"></i> SchemaSpy 6.1.0</a></strong>
+                    <strong>Generated by <a href="http://schemaspy.org/" class="logo-text"><i class="fa fa-database"></i> SchemaSpy 6.2.4</a></strong>
                 </div>
                 <!-- /.container -->
             </footer>
