@@ -2,6 +2,24 @@
 
 ## Unreleased
 
+## 6.3.0 - 2024-11-27
+
+### Changed
+
+* QGIS Administration project
+  * Prevent from editing some tables (`actor_category`, `observation`, etc.)
+  * Remove the `actor` child attribute table in the `actor_category` form
+  * Remove some layers from Lizmap attribute table configuration
+  * Reorder attribute layers & editable layers
+* Database
+  * Remove the useless `application` table
+  * Remove the NOT NULL constraint on the `actor.a_login` column
+  * Observation & protocol - Add a trigger function which prevents from editing an observation older than the protocol duration
+
+  ### Fixed
+
+* Import spatial layer data alg: remove unneeded `int` cast
+
 ## 6.2.0 - 2024-05-06
 
 * QGIS Administration project
