@@ -38,11 +38,6 @@ ALTER TABLE ONLY gobs.actor
     ADD CONSTRAINT actor_pkey PRIMARY KEY (id);
 
 
--- application application_pkey
-ALTER TABLE ONLY gobs.application
-    ADD CONSTRAINT application_pkey PRIMARY KEY (id);
-
-
 -- deleted_data_log deleted_data_log_pkey
 ALTER TABLE ONLY gobs.deleted_data_log
     ADD CONSTRAINT deleted_data_log_pkey PRIMARY KEY (de_table, de_uid);

@@ -27,7 +27,7 @@ CREATE TABLE gobs.actor (
     a_description text NOT NULL,
     a_email text NOT NULL,
     id_category integer NOT NULL,
-    a_login text NOT NULL
+    a_login text
 );
 
 
@@ -71,35 +71,6 @@ CREATE SEQUENCE gobs.actor_id_seq
 
 -- actor_id_seq
 ALTER SEQUENCE gobs.actor_id_seq OWNED BY gobs.actor.id;
-
-
--- application
-CREATE TABLE gobs.application (
-    id integer NOT NULL,
-    ap_code text NOT NULL,
-    ap_label text NOT NULL,
-    ap_description text NOT NULL,
-    ap_default_values jsonb NOT NULL
-);
-
-
--- application
-COMMENT ON TABLE gobs.application IS 'List the external applications interacting with G-Obs database with the web API.
-This will help storing application specific data such as the default values when creating automatically series, protocols, users, etc.';
-
-
--- application_id_seq
-CREATE SEQUENCE gobs.application_id_seq
-
-    START WITH 1
-    INCREMENT BY 1
-    NO MINVALUE
-    NO MAXVALUE
-    CACHE 1;
-
-
--- application_id_seq
-ALTER SEQUENCE gobs.application_id_seq OWNED BY gobs.application.id;
 
 
 -- deleted_data_log
@@ -545,10 +516,6 @@ ALTER TABLE ONLY gobs.actor ALTER COLUMN id SET DEFAULT nextval('gobs.actor_id_s
 
 -- actor_category id
 ALTER TABLE ONLY gobs.actor_category ALTER COLUMN id SET DEFAULT nextval('gobs.actor_category_id_seq'::regclass);
-
-
--- application id
-ALTER TABLE ONLY gobs.application ALTER COLUMN id SET DEFAULT nextval('gobs.application_id_seq'::regclass);
 
 
 -- dimension id
