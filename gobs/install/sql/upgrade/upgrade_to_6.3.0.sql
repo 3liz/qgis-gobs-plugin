@@ -117,4 +117,7 @@ INSERT INTO gobs.glossary (gl_field, gl_code, gl_label, gl_description, gl_order
 VALUES
 ('pv_type', 'global', 'Global', 'Global project view (only one per project)', 1),
 ('pv_type', 'filter', 'Filter', 'Filter view (to restrict access to some observations)', 2)
+WHERE NOT EXISTS (
+    SELECT id FROM gobs.glossary WHERE gl_field = 'pv_type'
+)
 ON CONFLICT DO NOTHING;

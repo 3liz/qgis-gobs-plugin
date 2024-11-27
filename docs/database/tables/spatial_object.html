@@ -3,7 +3,7 @@
     <head>
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <title>spatial_object - gis Database</title>
+        <title>spatial_object - gis.gobs</title>
         <!-- Tell the browser to be responsive to screen width -->
         <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
         <link rel="icon" type="image/png" sizes="16x16" href="../favicon.png">
@@ -46,7 +46,7 @@
                 <nav class="navbar navbar-static-top">
                     <div class="container">
                         <div class="navbar-header">
-                            <a href="../index.html" class="navbar-brand"><b>gis</b> Database</a>
+                            <a href="../index.html" class="navbar-brand"><b>gis</b></a><span class="navbar-brand" style="padding-left: 0">.gobs</span>
                             <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar-collapse"><i class="fa fa-bars"></i></button>
                         </div>
 
@@ -100,7 +100,13 @@
                             </div>
                         </div>
                         <div class="box-body">
-                            <table id="standard_table" class="table table-bordered table-striped dataTable" role="grid">
+                            <table
+                                    id="standard_table"
+                                    class="table table-bordered table-striped dataTable"
+                                    role="grid"
+                                    data-paging="false"
+                                    data-page-length="10"
+                                    data-length-change="false">
                                 <thead align='left'>
                                 <tr>
                                     <th>Column</th>
@@ -117,8 +123,8 @@
                                 <tbody>
                                 <tr>
                                     <td class='primaryKey' title='Primary Key'><i class='icon ion-key iconkey' style='padding-left: 5px;'></i><span id="id">id</span></td>
-                                    <td>bigserial</td>
-                                    <td>19</td>
+                                    <td>serial</td>
+                                    <td>10</td>
                                     <td title=''></td>
                                     <td title='Automatically updated by the database'>√</td>
                                     <td>nextval(&#39;gobs.spatial_object_id_seq&#39;::regclass)</td>
@@ -126,7 +132,8 @@
                                         <table border='0' cellspacing='0' cellpadding='0'>
                                             <tr>
                                                 <td title="observation.fk_id_spatial_object references spatial_object.id via observation_fk_id_spatial_object_fkey"><a href='observation.html'>observation</a><span class='relatedKey'>.fk_id_spatial_object</span></td>
-                                                <td class="constraint detail">observation_fk_id_spatial_object_fkey<span title='Restrict delete:&#10;Parent cannot be deleted if children exist'>R</span></td>
+                                                <td class="constraint detail">observation_fk_id_spatial_object_fkey</td>
+                                                <td class="constraint detail"><span title='Restrict delete:&#10;Parent cannot be deleted if children exist'>R</span></td>
                                             </tr>
                                         </table>
                                     </td>
@@ -202,7 +209,8 @@
                                         <table border='0' cellspacing='0' cellpadding='0'>
                                             <tr>
                                                 <td title="spatial_object.fk_id_spatial_layer references spatial_layer.id via spatial_object_fk_id_spatial_layer_fkey"><a href='spatial_layer.html'>spatial_layer</a><span class='relatedKey'>.id</span></td>
-                                                <td class="constraint detail">spatial_object_fk_id_spatial_layer_fkey<span title='Restrict delete:&#10;Parent cannot be deleted if children exist'>R</span></td>
+                                                <td class="constraint detail">spatial_object_fk_id_spatial_layer_fkey</td>
+                                                <td class="constraint detail"><span title='Restrict delete:&#10;Parent cannot be deleted if children exist'>R</span></td>
                                             </tr>
                                         </table>
                                     </td>
@@ -307,7 +315,13 @@
                             </div>
                         </div>
                         <div class="box-body">
-                            <table id="indexes_table" class="table table-bordered table-striped dataTable" role="grid">
+                            <table
+                                    id="indexes_table"
+                                    class="table table-bordered table-striped dataTable"
+                                    role="grid"
+                                    data-paging="false"
+                                    data-page-length="10"
+                                    data-length-change="false">
                                 <thead>
                                 <tr>
                                     <th>Constraint Name</th>
@@ -364,21 +378,20 @@
                                 <div class="tab-content no-padding">
                                     <div class="chart tab-pane active" id="oneDegreeImg-chart" style="position: relative; overflow-x:auto;">
                                         <map id="oneDegreeRelationshipsDiagram" name="oneDegreeRelationshipsDiagram">
-<area shape="rect" id="node1" href="observation.html" target="_top" title="observation" alt="" coords="655,5,863,240">
-<area shape="rect" id="node2" href="spatial_object.html" target="_top" title="spatial_object" alt="" coords="236,61,611,424">
+<area shape="rect" id="node1" href="observation.html" target="_top" title="observation" alt="" coords="644,5,852,240">
+<area shape="rect" id="node2" href="spatial_object.html" target="_top" title="spatial_object" alt="" coords="236,61,600,424">
 <area shape="rect" id="node3" href="spatial_layer.html" target="_top" title="spatial_layer" alt="" coords="5,181,192,357">
 </map>
                                         <a name='diagram'><img id="oneDegreeImg" src="../diagrams/tables/spatial_object.1degree.png" usemap="#oneDegreeRelationshipsDiagram" class="diagram" border="0" align="left"></a>
                                     </div>
                                     <div class="chart tab-pane " id="twodegreesDegreeImg-chart" style="position: relative; overflow-x:auto;">
                                         <map id="twoDegreesRelationshipsDiagram" name="twoDegreesRelationshipsDiagram">
-<area shape="rect" id="node1" href="import.html" target="_top" title="import" alt="" coords="763,455,902,543">
-<area shape="rect" id="node2" href="series.html" target="_top" title="series" alt="" coords="441,388,579,476">
-<area shape="rect" id="node6" href="spatial_layer.html" target="_top" title="spatial_layer" alt="" coords="188,244,375,420">
-<area shape="rect" id="node7" href="actor.html" target="_top" title="actor" alt="" coords="5,354,144,442">
-<area shape="rect" id="node3" href="observation.html" target="_top" title="observation" alt="" coords="1064,19,1272,254">
-<area shape="rect" id="node4" href="spatial_object.html" target="_top" title="spatial_object" alt="" coords="645,75,1020,438">
-<area shape="rect" id="node5" href="project_view.html" target="_top" title="project_view" alt="" coords="419,271,601,359">
+<area shape="rect" id="node1" href="import.html" target="_top" title="import" alt="" coords="821,140,956,228">
+<area shape="rect" id="node2" href="series.html" target="_top" title="series" alt="" coords="529,31,662,119">
+<area shape="rect" id="node5" href="actor.html" target="_top" title="actor" alt="" coords="5,99,139,187">
+<area shape="rect" id="node6" href="spatial_layer.html" target="_top" title="spatial_layer" alt="" coords="183,104,369,280">
+<area shape="rect" id="node3" href="observation.html" target="_top" title="observation" alt="" coords="1000,5,1208,240">
+<area shape="rect" id="node4" href="spatial_object.html" target="_top" title="spatial_object" alt="" coords="413,136,777,499">
 </map>
                                         <a name='diagram'><img id="twodegreesDegreeImg" src="../diagrams/tables/spatial_object.2degrees.png" usemap="#twoDegreesRelationshipsDiagram" class="diagram" border="0" align="left"></a>
                                     </div>
@@ -389,7 +402,7 @@
                 </section>
                 <script>
                     var config = {
-                        pagination: true
+                        pagination: false
                     }
                 </script>
             </div>
@@ -400,7 +413,7 @@
                         <a href="https://github.com/schemaspy/schemaspy" title="GitHub for SchemaSpy"><i class="fa fa-github-square fa-2x"></i></a>
                         <a href="http://stackoverflow.com/questions/tagged/schemaspy" title="StackOverflow for SchemaSpy"><i class="fa fa-stack-overflow fa-2x"></i></a>
                     </div>
-                    <strong>Generated by <a href="http://schemaspy.org/" class="logo-text"><i class="fa fa-database"></i> SchemaSpy 6.1.0</a></strong>
+                    <strong>Generated by <a href="http://schemaspy.org/" class="logo-text"><i class="fa fa-database"></i> SchemaSpy 6.2.4</a></strong>
                 </div>
                 <!-- /.container -->
             </footer>

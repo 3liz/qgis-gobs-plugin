@@ -3,7 +3,7 @@
     <head>
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <title>protocol - gis Database</title>
+        <title>protocol - gis.gobs</title>
         <!-- Tell the browser to be responsive to screen width -->
         <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
         <link rel="icon" type="image/png" sizes="16x16" href="../favicon.png">
@@ -46,7 +46,7 @@
                 <nav class="navbar navbar-static-top">
                     <div class="container">
                         <div class="navbar-header">
-                            <a href="../index.html" class="navbar-brand"><b>gis</b> Database</a>
+                            <a href="../index.html" class="navbar-brand"><b>gis</b></a><span class="navbar-brand" style="padding-left: 0">.gobs</span>
                             <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar-collapse"><i class="fa fa-bars"></i></button>
                         </div>
 
@@ -100,7 +100,13 @@
                             </div>
                         </div>
                         <div class="box-body">
-                            <table id="standard_table" class="table table-bordered table-striped dataTable" role="grid">
+                            <table
+                                    id="standard_table"
+                                    class="table table-bordered table-striped dataTable"
+                                    role="grid"
+                                    data-paging="false"
+                                    data-page-length="10"
+                                    data-length-change="false">
                                 <thead align='left'>
                                 <tr>
                                     <th>Column</th>
@@ -126,7 +132,8 @@
                                         <table border='0' cellspacing='0' cellpadding='0'>
                                             <tr>
                                                 <td title="series.fk_id_protocol references protocol.id via series_fk_id_protocol_fkey"><a href='series.html'>series</a><span class='relatedKey'>.fk_id_protocol</span></td>
-                                                <td class="constraint detail">series_fk_id_protocol_fkey<span title='Restrict delete:&#10;Parent cannot be deleted if children exist'>R</span></td>
+                                                <td class="constraint detail">series_fk_id_protocol_fkey</td>
+                                                <td class="constraint detail"><span title='Restrict delete:&#10;Parent cannot be deleted if children exist'>R</span></td>
                                             </tr>
                                         </table>
                                     </td>
@@ -187,6 +194,23 @@
                                     </td>
                                     <td><p>Description, including URLs to references and authors.</p></td>
                                 </tr>
+                                <tr>
+                                    <td><span id="pr_days_editable">pr_days_editable</span></td>
+                                    <td>int4</td>
+                                    <td>10</td>
+                                    <td title=''></td>
+                                    <td title=''></td>
+                                    <td>30</td>
+                                    <td>
+                                        <table border='0' cellspacing='0' cellpadding='0'>
+                                        </table>
+                                    </td>
+                                    <td>
+                                        <table border='0' cellspacing='0' cellpadding='0'>
+                                        </table>
+                                    </td>
+                                    <td><p>Number of days the observations from series related to the protocol are editable (delete &amp; update) after creation. Use a very long value such as 10000 if the editing can occur at any time. The control is made based on the observation created_at column</p></td>
+                                </tr>
                                 </tbody>
                             </table>
                         </div>
@@ -201,7 +225,13 @@
                             </div>
                         </div>
                         <div class="box-body">
-                            <table id="indexes_table" class="table table-bordered table-striped dataTable" role="grid">
+                            <table
+                                    id="indexes_table"
+                                    class="table table-bordered table-striped dataTable"
+                                    role="grid"
+                                    data-paging="false"
+                                    data-page-length="10"
+                                    data-length-change="false">
                                 <thead>
                                 <tr>
                                     <th>Constraint Name</th>
@@ -246,20 +276,20 @@
                                 <div class="tab-content no-padding">
                                     <div class="chart tab-pane active" id="oneDegreeImg-chart" style="position: relative; overflow-x:auto;">
                                         <map id="oneDegreeRelationshipsDiagram" name="oneDegreeRelationshipsDiagram">
-<area shape="rect" id="node1" href="series.html" target="_top" title="series" alt="" coords="352,5,547,216">
-<area shape="rect" id="node2" href="protocol.html" target="_top" title="protocol" alt="" coords="5,32,308,219">
+<area shape="rect" id="node1" href="series.html" target="_top" title="series" alt="" coords="361,5,556,216">
+<area shape="rect" id="node2" href="protocol.html" target="_top" title="protocol" alt="" coords="5,32,317,248">
 </map>
                                         <a name='diagram'><img id="oneDegreeImg" src="../diagrams/tables/protocol.1degree.png" usemap="#oneDegreeRelationshipsDiagram" class="diagram" border="0" align="left"></a>
                                     </div>
                                     <div class="chart tab-pane " id="twodegreesDegreeImg-chart" style="position: relative; overflow-x:auto;">
                                         <map id="twoDegreesRelationshipsDiagram" name="twoDegreesRelationshipsDiagram">
-<area shape="rect" id="node1" href="import.html" target="_top" title="import" alt="" coords="773,103,912,191">
-<area shape="rect" id="node2" href="series.html" target="_top" title="series" alt="" coords="535,133,729,344">
-<area shape="rect" id="node4" href="actor.html" target="_top" title="actor" alt="" coords="5,261,144,349">
-<area shape="rect" id="node5" href="indicator.html" target="_top" title="indicator" alt="" coords="261,245,417,333">
-<area shape="rect" id="node6" href="protocol.html" target="_top" title="protocol" alt="" coords="188,5,491,192">
-<area shape="rect" id="node7" href="spatial_layer.html" target="_top" title="spatial_layer" alt="" coords="248,351,431,439">
-<area shape="rect" id="node3" href="observation.html" target="_top" title="observation" alt="" coords="956,137,1133,225">
+<area shape="rect" id="node1" href="import.html" target="_top" title="import" alt="" coords="777,132,912,220">
+<area shape="rect" id="node2" href="series.html" target="_top" title="series" alt="" coords="539,163,733,373">
+<area shape="rect" id="node4" href="actor.html" target="_top" title="actor" alt="" coords="5,291,139,379">
+<area shape="rect" id="node5" href="indicator.html" target="_top" title="indicator" alt="" coords="263,275,415,363">
+<area shape="rect" id="node6" href="protocol.html" target="_top" title="protocol" alt="" coords="183,5,495,221">
+<area shape="rect" id="node7" href="spatial_layer.html" target="_top" title="spatial_layer" alt="" coords="249,380,429,468">
+<area shape="rect" id="node3" href="observation.html" target="_top" title="observation" alt="" coords="956,167,1131,255">
 </map>
                                         <a name='diagram'><img id="twodegreesDegreeImg" src="../diagrams/tables/protocol.2degrees.png" usemap="#twoDegreesRelationshipsDiagram" class="diagram" border="0" align="left"></a>
                                     </div>
@@ -270,7 +300,7 @@
                 </section>
                 <script>
                     var config = {
-                        pagination: true
+                        pagination: false
                     }
                 </script>
             </div>
@@ -281,7 +311,7 @@
                         <a href="https://github.com/schemaspy/schemaspy" title="GitHub for SchemaSpy"><i class="fa fa-github-square fa-2x"></i></a>
                         <a href="http://stackoverflow.com/questions/tagged/schemaspy" title="StackOverflow for SchemaSpy"><i class="fa fa-stack-overflow fa-2x"></i></a>
                     </div>
-                    <strong>Generated by <a href="http://schemaspy.org/" class="logo-text"><i class="fa fa-database"></i> SchemaSpy 6.1.0</a></strong>
+                    <strong>Generated by <a href="http://schemaspy.org/" class="logo-text"><i class="fa fa-database"></i> SchemaSpy 6.2.4</a></strong>
                 </div>
                 <!-- /.container -->
             </footer>

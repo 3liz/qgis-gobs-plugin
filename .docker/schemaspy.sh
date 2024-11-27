@@ -6,11 +6,11 @@ docker run \
   -v "${PWD}/../docs/database:/output" \
   --network=docker_${NETWORK} \
   etrimaille/schemaspy-pg:latest \
-  -t pgsql-mat \
-  -dp /drivers \
+  -t pgsql11 \
   -host db \
   -db gis \
   -u docker \
   -p docker \
   -port 5432 \
-  -s ${SCHEMA}
+  -s ${SCHEMA} \
+  -nopages
