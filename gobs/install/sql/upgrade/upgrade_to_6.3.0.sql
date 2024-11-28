@@ -111,13 +111,3 @@ DROP TRIGGER IF EXISTS trg_control_observation_editing_capability ON gobs.observ
 CREATE TRIGGER trg_control_observation_editing_capability
 BEFORE DELETE OR UPDATE ON gobs.observation FOR EACH ROW
 EXECUTE PROCEDURE gobs.control_observation_editing_capability();
-
-
-INSERT INTO gobs.glossary (gl_field, gl_code, gl_label, gl_description, gl_order)
-VALUES
-('pv_type', 'global', 'Global', 'Global project view (only one per project)', 1),
-('pv_type', 'filter', 'Filter', 'Filter view (to restrict access to some observations)', 2)
-WHERE NOT EXISTS (
-    SELECT id FROM gobs.glossary WHERE gl_field = 'pv_type'
-)
-ON CONFLICT DO NOTHING;

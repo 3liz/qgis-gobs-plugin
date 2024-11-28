@@ -49,6 +49,7 @@ INSERT INTO gobs.glossary (id, gl_field, gl_code, gl_label, gl_description, gl_o
 INSERT INTO gobs.glossary (id, gl_field, gl_code, gl_label, gl_description, gl_order) VALUES (27, 'pv_type', 'global', 'Global', 'Global project view (only one per project)', 1);
 INSERT INTO gobs.glossary (id, gl_field, gl_code, gl_label, gl_description, gl_order) VALUES (28, 'pv_type', 'filter', 'Filter', 'Filter view (to restrict access to some observations)', 2);
 
+
 --
 -- Name: glossary_id_seq; Type: SEQUENCE SET; Schema: gobs; Owner: -
 --
@@ -59,3 +60,4 @@ SELECT pg_catalog.setval('gobs.glossary_id_seq', 28, true);
 --
 -- PostgreSQL database dump complete
 --
+
