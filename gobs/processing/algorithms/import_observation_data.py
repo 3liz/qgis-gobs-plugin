@@ -206,7 +206,6 @@ class ImportObservationData(BaseProcessingAlgorithm):
             if not ok:
                 return False, msg
 
-
         # Additionnal checks
         # TODO
 

@@ -2,6 +2,17 @@
 
 ## Unreleased
 
+## 6.3.1 - 2024-11-28
+
+### Changed
+
+* Change minimum QGIS version to 3.28
+* Unit tests - Use version QGIS 3.34 instead of 3.28
+
+### Fixed
+
+* SQL - upgrade script to 6.3.0: remove useless INSERT
+
 ## 6.3.0 - 2024-11-27
 
 ### Changed
