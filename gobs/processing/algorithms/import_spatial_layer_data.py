@@ -9,6 +9,7 @@ import time
 import processing
 
 from qgis.core import (
+    Qgis,
     QgsExpressionContextUtils,
     QgsProcessingException,
     QgsProcessingOutputString,
@@ -286,8 +287,13 @@ class ImportSpatialLayerData(BaseProcessingAlgorithm):
 
         # Get vector layer geometry type
         # And compare it with the spatial_layer type
-        source_type = QgsWkbTypes.geometryDisplayString(sourcelayer.geometryType()).lower()
-        source_wtype = QgsWkbTypes.displayString(sourcelayer.wkbType()).lower()
+        if Qgis.versionInt() < 33400:
+            source_type = QgsWkbTypes.geometryDisplayString(int(sourcelayer.geometryType())).lower()
+            source_wtype = QgsWkbTypes.displayString(int(sourcelayer.wkbType())).lower()
+        else:
+            source_type = QgsWkbTypes.geometryDisplayString(sourcelayer.geometryType()).lower()
+            source_wtype = QgsWkbTypes.displayString(sourcelayer.wkbType()).lower()
+
         if not target_type.endswith(source_type):
             msg = tr('Source vector layer and target spatial layer do not have compatible geometry types')
             msg+= ' - SOURCE: {}, TARGET: {}'.format(
