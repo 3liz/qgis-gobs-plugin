@@ -305,6 +305,7 @@ class ImportObservationData(BaseProcessingAlgorithm):
         s = QgsSettings()
         last_indicator_fields = s.value("gobs/last_indicator_fields", "{}")
         series_default_values = {}
+        default_values = {}
         if last_indicator_fields != '{}':
             default_values = json.loads(last_indicator_fields)
 
