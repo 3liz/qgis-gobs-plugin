@@ -2,6 +2,12 @@
 
 ## Unreleased
 
+## 6.3.2 - 2024-12-20
+
+### Fixed
+
+* Import observation data - Fix bug with `default_values variable` not set
+
 ## 6.3.1 - 2024-11-28
 
 ### Changed
