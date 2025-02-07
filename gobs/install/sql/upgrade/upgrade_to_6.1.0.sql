@@ -33,6 +33,7 @@ ALTER TABLE gobs.observation ALTER COLUMN id SET DATA TYPE integer USING id::int
 ALTER TABLE gobs.observation ALTER COLUMN fk_id_spatial_object SET DATA TYPE integer USING fk_id_spatial_object::integer;
 
 -- Glossary
+ALTER TABLE gobs.glossary ADD UNIQUE (gl_field, gl_code);
 INSERT INTO gobs.glossary
 (gl_field, gl_code, gl_label, gl_description, gl_order)
 VALUES
@@ -40,3 +41,4 @@ VALUES
 ('pv_type', 'filter', 'Filter', 'Filter view (to restrict access to some observations)', 2)
 ON CONFLICT DO NOTHING
 ;
+ALTER TABLE gobs.glossary DROP CONSTRAINT IF EXISTS glossary_gl_field_gl_code_key;
