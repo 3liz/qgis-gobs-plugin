@@ -2,6 +2,13 @@
 
 ## Unreleased
 
+## 6.3.3 - 2025-02-07
+
+### Changed
+
+* Create database local interface
+  * Add the Lizmap configuration file `*.qgs.cfg` with the generated QGIS project file
+
 ## 6.3.2 - 2024-12-20
 
 ### Fixed
@@ -31,7 +38,8 @@
 * Database
   * Remove the useless `application` table
   * Remove the NOT NULL constraint on the `actor.a_login` column
-  * Observation & protocol - Add a trigger function which prevents from editing an observation older than the protocol duration
+  * Observation & protocol - Add a trigger function which prevents
+    from editing an observation older than the protocol duration
 
   ### Fixed
 

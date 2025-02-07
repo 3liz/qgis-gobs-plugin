@@ -15,6 +15,7 @@ from gobs.qgis_plugin_tools.tools.resources import plugin_path
 
 import shutil
 
+
 def get_postgis_connection_list():
     """Get a list of the PostGIS connection names"""
     metadata = QgsProviderRegistry.instance().providerMetadata('postgres')
