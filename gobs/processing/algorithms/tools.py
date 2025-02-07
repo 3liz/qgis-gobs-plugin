@@ -13,6 +13,7 @@ from qgis.core import (
 
 from gobs.qgis_plugin_tools.tools.resources import plugin_path
 
+import shutil
 
 def get_postgis_connection_list():
     """Get a list of the PostGIS connection names"""
@@ -99,5 +100,9 @@ def createAdministrationProjectFromTemplate(connection_name, project_file_path) 
     )
     with open(project_file_path, 'w') as fout:
         fout.write(filedata)
+
+    # Copy the Lizmap configuration
+    config_file = plugin_path('resources', 'qgis', 'gobs_administration.qgs.cfg')
+    shutil.copyfile(config_file, f'{project_file_path}.cfg')
 
     return True
