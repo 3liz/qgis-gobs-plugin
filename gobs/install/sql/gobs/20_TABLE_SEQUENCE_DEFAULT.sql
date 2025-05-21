@@ -293,7 +293,8 @@ CREATE TABLE gobs.observation (
     ob_end_timestamp timestamp without time zone,
     ob_uid uuid DEFAULT public.uuid_generate_v4() NOT NULL,
     created_at timestamp without time zone DEFAULT now() NOT NULL,
-    updated_at timestamp without time zone DEFAULT now() NOT NULL
+    updated_at timestamp without time zone DEFAULT now() NOT NULL,
+    fk_id_actor integer NOT NULL
 );
 
 
@@ -320,8 +321,7 @@ CREATE TABLE gobs.project (
     pt_code text NOT NULL,
     pt_lizmap_project_key text,
     pt_label text NOT NULL,
-    pt_description text,
-    pt_indicator_codes text[]
+    pt_description text
 );
 
 
@@ -426,9 +426,9 @@ COMMENT ON TABLE gobs.r_indicator_node IS 'Pivot table between indicators and no
 CREATE TABLE gobs.series (
     id integer NOT NULL,
     fk_id_protocol integer NOT NULL,
-    fk_id_actor integer NOT NULL,
     fk_id_indicator integer NOT NULL,
-    fk_id_spatial_layer integer NOT NULL
+    fk_id_spatial_layer integer NOT NULL,
+    fk_id_project integer NOT NULL
 );
 
 
@@ -456,7 +456,6 @@ CREATE TABLE gobs.spatial_layer (
     sl_label text NOT NULL,
     sl_description text NOT NULL,
     sl_creation_date date DEFAULT (now())::date NOT NULL,
-    fk_id_actor integer NOT NULL,
     sl_geometry_type text NOT NULL
 );
 
@@ -489,7 +488,8 @@ CREATE TABLE gobs.spatial_object (
     so_valid_to date,
     so_uid uuid DEFAULT public.uuid_generate_v4() NOT NULL,
     created_at timestamp without time zone DEFAULT now() NOT NULL,
-    updated_at timestamp without time zone DEFAULT now() NOT NULL
+    updated_at timestamp without time zone DEFAULT now() NOT NULL,
+    fk_id_actor integer NOT NULL
 );
 
 

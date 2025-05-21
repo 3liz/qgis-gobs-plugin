@@ -316,6 +316,10 @@ COMMENT ON COLUMN gobs.observation.created_at IS 'Creation timestamp';
 COMMENT ON COLUMN gobs.observation.updated_at IS 'Last updated timestamp';
 
 
+-- observation.fk_id_actor
+COMMENT ON COLUMN gobs.observation.fk_id_actor IS 'Actor, source of the observation data.';
+
+
 -- project
 COMMENT ON TABLE gobs.project IS 'List of projects, which represents a group of indicators';
 
@@ -338,10 +342,6 @@ COMMENT ON COLUMN gobs.project.pt_label IS 'Human readable label of the project.
 
 -- project.pt_description
 COMMENT ON COLUMN gobs.project.pt_description IS 'Description of the project.';
-
-
--- project.pt_indicator_codes
-COMMENT ON COLUMN gobs.project.pt_indicator_codes IS 'List of indicator codes available for this project';
 
 
 -- project_view
@@ -435,16 +435,16 @@ COMMENT ON COLUMN gobs.series.id IS 'Id';
 COMMENT ON COLUMN gobs.series.fk_id_protocol IS 'Protocol';
 
 
--- series.fk_id_actor
-COMMENT ON COLUMN gobs.series.fk_id_actor IS 'Actor, source of the observation data.';
-
-
 -- series.fk_id_indicator
 COMMENT ON COLUMN gobs.series.fk_id_indicator IS 'Indicator. The series is named after the indicator.';
 
 
 -- series.fk_id_spatial_layer
 COMMENT ON COLUMN gobs.series.fk_id_spatial_layer IS 'Spatial layer, mandatory. If needed, use a global spatial layer with only 1 object representing the global area.';
+
+
+-- series.fk_id_project
+COMMENT ON COLUMN gobs.series.fk_id_project IS 'Project of the given series';
 
 
 -- spatial_layer
@@ -465,10 +465,6 @@ COMMENT ON COLUMN gobs.spatial_layer.sl_description IS 'Description';
 
 -- spatial_layer.sl_creation_date
 COMMENT ON COLUMN gobs.spatial_layer.sl_creation_date IS 'Creation date';
-
-
--- spatial_layer.fk_id_actor
-COMMENT ON COLUMN gobs.spatial_layer.fk_id_actor IS 'Source actor.';
 
 
 -- spatial_layer.sl_geometry_type
@@ -517,6 +513,10 @@ COMMENT ON COLUMN gobs.spatial_object.created_at IS 'Creation timestamp';
 
 -- spatial_object.updated_at
 COMMENT ON COLUMN gobs.spatial_object.updated_at IS 'Last updated timestamp';
+
+
+-- spatial_object.fk_id_actor
+COMMENT ON COLUMN gobs.spatial_object.fk_id_actor IS 'Actor, source of the spatial object data.';
 
 
 --

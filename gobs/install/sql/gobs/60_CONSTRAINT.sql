@@ -183,6 +183,11 @@ ALTER TABLE ONLY gobs.import
     ADD CONSTRAINT import_fk_id_series_fkey FOREIGN KEY (fk_id_series) REFERENCES gobs.series(id) ON DELETE RESTRICT;
 
 
+-- observation observation_fk_id_actor_fkey
+ALTER TABLE ONLY gobs.observation
+    ADD CONSTRAINT observation_fk_id_actor_fkey FOREIGN KEY (fk_id_actor) REFERENCES gobs.actor(id) ON DELETE RESTRICT;
+
+
 -- observation observation_fk_id_import_fkey
 ALTER TABLE ONLY gobs.observation
     ADD CONSTRAINT observation_fk_id_import_fkey FOREIGN KEY (fk_id_import) REFERENCES gobs.import(id) ON DELETE RESTRICT;
@@ -213,14 +218,14 @@ ALTER TABLE ONLY gobs.r_indicator_node
     ADD CONSTRAINT r_indicator_node_fk_id_node_fkey FOREIGN KEY (fk_id_node) REFERENCES gobs.graph_node(id) ON DELETE CASCADE;
 
 
--- series series_fk_id_actor_fkey
-ALTER TABLE ONLY gobs.series
-    ADD CONSTRAINT series_fk_id_actor_fkey FOREIGN KEY (fk_id_actor) REFERENCES gobs.actor(id) ON DELETE RESTRICT;
-
-
 -- series series_fk_id_indicator_fkey
 ALTER TABLE ONLY gobs.series
     ADD CONSTRAINT series_fk_id_indicator_fkey FOREIGN KEY (fk_id_indicator) REFERENCES gobs.indicator(id) ON DELETE RESTRICT;
+
+
+-- series series_fk_id_project_fkey
+ALTER TABLE ONLY gobs.series
+    ADD CONSTRAINT series_fk_id_project_fkey FOREIGN KEY (fk_id_project) REFERENCES gobs.project(id) ON DELETE RESTRICT;
 
 
 -- series series_fk_id_protocol_fkey
@@ -233,9 +238,9 @@ ALTER TABLE ONLY gobs.series
     ADD CONSTRAINT series_fk_id_spatial_layer_fkey FOREIGN KEY (fk_id_spatial_layer) REFERENCES gobs.spatial_layer(id) ON DELETE RESTRICT;
 
 
--- spatial_layer spatial_layer_fk_id_actor_fkey
-ALTER TABLE ONLY gobs.spatial_layer
-    ADD CONSTRAINT spatial_layer_fk_id_actor_fkey FOREIGN KEY (fk_id_actor) REFERENCES gobs.actor(id) ON DELETE RESTRICT;
+-- spatial_object spatial_object_fk_id_actor_fkey
+ALTER TABLE ONLY gobs.spatial_object
+    ADD CONSTRAINT spatial_object_fk_id_actor_fkey FOREIGN KEY (fk_id_actor) REFERENCES gobs.actor(id) ON DELETE RESTRICT;
 
 
 -- spatial_object spatial_object_fk_id_spatial_layer_fkey

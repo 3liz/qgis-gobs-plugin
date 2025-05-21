@@ -38,6 +38,10 @@ CREATE INDEX import_fk_id_series_idx ON gobs.import USING btree (fk_id_series);
 CREATE INDEX indicator_id_label_idx ON gobs.indicator USING btree (id_code);
 
 
+-- observation_fk_id_actor_idx
+CREATE INDEX observation_fk_id_actor_idx ON gobs.observation USING btree (fk_id_actor);
+
+
 -- observation_fk_id_import_idx
 CREATE INDEX observation_fk_id_import_idx ON gobs.observation USING btree (fk_id_import);
 
@@ -58,12 +62,12 @@ CREATE INDEX observation_ob_timestamp_idx ON gobs.observation USING btree (ob_st
 CREATE INDEX protocol_pr_code_idx ON gobs.protocol USING btree (pr_code);
 
 
--- series_fk_id_actor_idx
-CREATE INDEX series_fk_id_actor_idx ON gobs.series USING btree (fk_id_actor);
-
-
 -- series_fk_id_indicator_idx
 CREATE INDEX series_fk_id_indicator_idx ON gobs.series USING btree (fk_id_indicator);
+
+
+-- series_fk_id_project_idx
+CREATE INDEX series_fk_id_project_idx ON gobs.series USING btree (fk_id_project);
 
 
 -- series_fk_id_protocol_idx
@@ -76,6 +80,10 @@ CREATE INDEX series_fk_id_spatial_layer_idx ON gobs.series USING btree (fk_id_sp
 
 -- spatial_layer_sl_code_idx
 CREATE INDEX spatial_layer_sl_code_idx ON gobs.spatial_layer USING btree (sl_code);
+
+
+-- spatial_object_fk_id_actor_idx
+CREATE INDEX spatial_object_fk_id_actor_idx ON gobs.spatial_object USING btree (fk_id_actor);
 
 
 -- spatial_object_fk_id_spatial_layer_idx
