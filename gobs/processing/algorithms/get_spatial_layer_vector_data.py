@@ -160,7 +160,12 @@ class GetSpatialLayerVectorData(GetDataAsLayer):
         feedback.pushInfo(
             tr('GET DATA FROM CHOSEN SPATIAL LAYER')
         )
-        sql = "SELECT id, sl_label, sl_geometry_type FROM gobs.spatial_layer WHERE id = %s" % id_spatial_layer
+        sql = f'''
+            SELECT
+                id, sl_label, sl_geometry_type
+            FROM gobs.spatial_layer
+            WHERE id = {id_spatial_layer}
+        '''
         data, error = fetch_data_from_sql_query(connection_name, sql)
         if not error:
             label = data[0][1]
@@ -174,25 +179,10 @@ class GetSpatialLayerVectorData(GetDataAsLayer):
 
         # Retrieve needed data
         id_spatial_layer = data[0][0]
-        geometry_type = data[0][2]
 
-        # Build SQL
-        sql = '''
-            SELECT
-            id,
-            so_unique_id AS code,
-            so_unique_label AS label,
-            so_valid_from AS valid_from,
-            so_valid_to AS valid_to,
-            geom::geometry({1}, 4326) AS geom
-            FROM gobs.spatial_object
-            WHERE fk_id_spatial_layer = {0}
-        '''.format(
-            id_spatial_layer,
-            geometry_type
-        )
         # View the spatial object for a specific day.
         # only if validity date is given
+        sql_validity_date = 'NULL::date'
         if validity_date:
             if validity_date != 'today':
                 # keep only date (remove time)
@@ -206,15 +196,16 @@ class GetSpatialLayerVectorData(GetDataAsLayer):
                     validity_date = '%s-01' % validity_date
             p = re.compile('^[0-9]{4}-[0-9]{2}-[0-9]{2}$')
             if validity_date == 'today' or p.match(validity_date):
-                sql += '''
-            AND (
-                (so_valid_from IS NULL OR so_valid_from <= '{validity_date}'::date)
-                AND
-                (so_valid_to IS NULL OR so_valid_to > '{validity_date}'::date)
+                sql_validity_date = f"'{validity_date}'::date"
+
+        # Build SQL
+        sql = f'''
+            SELECT *
+            FROM gobs.get_spatial_layer_vector_data(
+                {id_spatial_layer},
+                {sql_validity_date}
             )
-                '''.format(
-                    validity_date=validity_date
-                )
+        '''
 
         # Format SQL
         line_break = '''

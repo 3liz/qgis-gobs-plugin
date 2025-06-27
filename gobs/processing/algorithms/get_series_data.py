@@ -67,12 +67,12 @@ class GetSeriesData(GetDataAsLayer):
             concat(
                 id_label,
                 ' (', p.pr_label, ')',
-                ' / Source: ', a_label,
-                ' / Layer: ', sl_label
+                ' / Layer: "', sl_label, '"',
+                ' / Project: "', pt_label, '"'
             ) AS label
             FROM gobs.series s
             INNER JOIN gobs.protocol p ON p.id = s.fk_id_protocol
-            INNER JOIN gobs.actor a ON a.id = s.fk_id_actor
+            INNER JOIN gobs.project pt ON pt.id = s.fk_id_project
             INNER JOIN gobs.indicator i ON i.id = s.fk_id_indicator
             INNER JOIN gobs.spatial_layer sl ON sl.id = s.fk_id_spatial_layer
             ORDER BY label
@@ -153,32 +153,22 @@ class GetSeriesData(GetDataAsLayer):
         # Other parameters
         add_spatial_object_geom = self.parameterAsBool(parameters, self.ADD_SPATIAL_OBJECT_GEOM, context)
 
-        # Get data from chosen series
-        feedback.pushInfo(
-            tr('GET DATA FROM CHOSEN SERIES')
-        )
-        sql = '''
+        # Get series indicator dimensions codes and types (mandatory to build a flattened table
+        sql = f'''
             SELECT
-                id_label,
-                id_date_format,
-                array_to_string(array_agg(d.di_code ORDER BY d.id), '|') AS id_value_code,
-                array_to_string(array_agg(d.di_type ORDER BY d.id), '|') AS id_value_type,
-                array_to_string(array_agg(d.di_unit ORDER BY d.id), '|') AS id_value_unit
-            FROM gobs.indicator AS i
+                d.di_code, d.di_type, d.di_label, d.di_unit
+            FROM gobs.series AS s
+            INNER JOIN gobs.indicator AS i
+                ON i.id = s.fk_id_indicator
             INNER JOIN gobs.dimension AS d
                 ON d.fk_id_indicator = i.id
-            INNER JOIN gobs.series AS s
-                ON s.fk_id_indicator = i.id
             WHERE s.id = {id_serie}
-            GROUP BY id_label, id_date_format
-        '''.format(
-            id_serie=id_serie
-        )
+            ORDER BY d.id
+        '''
         data, error = fetch_data_from_sql_query(connection_name, sql)
         if not error:
-            id_label = data[0][0]
-            message = tr('* Data has been fetched for chosen series and related indicator')
-            message += ' %s !' % id_label
+            message = tr('* Properties has been fetched for the given series ID = ')
+            message += ' %s !' % id_serie
             feedback.pushInfo(
                 message
             )
@@ -186,61 +176,25 @@ class GetSeriesData(GetDataAsLayer):
             raise QgsProcessingException(error)
 
         # Retrieve needed data
-        # id_label = data[0][0]
-        id_date_format = data[0][1]
-        id_value_code = data[0][2].split('|')
-        id_value_type = data[0][3].split('|')
-        # id_value_unit = data[0][4].split('|')
-
-        # Compute "Date format" caster
-        date_formater = 'YYYY-MM-DD HH24:MI:SS'
-        date_format_rules = {
-            'second': 'YYYY-MM-DD HH24:MI:SS',
-            'minute': 'YYYY-MM-DD HH24:MI',
-            'hour': 'YYYY-MM-DD HH24',
-            'day': 'YYYY-MM-DD',
-            'month': 'YYYY-MM',
-            'year': 'YYYY',
-        }
-        if id_date_format in date_format_rules:
-            date_formater = date_format_rules[id_date_format]
+        # Flatten the indicator dimensions
+        flattened_dimensions = ', '.join([
+            f'"{a[0]}" {a[1]}'
+            for a in data
+        ])
 
         # Build SQL
-        get_values = [
-            '(ob_value->>%s)::%s AS "%s"' % (
-                idx,
-                id_value_type[idx],
-                s
-            )
-            for idx, s in enumerate(id_value_code)
-        ]
-        values = ", ".join(get_values)
-        sql = '''
+        sql = f'''
             SELECT
-            o.id,
-            so_unique_id AS spatial_object_code,
-            '''
-        # Add spatial object geom
-        if add_spatial_object_geom:
-            sql += '''
-            so.geom,
-            '''
-
-        sql+= '''
-            to_char(ob_start_timestamp, '{2}') AS observation_start,
-            to_char(ob_end_timestamp, '{2}') AS observation_end,
-            ob_start_timestamp AS observation_start_timestamp,
-            ob_end_timestamp AS observation_end_timestamp,
-            {0}
-            FROM gobs.observation AS o
-            INNER JOIN gobs.spatial_object AS so
-            ON so.id = o.fk_id_spatial_object
-            WHERE fk_id_series = {1}
-        '''.format(
-            values,
-            id_serie,
-            date_formater
-        )
+                g.*,
+                v.*
+            FROM
+                gobs.get_series_data(
+                    {id_serie},
+                    {str(add_spatial_object_geom)}
+                ) AS g,
+                json_to_record(g.observation_values)
+                    AS v ({flattened_dimensions})
+        '''
 
         # Format SQL
         line_break = '''
