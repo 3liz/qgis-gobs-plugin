@@ -35,6 +35,7 @@ from gobs.qgis_plugin_tools.tools.i18n import tr
 class ImportSpatialLayerData(BaseProcessingAlgorithm):
 
     SPATIALLAYER = 'SPATIALLAYER'
+    ACTOR = 'ACTOR'
     SOURCELAYER = 'SOURCELAYER'
     UNIQUEID = 'UNIQUEID'
     UNIQUELABEL = 'UNIQUELABEL'
@@ -47,6 +48,7 @@ class ImportSpatialLayerData(BaseProcessingAlgorithm):
     OUTPUT_STRING = 'OUTPUT_STRING'
 
     SPATIALLAYERS = []
+    ACTORS = []
 
     def name(self):
         return 'import_spatial_layer_data'
@@ -68,6 +70,8 @@ class ImportSpatialLayerData(BaseProcessingAlgorithm):
             'The G-Obs administrator must have created the needed spatial layer beforehand by addind the required items in the related database tables: gobs.actor_category, gobs.actor and gobs.spatial_layer.'
             '\n'
             '* Target spatial layer: choose one of the spatial layers available in G-Obs database'
+            '\n'
+            '* Source actor: choose the actor among the pre-defined list of actors'
             '\n'
             '* Source data: choose the QGIS vector layer containing the spatial data you want to import into the chosen spatial layer.'
             '\n'
@@ -120,6 +124,26 @@ class ImportSpatialLayerData(BaseProcessingAlgorithm):
                 optional=False
             )
         )
+        # List of actors
+        sql = '''
+            SELECT id, a_label
+            FROM gobs.actor
+            ORDER BY a_label
+        '''
+        data = []
+        if get_data == 'yes' and connection_name in get_postgis_connection_list():
+            data, _ = fetch_data_from_sql_query(connection_name, sql)
+        self.ACTORS = ['%s - %s' % (a[1], a[0]) for a in data]
+        self.addParameter(
+            QgsProcessingParameterEnum(
+                self.ACTOR,
+                tr('Source actor'),
+                options=self.ACTORS,
+                optional=False
+            )
+        )
+
+        # Source layer
         self.addParameter(
             QgsProcessingParameterVectorLayer(
                 self.SOURCELAYER,
@@ -127,6 +151,8 @@ class ImportSpatialLayerData(BaseProcessingAlgorithm):
                 optional=False
             )
         )
+
+        # Unique identifier
         self.addParameter(
             QgsProcessingParameterField(
                 self.UNIQUEID,
@@ -134,6 +160,8 @@ class ImportSpatialLayerData(BaseProcessingAlgorithm):
                 parentLayerParameterName=self.SOURCELAYER
             )
         )
+
+        # Unique label
         self.addParameter(
             QgsProcessingParameterField(
                 self.UNIQUELABEL,
@@ -142,6 +170,7 @@ class ImportSpatialLayerData(BaseProcessingAlgorithm):
                 type=QgsProcessingParameterField.String
             )
         )
+
         # Min validity field
         self.addParameter(
             QgsProcessingParameterField(
@@ -151,6 +180,7 @@ class ImportSpatialLayerData(BaseProcessingAlgorithm):
                 parentLayerParameterName=self.SOURCELAYER
             )
         )
+
         # Manual min validity
         self.addParameter(
             QgsProcessingParameterString(
@@ -159,6 +189,7 @@ class ImportSpatialLayerData(BaseProcessingAlgorithm):
                 optional=True
             )
         )
+
         # Max validity field
         self.addParameter(
             QgsProcessingParameterField(
@@ -168,6 +199,7 @@ class ImportSpatialLayerData(BaseProcessingAlgorithm):
                 parentLayerParameterName=self.SOURCELAYER
             )
         )
+
         # Manual max validity
         self.addParameter(
             QgsProcessingParameterString(
@@ -245,6 +277,7 @@ class ImportSpatialLayerData(BaseProcessingAlgorithm):
             connection_name = os.environ.get("GOBS_CONNECTION_NAME")
 
         spatiallayer = self.SPATIALLAYERS[parameters[self.SPATIALLAYER]]
+        actor = self.ACTORS[parameters[self.ACTOR]]
         sourcelayer = self.parameterAsVectorLayer(parameters, self.SOURCELAYER, context)
         uniqueid = self.parameterAsString(parameters, self.UNIQUEID, context)
         uniquelabel = self.parameterAsString(parameters, self.UNIQUELABEL, context)
@@ -258,6 +291,10 @@ class ImportSpatialLayerData(BaseProcessingAlgorithm):
 
         # Get chosen spatial layer id
         id_spatial_layer = spatiallayer.split('-')[-1].strip()
+
+        # Get chosen actor id
+        id_actor = actor.split('-')[-1].strip()
+
         feedback.pushInfo(
             tr('CHECK COMPATIBILITY BETWEEN SOURCE AND TARGET GEOMETRY TYPES')
         )
@@ -381,15 +418,21 @@ class ImportSpatialLayerData(BaseProcessingAlgorithm):
         sql = '''
             INSERT INTO gobs.spatial_object (
                 so_unique_id, so_unique_label,
-                geom, fk_id_spatial_layer,
-                so_valid_from
+                geom,
+                fk_id_spatial_layer,
+                fk_id_actor,
+                so_valid_from,
             '''
         if has_max_validity:
             sql += ', so_valid_to'
         sql += '''
             )
-            SELECT "{so_unique_id}", "{so_unique_label}", {st_multi_left}ST_Transform(ST_CollectionExtract(ST_MakeValid(geom),{geometry_type_integer}), 4326){st_multi_right} AS geom, {id_spatial_layer},
-            {casted_timestamp_min}
+            SELECT
+                "{so_unique_id}", "{so_unique_label}",
+                {st_multi_left}ST_Transform(ST_CollectionExtract(ST_MakeValid(geom),{geometry_type_integer}), 4326){st_multi_right} AS geom,
+                {id_spatial_layer},
+                {id_actor},
+                {casted_timestamp_min}
         '''.format(
             so_unique_id=uniqueid,
             so_unique_label=uniquelabel,
@@ -397,6 +440,7 @@ class ImportSpatialLayerData(BaseProcessingAlgorithm):
             geometry_type_integer=geometry_type_integer,
             st_multi_right=st_multi_right,
             id_spatial_layer=id_spatial_layer,
+            id_actor=id_actor,
             casted_timestamp_min=casted_timestamp_min
         )
         if has_max_validity:
@@ -410,11 +454,12 @@ class ImportSpatialLayerData(BaseProcessingAlgorithm):
             -- i.e. Same external ids for the same layer and the same start validity date
             -- so_unique_id, fk_id_spatial_layer AND so_valid_from are the same
             -- This is considered as the same object as the one already in database
-            -- We update the geometry, label, and end date of validity
+            -- We update the geometry, label, end date of validity, actor ID
             ON CONFLICT
                 ON CONSTRAINT spatial_object_unique_key
             DO UPDATE
-            SET (geom, so_unique_label, so_valid_to) = (EXCLUDED.geom, EXCLUDED.so_unique_label, EXCLUDED.so_valid_to)
+            SET (geom, so_unique_label, so_valid_to, fk_id_actor) =
+            (EXCLUDED.geom, EXCLUDED.so_unique_label, EXCLUDED.so_valid_to, EXCLUDED.fk_id_actor)
             WHERE True
             ;
 
