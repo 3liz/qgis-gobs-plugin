@@ -105,12 +105,12 @@ class GetAggregatedData(GetDataAsLayer):
             concat(
                 id_label,
                 ' (', p.pr_label, ')',
-                ' / Source: ', a_label,
-                ' / Layer: ', sl_label
+                ' / Layer: "', sl_label, '"',
+                ' / Project: "', pt_label, '"'
             ) AS label
             FROM gobs.series s
             INNER JOIN gobs.protocol p ON p.id = s.fk_id_protocol
-            INNER JOIN gobs.actor a ON a.id = s.fk_id_actor
+            INNER JOIN gobs.project pt ON pt.id = s.fk_id_project
             INNER JOIN gobs.indicator i ON i.id = s.fk_id_indicator
             INNER JOIN gobs.spatial_layer sl ON sl.id = s.fk_id_spatial_layer
             ORDER BY label
@@ -466,21 +466,6 @@ class GetAggregatedData(GetDataAsLayer):
             '''.format(
                 temporal_resolution=temporal_resolution
             )
-
-        # ORDER
-        # if add_spatial_object_data or temporal_resolution:
-            # sql+= '''
-            # ORDER BY 1
-            # '''
-
-        # if add_spatial_object_data:
-            # sql+= '''
-            # , so_unique_label
-            # '''
-        # if temporal_resolution:
-            # sql+= '''
-            # , temporal_resolution
-            # '''
 
         sql += '''
             ) AS s
