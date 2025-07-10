@@ -3,7 +3,7 @@ __license__ = "GPL version 3"
 __email__ = "info@3liz.org"
 __revision__ = "$Format:%H$"
 
-
+import os
 import re
 
 from qgis.core import (
@@ -66,6 +66,8 @@ class GetSpatialLayerVectorData(GetDataAsLayer):
 
         project = QgsProject.instance()
         connection_name = QgsExpressionContextUtils.projectScope(project).variable('gobs_connection_name')
+        if not connection_name:
+            connection_name = os.environ.get("GOBS_CONNECTION_NAME")
         get_data = QgsExpressionContextUtils.globalScope().variable('gobs_get_database_data')
 
         # Add spatial layer choice
@@ -141,6 +143,8 @@ class GetSpatialLayerVectorData(GetDataAsLayer):
 
         # Database connection parameters
         connection_name = QgsExpressionContextUtils.projectScope(context.project()).variable('gobs_connection_name')
+        if not connection_name:
+            connection_name = os.environ.get("GOBS_CONNECTION_NAME")
         get_data = QgsExpressionContextUtils.globalScope().variable('gobs_get_database_data')
         if get_data != 'yes':
             return

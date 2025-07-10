@@ -3,6 +3,8 @@ __license__ = "GPL version 3"
 __email__ = "info@3liz.org"
 __revision__ = "$Format:%H$"
 
+import os
+
 from qgis.core import (
     QgsExpressionContextUtils,
     QgsProcessingException,
@@ -65,6 +67,8 @@ class RemoveSeriesData(BaseProcessingAlgorithm):
         # INPUTS
         project = QgsProject.instance()
         connection_name = QgsExpressionContextUtils.projectScope(project).variable('gobs_connection_name')
+        if not connection_name:
+            connection_name = os.environ.get("GOBS_CONNECTION_NAME")
         get_data = QgsExpressionContextUtils.globalScope().variable('gobs_get_database_data')
 
         # List of series
@@ -73,12 +77,12 @@ class RemoveSeriesData(BaseProcessingAlgorithm):
             concat(
                 id_label,
                 ' (', p.pr_label, ')',
-                ' / Source: ', a_label,
-                ' / Layer: ', sl_label
+                ' / Layer: "', sl_label, '"',
+                ' / Project: "', pt_label, '"'
             ) AS label
             FROM gobs.series s
             INNER JOIN gobs.protocol p ON p.id = s.fk_id_protocol
-            INNER JOIN gobs.actor a ON a.id = s.fk_id_actor
+            INNER JOIN gobs.project pt ON pt.id = s.fk_id_project
             INNER JOIN gobs.indicator i ON i.id = s.fk_id_indicator
             INNER JOIN gobs.spatial_layer sl ON sl.id = s.fk_id_spatial_layer
             ORDER BY label

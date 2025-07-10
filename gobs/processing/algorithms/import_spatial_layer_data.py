@@ -124,6 +124,7 @@ class ImportSpatialLayerData(BaseProcessingAlgorithm):
                 optional=False
             )
         )
+
         # List of actors
         sql = '''
             SELECT id, a_label

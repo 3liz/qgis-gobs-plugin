@@ -3,6 +3,7 @@ __license__ = "GPL version 3"
 __email__ = "info@3liz.org"
 __revision__ = "$Format:%H$"
 
+import os
 import time
 
 from typing import Optional, Tuple
@@ -15,6 +16,7 @@ from qgis.core import (
     QgsExpressionContextUtils,
     QgsProcessing,
     QgsProcessingOutputString,
+    QgsProcessingParameterEnum,
     QgsProcessingParameterField,
     QgsProcessingParameterString,
     QgsProcessingParameterVectorLayer,
@@ -35,6 +37,7 @@ from gobs.qgis_plugin_tools.tools.i18n import tr
 
 class ImportObservationData(BaseProcessingAlgorithm):
     SOURCELAYER = 'SOURCELAYER'
+    ACTOR = 'ACTOR'
     MANUAL_START_DATE = 'MANUAL_START_DATE'
     MANUAL_END_DATE = 'MANUAL_END_DATE'
     FIELD_START_TIMESTAMP = 'FIELD_START_TIMESTAMP'
@@ -55,6 +58,8 @@ class ImportObservationData(BaseProcessingAlgorithm):
             'manual': MANUAL_END_DATE
         }
     }
+
+    ACTORS = []
 
     def name(self):
         return 'import_observation_data'
@@ -80,6 +85,8 @@ class ImportObservationData(BaseProcessingAlgorithm):
             '\n'
             'Each feature of this source layer is an observation, characterized by a spatial object, a timestamp, a vector of values, '
             'and will be imported into the database table gobs.observation.'
+            '\n'
+            '* Source actor: choose the actor among the pre-defined list of actors'
             '\n'
             '* Date time fields: choose the field containing the exact date or date & time of each observation: '
             'start and (optional) end timestamp'
@@ -113,6 +120,12 @@ class ImportObservationData(BaseProcessingAlgorithm):
         return {}
 
     def initAlgorithm(self, config):
+        project = QgsProject.instance()
+        connection_name = QgsExpressionContextUtils.projectScope(project).variable('gobs_connection_name')
+        if not connection_name:
+            connection_name = os.environ.get("GOBS_CONNECTION_NAME")
+        get_data = QgsExpressionContextUtils.globalScope().variable('gobs_get_database_data')
+
         # INPUTS
         # Source layer
         self.addParameter(
@@ -123,6 +136,27 @@ class ImportObservationData(BaseProcessingAlgorithm):
                 types=[QgsProcessing.TypeVector]
             )
         )
+
+        # List of actors
+        sql = '''
+            SELECT id, a_label
+            FROM gobs.actor
+            ORDER BY a_label
+        '''
+        data = []
+        if get_data == 'yes' and connection_name in get_postgis_connection_list():
+            data, _ = fetch_data_from_sql_query(connection_name, sql)
+        self.ACTORS = ['%s - %s' % (a[1], a[0]) for a in data]
+        self.addParameter(
+            QgsProcessingParameterEnum(
+                self.ACTOR,
+                tr('Source actor'),
+                options=self.ACTORS,
+                optional=False
+            )
+        )
+
+        # Dates
         for k, v in self.DATE_FIELDS.items():
             # Date field
             self.addParameter(
@@ -256,10 +290,10 @@ class ImportObservationData(BaseProcessingAlgorithm):
         separator = '#!#'
         sql = f'''
             SELECT
-                array_to_string(array_agg(d.di_code), '{separator}'),
-                array_to_string(array_agg(d.di_label), '{separator}'),
-                array_to_string(array_agg(d.di_type), '{separator}'),
-                array_to_string(array_agg(d.di_unit), '{separator}')
+                array_to_string(array_agg(d.di_code ORDER BY d.id), '{separator}'),
+                array_to_string(array_agg(d.di_label ORDER BY d.id), '{separator}'),
+                array_to_string(array_agg(d.di_type ORDER BY d.id), '{separator}'),
+                array_to_string(array_agg(d.di_unit ORDER BY d.id), '{separator}')
             FROM gobs.indicator AS i
             INNER JOIN gobs.dimension AS d
                 ON d.fk_id_indicator = i.id
@@ -397,7 +431,7 @@ class ImportObservationData(BaseProcessingAlgorithm):
             tr('GET DATA OF RELATED indicator')
         )
         sql = '''
-            SELECT id_date_format, array_to_string(array_agg(d.di_type), ',')
+            SELECT id_date_format, array_to_string(array_agg(d.di_type ORDER BY d.id), ',')
             FROM gobs.indicator AS i
             INNER JOIN gobs.dimension AS d
                 ON d.fk_id_indicator = i.id
@@ -514,13 +548,20 @@ class ImportObservationData(BaseProcessingAlgorithm):
                     else:
                         casted_timestamp[k] = 'NULL'
 
+
+            # Actor
+            actor = self.ACTORS[parameters[self.ACTOR]]
+            id_actor = actor.split('-')[-1].strip()
+
             # We use the unique constraint to override or not the data
-            # "observation_data_unique" UNIQUE CONSTRAINT, btree (fk_id_series, fk_id_spatial_object, ob_start_timestamp)
+            # "observation_data_unique" UNIQUE CONSTRAINT, btree
+            # (fk_id_series, fk_id_spatial_object, ob_start_timestamp)
             # ob_validation is automatically set by the trigger gobs.trg_after_import_validation()
             # to now() when the import is validated
             sql = '''
                 INSERT INTO gobs.observation AS o (
                     fk_id_series, fk_id_spatial_object, fk_id_import,
+                    fk_id_actor,
                     ob_value, ob_start_timestamp, ob_end_timestamp
                 )
                 SELECT
@@ -530,6 +571,8 @@ class ImportObservationData(BaseProcessingAlgorithm):
                 so.id,
                 -- id of the import log
                 {id_import},
+                -- actor ID
+                {id_actor},
                 -- jsonb array value computed
                 {jsonb_array},
                 -- start timestamp from the source
@@ -551,6 +594,7 @@ class ImportObservationData(BaseProcessingAlgorithm):
             '''.format(
                 id_series=id_series,
                 id_import=id_import,
+                id_actor=id_actor,
                 jsonb_array=jsonb_array,
                 casted_timestamp_start=casted_timestamp['Start'],
                 casted_timestamp_end=casted_timestamp['End'],
@@ -570,15 +614,23 @@ class ImportObservationData(BaseProcessingAlgorithm):
                     casted_timestamp_end=casted_timestamp['End'],
                 )
             # Manage INSERT conflicts
-            # If the observation has the same id_series, same start timestamp and same spatial object
+            # If the observation has the same id_series,
+            # same start timestamp and same spatial object
             # The observation is modified with the new end timestamp and ob_value
-            # This means a new observation is created when the start timestamp is different for the same series id and spatial object
+            # This means a new observation is created when the start timestamp
+            # is different for the same series id and spatial object
             sql += '''
                 -- Update line if data already exists
                 -- AND data is not validated
                 ON CONFLICT ON CONSTRAINT observation_data_unique
                 DO UPDATE
-                SET (fk_id_import, ob_value, ob_end_timestamp) = (EXCLUDED.fk_id_import, EXCLUDED.ob_value, EXCLUDED.ob_end_timestamp)
+                SET (
+                    fk_id_import, ob_value,
+                    ob_end_timestamp, fk_id_actor
+                ) = (
+                    EXCLUDED.fk_id_import, EXCLUDED.ob_value,
+                    EXCLUDED.ob_end_timestamp, EXCLUDED.fk_id_actor
+                )
                 WHERE o.ob_validation IS NULL
             '''
             feedback.pushInfo(sql)

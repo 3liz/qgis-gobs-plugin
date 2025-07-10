@@ -3,6 +3,8 @@ __license__ = "GPL version 3"
 __email__ = "info@3liz.org"
 __revision__ = "$Format:%H$"
 
+import os
+
 from qgis.core import (
     QgsExpressionContextUtils,
     QgsProcessingException,
@@ -97,6 +99,8 @@ class GetAggregatedData(GetDataAsLayer):
 
         project = QgsProject.instance()
         connection_name = QgsExpressionContextUtils.projectScope(project).variable('gobs_connection_name')
+        if not connection_name:
+            connection_name = os.environ.get("GOBS_CONNECTION_NAME")
         get_data = QgsExpressionContextUtils.globalScope().variable('gobs_get_database_data')
 
         # List of series
@@ -244,6 +248,8 @@ class GetAggregatedData(GetDataAsLayer):
 
         # Get parameters
         connection_name = QgsExpressionContextUtils.projectScope(context.project()).variable('gobs_connection_name')
+        if not connection_name:
+            connection_name = os.environ.get("GOBS_CONNECTION_NAME")
         get_data = QgsExpressionContextUtils.globalScope().variable('gobs_get_database_data')
         if get_data != 'yes':
             return
