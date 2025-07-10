@@ -111,6 +111,194 @@ $$;
 COMMENT ON FUNCTION gobs.find_observation_with_wrong_spatial_object(_id_series integer) IS 'Find the observations with having incompatible start and end timestamp with related spatial objects validity dates';
 
 
+-- get_series_data(integer, boolean)
+CREATE FUNCTION gobs.get_series_data(series_id integer, add_geometry boolean) RETURNS TABLE(id integer, spatial_object_code text, geom public.geometry, observation_start text, observation_end text, observation_start_timestamp timestamp without time zone, observation_end_timestamp timestamp without time zone, observation_values json, id_actor integer)
+    LANGUAGE plpgsql
+    AS $_$
+DECLARE
+    _series_data record;
+    _sql_text text;
+    _date_formater text;
+    _date_format_rules jsonb;
+    _get_values record;
+    _values_array text[];
+    _values_text text;
+BEGIN
+    -- Get series data
+    SELECT INTO _series_data
+        s.id,
+        i.id_label,
+        i.id_date_format,
+        array_agg(d.di_code ORDER BY d.id) AS id_value_codes,
+        array_agg(d.di_type ORDER BY d.id) AS id_value_types,
+        array_agg(d.di_unit ORDER BY d.id) AS id_value_units
+    FROM gobs.indicator AS i
+    INNER JOIN gobs.dimension AS d
+        ON d.fk_id_indicator = i.id
+    INNER JOIN gobs.series AS s
+        ON s.fk_id_indicator = i.id
+    WHERE s.id = series_id
+    GROUP BY s.id, id_label, id_date_format
+    ;
+
+    IF _series_data.id IS NULL THEN
+        RAISE EXCEPTION 'G-Obs - No series found for the given ID %',
+            series_id
+        ;
+    END IF;
+
+    -- Get date formatter
+    _date_formater = 'YYYY-MM-DD HH24:MI:SS';
+    _date_format_rules = json_build_object(
+        'second', 'YYYY-MM-DD HH24:MI:SS',
+        'minute', 'YYYY-MM-DD HH24:MI',
+        'hour', 'YYYY-MM-DD HH24',
+        'day', 'YYYY-MM-DD',
+        'month', 'YYYY-MM',
+        'year', 'YYYY'
+    );
+    IF _date_format_rules ? _series_data.id_date_format THEN
+        _date_formater = _date_format_rules->>(_series_data.id_date_format);
+    END IF;
+
+    -- Get observation values SELECT clause
+    FOR _get_values IN
+        SELECT
+            row_number() OVER() AS idx,
+            code
+        FROM unnest(_series_data.id_value_codes) AS code
+    LOOP
+        _values_array = array_append(
+            _values_array,
+            format( $TEXT$ '%1$s', (ob_value->>%2$s)::%3$s $TEXT$,
+                _series_data.id_value_codes[_get_values.idx],
+                _get_values.idx - 1,
+                _series_data.id_value_types[_get_values.idx]
+            )
+        );
+    END LOOP;
+    _values_text = concat(
+        'json_build_object(',
+        array_to_string(_values_array, ', '),
+        ')'
+    );
+
+    -- Build SQL
+    _sql_text = format(
+        $sql$
+        SELECT
+            o.id,
+            so_unique_id AS spatial_object_code,
+            %1$s,
+            to_char(ob_start_timestamp, '%2$s') AS observation_start,
+            to_char(ob_end_timestamp, '%2$s') AS observation_end,
+            ob_start_timestamp AS observation_start_timestamp,
+            ob_end_timestamp AS observation_end_timestamp,
+            %3$s,
+            o.fk_id_actor AS id_actor
+        FROM gobs.observation AS o
+        INNER JOIN gobs.spatial_object AS so
+        ON so.id = o.fk_id_spatial_object
+        WHERE fk_id_series = %4$s
+
+        $sql$,
+        -- add the geometry column if needed
+        CASE
+            WHEN add_geometry IS TRUE THEN 'so.geom'
+            ELSE 'NULL::geometry AS geom'
+        END,
+        -- Date formater
+        _date_formater,
+        -- Indicator values
+        _values_text,
+        -- Series ID
+        _series_data.id
+    )
+    ;
+
+    RAISE NOTICE '%', _sql_text;
+
+    RETURN QUERY
+    EXECUTE _sql_text
+    ;
+END;
+
+$_$;
+
+
+-- FUNCTION get_series_data(series_id integer, add_geometry boolean)
+COMMENT ON FUNCTION gobs.get_series_data(series_id integer, add_geometry boolean) IS 'Get the given series observation data, with optional geometry.';
+
+
+-- get_spatial_layer_vector_data(integer, date)
+CREATE FUNCTION gobs.get_spatial_layer_vector_data(spatial_layer_id integer, validity_date date) RETURNS TABLE(id integer, code text, label text, uid text, valid_from date, valid_to date, id_actor integer, geom public.geometry)
+    LANGUAGE plpgsql
+    AS $_$
+DECLARE
+    _spatial_layer record;
+    _sql_text text;
+BEGIN
+    -- Get spatial layer data
+    SELECT INTO _spatial_layer
+        *
+    FROM gobs.spatial_layer AS sl
+    WHERE sl.id = spatial_layer_id;
+
+    IF _spatial_layer.id IS NULL THEN
+        RAISE EXCEPTION 'G-Obs - No spatial layer found for the given ID %',
+            spatial_layer_id
+        ;
+    END IF;
+
+    -- Build SQL
+    _sql_text = format(
+        $sql$
+        SELECT
+            so.id,
+            so.so_unique_id AS code,
+            so.so_unique_label AS label,
+            so.so_uid::text AS uid,
+            so.so_valid_from AS valid_from,
+            so.so_valid_to AS valid_to,
+            so.fk_id_actor AS id_actor,
+            so.geom::geometry(%1$s, 4326) AS geom
+        FROM gobs.spatial_object AS so
+        WHERE so.fk_id_spatial_layer = %2$s
+        $sql$,
+        _spatial_layer.sl_geometry_type,
+        _spatial_layer.id
+    )
+    ;
+
+    -- Add optionnal date filter
+    IF validity_date IS NOT NULL THEN
+        _sql_text = _sql_text || format(
+            $sql$
+            AND
+                (
+                    (so_valid_from IS NULL OR so_valid_from <= '%1$s'::date)
+                    AND
+                    (so_valid_to IS NULL OR so_valid_to > '%1$s'::date)
+                )
+            $sql$,
+            validity_date::text
+        );
+
+    END IF;
+
+    RETURN QUERY
+    EXECUTE _sql_text
+    ;
+END;
+
+$_$;
+
+
+-- FUNCTION get_spatial_layer_vector_data(spatial_layer_id integer, validity_date date)
+COMMENT ON FUNCTION gobs.get_spatial_layer_vector_data(spatial_layer_id integer, validity_date date) IS 'Get the spatial object vector data corresponding to the given spatial layer ID.
+A date can be given to restrict objects corresponding to this date.';
+
+
 -- log_deleted_object()
 CREATE FUNCTION gobs.log_deleted_object() RETURNS trigger
     LANGUAGE plpgsql

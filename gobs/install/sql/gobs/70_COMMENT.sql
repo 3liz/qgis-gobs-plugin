@@ -20,6 +20,15 @@ SET row_security = off;
 COMMENT ON FUNCTION gobs.find_observation_with_wrong_spatial_object(_id_series integer) IS 'Find the observations with having incompatible start and end timestamp with related spatial objects validity dates';
 
 
+-- FUNCTION get_series_data(series_id integer, add_geometry boolean)
+COMMENT ON FUNCTION gobs.get_series_data(series_id integer, add_geometry boolean) IS 'Get the given series observation data, with optional geometry.';
+
+
+-- FUNCTION get_spatial_layer_vector_data(spatial_layer_id integer, validity_date date)
+COMMENT ON FUNCTION gobs.get_spatial_layer_vector_data(spatial_layer_id integer, validity_date date) IS 'Get the spatial object vector data corresponding to the given spatial layer ID.
+A date can be given to restrict objects corresponding to this date.';
+
+
 -- FUNCTION update_observations_with_wrong_spatial_objects(_id_series integer)
 COMMENT ON FUNCTION gobs.update_observations_with_wrong_spatial_objects(_id_series integer) IS 'Update observations with wrong spatial objects: it search the observation for which the start and end timestamp does not match anymore the related spatial objects validity dates. It gets the correct one if possible and perform an UPDATE for these observations. It returns a line with 2 integer columns: modified_obs_count (number of modified observations) and remaining_obs_count (number of observations still with wrong observations';
 
