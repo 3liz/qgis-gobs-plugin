@@ -171,28 +171,6 @@
                                     <td><p>Protocol</p></td>
                                 </tr>
                                 <tr>
-                                    <td class='foreignKey' title='Foreign Key'><i class='icon ion-key iconkey' style='padding-left: 5px;'></i><span id="fk_id_actor">fk_id_actor</span></td>
-                                    <td>int4</td>
-                                    <td>10</td>
-                                    <td title=''></td>
-                                    <td title=''></td>
-                                    <td>null</td>
-                                    <td>
-                                        <table border='0' cellspacing='0' cellpadding='0'>
-                                        </table>
-                                    </td>
-                                    <td>
-                                        <table border='0' cellspacing='0' cellpadding='0'>
-                                            <tr>
-                                                <td title="series.fk_id_actor references actor.id via series_fk_id_actor_fkey"><a href='actor.html'>actor</a><span class='relatedKey'>.id</span></td>
-                                                <td class="constraint detail">series_fk_id_actor_fkey</td>
-                                                <td class="constraint detail"><span title='Restrict delete:&#10;Parent cannot be deleted if children exist'>R</span></td>
-                                            </tr>
-                                        </table>
-                                    </td>
-                                    <td><p>Actor, source of the observation data.</p></td>
-                                </tr>
-                                <tr>
                                     <td class='foreignKey' title='Foreign Key'><i class='icon ion-key iconkey' style='padding-left: 5px;'></i><span id="fk_id_indicator">fk_id_indicator</span></td>
                                     <td>int4</td>
                                     <td>10</td>
@@ -236,6 +214,28 @@
                                     </td>
                                     <td><p>Spatial layer, mandatory. If needed, use a global spatial layer with only 1 object representing the global area.</p></td>
                                 </tr>
+                                <tr>
+                                    <td class='foreignKey' title='Foreign Key'><i class='icon ion-key iconkey' style='padding-left: 5px;'></i><span id="fk_id_project">fk_id_project</span></td>
+                                    <td>int4</td>
+                                    <td>10</td>
+                                    <td title=''></td>
+                                    <td title=''></td>
+                                    <td>null</td>
+                                    <td>
+                                        <table border='0' cellspacing='0' cellpadding='0'>
+                                        </table>
+                                    </td>
+                                    <td>
+                                        <table border='0' cellspacing='0' cellpadding='0'>
+                                            <tr>
+                                                <td title="series.fk_id_project references project.id via series_fk_id_project_fkey"><a href='project.html'>project</a><span class='relatedKey'>.id</span></td>
+                                                <td class="constraint detail">series_fk_id_project_fkey</td>
+                                                <td class="constraint detail"><span title='Restrict delete:&#10;Parent cannot be deleted if children exist'>R</span></td>
+                                            </tr>
+                                        </table>
+                                    </td>
+                                    <td><p>Project of the given series</p></td>
+                                </tr>
                                 </tbody>
                             </table>
                         </div>
@@ -273,16 +273,16 @@
                                     <td>id</td>
                                 </tr>
                                 <tr>
-                                    <td title='Indexed'>series_fk_id_actor_idx</td>
-                                    <td>Performance</td>
-                                    <td><span title='Ascending'>Asc</span></td>
-                                    <td>fk_id_actor</td>
-                                </tr>
-                                <tr>
                                     <td title='Indexed'>series_fk_id_indicator_idx</td>
                                     <td>Performance</td>
                                     <td><span title='Ascending'>Asc</span></td>
                                     <td>fk_id_indicator</td>
+                                </tr>
+                                <tr>
+                                    <td title='Indexed'>series_fk_id_project_idx</td>
+                                    <td>Performance</td>
+                                    <td><span title='Ascending'>Asc</span></td>
+                                    <td>fk_id_project</td>
                                 </tr>
                                 <tr>
                                     <td title='Indexed'>series_fk_id_protocol_idx</td>
@@ -319,30 +319,31 @@
                                 <div class="tab-content no-padding">
                                     <div class="chart tab-pane active" id="oneDegreeImg-chart" style="position: relative; overflow-x:auto;">
                                         <map id="oneDegreeRelationshipsDiagram" name="oneDegreeRelationshipsDiagram">
-<area shape="rect" id="node1" href="import.html" target="_top" title="import" alt="" coords="751,119,913,265">
-<area shape="rect" id="node2" href="series.html" target="_top" title="series" alt="" coords="435,92,707,308">
-<area shape="rect" id="node4" href="actor.html" target="_top" title="actor" alt="" coords="5,279,160,484">
-<area shape="rect" id="node5" href="indicator.html" target="_top" title="indicator" alt="" coords="213,205,382,352">
-<area shape="rect" id="node6" href="protocol.html" target="_top" title="protocol" alt="" coords="207,5,388,152">
-<area shape="rect" id="node7" href="spatial_layer.html" target="_top" title="spatial_layer" alt="" coords="204,369,391,545">
-<area shape="rect" id="node3" href="observation.html" target="_top" title="observation" alt="" coords="957,23,1165,257">
+<area shape="rect" id="node1" href="import.html" target="_top" title="import" alt="" coords="589,203,752,349">
+<area shape="rect" id="node2" href="series.html" target="_top" title="series" alt="" coords="273,176,545,392">
+<area shape="rect" id="node4" href="indicator.html" target="_top" title="indicator" alt="" coords="33,169,202,316">
+<area shape="rect" id="node5" href="project.html" target="_top" title="project" alt="" coords="5,497,229,673">
+<area shape="rect" id="node6" href="protocol.html" target="_top" title="protocol" alt="" coords="27,5,208,152">
+<area shape="rect" id="node7" href="spatial_layer.html" target="_top" title="spatial_layer" alt="" coords="24,333,211,480">
+<area shape="rect" id="node3" href="observation.html" target="_top" title="observation" alt="" coords="796,107,1004,371">
 </map>
                                         <a name='diagram'><img id="oneDegreeImg" src="../diagrams/tables/series.1degree.png" usemap="#oneDegreeRelationshipsDiagram" class="diagram" border="0" align="left"></a>
                                     </div>
                                     <div class="chart tab-pane " id="twodegreesDegreeImg-chart" style="position: relative; overflow-x:auto;">
                                         <map id="twoDegreesRelationshipsDiagram" name="twoDegreesRelationshipsDiagram">
-<area shape="rect" id="node1" href="actor.html" target="_top" title="actor" alt="" coords="247,171,380,259">
-<area shape="rect" id="node2" href="actor_category.html" target="_top" title="actor_category" alt="" coords="5,168,203,256">
-<area shape="rect" id="node3" href="dimension.html" target="_top" title="dimension" alt="" coords="704,307,867,395">
-<area shape="rect" id="node4" href="indicator.html" target="_top" title="indicator" alt="" coords="430,360,599,507">
-<area shape="rect" id="node5" href="document.html" target="_top" title="document" alt="" coords="705,412,866,500">
-<area shape="rect" id="node6" href="import.html" target="_top" title="import" alt="" coords="993,116,1127,204">
-<area shape="rect" id="node7" href="series.html" target="_top" title="series" alt="" coords="649,37,921,253">
-<area shape="rect" id="node11" href="protocol.html" target="_top" title="protocol" alt="" coords="424,5,605,152">
-<area shape="rect" id="node12" href="spatial_layer.html" target="_top" title="spatial_layer" alt="" coords="425,205,605,293">
-<area shape="rect" id="node8" href="observation.html" target="_top" title="observation" alt="" coords="1199,116,1373,204">
-<area shape="rect" id="node9" href="spatial_object.html" target="_top" title="spatial_object" alt="" coords="965,227,1155,315">
-<area shape="rect" id="node10" href="r_indicator_node.html" target="_top" title="r_indicator_node" alt="" coords="679,517,891,605">
+<area shape="rect" id="node1" href="dimension.html" target="_top" title="dimension" alt="" coords="328,5,491,93">
+<area shape="rect" id="node2" href="indicator.html" target="_top" title="indicator" alt="" coords="33,108,202,255">
+<area shape="rect" id="node3" href="document.html" target="_top" title="document" alt="" coords="329,111,490,199">
+<area shape="rect" id="node4" href="import.html" target="_top" title="import" alt="" coords="617,347,751,435">
+<area shape="rect" id="node5" href="series.html" target="_top" title="series" alt="" coords="273,327,545,543">
+<area shape="rect" id="node10" href="project.html" target="_top" title="project" alt="" coords="5,600,229,776">
+<area shape="rect" id="node12" href="protocol.html" target="_top" title="protocol" alt="" coords="27,272,208,419">
+<area shape="rect" id="node13" href="spatial_layer.html" target="_top" title="spatial_layer" alt="" coords="24,436,211,583">
+<area shape="rect" id="node6" href="observation.html" target="_top" title="observation" alt="" coords="823,477,997,565">
+<area shape="rect" id="node7" href="actor.html" target="_top" title="actor" alt="" coords="343,701,476,789">
+<area shape="rect" id="node8" href="spatial_object.html" target="_top" title="spatial_object" alt="" coords="589,523,779,611">
+<area shape="rect" id="node9" href="project_view.html" target="_top" title="project_view" alt="" coords="319,596,499,684">
+<area shape="rect" id="node11" href="r_indicator_node.html" target="_top" title="r_indicator_node" alt="" coords="303,216,515,304">
 </map>
                                         <a name='diagram'><img id="twodegreesDegreeImg" src="../diagrams/tables/series.2degrees.png" usemap="#twoDegreesRelationshipsDiagram" class="diagram" border="0" align="left"></a>
                                     </div>

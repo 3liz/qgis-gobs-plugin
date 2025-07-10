@@ -135,6 +135,11 @@
                                                 <td class="constraint detail">project_view_fk_id_project_fkey</td>
                                                 <td class="constraint detail"><span title='Cascade on delete:&#10;Deletion of parent deletes child'>C</span></td>
                                             </tr>
+                                            <tr>
+                                                <td title="series.fk_id_project references project.id via series_fk_id_project_fkey"><a href='series.html'>series</a><span class='relatedKey'>.fk_id_project</span></td>
+                                                <td class="constraint detail">series_fk_id_project_fkey</td>
+                                                <td class="constraint detail"><span title='Restrict delete:&#10;Parent cannot be deleted if children exist'>R</span></td>
+                                            </tr>
                                         </table>
                                     </td>
                                     <td>
@@ -211,23 +216,6 @@
                                     </td>
                                     <td><p>Description of the project.</p></td>
                                 </tr>
-                                <tr>
-                                    <td><span id="pt_indicator_codes">pt_indicator_codes</span></td>
-                                    <td>_text</td>
-                                    <td>2147483647</td>
-                                    <td title='nullable'>√</td>
-                                    <td title=''></td>
-                                    <td>null</td>
-                                    <td>
-                                        <table border='0' cellspacing='0' cellpadding='0'>
-                                        </table>
-                                    </td>
-                                    <td>
-                                        <table border='0' cellspacing='0' cellpadding='0'>
-                                        </table>
-                                    </td>
-                                    <td><p>List of indicator codes available for this project</p></td>
-                                </tr>
                                 </tbody>
                             </table>
                         </div>
@@ -294,14 +282,29 @@
                                 <h5>Close relationships within degrees of separation</h5>
                                 <ul class="nav nav-tabs pull-left ui-sortable-handle">
                                     <li class="active"><a href="#oneDegreeImg-chart" data-toggle="tab" aria-expanded="true">One</a></li>
+                                    <li class=""><a href="#twodegreesDegreeImg-chart" data-toggle="tab" aria-expanded="true">Two degrees</a></li>
                                 </ul>
                                 <div class="tab-content no-padding">
                                     <div class="chart tab-pane active" id="oneDegreeImg-chart" style="position: relative; overflow-x:auto;">
                                         <map id="oneDegreeRelationshipsDiagram" name="oneDegreeRelationshipsDiagram">
 <area shape="rect" id="node1" href="project_view.html" target="_top" title="project_view" alt="" coords="411,5,591,152">
-<area shape="rect" id="node2" href="project.html" target="_top" title="project" alt="" coords="5,32,367,277">
+<area shape="rect" id="node2" href="project.html" target="_top" title="project" alt="" coords="5,159,360,375">
+<area shape="rect" id="node3" href="series.html" target="_top" title="series" alt="" coords="404,169,599,380">
 </map>
                                         <a name='diagram'><img id="oneDegreeImg" src="../diagrams/tables/project.1degree.png" usemap="#oneDegreeRelationshipsDiagram" class="diagram" border="0" align="left"></a>
+                                    </div>
+                                    <div class="chart tab-pane " id="twodegreesDegreeImg-chart" style="position: relative; overflow-x:auto;">
+                                        <map id="twoDegreesRelationshipsDiagram" name="twoDegreesRelationshipsDiagram">
+<area shape="rect" id="node1" href="import.html" target="_top" title="import" alt="" coords="643,28,777,116">
+<area shape="rect" id="node2" href="series.html" target="_top" title="series" alt="" coords="404,59,599,269">
+<area shape="rect" id="node5" href="project.html" target="_top" title="project" alt="" coords="5,321,360,537">
+<area shape="rect" id="node6" href="indicator.html" target="_top" title="indicator" alt="" coords="107,111,259,199">
+<area shape="rect" id="node7" href="protocol.html" target="_top" title="protocol" alt="" coords="109,5,256,93">
+<area shape="rect" id="node8" href="spatial_layer.html" target="_top" title="spatial_layer" alt="" coords="93,216,273,304">
+<area shape="rect" id="node3" href="observation.html" target="_top" title="observation" alt="" coords="821,63,996,151">
+<area shape="rect" id="node4" href="project_view.html" target="_top" title="project_view" alt="" coords="411,295,591,441">
+</map>
+                                        <a name='diagram'><img id="twodegreesDegreeImg" src="../diagrams/tables/project.2degrees.png" usemap="#twoDegreesRelationshipsDiagram" class="diagram" border="0" align="left"></a>
                                     </div>
                                 </div>
                             </div>

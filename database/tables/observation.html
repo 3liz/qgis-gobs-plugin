@@ -323,6 +323,28 @@
                                     </td>
                                     <td><p>Last updated timestamp</p></td>
                                 </tr>
+                                <tr>
+                                    <td class='foreignKey' title='Foreign Key'><i class='icon ion-key iconkey' style='padding-left: 5px;'></i><span id="fk_id_actor">fk_id_actor</span></td>
+                                    <td>int4</td>
+                                    <td>10</td>
+                                    <td title=''></td>
+                                    <td title=''></td>
+                                    <td>null</td>
+                                    <td>
+                                        <table border='0' cellspacing='0' cellpadding='0'>
+                                        </table>
+                                    </td>
+                                    <td>
+                                        <table border='0' cellspacing='0' cellpadding='0'>
+                                            <tr>
+                                                <td title="observation.fk_id_actor references actor.id via observation_fk_id_actor_fkey"><a href='actor.html'>actor</a><span class='relatedKey'>.id</span></td>
+                                                <td class="constraint detail">observation_fk_id_actor_fkey</td>
+                                                <td class="constraint detail"><span title='Restrict delete:&#10;Parent cannot be deleted if children exist'>R</span></td>
+                                            </tr>
+                                        </table>
+                                    </td>
+                                    <td><p>Actor, source of the observation data.</p></td>
+                                </tr>
                                 </tbody>
                             </table>
                         </div>
@@ -364,6 +386,12 @@
                                     <td>Must be unique</td>
                                     <td><span title='Ascending'>Asc</span>/<span title='Ascending'>Asc</span>/<span title='Ascending'>Asc</span></td>
                                     <td>fk_id_series + fk_id_spatial_object + ob_start_timestamp</td>
+                                </tr>
+                                <tr>
+                                    <td title='Indexed'>observation_fk_id_actor_idx</td>
+                                    <td>Performance</td>
+                                    <td><span title='Ascending'>Asc</span></td>
+                                    <td>fk_id_actor</td>
                                 </tr>
                                 <tr>
                                     <td title='Indexed'>observation_fk_id_import_idx</td>
@@ -412,23 +440,26 @@
                                 <div class="tab-content no-padding">
                                     <div class="chart tab-pane active" id="oneDegreeImg-chart" style="position: relative; overflow-x:auto;">
                                         <map id="oneDegreeRelationshipsDiagram" name="oneDegreeRelationshipsDiagram">
-<area shape="rect" id="node1" href="import.html" target="_top" title="import" alt="" coords="260,319,423,465">
-<area shape="rect" id="node2" href="series.html" target="_top" title="series" alt="" coords="5,169,200,380">
-<area shape="rect" id="node3" href="observation.html" target="_top" title="observation" alt="" coords="483,5,833,397">
-<area shape="rect" id="node4" href="spatial_object.html" target="_top" title="spatial_object" alt="" coords="244,67,439,301">
+<area shape="rect" id="node1" href="import.html" target="_top" title="import" alt="" coords="260,325,423,471">
+<area shape="rect" id="node2" href="series.html" target="_top" title="series" alt="" coords="5,31,200,242">
+<area shape="rect" id="node3" href="observation.html" target="_top" title="observation" alt="" coords="483,53,833,474">
+<area shape="rect" id="node4" href="actor.html" target="_top" title="actor" alt="" coords="25,386,180,591">
+<area shape="rect" id="node5" href="spatial_object.html" target="_top" title="spatial_object" alt="" coords="244,43,439,307">
 </map>
                                         <a name='diagram'><img id="oneDegreeImg" src="../diagrams/tables/observation.1degree.png" usemap="#oneDegreeRelationshipsDiagram" class="diagram" border="0" align="left"></a>
                                     </div>
                                     <div class="chart tab-pane " id="twodegreesDegreeImg-chart" style="position: relative; overflow-x:auto;">
                                         <map id="twoDegreesRelationshipsDiagram" name="twoDegreesRelationshipsDiagram">
-<area shape="rect" id="node1" href="import.html" target="_top" title="import" alt="" coords="645,160,780,248">
-<area shape="rect" id="node2" href="series.html" target="_top" title="series" alt="" coords="437,53,571,141">
-<area shape="rect" id="node5" href="actor.html" target="_top" title="actor" alt="" coords="5,108,139,196">
-<area shape="rect" id="node6" href="indicator.html" target="_top" title="indicator" alt="" coords="197,39,349,127">
-<area shape="rect" id="node7" href="protocol.html" target="_top" title="protocol" alt="" coords="199,144,346,232">
-<area shape="rect" id="node8" href="spatial_layer.html" target="_top" title="spatial_layer" alt="" coords="183,249,363,337">
-<area shape="rect" id="node3" href="observation.html" target="_top" title="observation" alt="" coords="824,23,1175,415">
-<area shape="rect" id="node4" href="spatial_object.html" target="_top" title="spatial_object" alt="" coords="407,159,601,393">
+<area shape="rect" id="node1" href="actor.html" target="_top" title="actor" alt="" coords="247,387,380,475">
+<area shape="rect" id="node2" href="actor_category.html" target="_top" title="actor_category" alt="" coords="5,427,203,515">
+<area shape="rect" id="node3" href="import.html" target="_top" title="import" alt="" coords="451,228,586,316">
+<area shape="rect" id="node4" href="series.html" target="_top" title="series" alt="" coords="247,184,380,272">
+<area shape="rect" id="node7" href="indicator.html" target="_top" title="indicator" alt="" coords="28,321,180,409">
+<area shape="rect" id="node8" href="project.html" target="_top" title="project" alt="" coords="36,111,172,199">
+<area shape="rect" id="node9" href="protocol.html" target="_top" title="protocol" alt="" coords="31,216,177,304">
+<area shape="rect" id="node10" href="spatial_layer.html" target="_top" title="spatial_layer" alt="" coords="14,5,194,93">
+<area shape="rect" id="node5" href="observation.html" target="_top" title="observation" alt="" coords="657,56,1008,477">
+<area shape="rect" id="node6" href="spatial_object.html" target="_top" title="spatial_object" alt="" coords="424,123,613,211">
 </map>
                                         <a name='diagram'><img id="twodegreesDegreeImg" src="../diagrams/tables/observation.2degrees.png" usemap="#twoDegreesRelationshipsDiagram" class="diagram" border="0" align="left"></a>
                                     </div>

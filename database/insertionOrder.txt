@@ -1,10 +1,10 @@
 indicator
+project
+spatial_layer
 actor_category
 graph_node
-project
 protocol
 actor
-spatial_layer
 series
 import
 spatial_object
