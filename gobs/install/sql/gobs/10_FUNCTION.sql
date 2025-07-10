@@ -205,7 +205,7 @@ BEGIN
         -- add the geometry column if needed
         CASE
             WHEN add_geometry IS TRUE THEN 'so.geom'
-            ELSE 'NULL::geometry AS geom'
+            ELSE 'NULL::public.geometry AS geom'
         END,
         -- Date formater
         _date_formater,
@@ -261,7 +261,7 @@ BEGIN
             so.so_valid_from AS valid_from,
             so.so_valid_to AS valid_to,
             so.fk_id_actor AS id_actor,
-            so.geom::geometry(%1$s, 4326) AS geom
+            so.geom::public.geometry(%1$s, 4326) AS geom
         FROM gobs.spatial_object AS so
         WHERE so.fk_id_spatial_layer = %2$s
         $sql$,

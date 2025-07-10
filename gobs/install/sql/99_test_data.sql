@@ -62,26 +62,41 @@ VALUES
 
 -- spatial_layer
 INSERT INTO gobs.spatial_layer
-(id, sl_code, sl_label, sl_description, sl_creation_date, fk_id_actor, sl_geometry_type)
+(id, sl_code, sl_label, sl_description, sl_creation_date, sl_geometry_type)
 VALUES
-(1, 'pluviometers', 'Pluviometers', 'Sites equiped with pluviometers to measure rainfalls', '2019-06-26', 3, 'point'),
-(2, 'brittany-cities', 'Cities of Brittany , France', 'Cities of Brittany, France', '2019-07-05', 1, 'multipolygon'),
-(3, 'gpsposition', 'GPS position', 'Position of GPS trackers', '2020-09-10', 2, 'point'),
-(4, 'faunal_observation', 'Position of faunal observations', 'Observations on species (lions, girafes, etc.)', '2022-09-10', 4, 'point')
+(1, 'pluviometers', 'Pluviometers', 'Sites equiped with pluviometers to measure rainfalls', '2019-06-26', 'point'),
+(2, 'brittany-cities', 'Cities of Brittany , France', 'Cities of Brittany, France', '2019-07-05', 'multipolygon'),
+(3, 'gpsposition', 'GPS position', 'Position of GPS trackers', '2020-09-10', 'point'),
+(4, 'faunal_observation', 'Position of faunal observations', 'Observations on species (lions, girafes, etc.)', '2022-09-10', 'point')
+;
+
+-- projects
+INSERT INTO gobs.project
+(id, pt_code, pt_lizmap_project_key, pt_label, pt_description)
+VALUES
+(1, 'test_project_a', NULL, 'GobsAPI test project a', 'Test project a')
+;
+
+-- project_view
+INSERT INTO gobs.project_view
+(id, pv_label, fk_id_project, pv_groups, pv_type, geom)
+VALUES
+(2, 'Test project a filtered view', 1, 'gobsapi_filtered_group', 'filter', '0106000020E610000001000000010300000001000000050000002ABFB10C16030FC00B560706313248402ABFB10C16030FC06ED711A8FA4148408B7248EED9680DC06ED711A8FA4148408B7248EED9680DC00B560706313248402ABFB10C16030FC00B56070631324840'),
+(1, 'Test project a global view', 1, 'gobsapi_global_group', 'global', '0106000020E61000000100000001030000000100000005000000FD41B0EC7A980FC02757CA956E2B4840FD41B0EC7A980FC0FA9B7196694948403511B20319CF0CC0FA9B7196694948403511B20319CF0CC02757CA956E2B4840FD41B0EC7A980FC02757CA956E2B4840')
 ;
 
 -- series
 INSERT INTO gobs.series
-(id, fk_id_protocol, fk_id_actor, fk_id_indicator, fk_id_spatial_layer)
+(id, fk_id_protocol, fk_id_indicator, fk_id_spatial_layer, fk_id_project)
 VALUES
-(1, 1, 2, 1, 1),
-(2, 2, 2, 2, 2),
-(3, 3, 4, 3, 3),
-(4, 3, 5, 3, 3),
-(5, 3, 6, 3, 3),
-(6, 3, 7, 3, 3),
-(7, 3, 8, 3, 3),
-(8, 4, 4, 4, 4)
+(1, 1, 1, 1, 1),
+(2, 2, 2, 2, 1),
+(3, 3, 3, 3, 1),
+(4, 3, 3, 3, 1),
+(5, 3, 3, 3, 1),
+(6, 3, 3, 3, 1),
+(7, 3, 3, 3, 1),
+(8, 4, 4, 4, 1)
 ;
 
 -- SEQUENCES
@@ -92,6 +107,8 @@ SELECT pg_catalog.setval('gobs.dimension_id_seq', 5, true);
 SELECT pg_catalog.setval('gobs.document_id_seq', 2, true);
 SELECT pg_catalog.setval('gobs.protocol_id_seq', 4, true);
 SELECT pg_catalog.setval('gobs.spatial_layer_id_seq', 4, true);
+SELECT pg_catalog.setval('gobs.project_id_seq', 1, true);
+SELECT pg_catalog.setval('gobs.project_view_id_seq', 2, true);
 SELECT pg_catalog.setval('gobs.series_id_seq', 8, true);
 
 COMMIT;

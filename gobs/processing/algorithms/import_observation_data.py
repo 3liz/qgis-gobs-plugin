@@ -548,7 +548,6 @@ class ImportObservationData(BaseProcessingAlgorithm):
                     else:
                         casted_timestamp[k] = 'NULL'
 
-
             # Actor
             actor = self.ACTORS[parameters[self.ACTOR]]
             id_actor = actor.split('-')[-1].strip()

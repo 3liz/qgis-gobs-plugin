@@ -10,6 +10,7 @@ UPDATE gobs.observation AS o
 SET fk_id_actor = s.fk_id_actor
 FROM gobs.series AS s
 WHERE o.fk_id_series = s.id
+AND o.fk_id_actor IS NULL
 ;
 -- fk
 ALTER TABLE gobs.observation DROP CONSTRAINT IF EXISTS "observation_fk_id_actor_fkey";
@@ -58,6 +59,18 @@ ALTER TABLE gobs.observation ENABLE TRIGGER trg_manage_object_timestamps;
 
 
 -- SERIES: ADD A PROJECT ID COLUMN
+-- Add a project id if needed (for test migrations we had no project data)
+INSERT INTO gobs.project
+(id, pt_code, pt_lizmap_project_key, pt_label, pt_description, pt_indicator_codes)
+SELECT
+1, 'test_project_a', NULL, 'GobsAPI test project a', 'Test project a', '{pluviometry,population}'
+WHERE NOT EXISTS (
+    SELECT id
+    FROM gobs.project
+    WHERE id = 1
+)
+;
+
 ALTER TABLE gobs.series ADD COLUMN IF NOT EXISTS fk_id_project integer;
 COMMENT ON COLUMN gobs.series.fk_id_project IS 'Project of the given series';
 WITH s AS (
@@ -137,7 +150,7 @@ RETURNS TABLE (
     valid_from date,
     valid_to date,
     id_actor integer,
-    geom geometry(geometry, 4326)
+    geom public.geometry(geometry, 4326)
 ) AS
 $FUNCTION$
 DECLARE
@@ -167,7 +180,7 @@ BEGIN
             so.so_valid_from AS valid_from,
             so.so_valid_to AS valid_to,
             so.fk_id_actor AS id_actor,
-            so.geom::geometry(%1$s, 4326) AS geom
+            so.geom::public.geometry(%1$s, 4326) AS geom
         FROM gobs.spatial_object AS so
         WHERE so.fk_id_spatial_layer = %2$s
         $sql$,
@@ -211,7 +224,7 @@ DROP FUNCTION IF EXISTS gobs.get_series_data(integer, boolean);
 CREATE OR REPLACE FUNCTION gobs.get_series_data(
 	series_id integer,
 	add_geometry boolean)
-    RETURNS TABLE(id integer, spatial_object_code text, geom geometry, observation_start text, observation_end text, observation_start_timestamp timestamp without time zone, observation_end_timestamp timestamp without time zone, observation_values json, id_actor integer)
+    RETURNS TABLE(id integer, spatial_object_code text, geom public.geometry, observation_start text, observation_end text, observation_start_timestamp timestamp without time zone, observation_end_timestamp timestamp without time zone, observation_values json, id_actor integer)
     LANGUAGE 'plpgsql'
     COST 100
     VOLATILE PARALLEL UNSAFE
@@ -308,7 +321,7 @@ BEGIN
         -- add the geometry column if needed
         CASE
             WHEN add_geometry IS TRUE THEN 'so.geom'
-            ELSE 'NULL::geometry AS geom'
+            ELSE 'NULL::public.geometry AS geom'
         END,
         -- Date formater
         _date_formater,
@@ -327,9 +340,6 @@ BEGIN
 END;
 
 $BODY$;
-
-ALTER FUNCTION gobs.get_series_data(integer, boolean)
-    OWNER TO lizmap;
 
 COMMENT ON FUNCTION gobs.get_series_data(integer, boolean)
     IS 'Get the given series observation data, with optional geometry.';

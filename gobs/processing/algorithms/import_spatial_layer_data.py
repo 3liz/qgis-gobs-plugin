@@ -422,7 +422,7 @@ class ImportSpatialLayerData(BaseProcessingAlgorithm):
                 geom,
                 fk_id_spatial_layer,
                 fk_id_actor,
-                so_valid_from,
+                so_valid_from
             '''
         if has_max_validity:
             sql += ', so_valid_to'

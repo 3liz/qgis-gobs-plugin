@@ -70,6 +70,7 @@ class TestImportData(DatabaseTestCase):
         )
         params = {
             'SPATIALLAYER': 2,  # hardcoded
+            'ACTOR': 3,  # hardcoded
             'SOURCELAYER': layer_v1,
             'UNIQUEID': 'code_pluvio',
             'UNIQUELABEL': 'lieu_dit_station',
