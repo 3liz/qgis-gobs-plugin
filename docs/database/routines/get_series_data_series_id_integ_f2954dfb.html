@@ -3,7 +3,7 @@
     <head>
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <title>actor_category - gis.gobs</title>
+        <title>gis.gobs</title>
         <!-- Tell the browser to be responsive to screen width -->
         <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
         <link rel="icon" type="image/png" sizes="16x16" href="../favicon.png">
@@ -73,7 +73,7 @@
             <div class="content-wrapper">
                 <!-- Content Header (Page header) -->
                 <section class="content-header">
-                    <h1>actor_category</h1><p><span id="recordNumber">0</span> rows</p><br />
+                    <h1>get_series_data(series_id integer, add_geometry boolean)</h1><br />
                     <div class="box box-primary">
                         <div class="box-header with-border">
                             <i class="fa fa-file-text-o"></i>
@@ -82,10 +82,12 @@
                                 <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button>
                                 <button type="button" class="btn btn-box-tool" data-widget="remove"><i class="fa fa-times"></i></button>
                             </div>
-                        </div><!-- /.box-header -->
+                        </div>
+                        <!-- /.box-header -->
                         <div class="box-body clearfix">
-                            <p>Actors categories</p>
-                        </div><!-- /.box-body -->
+                            <p><p>Get the given series observation data, with optional geometry.</p></p>
+                        </div>
+                        <!-- /.box-body -->
                     </div>
                 </section>
                 <!-- Main content -->
@@ -93,179 +95,95 @@
                     <div class="box box-primary">
                         <div class="box-header with-border">
                             <span class="glyphicon glyphicon-list-alt" aria-hidden="true"></span>
-                            <h3 id="Columns" class="box-title">Columns</h3>
+                            <h3 id="Columns" class="box-title">Parameters</h3>
                             <div class="box-tools pull-right">
                                 <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button>
                                 <button type="button" class="btn btn-box-tool" data-widget="remove"><i class="fa fa-times"></i></button>
                             </div>
                         </div>
                         <div class="box-body">
-                            <table
-                                    id="standard_table"
-                                    class="table table-bordered table-striped dataTable"
-                                    role="grid"
-                                    data-paging="false"
-                                    data-page-length="10"
-                                    data-length-change="false">
+                            <table id="standard_table" class="table table-bordered table-striped dataTable" role="grid">
                                 <thead align='left'>
                                 <tr>
-                                    <th>Column</th>
+                                    <th>Name</th>
                                     <th>Type</th>
-                                    <th>Size</th>
-                                    <th title='Are nulls allowed?'>Nulls</th>
-                                    <th title='Is column automatically updated?'>Auto</th>
-                                    <th title='Default value'>Default</th>
-                                    <th title='Columns in tables that reference this column'>Children</th>
-                                    <th title='Columns in tables that are referenced by this column'>Parents</th>
-                                    <th title='Comments' class="toggle"><span>Comments</span></th>
+                                    <th>Mode</th>
                                 </tr>
                                 </thead>
                                 <tbody>
                                 <tr>
-                                    <td class='primaryKey' title='Primary Key'><i class='icon ion-key iconkey' style='padding-left: 5px;'></i><span id="id">id</span></td>
-                                    <td>serial</td>
-                                    <td>10</td>
-                                    <td title=''></td>
-                                    <td title='Automatically updated by the database'>√</td>
-                                    <td>nextval(&#39;gobs.actor_category_id_seq&#39;::regclass)</td>
-                                    <td>
-                                        <table border='0' cellspacing='0' cellpadding='0'>
-                                            <tr>
-                                                <td title="actor.id_category references actor_category.id via actor_id_category_fkey"><a href='actor.html'>actor</a><span class='relatedKey'>.id_category</span></td>
-                                                <td class="constraint detail">actor_id_category_fkey</td>
-                                                <td class="constraint detail"><span title='Restrict delete:&#10;Parent cannot be deleted if children exist'>R</span></td>
-                                            </tr>
-                                        </table>
-                                    </td>
-                                    <td>
-                                        <table border='0' cellspacing='0' cellpadding='0'>
-                                        </table>
-                                    </td>
-                                    <td><p>ID</p></td>
+                                    <td>series_id</td>
+                                    <td>integer</td>
+                                    <td>IN</td>
                                 </tr>
                                 <tr>
-                                    <td class='indexedColumn' title='Indexed'><i class='fa fa-sitemap fa-rotate-120' style='padding-right: 5px;'></i><span id="ac_label">ac_label</span></td>
-                                    <td>text</td>
-                                    <td>2147483647</td>
-                                    <td title=''></td>
-                                    <td title=''></td>
-                                    <td>null</td>
-                                    <td>
-                                        <table border='0' cellspacing='0' cellpadding='0'>
-                                        </table>
-                                    </td>
-                                    <td>
-                                        <table border='0' cellspacing='0' cellpadding='0'>
-                                        </table>
-                                    </td>
-                                    <td><p>Name of the actor category</p></td>
+                                    <td>add_geometry</td>
+                                    <td>boolean</td>
+                                    <td>IN</td>
                                 </tr>
                                 <tr>
-                                    <td><span id="ac_description">ac_description</span></td>
-                                    <td>text</td>
-                                    <td>2147483647</td>
-                                    <td title=''></td>
-                                    <td title=''></td>
-                                    <td>null</td>
-                                    <td>
-                                        <table border='0' cellspacing='0' cellpadding='0'>
-                                        </table>
-                                    </td>
-                                    <td>
-                                        <table border='0' cellspacing='0' cellpadding='0'>
-                                        </table>
-                                    </td>
-                                    <td><p>Description of the actor category</p></td>
-                                </tr>
-                                </tbody>
-                            </table>
-                        </div>
-                    </div>
-                    <div class="box box-primary">
-                        <div class="box-header with-border">
-                            <i class="fa fa-sitemap"></i>
-                            <h3 id="Indexes" class="box-title">Indexes</h3>
-                            <div class="box-tools pull-right">
-                                <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button>
-                                <button type="button" class="btn btn-box-tool" data-widget="remove"><i class="fa fa-times"></i></button>
-                            </div>
-                        </div>
-                        <div class="box-body">
-                            <table
-                                    id="indexes_table"
-                                    class="table table-bordered table-striped dataTable"
-                                    role="grid"
-                                    data-paging="false"
-                                    data-page-length="10"
-                                    data-length-change="false">
-                                <thead>
-                                <tr>
-                                    <th>Constraint Name</th>
-                                    <th>Type</th>
-                                    <th>Sort</th>
-                                    <th>Column(s)</th>
-                                </tr>
-                                </thead>
-                                <tbody>
-                                <tr>
-                                    <td class='primaryKey' title='Primary Key'><i class='icon ion-key iconkey'></i> actor_category_pkey</td>
-                                    <td>Primary key</td>
-                                    <td><span title='Ascending'>Asc</span></td>
                                     <td>id</td>
+                                    <td>integer</td>
+                                    <td>TABLE</td>
                                 </tr>
                                 <tr>
-                                    <td class='uniqueKey' title='Unique Key'><i class='icon ion-key iconkey'></i> actor_category_ac_label_key</td>
-                                    <td>Must be unique</td>
-                                    <td><span title='Ascending'>Asc</span></td>
-                                    <td>ac_label</td>
+                                    <td>spatial_object_code</td>
+                                    <td>text</td>
+                                    <td>TABLE</td>
+                                </tr>
+                                <tr>
+                                    <td>geom</td>
+                                    <td>geometry</td>
+                                    <td>TABLE</td>
+                                </tr>
+                                <tr>
+                                    <td>observation_start</td>
+                                    <td>text</td>
+                                    <td>TABLE</td>
+                                </tr>
+                                <tr>
+                                    <td>observation_end</td>
+                                    <td>text</td>
+                                    <td>TABLE</td>
+                                </tr>
+                                <tr>
+                                    <td>observation_start_timestamp</td>
+                                    <td>timestamp without time zone</td>
+                                    <td>TABLE</td>
+                                </tr>
+                                <tr>
+                                    <td>observation_end_timestamp</td>
+                                    <td>timestamp without time zone</td>
+                                    <td>TABLE</td>
+                                </tr>
+                                <tr>
+                                    <td>observation_values</td>
+                                    <td>json</td>
+                                    <td>TABLE</td>
+                                </tr>
+                                <tr>
+                                    <td>id_actor</td>
+                                    <td>integer</td>
+                                    <td>TABLE</td>
                                 </tr>
                                 </tbody>
                             </table>
-                        </div><!-- /.box-body -->
+                        </div>
                     </div>
                     <div class="box box-primary">
                         <div class="box-header with-border">
-                            <i class="fa fa-code-fork"></i>
-                            <h3 id="Relationships" class="box-title">Relationships</h3>
+                            <i class="fa fa-file-code-o"></i>
+                            <h3 id="RoutineDefinition" class="box-title">Definition</h3>
                             <div class="box-tools pull-right">
                                 <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button>
                                 <button type="button" class="btn btn-box-tool" data-widget="remove"><i class="fa fa-times"></i></button>
                             </div>
                         </div>
                         <div class="box-body">
-                            <div class="nav-tabs-custom"><!-- Tabs within a box -->
-                                <h5>Close relationships within degrees of separation</h5>
-                                <ul class="nav nav-tabs pull-left ui-sortable-handle">
-                                    <li class="active"><a href="#oneDegreeImg-chart" data-toggle="tab" aria-expanded="true">One</a></li>
-                                    <li class=""><a href="#twodegreesDegreeImg-chart" data-toggle="tab" aria-expanded="true">Two degrees</a></li>
-                                </ul>
-                                <div class="tab-content no-padding">
-                                    <div class="chart tab-pane active" id="oneDegreeImg-chart" style="position: relative; overflow-x:auto;">
-                                        <map id="oneDegreeRelationshipsDiagram" name="oneDegreeRelationshipsDiagram">
-<area shape="rect" id="node1" href="actor.html" target="_top" title="actor" alt="" coords="347,5,501,211">
-<area shape="rect" id="node2" href="actor_category.html" target="_top" title="actor_category" alt="" coords="5,61,303,219">
-</map>
-                                        <a name='diagram'><img id="oneDegreeImg" src="../diagrams/tables/actor_category.1degree.png" usemap="#oneDegreeRelationshipsDiagram" class="diagram" border="0" align="left"></a>
-                                    </div>
-                                    <div class="chart tab-pane " id="twodegreesDegreeImg-chart" style="position: relative; overflow-x:auto;">
-                                        <map id="twoDegreesRelationshipsDiagram" name="twoDegreesRelationshipsDiagram">
-<area shape="rect" id="node1" href="actor.html" target="_top" title="actor" alt="" coords="347,5,501,211">
-<area shape="rect" id="node2" href="actor_category.html" target="_top" title="actor_category" alt="" coords="5,61,303,219">
-<area shape="rect" id="node3" href="observation.html" target="_top" title="observation" alt="" coords="779,9,953,97">
-<area shape="rect" id="node4" href="spatial_object.html" target="_top" title="spatial_object" alt="" coords="545,45,735,133">
-</map>
-                                        <a name='diagram'><img id="twodegreesDegreeImg" src="../diagrams/tables/actor_category.2degrees.png" usemap="#twoDegreesRelationshipsDiagram" class="diagram" border="0" align="left"></a>
-                                    </div>
-                                </div>
-                            </div>
-                        </div><!-- /.box-body -->
+                            <textarea id="sql-script-codemirror" name="sql-script-codemirror" rows="" style="display: none;">DECLARE&#10;    _series_data record;&#10;    _sql_text text;&#10;    _date_formater text;&#10;    _date_format_rules jsonb;&#10;    _get_values record;&#10;    _values_array text[];&#10;    _values_text text;&#10;BEGIN&#10;    -- Get series data&#10;    SELECT INTO _series_data&#10;        s.id,&#10;        i.id_label,&#10;        i.id_date_format,&#10;        array_agg(d.di_code ORDER BY d.id) AS id_value_codes,&#10;        array_agg(d.di_type ORDER BY d.id) AS id_value_types,&#10;        array_agg(d.di_unit ORDER BY d.id) AS id_value_units&#10;    FROM gobs.indicator AS i&#10;    INNER JOIN gobs.dimension AS d&#10;        ON d.fk_id_indicator &#61; i.id&#10;    INNER JOIN gobs.series AS s&#10;        ON s.fk_id_indicator &#61; i.id&#10;    WHERE s.id &#61; series_id&#10;    GROUP BY s.id, id_label, id_date_format&#10;    ;&#10;&#10;    IF _series_data.id IS NULL THEN&#10;        RAISE EXCEPTION &#39;G-Obs - No series found for the given ID %&#39;,&#10;            series_id&#10;        ;&#10;    END IF;&#10;&#10;    -- Get date formatter&#10;    _date_formater &#61; &#39;YYYY-MM-DD HH24:MI:SS&#39;;&#10;    _date_format_rules &#61; json_build_object(&#10;        &#39;second&#39;, &#39;YYYY-MM-DD HH24:MI:SS&#39;,&#10;        &#39;minute&#39;, &#39;YYYY-MM-DD HH24:MI&#39;,&#10;        &#39;hour&#39;, &#39;YYYY-MM-DD HH24&#39;,&#10;        &#39;day&#39;, &#39;YYYY-MM-DD&#39;,&#10;        &#39;month&#39;, &#39;YYYY-MM&#39;,&#10;        &#39;year&#39;, &#39;YYYY&#39;&#10;    );&#10;    IF _date_format_rules ? _series_data.id_date_format THEN&#10;        _date_formater &#61; _date_format_rules-&gt;&gt;(_series_data.id_date_format);&#10;    END IF;&#10;&#10;    -- Get observation values SELECT clause&#10;    FOR _get_values IN&#10;        SELECT&#10;            row_number() OVER() AS idx,&#10;            code&#10;        FROM unnest(_series_data.id_value_codes) AS code&#10;    LOOP&#10;        _values_array &#61; array_append(&#10;            _values_array,&#10;            format( $TEXT$ &#39;%1$s&#39;, (ob_value-&gt;&gt;%2$s)::%3$s $TEXT$,&#10;                _series_data.id_value_codes[_get_values.idx],&#10;                _get_values.idx - 1,&#10;                _series_data.id_value_types[_get_values.idx]&#10;            )&#10;        );&#10;    END LOOP;&#10;    _values_text &#61; concat(&#10;        &#39;json_build_object(&#39;,&#10;        array_to_string(_values_array, &#39;, &#39;),&#10;        &#39;)&#39;&#10;    );&#10;&#10;    -- Build SQL&#10;    _sql_text &#61; format(&#10;        $sql$&#10;        SELECT&#10;            o.id,&#10;            so_unique_id AS spatial_object_code,&#10;            %1$s,&#10;            to_char(ob_start_timestamp, &#39;%2$s&#39;) AS observation_start,&#10;            to_char(ob_end_timestamp, &#39;%2$s&#39;) AS observation_end,&#10;            ob_start_timestamp AS observation_start_timestamp,&#10;            ob_end_timestamp AS observation_end_timestamp,&#10;            %3$s,&#10;            o.fk_id_actor AS id_actor&#10;        FROM gobs.observation AS o&#10;        INNER JOIN gobs.spatial_object AS so&#10;        ON so.id &#61; o.fk_id_spatial_object&#10;        WHERE fk_id_series &#61; %4$s&#10;&#10;        $sql$,&#10;        -- add the geometry column if needed&#10;        CASE&#10;            WHEN add_geometry IS TRUE THEN &#39;so.geom&#39;&#10;            ELSE &#39;NULL::public.geometry AS geom&#39;&#10;        END,&#10;        -- Date formater&#10;        _date_formater,&#10;        -- Indicator values&#10;        _values_text,&#10;        -- Series ID&#10;        _series_data.id&#10;    )&#10;    ;&#10;&#10;    RAISE NOTICE &#39;%&#39;, _sql_text;&#10;&#10;    RETURN QUERY&#10;    EXECUTE _sql_text&#10;    ;&#10;END;</textarea>
+                        </div>
                     </div>
                 </section>
-                <script>
-                    var config = {
-                        pagination: false
-                    }
-                </script>
             </div>
             <!-- /.content-wrapper -->
             <footer class="main-footer">
@@ -312,7 +230,7 @@
         <script src="../bower/codemirror/sql.js"></script>
         <!-- AdminLTE App -->
         <script src="../bower/admin-lte/dist/js/app.min.js"></script>
-        <script src="table.js"></script>
+        <script src="routine.js"></script>
         <script src="../schemaSpy.js"></script>
     </body>
 </html>

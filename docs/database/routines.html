@@ -130,6 +130,15 @@
                                         <td></td>
                                     </tr>
                                     <tr>
+                                        <td><a href="routines/get_series_data_series_id_integ_f2954dfb.html">get_series_data(series_id integer, add_geometry boolean)</a></td>
+                                        <td>FUNCTION</td>
+                                        <td>plpgsql</td>
+                                        <td>false</td>
+                                        <td>TABLE(id integer, spatial_object_code text, geom geometry, observation_start text, observation_end text, observation_start_timestamp timestamp without time zone, observation_end_timestamp timestamp without time zone, observation_values json, id_actor integer)</td>
+                                        <td>INVOKER</td>
+                                        <td><p>Get the given series observation data, with optional geometry.</p></td>
+                                    </tr>
+                                    <tr>
                                         <td><a href="routines/trg_parse_indicator_paths___5c68011d.html">trg_parse_indicator_paths()</a></td>
                                         <td>FUNCTION</td>
                                         <td>plpgsql</td>
@@ -166,20 +175,20 @@
                                         <td><p>Update observations with wrong spatial objects: it search the observation for which the start and end timestamp does not match anymore the related spatial objects validity dates. It gets the correct one if possible and perform an UPDATE for these observations. It returns a line with 2 integer columns: modified_obs_count (number of modified observations) and remaining_obs_count (number of observations still with wrong observations</p></td>
                                     </tr>
                                     <tr>
-                                        <td><a href="routines/parse_indicator_paths_i_id_inte_88c60630.html">parse_indicator_paths(i_id integer, i_path text)</a></td>
-                                        <td>FUNCTION</td>
-                                        <td>plpgsql</td>
-                                        <td>false</td>
-                                        <td>integer</td>
-                                        <td>INVOKER</td>
-                                        <td></td>
-                                    </tr>
-                                    <tr>
                                         <td><a href="routines/update_spatial_object_end_valid_bba228a6.html">update_spatial_object_end_validity()</a></td>
                                         <td>FUNCTION</td>
                                         <td>plpgsql</td>
                                         <td>false</td>
                                         <td>trigger</td>
+                                        <td>INVOKER</td>
+                                        <td></td>
+                                    </tr>
+                                    <tr>
+                                        <td><a href="routines/parse_indicator_paths_i_id_inte_88c60630.html">parse_indicator_paths(i_id integer, i_path text)</a></td>
+                                        <td>FUNCTION</td>
+                                        <td>plpgsql</td>
+                                        <td>false</td>
+                                        <td>integer</td>
                                         <td>INVOKER</td>
                                         <td></td>
                                     </tr>
@@ -191,6 +200,15 @@
                                         <td>trigger</td>
                                         <td>INVOKER</td>
                                         <td></td>
+                                    </tr>
+                                    <tr>
+                                        <td><a href="routines/get_spatial_layer_vector_data_s_167d53ec.html">get_spatial_layer_vector_data(spatial_layer_id integer, validity_date date)</a></td>
+                                        <td>FUNCTION</td>
+                                        <td>plpgsql</td>
+                                        <td>false</td>
+                                        <td>TABLE(id integer, code text, label text, uid text, valid_from date, valid_to date, id_actor integer, geom geometry)</td>
+                                        <td>INVOKER</td>
+                                        <td><p>Get the spatial object vector data corresponding to the given spatial layer ID. A date can be given to restrict objects corresponding to this date.</p></td>
                                     </tr>
                                 </tbody>
                             </table>

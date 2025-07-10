@@ -10,10 +10,10 @@ dimension
 spatial_object
 import
 series
-spatial_layer
 actor
 protocol
-project
 graph_node
 actor_category
+spatial_layer
+project
 indicator

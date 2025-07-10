@@ -131,13 +131,13 @@
                                     <td>
                                         <table border='0' cellspacing='0' cellpadding='0'>
                                             <tr>
-                                                <td title="series.fk_id_actor references actor.id via series_fk_id_actor_fkey"><a href='series.html'>series</a><span class='relatedKey'>.fk_id_actor</span></td>
-                                                <td class="constraint detail">series_fk_id_actor_fkey</td>
+                                                <td title="observation.fk_id_actor references actor.id via observation_fk_id_actor_fkey"><a href='observation.html'>observation</a><span class='relatedKey'>.fk_id_actor</span></td>
+                                                <td class="constraint detail">observation_fk_id_actor_fkey</td>
                                                 <td class="constraint detail"><span title='Restrict delete:&#10;Parent cannot be deleted if children exist'>R</span></td>
                                             </tr>
                                             <tr>
-                                                <td title="spatial_layer.fk_id_actor references actor.id via spatial_layer_fk_id_actor_fkey"><a href='spatial_layer.html'>spatial_layer</a><span class='relatedKey'>.fk_id_actor</span></td>
-                                                <td class="constraint detail">spatial_layer_fk_id_actor_fkey</td>
+                                                <td title="spatial_object.fk_id_actor references actor.id via spatial_object_fk_id_actor_fkey"><a href='spatial_object.html'>spatial_object</a><span class='relatedKey'>.fk_id_actor</span></td>
+                                                <td class="constraint detail">spatial_object_fk_id_actor_fkey</td>
                                                 <td class="constraint detail"><span title='Restrict delete:&#10;Parent cannot be deleted if children exist'>R</span></td>
                                             </tr>
                                         </table>
@@ -309,24 +309,22 @@
                                 <div class="tab-content no-padding">
                                     <div class="chart tab-pane active" id="oneDegreeImg-chart" style="position: relative; overflow-x:auto;">
                                         <map id="oneDegreeRelationshipsDiagram" name="oneDegreeRelationshipsDiagram">
-<area shape="rect" id="node1" href="actor.html" target="_top" title="actor" alt="" coords="247,119,532,364">
-<area shape="rect" id="node2" href="actor_category.html" target="_top" title="actor_category" alt="" coords="5,239,203,385">
-<area shape="rect" id="node3" href="series.html" target="_top" title="series" alt="" coords="807,5,1001,216">
-<area shape="rect" id="node4" href="spatial_layer.html" target="_top" title="spatial_layer" alt="" coords="576,131,763,307">
+<area shape="rect" id="node1" href="actor.html" target="_top" title="actor" alt="" coords="247,196,532,441">
+<area shape="rect" id="node2" href="actor_category.html" target="_top" title="actor_category" alt="" coords="5,316,203,463">
+<area shape="rect" id="node3" href="observation.html" target="_top" title="observation" alt="" coords="815,24,1023,288">
+<area shape="rect" id="node4" href="spatial_object.html" target="_top" title="spatial_object" alt="" coords="576,5,771,269">
 </map>
                                         <a name='diagram'><img id="oneDegreeImg" src="../diagrams/tables/actor.1degree.png" usemap="#oneDegreeRelationshipsDiagram" class="diagram" border="0" align="left"></a>
                                     </div>
                                     <div class="chart tab-pane " id="twodegreesDegreeImg-chart" style="position: relative; overflow-x:auto;">
                                         <map id="twoDegreesRelationshipsDiagram" name="twoDegreesRelationshipsDiagram">
-<area shape="rect" id="node1" href="actor.html" target="_top" title="actor" alt="" coords="247,107,532,352">
-<area shape="rect" id="node2" href="actor_category.html" target="_top" title="actor_category" alt="" coords="5,227,203,373">
-<area shape="rect" id="node3" href="import.html" target="_top" title="import" alt="" coords="1033,144,1168,232">
-<area shape="rect" id="node4" href="series.html" target="_top" title="series" alt="" coords="828,147,961,235">
-<area shape="rect" id="node7" href="indicator.html" target="_top" title="indicator" alt="" coords="590,44,742,132">
-<area shape="rect" id="node8" href="protocol.html" target="_top" title="protocol" alt="" coords="593,149,739,237">
-<area shape="rect" id="node9" href="spatial_layer.html" target="_top" title="spatial_layer" alt="" coords="576,255,756,343">
-<area shape="rect" id="node5" href="observation.html" target="_top" title="observation" alt="" coords="1212,212,1387,300">
-<area shape="rect" id="node6" href="spatial_object.html" target="_top" title="spatial_object" alt="" coords="800,252,989,340">
+<area shape="rect" id="node1" href="actor.html" target="_top" title="actor" alt="" coords="247,5,532,251">
+<area shape="rect" id="node2" href="actor_category.html" target="_top" title="actor_category" alt="" coords="5,125,203,272">
+<area shape="rect" id="node3" href="import.html" target="_top" title="import" alt="" coords="603,304,738,392">
+<area shape="rect" id="node4" href="series.html" target="_top" title="series" alt="" coords="323,304,456,392">
+<area shape="rect" id="node7" href="spatial_layer.html" target="_top" title="spatial_layer" alt="" coords="14,296,194,384">
+<area shape="rect" id="node5" href="observation.html" target="_top" title="observation" alt="" coords="809,199,984,287">
+<area shape="rect" id="node6" href="spatial_object.html" target="_top" title="spatial_object" alt="" coords="576,163,765,251">
 </map>
                                         <a name='diagram'><img id="twodegreesDegreeImg" src="../diagrams/tables/actor.2degrees.png" usemap="#twoDegreesRelationshipsDiagram" class="diagram" border="0" align="left"></a>
                                     </div>
