@@ -2,6 +2,19 @@
 
 ## Unreleased
 
+## 7.0.0 - 2025-07-11
+
+### Changed
+
+* Project : remove the field containing the list of indicators
+* Series: add the project ID
+* Move the actor ID from series to observations and from spatial layer to spatial objects
+* Import spatial layer data - Add a new SQL filter parameter
+  to filter the data to import from source
+* Algorithms "Get series data" & "Get spatial layer vector data":
+  move the implementation from the Python plugin to the SQL database
+* QGIS - adapt the administration project model
+
 ## 6.3.3 - 2025-02-07
 
 ### Changed
