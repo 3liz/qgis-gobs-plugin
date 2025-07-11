@@ -92,11 +92,7 @@ VALUES
 (1, 1, 1, 1, 1),
 (2, 2, 2, 2, 1),
 (3, 3, 3, 3, 1),
-(4, 3, 3, 3, 1),
-(5, 3, 3, 3, 1),
-(6, 3, 3, 3, 1),
-(7, 3, 3, 3, 1),
-(8, 4, 4, 4, 1)
+(4, 4, 4, 4, 1)
 ;
 
 -- SEQUENCES
@@ -109,6 +105,6 @@ SELECT pg_catalog.setval('gobs.protocol_id_seq', 4, true);
 SELECT pg_catalog.setval('gobs.spatial_layer_id_seq', 4, true);
 SELECT pg_catalog.setval('gobs.project_id_seq', 1, true);
 SELECT pg_catalog.setval('gobs.project_view_id_seq', 2, true);
-SELECT pg_catalog.setval('gobs.series_id_seq', 8, true);
+SELECT pg_catalog.setval('gobs.series_id_seq', 4, true);
 
 COMMIT;
