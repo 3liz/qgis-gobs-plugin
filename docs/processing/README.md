@@ -1,12 +1,9 @@
 ---
-Title: G-Obs
-Favicon: ../icon.png
-Up: True
-...
+hide:
+  - navigation
+---
 
-[TOC]
-
-# G-Obs
+# Processing
 
 ## Configuration
 
@@ -25,7 +22,7 @@ You must run this script before any other script.
 
 | ID | Description | Type | Info | Required | Advanced | Option |
 |:-:|:-:|:-:|:-:|:-:|:-:|:-:|
-CONNECTION_NAME|PostgreSQL connection to G-Obs database|String||✓|||
+CONNECTION_NAME|PostgreSQL connection to G-Obs database|ProviderConnection|The database where the schema 'gobs' will be installed.|✓|||
 
 
 #### Outputs
@@ -57,7 +54,7 @@ The generated QGIS project must then be opened by the administrator to create th
 
 | ID | Description | Type | Info | Required | Advanced | Option |
 |:-:|:-:|:-:|:-:|:-:|:-:|:-:|
-CONNECTION_NAME|PostgreSQL connection to G-Obs database|String||✓|||
+CONNECTION_NAME|Connection to the PostgreSQL database|ProviderConnection|The database where the schema GObs has been installed.|✓|||
 PROJECT_FILE|QGIS project file to create|FileDestination||✓|||
 
 
@@ -92,9 +89,10 @@ Beware ! If you check the "override" checkboxes, you will loose all existing dat
 
 | ID | Description | Type | Info | Required | Advanced | Option |
 |:-:|:-:|:-:|:-:|:-:|:-:|:-:|
-CONNECTION_NAME|PostgreSQL connection to G-Obs database|String||✓|||
+CONNECTION_NAME|Connection to the PostgreSQL database|ProviderConnection|The database where the schema 'gobs' will be installed.|✓|||
 OVERRIDE|Overwrite schema gobs and all data ? ** CAUTION ** It will remove all existing data !|Boolean||✓|||
 ADD_TEST_DATA|Add test data ?|Boolean||✓|||
+ADD_OBSERVATION_DATA|Add observation test data ?|Boolean||✓|||
 
 
 #### Outputs
@@ -122,7 +120,7 @@ If you have upgraded your QGIS G-Obs plugin, you can run this script to upgrade 
 
 | ID | Description | Type | Info | Required | Advanced | Option |
 |:-:|:-:|:-:|:-:|:-:|:-:|:-:|
-CONNECTION_NAME|PostgreSQL connection to G-Obs database|String||✓|||
+CONNECTION_NAME|Connection to the PostgreSQL database|ProviderConnection|The database where the schema 'gobs' will be installed.|✓|||
 RUN_MIGRATIONS|Check this box to upgrade. No action will be done otherwise|Boolean||✓|||
 
 
@@ -148,7 +146,7 @@ This algorithm allows to add a table or vector layer in your QGIS project contai
 * Add spatial object ID and label ? If checked, the output layer will have two more columns with the spatial layer unique identifiers (ID and label).
 * Add spatial object geometry ? If checked, the output layer will be a spatial QGIS vector layer, displayed in the map, and not a geometryless table layer. The result can show duplicated geometries, for observations defined by the same geometry at different dates or times.
 * Timestamp extraction resolution: choose the desired temporal resolution of the output. Aggregates will be calculated (sum, average, etc.) by grouping the source data by this temporal resolution.
-* Choose aggregate functions to use: you can choose between minimum (min), maximum (max), average (avg) and  sum.
+* Choose aggregate functions to use: you can choose between the proposed functions. The function will only be used for the compatible field types (ex: "avg" will not be used with text)
 * Minimum observation timestamp: if you enter a valid ISO timestamp in this field, only observations with a timestamp after this value will be processed.
 * Maximum observation timestamp: if you enter a valid ISO timestamp in this field, only observations with a timestamp before this value will be processed.
 
@@ -163,8 +161,8 @@ SERIE|Series of observations|Enum||✓||Values:  <br>|
 SERIE_ID|Series ID. If given, it overrides previous choice|Number||✓||Default: -1 <br> Type: Integer<br> Min: -1.7976931348623157e+308, Max: 1.7976931348623157e+308 <br>|
 ADD_SPATIAL_OBJECT_DATA|Add spatial object ID and label ?|Boolean||✓||Default: True <br> |
 ADD_SPATIAL_OBJECT_GEOM|Add spatial object geometry ?|Boolean||✓|||
-TEMPORAL_RESOLUTION|Timestamp extraction resolution|Enum||✓||Values: original, second, minute, hour, day, week, month, year <br>|
-AGGREGATE_FUNCTIONS|Choose aggregate functions to use|Enum||✓||Default: [0, 1, 2, 3] <br> Values: min, max, avg, sum <br>|
+TEMPORAL_RESOLUTION|Timestamp extraction resolution (aggregate values against this resolution)|Enum||✓||Values: original, second, minute, hour, day, week, month, year <br>|
+AGGREGATE_FUNCTIONS|Choose the aggregate functions to use|Enum||✓||Default: [0, 1, 2, 3, 4, 5, 6] <br> Values: min, max, avg, sum, count, count_distinct, string_agg <br>|
 MIN_TIMESTAMP|Minimum observation timestamp, Ex: 2019-01-01 or 2019-01-06 00:00:00|String|||||
 MAX_TIMESTAMP|Maximum observation timestamp, Ex:2019-12-31 or 2019-12-31 23:59:53|String|||||
 
@@ -341,13 +339,15 @@ This algorithm allows to import data from a QGIS spatial layer into the G-Obs da
 
 The G-Obs administrator must have created the needed spatial layer beforehand by addind the required items in the related database tables: gobs.actor_category, gobs.actor and gobs.spatial_layer.
 * Target spatial layer: choose one of the spatial layers available in G-Obs database
-* Source data layer: choose the QGIS vector layer containing the spatial data you want to import into the chosen spatial layer.
+* Source actor: choose the actor among the pre-defined list of actors
+* Source data: choose the QGIS vector layer containing the spatial data you want to import into the chosen spatial layer.
 * Unique identifier: choose the field containing the unique ID. It can be an integer or a text field, but must be unique.
 * Unique label: choose the text field containing the unique label of the layer feature. You could use the QGIS field calculator to create one if needed.
 * Start of validity: choose the field with the start timestamp of validity for each feature. Leave empty if all the features share the same date/time and manually enter the value in the next input. This field content must respect the ISO format. For example 2020-05-01 10:50:30 or 2020-01-01
 * Start of validity for all features Specify the start timestamp of validity for all the objects in the spatial layer. This value must respect the ISO format. For example 2020-05-01 10:50:30 or 2020-01-01
 * End of validity: choose the field with the end timestamp of validity for each feature. Leave empty if all the features share the same date/time and manually enter the value in the next input. This field content must respect the ISO format. For example 2020-05-01 10:50:30 or 2020-01-01
 * End of validity for all features Specify the end timestamp of validity for all the objects in the spatial layer. This value must respect the ISO format. For example 2020-05-01 10:50:30 or 2020-01-01
+* SQL Filter You can specify a valid SQL filter to restrict the data from the source to be imported. For example : hiker = 'Al'
 
 
 ![algo_id](./gobs-import_spatial_layer_data.png)
@@ -357,13 +357,15 @@ The G-Obs administrator must have created the needed spatial layer beforehand by
 | ID | Description | Type | Info | Required | Advanced | Option |
 |:-:|:-:|:-:|:-:|:-:|:-:|:-:|
 SPATIALLAYER|Target spatial layer|Enum||✓||Values:  <br>|
-SOURCELAYER|Source data layer|VectorLayer||✓||Type:  <br>|
+ACTOR|Source actor|Enum||✓||Values:  <br>|
+SOURCELAYER|Source data|VectorLayer||✓||Type:  <br>|
 UNIQUEID|Unique identifier|Field||✓|||
 UNIQUELABEL|Unique label|Field||✓|||
 DATE_VALIDITY_MIN|Start timestamp of validity. Field in ISO Format|Field|||||
 MANUAL_DATE_VALIDITY_MIN|Manual start timestamp of validity (2019-01-06 or 2019-01-06 22:59:50)|String|||||
 DATE_VALIDITY_MAX|End timestamp of validity. Field in ISO Format|Field|||||
 MANUAL_DATE_VALIDITY_MAX|Manual end timestamp of validity (2019-01-31 or 2019-01-31 23:59:59)|String|||||
+SQL_FILTER|Optionnal SQL filter to restrict data to be imported|String|||||
 
 
 #### Outputs
