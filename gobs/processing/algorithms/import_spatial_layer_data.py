@@ -43,6 +43,7 @@ class ImportSpatialLayerData(BaseProcessingAlgorithm):
     MANUAL_DATE_VALIDITY_MIN = 'MANUAL_DATE_VALIDITY_MIN'
     DATE_VALIDITY_MAX = 'DATE_VALIDITY_MAX'
     MANUAL_DATE_VALIDITY_MAX = 'MANUAL_DATE_VALIDITY_MAX'
+    SQL_FILTER = 'SQL_FILTER'
 
     OUTPUT_STATUS = 'OUTPUT_STATUS'
     OUTPUT_STRING = 'OUTPUT_STRING'
@@ -94,6 +95,10 @@ class ImportSpatialLayerData(BaseProcessingAlgorithm):
             '* End of validity for all features'
             ' Specify the end timestamp of validity for all the objects in the spatial layer.'
             ' This value must respect the ISO format. For example 2020-05-01 10:50:30 or 2020-01-01'
+            '\n'
+            '* SQL Filter'
+            ' You can specify a valid SQL filter to restrict the data from the source to be imported.'
+            " For example : hiker = 'Al'"
             '\n'
         )
         return short_help
@@ -210,6 +215,15 @@ class ImportSpatialLayerData(BaseProcessingAlgorithm):
             )
         )
 
+        # SQL Filter
+        self.addParameter(
+            QgsProcessingParameterString(
+                self.SQL_FILTER,
+                tr('Optionnal SQL filter to restrict data to be imported'),
+                optional=True
+            )
+        )
+
         # OUTPUTS
         # Add output for message
         self.addOutput(
@@ -286,6 +300,7 @@ class ImportSpatialLayerData(BaseProcessingAlgorithm):
         manual_date_validity_min = self.parameterAsString(parameters, self.MANUAL_DATE_VALIDITY_MIN, context)
         date_validity_max = self.parameterAsString(parameters, self.DATE_VALIDITY_MAX, context)
         manual_date_validity_max = self.parameterAsString(parameters, self.MANUAL_DATE_VALIDITY_MAX, context)
+        sql_filter = self.parameterAsString(parameters, self.SQL_FILTER, context)
 
         msg = ''
         status = 1
@@ -448,9 +463,18 @@ class ImportSpatialLayerData(BaseProcessingAlgorithm):
             sql += ', {casted_timestamp_max}'.format(
                 casted_timestamp_max=casted_timestamp_max
             )
-        sql += '''
+        sql += f'''
             FROM "{temp_schema}"."{temp_table}" AS s
+            WHERE TRUE
+        '''
 
+        # Add SQL filter if given
+        if sql_filter:
+            sql += f'''
+            AND ( {sql_filter} )
+            '''
+
+        sql += '''
             -- Update line if data already exists
             -- i.e. Same external ids for the same layer and the same start validity date
             -- so_unique_id, fk_id_spatial_layer AND so_valid_from are the same
@@ -463,11 +487,7 @@ class ImportSpatialLayerData(BaseProcessingAlgorithm):
             (EXCLUDED.geom, EXCLUDED.so_unique_label, EXCLUDED.so_valid_to, EXCLUDED.fk_id_actor)
             WHERE True
             ;
-
-        '''.format(
-            temp_schema=temp_schema,
-            temp_table=temp_table
-        )
+        '''
 
         try:
             _, error = fetch_data_from_sql_query(connection_name, sql)
@@ -486,7 +506,7 @@ class ImportSpatialLayerData(BaseProcessingAlgorithm):
                 )
         except Exception as e:
             status = 0
-            msg = tr('* An unknown error occured while adding features to spatial_object table')
+            msg = tr('* An unknown error occurred while adding features to spatial_object table')
             msg+= ' ' + str(e)
 
         # Check there is no issues with related observation data

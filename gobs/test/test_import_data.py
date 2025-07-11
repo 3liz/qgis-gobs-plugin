@@ -69,7 +69,8 @@ class TestImportData(DatabaseTestCase):
             'ogr'
         )
         params = {
-            'SPATIALLAYER': 2,  # hardcoded
+            # hardcoded : this is the item order in the list (not spatial layer id)
+            'SPATIALLAYER': 2,
             'ACTOR': 3,  # hardcoded
             'SOURCELAYER': layer_v1,
             'UNIQUEID': 'code_pluvio',
@@ -77,7 +78,8 @@ class TestImportData(DatabaseTestCase):
             'DATE_VALIDITY_MIN': 'date',
             'MANUAL_DATE_VALIDITY_MIN': '',
             'DATE_VALIDITY_MAX': '',
-            'MANUAL_DATE_VALIDITY_MAX': ''
+            'MANUAL_DATE_VALIDITY_MAX': '',
+            'SQL_FILTER': "code_pluvio != '29275003'"
         }
         processing_output = processing.run(alg, params, feedback=feedback)
 
@@ -90,6 +92,14 @@ class TestImportData(DatabaseTestCase):
             " )"
         )
         self.cursor.execute(sql)
+        expected = 4
+        self.assertEqual((expected,), self.cursor.fetchone())
+
+        # Import pluviometers_v1 with only "code_pluvio" = '29275003'
+        params['SQL_FILTER'] = "code_pluvio = '29275003'"
+        processing_output = processing.run(alg, params, feedback=feedback)
+        self.assertEqual(1, processing_output["OUTPUT_STATUS"])
+        self.cursor.execute(sql)
         expected = 5
         self.assertEqual((expected,), self.cursor.fetchone())
 
@@ -101,6 +111,7 @@ class TestImportData(DatabaseTestCase):
         )
         params['SOURCELAYER'] = layer_v2
         params['DATE_VALIDITY_MAX'] = 'end_date'
+        params['SQL_FILTER'] = ''
         processing_output = processing.run(alg, params, feedback=feedback)
 
         self.assertEqual(1, processing_output["OUTPUT_STATUS"])
