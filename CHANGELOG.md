@@ -2,6 +2,19 @@
 
 ## Unreleased
 
+## 7.0.1 - 2025-07-21
+
+### Fixed
+
+* QGIS administration project
+  * Remove the constraint on the project field "Lizmap project unique ID"
+  * Remove the relations from the project form
+* Create database structure
+  * Add default project & project view
+  * Add actor categories even if no test data is asked to be added
+  * Fix errors when checking "Add observation test data"
+* Fix migration script to avoid errors when no project existed
+
 ## 7.0.0 - 2025-07-11
 
 ### Changed
