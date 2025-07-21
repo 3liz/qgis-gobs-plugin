@@ -59,19 +59,41 @@ ALTER TABLE gobs.observation ENABLE TRIGGER trg_manage_object_timestamps;
 
 
 -- SERIES: ADD A PROJECT ID COLUMN
--- Add a project id if needed (for test migrations we had no project data)
+-- Add a default project if no project can be found
 INSERT INTO gobs.project
-(id, pt_code, pt_lizmap_project_key, pt_label, pt_description, pt_indicator_codes)
+(pt_code, pt_lizmap_project_key, pt_label, pt_description)
 SELECT
-1, 'test_project_a', NULL, 'GobsAPI test project a', 'Test project a', '{pluviometry,population}'
+'default_project', NULL, 'Default G-Obs project', 'This project can be used to group series.'
 WHERE NOT EXISTS (
     SELECT id
     FROM gobs.project
-    WHERE id = 1
+    WHERE pt_code = 'default_project'
+)
+;
+-- Default project view
+INSERT INTO gobs.project_view
+(pv_type, pv_label, pv_groups, fk_id_project, geom)
+SELECT
+    'global',
+    'Defaut global view',
+    'admins, group_a, group_b',
+    (SELECT id FROM gobs.project WHERE pt_code = 'default_project'),
+    public.ST_MakeEnvelope(-180, -90, 180, 90, 4326)
+WHERE NOT EXISTS (
+    SELECT id
+    FROM gobs.project_view
+    WHERE fk_id_project = (
+        SELECT id
+        FROM gobs.project
+        WHERE pt_code = 'default_project'
+    )
+    AND pv_type = 'global'
 )
 ;
 
+-- Add the new project Id to the series table
 ALTER TABLE gobs.series ADD COLUMN IF NOT EXISTS fk_id_project integer;
+-- Try to use the pt_indicator_codes to find projects to link to the series
 COMMENT ON COLUMN gobs.series.fk_id_project IS 'Project of the given series';
 WITH s AS (
     SELECT i.id AS indicator_id, i.id_code, i.id_label, s.id AS series_id
@@ -95,6 +117,20 @@ SET fk_id_project = f.project_id
 FROM final AS f
 WHERE s.id = f.series_id
 ;
+-- Link orhpan series with the default project
+UPDATE gobs.series SET fk_id_project = (
+    SELECT id
+    FROM gobs.project
+    WHERE pt_code = 'default_project'
+    LIMIT 1
+)
+WHERE fk_id_project IS NULL
+OR fk_id_project NOT IN (
+    SELECT id
+    FROM gobs.project
+)
+;
+
 ALTER TABLE gobs.series ALTER COLUMN fk_id_project SET NOT NULL;
 ALTER TABLE gobs.series
 ADD CONSTRAINT "series_fk_id_project_fkey"
