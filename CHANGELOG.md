@@ -2,9 +2,16 @@
 
 ## Unreleased
 
-## 7.0.1 - 2025-07-21
+## 7.0.2 - 2025-08-27
 
-### Fixed
+* Installation - Fix some issues since 7.0.1
+  * Rename SQL upgrade file 7.1.0 to 7.0.1: this fixes the wrong message
+    `The database G-Obs version is older than your plugin version`
+  * Update the script in charge of exporting the database structure & glossary
+  * Delete obsolete installation SQL files
+* Plugin metadata - remove the `experimental` flag & update links
+
+## 7.0.1 - 2025-07-21
 
 * QGIS administration project
   * Remove the constraint on the project field "Lizmap project unique ID"
@@ -17,8 +24,6 @@
 
 ## 7.0.0 - 2025-07-11
 
-### Changed
-
 * Project : remove the field containing the list of indicators
 * Series: add the project ID
 * Move the actor ID from series to observations and from spatial layer to spatial objects
@@ -30,31 +35,20 @@
 
 ## 6.3.3 - 2025-02-07
 
-### Changed
-
 * Create database local interface
   * Add the Lizmap configuration file `*.qgs.cfg` with the generated QGIS project file
 
 ## 6.3.2 - 2024-12-20
 
-### Fixed
-
 * Import observation data - Fix bug with `default_values variable` not set
 
 ## 6.3.1 - 2024-11-28
 
-### Changed
-
 * Change minimum QGIS version to 3.28
 * Unit tests - Use version QGIS 3.34 instead of 3.28
-
-### Fixed
-
 * SQL - upgrade script to 6.3.0: remove useless INSERT
 
 ## 6.3.0 - 2024-11-27
-
-### Changed
 
 * QGIS Administration project
   * Prevent from editing some tables (`actor_category`, `observation`, etc.)
@@ -66,9 +60,6 @@
   * Remove the NOT NULL constraint on the `actor.a_login` column
   * Observation & protocol - Add a trigger function which prevents
     from editing an observation older than the protocol duration
-
-  ### Fixed
-
 * Import spatial layer data alg: remove unneeded `int` cast
 
 ## 6.2.0 - 2024-05-06
