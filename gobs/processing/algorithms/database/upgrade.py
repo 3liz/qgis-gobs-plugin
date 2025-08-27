@@ -209,6 +209,10 @@ class UpgradeDatabaseStructure(BaseDatabaseAlgorithm):
                 )
 
                 try:
+                    # For test environment, the search_path must be defined
+                    # to avoid the error ERROR:  type geometry does not exist
+                    if ' geometry' in sql:
+                        sql = 'SET search_path TO "$user", public;' + sql
                     connection.executeSql(sql)
                 except QgsProviderConnectionException as e:
                     feedback.reportError("Error when executing file {}".format(sf))

@@ -8,7 +8,7 @@
 SET statement_timeout = 0;
 SET lock_timeout = 0;
 SET idle_in_transaction_session_timeout = 0;
-SET transaction_timeout = 0;
+-- SET transaction_timeout = 0;
 SET client_encoding = 'UTF8';
 SET standard_conforming_strings = on;
 SELECT pg_catalog.set_config('search_path', '', false);
@@ -4847,4 +4847,3 @@ SELECT pg_catalog.setval('gobs.spatial_object_id_seq', 1016, true);
 --
 -- PostgreSQL database dump complete
 --
-

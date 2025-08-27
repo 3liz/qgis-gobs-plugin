@@ -5,6 +5,8 @@
 
 
 
+
+
 SET statement_timeout = 0;
 SET lock_timeout = 0;
 
@@ -531,4 +533,6 @@ COMMENT ON COLUMN gobs.spatial_object.fk_id_actor IS 'Actor, source of the spati
 --
 -- PostgreSQL database dump complete
 --
+
+
 

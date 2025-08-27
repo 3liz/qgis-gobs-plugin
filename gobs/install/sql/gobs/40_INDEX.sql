@@ -5,6 +5,8 @@
 
 
 
+
+
 SET statement_timeout = 0;
 SET lock_timeout = 0;
 
@@ -97,4 +99,6 @@ CREATE INDEX spatial_object_geom_idx ON gobs.spatial_object USING gist (geom);
 --
 -- PostgreSQL database dump complete
 --
+
+
 

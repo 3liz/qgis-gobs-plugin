@@ -5,6 +5,8 @@
 
 
 
+
+
 SET statement_timeout = 0;
 SET lock_timeout = 0;
 
@@ -59,4 +61,6 @@ CREATE TRIGGER trg_update_spatial_object_end_validity AFTER INSERT ON gobs.spati
 --
 -- PostgreSQL database dump complete
 --
+
+
 

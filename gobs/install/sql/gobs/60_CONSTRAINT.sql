@@ -5,6 +5,8 @@
 
 
 
+
+
 SET statement_timeout = 0;
 SET lock_timeout = 0;
 
@@ -251,4 +253,6 @@ ALTER TABLE ONLY gobs.spatial_object
 --
 -- PostgreSQL database dump complete
 --
+
+
 

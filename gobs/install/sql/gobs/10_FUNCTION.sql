@@ -5,6 +5,8 @@
 
 
 
+
+
 SET statement_timeout = 0;
 SET lock_timeout = 0;
 
@@ -112,7 +114,7 @@ COMMENT ON FUNCTION gobs.find_observation_with_wrong_spatial_object(_id_series i
 
 
 -- get_series_data(integer, boolean)
-CREATE FUNCTION gobs.get_series_data(series_id integer, add_geometry boolean) RETURNS TABLE(id integer, spatial_object_code text, geom public.geometry, observation_start text, observation_end text, observation_start_timestamp timestamp without time zone, observation_end_timestamp timestamp without time zone, observation_values json, id_actor integer)
+CREATE FUNCTION gobs.get_series_data(series_id integer, add_geometry boolean) RETURNS TABLE(id integer, spatial_object_code text, geom geometry, observation_start text, observation_end text, observation_start_timestamp timestamp without time zone, observation_end_timestamp timestamp without time zone, observation_values json, id_actor integer)
     LANGUAGE plpgsql
     AS $_$
 DECLARE
@@ -205,7 +207,7 @@ BEGIN
         -- add the geometry column if needed
         CASE
             WHEN add_geometry IS TRUE THEN 'so.geom'
-            ELSE 'NULL::public.geometry AS geom'
+            ELSE 'NULL::geometry AS geom'
         END,
         -- Date formater
         _date_formater,
@@ -231,7 +233,7 @@ COMMENT ON FUNCTION gobs.get_series_data(series_id integer, add_geometry boolean
 
 
 -- get_spatial_layer_vector_data(integer, date)
-CREATE FUNCTION gobs.get_spatial_layer_vector_data(spatial_layer_id integer, validity_date date) RETURNS TABLE(id integer, code text, label text, uid text, valid_from date, valid_to date, id_actor integer, geom public.geometry)
+CREATE FUNCTION gobs.get_spatial_layer_vector_data(spatial_layer_id integer, validity_date date) RETURNS TABLE(id integer, code text, label text, uid text, valid_from date, valid_to date, id_actor integer, geom geometry)
     LANGUAGE plpgsql
     AS $_$
 DECLARE
@@ -261,7 +263,7 @@ BEGIN
             so.so_valid_from AS valid_from,
             so.so_valid_to AS valid_to,
             so.fk_id_actor AS id_actor,
-            so.geom::public.geometry(%1$s, 4326) AS geom
+            so.geom::geometry(%1$s, 4326) AS geom
         FROM gobs.spatial_object AS so
         WHERE so.fk_id_spatial_layer = %2$s
         $sql$,
@@ -608,4 +610,6 @@ $$;
 --
 -- PostgreSQL database dump complete
 --
+
+
 

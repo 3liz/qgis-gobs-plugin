@@ -5,6 +5,8 @@
 
 
 
+
+
 SET statement_timeout = 0;
 SET lock_timeout = 0;
 
@@ -350,7 +352,7 @@ CREATE TABLE gobs.project_view (
     fk_id_project integer NOT NULL,
     pv_groups text,
     pv_type text DEFAULT 'global'::text NOT NULL,
-    geom public.geometry(MultiPolygon,4326) NOT NULL
+    geom geometry(MultiPolygon,4326) NOT NULL
 );
 
 
@@ -482,7 +484,7 @@ CREATE TABLE gobs.spatial_object (
     id integer NOT NULL,
     so_unique_id text NOT NULL,
     so_unique_label text NOT NULL,
-    geom public.geometry(Geometry,4326) NOT NULL,
+    geom geometry(Geometry,4326) NOT NULL,
     fk_id_spatial_layer integer NOT NULL,
     so_valid_from date DEFAULT (now())::date NOT NULL,
     so_valid_to date,
@@ -577,4 +579,6 @@ ALTER TABLE ONLY gobs.spatial_object ALTER COLUMN id SET DEFAULT nextval('gobs.s
 --
 -- PostgreSQL database dump complete
 --
+
+
 

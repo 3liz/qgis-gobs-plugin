@@ -5,6 +5,8 @@
 
 
 
+
+
 SET statement_timeout = 0;
 SET lock_timeout = 0;
 
@@ -60,4 +62,6 @@ SELECT pg_catalog.setval('gobs.glossary_id_seq', 28, true);
 --
 -- PostgreSQL database dump complete
 --
+
+
 

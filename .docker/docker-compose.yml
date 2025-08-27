@@ -6,7 +6,7 @@ services:
     profiles:
       - "qgis"
       - "db"
-    image: 3liz/postgis:13-3
+    image: 3liz/postgis:15-3
     hostname: db
     container_name: postgis
     networks:
